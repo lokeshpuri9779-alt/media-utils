@@ -1,5 +1,6 @@
 """Bounded, non-publishing premise rewriting into a persistent review queue."""
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -51,10 +52,55 @@ def reusable_pending_queue(queue):
     return True
 
 
-def rewrite_or_reuse(packet_path, output_path, limit=3, generator=None, reuse_pending=False):
+def pending_matches_packet(queue, packet, limit=3):
+    """A cached review queue belongs only to its exact selected source premises."""
+    selected = select_premises(packet, limit=limit)
+    rows = queue.get("rewrites", []) if reusable_pending_queue(queue) else []
+    return bool(selected) and len(rows) == len(selected) and all(
+        row["candidate_id"] == premise.get("candidate_id")
+        and row["source_sha256"] == premise.get("source_sha256")
+        for row, premise in zip(rows, selected))
+
+
+def archive_stale_pending_queue(queue_path, archive_dir, image_manifest_path):
+    """Preserve review-only stories and their image index before queue rotation.
+
+    Scene bytes remain in the immutable omni_assets tree; never approve them.
+    Archive filenames are content-addressed and never silently overwritten.
+    """
+    manifest_path = Path(image_manifest_path)
+    if not manifest_path.is_file():
+        raise ValueError("stale_rewrite_queue_missing_image_manifest")
+    queue_bytes = Path(queue_path).read_bytes()
+    manifest_bytes = manifest_path.read_bytes()
+    try:
+        manifest = json.loads(manifest_bytes)
+    except (ValueError, UnicodeError) as exc:
+        raise ValueError("stale_rewrite_queue_invalid_image_manifest") from exc
+    if (not isinstance(manifest, dict)
+            or not isinstance(manifest.get("assets"), list)
+            or manifest.get("production_ready") is not False):
+        raise ValueError("stale_rewrite_queue_unsafe_image_manifest")
+    archive = Path(archive_dir)
+    archive.mkdir(parents=True, exist_ok=True)
+    digest = hashlib.sha256(queue_bytes).hexdigest()
+    for name, payload in ((digest + ".queue.json", queue_bytes),
+                          (digest + ".images.json", manifest_bytes)):
+        destination = archive / name
+        if destination.exists():
+            if destination.read_bytes() != payload:
+                raise ValueError("stale_rewrite_queue_archive_collision")
+        else:
+            with destination.open("xb") as handle:
+                handle.write(payload)
+    return digest
+
+
+def rewrite_or_reuse(packet_path, output_path, limit=3, generator=None,
+                     reuse_pending=False, archive_dir=None, image_manifest_path=None):
     """Keep existing review-only drafts when image quota blocks their artwork."""
     packet = json.loads(Path(packet_path).read_text(encoding="utf-8"))
-    select_premises(packet, limit=limit)  # Fail closed on unsafe editorial packets.
+    selected = select_premises(packet, limit=limit)  # Fail closed on unsafe editorial packets.
     output = Path(output_path)
     if reuse_pending and output.exists():
         try:
@@ -62,7 +108,14 @@ def rewrite_or_reuse(packet_path, output_path, limit=3, generator=None, reuse_pe
         except (ValueError, OSError):
             previous = None
         if reusable_pending_queue(previous):
-            return previous, True
+            if pending_matches_packet(previous, packet, limit=limit):
+                return previous, True
+            # Do not silently discard review drafts or strand cached scene art.
+            if not selected:
+                raise ValueError("stale_rewrite_queue_no_eligible_premises")
+            if archive_dir is None or image_manifest_path is None:
+                raise ValueError("stale_rewrite_queue_requires_archive")
+            archive_stale_pending_queue(output, archive_dir, image_manifest_path)
     result = rewrite_packet(packet, limit=limit, generator=generator)
     output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
     return result, False
@@ -123,10 +176,14 @@ def main():
     parser.add_argument("--packet", required=True)
     parser.add_argument("--output", required=True)
     parser.add_argument("--limit", type=int, default=3)
-    parser.add_argument("--reuse-pending", action="store_true", help="Retain complete unapproved rewrites across image-provider cooldowns")
+    parser.add_argument("--reuse-pending", action="store_true", help="Reuse only rewrites tied to the current editorial packet")
+    parser.add_argument("--archive-dir", help="Immutable archive for superseded review-only queues")
+    parser.add_argument("--image-manifest", help="Image index to preserve when rotating a queue")
     args = parser.parse_args()
     result, reused = rewrite_or_reuse(args.packet, args.output, limit=args.limit,
-                                      reuse_pending=args.reuse_pending)
+                                      reuse_pending=args.reuse_pending,
+                                      archive_dir=args.archive_dir,
+                                      image_manifest_path=args.image_manifest)
     print("ASTRA_REWRITE_QUEUE=" + json.dumps({"attempted": 0 if reused else len(result["rewrites"]),
         "reused_pending": len(result["rewrites"]) if reused else 0,
         "pending_review_only": sum(r["status"] == "awaiting_independent_editorial_approval" for r in result["rewrites"]),
