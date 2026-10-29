@@ -35,6 +35,15 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         from optimum.intel import OVStableDiffusionPipeline
         stage = "import_pillow"
         from PIL import Image
+        if profile == "preconverted":
+            stage = "model_manifest"
+            from huggingface_hub import list_repo_files
+            available_files = set(list_repo_files(model))
+            required_files = ("model_index.json", "unet/config.json", "unet/openvino_model.xml")
+            missing_files = [name for name in required_files if name not in available_files]
+            if missing_files:
+                report["missing_model_files"] = missing_files
+                raise ValueError("Preconverted OpenVINO model is missing required configuration or model files")
         stage = "model_load"
         load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
