@@ -96,6 +96,48 @@ class DirectedSceneContractTests(unittest.TestCase):
         self.assertFalse(eligible)
         self.assertIn("human_actor_not_supported_by_directed_icons", reason)
 
+    def test_clothed_character_action_without_bible_needs_exact_art(self):
+        # Publisher run 40798871334 composited only forest backdrops for a
+        # Gemini scene describing Bramble and Rowan as embodied characters.
+        shot = {
+            "visual": "forest",
+            "speech": "Look at the central leaves, Rowan!",
+            "visual_prompt": (
+                "Bramble pointing at a withered root system in a towering tree. "
+                "Bramble has messy auburn hair and a moss-green tunic. "
+                "Rowan stands beside him holding a rusted metal trowel."
+            ),
+        }
+        with self.assertRaisesRegex(
+                CreativeReject, "embodied_character_not_supported_by_directed_icons"):
+            validate_story_shot(shot)
+        self.assertEqual(validate_story_shot({
+            "visual": "forest", "speech": "The forest glows after rain.",
+            "visual_prompt": "Sunlight filters through the forest canopy.",
+        }), "directed")
+
+    def test_gemini_story_with_clothed_actor_fails_publication_preflight(self):
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        story = {
+            "genre": "fiction",
+            "content_id": "fidelity-regression-no-visual-bible",
+            "title": "The Canopy Trackers and the Fading Roots",
+            "story_beats": [{
+                "headline": "Discovering the Wilted Core",
+                "speech": "Look at the central leaves, Rowan!",
+                "visual": "forest",
+                "visual_prompt": (
+                    "Bramble pointing at a withered root system. "
+                    "Bramble has messy auburn hair and a moss-green tunic. "
+                    "Rowan stands beside him holding a rusted trowel."
+                ),
+            }],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("embodied_character_not_supported_by_directed_icons", reason)
+
     def test_manifest_path_and_foreground_props_do_not_override_check(self):
         shot = {"speech": "The thief grabs the papers.", "visual": "robot",
                 "artwork_manifest_path": "/missing/manifest.json"}

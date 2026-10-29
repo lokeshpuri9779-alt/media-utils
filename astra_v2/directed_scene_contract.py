@@ -9,7 +9,7 @@ from astra_errors import CreativeReject
 
 _HUMAN = re.compile(
     r"\b(?:stationmaster|courier|thief|thieves|man|woman|boy|girl|"
-    r"child|children|person|people|guard|passenger|driver|captain)\b", re.I)
+    r"child|children|person|people|guard|passenger|driver|captain|rescuer|explorer|climber)\b", re.I)
 _INTERACTION = re.compile(
     r"\b(?:slides?|sliding|maneuvers?|manoeuvres?|navigates?|"
     r"enters?|entering|retrieves?|retrieving|returns?|returning|"
@@ -22,6 +22,15 @@ _BIOLOGICAL_HUMAN = re.compile(
     r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
     r"student|pilot|officer|engineer|botanist)\b", re.I)
 _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)\b", re.I)
+
+# Two independent visual cues identify a visibly embodied figure even when
+# an AI story omitted its visual_bible. Generic forest/door/signal icons cannot
+# portray a clothed character performing an action.
+_FIGURE_VISUAL_CUE = re.compile(
+    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
+_FIGURE_ACTION = re.compile(
+    r"\b(?:pointing|kneeling|standing|stands?|holding|holds?|smiling|"
+    r"walking|wearing|wears?|tipping|pouring|running|gripping|striking|climbing|sitting|swinging)\b", re.I)
 
 
 def named_human_characters(visual_bible):
@@ -59,6 +68,10 @@ def directed_scene_issue(shot):
     # Include the story title so first-person/pronoun beats don't erase humans.
     if _HUMAN.search(text + " " + str(shot.get("story_title") or "")):
         return "human_actor_not_supported_by_directed_icons"
+    visual_prompt = str(shot.get("visual_prompt") or "")
+    if (_FIGURE_VISUAL_CUE.search(visual_prompt)
+            and _FIGURE_ACTION.search(visual_prompt)):
+        return "embodied_character_not_supported_by_directed_icons"
     if str(shot.get("visual") or "").lower() == "signal" and not _SIGNAL.search(text):
         return "signal_graphic_does_not_depict_narrated_event"
     subject = str(shot.get("story_subject") or shot.get("visual") or "").lower()
