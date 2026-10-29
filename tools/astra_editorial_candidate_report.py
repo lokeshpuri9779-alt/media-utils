@@ -60,7 +60,15 @@ def build_report(limit=100, rotation=0, seen=None):
         item["requires_human_editorial_approval"] = True
         item["production_ready"] = False
     remaining = len(unique) - len(selected)
-    status = "exhausted" if remaining == 0 else "low" if remaining < limit * 3 else "healthy"
+    # Fingerprint/character variants are not new causal plots.  A large pool
+    # of unreviewed variants can coexist with zero unseen authored mechanisms.
+    available_new_mechanisms = {x["mechanism"] for x in unique.values()} - seen_mechanisms
+    if not available_new_mechanisms:
+        status = "exhausted"
+    elif len(available_new_mechanisms) < min(3, len(mechanisms)) or remaining < limit * 3:
+        status = "low"
+    else:
+        status = "healthy"
     selected_mechanisms = {x["mechanism"] for x in selected}
     # A candidate can have a fresh fingerprint while repeating a known causal premise.
     newly_introduced_mechanisms = selected_mechanisms - seen_mechanisms
@@ -71,7 +79,9 @@ def build_report(limit=100, rotation=0, seen=None):
             "new_premises_in_batch": len(newly_introduced_mechanisms),
             "reused_premises_in_batch": len(selected_mechanisms & seen_mechanisms),
             "cosmetic_variants_are_new_plots": False,
-            "remaining_unreviewed_after_selection": remaining, "supply_status": status,
+            "remaining_unreviewed_after_selection": remaining,
+            "available_new_causal_premises": len(available_new_mechanisms),
+            "supply_status": status,
             "requires_new_authored_mechanisms": status != "healthy",
             "source_candidates": candidate_count(), "unique_candidates": len(unique),
             "selected_for_review": len(selected), "mechanisms_represented": len({x["mechanism"] for x in selected}), "publication_approved": 0,
