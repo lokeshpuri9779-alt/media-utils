@@ -1,26 +1,25 @@
 {
-  "observed_at": "2026-10-28T18:58:00.673428+00:00",
-  "generated": 19,
+  "observed_at": "2026-10-29T01:04:19.676859+00:00",
+  "generated": 18,
   "requested": 20,
   "generation_failures": [
     {
       "index": 13,
       "reason": "ValueError"
+    },
+    {
+      "index": 14,
+      "reason": "ValueError"
     }
   ],
-  "reviewed": 19,
-  "approved": 0,
+  "reviewed": 18,
+  "approved": 3,
   "review_issues": [
-    "The candidate story 'The Otter and the Fading Trench' shares a very similar structural and thematic premise with 'The Octopus Cartographer and /maren and the brass buoy of whispering waves' and other aquatic environmental problem-solving stories in the comparison history, focusing on an animal protagonist repairing a failing underwater natural system (reef/coral/trench) through a mechanical intervention (valve/stream/current redirection).",
-    "Uncertainty regarding absolute uniqueness of the narrative pattern within the comparison dataset.",
+    "The central conflict, decisive choice, and resolution closely mirror recently published premises in the comparison history, specifically involving a ravine blocking a bridge or crossing, combining vines or anchors, and safely crossing to a destination (e.g., 'The Canopy Pathfinders and the Root of Whispers', 'The Ranger and the Amber Spore').",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
