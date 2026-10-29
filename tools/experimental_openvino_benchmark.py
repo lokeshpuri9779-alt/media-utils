@@ -25,17 +25,28 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     model = APPROVED_MODELS[profile]
     report = {"engine": "OpenVINO CPU", "model": model, "steps": steps,
               "success": False, "published": False, "approved": False,
-              "production_ready": False, "still_image_only": True}
+              "production_ready": False, "still_image_only": True,
+              "render_completed": False,
+              "semantic_quality": "not_verified",
+              "manual_visual_review_required": True}
     started = time.monotonic()
     try:
         from optimum.intel import OVStableDiffusionPipeline
         from PIL import Image
+        load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
             model, export=profile == "export", compile=False, device="CPU")
+        report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
+        compile_started = time.monotonic()
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
-        image = pipe(PROMPT, height=768, width=512,
-                     num_inference_steps=steps).images[0]
+        report["reshape_compile_seconds"] = round(time.monotonic() - compile_started, 2)
+        inference_started = time.monotonic()
+        try:
+            image = pipe(PROMPT, height=768, width=512,
+                         num_inference_steps=steps).images[0]
+        finally:
+            report["inference_seconds"] = round(time.monotonic() - inference_started, 2)
         if not isinstance(image, Image.Image):
             raise ValueError("No PIL image returned")
         image.save(output, format="PNG")
@@ -44,6 +55,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         report["quality"] = quality
         report["dimensions"] = {"width": image.width, "height": image.height}
         report["bytes"] = output.stat().st_size
+        report["render_completed"] = True
         report["success"] = bool(quality["passed"])
         report["output"] = str(output)
     except Exception as exc:
