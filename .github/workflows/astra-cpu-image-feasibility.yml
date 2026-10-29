@@ -61,6 +61,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      - name: Verify offline CPU probe guardrails
+        run: python3 -m unittest discover -s tests -p 'test_experimental_cpu_runtime_probe.py' -v
       - name: Capture read-only CPU environment
         run: python3 -m tools.experimental_cpu_runtime_probe
       - name: Retain CPU environment report
