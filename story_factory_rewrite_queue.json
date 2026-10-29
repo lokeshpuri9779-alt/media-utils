@@ -10,18 +10,18 @@
   "blocked_reason": null,
   "rewrites": [
     {
-      "candidate_id": "836d888e2c68684eb17761b7",
-      "source_sha256": "6866b4535abc6da5208c9bf9397dfe83b76d3b4577deca00b12d6cfd159985a1",
+      "candidate_id": "6aeed61cb45f21540c05dd2b",
+      "source_sha256": "299d7462b76fb82486ec55a882cea3eca471eab50045d5536ada2c1065acac1b",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-f689c469a7e00d90255b",
+        "content_id": "rayvan-gemini-fd99263ed021073a7aea",
         "title": "The Great Tomato Launch Fiasco",
-        "hook": "The Defective Sorting Mechanism",
-        "question": "Can an overzealous inventor save his vegetable stall using an automated fruit launcher?",
-        "answer": "Yes, by accidentally inventing the world's first mobile salsa-making machine.",
+        "hook": "The Catastrophic Test",
+        "question": "Can an over-engineered pneumatic produce launcher survive a crowded farmer's market?",
+        "answer": "Yes, by abandoning speed for extreme precision and hitting every customer's basket simultaneously.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -29,79 +29,79 @@
         ],
         "story_beats": [
           {
-            "headline": "The Defective Sorting Mechanism",
-            "speech": "Behold the magnificent automated fruit sorter, designed to eliminate bruised produce from our busy market stall forever!",
+            "headline": "The Catastrophic Test",
+            "speech": "Behold the Tomato-matic Ninety-Ninth, guaranteed to deliver fresh produce across the entire square in mere seconds flat!",
             "visual": "robot",
-            "label": "Robot Sorter",
+            "label": "The Setup",
             "story_beat": "reveal",
-            "visual_prompt": "Inventor Silas standing proudly behind a copper sorting robot in a crowded market square, holding a clipboard while the robot wildly twitches.",
+            "visual_prompt": "Inventor Barnaby stands in a crowded marketplace next to a hissing brass mechanical launcher, wearing oil-stained overalls and safety goggles, holding a wrench while terrified market vendors duck.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Rampant Produce Barrage",
-            "speech": "Stop pressing that big red button! You are loading the entire morning harvest into the high-pressure pneumatic cannon now!",
-            "visual": "ship",
-            "label": "Market Stall",
-            "story_beat": "build",
-            "visual_prompt": "Assistant Maya frantically waving her arms in front of a wooden market stall while bright red tomatoes fly rapidly through the air.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Aerial Culinary Collision",
-            "speech": "Look out above! The flying tomatoes are colliding with the fresh onions and cilantro hovering over the roasting tent!",
+            "headline": "Climbing Pressure",
+            "speech": "The gauge is entering the red zone now! Quick, hand me the extra rubber gaskets before the brass tank explodes!",
             "visual": "signal",
-            "label": "Flying Ingredients",
-            "story_beat": "twist",
-            "visual_prompt": "Silas and Maya ducking beneath their wooden counter as a cloud of flying vegetables forms a spinning vortex in the sunny sky.",
+            "label": "The Build",
+            "story_beat": "build",
+            "visual_prompt": "Barnaby frantically twists a glowing red pressure valve on the steaming brass launcher while his nervous assistant Cora holds a box of rubber gaskets in the bustling market square.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "The Accidental Fiesta",
-            "speech": "Well, nobody wanted raw tomatoes anyway. Grab the tortilla chips because we just made ten gallons of fresh salsa!",
+            "headline": "The Wild Discharge",
+            "speech": "Duck under your market stalls! Thousands of ripe red tomatoes are flying completely out of control in every direction!",
+            "visual": "ship",
+            "label": "The Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "A chaotic blur of ripe red tomatoes arcs through the air above crowded market awnings while frightened shoppers cower and Barnaby chases the vibrating launcher with outstretched arms.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Perfect Delivery",
+            "speech": "Look at that! Every single basket caught a fresh tomato without a single bruise or dent anywhere in sight!",
             "visual": "forest",
-            "label": "Salsa Fountain",
+            "label": "The Finale",
             "story_beat": "payoff",
-            "visual_prompt": "Silas and Maya smiling covered in mild salsa next to a giant communal cooking pot surrounded by cheering market customers holding chips.",
+            "visual_prompt": "Barnaby and Cora smile proudly beside the now-cool brass launcher as smiling market vendors hold up baskets filled with perfectly caught tomatoes under festive hanging string lights.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "Inventing a tomato sorting cannon that disrupts the entire farmers market.",
-        "decisive_choice": "Re-aiming the malfunctioning launcher directly at the giant cooking vat.",
-        "resolution": "A chaotic market transforms into a bustling, highly successful outdoor taco festival.",
+        "central_conflict": "Pneumatic fruit launcher over-pressurizes and threatens to destroy the entire vegetable square.",
+        "decisive_choice": "Re-routing the main pressure valve into a network of hand-held umbrella catchers.",
+        "resolution": "Every shopper receives free tomatoes safely and the inventor gets a permanent stall.",
         "visual_bible": {
-          "style": "Bright, colorful slapstick comedy animation style with expressive character movements and vibrant marketplace details.",
+          "style": "Bright stop-motion claymation aesthetic with rich vibrant textures and warm daylight.",
           "characters": {
-            "Silas": "An eccentric inventor with wild gray hair, wearing a patched green vest, round spectacles, and an enthusiastic expression.",
-            "Maya": "A practical assistant wearing a durable blue apron, tool belt, and sporting a perpetually worried expression."
+            "Barnaby": "An eccentric inventor with wild gray hair, wearing oil-stained brown overalls and oversized brass safety goggles.",
+            "Cora": "A practical assistant wearing a green apron, canvas trousers, and holding a wooden toolbox."
           },
           "locations": {
-            "Market Square": "A bustling outdoor farmers market filled with striped canvas awnings, wooden crates, and bustling shoppers."
+            "MarketSquare": "A bustling cobblestone town square lined with striped canvas awnings and wooden vendor stalls."
           },
           "objects": {
-            "Sorting Cannon": "A gleaming brass and steel pneumatic machine with multiple funnels, digital gauges, and a very large emergency stop button."
+            "Launcher": "A massive, steampunk pneumatic brass cylinder decorated with copper pipes, pressure gauges, and a large red starter lever."
           }
         },
-        "plot_fingerprint": "768ae9498e7c993e1e869585179df1bcdc6b70fdf680ca6d4a01c5d810fbf44a"
+        "plot_fingerprint": "c91458e24cf016f0cabc141c0e5506095dbf64e62242f12258b249830622f42c"
       },
       "approved": false
     },
     {
-      "candidate_id": "d75788178b58f5632b9d2c3c",
-      "source_sha256": "04412f5d9e61f2f3c329d68f837ecec8b86217619ec43b5918e24026f70c689a",
+      "candidate_id": "34fd45a56e2760554e8285c7",
+      "source_sha256": "433094251d9683b62ec8efff85d205593a218e2839a4574c63f1854bd95c8942",
       "status": "awaiting_independent_editorial_approval",
       "story": {
         "genre": "fiction",
         "kind": "microfiction",
         "production_ready": false,
-        "content_id": "rayvan-gemini-d6ba3ffc4eaadafb9ae9",
-        "title": "The Gravity Leak of Sector Nine",
-        "hook": "Warning Alarms",
-        "question": "Can the crew purge the ballast core before the hull ruptures?",
-        "answer": "Yes, by manually overriding the magnetic vent to save the ship.",
+        "content_id": "rayvan-gemini-34ad7e2c9aeab409681c",
+        "title": "The Beacon Ridge Rescue",
+        "hook": "The Distant Flash",
+        "question": "Can the veteran climber reach the lost explorer before the snowstorm buries the canyon?",
+        "answer": "Yes, by trusting a glowing emergency signal and scaling the fractured ice wall.",
         "source": "",
         "keywords": [
           "original fiction",
@@ -109,147 +109,147 @@
         ],
         "story_beats": [
           {
-            "headline": "Warning Alarms",
-            "speech": "Listen to me, Chief Engineer! If we do not vent the cargo bay right now, the bulkhead will tear open completely.",
-            "visual": "ship",
-            "label": "Hull Stress",
-            "story_beat": "reveal",
-            "visual_prompt": "Captain Vance, a human woman with a short grey buzzcut wearing a dark blue flight suit, points urgently at a flashing red diagnostic console inside the narrow metal corridor of the cargo ship, while alarms strobe in the background.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Disagreement",
-            "speech": "That cargo contains our entire payload! We cannot just throw away six months of hard work because of a faulty valve.",
-            "visual": "robot",
-            "label": "Cargo Dispute",
-            "story_beat": "build",
-            "visual_prompt": "Milo, a slender orange maintenance robot with a single glowing blue optical sensor, gestures defensively with its mechanical arms inside the cramped engine room, arguing with Captain Vance who stands firmly beside the main reactor panel.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Manual Override",
-            "speech": "There is no other choice left. I am pulling the manual emergency lever to save our lives, payload or no payload.",
+            "headline": "The Distant Flash",
+            "speech": "Look closely at that ridge. A faint SOS signal is flashing through the blowing snow and freezing fog.",
             "visual": "signal",
-            "label": "Vent Trigger",
-            "story_beat": "mechanism",
-            "visual_prompt": "Captain Vance grips a heavy yellow mechanical lever with both hands and pulls it down firmly, while a cascade of orange warning signals lights up the control board in the dimly lit engineering bay.",
+            "label": "The Signal",
+            "story_beat": "reveal",
+            "visual_prompt": "An experienced rescuer in bright red winter gear points up at a jagged mountain peak where a faint blinking emergency light cuts through swirling white snowflakes.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           },
           {
-            "headline": "Safe Harbor",
-            "speech": "The pressure is finally dropping. We lost the cargo, but we are all alive and the hull is completely secure.",
+            "headline": "The Frozen Timber",
+            "speech": "We must navigate this dense pine forest quickly because the freezing temperatures will drain their battery soon.",
+            "visual": "forest",
+            "label": "The Forest",
+            "story_beat": "build",
+            "visual_prompt": "The rescuer wearing thick mountaineering boots and a yellow parka strides purposefully through a dark, snow-draped pine forest holding an active GPS device.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Cleft Entrance",
+            "speech": "Hold onto the anchor rope tightly while I descend into this deep crevasse to reach the injured climber.",
+            "visual": "door",
+            "label": "The Cleft",
+            "story_beat": "mechanism",
+            "visual_prompt": "The rescuer leaning over the edge of a dark icy crevasse in the rock face, securing a heavy metal carabiner to a frozen steel piton driven into the stone.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Safe Ascent",
+            "speech": "We made it just in time. The rescue helicopter is lowering the winch harness to pull us both up.",
+            "visual": "ship",
+            "label": "The Rescue",
+            "story_beat": "payoff",
+            "visual_prompt": "The rescuer and the wrapped hiker standing together on a snowy ledge, looking up as a silver rescue helicopter hovering overhead lowers a bright yellow rescue harness.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A sudden blizzard traps an injured hiker in a remote alpine crevasse.",
+        "decisive_choice": "Abandon the safe lower trail to climb the treacherous vertical ice face.",
+        "resolution": "The hiker is safely hoisted onto the rescue helicopter just before sunset.",
+        "visual_bible": {
+          "style": "Realistic cinematic winter photography with crisp textures and dramatic lighting.",
+          "characters": {
+            "lead_rescuer": "A rugged middle-aged climber with a weathered face, intense focus, wearing a heavy waterproof yellow parka and thermal climbing pants."
+          },
+          "locations": {
+            "mountain_ridge": "A steep alpine environment featuring jagged grey granite rocks, deep snowdrifts, and towering frozen pine trees.",
+            "icy_crevasse": "A narrow vertical fissure in the glacier with glistening blue-tinted ice walls."
+          },
+          "objects": {
+            "gps_device": "A rugged handheld electronic gadget with a glowing amber screen and rubberized black edges.",
+            "rescue_rope": "A thick, high-strength braided red nylon climbing rope with reinforced steel carabiners."
+          }
+        },
+        "plot_fingerprint": "6374348537672f9aafdc7edbd5dd7956db34a55941c8b8b94d5c4255df20340a"
+      },
+      "approved": false
+    },
+    {
+      "candidate_id": "64ededf50cae4afa6ef9b9c1",
+      "source_sha256": "5ae969bba280c570c0fa2ff33d189697d16ecc73ab0c05b304e72f2f6b0535e6",
+      "status": "awaiting_independent_editorial_approval",
+      "story": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": false,
+        "content_id": "rayvan-gemini-98842926a2bb43c9504b",
+        "title": "The Magnetic Hull Leak",
+        "hook": "Warning Claxons Blaze",
+        "question": "Can the engineering crew patch the magnetic stabilizer before solar radiation fries the main drive?",
+        "answer": "Yes, by manually rerouting coolant through the auxiliary conduit under extreme pressure.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Warning Claxons Blaze",
+            "speech": "Warning alarms echo across the bridge as radiation levels spike past critical limits and the hull groans.",
+            "visual": "ship",
+            "label": "Reactor Core Warning",
+            "story_beat": "reveal",
+            "visual_prompt": "Chief Engineer Vane standing at the glowing orange bridge console, pointing angrily at a cracked plasma gauge while Pilot Jax sits behind him looking worried.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Heated Disagreement",
+            "speech": "We must vent the forward thrusters immediately before the pressure overload fractures the entire starboard engine assembly.",
+            "visual": "robot",
+            "label": "Thruster Debate",
+            "story_beat": "build",
+            "visual_prompt": "Pilot Jax holding a heavy titanium wrench in the cramped engineering bay, glaring at Vane who stands firmly in front of the locked maintenance hatch.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Emergency Override",
+            "speech": "Hand me the cryogenic sealant canister now, because I am overriding the manual locks to freeze this reactor leak.",
+            "visual": "signal",
+            "label": "Manual Override",
+            "story_beat": "mechanism",
+            "visual_prompt": "Chief Engineer Vane smashing his palm against the flashing red emergency override keypad while holding a pressurized silver coolant cylinder.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Stable Orbit Achieved",
+            "speech": "The weld held against the solar shockwave, and our reactor temperatures are finally returning to safe operational baselines.",
             "visual": "planet",
             "label": "Stable Flight",
             "story_beat": "payoff",
-            "visual_prompt": "Captain Vance and Milo stand side by side looking through the large forward viewport of the cockpit at a calm green and blue planet spinning peacefully in the distance.",
+            "visual_prompt": "Both crew members relaxing in the softly lit cockpit, watching a blue and green planet fill the main viewport as the warning lights finally turn off.",
             "sub": "AN ORIGINAL RAYVAN STORY",
             "duration": 2.1
           }
         ],
-        "central_conflict": "A stuck ballast valve threatens to tear the ship apart while the crew argues over venting the main cargo.",
-        "decisive_choice": "Venting the valuable cargo hold to release structural pressure.",
-        "resolution": "The cargo is lost in space, but the ship stabilizes and safely reaches the nearest station.",
+        "central_conflict": "Disagreement between Chief Engineer Vane and Pilot Jax over whether to vent forward thrusters or shield the core during a solar flare.",
+        "decisive_choice": "Chief Engineer Vane overrides the automated flight computer to force a cold-weld seal directly onto the vibrating reactor plate.",
+        "resolution": "The hull seal holds firm against the solar wave, saving the vessel and restoring full propulsion to the crew.",
         "visual_bible": {
-          "style": "Clean sci-fi anime style with high contrast lighting, distinct silhouettes, and vibrant hazard markings.",
+          "style": "Cinematic sci-fi realism with gritty industrial textures, stark metallic lighting, and high contrast shadows.",
           "characters": {
-            "Captain Vance": "A human woman in her late forties with a practical grey buzzcut, determined expression, and a dark blue utility flight suit with reinforced leather patches on the knees.",
-            "Milo": "A slender orange service robot with polished metallic plating, a domed head featuring a horizontal blue optical visor, and articulated three-fingered manipulator hands."
+            "Vane": "A weathered chief engineer with a greying buzzcut, wearing a stained canvas jumpsuit with reinforced leather elbow pads.",
+            "Jax": "A cautious pilot with braided dark hair, wearing a sleek grey flight jacket adorned with embroidered mission patches."
           },
           "locations": {
-            "Cargo Ship Interior": "A narrow, functional spaceship corridor featuring exposed conduits, metallic grating floors, and glowing yellow and red status panels along the curved walls.",
-            "Cockpit": "A spacious forward room dominated by a panoramic curved glass window overlooking deep space and a console fitted with glowing amber buttons."
+            "bridge": "A cramped circular control room featuring banks of amber analog dials, glowing toggle switches, and a massive curved observation window.",
+            "engineering_bay": "A narrow industrial corridor lined with exposed copper piping, vibrating hydraulic pistons, and heavy safety grates."
           },
           "objects": {
-            "Diagnostic Console": "A slanted metallic panel embedded into the corridor wall with a flickering red LCD screen displaying system telemetry.",
-            "Emergency Lever": "A heavy industrial steel lever painted in bright yellow and black hazard stripes, mounted inside a recessed wall housing."
+            "wrench": "A heavy, dual-ended titanium spanner with deep scratches along the handle.",
+            "canister": "A cylindrical steel cryogenic coolant container frosted over with white ice crystals.",
+            "keypad": "An angled metal control panel featuring three physical toggle switches and a glowing red indicator light."
           }
         },
-        "plot_fingerprint": "762f7b4c6b94250347b34bd1cfae976c1e721e9711a7c11e9b86f826ac65c269"
-      },
-      "approved": false
-    },
-    {
-      "candidate_id": "9daac7df3dde0d093e60d453",
-      "source_sha256": "08d20cf7ef07f3441304d9d8b87e9359511c4716be65eae68fbd2446d8afe05f",
-      "status": "awaiting_independent_editorial_approval",
-      "story": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": false,
-        "content_id": "rayvan-gemini-2a936d103b91e83aa7a7",
-        "title": "The Canopy Chorus",
-        "hook": "A Hidden Relic",
-        "question": "How can two stranded travelers restart the automated rescue beacon before nightfall?",
-        "answer": "By synchronizing their acoustic resonators with the resonant frequency of the giant ironwood tree.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "A Hidden Relic",
-            "speech": "Look at these old acoustic carvings on the bark. They match the schematic on our damaged rescue terminal.",
-            "visual": "forest",
-            "label": "Ancient Glyphs",
-            "story_beat": "reveal",
-            "visual_prompt": "Wide shot of a dense glowing forest at dusk. Lyra, a human scout in a teal jumpsuit, points her flashlight at deep spiral carvings on a giant ironwood trunk, while Jinx, an orange-furred fox-like tracker, holds a glowing blue mapping slate in his paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Building the Bridge",
-            "speech": "Hold this copper wire steady while I connect the amplifier to the root system.",
-            "visual": "signal",
-            "label": "Circuit Setup",
-            "story_beat": "build",
-            "visual_prompt": "Medium closeup of Jinx and Lyra working frantically on a mossy root. Jinx uses metallic pincers to attach a copper wire to an exposed glowing sap vein, while Lyra holds the heavy iron signal transmitter, her face tense with concentration under the dim canopy light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Resonance Mechanism",
-            "speech": "The frequency is unstable. We must hum the exact pitch together to balance the magnetic core.",
-            "visual": "robot",
-            "label": "Frequency Tune",
-            "story_beat": "mechanism",
-            "visual_prompt": "Close shot of a small hovering utility robot projecting a red error hologram above the ironwood root. Lyra and Jinx stand shoulder to shoulder, eyes closed and breathing deeply as they sing into hand-held metallic tuning forks that glow with steady green light.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Payoff",
-            "speech": "It worked. The signal beam has punched through the canopy and the extraction ship is descending now.",
-            "visual": "ship",
-            "label": "Beacon Lock",
-            "story_beat": "payoff",
-            "visual_prompt": "Low angle shot looking up through the glowing forest branches. Lyra and Jinx cheer together as a sleek white rescue ship descends through the opening, its landing lights washing over the ancient trees while the signal transmitter rests safely between them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Power cell depletion before resonance lock",
-        "decisive_choice": "Sacrificing their last backup battery to amplify the tree duet",
-        "resolution": "A rescue drone arrives guided by the synchronized forest signal",
-        "visual_bible": {
-          "style": "Cinematic 3D animation with vibrant colors, soft glowing foliage, and highly detailed textural surfaces.",
-          "characters": {
-            "Lyra": "Human female scout with short dark hair, wearing a utilitarian teal jumpsuit with orange safety stripes, leather boots, and a determined expression.",
-            "Jinx": "An intelligent alien companion resembling an orange-furred red fox with oversized expressive ears, wearing a small utility vest with pouches."
-          },
-          "locations": {
-            "Ironwood Grove": "A dense alien forest filled with towering trees, bioluminescent moss, purple hanging vines, and scattered metallic ruins."
-          },
-          "objects": {
-            "signal_transmitter": "A heavy rectangular grey metal box with dual fold-out antennae and a flickering amber control screen.",
-            "mapping_slate": "A flat rectangular glassless tablet that projects holographic blue schematics in mid-air.",
-            "tuning_fork": "A slender silver metallic fork that glows green when vibrating at the correct frequency."
-          }
-        },
-        "plot_fingerprint": "2a1f1628276df841d38c18218de7c549294857891bbda03f44463ba30b1108c8"
+        "plot_fingerprint": "407c95efbb5f82e58903351c20c87858f8a598b548e164fc3aa4a7f29c10d7b6"
       },
       "approved": false
     }
