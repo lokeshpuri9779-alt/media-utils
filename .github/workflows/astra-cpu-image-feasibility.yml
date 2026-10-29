@@ -6,10 +6,6 @@ on:
         description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
         required: true
         type: string
-      cpu_runtime_probe:
-        description: 'Read-only CPU model, affinity, quota and memory report; no model downloads or images'
-        type: boolean
-        default: false
       sdxl_one_image:
         description: 'One 1024x1024 fixed-seed 20-step SDXL INT8 CPU diagnostic; review only, not production quality'
         type: boolean
@@ -53,28 +49,8 @@ on:
 permissions:
   contents: read
 jobs:
-  cpu-runtime-probe:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.cpu_runtime_probe
-    runs-on: ubuntu-24.04
-    timeout-minutes: 3
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - name: Verify offline CPU probe guardrails
-        run: python3 -m unittest discover -s tests -p 'test_experimental_cpu_runtime_probe.py' -v
-      - name: Capture read-only CPU environment
-        run: python3 -m tools.experimental_cpu_runtime_probe
-      - name: Retain CPU environment report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-cpu-runtime-${{ github.run_id }}
-          path: artifacts/experimental-openvino/cpu-runtime-probe.json
-          if-no-files-found: error
-          retention-days: 7
   sdxl-load-compile:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_load && !inputs.sdxl_one_image && !inputs.cpu_runtime_probe
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_load && !inputs.sdxl_one_image
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -100,7 +76,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   sdxl-one-image:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_one_image && !inputs.cpu_runtime_probe
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_one_image
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
@@ -129,7 +105,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   sdxl-resource-preflight:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_preflight && !inputs.sdxl_load && !inputs.sdxl_one_image && !inputs.cpu_runtime_probe
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_preflight && !inputs.sdxl_load && !inputs.sdxl_one_image
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     env:
@@ -147,7 +123,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   benchmark:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && !inputs.sdxl_preflight && !inputs.sdxl_load && !inputs.sdxl_one_image && !inputs.cpu_runtime_probe
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && !inputs.sdxl_preflight && !inputs.sdxl_load && !inputs.sdxl_one_image
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
