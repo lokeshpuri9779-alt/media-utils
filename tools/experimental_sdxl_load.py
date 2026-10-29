@@ -43,7 +43,7 @@ def selected(name):
     return group in ('tokenizer', 'tokenizer_2') and file in (
         'merges.txt', 'vocab.json', 'tokenizer_config.json', 'special_tokens_map.json')
 
-def worker(one_image=False):
+def worker(one_image=False, performance_probe=False):
     stage('download')
     started = time.monotonic()
     url = f'https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true'
@@ -99,7 +99,7 @@ def worker(one_image=False):
     save('timings.json', timings)
     result_status = 'loaded_and_compiled'
     images_generated = 0
-    if one_image:
+    if one_image or performance_probe:
         stage('inference')
         started = time.monotonic()
         import torch
@@ -133,6 +133,22 @@ def worker(one_image=False):
             'latent_sha256': hashlib.sha256(noise.numpy().tobytes()).hexdigest(),
             'approved': False, 'production_ready': False, 'published': False,
             'manual_visual_review_required': True})
+        if performance_probe:
+            from tools.experimental_sdxl_performance import runtime_details, run_probe
+            save('runtime.json', runtime_details(pipe, torch))
+            run_probe(pipe, {
+                'prompt': ONE_IMAGE_PROMPT, 'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
+                'height': 1024, 'width': 1024, 'num_inference_steps': ONE_IMAGE_STEPS,
+                'guidance_scale': 7.5, 'original_size': size, 'target_size': size,
+                'crops_coords_top_left': crop, 'negative_original_size': size,
+                'negative_target_size': size, 'negative_crops_coords_top_left': crop,
+                'latents': noise}, save)
+            save('worker-result.json', {'status': 'performance_probe_complete',
+                'images_generated': 0, 'approved': False, 'production_ready': False,
+                'published': False, 'manual_visual_review_required': True,
+                'packages': {p: importlib.metadata.version(p) for p in
+                    ('openvino', 'optimum-intel', 'diffusers', 'transformers', 'torch', 'psutil')}})
+            return
         generated = pipe(
             ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
             height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
@@ -174,20 +190,20 @@ def available_memory():
             available = min(available, max(0, int(maximum) - int((root / 'memory.current').read_text())))
     return available
 
-def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None):
+def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None, inference_limit=900):
     if rss >= 12 * GIB:
         return 'rss_limit'
     if available < 2 * GIB:
         return 'available_ram_limit'
     if load_elapsed is not None and load_elapsed >= 600:
         return 'load_compile_timeout'
-    if inference_elapsed is not None and inference_elapsed >= 900:
+    if inference_elapsed is not None and inference_elapsed >= inference_limit:
         return 'inference_timeout'
     if elapsed >= 1200:
         return 'overall_timeout'
     return None
 
-def supervise(one_image=False):
+def supervise(one_image=False, performance_probe=False):
     import psutil
     import shutil
     OUT.mkdir(parents=True, exist_ok=True)
@@ -197,11 +213,11 @@ def supervise(one_image=False):
     report = {'model': MODEL, 'revision': REVISION, 'approved': False,
         'production_ready': False, 'published': False, 'manual_visual_review_required': True,
         'semantic_quality': 'not_verified', 'character_consistency': 'not_verified',
-        'images_generated': 0, 'mode': 'single_image' if one_image else 'load_only',
+        'images_generated': 0, 'mode': 'performance_probe' if performance_probe else ('single_image' if one_image else 'load_only'),
         'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
         'initial_available_ram_bytes': available_memory(), 'initial_disk_free_bytes': shutil.disk_usage('/tmp').free,
         'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
-                   'load_compile_seconds': 600, 'inference_seconds': 900, 'overall_seconds': 1200},
+                   'load_compile_seconds': 600, 'inference_seconds': 450 if performance_probe else 900, 'overall_seconds': 1200},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()
@@ -210,7 +226,9 @@ def supervise(one_image=False):
     reason = None
     with (OUT / 'worker.log').open('w') as log:
         command = [sys.executable, '-m', 'tools.experimental_sdxl_load', '--worker']
-        if one_image:
+        if performance_probe:
+            command.append('--performance-probe')
+        elif one_image:
             command.append('--one-image')
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         while process.poll() is None:
@@ -231,16 +249,17 @@ def supervise(one_image=False):
             now = time.monotonic()
             reason = limit_reason(rss, available_memory(), now - started,
                 now - load_started if current in ('load', 'compile') and load_started is not None else None,
-                now - inference_started if current == 'inference' and inference_started is not None else None)
+                now - inference_started if current == 'inference' and inference_started is not None else None,
+                inference_limit=450 if performance_probe else 900)
             if reason:
                 os.killpg(process.pid, signal.SIGKILL)
                 break
             time.sleep(0.2)
         code = process.wait()
-    expected = 'image_generated_review_only' if one_image else 'loaded_and_compiled'
+    expected = 'performance_probe_complete' if performance_probe else ('image_generated_review_only' if one_image else 'loaded_and_compiled')
     result = json.loads((OUT / 'worker-result.json').read_text()) if (OUT / 'worker-result.json').exists() else {}
     success = code == 0 and result.get('status') == expected and (
-        not one_image or ((OUT / 'image-review.json').exists() and (OUT / 'sdxl-fixed-seed-42.png').exists()))
+        performance_probe or not one_image or ((OUT / 'image-review.json').exists() and (OUT / 'sdxl-fixed-seed-42.png').exists()))
     report.update(status=reason or (expected if success else 'worker_failed'),
                   images_generated=result.get('images_generated', 0) if success else 0,
                   worker_exit_code=code, elapsed_seconds=time.monotonic() - started)
@@ -250,6 +269,6 @@ def supervise(one_image=False):
 
 if __name__ == '__main__':
     if '--worker' in sys.argv:
-        worker(one_image='--one-image' in sys.argv)
+        worker(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv)
     else:
-        raise SystemExit(supervise(one_image='--one-image' in sys.argv))
+        raise SystemExit(supervise(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv))
