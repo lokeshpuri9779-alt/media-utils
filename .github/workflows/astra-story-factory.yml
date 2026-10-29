@@ -45,13 +45,25 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python -m astra_v2.story_factory_inventory --inventory ../state/preproduced_video_inventory.json --root ../state --publisher-state ../state/astra_v2_state.json --target 7
-      - name: Generate review-only candidates
+      # Do not rotate a cohort with already-generated, unapproved scene artwork.
+      # Preserve the queue and manifest for independent visual review without
+      # making additional free-provider calls or advancing the story cursor.
+      - name: Hold existing review-only artwork cohort
+        id: cohort_guard
         if: steps.inventory.outputs.replenish == 'true'
+        working-directory: code
+        run: |
+          python -m astra_v2.story_factory_cohort_guard \
+            --queue ../state/story_factory_rewrite_queue.json \
+            --manifest ../state/story_factory_image_manifest.json \
+            --github-output "$GITHUB_OUTPUT"
+      - name: Generate review-only candidates
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: code
         run: |
           python -m astra_v2.story_factory --state ../state/story_factory_state.json --output ../state/story_factory_candidates.jsonl --batch-size 500
       - name: Validate candidate and review artifacts before state push
-        if: steps.inventory.outputs.replenish == 'true'
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: state
         run: |
           python - <<'PY'
@@ -75,7 +87,7 @@ jobs:
           print("Validated review-only replenishment batch:",len(candidates))
           PY
       - name: Build fail-closed editorial review packet
-        if: steps.inventory.outputs.replenish == 'true'
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: code
         run: |
           python -m astra_v2.story_factory_review_packet \
@@ -85,7 +97,7 @@ jobs:
       # Keep complete, unapproved rewrites while image-provider quota is exhausted.
       # The rewrite CLI validates the saved queue before reusing it; never auto-approves.
       - name: Rewrite a bounded editorial shortlist with existing Gemini
-        if: steps.inventory.outputs.replenish == 'true'
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: code
         env:
           ASTRA_GEMINI_ENABLED: ${{ secrets.GEMINI_API_KEY != '' && '1' || '0' }}
@@ -103,11 +115,11 @@ jobs:
       # Keep the prior manifest available for stale-queue archival above.
       # Only clear it after rewrite succeeds; then count this run's image results afresh.
       - name: Clear previous image manifest for fresh-run accounting
-        if: steps.inventory.outputs.replenish == 'true'
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: state
         run: rm -f story_factory_image_manifest.json
       - name: Preproduce review-only images via configured free OmniRoute provider
-        if: steps.inventory.outputs.replenish == 'true'
+        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: code
         env:
           ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
@@ -148,9 +160,12 @@ jobs:
       - name: Report actual image preproduction outcome
         working-directory: state
         if: always()
+        env:
+          ASTRA_COHORT_HELD: ${{ steps.cohort_guard.outputs.hold }}
         run: |
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
           p = Path("story_factory_image_manifest.json")
           if not p.exists():
@@ -158,8 +173,9 @@ jobs:
           else:
               result = json.loads(p.read_text())
               assets = result.get("assets", [])
-              generated = sum(a.get("status") == "review_only" for a in assets)
-              cached = sum(a.get("status") == "cached_review_only" for a in assets)
+              held = os.environ.get("ASTRA_COHORT_HELD") == "true"
+              generated = 0 if held else sum(a.get("status") == "review_only" for a in assets)
+              cached = sum(a.get("status") in ("review_only", "cached_review_only") for a in assets) if held else sum(a.get("status") == "cached_review_only" for a in assets)
               failures = sum(a.get("status") == "generation_failed" for a in assets)
               adapted = sum(a.get("adaptation") == "square_to_portrait_review_padding_v1"
                             and a.get("status") in ("review_only", "cached_review_only") for a in assets)
@@ -180,8 +196,8 @@ jobs:
               print("ASTRA_IMAGE_DIMENSIONS=" + json.dumps({"verified": len(dimensions),
                     "portrait": portrait, "sizes": dimensions[:10]}, sort_keys=True))
               print("ASTRA_IMAGE_RESULT=" + json.dumps({
-                  "status": result.get("status"),
-                  "provider_calls": result.get("provider_calls", 0),
+                  "status": "held_for_review" if held else result.get("status"),
+                  "provider_calls": 0 if held else result.get("provider_calls", 0),
                   "new_images": generated,
                   "cached_images": cached,
                   "square_review_padded": adapted,
