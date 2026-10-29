@@ -26,6 +26,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
     report = {"engine": "OpenVINO CPU", "model": model, "steps": steps,
               "success": False, "published": False, "approved": False,
               "production_ready": False, "still_image_only": True,
+              "render_completed": False,
               "semantic_quality": "not_verified",
               "manual_visual_review_required": True}
     started = time.monotonic()
@@ -54,6 +55,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         report["quality"] = quality
         report["dimensions"] = {"width": image.width, "height": image.height}
         report["bytes"] = output.stat().st_size
+        report["render_completed"] = True
         report["success"] = bool(quality["passed"])
         report["output"] = str(output)
     except Exception as exc:
