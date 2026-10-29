@@ -36,6 +36,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_asset_readiness_audit.py'
           python -m unittest discover -s tests -p 'test_reviewed_art_bridge.py'
           python -m unittest discover -s tests -p 'test_story_factory_rewrite_queue.py'
+          python -m unittest discover -s tests -p 'test_state_push_reconcile.py'
       - name: Check verified ready-video inventory
         id: inventory
         working-directory: code
