@@ -23,6 +23,15 @@ class CpuRuntimeProbeTests(unittest.TestCase):
         self.assertTrue(report["diagnostic_only"])
         self.assertEqual(report["logical_cpu_count"], 2)
 
+    def test_effective_cpu_quota(self):
+        quota = self.probe.effective_cpu_quota
+        self.assertEqual(quota("200000 100000", None, None), 2.0)
+        self.assertEqual(quota("50000 100000", None, None), 0.5)
+        self.assertIsNone(quota("max 100000", None, None))
+        self.assertEqual(quota(None, "150000", "100000"), 1.5)
+        self.assertIsNone(quota(None, "-1", "100000"))
+        self.assertIsNone(quota("invalid", None, None))
+
     def test_missing_procfs_is_safe(self):
         with patch.object(self.probe, "read", return_value=None), \
              patch.object(self.probe.platform, "processor", return_value="fallback"):
