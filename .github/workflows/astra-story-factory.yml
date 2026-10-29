@@ -97,7 +97,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
-          python -m astra_v2.story_factory_rewrite_queue --packet ../state/story_factory_editorial_packet.json --output ../state/story_factory_rewrite_queue.json --limit 3 --reuse-pending
+          python -m astra_v2.story_factory_rewrite_queue \
+            --packet ../state/story_factory_editorial_packet.json \
+            --output ../state/story_factory_rewrite_queue.json \
+            --limit 3 --reuse-pending \
+            --archive-dir ../state/story_factory_review_archive \
+            --image-manifest ../state/story_factory_image_manifest.json
       - name: Preproduce review-only images via configured free OmniRoute provider
         if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
@@ -209,6 +214,7 @@ jobs:
           path: |
             state/story_factory_review_summary.json
             state/story_factory_rewrite_queue.json
+            state/story_factory_review_archive/
             state/story_factory_image_manifest.json
             state/story_factory_production_ledger.json
             state/story_factory_asset_readiness.json
@@ -259,6 +265,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add story_factory_state.json story_factory_candidates.jsonl story_factory_review.jsonl story_factory_review_summary.json story_factory_editorial_packet.json
           if [ -f story_factory_rewrite_queue.json ]; then git add story_factory_rewrite_queue.json; fi
+          if [ -d story_factory_review_archive ]; then git add story_factory_review_archive/; fi
           if [ -f story_factory_image_manifest.json ]; then
             git add story_factory_image_manifest.json
             # Image generation can legitimately yield zero files; never fail
