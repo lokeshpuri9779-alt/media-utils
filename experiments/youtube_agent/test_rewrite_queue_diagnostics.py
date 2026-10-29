@@ -14,6 +14,18 @@ class RewriteQueueTests(unittest.TestCase):
         self.assertFalse(out["results"][0]["diagnostics"]["production_ready"])
         self.assertIn("error",out["results"][1])
         self.assertFalse(out["publication_triggered"])
+    def test_long_hook_never_grants_editorial_quality_decision(self):
+        payload = {"rewrites": [{"story": {
+            "hook": "What happens when a mysterious visitor changes everything overnight in this village",
+            "title": "A Mysterious Visitor",
+        }}]}
+        result = inspect_queue(payload)
+        row = result["results"][0]
+        self.assertEqual(row["hook_score_applicability"], "heuristic_only")
+        self.assertFalse(row["diagnostics"]["hook"]["quality_decision_allowed"])
+        self.assertEqual(row["diagnostics"]["hook"]["interpretation"], "unvalidated_heuristic_not_quality_gate")
+        self.assertFalse(row["diagnostics"]["production_ready"])
+
     def test_invalid_queue(self):
         with self.assertRaises(ValueError):
             inspect_queue({"rewrites":{}})
