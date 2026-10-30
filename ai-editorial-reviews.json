@@ -4041,6 +4041,17 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-eca9a6a370189b00720f",
+      "story_sha256": "9808073d78460d64a8c27b48831e3981b2a6264deea140a2b33f7a63d8e0f75b",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story is highly derivative of previously published content in the provided dataset, specifically 'Finley and the Abyssal Melody'. Both stories feature an underwater protagonist (Finley/Finnegan) in a reef setting, a mechanical failure causing a loss of essential energy/oxygen, a risky manual intervention to fix a valve/debris, and a resolution involving the restoration of a life-sustaining flow. The causal mechanism and narrative arc are nearly identical to existing entries."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
