@@ -67,7 +67,9 @@ def run_probe(pipe, kwargs, save, clock=time.monotonic):
     save('performance.json', report)
     try:
         pipe(**kwargs, output_type='latent', callback_on_step_end=callback,
-             callback_on_step_end_tensor_inputs=[])
+             # Optimum 2.2.0 indexes list arguments during generator conversion.
+             # Use Diffusers' normal latent callback input; return it unchanged.
+             callback_on_step_end_tensor_inputs=['latents'])
     except ProbeComplete:
         if len(report['steps']) != PROBE_STEPS:
             raise RuntimeError('Probe stopped before collecting three steps')

@@ -4,6 +4,22 @@ from tools.experimental_sdxl_performance import run_probe, runtime_details
 from tools.experimental_sdxl_load import limit_reason, GIB
 
 class PerformanceTests(unittest.TestCase):
+    def test_optimum_list_conversion_and_latent_passthrough(self):
+        latent = object()
+        def pipeline(**kwargs):
+            # Reproduce the pinned wrapper's unconditional list[0] access.
+            for value in kwargs.values():
+                if isinstance(value, list):
+                    first = value[0]
+            self.assertEqual(kwargs['callback_on_step_end_tensor_inputs'], ['latents'])
+            for i in range(20):
+                payload = {'latents': latent}
+                returned = kwargs['callback_on_step_end'](None, i, 999-i, payload)
+                self.assertIs(returned, payload)
+                self.assertIs(returned['latents'], latent)
+            self.fail('Probe must stop before decode')
+        run_probe(pipeline, {'num_inference_steps': 20}, lambda *args: None)
+
     def test_stops_after_three_callbacks_without_decode(self):
         saved = {}
         calls = []
