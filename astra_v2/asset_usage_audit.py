@@ -71,6 +71,26 @@ def observe(shot_number, analysis, status, identity, *, asset=None, before=None,
     print("ASTRA_ASSET_SHOT_EVIDENCE=" + json.dumps(decision, sort_keys=True), flush=True)
 
 
+
+def fiction_compositor_coverage_rejection(story, rendered):
+    """Block audited fiction with unresolved backgrounds before upload.
+
+    Pixel coverage is a necessary minimum, NOT semantic or editorial approval.
+    Keep unaffected genres and installations without the optional audit unchanged.
+    """
+    if story.get("genre") != "fiction" or os.getenv("ASTRA_ASSET_PACK_AUDIT") != "1":
+        return None
+    receipt = rendered.get("asset_pack_usage") if isinstance(rendered, dict) else None
+    if not isinstance(receipt, dict):
+        return "fiction_asset_usage_evidence_missing"
+    shots = receipt.get("shot_count")
+    composited = receipt.get("composited_shots")
+    if (type(shots) is not int or shots < 1 or
+            type(composited) is not int or composited != shots):
+        return "fiction_scene_background_coverage_incomplete"
+    return None
+
+
 def finish(video_path, *, renderer, expected_shots=None):
     """After encoding succeeds, link the actual MP4 hash to each shot decision."""
     state = _ACTIVE.get()
