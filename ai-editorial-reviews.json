@@ -4072,6 +4072,19 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-79fbd03187fc92bd9df7",
+      "story_sha256": "c7786edd0d344a37876e67df236a52ef580213b56c22d4602101a1ff36b8a19d",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, conflict, and resolution are nearly identical to the previously published 'Finley and the Abyssal Melody' in the provided history.",
+        "Both stories feature a protagonist named Finley, a dying bioluminescent reef, a rhythmic/current-based energy crisis, and a decisive action involving the removal of debris to restore the reef's light.",
+        "The repetition of the character name and the specific causal mechanism (clearing debris to restore bioluminescence) constitutes a lack of originality relative to the provided dataset."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
