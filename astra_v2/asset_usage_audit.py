@@ -14,8 +14,6 @@ import os
 from pathlib import Path
 import re
 
-from PIL import ImageChops
-
 
 _ACTIVE = ContextVar("astra_asset_pack_audit", default=None)
 
@@ -64,6 +62,7 @@ def observe(shot_number, analysis, status, identity, *, asset=None, before=None,
             raise ValueError("rendered asset evidence requires both compositor frames")
         # Pixel-level evidence from the actual background-compositing operation.
         # This does not claim a decoded video comparison or full semantic fit.
+        from PIL import ImageChops  # Only the frame-compositing path needs Pillow.
         changed = ImageChops.difference(before.convert("RGB"), after.convert("RGB")).getbbox() is not None
         decision["pixel_changed"] = changed
         decision["status"] = "composited" if changed else "selected_no_pixel_change"
