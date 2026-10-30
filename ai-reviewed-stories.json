@@ -6365,11 +6365,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-778c674c5f44db866e55",
-      "title": "The Canopy Trackers and the Fading Roots",
-      "hook": "Discovering the Wilted Core",
-      "question": "Can two woodland scouts restore a dying ancient tree before nightfall?",
-      "answer": "Yes, by combining their unique tracking skills and pooling their remaining water flasks.",
+      "content_id": "rayvan-gemini-251a65461460615262cb",
+      "title": "The Stationmaster's Lost Ledger and the Platform Seven Mystery",
+      "hook": "The Missing Ledger",
+      "question": "Can the missing ledger be found before the last midnight train departs?",
+      "answer": "Yes, by uncovering a hidden compartment inside the station signal box.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6377,215 +6377,65 @@
       ],
       "story_beats": [
         {
-          "headline": "Discovering the Wilted Core",
-          "speech": "Look at the central leaves, Rowan! The ancient roots are turning dry and brittle faster than expected.",
-          "visual": "forest",
-          "label": "First Sign",
-          "story_beat": "reveal",
-          "visual_prompt": "Bramble pointing at a withered root system in a towering ancient tree. Bramble has messy auburn hair and a moss-green tunic. Rowan stands beside him holding a rusted metal trowel. The afternoon sun filters through dense green foliage casting long shadows.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Excavating the Main Channel",
-          "speech": "We must dig away this packed clay immediately to reach the deepest moisture channels before dusk settles.",
+          "headline": "The Missing Ledger",
+          "speech": "My entire ledger of daily arrivals is gone! Without it, platform seven cannot dispatch the midnight express safely.",
           "visual": "signal",
-          "label": "Clearing the Path",
-          "story_beat": "build",
-          "visual_prompt": "Rowan kneeling in damp soil using a rusted metal trowel to clear dirt from a thick root. Bramble holds a carved wooden signal flare aloft to illuminate the dark undergrowth. Rowan wears a leather vest over a brown wool shirt with soot smudges on her cheek.",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Stationmaster Bramble stands in the empty ticket office with hands on his head, wearing a blue uniform and silver spectacles, looking at an empty wooden desk while a stray terrier dog sits quietly by the open door holding an old leather strap in its teeth.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Pooling the Last Water",
-          "speech": "My canteen is almost empty too, but if we pour them together right here, it might just work.",
-          "visual": "robot",
-          "label": "Shared Sacrifice",
-          "story_beat": "mechanism",
-          "visual_prompt": "Bramble and Rowan side by side, simultaneously tipping two leather water canteens over the exposed root junction. A small metallic maintenance automaton with a single glowing lens watches them closely from a nearby mossy stone.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Canopy Reborn",
-          "speech": "The leaves are turning green again! Our combined effort saved the whole grove from perishing tonight.",
+          "headline": "Following the Scent",
+          "speech": "That clever little terrier is scratching at the old telegraph door instead of chasing mice in the luggage hall.",
           "visual": "door",
-          "label": "Sprouting Hope",
-          "story_beat": "payoff",
-          "visual_prompt": "Bramble and Rowan smiling broadly as luminous turquoise spores drift upward from the revived mother tree. In the background, a massive hollow wooden archway glows with soft inner light. Both characters hold empty canteens loosely at their sides.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A vital mother tree begins to wither from thirst while a sudden drought grips the high canopy.",
-      "decisive_choice": "Instead of keeping individual rations, they empty both canteens into the primary root junction.",
-      "resolution": "The mother tree revives, blooming with vibrant protective spores that secure the forest's safety.",
-      "visual_bible": {
-        "style": "Lush storybook illustration with rich earthy tones, soft natural lighting, and detailed textures of bark, moss, and worn leather.",
-        "characters": {
-          "Bramble": "A young scout with messy auburn hair, freckled skin, wearing a moss-green linen tunic and sturdy leather boots.",
-          "Rowan": "A resourceful tracker with dark braided hair, wearing a patched leather vest over a brown wool shirt and mud-stained trousers."
-        },
-        "locations": {
-          "High Canopy Grove": "An elevated forest platform surrounded by massive ancient trees, hanging vines, and thick carpets of emerald moss."
-        },
-        "objects": {
-          "leather_canteen": "A well-worn brown leather water flask with a silver buckle and a frayed carrying strap.",
-          "rusted_trowel": "A small gardening shovel made of oxidized iron with a carved wooden handle wrapped in twine.",
-          "wooden_signal_flare": "A cylindrical carved pine rod tipped with a glowing resin crystal that emits a warm amber light.",
-          "maintenance_automaton": "A compact, copper-plated robotic helper with three jointed legs and a single glowing blue optical lens."
-        }
-      },
-      "plot_fingerprint": "51b9299e7651bf5f61896710602b28170345c6d63283df0e5f66a1da911a464e"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-72bdf7e1799a8d3de2e9",
-      "title": "Taran and the Singing Geode of the Salt Flats",
-      "hook": "The Silent Horizon",
-      "question": "Can Taran cross the scorching salt flats before his water runs dry?",
-      "answer": "Yes, by discovering a subterranean freshwater spring hidden inside a singing quartz geode.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Silent Horizon",
-          "speech": "My water flask is nearly empty, and these endless salt flats offer nothing except shimmering heat.",
-          "visual": "planet",
-          "label": "Act I",
-          "story_beat": "reveal",
-          "visual_prompt": "Wide shot of a vast white desert under a blistering sun. Taran, a lean explorer with sun-weathered skin, canvas trousers, and a wide-brimmed straw hat, holds an empty metal canteen with a defeated expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hum in the Earth",
-          "speech": "Wait, do you hear that? The ground beneath this massive crystal formation is vibrating with a melodic frequency.",
-          "visual": "signal",
-          "label": "Act II",
+          "label": "The Track",
           "story_beat": "build",
-          "visual_prompt": "Medium close-up of Taran kneeling beside a towering quartz geode jutting from the crust. He presses his ear against the stone, eyes wide with sudden curiosity, holding a small copper geological hammer in his right hand.",
+          "visual_prompt": "Terrier dog scratches excitedly at a heavy iron maintenance door marked platform seven, while Bramble holds a brass lantern aloft, illuminating cobblestone floor dust and fluttering ticket scraps.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Breaking the Shell",
-          "speech": "If I crack the outer shell of this crystal, I might find trapped moisture or something even more precious.",
+          "headline": "Inside the Box",
+          "speech": "Look up there inside the signal cabinet! Someone tucked the heavy book behind the brass lever weights.",
           "visual": "robot",
-          "label": "Act III",
+          "label": "The Search",
           "story_beat": "mechanism",
-          "visual_prompt": "Action shot of Taran striking the base of the singing geode with his copper hammer. Fine white crystalline dust flies into the air, illuminated by the harsh afternoon sunlight, while tiny mechanical sensors on his wrist strap flash amber.",
+          "visual_prompt": "Bramble reaches inside an open metal signal cabinet with mechanical gears and levers, pulling out a thick leather ledger, while the terrier dog sits happily at his feet wagging its tail under glowing Edison bulbs.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Liquid Symphony",
-          "speech": "It is not just water; it is a living underground oasis singing through the desert stone!",
-          "visual": "forest",
-          "label": "Act IV",
-          "story_beat": "payoff",
-          "visual_prompt": "Joyful shot of Taran kneeling as a crystal-clear spring erupts from the broken geode base, watering sudden patches of green moss and desert ferns. He fills his canteen with a bright, relieved smile.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Taran faces severe dehydration while traversing the scorching white salt flats.",
-      "decisive_choice": "Taran chooses to dig beneath a large humming crystal formation instead of turning back.",
-      "resolution": "A gushing underground spring quenches his thirst and transforms the barren landscape.",
-      "visual_bible": {
-        "style": "Cinematic realism with warm golden hour lighting, rich textures of salt and crystal, and vibrant contrast between the harsh white desert and the cool blue water.",
-        "characters": {
-          "Taran": "A determined desert explorer in his late thirties with deep brown eyes, short dark hair, sun-bronzed skin, wearing rugged tan canvas trousers, a linen shirt with rolled-up sleeves, and a frayed straw hat."
-        },
-        "locations": {
-          "Salt Flats": "An endless, blindingly white expanse of crystalline salt crust under a bright, cloudless sky, punctuated by ancient geological formations."
-        },
-        "objects": {
-          "Geode": "A towering, six-foot-tall quartz crystal formation embedded in the salt flats, featuring translucent purple and white inner layers that vibrate audibly.",
-          "Canteen": "A dented, silver-plated metal water flask attached to a worn leather strap.",
-          "Hammer": "A short-handled copper geological mallet with a steel-capped head and a grip wrapped in weathered black leather."
-        }
-      },
-      "plot_fingerprint": "bf54dc455a50f0966b5d1fc9cab97cfac00af59190ca151ab2a6d37f13baf52f"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-d94b09e507f5f5419b3c",
-      "title": "The Ranger and the Hidden Shelf",
-      "hook": "The Emergency Signal",
-      "question": "Can the veteran mountain rescuer navigate the crumbling cliff face to reach the trapped climber before sunset?",
-      "answer": "Yes, by trusting his old mapping instincts over the automated scanner, he scales the hidden ledge and pulls her to safety.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Emergency Signal",
-          "speech": "Look at that faint red blink up near the freezing summit ridge. Someone is definitely stranded.",
-          "visual": "signal",
-          "label": "Beacon Spotted",
-          "story_beat": "reveal",
-          "visual_prompt": "Rescuer Marcus holding a blinking orange emergency beacon while standing on a snowy mountain overlook, looking up at a distant red light on a steep cliff face during late afternoon.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Impassable Route",
-          "speech": "The main rope bridge is completely snapped in half. We cannot cross this deep glacial chasm safely.",
-          "visual": "door",
-          "label": "Broken Bridge",
-          "story_beat": "build",
-          "visual_prompt": "Rescuer Marcus standing at the edge of a deep crevasse, staring at broken wooden planks of a suspension bridge, wearing a heavy blue parka and holding a steel ice axe in his right hand.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Risky Ascent",
-          "speech": "Hold on tight to your anchors because I am climbing straight up this icy wall to reach you.",
-          "visual": "forest",
-          "label": "Vertical Climb",
-          "story_beat": "mechanism",
-          "visual_prompt": "Rescuer Marcus actively swinging his metal ice axe into a vertical wall of blue ice, climbing upward past frozen pine branches hanging off the cliffside under a cold gray sky.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Safe Return",
-          "speech": "You are securely hooked into my harness now. We made it off that dangerous ledge just in time.",
+          "headline": "Saved by the Hound",
+          "speech": "The train leaves right on time now, and this brave dog has a permanent home right here beside us.",
           "visual": "ship",
-          "label": "Successful Rescue",
+          "label": "The Return",
           "story_beat": "payoff",
-          "visual_prompt": "Rescuer Marcus and a rescued climber in red jackets sitting safely inside a warm rescue helicopter cabin, smiling and holding steaming metal flasks of hot tea as dusk settles outside.",
+          "visual_prompt": "Bramble stamps the final departure ticket at the wooden ticket window, smiling broadly in his crisp blue uniform, while the terrier wears a new red collar and rests beside a steaming cup of tea.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A stranded climber is trapped on an unstable snow ledge as daylight rapidly fades.",
-      "decisive_choice": "The rescuer chooses to abandon the unsafe main trail and free-climb the frozen waterfall shortcut.",
-      "resolution": "The rescuer reaches the shelf, secures the harness, and brings the climber back down before nightfall.",
+      "central_conflict": "The master ledger containing all ticket receipts and schedule notes has vanished from the ticket office.",
+      "decisive_choice": "Search the off-limits signal box using an orphaned railway dog as an unexpected tracker.",
+      "resolution": "The ledger is recovered from a dusty locker, saving the stationmaster from wrongful suspension.",
       "visual_bible": {
-        "style": "Cinematic and realistic mountain rescue adventure style with crisp lighting and detailed snow textures.",
+        "style": "Warm vintage storybook illustration with rich sepia tones, detailed brass textures, and cozy lighting.",
         "characters": {
-          "Marcus": "A seasoned mountain rescue ranger in his late forties with a weather-beaten face, short graying hair, wearing a thick navy blue parka and yellow safety goggles."
+          "Bramble": "An elderly human stationmaster with a round belly, bushy white mustache, round silver spectacles, wearing a dark blue railway coat with brass buttons and a matching peaked cap.",
+          "Terrier": "A scruffy, clever brown-and-white stray terrier dog with floppy ears, intelligent dark eyes, and an energetic posture."
         },
         "locations": {
-          "Summit Ridge": "A treacherous, snow-covered alpine mountain range with steep ice cliffs, deep crevasses, and sparse alpine pine trees."
+          "Ticket Office": "A cluttered vintage railway office featuring dark mahogany wood walls, stacked paper tickets, a grandfather clock, and a frosted glass window.",
+          "Platform Seven": "An atmospheric Victorian train platform with arched iron roof girders, glowing amber gas lamps, and gleaming steel tracks disappearing into the foggy night."
         },
         "objects": {
-          "ice_axe": "A professional steel mountaineering ice axe with a curved pick and a bright orange wrist lanyard.",
-          "emergency_beacon": "A handheld rectangular orange electronic radio device with a flashing red LED light on top."
+          "Ledger": "A thick, worn black leather ledger book with faded gold lettering on the spine and pages filled with neat handwriting.",
+          "Lantern": "A heavy brass hand lantern with a glass chimney casting a warm, flickering yellow glow."
         }
       },
-      "plot_fingerprint": "eaa53713642bf58c2f772e823884444612722dfcb52e4893c4cdf65fdb4ab574"
+      "plot_fingerprint": "031679ee4980e366a8e0ee00fd620ac8b47107d9836762db20d3d16faf6b2200"
     }
   ]
 }
