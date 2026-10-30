@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from PIL import Image
 
-from astra_v2.asset_usage_audit import begin, finish
+from astra_v2.asset_usage_audit import begin, finish, fiction_compositor_coverage_rejection
 from astra_v2.visual_artifact_backdrop import apply_pack_background
 
 
@@ -95,6 +95,32 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         self.assertEqual(report["composited_shots"], 0)
         self.assertEqual(report["shots"][0]["status"], "no_matching_background")
         self.assertFalse(report["shots"][0]["pixel_changed"])
+
+    def test_audited_fiction_rejects_partial_scene_coverage_before_upload(self):
+        story = {"genre": "fiction", "content_id": "railway-ledger"}
+        receipt = {"shot_count": 4, "composited_shots": 1,
+                   "asset_coverage_status": "partial"}
+        self.assertEqual(
+            fiction_compositor_coverage_rejection(story, {"asset_pack_usage": receipt}),
+            "fiction_scene_background_coverage_incomplete")
+
+    def test_audited_fiction_requires_complete_valid_receipt(self):
+        story = {"genre": "fiction"}
+        for report in ({}, {"asset_pack_usage": None},
+                       {"asset_pack_usage": {"shot_count": True, "composited_shots": 1}},
+                       {"asset_pack_usage": {"shot_count": 4, "composited_shots": 5}}):
+            with self.subTest(report=report):
+                self.assertIsNotNone(fiction_compositor_coverage_rejection(story, report))
+        self.assertIsNone(fiction_compositor_coverage_rejection(
+            story, {"asset_pack_usage": {"shot_count": 4, "composited_shots": 4}}))
+
+    def test_coverage_gate_does_not_change_current_events_or_disabled_audits(self):
+        partial = {"asset_pack_usage": {"shot_count": 4, "composited_shots": 1}}
+        self.assertIsNone(fiction_compositor_coverage_rejection(
+            {"genre": "current"}, partial))
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
+            self.assertIsNone(fiction_compositor_coverage_rejection(
+                {"genre": "fiction"}, partial))
 
     def test_opt_out_produces_no_receipt(self):
         with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
