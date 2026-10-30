@@ -4096,6 +4096,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-24758d4e286567015327",
+      "story_sha256": "3f24c643ead97b81ca79709a132505b70814ec264c290f0082db1961cfd5a486",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and conflict (a reef losing its color/energy and a protagonist needing to restore it via a specific item) are highly derivative of previously published stories in the provided history, specifically 'The Octopus and the Faded Reef', 'The Octopus Cartographer and the Choking Reef', and 'Finley and the Abyssal Melody'.",
+        "The causal mechanism of 'trading a rare item to a guardian to save a dying ecosystem' is a repetitive trope within the provided dataset, lacking sufficient original narrative distinction."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
