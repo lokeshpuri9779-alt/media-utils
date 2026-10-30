@@ -9,7 +9,8 @@ from unittest.mock import patch
 
 from PIL import Image
 
-from astra_v2.asset_usage_audit import begin, finish, fiction_compositor_coverage_rejection
+from astra_v2.asset_usage_audit import (begin, finish, fiction_compositor_coverage_rejection,
+                                        fiction_preload_coverage_rejection)
 from astra_v2.visual_artifact_backdrop import apply_pack_background
 
 
@@ -121,6 +122,32 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
             self.assertIsNone(fiction_compositor_coverage_rejection(
                 {"genre": "fiction"}, partial))
+
+    def test_fiction_preload_requires_hash_bound_full_coverage(self):
+        valid = {"genre": "fiction", "format": "short", "content_id": "railway",
+                 "sha256": "a" * 64,
+                 "asset_pack_usage": {"shot_count": 4, "composited_shots": 4,
+                                      "video_sha256": "a" * 64,
+                                      "asset_coverage_status": "full",
+                                      "statuses": {"composited": 4}}}
+        self.assertIsNone(fiction_preload_coverage_rejection(valid))
+        for changes in (
+            {"asset_pack_usage": None},
+            {"sha256": "b" * 64},
+            {"asset_pack_usage": {**valid["asset_pack_usage"], "composited_shots": 1}},
+            {"asset_pack_usage": {**valid["asset_pack_usage"], "asset_coverage_status": "partial"}},
+            {"asset_pack_usage": {**valid["asset_pack_usage"], "statuses": {"composited": 3, "scene_unresolved": 1}}},
+        ):
+            with self.subTest(changes=changes):
+                self.assertIsNotNone(fiction_preload_coverage_rejection({**valid, **changes}))
+        self.assertIsNone(fiction_preload_coverage_rejection({**valid, "genre": "current"}))
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
+            self.assertIsNone(fiction_preload_coverage_rejection({**valid, "asset_pack_usage": None}))
+
+    def test_preload_workflow_enables_fiction_audit(self):
+        workflow = (Path(__file__).resolve().parents[1] /
+                    ".github/workflows/astra-v2-preload.yml").read_text(encoding="utf-8")
+        self.assertIn("ASTRA_ASSET_PACK_AUDIT: '1'", workflow)
 
     def test_opt_out_produces_no_receipt(self):
         with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
