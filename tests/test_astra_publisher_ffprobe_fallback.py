@@ -67,7 +67,7 @@ exit 0
     def test_failed_apt_install_blocks_publishing(self):
         result = self._exercise(install_succeeds=False)
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("Cannot install free system ffmpeg/ffprobe", result.stderr)
+        self.assertIn("ASTRA_CODEC_BOOTSTRAP_RETRY=", result.stdout, repr((result.stdout, result.stderr)))
 
     def test_unusable_probe_blocks_publishing(self):
         result = self._exercise(probe_works=False)
