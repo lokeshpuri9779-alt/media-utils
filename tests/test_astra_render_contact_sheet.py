@@ -113,31 +113,17 @@ class ContactSheetTests(unittest.TestCase):
                 self.assertFalse(list((Path(root) / "review").glob("*.jpg")))
 
 
-    def test_publisher_ffmpeg_path_has_real_newline(self):
-        """The wheel encoder must remain on PATH in subsequent Actions steps."""
-        import ast
-
-        workflow = (Path(__file__).resolve().parents[1] /
-                    ".github/workflows/astra-v2-publish.yml").read_text()
-        anchor = workflow.index("# Use the wheel-bundled encoder")
-        start = workflow.index("          import imageio_ffmpeg", anchor)
-        end = workflow.index("\n          PY\n", start)
-        script = "\n".join(line.removeprefix("          ")
-                           for line in workflow[start:end].splitlines())
-        syntax = ast.parse(script)
-        writes = [
-            node for node in ast.walk(syntax)
-            if isinstance(node, ast.Call)
-            and isinstance(node.func, ast.Attribute)
-            and isinstance(node.func.value, ast.Name)
-            and node.func.value.id == "out"
-            and node.func.attr == "write"
-        ]
-        self.assertEqual(len(writes), 1)
-        argument = writes[0].args[0]
-        self.assertIsInstance(argument, ast.BinOp)
-        self.assertIsInstance(argument.right, ast.Constant)
-        self.assertEqual(argument.right.value, "\n")
+    def test_publisher_uses_verified_shared_codec_bootstrap(self):
+        """Avoid the failed wheel PATH/static tarball path in the publisher."""
+        root = Path(__file__).resolve().parents[1]
+        workflow = (root / ".github/workflows/astra-v2-publish.yml").read_text()
+        install = workflow.split("- name: Install free rendering dependencies", 1)[1].split(chr(10) + "      - name:", 1)[0]
+        self.assertIn("bash tools/astra_ffmpeg_bootstrap.sh", install)
+        self.assertNotIn("imageio_ffmpeg.get_ffmpeg_exe()", install)
+        self.assertNotIn("ffmpeg-release-amd64-static.tar.xz", install)
+        shared = (root / "tools/astra_ffmpeg_bootstrap.sh").read_text()
+        self.assertIn("command -v ffmpeg", shared)
+        self.assertIn("command -v ffprobe", shared)
 
 
 if __name__ == "__main__":
