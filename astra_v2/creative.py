@@ -342,6 +342,16 @@ def make_candidate(path, excluded_ids, excluded_titles):
             from astra_v2.preload_reviewed_art import attach_reviewed_art
             story = attach_reviewed_art(story)
             rendered = render_short(story, path)
+            # The asset receipt is tied to the encoded MP4. An audit showing
+            # unresolved scene backgrounds is not production-quality evidence.
+            from astra_v2.asset_usage_audit import fiction_compositor_coverage_rejection
+            coverage_rejection = fiction_compositor_coverage_rejection(story, rendered)
+            if coverage_rejection:
+                selection["render_qa_rejected"] += 1
+                print("ASTRA_CANDIDATE_ASSET_COVERAGE_REJECTED=" + json.dumps({
+                    "content_id": story.get("content_id"), "reason": coverage_rejection,
+                }, sort_keys=True))
+                continue
             evaluation = evaluate_studio_render(story, rendered, video_path=path)
             if not evaluation.get("pass"):
                 selection["render_qa_rejected"] += 1
