@@ -1,24 +1,27 @@
 {
-  "observed_at": "2026-10-29T18:59:59.212660+00:00",
-  "generated": 19,
+  "observed_at": "2026-10-30T01:05:38.510441+00:00",
+  "generated": 15,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 14,
+      "index": 11,
       "reason": "ValueError"
+    },
+    {
+      "index": 16,
+      "reason": "ValueError"
+    },
+    {
+      "index": 17,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 19,
+  "reviewed": 15,
   "approved": 0,
   "review_issues": [
-    "The candidate story heavily mirrors structural and thematic elements of recently published titles in the comparison history involving environmental mechanics, blocked flows/pipes/vents, and a decisive manual intervention (e.g., 'The Tidal Weaver and the Salt-Crusted Spire', 'Finley and the Abyssal Melody').",
-    "The causal mechanism and narrative progression follow a formulaic template present in multiple recent AI-generated story listings within the comparison history.",
-    "The story 'The Octopus Cartographer and the Fading Current' closely repeats the premise, conflict type, and character archetype of the recently published comparison example 'The Octopus Cartographer and the Choking Reef' and 'Finley and the Abyssal Melody', dealing with an underwater environment suffering from a blocked natural mechanism (coral nursery oxygen/thermal vents vs. clogged reef/coral melody) resolved by clearing debris with a risky mechanical action.",
-    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
