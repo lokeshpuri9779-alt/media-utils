@@ -92,6 +92,8 @@ jobs:
       # for an explicit diagnostic fallback.
       ASTRA_ASSET_PACK_ENABLED: ${{ vars.ASTRA_ASSET_PACK_ENABLED || '1' }}
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+      # Match publisher: never queue fiction without a compositor coverage receipt.
+      ASTRA_ASSET_PACK_AUDIT: '1'
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
       ORT_DISABLE_TELEMETRY: '1'
