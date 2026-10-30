@@ -1,17 +1,48 @@
 {
-  "observed_at": "2026-10-30T07:04:19.185012+00:00",
-  "generated": 20,
+  "observed_at": "2026-10-30T13:02:22.275345+00:00",
+  "generated": 13,
   "requested": 20,
-  "generation_failures": [],
-  "reviewed": 20,
+  "generation_failures": [
+    {
+      "index": 1,
+      "reason": "ValueError"
+    },
+    {
+      "index": 2,
+      "reason": "ValueError"
+    },
+    {
+      "index": 3,
+      "reason": "ValueError"
+    },
+    {
+      "index": 4,
+      "reason": "ValueError"
+    },
+    {
+      "index": 6,
+      "reason": "ValueError"
+    },
+    {
+      "index": 18,
+      "reason": "ValueError"
+    },
+    {
+      "index": 19,
+      "reason": "ValueError"
+    }
+  ],
+  "reviewed": 13,
   "approved": 0,
   "review_issues": [
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "The story closely mirrors previously published narrative formulas and premises in the comparison history, such as 'Finley and the Abyssal Melody' and 'The Octopus Cartographer and the Choking Reef', featuring a protagonist clearing a blockage to restore a fading underwater or natural element.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
   ],
   "approval_pair_present": true,
   "model_access": {
