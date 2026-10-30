@@ -7824,11 +7824,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-10-30T15:19:33.477707+00:00",
+  "last_preflight_at": "2026-10-30T15:45:55.801763+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-30T15:20:35.742451+00:00",
+    "at": "2026-10-30T15:47:14.350787+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -7845,7 +7845,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-10-30T03:44:44.435323+00:00",
+  "last_feedback_attempt_at": "2026-10-30T15:46:50.238974+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -16383,7 +16383,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-30T15:20:35.742410+00:00",
+    "at": "2026-10-30T15:47:14.350708+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -16394,13 +16394,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-30T15:20:35.742444+00:00",
+    "at": "2026-10-30T15:47:14.350773+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-30T15:20:03.799761+00:00",
+    "at": "2026-10-30T15:46:50.000185+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -16430,7 +16430,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-10-30T15:20:35.742241+00:00",
+    "at": "2026-10-30T15:47:14.350427+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -16442,7 +16442,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-30T15:20:35.742407+00:00",
+    "at": "2026-10-30T15:47:14.350701+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
