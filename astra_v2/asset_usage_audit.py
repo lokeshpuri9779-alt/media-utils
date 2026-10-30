@@ -14,8 +14,6 @@ import os
 from pathlib import Path
 import re
 
-from PIL import ImageChops
-
 
 _ACTIVE = ContextVar("astra_asset_pack_audit", default=None)
 
@@ -64,6 +62,7 @@ def observe(shot_number, analysis, status, identity, *, asset=None, before=None,
             raise ValueError("rendered asset evidence requires both compositor frames")
         # Pixel-level evidence from the actual background-compositing operation.
         # This does not claim a decoded video comparison or full semantic fit.
+        from PIL import ImageChops  # Only the frame-compositing path needs Pillow.
         changed = ImageChops.difference(before.convert("RGB"), after.convert("RGB")).getbbox() is not None
         decision["pixel_changed"] = changed
         decision["status"] = "composited" if changed else "selected_no_pixel_change"
@@ -88,6 +87,34 @@ def fiction_compositor_coverage_rejection(story, rendered):
     if (type(shots) is not int or shots < 1 or
             type(composited) is not int or composited != shots):
         return "fiction_scene_background_coverage_incomplete"
+    return None
+
+
+
+def fiction_preload_coverage_rejection(candidate):
+    """Reject old or unverifiable fiction preload artifacts before publisher reuse.
+
+    A complete background receipt is necessary, not semantic approval.
+    Current-events and installations without the explicit audit are unchanged.
+    """
+    if (candidate.get("genre") != "fiction"
+            or candidate.get("format") != "short"
+            or os.getenv("ASTRA_ASSET_PACK_AUDIT") != "1"):
+        return None
+    receipt = candidate.get("asset_pack_usage")
+    rejection = fiction_compositor_coverage_rejection(candidate, {"asset_pack_usage": receipt})
+    if rejection:
+        return rejection
+    digest = candidate.get("sha256")
+    if (not isinstance(digest, str) or len(digest) != 64
+            or any(c not in "0123456789abcdef" for c in digest.lower())
+            or receipt.get("video_sha256") != digest):
+        return "fiction_asset_usage_video_hash_mismatch"
+    statuses = receipt.get("statuses")
+    if (receipt.get("asset_coverage_status") != "full"
+            or not isinstance(statuses, dict)
+            or statuses != {"composited": receipt["shot_count"]}):
+        return "fiction_asset_usage_not_full"
     return None
 
 

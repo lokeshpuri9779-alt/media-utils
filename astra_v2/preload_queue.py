@@ -334,6 +334,12 @@ def prepare(path, candidate):
         payload.update(approved_story_context(candidate))
     video_bytes = video.read_bytes()
     payload["sha256"] = hashlib.sha256(video_bytes).hexdigest()
+    if fmt == "short" and candidate.get("genre") == "fiction":
+        from astra_v2.asset_usage_audit import fiction_preload_coverage_rejection
+        payload["asset_pack_usage"] = candidate.get("asset_pack_usage")
+        rejection = fiction_preload_coverage_rejection(payload)
+        if rejection:
+            raise ValueError("Fiction preload compositor audit rejected: " + rejection)
     payload["media"] = media
     package = video.parent / "preload-package"
     package.mkdir(exist_ok=True)
@@ -498,6 +504,13 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                             "content_id": cid, "reason": rejection,
                         }))
                         continue
+                    if candidate["format"] == "short" and candidate.get("genre") == "fiction":
+                        from astra_v2.asset_usage_audit import fiction_preload_coverage_rejection
+                        rejection = fiction_preload_coverage_rejection(candidate)
+                        if rejection:
+                            print("ASTRA_PRELOAD_FICTION_COVERAGE_SKIP=" + json.dumps({
+                                "content_id": cid, "reason": rejection}, sort_keys=True))
+                            continue
                     if candidate["format"] == "short":
                         from astra_v2.shorts_novelty import is_near_duplicate
                         from astra_v2.creative import publisher_history_ids
