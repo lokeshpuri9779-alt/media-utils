@@ -1,9 +1,4 @@
-"""Publisher codec installation uses the same fail-closed path as long-form.
-
-The original publisher-only .deb/static-xz fallback failed in live run
-40992083726. Exercise the shared bootstrap offline with fake apt commands.
-"""
-import os
+"""Regression coverage for the publisher's shared, fail-closed codec bootstrap."""
 from pathlib import Path
 import subprocess
 import tempfile
@@ -15,14 +10,14 @@ WORKFLOW = ROOT / ".github" / "workflows" / "astra-v2-publish.yml"
 
 
 def write_script(path, body):
-    path.write_text("#!/bin/sh\\nset -eu\\n" + body, encoding="utf-8")
+    path.write_text("#!/bin/sh" + chr(10) + "set -eu" + chr(10) + body, encoding="utf-8")
     path.chmod(0o755)
 
 
 class PublisherFfprobeRecoveryTests(unittest.TestCase):
     def test_publisher_uses_shared_bootstrap(self):
         workflow = WORKFLOW.read_text(encoding="utf-8")
-        step = workflow.split("- name: Install free rendering dependencies", 1)[1].split("\\n      - name:", 1)[0]
+        step = workflow.split("- name: Install free rendering dependencies", 1)[1].split(chr(10) + "      - name:", 1)[0]
         self.assertIn("if: steps.preflight.outputs.render_due == 'true'", step)
         self.assertIn("bash tools/astra_ffmpeg_bootstrap.sh", step)
 
@@ -36,15 +31,18 @@ class PublisherFfprobeRecoveryTests(unittest.TestCase):
             bin_dir = root / "bin"
             bin_dir.mkdir()
             (bin_dir / "head").symlink_to("/usr/bin/head")
-            write_script(bin_dir / "timeout", 'shift\\nexec "$@"\\n')
+            write_script(bin_dir / "timeout", 'shift' + chr(10) + 'exec "$@"' + chr(10))
             write_script(bin_dir / "sudo", """
 case " $* " in
   *" install "*)
     if [ "$ASTRA_FAKE_INSTALL" != "yes" ]; then exit 1; fi
-    printf '#!/bin/sh\\nprintf "ffmpeg test\\\\n"\\n' > "$ASTRA_FAKE_BIN/ffmpeg"
-    printf '#!/bin/sh\\nprintf "ffprobe test\\\\n"\\n' > "$ASTRA_FAKE_BIN/ffprobe"
-    if [ "$ASTRA_FAKE_PROBE" != "yes" ]; then
-      printf '#!/bin/sh\\nexit 2\\n' > "$ASTRA_FAKE_BIN/ffprobe"
+    echo '#!/bin/sh' > "$ASTRA_FAKE_BIN/ffmpeg"
+    echo 'echo ffmpeg-test' >> "$ASTRA_FAKE_BIN/ffmpeg"
+    echo '#!/bin/sh' > "$ASTRA_FAKE_BIN/ffprobe"
+    if [ "$ASTRA_FAKE_PROBE" = "yes" ]; then
+      echo 'echo ffprobe-test' >> "$ASTRA_FAKE_BIN/ffprobe"
+    else
+      echo 'exit 2' >> "$ASTRA_FAKE_BIN/ffprobe"
     fi
     /bin/chmod +x "$ASTRA_FAKE_BIN/ffmpeg" "$ASTRA_FAKE_BIN/ffprobe"
     ;;
@@ -64,7 +62,7 @@ exit 0
         result = self._exercise()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("ASTRA_CODEC_BOOTSTRAP=ready", result.stdout)
-        self.assertIn("ffprobe test", result.stdout)
+        self.assertIn("ffprobe-test", result.stdout)
 
     def test_failed_apt_install_blocks_publishing(self):
         result = self._exercise(install_succeeds=False)
