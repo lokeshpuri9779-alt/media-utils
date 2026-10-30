@@ -1,48 +1,34 @@
 {
-  "observed_at": "2026-10-30T13:02:22.275345+00:00",
-  "generated": 13,
+  "observed_at": "2026-10-30T18:55:47.019537+00:00",
+  "generated": 17,
   "requested": 20,
   "generation_failures": [
-    {
-      "index": 1,
-      "reason": "ValueError"
-    },
-    {
-      "index": 2,
-      "reason": "ValueError"
-    },
     {
       "index": 3,
       "reason": "ValueError"
     },
     {
-      "index": 4,
+      "index": 10,
       "reason": "ValueError"
     },
     {
-      "index": 6,
-      "reason": "ValueError"
-    },
-    {
-      "index": 18,
-      "reason": "ValueError"
-    },
-    {
-      "index": 19,
+      "index": 16,
       "reason": "ValueError"
     }
   ],
-  "reviewed": 13,
-  "approved": 0,
+  "reviewed": 17,
+  "approved": 1,
   "review_issues": [
-    "The story closely mirrors previously published narrative formulas and premises in the comparison history, such as 'Finley and the Abyssal Melody' and 'The Octopus Cartographer and the Choking Reef', featuring a protagonist clearing a blockage to restore a fading underwater or natural element.",
+    "The central conflict, characters, and plot mechanics closely mirror recently published stories in the comparison history, specifically involving broken ravine bridges, anchor spikes, and cooperative crossing mechanisms like 'The Canopy Pathfinders and the Root of Whispers' and 'The Ranger and the Amber Spore'.",
+    "The premise, character archetype, and setting ('The Octopus Cartographer') heavily overlap with recently published works such as 'The Octopus and the Faded Reef' and 'The Octopus Cartographer and the Choking Reef'.",
+    "The story duplicates premises, characters, and structural tropes from previously published entries in the comparison history, specifically featuring a forest animal (badger) cooperating to save a dying plant/root under environmental stress (similar to 'The Badger And The Weeping Root' and 'The Canopy Trackers and the Fading Roots').",
     "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
   ],
   "approval_pair_present": true,
   "model_access": {
