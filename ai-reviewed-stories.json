@@ -6436,6 +6436,154 @@
         }
       },
       "plot_fingerprint": "c7a80f839b99f5c3bfebe5f2afdf235500021e97cb5393909c15ae210c9c17e1"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-59bb85806c620894aed8",
+      "title": "Rowan and the Signal Flare of Shadow Crag",
+      "hook": "The Faint Orange Beacon",
+      "question": "Can Rowan reach the stranded climber before the battery in the emergency flare dies completely?",
+      "answer": "Yes, Rowan scales the icy ridge just in time to ignite the primary rescue flare and guide the helicopter.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Faint Orange Beacon",
+          "speech": "That blinking light is too weak to pierce this heavy snowfall. We have to move right now.",
+          "visual": "signal",
+          "label": "Beacon spotted",
+          "story_beat": "reveal",
+          "visual_prompt": "Rowan stands on a snowy ridge at dusk, holding a flashing electronic signal device, staring up at a distant orange pulse against dark alpine rocks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Scaling the Frosty Wall",
+          "speech": "If I drop my ice axes here, the climb becomes impossible. I need a secure grip on every single hold.",
+          "visual": "forest",
+          "label": "The icy climb",
+          "story_beat": "build",
+          "visual_prompt": "Rowan firmly grips two steel ice axes into a vertical frozen waterfall, wearing heavy red winter gear and breathing visible frosty air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Crevasse",
+          "speech": "The bridge of packed snow is cracking underneath my boots. I must jump across before it collapses entirely.",
+          "visual": "door",
+          "label": "The chasm crossing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Rowan leaps across a deep blue glacier crevasse, arms outstretched for balance, with snowy pine trees visible on the steep slope far below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Summit Rescue",
+          "speech": "Hold onto this flare tightly! The rescue chopper sees our position and is dropping the harness right now.",
+          "visual": "ship",
+          "label": "Helicopter arrival",
+          "story_beat": "payoff",
+          "visual_prompt": "Rowan and a rescued hiker huddle together on a snowy peak, shielding their eyes from the rotor wash of a hovering yellow rescue helicopter above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Rowan must navigate a treacherous blizzard to find a lost hiker before hypothermia sets in.",
+      "decisive_choice": "Rowan decides to leave the heavy pack behind to climb the steep ice wall faster.",
+      "resolution": "The hiker is safely winched aboard the rescue helicopter thanks to the timely signal.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion animation style with detailed textures of snow, ice, and heavy weather-proof fabric.",
+        "characters": {
+          "rowan": "A determined alpine rescuer with a weathered face, warm brown eyes, wearing a heavy red parka, black snow pants, and crampons on sturdy boots."
+        },
+        "locations": {
+          "shadow_crag": "A towering, jagged mountain range covered in deep drifts of blue-white snow and steep vertical ice walls under a darkening winter sky."
+        },
+        "objects": {
+          "ice_axes": "A pair of lightweight steel mountaineering axes with bright yellow grips and sharp curved picks.",
+          "emergency_flare": "A rugged orange cylinder device with a cracked digital screen and a flashing LED light at the tip."
+        }
+      },
+      "plot_fingerprint": "9122162620527f9dc200872bb3ce077a464307809b686bc394542e4e9176278a"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-fea1ea56db017aae57dd",
+      "title": "Corin and the Kelp-Weave Kite Rig",
+      "hook": "The Sudden Squall",
+      "question": "Can a festival kite-boat overcome an incoming gale?",
+      "answer": "Yes, by re-rigging the kelp sails into a stabilizing hydrodynamic rudder.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Sudden Squall",
+          "speech": "Look at those dark clouds rolling over the harbor! We must secure the rigging before the festival race begins.",
+          "visual": "signal",
+          "label": "The Warning Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "Corin stands on a wooden boardwalk pointing at a distant red weather signal flag, wearing a blue canvas apron, holding a brass wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Constructing the Rig",
+          "speech": "We will braid the kelp fibers tightly around the bamboo spars to withstand the fierce offshore gale winds.",
+          "visual": "ship",
+          "label": "Rigging the Boat",
+          "story_beat": "build",
+          "visual_prompt": "Corin ties green braided kelp strands onto a miniature wooden sailboat hull resting on a workbench covered in tools.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Turning Point",
+          "speech": "The wind is too strong for standard flight. I must release the primary tether and deploy the water brake instantly.",
+          "visual": "robot",
+          "label": "Emergency Adjustment",
+          "story_beat": "mechanism",
+          "visual_prompt": "Corin pulls a brass lever on the deck of the sailboat as choppy sea spray splashes against the wooden dock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Victory on the Tides",
+          "speech": "It worked! The redirected resistance steers us straight through the channel and right toward the festival finish line.",
+          "visual": "forest",
+          "label": "The Safe Harbor",
+          "story_beat": "payoff",
+          "visual_prompt": "Corin smiles proudly as the wooden sailboat glides smoothly past green pine-lined cliffs into a calm seaside cove.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden squall threatens to capsize Corin's festival entry during the grand coastal regatta.",
+      "decisive_choice": "Corin cuts the main tension line to let the kite spin freely as an improvised water brake.",
+      "resolution": "The boat stabilizes, safely gliding across the finish line to win the festival prize.",
+      "visual_bible": {
+        "style": "Bright, detailed storybook illustration with warm lighting and rich coastal textures",
+        "characters": {
+          "Corin": "A young inventor with messy brown hair, wearing a durable blue canvas work apron and leather boots."
+        },
+        "locations": {
+          "Harbor Docks": "A bustling wooden seaside pier with weathered pilings, colorful festival banners, and rolling blue waves."
+        },
+        "objects": {
+          "Kelp Sail": "A flexible, vibrant green sail woven from tough dried sea kelp and tied with thick hemp rope.",
+          "Brass Wrench": "A heavy, polished golden wrench used for adjusting marine fasteners and control levers."
+        }
+      },
+      "plot_fingerprint": "b3fbcc38f2b7b1c6782dc38ccfd6c787f05e74f05114ab070617f1ff8b72663b"
     }
   ]
 }
