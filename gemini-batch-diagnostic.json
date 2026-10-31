@@ -1,18 +1,10 @@
 {
-  "observed_at": "2026-10-31T01:04:25.947890+00:00",
-  "generated": 12,
+  "observed_at": "2026-10-31T06:58:17.872705+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
-      "index": 4,
-      "reason": "ValueError"
-    },
-    {
-      "index": 5,
+      "index": 2,
       "reason": "ValueError"
     },
     {
@@ -20,13 +12,14 @@
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 12,
-  "approved": 1,
+  "reviewed": 14,
+  "approved": 2,
   "review_issues": [
-    "The central conflict, decisive choice, and resolution involving a broken bridge/ravine crossing, pooling materials, and building a bridge with vines to cross safely closely mirrors the structure and premise of 'The Canopy Pathfinders and the Root of Whispers' and 'The Ranger and the Amber Spore' found in the recent comparison history.",
-    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
