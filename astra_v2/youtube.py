@@ -135,6 +135,15 @@ class Youtube:
         """Use relevant evergreen discovery terms; do not invent live trends."""
         import re
         text = (title + " " + description).casefold()
+        # Trend explainers are not fictional cartoons. Use the existing stable
+        # content identity, not keywords such as "rocket" that can be ambiguous.
+        if "ASTRA-V2-ID:trend-brief-" in description:
+            topic = re.sub(r"^Why\s+", "", title, flags=re.IGNORECASE)
+            topic = re.sub(r"\s+Is Getting Attention Now\s*\|\s*RAYVAN\s*$", "", topic, flags=re.IGNORECASE).strip()
+            tags = ["news explainer", "current events", "trend analysis"]
+            if 2 <= len(topic) <= 60 and re.fullmatch(r"[\w\s'’.-]+", topic):
+                tags.insert(0, topic)
+            return tags, []
         themes = {
             "comedy": (("funny", "comedy", "joke", "laugh", "humor", "humour"), ("comedy", "funny cartoon", "animated comedy")),
             "mystery": (("mystery", "detective", "clue", "secret"), ("mystery story", "animated mystery")),
