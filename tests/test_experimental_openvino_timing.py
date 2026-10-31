@@ -21,7 +21,10 @@ class FakeImage:
 class FakePipeline:
     @classmethod
     def from_pretrained(cls, *args, **kwargs):
-        return cls()
+        obj = cls()
+        obj.safety_checker = kwargs.get("safety_checker")
+        obj.feature_extractor = kwargs.get("feature_extractor")
+        return obj
 
     def reshape(self, **kwargs):
         pass
@@ -40,6 +43,31 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
             "model_index.json", "unet/config.json", "unet/openvino_model.xml",
             "safety_checker/config.json", "safety_checker/model.safetensors"
         ]
+        transformers = types.ModuleType("transformers")
+        class FakeExtractor:
+            @classmethod
+            def from_pretrained(cls, *args, **kwargs):
+                return cls()
+        transformers.CLIPImageProcessor = FakeExtractor
+        diffusers = types.ModuleType("diffusers")
+        diffusers.__path__ = []
+        pipelines = types.ModuleType("diffusers.pipelines")
+        pipelines.__path__ = []
+        stable = types.ModuleType("diffusers.pipelines.stable_diffusion")
+        stable.__path__ = []
+        safety = types.ModuleType("diffusers.pipelines.stable_diffusion.safety_checker")
+        class FakeChecker:
+            @classmethod
+            def from_pretrained(cls, *args, **kwargs):
+                return cls()
+        safety.StableDiffusionSafetyChecker = FakeChecker
+        self.checker_patch = patch.dict(sys.modules, {
+            "transformers": transformers, "diffusers": diffusers,
+            "diffusers.pipelines": pipelines,
+            "diffusers.pipelines.stable_diffusion": stable,
+            "diffusers.pipelines.stable_diffusion.safety_checker": safety})
+        self.checker_patch.start()
+        self.addCleanup(self.checker_patch.stop)
         self.hub_patch = patch.dict(sys.modules, {"huggingface_hub": hub})
         self.hub_patch.start()
         self.addCleanup(self.hub_patch.stop)
@@ -67,36 +95,32 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
             self.assertFalse(output.exists())
 
 
-    def test_preflight_rejects_missing_safety_checker_weights(self):
+    def test_preconverted_ir_only_checker_is_allowed_with_external_checkpoint(self):
+        # The INT8 model has IR-only safety files; an external checkpoint is supplied.
         hub = types.ModuleType("huggingface_hub")
         hub.list_repo_files = lambda model: [
             "model_index.json", "unet/config.json", "unet/openvino_model.xml",
             "safety_checker/config.json", "safety_checker/openvino_model.xml",
-            "safety_checker/openvino_model.bin",
         ]
         optimum = types.ModuleType("optimum")
         optimum.__path__ = []
         intel = types.ModuleType("optimum.intel")
-        class MustNotLoad:
-            @classmethod
-            def from_pretrained(cls, *args, **kwargs):
-                raise AssertionError("unsafe model load attempted")
-        intel.OVStableDiffusionPipeline = MustNotLoad
+        intel.OVStableDiffusionPipeline = FakePipeline
         pillow = types.ModuleType("PIL")
         pillow.Image = types.SimpleNamespace(Image=FakeImage)
+        assets = types.ModuleType("astra_v2.omniroute_image_assets")
+        assets.image_quality_report = lambda data, kind: {"passed": True}
         with tempfile.TemporaryDirectory() as tmp, patch.dict(
             sys.modules, {"huggingface_hub": hub, "optimum": optimum,
-                          "optimum.intel": intel, "PIL": pillow}
+                          "optimum.intel": intel, "PIL": pillow,
+                          "astra_v2.omniroute_image_assets": assets}
         ):
-            output = Path(tmp) / "keyframe.png"
-            report = benchmark.run(output=output)
-            self.assertEqual(report["error_stage"], "model_manifest")
-            self.assertEqual(report["missing_model_component"], "safety_checker_weights")
-            self.assertFalse(report["success"])
+            report = benchmark.run(output=Path(tmp) / "keyframe.png")
+            self.assertTrue(report["safety_checker_loaded"])
+            self.assertTrue(report["render_completed"])
             self.assertFalse(report["approved"])
-            self.assertFalse(report["production_ready"])
             self.assertFalse(report["published"])
-            self.assertFalse(output.exists())
+            self.assertFalse(report["production_ready"])
 
     def test_successful_timing_report_stays_unapproved(self):
         optimum = types.ModuleType("optimum")
