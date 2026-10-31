@@ -49,9 +49,9 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             # repository instead; never disable the checker to make loading work.
             checker_repo = "stable-diffusion-v1-5/stable-diffusion-v1-5"
             from huggingface_hub import hf_hub_download
+            stage = "safety_checker_load"
             from transformers import CLIPImageProcessor
             from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
-            stage = "safety_checker_load"
             checker = StableDiffusionSafetyChecker.from_pretrained(
                 checker_repo, subfolder="safety_checker", use_safetensors=True
             )
