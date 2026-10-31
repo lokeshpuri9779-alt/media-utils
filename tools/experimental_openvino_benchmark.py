@@ -45,10 +45,10 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
                 report["missing_model_files"] = missing_files
                 raise ValueError("Preconverted OpenVINO model is missing required configuration or model files")
             # Fail before heavyweight downloads if the declared safety checker has no weights.
-            from huggingface_hub import hf_hub_download
-            index = json.loads(Path(hf_hub_download(model, "model_index.json")).read_text())
-            checker = index.get("safety_checker")
-            report["safety_checker_declared"] = bool(checker)
+            # Inspect repository file inventory without requiring extra Hub API calls.
+            # A safety_checker directory with no recognized weights cannot load.
+            checker = any(name.startswith("safety_checker/") for name in available_files)
+            report["safety_checker_files_present"] = checker
             if checker:
                 checkpoint_names = (
                     "safety_checker/model.safetensors",
