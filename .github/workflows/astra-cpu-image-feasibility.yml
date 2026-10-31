@@ -30,6 +30,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Verify experimental branch and INT8 model before dependency install
+        env:
+          ACTUAL_REF: ${{ github.ref_name }}
+          EXPECTED_REF: experiment/openvino-int8-model-candidate
+          EXPECTED_MODEL: OpenVINO/stable-diffusion-v1-5-int8-ov
+          SELECTED_PROFILE: ${{ inputs.model_profile }}
+        run: |
+          python - <<'PY'
+          import ast
+          import os
+          from pathlib import Path
+          ref = os.environ["ACTUAL_REF"]
+          expected_ref = os.environ["EXPECTED_REF"]
+          if ref != expected_ref:
+              raise SystemExit(f"Wrong workflow branch: {ref!r}; select {expected_ref!r} before rerunning")
+          if os.environ["SELECTED_PROFILE"] != "preconverted":
+              raise SystemExit("This experimental INT8 validation requires model_profile=preconverted")
+          source = ast.parse(Path("tools/experimental_openvino_benchmark.py").read_text())
+          models = next(
+              ast.literal_eval(node.value)
+              for node in source.body
+              if isinstance(node, ast.Assign)
+              and any(isinstance(target, ast.Name) and target.id == "APPROVED_MODELS" for target in node.targets)
+          )
+          actual_model = models["preconverted"]
+          if actual_model != os.environ["EXPECTED_MODEL"]:
+              raise SystemExit(f"Unexpected model: {actual_model!r}")
+          print(f"Validated branch={ref} model={actual_model}; proceeding with CPU-only benchmark")
+          PY
       - name: Install CPU-only benchmark dependencies
         run: |
           python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'transformers>=4.40,<5' 'optimum[openvino]' diffusers
