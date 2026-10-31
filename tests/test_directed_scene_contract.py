@@ -125,6 +125,44 @@ class DirectedSceneContractTests(unittest.TestCase):
         self.assertFalse(eligible)
         self.assertIn("human_actor_not_supported_by_directed_icons", reason)
 
+    def test_named_alpine_rescuer_requires_verified_scene_art(self):
+        # Publisher #41190577737 rendered Rowan's first beat with a generic
+        # backdrop and rejected the MP4 for incomplete scene coverage.
+        # The visual bible calls Rowan a rescuer, not a person or researcher.
+        from astra_v2.directed_scene_contract import named_human_characters
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        bible = {"characters": {
+            "rowan": (
+                "A determined alpine rescuer with a weathered face, warm brown "
+                "eyes, wearing a heavy red parka and black snow pants."
+            ),
+            "Unit 7G": "An autonomous rescuer robot with steel plating.",
+        }}
+        self.assertEqual(named_human_characters(bible), ("rowan",))
+        story = {
+            "genre": "fiction",
+            "content_id": "rayvan-gemini-59bb85806c620894aed8",
+            "title": "Rowan and the Signal Flare of Shadow Crag",
+            "visual_bible": bible,
+            "story_beats": [{
+                "headline": "The Faint Orange Beacon",
+                "visual": "signal",
+                "speech": (
+                    "That blinking light is too weak to pierce this heavy "
+                    "snowfall. We have to move right now."
+                ),
+                "visual_prompt": (
+                    "Rowan stands on a snowy ridge at dusk, holding a flashing "
+                    "electronic signal device, staring up at a distant orange "
+                    "pulse against dark alpine rocks."
+                ),
+            }],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("human_actor_not_supported_by_directed_icons", reason)
+
     def test_clothed_character_action_without_bible_needs_exact_art(self):
         # Publisher run 40798871334 composited only forest backdrops for a
         # Gemini scene describing Bramble and Rowan as embodied characters.
