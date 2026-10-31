@@ -133,9 +133,10 @@ def worker(one_image=False, performance_probe=False):
             'latent_sha256': hashlib.sha256(noise.numpy().tobytes()).hexdigest(),
             'approved': False, 'production_ready': False, 'published': False,
             'manual_visual_review_required': True})
+        from tools.experimental_sdxl_performance import runtime_details
+        save('runtime.json', runtime_details(pipe, torch))
         if performance_probe:
-            from tools.experimental_sdxl_performance import runtime_details, run_probe
-            save('runtime.json', runtime_details(pipe, torch))
+            from tools.experimental_sdxl_performance import run_probe
             run_probe(pipe, {
                 'prompt': ONE_IMAGE_PROMPT, 'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
                 'height': 1024, 'width': 1024, 'num_inference_steps': ONE_IMAGE_STEPS,
