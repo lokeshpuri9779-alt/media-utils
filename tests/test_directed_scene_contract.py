@@ -167,6 +167,41 @@ class DirectedSceneContractTests(unittest.TestCase):
         self.assertFalse(eligible)
         self.assertIn("embodied_character_not_supported_by_directed_icons", reason)
 
+    def test_apron_clad_human_requires_scene_art_even_without_visual_bible(self):
+        # 2026-10-31 publication journal records the Corin story. Its first
+        # prompt describes an apron-clad actor pointing and holding a wrench.
+        # This tests a lexical preflight gap; it does NOT assert the uploaded
+        # video lacked valid artwork or that its pixels were independently reviewed.
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        story = {
+            "genre": "fiction",
+            "content_id": "rayvan-gemini-fea1ea56db017aae57dd",
+            "title": "Corin and the Kelp-Weave Kite Rig",
+            "story_beats": [{
+                "headline": "The Sudden Squall",
+                "visual": "signal",
+                "speech": (
+                    "Look at those dark clouds rolling over the harbor! "
+                    "We must secure the rigging before the festival race begins."
+                ),
+                "visual_prompt": (
+                    "Corin stands on a wooden boardwalk pointing at a distant "
+                    "red weather signal flag, wearing a blue canvas apron, "
+                    "holding a brass wrench."
+                ),
+            }],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("embodied_character_not_supported_by_directed_icons", reason)
+        # A prop alone must not be misclassified as a visible human.
+        self.assertEqual(validate_story_shot({
+            "visual": "forest",
+            "speech": "A gust rattles the shutter.",
+            "visual_prompt": "A blue apron hangs on an empty shop hook.",
+        }), "directed")
+
     def test_manifest_path_and_foreground_props_do_not_override_check(self):
         shot = {"speech": "The thief grabs the papers.", "visual": "robot",
                 "artwork_manifest_path": "/missing/manifest.json"}
