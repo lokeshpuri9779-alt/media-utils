@@ -1,24 +1,22 @@
 {
-  "observed_at": "2026-10-31T12:55:56.313396+00:00",
-  "generated": 17,
+  "observed_at": "2026-10-31T18:52:02.012399+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 4,
       "reason": "ValueError"
     },
     {
-      "index": 2,
-      "reason": "ValueError"
-    },
-    {
-      "index": 3,
-      "reason": "ValueError"
+      "index": 15,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 17,
-  "approved": 1,
+  "reviewed": 14,
+  "approved": 0,
   "review_issues": [
+    "The story premise, characters (badger), and central location ('Whispering Root') closely mirror the recently published example 'The Badger And The Weeping Root', violating originality guidelines regarding recently published premises and characters.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
