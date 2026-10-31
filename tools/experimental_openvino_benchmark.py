@@ -15,15 +15,22 @@ PROMPT = ("original cinematic animated-film illustration, a small copper robot h
           "no text, portrait composition")
 
 
-def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-openvino/keyframe.png")):
+PROMPTS = {
+    "baseline": PROMPT,
+    "simple": "a small copper toy robot standing in a green forest, full body, centered, illustration",
+}
+
+def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Path("artifacts/experimental-openvino/keyframe.png")):
     if profile not in APPROVED_MODELS:
         raise ValueError("Unapproved model profile")
     if not isinstance(steps, int) or not 1 <= steps <= 20:
         raise ValueError("steps must be 1..20")
+    if prompt_profile not in PROMPTS:
+        raise ValueError("Unapproved prompt profile")
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     model = APPROVED_MODELS[profile]
-    report = {"engine": "OpenVINO CPU", "model": model, "steps": steps,
+    report = {"engine": "OpenVINO CPU", "model": model, "steps": steps, "prompt_profile": prompt_profile,
               "success": False, "published": False, "approved": False,
               "production_ready": False, "still_image_only": True,
               "render_completed": False,
@@ -82,7 +89,7 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         stage = "inference"
         inference_started = time.monotonic()
         try:
-            result = pipe(PROMPT, height=768, width=512,
+            result = pipe(PROMPTS[prompt_profile], height=768, width=512,
                           num_inference_steps=steps)
             if profile == "preconverted":
                 flags = getattr(result, "nsfw_content_detected", None)
@@ -142,9 +149,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--profile", choices=sorted(APPROVED_MODELS), default="preconverted")
     parser.add_argument("--steps", type=int, default=8)
+    parser.add_argument("--prompt-profile", choices=sorted(PROMPTS), default="baseline")
     parser.add_argument("--output", type=Path, default=Path("artifacts/experimental-openvino/keyframe.png"))
     args = parser.parse_args()
-    if not run(profile=args.profile, steps=args.steps, output=args.output)["success"]:
+    if not run(profile=args.profile, steps=args.steps, prompt_profile=args.prompt_profile, output=args.output)["success"]:
         raise SystemExit(1)
 
 
