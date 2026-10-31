@@ -27,7 +27,7 @@ _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)
 # an AI story omitted its visual_bible. Generic forest/door/signal icons cannot
 # portray a clothed character performing an action.
 _FIGURE_VISUAL_CUE = re.compile(
-    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
+    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?|apron|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
 _FIGURE_ACTION = re.compile(
     r"\b(?:pointing|kneeling|standing|stands?|holding|holds?|smiling|"
     r"walking|wearing|wears?|tipping|pouring|running|gripping|striking|climbing|sitting|swinging)\b", re.I)
