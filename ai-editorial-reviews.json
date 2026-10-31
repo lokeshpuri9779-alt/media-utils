@@ -4601,6 +4601,19 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-009600e384710eb75a01",
+      "story_sha256": "49701a996ade5ed2305218db7992e803ea6c8e6af1886dd7604b69eb2fb1f2bb",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story relies on a repetitive 'nature-saving' trope that mirrors several previously provided examples, specifically 'The Canopy Trackers and the Fading Roots' and 'Kaelen and Silas: The Iron-Root Rescue'.",
+        "The causal mechanism of 'synchronizing energy' to save a dying forest is functionally identical to the resolution in 'The Canopy Trackers and the Fading Roots' and 'Finley and the Abyssal Melody'.",
+        "The character 'Kaelen' is reused from a previously provided example ('Kaelen and Silas: The Iron-Root Rescue'), creating a lack of originality in character development and setting."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
