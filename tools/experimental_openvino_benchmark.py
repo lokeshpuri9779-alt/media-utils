@@ -70,7 +70,12 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             **({"safety_checker": checker, "feature_extractor": feature_extractor}
                if profile == "preconverted" else {}))
         report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
-        if profile == "preconverted" and (getattr(pipe, "safety_checker", None) is None or getattr(pipe, "feature_extractor", None) is None):\n            raise ValueError("Pipeline did not retain required safety components")\n        stage = "reshape_compile"
+        if profile == "preconverted" and (
+            getattr(pipe, "safety_checker", None) is None
+            or getattr(pipe, "feature_extractor", None) is None
+        ):
+            raise ValueError("Pipeline did not retain required safety components")
+        stage = "reshape_compile"
         compile_started = time.monotonic()
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
