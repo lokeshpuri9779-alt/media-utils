@@ -44,6 +44,21 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             if missing_files:
                 report["missing_model_files"] = missing_files
                 raise ValueError("Preconverted OpenVINO model is missing required configuration or model files")
+            # Fail before heavyweight downloads if the declared safety checker has no weights.
+            from huggingface_hub import hf_hub_download
+            index = json.loads(Path(hf_hub_download(model, "model_index.json")).read_text())
+            checker = index.get("safety_checker")
+            report["safety_checker_declared"] = bool(checker)
+            if checker:
+                checkpoint_names = (
+                    "safety_checker/model.safetensors",
+                    "safety_checker/pytorch_model.bin",
+                    "safety_checker/openvino_model.xml",
+                )
+                if not any(name in available_files for name in checkpoint_names):
+                    report["missing_model_component"] = "safety_checker"
+                    raise ValueError("Model declares a safety_checker but supplies no recognized checkpoint")
+
         stage = "model_load"
         load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
