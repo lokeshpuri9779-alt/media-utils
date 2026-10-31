@@ -20,7 +20,7 @@ _SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadca
 
 _BIOLOGICAL_HUMAN = re.compile(
     r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
-    r"student|pilot|officer|engineer|botanist)\b", re.I)
+    r"student|pilot|officer|engineer|botanist|researcher|meteorologist)\b", re.I)
 _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)\b", re.I)
 
 # Two independent visual cues identify a visibly embodied figure even when

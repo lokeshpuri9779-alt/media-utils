@@ -96,6 +96,35 @@ class DirectedSceneContractTests(unittest.TestCase):
         self.assertFalse(eligible)
         self.assertIn("human_actor_not_supported_by_directed_icons", reason)
 
+    def test_icebound_researcher_requires_real_scene_art(self):
+        # The independently approved 2026-10-31 Gemini story had no verified
+        # scene artwork: its meteorologist/researcher characters were silently
+        # treated as icon-only backgrounds by the preflight.
+        from astra_v2.directed_scene_contract import named_human_characters
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        bible = {"characters": {
+            "Dr. Vane": "A determined meteorologist with weathered skin and a navy-blue polar parka.",
+            "Colleague": "A field researcher wearing an orange insulated snowsuit.",
+            "Unit 7G": "An autonomous researcher robot with steel plating.",
+        }}
+        self.assertEqual(named_human_characters(bible), ("Dr. Vane", "Colleague"))
+        story = {
+            "genre": "fiction",
+            "content_id": "rayvan-gemini-c4da68efcf8034b2d9b5",
+            "title": "The Icebound Navigator and the Fissure Beacon",
+            "visual_bible": bible,
+            "story_beats": [{
+                "headline": "The Hidden Fault",
+                "visual": "signal",
+                "speech": "The sensor array shows his beacon dropping deeper into the shelf.",
+                "visual_prompt": "Dr. Vane stands inside the command dome pointing at a red telemetry screen.",
+            }],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("human_actor_not_supported_by_directed_icons", reason)
+
     def test_clothed_character_action_without_bible_needs_exact_art(self):
         # Publisher run 40798871334 composited only forest backdrops for a
         # Gemini scene describing Bramble and Rowan as embodied characters.
