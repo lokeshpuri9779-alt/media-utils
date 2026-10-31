@@ -56,9 +56,14 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
                 "safety_checker/model.safetensors.index.json",
                 "safety_checker/pytorch_model.bin.index.json",
             )
-            if checker_files and not any(name in available_files for name in checkpoint_names):
+            matching_checkpoints = sorted(name for name in checkpoint_names
+                                          if name in available_files)
+            report["safety_checker_file_names"] = [Path(name).name for name in checker_files][:20]
+            report["safety_checker_checkpoint_candidates"] = [
+                Path(name).name for name in matching_checkpoints
+            ]
+            if checker_files and not matching_checkpoints:
                 report["missing_model_component"] = "safety_checker_weights"
-                report["safety_checker_file_names"] = [Path(name).name for name in checker_files][:20]
                 raise ValueError("Safety checker directory lacks compatible Transformers checkpoint weights")
 
         stage = "model_load"
