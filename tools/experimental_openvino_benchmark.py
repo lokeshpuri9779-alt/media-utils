@@ -80,6 +80,12 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         report["error_type"] = type(exc).__name__
         if isinstance(exc, ValueError):
             report["error_message"] = str(exc)[:500]
+        elif isinstance(exc, OSError) and stage == "model_load":
+            # Redact URLs, absolute paths and long opaque tokens; never print raw exceptions.
+            import re
+            message = str(exc)
+            message = re.sub(r"https?://\\S+|(?:/[^\\s:]+)+|[A-Za-z0-9_-]{32,}", "[redacted]", message)
+            report["error_message"] = message[:500]
         report["error_stage"] = stage
         if isinstance(exc, AttributeError):
             report["missing_attribute"] = getattr(exc, "name", None)
