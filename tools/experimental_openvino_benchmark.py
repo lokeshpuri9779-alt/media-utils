@@ -45,19 +45,21 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
                 report["missing_model_files"] = missing_files
                 raise ValueError("Preconverted OpenVINO model is missing required configuration or model files")
             # Fail before heavyweight downloads if the declared safety checker has no weights.
-            # Inspect repository file inventory without requiring extra Hub API calls.
-            # A safety_checker directory with no recognized weights cannot load.
-            checker = any(name.startswith("safety_checker/") for name in available_files)
-            report["safety_checker_files_present"] = checker
-            if checker:
-                checkpoint_names = (
-                    "safety_checker/model.safetensors",
-                    "safety_checker/pytorch_model.bin",
-                    "safety_checker/openvino_model.xml",
-                )
-                if not any(name in available_files for name in checkpoint_names):
-                    report["missing_model_component"] = "safety_checker"
-                    raise ValueError("Model declares a safety_checker but supplies no recognized checkpoint")
+            # Directory presence is insufficient: Transformers expects actual weights.
+            # Fail closed instead of disabling or replacing the safety checker.
+            checker_files = sorted(name for name in available_files
+                                   if name.startswith("safety_checker/"))
+            report["safety_checker_files_present"] = bool(checker_files)
+            checkpoint_names = (
+                "safety_checker/model.safetensors",
+                "safety_checker/pytorch_model.bin",
+                "safety_checker/model.safetensors.index.json",
+                "safety_checker/pytorch_model.bin.index.json",
+            )
+            if checker_files and not any(name in available_files for name in checkpoint_names):
+                report["missing_model_component"] = "safety_checker_weights"
+                report["safety_checker_file_names"] = [Path(name).name for name in checker_files][:20]
+                raise ValueError("Safety checker directory lacks compatible Transformers checkpoint weights")
 
         stage = "model_load"
         load_started = time.monotonic()
