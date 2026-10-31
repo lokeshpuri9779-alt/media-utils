@@ -29,6 +29,8 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
         raise ValueError("Unapproved prompt profile")
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
+    # Never leave a stale image that could be mistaken for this run's output.
+    output.unlink(missing_ok=True)
     model = APPROVED_MODELS[profile]
     report = {"engine": "OpenVINO CPU", "model": model, "steps": steps, "prompt_profile": prompt_profile,
               "success": False, "published": False, "approved": False,
@@ -117,6 +119,8 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
         report["success"] = bool(quality["passed"])
         report["output"] = str(output)
     except Exception as exc:
+        # A failed safety or pixel-quality gate must not retain a reviewable PNG.
+        output.unlink(missing_ok=True)
         # No prompt, credentials, provider bodies or exception text in diagnostics.
         report["error_type"] = type(exc).__name__
         if isinstance(exc, ValueError):
