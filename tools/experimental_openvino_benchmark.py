@@ -66,7 +66,9 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         stage = "model_load"
         load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
-            model, export=profile == "export", compile=False, device="CPU",\n            **({"safety_checker": checker, "feature_extractor": feature_extractor}\n               if profile == "preconverted" else {}))
+            model, export=profile == "export", compile=False, device="CPU",
+            **({"safety_checker": checker, "feature_extractor": feature_extractor}
+               if profile == "preconverted" else {}))
         report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
         if profile == "preconverted" and (getattr(pipe, "safety_checker", None) is None or getattr(pipe, "feature_extractor", None) is None):\n            raise ValueError("Pipeline did not retain required safety components")\n        stage = "reshape_compile"
         compile_started = time.monotonic()
