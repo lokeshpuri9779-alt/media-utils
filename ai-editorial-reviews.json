@@ -4521,6 +4521,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-0b062db9588af177d481",
+      "story_sha256": "3cf456dd6de70e581f5e5816f6ce2616cbc977cc34060951c2bead1ff7765957",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-0b062db9588af177d481",
+        "story_sha256": "3cf456dd6de70e581f5e5816f6ce2616cbc977cc34060951c2bead1ff7765957",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or plot resolutions of the provided comparison history.; The narrative demonstrates clear causal coherence, moving logically from the discovery of the trapped animal to the engineering solution and successful rescue.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is distinct from the provided examples, focusing on a character-driven rescue rather than the mechanical or environmental repair themes found in the reference list.",
+        "reviewed_at": "2026-10-31T18:44:43.477675+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }

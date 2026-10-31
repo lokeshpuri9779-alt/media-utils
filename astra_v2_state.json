@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "day": "2026-10-31",
+  "day": "2026-11-01",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-10-31T15:46:33.850232+00:00",
+  "attempts": 1,
+  "confirmed_today": 0,
+  "last_attempt_at": "2026-10-31T18:59:22.191464+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8013,14 +8013,71 @@
       "genre": "current"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "SzhBxX_WvmQ": {
+      "content_id": "rayvan-gemini-0b062db9588af177d481",
+      "title": "Kaelen and Silas: The Iron-Root Rescue",
+      "day": "2026-11-01",
+      "uploaded_at": "2026-10-31T18:59:23.750462+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ef368b068bb4ca032792cf68cab00fb44f544b6f43e71105e13a16998ac27b85",
+      "story_beats": [
+        {
+          "headline": "The Trapped Discovery",
+          "speech": "Look Silas, the cub is pinned beneath this massive root, we must act immediately or the tide will surely rise higher.",
+          "visual": "forest",
+          "label": "The discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen points to a small golden-furred mountain cat trapped under a gnarled black root in a dense, mossy forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Plan",
+          "speech": "My pulley device is too heavy to place alone, I need you to climb the trunk and anchor this iron rope firmly.",
+          "visual": "robot",
+          "label": "Engineering the solution",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas, wearing a brass-geared shoulder rig, holds up a heavy iron pulley while Kaelen stands ready to climb the ancient, towering tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Critical Shift",
+          "speech": "The tension is too high, catch the hook before it snaps back or the entire anchor system will fail us right now.",
+          "visual": "signal",
+          "label": "The risky moment",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen leaps through the air to catch a swinging metal hook while Silas strains against the vibrating tension of the rope mechanism.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Release",
+          "speech": "The log has shifted enough, grab the cub and run for higher ground before the root settles back into the soft mud.",
+          "visual": "door",
+          "label": "The escape",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen pulls the cub through a natural stone archway as the heavy log hits the ground behind them, dust and leaves swirling in the air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A young mountain cat is pinned by a fallen ancient iron-root log.",
+      "decisive_choice": "Silas hands Kaelen his heavy climbing hook to create a compound leverage system.",
+      "resolution": "The log is lifted, the cat is freed, and the two rivals form a newfound partnership.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-31T18:04:32.737104+00:00",
+  "last_preflight_at": "2026-10-31T18:43:51.880964+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-31T18:05:29.951765+00:00",
+    "at": "2026-10-31T18:59:24.251354+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -16754,13 +16811,67 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-0b062db9588af177d481": {
+      "at": "2026-10-31T18:59:22.191444+00:00",
+      "title": "Kaelen and Silas: The Iron-Root Rescue",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "ef368b068bb4ca032792cf68cab00fb44f544b6f43e71105e13a16998ac27b85",
+      "story_beats": [
+        {
+          "headline": "The Trapped Discovery",
+          "speech": "Look Silas, the cub is pinned beneath this massive root, we must act immediately or the tide will surely rise higher.",
+          "visual": "forest",
+          "label": "The discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen points to a small golden-furred mountain cat trapped under a gnarled black root in a dense, mossy forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Plan",
+          "speech": "My pulley device is too heavy to place alone, I need you to climb the trunk and anchor this iron rope firmly.",
+          "visual": "robot",
+          "label": "Engineering the solution",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas, wearing a brass-geared shoulder rig, holds up a heavy iron pulley while Kaelen stands ready to climb the ancient, towering tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Critical Shift",
+          "speech": "The tension is too high, catch the hook before it snaps back or the entire anchor system will fail us right now.",
+          "visual": "signal",
+          "label": "The risky moment",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen leaps through the air to catch a swinging metal hook while Silas strains against the vibrating tension of the rope mechanism.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Release",
+          "speech": "The log has shifted enough, grab the cub and run for higher ground before the root settles back into the soft mud.",
+          "visual": "door",
+          "label": "The escape",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen pulls the cub through a natural stone archway as the heavy log hits the ground behind them, dust and leaves swirling in the air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A young mountain cat is pinned by a fallen ancient iron-root log.",
+      "decisive_choice": "Silas hands Kaelen his heavy climbing hook to create a compound leverage system.",
+      "resolution": "The log is lifted, the cat is freed, and the two rivals form a newfound partnership.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-31T18:05:29.951703+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-31T18:59:24.251278+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -16768,55 +16879,33 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-31T18:05:29.951754+00:00",
+    "at": "2026-10-31T18:59:24.251340+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-31T18:05:02.674492+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 122,
-      "not_ready": 64,
-      "policy_rejected": {
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 122,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-31T18:44:19.860061+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-0b062db9588af177d481",
+    "video_url": "https://www.youtube.com/watch?v=SzhBxX_WvmQ",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-31T18:05:29.951470+00:00",
+    "at": "2026-10-31T18:59:24.251056+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-31T18:05:29.951697+00:00",
+    "at": "2026-10-31T18:59:24.251271+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
@@ -16838,36 +16927,26 @@
         "total": 156
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 122,
+        "remaining": 123,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 122,
-        "remaining": 0
+        "pool": 123,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 122,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
