@@ -33,7 +33,7 @@ class FakePipeline:
         pass
 
     def __call__(self, *args, **kwargs):
-        return types.SimpleNamespace(images=[FakeImage()])
+        return types.SimpleNamespace(images=[FakeImage()], nsfw_content_detected=[False])
 
 
 class CpuBenchmarkTimingTests(unittest.TestCase):
@@ -148,6 +148,46 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
             self.assertFalse(report["production_ready"])
             self.assertFalse(report["published"])
             self.assertTrue(report["manual_visual_review_required"])
+
+    def test_missing_safety_result_rejects_image_before_save(self):
+        class MissingFlagPipeline(FakePipeline):
+            def __call__(self, *args, **kwargs):
+                return types.SimpleNamespace(images=[FakeImage()])
+        optimum = types.ModuleType("optimum")
+        optimum.__path__ = []
+        intel = types.ModuleType("optimum.intel")
+        intel.OVStableDiffusionPipeline = MissingFlagPipeline
+        pillow = types.ModuleType("PIL")
+        pillow.Image = types.SimpleNamespace(Image=FakeImage)
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(
+            sys.modules, {"optimum": optimum, "optimum.intel": intel, "PIL": pillow}
+        ):
+            output = Path(tmp) / "keyframe.png"
+            report = benchmark.run(output=output)
+            self.assertEqual(report["error_stage"], "inference")
+            self.assertFalse(output.exists())
+            self.assertFalse(report["approved"])
+            self.assertFalse(report["published"])
+
+    def test_flagged_safety_result_rejects_image_before_save(self):
+        class FlaggedPipeline(FakePipeline):
+            def __call__(self, *args, **kwargs):
+                return types.SimpleNamespace(images=[FakeImage()], nsfw_content_detected=[True])
+        optimum = types.ModuleType("optimum")
+        optimum.__path__ = []
+        intel = types.ModuleType("optimum.intel")
+        intel.OVStableDiffusionPipeline = FlaggedPipeline
+        pillow = types.ModuleType("PIL")
+        pillow.Image = types.SimpleNamespace(Image=FakeImage)
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(
+            sys.modules, {"optimum": optimum, "optimum.intel": intel, "PIL": pillow}
+        ):
+            output = Path(tmp) / "keyframe.png"
+            report = benchmark.run(output=output)
+            self.assertTrue(report["nsfw_content_detected"])
+            self.assertFalse(output.exists())
+            self.assertFalse(report["approved"])
+            self.assertFalse(report["published"])
 
     def test_inference_failure_records_elapsed_time_without_approval(self):
         class BrokenPipeline(FakePipeline):
