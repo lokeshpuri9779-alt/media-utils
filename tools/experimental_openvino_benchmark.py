@@ -44,39 +44,31 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             if missing_files:
                 report["missing_model_files"] = missing_files
                 raise ValueError("Preconverted OpenVINO model is missing required configuration or model files")
-            # The Transformers safety checker needs actual weights. An OpenVINO
-            # IR, config, or sharded index alone is not a usable checkpoint.
-            checker_files = sorted(name for name in available_files
-                                   if name.startswith("safety_checker/"))
-            report["safety_checker_files_present"] = bool(checker_files)
-            report["safety_checker_file_names"] = [
-                Path(name).name for name in checker_files
-            ][:20]
-            direct_weights = (
-                "safety_checker/model.safetensors",
-                "safety_checker/pytorch_model.bin",
+            # The INT8 repo may only carry an OpenVINO safety checker IR.
+            # Load a real Transformers checkpoint from the original SD1.5
+            # repository instead; never disable the checker to make loading work.
+            checker_repo = "stable-diffusion-v1-5/stable-diffusion-v1-5"
+            from huggingface_hub import hf_hub_download
+            from transformers import CLIPImageProcessor
+            from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
+            stage = "safety_checker_load"
+            checker = StableDiffusionSafetyChecker.from_pretrained(
+                checker_repo, subfolder="safety_checker", use_safetensors=True
             )
-            matching_weights = [name for name in direct_weights
-                                if name in available_files]
-            report["safety_checker_checkpoint_candidates"] = [
-                Path(name).name for name in matching_weights
-            ]
-            # A sharded index requires its referenced shards. This benchmark
-            # deliberately rejects unverified sharded layouts rather than
-            # treating an index file as sufficient proof of loadability.
-            if not matching_weights:
-                report["missing_model_component"] = "safety_checker_weights"
-                raise ValueError(
-                    "No directly loadable Transformers safety-checker weights "
-                    "found; model requires a verified compatible loader or model"
-                )
+            feature_extractor = CLIPImageProcessor.from_pretrained(
+                checker_repo, subfolder="feature_extractor"
+            )
+            if checker is None or feature_extractor is None:
+                raise ValueError("Compatible safety checker or image processor unavailable")
+            report["safety_checker_source"] = checker_repo
+            report["safety_checker_loaded"] = True
 
         stage = "model_load"
         load_started = time.monotonic()
         pipe = OVStableDiffusionPipeline.from_pretrained(
-            model, export=profile == "export", compile=False, device="CPU")
+            model, export=profile == "export", compile=False, device="CPU",\n            **({"safety_checker": checker, "feature_extractor": feature_extractor}\n               if profile == "preconverted" else {}))
         report["model_load_seconds"] = round(time.monotonic() - load_started, 2)
-        stage = "reshape_compile"
+        if profile == "preconverted" and (getattr(pipe, "safety_checker", None) is None or getattr(pipe, "feature_extractor", None) is None):\n            raise ValueError("Pipeline did not retain required safety components")\n        stage = "reshape_compile"
         compile_started = time.monotonic()
         pipe.reshape(batch_size=1, height=768, width=512, num_images_per_prompt=1)
         pipe.compile()
