@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-10-31",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
+  "attempts": 4,
   "confirmed_today": 3,
-  "last_attempt_at": "2026-10-31T07:56:30.023409+00:00",
+  "last_attempt_at": "2026-10-31T13:30:26.043485+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -7945,14 +7945,71 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "quality_skip",
+  "pending": {
+    "uqJXhN5wom0": {
+      "content_id": "rayvan-gemini-224f8965b49cadbd5506",
+      "title": "The Otter and the Silent Trench",
+      "day": "2026-10-31",
+      "uploaded_at": "2026-10-31T13:30:27.568288+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "68259c8fb8067b2b576d420c30d57b719a405e2697974dce717ea99de41e1fb8",
+      "story_beats": [
+        {
+          "headline": "The Dark Beacon",
+          "speech": "Look closely at the cold stone casing, for the sacred flame has vanished into the suffocating darkness of the abyss.",
+          "visual": "signal",
+          "label": "Trench Alarm",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the brown sea otter with a bright yellow shell-satchel examining an unlit stone beacon in a dark underwater trench, holding a glowing algae torch in his right paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unexpected Obstruction",
+          "speech": "These stubborn pearl-clams have clamped their iridescent shells tightly over the intake valve, halting all vital water current.",
+          "visual": "ship",
+          "label": "Clam Cluster",
+          "story_beat": "build",
+          "visual_prompt": "Pip peering closely at a massive cluster of shimmering lavender pearl-clams blocking a circular stone intake pipe on the seabed, pointing with a small driftwood stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Gentle Tickle",
+          "speech": "If I use my softest kelp-frond brush to tickle their hinged shells, perhaps they will relocate without any harm done.",
+          "visual": "forest",
+          "label": "Kelp Brush",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip gently stroking the edge of a large pearl-clam shell with a soft green kelp brush while floating upside down in the deep blue water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Restored Flame",
+          "speech": "The current flows freely once more, igniting the beacon and guiding our weary travelers safely through the deep waters.",
+          "visual": "planet",
+          "label": "Bright Beacon",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip smiling happily as a brilliant blue flame bursts forth from the stone beacon, casting a warm glow on schools of silver fish swimming past.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden blackout of the trench warning beacon threatens the safety of migrating fish schools.",
+      "decisive_choice": "Pip the sea otter chooses to gently tickle the pearl-clams instead of forcefully prying them off with a sharp stone.",
+      "resolution": "The clams giggle and scuttle away to a nearby ridge, instantly restoring water flow to the beacon.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-10-31T12:16:56.469590+00:00",
+  "last_preflight_at": "2026-10-31T13:14:10.799630+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-10-31T12:18:13.947893+00:00",
+    "at": "2026-10-31T13:30:28.011379+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -16622,13 +16679,67 @@
       "resolution": "The boat stabilizes, safely gliding across the finish line to win the festival prize.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-224f8965b49cadbd5506": {
+      "at": "2026-10-31T13:30:26.043468+00:00",
+      "title": "The Otter and the Silent Trench",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "68259c8fb8067b2b576d420c30d57b719a405e2697974dce717ea99de41e1fb8",
+      "story_beats": [
+        {
+          "headline": "The Dark Beacon",
+          "speech": "Look closely at the cold stone casing, for the sacred flame has vanished into the suffocating darkness of the abyss.",
+          "visual": "signal",
+          "label": "Trench Alarm",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the brown sea otter with a bright yellow shell-satchel examining an unlit stone beacon in a dark underwater trench, holding a glowing algae torch in his right paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unexpected Obstruction",
+          "speech": "These stubborn pearl-clams have clamped their iridescent shells tightly over the intake valve, halting all vital water current.",
+          "visual": "ship",
+          "label": "Clam Cluster",
+          "story_beat": "build",
+          "visual_prompt": "Pip peering closely at a massive cluster of shimmering lavender pearl-clams blocking a circular stone intake pipe on the seabed, pointing with a small driftwood stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Gentle Tickle",
+          "speech": "If I use my softest kelp-frond brush to tickle their hinged shells, perhaps they will relocate without any harm done.",
+          "visual": "forest",
+          "label": "Kelp Brush",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip gently stroking the edge of a large pearl-clam shell with a soft green kelp brush while floating upside down in the deep blue water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Restored Flame",
+          "speech": "The current flows freely once more, igniting the beacon and guiding our weary travelers safely through the deep waters.",
+          "visual": "planet",
+          "label": "Bright Beacon",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip smiling happily as a brilliant blue flame bursts forth from the stone beacon, casting a warm glow on schools of silver fish swimming past.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden blackout of the trench warning beacon threatens the safety of migrating fish schools.",
+      "decisive_choice": "Pip the sea otter chooses to gently tickle the pearl-clams instead of forcefully prying them off with a sharp stone.",
+      "resolution": "The clams giggle and scuttle away to a nearby ridge, instantly restoring water flow to the beacon.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-10-31T12:18:13.947836+00:00",
-    "publication_outcome": "quality_skip",
-    "publication_reason": "no_approved_original_story_available",
-    "character_memory": "not_reported",
+    "at": "2026-10-31T13:30:28.011301+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -16636,60 +16747,38 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-10-31T12:18:13.947884+00:00",
+    "at": "2026-10-31T13:30:28.011364+00:00",
     "history_file_present": true,
-    "publication_outcome": "quality_skip",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-10-31T12:17:28.481262+00:00",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "content_id": "",
-    "video_url": "",
-    "story_selection": {
-      "considered": 122,
-      "not_ready": 64,
-      "policy_rejected": {
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6,
-        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-        "not_production_ready": 3
-      },
-      "already_seen": 0,
-      "duration_rejected": 0,
-      "render_qa_rejected": 0,
-      "render_exception": {},
-      "approved": 0,
-      "exhausted": true,
-      "rejection_total": 122,
-      "next_action": "replenish_approved_story_supply"
-    }
+    "at": "2026-10-31T13:14:41.091502+00:00",
+    "outcome": "processing",
+    "reason": "",
+    "content_id": "rayvan-gemini-224f8965b49cadbd5506",
+    "video_url": "https://www.youtube.com/watch?v=uqJXhN5wom0",
+    "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-10-31T12:18:13.947609+00:00",
+    "at": "2026-10-31T13:30:28.011070+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "quality_skip",
-    "reason": "no_approved_original_story_available",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-10-31T12:18:13.947831+00:00",
+    "at": "2026-10-31T13:30:28.011293+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 0,
+        "eligible": 1,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -16703,39 +16792,29 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 34,
-        "total": 156
+        "total": 157
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 122,
+        "remaining": 123,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 122,
-        "remaining": 0
+        "pool": 123,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 0,
-        "considered": 122,
+        "approved": 1,
+        "considered": 1,
         "duration_rejected": 0,
-        "not_ready": 64,
-        "policy_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
-        },
+        "not_ready": 0,
+        "policy_rejected": {},
         "render_exception": {},
         "render_qa_rejected": 0
       }
