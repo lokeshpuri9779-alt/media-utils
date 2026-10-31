@@ -65,6 +65,19 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             if checker_files and not matching_checkpoints:
                 report["missing_model_component"] = "safety_checker_weights"
                 raise ValueError("Safety checker directory lacks compatible Transformers checkpoint weights")
+            # A sharded index without any shards is not a usable checkpoint.
+            for index_name in ("safety_checker/model.safetensors.index.json",
+                               "safety_checker/pytorch_model.bin.index.json"):
+                if index_name in matching_checkpoints:
+                    prefix = "safety_checker/"
+                    shards = [name for name in checker_files if name.startswith(prefix)
+                              and name not in checkpoint_names
+                              and name.endswith((".safetensors", ".bin"))]
+                    if not shards:
+                        report["missing_model_component"] = "safety_checker_shards"
+                        raise ValueError("Safety checker checkpoint index has no weight shards")
+            # OpenVINO IR weights alone are not loadable by the Transformers
+            # safety checker; never bypass or silently replace that component.
 
         stage = "model_load"
         load_started = time.monotonic()
