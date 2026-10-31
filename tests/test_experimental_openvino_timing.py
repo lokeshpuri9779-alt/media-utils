@@ -37,7 +37,8 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
     def setUp(self):
         hub = types.ModuleType("huggingface_hub")
         hub.list_repo_files = lambda model: [
-            "model_index.json", "unet/config.json", "unet/openvino_model.xml"
+            "model_index.json", "unet/config.json", "unet/openvino_model.xml",
+            "safety_checker/config.json", "safety_checker/model.safetensors"
         ]
         self.hub_patch = patch.dict(sys.modules, {"huggingface_hub": hub})
         self.hub_patch.start()
