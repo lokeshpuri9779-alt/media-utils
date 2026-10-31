@@ -6515,11 +6515,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-fea1ea56db017aae57dd",
-      "title": "Corin and the Kelp-Weave Kite Rig",
-      "hook": "The Sudden Squall",
-      "question": "Can a festival kite-boat overcome an incoming gale?",
-      "answer": "Yes, by re-rigging the kelp sails into a stabilizing hydrodynamic rudder.",
+      "content_id": "rayvan-gemini-224f8965b49cadbd5506",
+      "title": "The Otter and the Silent Trench",
+      "hook": "The Dark Beacon",
+      "question": "Why did the ancient warning beacon in the deep trench suddenly go dark?",
+      "answer": "A colony of shy pearl-clams had migrated over the intake valve, accidentally blocking the current needed to feed the flame.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6527,63 +6527,64 @@
       ],
       "story_beats": [
         {
-          "headline": "The Sudden Squall",
-          "speech": "Look at those dark clouds rolling over the harbor! We must secure the rigging before the festival race begins.",
+          "headline": "The Dark Beacon",
+          "speech": "Look closely at the cold stone casing, for the sacred flame has vanished into the suffocating darkness of the abyss.",
           "visual": "signal",
-          "label": "The Warning Signal",
+          "label": "Trench Alarm",
           "story_beat": "reveal",
-          "visual_prompt": "Corin stands on a wooden boardwalk pointing at a distant red weather signal flag, wearing a blue canvas apron, holding a brass wrench.",
+          "visual_prompt": "Pip the brown sea otter with a bright yellow shell-satchel examining an unlit stone beacon in a dark underwater trench, holding a glowing algae torch in his right paw.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Constructing the Rig",
-          "speech": "We will braid the kelp fibers tightly around the bamboo spars to withstand the fierce offshore gale winds.",
+          "headline": "The Unexpected Obstruction",
+          "speech": "These stubborn pearl-clams have clamped their iridescent shells tightly over the intake valve, halting all vital water current.",
           "visual": "ship",
-          "label": "Rigging the Boat",
+          "label": "Clam Cluster",
           "story_beat": "build",
-          "visual_prompt": "Corin ties green braided kelp strands onto a miniature wooden sailboat hull resting on a workbench covered in tools.",
+          "visual_prompt": "Pip peering closely at a massive cluster of shimmering lavender pearl-clams blocking a circular stone intake pipe on the seabed, pointing with a small driftwood stick.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Turning Point",
-          "speech": "The wind is too strong for standard flight. I must release the primary tether and deploy the water brake instantly.",
-          "visual": "robot",
-          "label": "Emergency Adjustment",
-          "story_beat": "mechanism",
-          "visual_prompt": "Corin pulls a brass lever on the deck of the sailboat as choppy sea spray splashes against the wooden dock.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Victory on the Tides",
-          "speech": "It worked! The redirected resistance steers us straight through the channel and right toward the festival finish line.",
+          "headline": "The Gentle Tickle",
+          "speech": "If I use my softest kelp-frond brush to tickle their hinged shells, perhaps they will relocate without any harm done.",
           "visual": "forest",
-          "label": "The Safe Harbor",
+          "label": "Kelp Brush",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip gently stroking the edge of a large pearl-clam shell with a soft green kelp brush while floating upside down in the deep blue water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Restored Flame",
+          "speech": "The current flows freely once more, igniting the beacon and guiding our weary travelers safely through the deep waters.",
+          "visual": "planet",
+          "label": "Bright Beacon",
           "story_beat": "payoff",
-          "visual_prompt": "Corin smiles proudly as the wooden sailboat glides smoothly past green pine-lined cliffs into a calm seaside cove.",
+          "visual_prompt": "Pip smiling happily as a brilliant blue flame bursts forth from the stone beacon, casting a warm glow on schools of silver fish swimming past.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A sudden squall threatens to capsize Corin's festival entry during the grand coastal regatta.",
-      "decisive_choice": "Corin cuts the main tension line to let the kite spin freely as an improvised water brake.",
-      "resolution": "The boat stabilizes, safely gliding across the finish line to win the festival prize.",
+      "central_conflict": "A sudden blackout of the trench warning beacon threatens the safety of migrating fish schools.",
+      "decisive_choice": "Pip the sea otter chooses to gently tickle the pearl-clams instead of forcefully prying them off with a sharp stone.",
+      "resolution": "The clams giggle and scuttle away to a nearby ridge, instantly restoring water flow to the beacon.",
       "visual_bible": {
-        "style": "Bright, detailed storybook illustration with warm lighting and rich coastal textures",
+        "style": "Cinematic 3D animation style with vibrant underwater lighting, soft particulate drift, and rich textures on scales, fur, and stone.",
         "characters": {
-          "Corin": "A young inventor with messy brown hair, wearing a durable blue canvas work apron and leather boots."
+          "Pip": "A clever young sea otter with glossy brown fur, big curious amber eyes, wearing a small woven satchel made of yellow reeds across his chest."
         },
         "locations": {
-          "Harbor Docks": "A bustling wooden seaside pier with weathered pilings, colorful festival banners, and rolling blue waves."
+          "The Deep Trench": "A dramatic underwater canyon with jagged gray rock walls, glowing blue anemones, and soft pale sand on the floor."
         },
         "objects": {
-          "Kelp Sail": "A flexible, vibrant green sail woven from tough dried sea kelp and tied with thick hemp rope.",
-          "Brass Wrench": "A heavy, polished golden wrench used for adjusting marine fasteners and control levers."
+          "Algae Torch": "A sturdy wooden handle topped with a glowing green moss that emits a steady underwater light.",
+          "Kelp Brush": "A soft bundle of cured kelp fronds tied together with strong spider-silk thread.",
+          "Beacon": "An ancient carved stone pillar with a wide metal basin at the top designed to channel pressurized sea currents."
         }
       },
-      "plot_fingerprint": "b3fbcc38f2b7b1c6782dc38ccfd6c787f05e74f05114ab070617f1ff8b72663b"
+      "plot_fingerprint": "68259c8fb8067b2b576d420c30d57b719a405e2697974dce717ea99de41e1fb8"
     }
   ]
 }
