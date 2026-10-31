@@ -1,6 +1,6 @@
 {
-  "observed_at": "2026-10-30T18:55:47.019537+00:00",
-  "generated": 17,
+  "observed_at": "2026-10-31T01:04:25.947890+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
@@ -8,27 +8,26 @@
       "reason": "ValueError"
     },
     {
-      "index": 10,
+      "index": 4,
       "reason": "ValueError"
     },
     {
-      "index": 16,
+      "index": 5,
       "reason": "ValueError"
+    },
+    {
+      "index": 15,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 17,
+  "reviewed": 12,
   "approved": 1,
   "review_issues": [
-    "The central conflict, characters, and plot mechanics closely mirror recently published stories in the comparison history, specifically involving broken ravine bridges, anchor spikes, and cooperative crossing mechanisms like 'The Canopy Pathfinders and the Root of Whispers' and 'The Ranger and the Amber Spore'.",
-    "The premise, character archetype, and setting ('The Octopus Cartographer') heavily overlap with recently published works such as 'The Octopus and the Faded Reef' and 'The Octopus Cartographer and the Choking Reef'.",
-    "The story duplicates premises, characters, and structural tropes from previously published entries in the comparison history, specifically featuring a forest animal (badger) cooperating to save a dying plant/root under environmental stress (similar to 'The Badger And The Weeping Root' and 'The Canopy Trackers and the Fading Roots').",
+    "The central conflict, decisive choice, and resolution involving a broken bridge/ravine crossing, pooling materials, and building a bridge with vines to cross safely closely mirrors the structure and premise of 'The Canopy Pathfinders and the Root of Whispers' and 'The Ranger and the Amber Spore' found in the recent comparison history.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
   "model_access": {
