@@ -48,7 +48,6 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
             # Load a real Transformers checkpoint from the original SD1.5
             # repository instead; never disable the checker to make loading work.
             checker_repo = "stable-diffusion-v1-5/stable-diffusion-v1-5"
-            from huggingface_hub import hf_hub_download
             stage = "safety_checker_load"
             from transformers import CLIPImageProcessor
             from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
@@ -83,8 +82,17 @@ def run(*, profile="preconverted", steps=8, output=Path("artifacts/experimental-
         stage = "inference"
         inference_started = time.monotonic()
         try:
-            image = pipe(PROMPT, height=768, width=512,
-                         num_inference_steps=steps).images[0]
+            result = pipe(PROMPT, height=768, width=512,
+                          num_inference_steps=steps)
+            if profile == "preconverted":
+                flags = getattr(result, "nsfw_content_detected", None)
+                if not isinstance(flags, (list, tuple)) or len(flags) != 1 or type(flags[0]) is not bool:
+                    raise ValueError("Safety checker result missing or malformed")
+                report["safety_checker_applied"] = True
+                report["nsfw_content_detected"] = flags[0]
+                if flags[0]:
+                    raise ValueError("Safety checker flagged generated content")
+            image = result.images[0]
         finally:
             report["inference_seconds"] = round(time.monotonic() - inference_started, 2)
         stage = "validate_image"
