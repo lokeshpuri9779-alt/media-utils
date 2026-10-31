@@ -7102,6 +7102,58 @@
       "video_id": "MzZyYiKULlA",
       "confirmed_at": "2026-10-31T16:04:38.285384+00:00",
       "title": "Why lisandro martínez Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-0b062db9588af177d481",
+      "video_id": "SzhBxX_WvmQ",
+      "confirmed_at": "2026-10-31T19:00:37.304700+00:00",
+      "title": "Kaelen and Silas: The Iron-Root Rescue",
+      "plot_fingerprint": "ef368b068bb4ca032792cf68cab00fb44f544b6f43e71105e13a16998ac27b85",
+      "story_beats": [
+        {
+          "headline": "The Trapped Discovery",
+          "speech": "Look Silas, the cub is pinned beneath this massive root, we must act immediately or the tide will surely rise higher.",
+          "visual": "forest",
+          "label": "The discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Kaelen points to a small golden-furred mountain cat trapped under a gnarled black root in a dense, mossy forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Plan",
+          "speech": "My pulley device is too heavy to place alone, I need you to climb the trunk and anchor this iron rope firmly.",
+          "visual": "robot",
+          "label": "Engineering the solution",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas, wearing a brass-geared shoulder rig, holds up a heavy iron pulley while Kaelen stands ready to climb the ancient, towering tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Critical Shift",
+          "speech": "The tension is too high, catch the hook before it snaps back or the entire anchor system will fail us right now.",
+          "visual": "signal",
+          "label": "The risky moment",
+          "story_beat": "build",
+          "visual_prompt": "Kaelen leaps through the air to catch a swinging metal hook while Silas strains against the vibrating tension of the rope mechanism.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Successful Release",
+          "speech": "The log has shifted enough, grab the cub and run for higher ground before the root settles back into the soft mud.",
+          "visual": "door",
+          "label": "The escape",
+          "story_beat": "payoff",
+          "visual_prompt": "Kaelen pulls the cub through a natural stone archway as the heavy log hits the ground behind them, dust and leaves swirling in the air.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A young mountain cat is pinned by a fallen ancient iron-root log.",
+      "decisive_choice": "Silas hands Kaelen his heavy climbing hook to create a compound leverage system.",
+      "resolution": "The log is lifted, the cat is freed, and the two rivals form a newfound partnership."
     }
   ]
 }
