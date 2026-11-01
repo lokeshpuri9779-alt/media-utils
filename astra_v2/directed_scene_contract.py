@@ -9,7 +9,7 @@ from astra_errors import CreativeReject
 
 _HUMAN = re.compile(
     r"\b(?:stationmaster|courier|thief|thieves|man|woman|boy|girl|"
-    r"child|children|person|people|guard|passenger|driver|captain|rescuer|explorer|climber)\b", re.I)
+    r"child|children|person|people|guard|passenger|driver|captain|rescuer|explorer|climber|"\n    r"doctor|dr|professor|researcher|scientist)\b", re.I)
 _INTERACTION = re.compile(
     r"\b(?:slides?|sliding|maneuvers?|manoeuvres?|navigates?|"
     r"enters?|entering|retrieves?|retrieving|returns?|returning|"
