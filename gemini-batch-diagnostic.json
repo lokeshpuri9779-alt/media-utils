@@ -1,41 +1,21 @@
 {
-  "observed_at": "2026-11-01T13:19:51.259133+00:00",
-  "generated": 10,
+  "observed_at": "2026-11-01T15:32:59.145985+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 2,
-      "reason": "ValueError"
-    },
-    {
-      "index": 3,
-      "reason": "ValueError"
-    },
-    {
-      "index": 9,
-      "reason": "ValueError"
-    },
-    {
-      "index": 10,
-      "reason": "ValueError"
-    },
-    {
-      "index": 11,
-      "reason": "ValueError"
-    },
-    {
-      "index": 15,
-      "reason": "provider_http_429"
-    }
-  ],
-  "reviewed": 10,
-  "approved": 0,
+  "generation_failures": [],
+  "reviewed": 20,
+  "approved": 1,
   "review_issues": [
-    "The candidate story 'The Otter and the Submerged Sound-Stone' features a plot, characters (Pip the sea otter), and causal mechanisms that heavily overlap with the recently published premise 'The Otter and the Silent Trench' in the comparison history, violating originality requirements.",
+    "The candidate story 'Barnaby's Brass Pancake-Flapper and the Plaza Pickle' shares a nearly identical character, premise, setting, and causal structure with the recently published story 'Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic' from the comparison history.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
