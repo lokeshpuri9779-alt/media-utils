@@ -68,6 +68,17 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
             "diffusers.pipelines.stable_diffusion.safety_checker": safety})
         self.checker_patch.start()
         self.addCleanup(self.checker_patch.stop)
+        torch = types.ModuleType("torch")
+        class FakeGenerator:
+            def __init__(self, device):
+                self.device = device
+            def manual_seed(self, seed):
+                self.seed = seed
+                return self
+        torch.Generator = FakeGenerator
+        self.torch_patch = patch.dict(sys.modules, {"torch": torch})
+        self.torch_patch.start()
+        self.addCleanup(self.torch_patch.stop)
         self.hub_patch = patch.dict(sys.modules, {"huggingface_hub": hub})
         self.hub_patch.start()
         self.addCleanup(self.hub_patch.stop)
