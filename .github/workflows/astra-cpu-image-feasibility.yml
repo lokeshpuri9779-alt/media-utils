@@ -7,13 +7,14 @@ on:
         required: true
         type: string
       prompt_profile:
-        description: 'Compare baseline or simpler scene; neither permits publishing'
+        description: 'Select baseline, simple robot, or neutral geometry control; review-only'
         type: choice
         required: true
         default: baseline
         options:
           - baseline
           - simple
+          - geometry
       model_profile:
         description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
         type: choice
