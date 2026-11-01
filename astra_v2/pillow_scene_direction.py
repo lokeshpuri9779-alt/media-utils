@@ -238,7 +238,7 @@ def draw_story_stage(d, shot, t):
     # merely a blue river platform. Draw it behind the actors, inside the
     # established artwork-safe region; do not infer damage from "bridge" alone.
     spoken = str(shot.get("speech") or "").lower()
-    if setting == "river" and re.search(r"\\bbridge\\b", spoken) and re.search(r"\\bbroken plank\\b", spoken):
+    if setting == "river" and re.search(r"\bbridge\b", spoken) and re.search(r"\bbroken plank\b", spoken):
         wood = (174, 125, 83)
         edge = (97, 72, 62)
         # Two separated wooden bridge decks; the exposed water between them
