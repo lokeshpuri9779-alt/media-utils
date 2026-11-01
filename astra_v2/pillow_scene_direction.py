@@ -241,20 +241,21 @@ def draw_story_stage(d, shot, t):
     if setting == "river" and re.search(r"\bbridge\b", spoken) and re.search(r"\bbroken plank\b", spoken):
         wood = (174, 125, 83)
         edge = (97, 72, 62)
-        # Two separated wooden bridge decks; the exposed water between them
-        # makes the missing plank readable even on a small Shorts screen.
-        for x0, x1 in ((90, 480), (610, 990)):
+        # Keep the missing plank to the right of the central lantern, which
+        # otherwise occludes the gap in the final composited Shorts frame.
+        # Both decks and the hazard remain within the artwork-safe region.
+        for x0, x1 in ((90, 510), (700, 990)):
             d.rectangle((x0, 1140, x1, 1194), fill=wood, outline=edge, width=7)
             for x in range(x0 + 66, x1, 68):
                 d.line((x, 1143, x, 1191), fill=edge, width=5)
-        d.polygon(((455, 1142), (490, 1154), (474, 1175), (484, 1191),
-                   (451, 1191)), fill=(127, 91, 67))
-        d.polygon(((630, 1142), (603, 1151), (620, 1173), (604, 1191),
-                   (633, 1191)), fill=(127, 91, 67))
+        d.polygon(((489, 1142), (520, 1154), (503, 1175), (514, 1191),
+                   (488, 1191)), fill=(127, 91, 67))
+        d.polygon(((717, 1142), (684, 1151), (701, 1173), (686, 1191),
+                   (720, 1191)), fill=(127, 91, 67))
         for x in (125, 930):
             d.rectangle((x, 1025, x + 19, 1140), fill=edge)
-        d.line((135, 1055, 469, 1055), fill=(196, 157, 108), width=11)
-        d.line((619, 1055, 940, 1055), fill=(196, 157, 108), width=11)
+        d.line((135, 1055, 498, 1055), fill=(196, 157, 108), width=11)
+        d.line((709, 1055, 940, 1055), fill=(196, 157, 108), width=11)
     # Story-seeded, fixed environmental dressing: each location has a
     # foreground/midground silhouette. The details never re-roll per frame.
     for k in range(7):
