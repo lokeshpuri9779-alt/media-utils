@@ -3,7 +3,7 @@
   "day": "2026-11-01",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 2,
-  "confirmed_today": 1,
+  "confirmed_today": 2,
   "last_attempt_at": "2026-11-01T06:48:27.648525+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -8067,29 +8067,28 @@
       "decisive_choice": "Silas hands Kaelen his heavy climbing hook to create a compound leverage system.",
       "resolution": "The log is lifted, the cat is freed, and the two rivals form a newfound partnership.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "St_lV_5AiB8": {
-      "content_id": "trend-brief-2026-11-01-am",
+    },
+    "trend-brief-2026-11-01-am": {
+      "video_id": "St_lV_5AiB8",
+      "confirmed_at": "2026-11-01T07:59:17.739411+00:00",
       "title": "Why hong kong vs sri lanka Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-01",
-      "uploaded_at": "2026-11-01T06:48:29.204217+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-01T06:48:29.204217+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
-      "renderer": "studio-7.3.1"
+      "genre": "current"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-01T06:47:42.232007+00:00",
+  "last_preflight_at": "2026-11-01T07:59:17.182783+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-01T06:48:35.193002+00:00",
+    "at": "2026-11-01T08:00:15.990192+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -16890,10 +16889,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-01T06:48:35.192928+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-01T08:00:15.990111+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -16901,36 +16900,110 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-01T06:48:35.192988+00:00",
+    "at": "2026-11-01T08:00:15.990177+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-01T06:48:09.404034+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "trend-brief-2026-11-01-am",
-    "video_url": "https://www.youtube.com/watch?v=St_lV_5AiB8",
-    "story_selection": {}
+    "at": "2026-11-01T07:59:51.440216+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 122,
+      "not_ready": 64,
+      "policy_rejected": {
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {},
+      "approved": 0,
+      "exhausted": true,
+      "rejection_total": 122,
+      "next_action": "replenish_approved_story_supply"
+    }
   },
   "last_workflow_result": {
-    "at": "2026-11-01T06:48:35.192838+00:00",
+    "at": "2026-11-01T08:00:15.989858+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-01T06:48:35.192921+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-11-01T08:00:15.990104+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 0,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "seen": 34,
+        "total": 156
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 156,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 122,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 122,
+        "remaining": 0
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 0,
+        "considered": 122,
+        "duration_rejected": 0,
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 9,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 14,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
+        },
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
