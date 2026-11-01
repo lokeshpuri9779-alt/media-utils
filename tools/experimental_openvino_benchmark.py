@@ -34,7 +34,7 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
     output.unlink(missing_ok=True)
     model = APPROVED_MODELS[profile]
     report = {"engine": "OpenVINO CPU", "model": model, "steps": steps, "prompt_profile": prompt_profile,
-              "success": False, "published": False, "approved": False,
+              "seed": 42, "success": False, "published": False, "approved": False,
               "production_ready": False, "still_image_only": True,
               "render_completed": False,
               "semantic_quality": "not_verified",
@@ -95,7 +95,7 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
         inference_started = time.monotonic()
         try:
             result = pipe(PROMPTS[prompt_profile], height=768, width=512,
-                          num_inference_steps=steps)
+                          num_inference_steps=steps, generator=__import__("torch").Generator(device="cpu").manual_seed(42))
             if profile == "preconverted":
                 flags = getattr(result, "nsfw_content_detected", None)
                 if not isinstance(flags, (list, tuple)) or len(flags) != 1 or type(flags[0]) is not bool:
@@ -120,7 +120,9 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
         report["dimensions"] = {"width": image.width, "height": image.height}
         report["bytes"] = output.stat().st_size
         report["render_completed"] = True
-        report["success"] = bool(quality["passed"])
+        if not quality["passed"]:
+            raise ValueError("Pixel-quality gate rejected generated image")
+        report["success"] = True
         report["output"] = str(output)
     except Exception as exc:
         # A failed safety or pixel-quality gate must not retain a reviewable PNG.
