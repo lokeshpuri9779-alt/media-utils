@@ -15,6 +15,14 @@ on:
           - baseline
           - simple
           - geometry
+      inference_steps:
+        description: 'CPU inference steps; 16 tests whether more steps improve visual fidelity'
+        type: choice
+        required: true
+        default: '8'
+        options:
+          - '8'
+          - '16'
       model_profile:
         description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
         type: choice
@@ -91,7 +99,7 @@ jobs:
           df -h .
       - name: Produce isolated portrait keyframe
         run: |
-          python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8 --prompt-profile "${{ inputs.prompt_profile }}"
+          python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps "${{ inputs.inference_steps }}" --prompt-profile "${{ inputs.prompt_profile }}"
       - name: Retain review-only benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
