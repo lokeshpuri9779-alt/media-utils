@@ -27,7 +27,7 @@ class PreserveReviewedManifestTests(unittest.TestCase):
             self.assertEqual(len(second), len(first))
             self.assertIn(reviewed, second)
 
-    def test_generated_background_renders_and_tampering_is_rejected(self):
+    def test_generated_background_is_review_only_and_legacy_approval_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             scene = {"speech": "A fox finds a bell in the woods."}
@@ -36,15 +36,16 @@ class PreserveReviewedManifestTests(unittest.TestCase):
             rows = json.loads(manifest.read_text())["assets"]
             generated = [row for row in rows if row.get("source") == "offline-semantic-generator"]
             self.assertEqual(len(generated), 1)
+            self.assertEqual(generated[0]["status"], "review_only")
             self.assertEqual(len(generated[0]["sha256"]), 64)
-            self.assertEqual(len(load_assets(manifest)), 1)
+            self.assertEqual(load_assets(manifest), [])
             frame = Image.new("RGB", (540, 960), (0, 0, 0))
             before = frame.copy()
-            self.assertTrue(draw_asset_for_scene(frame, scene, manifest_path=manifest))
-            self.assertIsNotNone(ImageChops.difference(frame, before).getbbox())
-            asset_path = root / generated[0]["path"]
-            with asset_path.open("ab") as handle:
-                handle.write(b"tampered")
+            self.assertFalse(draw_asset_for_scene(frame, scene, manifest_path=manifest))
+            self.assertIsNone(ImageChops.difference(frame, before).getbbox())
+            # Old artifacts may contain status=approved; source must still fail closed.
+            generated[0]["status"] = "approved"
+            manifest.write_text(json.dumps({"assets": rows}))
             self.assertEqual(load_assets(manifest), [])
             self.assertFalse(draw_asset_for_scene(
                 Image.new("RGB", (540, 960)), scene, manifest_path=manifest))
