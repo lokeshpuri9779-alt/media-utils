@@ -59,7 +59,17 @@ class DirectedPillowScenesTests(unittest.TestCase):
             images.append(im)
         damaged, baseline = images
         self.assertEqual(damaged.getpixel((350, 1160)), (174, 125, 83))
-        self.assertNotEqual(damaged.getpixel((550, 1160)), (174, 125, 83))
+        self.assertEqual(damaged.getpixel((750, 1160)), (174, 125, 83))
+        # The central lantern formerly covered the narrow broken-plank gap.
+        # The wider gap must remain visible in the composed frame, not just
+        # when rendering the background in isolation.
+        self.assertNotEqual(damaged.getpixel((620, 1160)), (174, 125, 83))
+        composed = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        composed_shot = dict(broken, story_cast=("fox", "rabbit"),
+                             story_prop="lantern", story_action="warn")
+        self.assertTrue(draw_duo(composed, composed_shot, 0.5))
+        self.assertEqual(composed.getpixel((620, 1160)),
+                         damaged.getpixel((620, 1160)))
         self.assertNotEqual(baseline.getpixel((350, 1160)), (174, 125, 83))
         for rect in ((0, 0, 1080, 480), (0, 1400, 1080, 1920)):
             self.assertIsNone(ImageChops.difference(
