@@ -125,6 +125,57 @@ class DirectedSceneContractTests(unittest.TestCase):
         self.assertFalse(eligible)
         self.assertIn("human_actor_not_supported_by_directed_icons", reason)
 
+    def test_approved_glacial_doctor_story_requires_scene_art(self):
+        # The 2026-11-01 Gemini batch #41321629328 approved this story
+        # editorially, although the directed icon grammar cannot depict
+        # Dr. Vance, a rope rescue, or the human partner. Fail closed before
+        # voice/render/upload; retain the story and its editorial decision.
+        from astra_v2.renderer_eligibility import check_renderer_eligibility
+        story = {
+            "genre": "fiction",
+            "kind": "authored_causal_story",
+            "production_ready": True,
+            "content_id": "rayvan-gemini-7dd38f673f5882788f9c",
+            "title": "Dr. Aris Vance and the Glacial Crevasse Rescue",
+            "visual_bible": {"characters": {
+                "Dr. Aris Vance": (
+                    "A seasoned arctic researcher with a weathered face, "
+                    "thick graying beard, wearing a heavy orange expedition parka."
+                ),
+            }},
+            "story_beats": [
+                {"headline": "The Hidden Rift", "visual": "signal",
+                 "speech": (
+                     "Look at the monitor, the seismic sensors indicate the "
+                     "entire eastern shelf is breaking apart right now beneath us."
+                 ),
+                 "visual_prompt": (
+                     "Dr. Vance stands in a frozen snowy wasteland looking at "
+                     "a flashing red seismic monitor showing an active signal spike "
+                     "while holding a glowing handheld radio."
+                 )},
+                {"headline": "The Trapped Partner", "visual": "ship",
+                 "speech": (
+                     "Hold on tight to the harness rope, I am lowering myself "
+                     "down into the dark chasm to pull you out safely."
+                 ),
+                 "visual_prompt": (
+                     "Dr. Vance leans over the edge of a deep blue glacial crevasse, "
+                     "anchoring a bright yellow tow rope to a heavy steel sledge."
+                 )},
+            ],
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+            eligible, reason, modes = check_renderer_eligibility(story)
+        self.assertFalse(eligible)
+        self.assertIn("human_actor_not_supported_by_directed_icons", reason)
+        self.assertEqual(modes, ())
+        # An ordinary signal scene remains valid; no global renderer shutdown.
+        self.assertEqual(validate_story_shot({
+            "visual": "signal",
+            "speech": "The radio signal grows stronger as the storm clears.",
+        }), "directed")
+
     def test_named_alpine_rescuer_requires_verified_scene_art(self):
         # Publisher #41190577737 rendered Rowan's first beat with a generic
         # backdrop and rejected the MP4 for incomplete scene coverage.
