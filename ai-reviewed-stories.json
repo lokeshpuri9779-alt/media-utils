@@ -6585,6 +6585,83 @@
         }
       },
       "plot_fingerprint": "4fc98c009c1ac0a2470e2ef9de259d2206abb436994a3ea29f2d923131d13c2d"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-49290843971f4e313877",
+      "title": "The Badger and the Amber Spores of Pine Ridge",
+      "hook": "Discovering the Broken Span",
+      "question": "Can two woodland companions successfully cross a crumbling ravine by combining their distinct survival skills before a torrential storm breaks?",
+      "answer": "Yes, by weaving resilient vine ropes and sharing amber warmth, they reach the safety of the ridge lodge.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Discovering the Broken Span",
+          "speech": "Look closely at the snapped roots across the canyon. We cannot cross without building a sturdy vine bridge together right now.",
+          "visual": "forest",
+          "label": "Ravine Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the badger and Pip the squirrel stand at the edge of a deep misty forest ravine. Bramble points with a muddy paw at a snapped root bridge while Pip holds a frayed hemp rope with a worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Weaving the Amber Anchor",
+          "speech": "Hold this glowing resin tight while I loop the heavy fiber around the stout pine trunk to secure our lifeline.",
+          "visual": "signal",
+          "label": "Securing the Line",
+          "story_beat": "build",
+          "visual_prompt": "Pip the squirrel actively wraps glowing sticky amber resin around a thick pine trunk, holding a glowing sap vial in his tiny paws. Bramble the badger stands nearby steadying the heavy main towline.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Perilous Crossing",
+          "speech": "Step carefully across the swaying rope now. Keep your balance low and steady until your paws touch solid earth.",
+          "visual": "door",
+          "label": "Crossing the Chasm",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the squirrel is mid-crossing on a taut vine rope stretched across the foggy chasm, holding a small wooden supply pouch. Bramble the badger firmly grips the anchor knot on the near side of the ravine.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Inside the Ridge Lodge",
+          "speech": "We made it across just as the heavy rain starts. Let us close the wooden door and rest safely together.",
+          "visual": "ship",
+          "label": "Shelter Achieved",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the badger and Pip the squirrel stand safely inside a cozy wooden shelter cabin, closing a stout timber door while heavy rain pours outside. Both characters smile warmly, holding dried berries.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden torrential rain threatens to wash away the only natural bridge across the deep ravine while their supply pack is stuck on the unstable ledge.",
+      "decisive_choice": "Bramble the badger chooses to stay on the crumbling ledge to anchor the heavy vine line while Pip the squirrel makes the leap across.",
+      "resolution": "Both partners safely unite on the secure side, saving their provisions and securing shelter before the storm crests.",
+      "visual_bible": {
+        "style": "Warm and detailed storybook illustration with rich forest textures, earthy greens and amber lighting.",
+        "characters": {
+          "Bramble": "An older badger with gray-streaked fur, wearing a canvas utility vest and sturdy leather paw wraps.",
+          "Pip": "A nimble red squirrel with bright amber eyes, wearing a knitted blue scarf and a small pouch."
+        },
+        "locations": {
+          "Pine Ridge Ravine": "A deep woodland canyon filled with ancient pines, thick moss, and hanging vines under a stormy sky.",
+          "Ridge Lodge": "A small, sturdy timber cabin nestled safely into the cliffside with a heavy oak door."
+        },
+        "objects": {
+          "Vine Rope": "A thick, hand-woven green hemp rope twisted with flexible forest vines.",
+          "Amber Resin Vial": "A small glass bottle filled with glowing golden tree sap that emits a warm light.",
+          "Supply Pouch": "A weathered brown canvas sack tied with leather cord containing dried forest nuts and berries."
+        }
+      },
+      "plot_fingerprint": "ec18631817c47156e987b73d3f80941f3b2d04734aacfcf9b75402bc1b8c7e48"
     }
   ]
 }
