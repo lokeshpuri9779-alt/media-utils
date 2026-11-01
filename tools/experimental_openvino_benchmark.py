@@ -18,6 +18,7 @@ PROMPT = ("original cinematic animated-film illustration, a small copper robot h
 PROMPTS = {
     "baseline": PROMPT,
     "simple": "a small copper toy robot standing in a green forest, full body, centered, illustration",
+    "geometry": "a red wooden cube on a plain blue table, centered, simple studio illustration",
 }
 
 def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Path("artifacts/experimental-openvino/keyframe.png")):
@@ -37,7 +38,9 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
               "production_ready": False, "still_image_only": True,
               "render_completed": False,
               "semantic_quality": "not_verified",
-              "manual_visual_review_required": True}
+              "manual_visual_review_required": True,
+              "safety_rejection_policy": "discard_image_and_fail",
+              "safety_false_positive": "not_determined"}
     started = time.monotonic()
     stage = "import_pipeline"
     try:
@@ -100,6 +103,7 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
                 report["safety_checker_applied"] = True
                 report["nsfw_content_detected"] = flags[0]
                 if flags[0]:
+                    report["safety_rejection_observed"] = True
                     raise ValueError("Safety checker flagged generated content")
             image = result.images[0]
         finally:
