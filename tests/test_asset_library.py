@@ -14,9 +14,10 @@ class AssetLibraryTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         (self.root / "art" / "assets").mkdir(parents=True)
         # Transparent foreground proves real alpha is preserved.
-        sprite = Image.new("RGBA", (60, 80), (255, 0, 0, 0))
-        for x in range(10, 50):
-            for y in range(10, 70):
+        # Production compositor rejects foreground images below 256x256.
+        sprite = Image.new("RGBA", (300, 400), (255, 0, 0, 0))
+        for x in range(50, 250):
+            for y in range(50, 350):
                 sprite.putpixel((x, y), (240, 100, 40, 255))
         sprite.save(self.root / "art" / "assets" / "fox.png")
         (self.root / "art" / "manifest.json").write_text(json.dumps({
