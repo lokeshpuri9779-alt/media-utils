@@ -1,5 +1,10 @@
-name: ASTRA CPU Image Feasibility (Manual)
+name: ASTRA CPU Image Feasibility (Isolated)
 on:
+  push:
+    branches:
+      - experiment/openvino-int8-model-candidate
+    paths:
+      - .github/workflows/astra-cpu-image-feasibility.yml
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
@@ -42,20 +47,25 @@ jobs:
       HF_HOME: /tmp/astra-hf
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
     steps:
-      - name: Explain and validate manual benchmark trigger
+      - name: Authorize bounded experimental run
         env:
           EVENT_NAME: ${{ github.event_name }}
           CONFIRMATION: ${{ inputs.confirm_cpu_benchmark }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          if [ "$EVENT_NAME" != "workflow_dispatch" ]; then
-            echo "::error::This benchmark must be started with Run workflow (workflow_dispatch), not a pull-request check."
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ "$COMMIT_MESSAGE" != "experiment: one-shot 16-step geometry CPU benchmark" ]; then
+              echo "::error::Push is not the explicitly scoped one-shot benchmark commit"
+              exit 1
+            fi
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$CONFIRMATION" != "BENCHMARK" ]; then
+              echo "::error::Enter BENCHMARK exactly"
+              exit 1
+            fi
+          else
             exit 1
           fi
-          if [ "$CONFIRMATION" != "BENCHMARK" ]; then
-            echo "::error::Enter BENCHMARK exactly in the confirmation field; received a different or empty value."
-            exit 1
-          fi
-          echo "Manual confirmation accepted; continuing to branch/model preflight."
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
@@ -65,7 +75,7 @@ jobs:
           ACTUAL_REF: ${{ github.ref_name }}
           EXPECTED_REF: experiment/openvino-int8-model-candidate
           EXPECTED_MODEL: OpenVINO/stable-diffusion-v1-5-int8-ov
-          SELECTED_PROFILE: ${{ inputs.model_profile }}
+          SELECTED_PROFILE: ${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}
         run: |
           python - <<'PY'
           import ast
@@ -99,7 +109,7 @@ jobs:
           df -h .
       - name: Produce isolated portrait keyframe
         run: |
-          python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps "${{ inputs.inference_steps }}" --prompt-profile "${{ inputs.prompt_profile }}"
+          python -m tools.experimental_openvino_benchmark --profile "${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}" --steps "${{ github.event_name == 'push' && '16' || inputs.inference_steps }}" --prompt-profile "${{ github.event_name == 'push' && 'geometry' || inputs.prompt_profile }}"
       - name: Retain review-only benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
