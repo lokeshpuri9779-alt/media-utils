@@ -48,6 +48,23 @@ class DirectedPillowScenesTests(unittest.TestCase):
         self.assertEqual(story_setting({
             "speech":"The friends opened a book at the library."}),"library")
 
+    def test_broken_river_bridge_has_visible_missing_plank(self):
+        from PIL import ImageDraw
+        broken = {"speech": "The fox ran toward the river bridge, but the rabbit spotted a broken plank and waved a warning."}
+        intact = {"speech": "The fox and rabbit walked beside the river bridge."}
+        images = []
+        for shot in (broken, intact):
+            im = Image.new("RGB", (1080, 1920), (24, 35, 60))
+            self.assertEqual(draw_story_stage(ImageDraw.Draw(im), shot, 0.5), "river")
+            images.append(im)
+        damaged, baseline = images
+        self.assertEqual(damaged.getpixel((350, 1160)), (174, 125, 83))
+        self.assertNotEqual(damaged.getpixel((550, 1160)), (174, 125, 83))
+        self.assertNotEqual(baseline.getpixel((350, 1160)), (174, 125, 83))
+        for rect in ((0, 0, 1080, 480), (0, 1400, 1080, 1920)):
+            self.assertIsNone(ImageChops.difference(
+                damaged.crop(rect), baseline.crop(rect)).getbbox())
+
     def test_ball_rolls_and_the_catch_overrides_earlier_roll_verb(self):
         first={"speech":"The fox and cat watched the ball roll away.",
                "story_beat":"reveal","story_action":"idle"}
