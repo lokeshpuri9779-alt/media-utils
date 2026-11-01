@@ -32,6 +32,24 @@ class UnifiedEngineTests(unittest.TestCase):
         with patch("astra_v2.unified_story_engine._draw_solo", return_value=True):
             self.assertEqual(draw_story_frame(object(), shot, .2), "solo")
 
+    def test_badger_is_not_replaced_by_single_squirrel(self):
+        # The 2026-11-01 published candidate narrated Bramble the badger
+        # alongside Pip the squirrel, but sampled frames showed only one
+        # squirrel-like puppet. The unsupported actor must fail before upload.
+        for field in ("story_title", "visual_prompt", "speech"):
+            shot = {"story_cast": ("squirrel",),
+                    "speech": "We must cross the ravine.",
+                    field: "Bramble the badger and Pip the squirrel"}
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(CreativeReject, "unsupported badger actor"):
+                    validate_story_shot(shot)
+
+    def test_supported_squirrel_still_renders_without_badger(self):
+        shot = {"story_title": "Pip the Squirrel",
+                "visual_prompt": "Pip the squirrel watches the moon.",
+                "story_cast": ("squirrel",)}
+        self.assertEqual(validate_story_shot(shot), "solo")
+
     def test_duo_cast_stable(self):
         shot = {"speech": "The fox helped the rabbit carry a lantern.",
                 "story_cast": ("fox", "rabbit")}
