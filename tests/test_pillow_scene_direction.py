@@ -65,6 +65,37 @@ class DirectedPillowScenesTests(unittest.TestCase):
             self.assertIsNone(ImageChops.difference(
                 damaged.crop(rect), baseline.crop(rect)).getbbox())
 
+    def test_explicit_lantern_repair_uses_both_named_actors_and_wick(self):
+        from astra_v2.pillow_duo_scene import _authored_lantern_repair_roles
+        narration = ("The rabbit repaired the lantern with a spare wick "
+                     "while the fox held the lantern steady.")
+        shot = {
+            "speech": narration, "story_cast": ("fox", "rabbit"),
+            "story_prop": "lantern", "story_action": "repair",
+            "story_visual_seed": "fox-rabbit-lantern-regression",
+        }
+        self.assertEqual(_authored_lantern_repair_roles(
+            shot, ("fox", "rabbit"), "lantern", "repair"), (0, 1))
+        self.assertIsNone(_authored_lantern_repair_roles(
+            shot, ("fox", "rabbit"), "book", "repair"))
+        self.assertIsNone(_authored_lantern_repair_roles(
+            shot, ("rabbit", "fox"), "lantern", "repair"))
+        ambiguous = dict(shot, speech=narration.replace("spare wick", "small tool"))
+        self.assertIsNone(_authored_lantern_repair_roles(
+            ambiguous, ("fox", "rabbit"), "lantern", "repair"))
+        repaired = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        baseline = repaired.copy()
+        self.assertTrue(draw_duo(repaired, shot, 1.6))
+        self.assertTrue(draw_duo(baseline, ambiguous, 1.6))
+        # Composed frames must differ around the physical repair, not just
+        # in narration metadata or the background-only regression test.
+        self.assertIsNotNone(ImageChops.difference(
+            repaired.crop((400, 930, 660, 1170)),
+            baseline.crop((400, 930, 660, 1170))).getbbox())
+        for rect in ((0, 0, 1080, 480), (0, 1400, 1080, 1920)):
+            self.assertIsNone(ImageChops.difference(
+                repaired.crop(rect), baseline.crop(rect)).getbbox())
+
     def test_ball_rolls_and_the_catch_overrides_earlier_roll_verb(self):
         first={"speech":"The fox and cat watched the ball roll away.",
                "story_beat":"reveal","story_action":"idle"}
