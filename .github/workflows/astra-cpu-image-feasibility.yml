@@ -1,11 +1,33 @@
-name: ASTRA CPU Image Feasibility (Manual)
+name: ASTRA CPU Image Feasibility (Isolated)
 on:
+  push:
+    branches:
+      - experiment/openvino-int8-model-candidate
+    paths:
+      - .github/workflows/astra-cpu-image-feasibility.yml
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
         description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
         required: true
         type: string
+      prompt_profile:
+        description: 'Select baseline, simple robot, or neutral geometry control; review-only'
+        type: choice
+        required: true
+        default: baseline
+        options:
+          - baseline
+          - simple
+          - geometry
+      inference_steps:
+        description: 'CPU inference steps; 16 tests whether more steps improve visual fidelity'
+        type: choice
+        required: true
+        default: '8'
+        options:
+          - '8'
+          - '16'
       model_profile:
         description: 'Preconverted OpenVINO model recommended; export uses more memory/time'
         type: choice
@@ -18,7 +40,6 @@ permissions:
   contents: read
 jobs:
   benchmark:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -26,10 +47,58 @@ jobs:
       HF_HOME: /tmp/astra-hf
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
     steps:
+      - name: Authorize bounded experimental run
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          CONFIRMATION: ${{ inputs.confirm_cpu_benchmark }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ "$COMMIT_MESSAGE" != "experiment: one-shot 16-step geometry CPU benchmark" ]; then
+              echo "::error::Push is not the explicitly scoped one-shot benchmark commit"
+              exit 1
+            fi
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$CONFIRMATION" != "BENCHMARK" ]; then
+              echo "::error::Enter BENCHMARK exactly"
+              exit 1
+            fi
+          else
+            exit 1
+          fi
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Verify experimental branch and INT8 model before dependency install
+        env:
+          ACTUAL_REF: ${{ github.ref_name }}
+          EXPECTED_REF: experiment/openvino-int8-model-candidate
+          EXPECTED_MODEL: OpenVINO/stable-diffusion-v1-5-int8-ov
+          SELECTED_PROFILE: ${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}
+        run: |
+          python - <<'PY'
+          import ast
+          import os
+          from pathlib import Path
+          ref = os.environ["ACTUAL_REF"]
+          expected_ref = os.environ["EXPECTED_REF"]
+          if ref != expected_ref:
+              raise SystemExit(f"Wrong workflow branch: {ref!r}; select {expected_ref!r} before rerunning")
+          if os.environ["SELECTED_PROFILE"] != "preconverted":
+              raise SystemExit("This experimental INT8 validation requires model_profile=preconverted")
+          source = ast.parse(Path("tools/experimental_openvino_benchmark.py").read_text())
+          models = next(
+              ast.literal_eval(node.value)
+              for node in source.body
+              if isinstance(node, ast.Assign)
+              and any(isinstance(target, ast.Name) and target.id == "APPROVED_MODELS" for target in node.targets)
+          )
+          actual_model = models["preconverted"]
+          if actual_model != os.environ["EXPECTED_MODEL"]:
+              raise SystemExit(f"Unexpected model: {actual_model!r}")
+          print(f"Validated branch={ref} model={actual_model}; proceeding with CPU-only benchmark")
+          PY
       - name: Install CPU-only benchmark dependencies
         run: |
           python -m pip install --disable-pip-version-check 'Pillow>=10,<12' 'transformers>=4.40,<5' 'optimum[openvino]' diffusers
@@ -40,7 +109,7 @@ jobs:
           df -h .
       - name: Produce isolated portrait keyframe
         run: |
-          python -m tools.experimental_openvino_benchmark --profile "${{ inputs.model_profile }}" --steps 8
+          python -m tools.experimental_openvino_benchmark --profile "${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}" --steps "${{ github.event_name == 'push' && '16' || inputs.inference_steps }}" --prompt-profile "${{ github.event_name == 'push' && 'geometry' || inputs.prompt_profile }}"
       - name: Retain review-only benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
