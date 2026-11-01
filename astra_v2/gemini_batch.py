@@ -5,6 +5,42 @@ from pathlib import Path
 from astra_v2.omniroute_gemini import generate
 
 
+def _failure_reason(exc):
+    """Classify only known failure signatures; never persist exception text."""
+    message = str(exc)
+    if "Gemini HTTP " in message:
+        code = message.split("Gemini HTTP ", 1)[1].split()[0]
+        return "provider_http_" + code if code.isdigit() else "provider_http_error"
+    if message.startswith("Gemini transport failed:"):
+        return "provider_transport_error"
+    if isinstance(exc, KeyError):
+        return "missing_required_field"
+    if isinstance(exc, json.JSONDecodeError):
+        return "invalid_provider_json"
+    if isinstance(exc, ValueError):
+        known = {
+            "duplicate_candidate": "duplicate_candidate",
+            "Duplicate story content": "duplicate_candidate",
+            "Generated story repeats narrative history": "narrative_duplicate",
+            "Generated story failed causal planning": "causal_planning_rejected",
+            "Generated story title or beat count invalid": "invalid_story_structure",
+            "Gemini returned no candidates": "empty_provider_response",
+            "Gemini response incomplete": "incomplete_provider_response",
+            "Invalid visual bible": "invalid_visual_bible",
+            "Invalid visual bible entities": "invalid_visual_bible",
+            "Invalid beat": "invalid_beat",
+            "Invalid beat text": "invalid_beat",
+            "Invalid beat visual or narrative role": "invalid_beat",
+            "Invalid story summary": "invalid_story_summary",
+            "Invalid Gemini model": "invalid_model_configuration",
+            "Invalid Gemini fallback model": "invalid_model_configuration",
+        }
+        if message.startswith("Generated story failed editorial review:"):
+            return "editorial_rejected"
+        return known.get(message, "validation_error_unclassified")
+    return "runtime_error_unclassified"
+
+
 def generate_batch(count, generator=generate, history=()):
     if not 1 <= count <= 50:
         raise ValueError("count must be 1..50")
@@ -25,14 +61,7 @@ def generate_batch(count, generator=generate, history=()):
             ids.add(cid)
             titles.add(title)
         except (RuntimeError, ValueError, KeyError) as exc:
-            message = str(exc)
-            if "Gemini HTTP " in message:
-                code = message.split("Gemini HTTP ", 1)[1].split()[0]
-                reason = "provider_http_" + code if code.isdigit() else "provider_http_error"
-            elif message.startswith("Gemini transport failed:"):
-                reason = "provider_transport_error"
-            else:
-                reason = type(exc).__name__
+            reason = _failure_reason(exc)
             failures.append({"index": i, "reason": reason})
             if reason.startswith("provider_http_") or reason == "provider_transport_error":
                 break
