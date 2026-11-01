@@ -15,6 +15,13 @@ from astra_v2.pillow_duo_scene import (
 )
 from astra_v2.ensemble_scene import cast_for_shot, ensemble_frame
 
+# A real badger is not in the Studio puppet actor library. A generated
+# squirrel-only frame cannot stand in for the narrated badger character.
+# Check the title as well as each beat: later pronoun-only beats must not
+# silently erase an unsupported protagonist. This is a narrow fail-closed
+# regression for the observed public visual mismatch, not semantic approval.
+_UNRENDERABLE_BADGER = re.compile(r"\bbadgers?\b", re.IGNORECASE)
+
 
 def _mentioned_animals(shot):
     text = " ".join(str(shot.get(k) or "") for k in
@@ -64,6 +71,10 @@ def validate_story_shot(shot):
     if shot.get("story_human_actor") is not None:
         from astra_v2.human_story_performance import validate_human_scene
         return validate_human_scene(shot)
+    identity_text = " ".join(str(shot.get(k) or "") for k in
+                             ("story_title", "visual_prompt", "speech", "action"))
+    if _UNRENDERABLE_BADGER.search(identity_text):
+        raise CreativeReject("Unified Studio: unsupported badger actor requires verified scene artwork")
     cast = _resolved_cast(shot)
     if not cast:
         from astra_v2.directed_scene_contract import validate_directed_scene
