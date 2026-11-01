@@ -62,7 +62,7 @@ def generate_semantic_assets(stories, output_root=None, limit=24):
         entries.append({"id": "semantic-" + identity,
                         "path": destination.relative_to(root).as_posix(),
                         "category": "background", "tags": tags,
-                        "status": "approved", "source": "offline-semantic-generator",
+                        "status": "review_only", "source": "offline-semantic-generator",
                         "sha256": hashlib.sha256(destination.read_bytes()).hexdigest()})
     manifest = root / "art" / "manifest.json"
     manifest.parent.mkdir(parents=True, exist_ok=True)
@@ -105,6 +105,10 @@ def load_assets(manifest_path: str | Path = DEFAULT_MANIFEST) -> list[dict]:
     assets = []
     for row in data["assets"]:
         if not isinstance(row, dict) or row.get("status") != "approved":
+            continue
+        # Procedural geometry has no independent narration/scene review.
+        # Reject even legacy manifests that marked it approved.
+        if row.get("source") == "offline-semantic-generator":
             continue
         rel = row.get("path")
         if not isinstance(rel, str) or not rel.strip():
