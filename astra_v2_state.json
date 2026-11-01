@@ -8084,11 +8084,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-01T14:55:29.867323+00:00",
+  "last_preflight_at": "2026-11-01T15:59:30.437083+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-01T14:56:26.921624+00:00",
+    "at": "2026-11-01T16:07:30.785780+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -16889,7 +16889,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-01T14:56:26.921546+00:00",
+    "at": "2026-11-01T16:07:30.785723+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -16900,19 +16900,19 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-01T14:56:26.921609+00:00",
+    "at": "2026-11-01T16:07:30.785771+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-01T14:55:56.632099+00:00",
+    "at": "2026-11-01T16:00:07.494306+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
     "video_url": "",
     "story_selection": {
-      "considered": 122,
+      "considered": 123,
       "not_ready": 64,
       "policy_rejected": {
         "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
@@ -16927,16 +16927,16 @@
       },
       "already_seen": 0,
       "duration_rejected": 0,
-      "render_qa_rejected": 0,
+      "render_qa_rejected": 1,
       "render_exception": {},
       "approved": 0,
       "exhausted": true,
-      "rejection_total": 122,
+      "rejection_total": 123,
       "next_action": "replenish_approved_story_supply"
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-01T14:56:26.921289+00:00",
+    "at": "2026-11-01T16:07:30.785480+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -16948,12 +16948,12 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-01T14:56:26.921539+00:00",
+    "at": "2026-11-01T16:07:30.785717+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 0,
+        "eligible": 1,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -16967,26 +16967,26 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "seen": 34,
-        "total": 156
+        "total": 157
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 156,
+        "before": 157,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 122,
+        "remaining": 123,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 122,
-        "remaining": 0
+        "pool": 123,
+        "remaining": 1
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
         "approved": 0,
-        "considered": 122,
+        "considered": 123,
         "duration_rejected": 0,
         "not_ready": 64,
         "policy_rejected": {
@@ -17001,7 +17001,7 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 6
         },
         "render_exception": {},
-        "render_qa_rejected": 0
+        "render_qa_rejected": 1
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"

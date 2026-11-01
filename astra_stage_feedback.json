@@ -2,18 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-23T12:17:52.561652+00:00",
-      "stage": "render",
-      "element": "studio_render",
-      "outcome": "pass",
-      "evidence": {
-        "duration": 51.067,
-        "renderer": "studio-7.3.0"
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-season-01-episode-04"
-    },
-    {
       "at": "2026-10-23T12:43:03.481553+00:00",
       "stage": "quality",
       "element": "creative_director",
@@ -8603,6 +8591,17 @@
       },
       "proposed_action": "Diagnose story supply and creative gate failures",
       "candidate_id": ""
+    },
+    {
+      "at": "2026-11-01T16:07:30.561180+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -8703,7 +8702,7 @@
       "regressed": 0
     },
     "render": {
-      "pass": 183,
+      "pass": 182,
       "fail": 0,
       "skip": 0,
       "unknown": 0,
@@ -8712,7 +8711,7 @@
     },
     "quality": {
       "pass": 182,
-      "fail": 235,
+      "fail": 236,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
