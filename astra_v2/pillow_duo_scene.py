@@ -439,7 +439,7 @@ def _actor(d, name, x, y, t, action, mood, idx, *, hand_target=None,
     return hands
 
 
-def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, repair_transition=False):
+def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, repair_transition=False, repair_wick=False):
     """Draw the narrated object, with an optional stable illustrated emblem."""
     x,y=int(x),int(y)
     if name=="box":
@@ -536,6 +536,20 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, re
     if symbol_id is not None and name in ("box","book","ball","lantern"):
         from astra_v2.procedural_visual_library import draw_icon
         draw_icon(d,symbol_id,x,y+13,size=33)
+    if name == "lantern" and repair_wick:
+        # Only an explicitly narrated wick replacement gets this action cue.
+        # The bright wick travels toward the lantern center as the repairer
+        # reaches in; ordinary lantern shots retain their existing appearance.
+        progress = _ease((max(0.0, float(t)) - .2) / 1.15)
+        tip_x = x + round(34 * (1 - progress))
+        tip_y = y - 10
+        d.line((x + 78, y - 46, tip_x, tip_y),
+               fill=(250, 234, 194), width=11)
+        d.ellipse((tip_x - 7, tip_y - 7, tip_x + 7, tip_y + 7),
+                  fill=(80, 63, 54))
+        if progress > .65:
+            d.ellipse((x - 10, y - 13, x + 10, y + 19),
+                      fill=(255, 221, 115))
 
 
 def prop_position(action, t):
@@ -564,6 +578,18 @@ def duo_compatibility(shot):
     return {"supported": True, "reason": "supported", "cast": pair}
 
 
+def _authored_lantern_repair_roles(shot, pair, prop, action):
+    """Return (holder, repairer) only when both actions are explicit."""
+    if prop != "lantern" or action != "repair" or pair != ("fox", "rabbit"):
+        return None
+    speech = str(shot.get("speech") or "").lower()
+    if (re.search(r"\brabbit\s+repair(?:s|ed|ing)?\s+the\s+lantern\b", speech)
+            and re.search(r"\bfox\s+(?:held|holds?|holding)\s+the\s+lantern\b", speech)
+            and re.search(r"\bspare\s+wick\b", speech)):
+        return (0, 1)
+    return None
+
+
 def draw_duo(image, shot, t):
     """Return True only when the complete illustrated duo was drawn."""
     pair=scene_pair(shot)
@@ -589,6 +615,14 @@ def draw_duo(image, shot, t):
     owner_idx = next((i for i, name in enumerate(pair)
                       if isinstance(owner, str) and owner.strip().casefold() == name.casefold()), None)
     owner_active = owner_idx is not None
+    repair_roles = _authored_lantern_repair_roles(shot, pair, prop, action)
+    # Never override an explicitly authored conflicting owner.
+    if repair_roles and owner_idx not in (None, repair_roles[0]):
+        repair_roles = None
+    repairer_idx = repair_roles[1] if repair_roles else None
+    if repair_roles:
+        owner_idx = repair_roles[0]
+        owner_active = True
     hand_x = (298 if owner_idx in (None, 0) else 772)
     hand_side = 1 if owner_idx in (None, 0) else -1
     def owner_hand(current_action):
@@ -671,7 +705,7 @@ def draw_duo(image, shot, t):
         if handoff and prop:
             pass  # Both authored participants reach toward the transferred prop.
         elif owner_active:
-            if idx != owner_idx:
+            if idx != owner_idx and idx != repairer_idx:
                 hand_target = None
         elif idx==1 and action!="carry":
             hand_target=None
@@ -686,5 +720,6 @@ def draw_duo(image, shot, t):
         symbol_id=icon_for_story(motif,stable_key) if motif in MOTIFS else None
         _prop(d,prop,*prop_pos,t,symbol_id=symbol_id,action=action,
               condition=shot.get("story_prop_state"),
-              repair_transition=bool(shot.get("story_prop_repair_transition")))
+              repair_transition=bool(shot.get("story_prop_repair_transition")),
+              repair_wick=repairer_idx is not None)
     return True
