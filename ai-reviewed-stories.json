@@ -6515,11 +6515,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-224f8965b49cadbd5506",
-      "title": "The Otter and the Silent Trench",
-      "hook": "The Dark Beacon",
-      "question": "Why did the ancient warning beacon in the deep trench suddenly go dark?",
-      "answer": "A colony of shy pearl-clams had migrated over the intake valve, accidentally blocking the current needed to feed the flame.",
+      "content_id": "rayvan-gemini-7dd38f673f5882788f9c",
+      "title": "Dr. Aris Vance and the Glacial Crevasse Rescue",
+      "hook": "The Hidden Rift",
+      "question": "Can the researcher retrieve the critical core sample before the ice shelf collapses entirely?",
+      "answer": "Yes, by abandoning heavy gear to pull his partner from the unstable rift.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6527,64 +6527,64 @@
       ],
       "story_beats": [
         {
-          "headline": "The Dark Beacon",
-          "speech": "Look closely at the cold stone casing, for the sacred flame has vanished into the suffocating darkness of the abyss.",
+          "headline": "The Hidden Rift",
+          "speech": "Look at the monitor, the seismic sensors indicate the entire eastern shelf is breaking apart right now beneath us.",
           "visual": "signal",
-          "label": "Trench Alarm",
+          "label": "Seismic Alert",
           "story_beat": "reveal",
-          "visual_prompt": "Pip the brown sea otter with a bright yellow shell-satchel examining an unlit stone beacon in a dark underwater trench, holding a glowing algae torch in his right paw.",
+          "visual_prompt": "Dr. Vance stands in a frozen snowy wasteland looking at a flashing red seismic monitor showing an active signal spike while holding a glowing handheld radio.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Unexpected Obstruction",
-          "speech": "These stubborn pearl-clams have clamped their iridescent shells tightly over the intake valve, halting all vital water current.",
+          "headline": "The Trapped Partner",
+          "speech": "Hold on tight to the harness rope, I am lowering myself down into the dark chasm to pull you out safely.",
           "visual": "ship",
-          "label": "Clam Cluster",
+          "label": "Descent Setup",
           "story_beat": "build",
-          "visual_prompt": "Pip peering closely at a massive cluster of shimmering lavender pearl-clams blocking a circular stone intake pipe on the seabed, pointing with a small driftwood stick.",
+          "visual_prompt": "Dr. Vance leans over the edge of a deep blue glacial crevasse, anchoring a bright yellow tow rope to a heavy steel sledge resting in deep snow.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Gentle Tickle",
-          "speech": "If I use my softest kelp-frond brush to tickle their hinged shells, perhaps they will relocate without any harm done.",
-          "visual": "forest",
-          "label": "Kelp Brush",
+          "headline": "The Heavy Choice",
+          "speech": "We cannot lift both the heavy ice core drill and your injured weight up this icy wall before the crack spreads.",
+          "visual": "robot",
+          "label": "Winch Jam",
           "story_beat": "mechanism",
-          "visual_prompt": "Pip gently stroking the edge of a large pearl-clam shell with a soft green kelp brush while floating upside down in the deep blue water.",
+          "visual_prompt": "Dr. Vance struggles with a humming motorized winch jammed with blue ice, his face covered in frost and sweat while shouting down into the shadowed crevasse.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Restored Flame",
-          "speech": "The current flows freely once more, igniting the beacon and guiding our weary travelers safely through the deep waters.",
-          "visual": "planet",
-          "label": "Bright Beacon",
+          "headline": "Safe Ascent",
+          "speech": "I let the drill go into the deep abyss so we could both climb back up onto solid frozen ground together.",
+          "visual": "door",
+          "label": "Successful Rescue",
           "story_beat": "payoff",
-          "visual_prompt": "Pip smiling happily as a brilliant blue flame bursts forth from the stone beacon, casting a warm glow on schools of silver fish swimming past.",
+          "visual_prompt": "Dr. Vance and his rescued partner sit side by side on a bright white snow ridge, smiling in exhaustion while looking out at the vast open polar horizon.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A sudden blackout of the trench warning beacon threatens the safety of migrating fish schools.",
-      "decisive_choice": "Pip the sea otter chooses to gently tickle the pearl-clams instead of forcefully prying them off with a sharp stone.",
-      "resolution": "The clams giggle and scuttle away to a nearby ridge, instantly restoring water flow to the beacon.",
+      "central_conflict": "Retrieving a critical ice core sample from a collapsing crevasse versus abandoning the mission to save an injured expedition partner.",
+      "decisive_choice": "Dr. Vance chooses to drop the titanium core winch and use his last anchor line to haul his partner upward.",
+      "resolution": "Both researchers escape the shifting ice shelf safely, sacrificing scientific samples for human life.",
       "visual_bible": {
-        "style": "Cinematic 3D animation style with vibrant underwater lighting, soft particulate drift, and rich textures on scales, fur, and stone.",
+        "style": "Cinematic realism with cold blue and stark white polar tones, sharp focus, dramatic lighting",
         "characters": {
-          "Pip": "A clever young sea otter with glossy brown fur, big curious amber eyes, wearing a small woven satchel made of yellow reeds across his chest."
+          "Dr. Aris Vance": "A seasoned arctic researcher with a weathered face, thick graying beard, wearing a heavy orange expedition parka with fur-lined hood and frost-dusted goggles."
         },
         "locations": {
-          "The Deep Trench": "A dramatic underwater canyon with jagged gray rock walls, glowing blue anemones, and soft pale sand on the floor."
+          "Glacial Shelf": "A vast expanse of cracked blue and white ice fields under a pale overcast sky, featuring deep bottomless crevasses and jagged ice ridges."
         },
         "objects": {
-          "Algae Torch": "A sturdy wooden handle topped with a glowing green moss that emits a steady underwater light.",
-          "Kelp Brush": "A soft bundle of cured kelp fronds tied together with strong spider-silk thread.",
-          "Beacon": "An ancient carved stone pillar with a wide metal basin at the top designed to channel pressurized sea currents."
+          "Seismic Monitor": "A rugged black handheld device with a glowing amber screen displaying jagged red seismic wave readouts and blinking indicator lights.",
+          "Tow Rope": "A heavy-duty yellow synthetic braided rope coiled neatly next to steel ice anchors driven firmly into the frozen ground.",
+          "Motorized Winch": "A metallic silver mechanical haul-assist unit with exposed gears, frozen frost crystals clinging to its heavy-duty battery pack."
         }
       },
-      "plot_fingerprint": "68259c8fb8067b2b576d420c30d57b719a405e2697974dce717ea99de41e1fb8"
+      "plot_fingerprint": "4fc98c009c1ac0a2470e2ef9de259d2206abb436994a3ea29f2d923131d13c2d"
     }
   ]
 }
