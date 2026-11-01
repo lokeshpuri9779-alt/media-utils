@@ -60,6 +60,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
           python -m unittest discover -s tests -p 'test_quality_asset_selector.py' -v
           python -m unittest discover -s tests -p 'test_preserve_reviewed_manifest.py' -v
+          python -m unittest discover -s tests -p 'test_asset_library.py' -v
           python -m unittest discover -s tests -p 'test_illustrated_story_compositor.py' -v
       - name: Compile story modules
         run: python -m compileall -q astra_v2
