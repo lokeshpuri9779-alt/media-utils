@@ -1,18 +1,37 @@
 {
-  "observed_at": "2026-11-01T01:15:12.373731+00:00",
-  "generated": 15,
+  "observed_at": "2026-11-01T13:19:51.259133+00:00",
+  "generated": 10,
   "requested": 20,
   "generation_failures": [
+    {
+      "index": 2,
+      "reason": "ValueError"
+    },
+    {
+      "index": 3,
+      "reason": "ValueError"
+    },
+    {
+      "index": 9,
+      "reason": "ValueError"
+    },
+    {
+      "index": 10,
+      "reason": "ValueError"
+    },
+    {
+      "index": 11,
+      "reason": "ValueError"
+    },
     {
       "index": 15,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 15,
+  "reviewed": 10,
   "approved": 0,
   "review_issues": [
-    "The story duplicates the central conflict, decisive choice, and resolution of 'The Canopy Pathfinders and the Root of Whispers' where a ravine splits a migration trail and characters combine flexible vines to build a bridge across it.",
-    "The story reuses the exact same character (Barnaby), setting (town square/market), and narrative structure (an inventor's device malfunctioning and launching food/items into the crowd, resolved by adjusting a valve/dial to turn the disaster into a successful public food event) from a recently published premise in the comparison history ('Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic').",
+    "The candidate story 'The Otter and the Submerged Sound-Stone' features a plot, characters (Pip the sea otter), and causal mechanisms that heavily overlap with the recently published premise 'The Otter and the Silent Trench' in the comparison history, violating originality requirements.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
