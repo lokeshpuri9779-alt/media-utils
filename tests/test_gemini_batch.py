@@ -44,6 +44,38 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertEqual(result["failures"][0]["reason"], "provider_http_404")
 
+    def test_sanitized_failure_categories_and_continue(self):
+        messages = [
+            ValueError("Generated story failed causal planning"),
+            ValueError("Generated story failed editorial review: private model text"),
+            ValueError("Generated story repeats narrative history"),
+            ValueError("Gemini response incomplete"),
+            ValueError("unrecognized private text or API key"),
+            KeyError("private_field"),
+            ValueError("duplicate_candidate"),
+        ]
+        def fail(*args):
+            raise messages.pop(0)
+        result = generate_batch(7, generator=fail)
+        self.assertEqual(result["generated"], 0)
+        self.assertEqual([f["reason"] for f in result["failures"]], [
+            "causal_planning_rejected", "editorial_rejected",
+            "narrative_duplicate", "incomplete_provider_response",
+            "validation_error_unclassified", "missing_required_field",
+            "duplicate_candidate",
+        ])
+        self.assertNotIn("private", str(result))
+        self.assertEqual(messages, [])
+
+    def test_invalid_json_and_unknown_runtime_are_sanitized(self):
+        from astra_v2.gemini_batch import _failure_reason
+        import json
+        self.assertEqual(_failure_reason(json.JSONDecodeError("secret", "private", 0)),
+                         "invalid_provider_json")
+        self.assertEqual(_failure_reason(RuntimeError("private token")),
+                         "runtime_error_unclassified")
+
+
 
 if __name__ == "__main__":
     unittest.main()
