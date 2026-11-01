@@ -38,6 +38,29 @@ class HumanoidSceneFidelityTests(unittest.TestCase):
                 issue = directed_scene_issue({"visual": visual, "visual_prompt": prompt})
                 self.assertIsNotNone(issue)
 
+    def test_approved_glacial_doctor_is_not_a_signal_icon(self):
+        # Approved Gemini batch #41321629328: the full character name
+        # appears in the title, while each shot uses only "Dr. Vance".
+        shot = {
+            "story_title": "Dr. Aris Vance and the Glacial Crevasse Rescue",
+            "visual": "signal",
+            "speech": (
+                "Look at the monitor, the seismic sensors indicate the "
+                "entire eastern shelf is breaking apart right now beneath us."
+            ),
+            "visual_prompt": (
+                "Dr. Vance stands in a frozen snowy wasteland looking at a "
+                "flashing red seismic monitor showing an active signal spike."
+            ),
+            "story_named_humans": ("Dr. Aris Vance",),
+        }
+        self.assertEqual(directed_scene_issue(shot),
+                         "human_actor_not_supported_by_directed_icons")
+        self.assertIsNone(directed_scene_issue({
+            "visual": "signal",
+            "speech": "The radio signal grows stronger as the storm clears.",
+        }))
+
     def test_natural_landscape_does_not_need_character_art(self):
         self.assertIsNone(directed_scene_issue({
             "visual": "forest",
