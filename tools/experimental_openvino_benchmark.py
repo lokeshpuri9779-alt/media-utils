@@ -20,8 +20,6 @@ PROMPTS = {
     "simple": "a small copper toy robot standing in a green forest, full body, centered, illustration",
     "geometry": "a red wooden cube on a plain blue table, centered, simple studio illustration",
     "geometry_explicit": "studio product photograph of one red wooden cube resting directly on top of a flat solid blue tabletop, cube fully supported by the blue table surface, close-up centered composition, no floor visible, plain neutral background",
-    "geometry_explicit": "single red wooden cube resting on top of a flat solid blue tabletop, tabletop clearly visible beneath cube, isolated objects, plain neutral background, studio product photograph",
-    "geometry_explicit": "Product photo of one red wooden cube resting directly on the flat top surface of one solid blue table. The cube touches the blue tabletop. Both the entire cube and the tabletop are visible. Plain neutral background, no other objects.",
 }
 
 def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Path("artifacts/experimental-openvino/keyframe.png")):
