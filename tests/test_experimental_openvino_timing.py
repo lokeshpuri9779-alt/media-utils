@@ -83,6 +83,12 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
         self.hub_patch.start()
         self.addCleanup(self.hub_patch.stop)
 
+    def test_explicit_geometry_prompt_is_separate_and_bounded(self):
+        self.assertIn("geometry_explicit", benchmark.PROMPTS)
+        self.assertIn("geometry", benchmark.PROMPTS)
+        self.assertNotEqual(benchmark.PROMPTS["geometry_explicit"], benchmark.PROMPTS["geometry"])
+        self.assertIn("tabletop clearly visible beneath cube", benchmark.PROMPTS["geometry_explicit"])
+
     def test_preflight_rejects_missing_unet_config(self):
         hub = types.ModuleType("huggingface_hub")
         hub.list_repo_files = lambda model: ["model_index.json", "unet/openvino_model.xml"]
