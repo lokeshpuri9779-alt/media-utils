@@ -121,3 +121,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 # One-shot review-only run: no approval, fallback, or publishing.
+# Authorized one-shot INT8 geometry benchmark, 16 CPU inference steps.
