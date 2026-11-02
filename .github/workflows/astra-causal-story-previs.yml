@@ -1,0 +1,102 @@
+name: ASTRA Causal Story Shot Previs (Isolated)
+on:
+  push:
+    branches:
+      - experiment/astra-robot-walk-and-pickup
+    paths:
+      - tools/experimental_causal_storyboard.py
+      - tools/experimental_causal_story_render.py
+      - tools/experimental_robot_walk_pickup.py
+      - .github/workflows/astra-causal-story-previs.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.ref == 'refs/heads/experiment/astra-robot-walk-and-pickup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate three-beat episode plan against ASTRA's planner
+        run: |
+          python3 -m tools.experimental_causal_storyboard \
+            --output artifacts/experimental-causal-story/shot_plan.json
+      - name: Install free CPU Blender and FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          blender --version | head -n 2
+      - name: Render three causal shots with physically unchanged characters
+        run: |
+          blender --background --threads 2 --python-exit-code 1 \
+            --python tools/experimental_causal_story_render.py -- \
+            --output-dir artifacts/experimental-causal-story/
+      - name: Encode silent three-shot narrative MP4
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -framerate 8 -start_number 0 \
+            -i artifacts/experimental-causal-story/frame_%03d.png \
+            -frames:v 20 -c:v libx264 -preset veryfast -crf 19 \
+            -pix_fmt yuv420p -movflags +faststart \
+            artifacts/experimental-causal-story/story_previs.mp4
+      - name: Verify shot structure, narrative states and delivery gates
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import struct
+          import subprocess
+          from pathlib import Path
+          root=Path('artifacts/experimental-causal-story')
+          shot=json.loads((root/'shot_plan.json').read_text())
+          report=json.loads((root/'review.json').read_text())
+          assert report['success'] is True and all(report['checks'].values())
+          assert shot['plot_fingerprint']==report['plot_fingerprint']
+          assert shot['shot_count']==3 and report['shot_count']==3
+          assert [s['beat'] for s in shot['shots']]==['setup','attempt','payoff']
+          assert [s['first_frame'] for s in shot['shots']]==[0,6,15]
+          assert [s['last_frame'] for s in shot['shots']]==[5,14,19]
+          assert shot['frame_count']==20 and report['fps']==8
+          assert report['cycles_samples']==28
+          assert report['dimensions']==[384,576]
+          for state in (shot,report):
+              assert state['approved'] is False and state['published'] is False
+              assert state['production_ready'] is False and state['paid_apis_used'] is False
+          assert report['editorial_review_required'] is True
+          assert report['visual_review_required'] is True
+          assert report['semantic_quality']=='manual_review_required'
+          assert report['character_continuity']=='not_verified'
+          assert report['cinematic_quality']=='not_verified'
+          assert len(report['frames'])==20
+          assert [f['frame'] for f in report['frames']]==list(range(20))
+          for f in report['frames']:
+              img=(root/f['file']).read_bytes()
+              assert img.startswith(b'\x89PNG\r\n\x1a\n')
+              assert struct.unpack('>II',img[16:24])==(384,576)
+              assert hashlib.sha256(img).hexdigest()==f['sha256']
+          mp4=root/'story_previs.mp4'
+          assert mp4.is_file() and mp4.stat().st_size>4096
+          video=json.loads(subprocess.check_output([
+              'ffprobe','-v','error','-select_streams','v:0',
+              '-show_entries','stream=codec_name,width,height,r_frame_rate,nb_frames',
+              '-of','json',str(mp4)],text=True))['streams'][0]
+          assert video['codec_name']=='h264'
+          assert (video['width'],video['height'])==(384,576)
+          assert video['r_frame_rate']=='8/1' and int(video['nb_frames'])==20
+          report['video']={'file':mp4.name,'codec':'h264','fps':8,
+                           'frames':20,'duration_seconds':2.5,
+                           'bytes':mp4.stat().st_size}
+          (root/'review.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('Causal shot plan, 20-frame MP4 and review-only restrictions verified')
+          PY
+      - name: Retain story previsualization, not publication assets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-causal-story-review
+          path: artifacts/experimental-causal-story/
+          retention-days: 7
+          if-no-files-found: warn
