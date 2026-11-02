@@ -17,4 +17,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # Renderer preflight imports the Studio Pillow scene implementation.
+      # Keep this lightweight gate aligned with the publisher's pinned Pillow.
+      - run: python -m pip install Pillow==11.3.0
       - run: python -m unittest discover -s tests -p 'test_astra_story_inventory.py' -v
