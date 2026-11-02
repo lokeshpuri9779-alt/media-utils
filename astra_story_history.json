@@ -7218,6 +7218,58 @@
       "video_id": "Tta6LwpB760",
       "confirmed_at": "2026-11-02T09:53:08.268153+00:00",
       "title": "Why grambling basketball Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-74c519adc37ec4a5de5b",
+      "video_id": "WD4YeyUqZbM",
+      "confirmed_at": "2026-11-02T18:58:14.102477+00:00",
+      "title": "The Weaver's Choice at Bramble Mill",
+      "plot_fingerprint": "f246407df20bbdcaf085b9e99fbf7adbd260e13b2ef398777cb88f432531d658",
+      "story_beats": [
+        {
+          "headline": "The Hidden Fault",
+          "speech": "Look at the rotting timbers beneath the floorboards, Bram. Our village mill cannot withstand another autumn flood.",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Close-up of Bram and Thomas examining damp wooden floorboards inside the rustic mill, holding a flickering oil lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Rising Waters",
+          "speech": "We must carry the precious wool bales up to the loft immediately, before the rushing water ruins everything we own.",
+          "visual": "door",
+          "label": "The Preparation",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Thomas and Bram hoisting heavy wool bales toward the heavy oak storage door against rising muddy water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Jammed Gate",
+          "speech": "The iron winch is completely rusted shut. If I leave my loom now, my winter commission will be entirely lost forever.",
+          "visual": "signal",
+          "label": "The Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of Bram struggling with a jammed metal crank lever outside in the rain while Thomas waves a warning red signal flag.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Bond",
+          "speech": "Forget the cloth and pull this beam together with me now, or our entire village will starve through the cold winter.",
+          "visual": "ship",
+          "label": "The Final Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Action shot of Bram and Thomas straining together to drop the heavy timber sluice gate as floodwaters swirl safely around the stone foundation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden river flood threatens both the communal winter flour sacks and the mill's ancient wooden sluice gate.",
+      "decisive_choice": "Bram abandons his own flooded weaving loom to help his estranged friend lift the heavy sluice beam.",
+      "resolution": "The mill survives the deluge, and the two friends rebuild their workshop together with mutual respect."
     }
   ]
 }
