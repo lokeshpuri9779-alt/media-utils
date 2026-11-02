@@ -34,7 +34,7 @@ SCENES = [
         "state_after": "paper plane rescued; seed planted; frog by pot; tiny sprout visible",
     },
 ]
-SHOT_FRAMES = [(0, 5), (6, 14), (15, 19)]
+SHOT_FRAMES = [(0, 7), (8, 21), (22, 31)]
 SHOTS = [
     {
         "beat": beat,
@@ -62,10 +62,10 @@ def build():
     assert proposal["production_ready"] is False
     assert proposal["plot_fingerprint"] != first["plot_fingerprint"]
     assert [s["beat"] for s in SHOTS] == ["setup", "attempt", "payoff"]
-    assert [s["first_frame"] for s in SHOTS] == [0, 6, 15]
-    assert [s["last_frame"] for s in SHOTS] == [5, 14, 19]
+    assert [s["first_frame"] for s in SHOTS] == [0, 8, 22]
+    assert [s["last_frame"] for s in SHOTS] == [7, 21, 31]
     assert all(SCENES[i]["state_after"] == SCENES[i + 1]["state_before"] for i in (0, 1))
-    assert sum(s["last_frame"] - s["first_frame"] + 1 for s in SHOTS) == 20
+    assert sum(s["last_frame"] - s["first_frame"] + 1 for s in SHOTS) == 32
     assert all(s["required_visible_cue"] for s in SHOTS)
     assert all(
         not any(word in json.dumps(s).lower() for word in ("lighthouse", "beacon", "robot", "orb"))
@@ -77,7 +77,7 @@ def build():
         "plot_fingerprint": proposal["plot_fingerprint"],
         "comparison_story_fingerprint": first["plot_fingerprint"],
         "shot_count": 3,
-        "frame_budget": 20,
+        "frame_budget": 32,
         "shots": SHOTS,
         "approved": False,
         "published": False,
