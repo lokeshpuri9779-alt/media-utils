@@ -76,6 +76,20 @@ def validate_story_shot(shot):
     if _UNRENDERABLE_BADGER.search(identity_text):
         raise CreativeReject("Unified Studio: unsupported badger actor requires verified scene artwork")
     cast = _resolved_cast(shot)
+    if cast:
+        # A supported animal in the same shot must not hide an unsupported
+        # human actor or clothed/embodied character. Solo/duo puppets cannot
+        # silently stand in for the other authored participant.
+        # Reuse the existing VERIFIED-art exception, and route an approved
+        # complete scene to the directed compositor rather than animal sprites.
+        from astra_v2.directed_scene_contract import (
+            directed_scene_issue, validate_directed_scene,
+        )
+        if directed_scene_issue(shot) in (
+                "human_actor_not_supported_by_directed_icons",
+                "embodied_character_not_supported_by_directed_icons"):
+            validate_directed_scene(shot)
+            return "directed"
     if not cast:
         from astra_v2.directed_scene_contract import validate_directed_scene
         validate_directed_scene(shot)
