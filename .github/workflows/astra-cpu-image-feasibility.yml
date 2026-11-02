@@ -12,7 +12,7 @@ on:
         required: true
         type: string
       prompt_profile:
-        description: 'Select baseline, simple robot, or neutral geometry control; review-only'
+        description: 'Select baseline, robot, geometry, or explicit cube-on-table control; review-only'
         type: choice
         required: true
         default: baseline
@@ -20,6 +20,7 @@ on:
           - baseline
           - simple
           - geometry
+          - geometry_explicit
       inference_steps:
         description: 'CPU inference steps; 16 tests whether more steps improve visual fidelity'
         type: choice
