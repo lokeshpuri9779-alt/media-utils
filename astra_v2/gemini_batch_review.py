@@ -57,8 +57,15 @@ def main():
                         ("ai-reviewed-decisions.json", reviews),
                         ("ai-batch-review-audit.json", audit)):
         (folder / name).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print("ASTRA_GEMINI_REVIEW=" + json.dumps({"generated": len(document["stories"]),
-          "approved": len(stories["stories"]), "rejected": len(audit["reviews"]) - len(stories["stories"])}))
+    deferred = sum("review_deferred:rate_limited" in row.get("issues", [])
+                   for row in audit["reviews"])
+    print("ASTRA_GEMINI_REVIEW=" + json.dumps({
+        "generated": len(document["stories"]),
+        "reviewed": len(audit["reviews"]) - deferred,
+        "approved": len(stories["stories"]),
+        "rejected": len(audit["reviews"]) - len(stories["stories"]) - deferred,
+        "deferred": deferred,
+    }))
 
 
 if __name__ == "__main__":
