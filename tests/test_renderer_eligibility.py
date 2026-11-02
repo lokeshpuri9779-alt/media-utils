@@ -38,6 +38,25 @@ class RendererEligibilityTests(unittest.TestCase):
              patch("studio_renderer.make_plan", return_value=[]):
             self.assertIn("renderer_incompatible", publication_rejection(story))
 
+    def test_weaver_fiction_rejected_at_independent_and_publication_preflight(self):
+        # Structural review must fail before voice/video generation; the
+        # publisher rechecks the same eligibility even for queued candidates.
+        from astra_v2.publication_quality import publication_rejection
+        title = "The Weaver's Choice at Bramble Mill"
+        story = {"genre": "fiction", "kind": "authored_causal_story",
+                 "content_id": "rayvan-gemini-regression-weaver",
+                 "title": title, "production_ready": True}
+        shot = {"story_title": title, "visual": "forest",
+                "visual_prompt": "Bram and Thomas hold the lantern at the village mill.",
+                "speech": "We must protect our wool bales before the river rises."}
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+             patch("studio_renderer.make_plan", return_value=[shot]):
+            eligible, reason, modes = check_renderer_eligibility(story)
+            self.assertFalse(eligible)
+            self.assertIn("human_actor_not_supported_by_directed_icons", reason)
+            self.assertEqual(modes, ())
+            self.assertIn("renderer_incompatible", publication_rejection(story))
+
     def test_other_engine_not_blocked_by_unified_preflight(self):
         with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "0"}):
             self.assertIsNone(publication_renderer_rejection({"genre": "fiction"}))
