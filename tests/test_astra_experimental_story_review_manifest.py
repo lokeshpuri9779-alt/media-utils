@@ -78,6 +78,15 @@ class ReviewManifestTest(unittest.TestCase):
         )
         self.mock_video = self.video_patch.start()
         self.addCleanup(self.video_patch.stop)
+        # The synthetic PNG/MP4 fixtures are deliberately not decodable.
+        # Live CPU-render workflows exercise the real pixel decoder.
+        self.fidelity_patch = patch.object(
+            manifest, "compare_video",
+            return_value={"passed": True, "mean_rgb_mae": 1.0,
+                          "max_frame_rgb_mae": 1.5, "worst_frame": 0}
+        )
+        self.mock_fidelity = self.fidelity_patch.start()
+        self.addCleanup(self.fidelity_patch.stop)
 
     def configure(self, profile):
         cfg = fixture(self.root, profile)
@@ -143,6 +152,20 @@ class ReviewManifestTest(unittest.TestCase):
         self.mock_video.return_value["codec_name"] = "mpeg4"
         result = manifest.build(self.root, "frog")
         self.assertIn("video_matches_story_frames", result["failed_checks"])
+
+    def test_rejects_valid_mp4_with_wrong_visual_content(self):
+        # Codec, dimensions, timing and file digest can all look correct,
+        # while the MP4 actually depicts unrelated or blank frames.
+        self.configure("frog")
+        self.mock_fidelity.return_value = {
+            "passed": False, "mean_rgb_mae": 50.0,
+            "max_frame_rgb_mae": 80.0, "worst_frame": 0
+        }
+        result = manifest.build(self.root, "frog")
+        self.assertFalse(result["technical_evidence_passed"])
+        self.assertIn("encoded_video_pixels_match_png_sequence",
+                      result["failed_checks"])
+        self.assertFalse(result["approved"])
 
     def test_rejects_missing_frame(self):
         self.configure("frog")
