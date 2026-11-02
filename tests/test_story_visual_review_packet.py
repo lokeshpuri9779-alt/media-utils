@@ -34,7 +34,8 @@ def evidence(story, digest="a" * 64):
     receipt = {"content_id": story["content_id"], "shot_count": 2,
                "shots": shots, "video_sha256": digest, "composited_shots": 2,
                "asset_coverage_status": "full"}
-    manifest = {"source_mp4_sha256": digest, "sample_count": 4,
+    manifest = {"source_mp4_sha256": digest, "contact_sheet_sha256": "b" * 64,
+                "sample_count": 4,
                 "sample_times_seconds": [0.2, 0.6, 1.0, 1.4],
                 "semantic_quality": "not_verified", "publication_approval": False}
     return receipt, manifest
@@ -68,11 +69,13 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
     def test_hash_and_identity_mismatches_fail_closed(self):
         source = snapshot(original_story())
         receipt, manifest = evidence(source)
-        for change in ("video_hash", "story_id", "no_shots", "missing_samples"):
+        for change in ("video_hash", "sheet_hash", "story_id", "no_shots", "missing_samples"):
             with self.subTest(change=change):
                 r, m = dict(receipt), dict(manifest)
                 if change == "video_hash":
                     m["source_mp4_sha256"] = "b" * 64
+                elif change == "sheet_hash":
+                    m["contact_sheet_sha256"] = "wrong"
                 elif change == "story_id":
                     r["content_id"] = "wrong-story"
                 elif change == "no_shots":
@@ -114,7 +117,11 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
         receipt, manifest = evidence(source)
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / "review.story-review.json"
-            result = write_packet(source, receipt, manifest, output)
+            jpeg = Path(folder) / "review.jpg"
+            jpeg.write_bytes(b"sampled frames fixture")
+            manifest["contact_sheet_sha256"] = hashlib.sha256(jpeg.read_bytes()).hexdigest()
+            result = write_packet(source, receipt, manifest, output,
+                                  contact_sheet_path=jpeg)
             packet = json.loads(output.read_text())
             self.assertEqual(result["source_mp4_sha256"], receipt["video_sha256"])
             self.assertFalse(result["publication_approval"])
@@ -136,8 +143,11 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
             def sampled(*args, **kwargs):
                 review_dir.mkdir(exist_ok=True)
                 sheet.write_bytes(b"mock sheet; separately decoded frame tests exist")
+                contact_hash = hashlib.sha256(sheet.read_bytes()).hexdigest()
                 manifest_path.write_text(json.dumps({
-                    "source_mp4_sha256": digest, "sample_count": 4,
+                    "source_mp4_sha256": digest,
+                    "contact_sheet_sha256": contact_hash,
+                    "sample_count": 4,
                     "sample_times_seconds": [0.2, 0.6, 1.0, 1.4],
                     "semantic_quality": "not_verified", "publication_approval": False,
                 }))
@@ -164,6 +174,20 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
             self.assertEqual(packet["story_sha256"], snapshot(story)["story_sha256"])
             self.assertFalse(packet["publication_approval"])
             self.assertEqual(packet["semantic_quality"], "not_verified")
+
+    def test_swapped_contact_jpeg_cannot_generate_review_packet(self):
+        source = snapshot(original_story())
+        receipt, manifest = evidence(source)
+        with tempfile.TemporaryDirectory() as folder:
+            image = Path(folder) / "sheet.jpg"
+            output = Path(folder) / "review.story-review.json"
+            image.write_bytes(b"original frame samples")
+            manifest["contact_sheet_sha256"] = hashlib.sha256(image.read_bytes()).hexdigest()
+            image.write_bytes(b"tampered frame samples")
+            with self.assertRaisesRegex(ValueError, "contact_sheet_hash_mismatch"):
+                write_packet(source, receipt, manifest, output,
+                             contact_sheet_path=image)
+            self.assertFalse(output.exists())
 
     def test_preload_and_publisher_archive_visual_evidence(self):
         root = Path(__file__).resolve().parents[1]
