@@ -82,9 +82,10 @@ jobs:
           from pathlib import Path
           ref = os.environ["ACTUAL_REF"]
           import subprocess
-          checked_out = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], text=True).strip()
-          if checked_out != ref:
-              raise SystemExit(f'Checkout branch mismatch: {checked_out!r} != {ref!r}')
+          checked_out = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          remote_ref = subprocess.check_output(['git', 'ls-remote', 'origin', f'refs/heads/{ref}'], text=True).strip().split()[0]
+          if checked_out != remote_ref:
+              raise SystemExit(f'Checkout commit mismatch: {checked_out!r} != {remote_ref!r}')
           expected_ref = os.environ["EXPECTED_REF"]
           if ref != expected_ref:
               raise SystemExit(f"Wrong workflow branch: {ref!r}; select {expected_ref!r} before rerunning")
