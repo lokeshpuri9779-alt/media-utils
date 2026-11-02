@@ -30,6 +30,58 @@ class ReviewBatchTests(unittest.TestCase):
         self.assertFalse(audit["reviews"][0]["approved"])
 
 
+
+    def test_first_rate_limit_defers_remaining_without_more_api_calls(self):
+        batch = [{"content_id": f"story-{i}", "kind": "microfiction"} for i in range(4)]
+        invoked = []
+        def reviewer(story, history):
+            invoked.append((story["content_id"], tuple(x["content_id"] for x in history)))
+            if len(invoked) == 1:
+                return {"approved": True, "issues": [],
+                        "record": {"content_id": story["content_id"],
+                                   "story_sha256": story_digest(story)}}
+            if len(invoked) == 2:
+                return {"approved": False, "record": None,
+                        "issues": ["review_failed:HTTP_429", "review_provider:rate_limited"]}
+            self.fail("No reviewer requests permitted after HTTP 429")
+
+        stories, decisions, audit = review_batch(
+            {"status": "unreviewed", "stories": batch}, [], reviewer=reviewer
+        )
+        self.assertEqual(len(invoked), 2)
+        self.assertEqual(len(stories["stories"]), 1)
+        self.assertEqual(len(decisions["reviews"]), 1)
+        self.assertEqual(stories["stories"][0]["content_id"], "story-0")
+        self.assertEqual(len(audit["reviews"]), 4)
+        self.assertEqual([x["issues"] for x in audit["reviews"][2:]],
+                         [["review_deferred:rate_limited"]] * 2)
+        self.assertTrue(all(x["approved"] is False for x in audit["reviews"][1:]))
+        self.assertEqual([x["kind"] for x in batch], ["microfiction"] * 4)
+        self.assertEqual(invoked[1][1], ("story-0",))
+
+    def test_non_quota_rejection_does_not_defer_following_candidate(self):
+        calls = []
+        def reviewer(story, history):
+            calls.append(story["content_id"])
+            return {"approved": False, "record": None,
+                    "issues": ["ai_editorial_rejection"]}
+        batch = [{"content_id": f"story-{i}", "kind": "microfiction"} for i in range(3)]
+        _, _, audit = review_batch({"status": "unreviewed", "stories": batch},
+                                   [], reviewer=reviewer)
+        self.assertEqual(calls, [s["content_id"] for s in batch])
+        self.assertTrue(all(item["issues"] == ["ai_editorial_rejection"]
+                            for item in audit["reviews"]))
+
+    def test_quota_deferred_does_not_make_invalid_story_publishable(self):
+        def reviewer(story, history):
+            return {"approved": False, "record": None,
+                    "issues": ["review_provider:rate_limited"]}
+        batch = [{"content_id": "first", "kind": "microfiction"},
+                 {"content_id": "invalid", "kind": "not_microfiction"}]
+        with self.assertRaisesRegex(ValueError, "unexpected_gemini_proposal_kind"):
+            review_batch({"status": "unreviewed", "stories": batch}, [],
+                         reviewer=reviewer)
+
     def test_gemini_review_uses_same_unified_renderer_gate_as_publisher(self):
         from pathlib import Path
         root = Path(__file__).resolve().parents[1]
