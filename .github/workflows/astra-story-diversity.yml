@@ -58,6 +58,26 @@ jobs:
           assert (root/'frog_story_previs.mp4').stat().st_size>4096
           print('Distinct second story rendered for manual visual review only')
           PY
+      - name: Apply shared scene-independent action timing contract
+        run: |
+          python3 -m tools.experimental_action_contracts \
+            --profile frog \
+            --report artifacts/experimental-frog-render/review.json \
+            --output artifacts/experimental-frog-render/action_contract.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/action_contract.json')
+          x=json.loads(p.read_text())
+          assert x['passed'] is True and all(x['checks'].values())
+          assert x['events']['magnet_attaches'] < x['events']['airplane_lifted']
+          assert x['events']['seed_in_pot'] <= x['events']['rain_waters_seed']
+          assert x['events']['rain_waters_seed'] < x['events']['stem_sprouts']
+          assert x['approved'] is False and x['published'] is False
+          assert x['production_ready'] is False
+          assert x['semantic_quality']=='not_verified'
+          print('Shared frog contract passed on actual CPU render trace')
+          PY
       - name: Preserve frog video and frames for review
         if: always()
         uses: actions/upload-artifact@v4
