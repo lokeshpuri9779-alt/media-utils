@@ -16,6 +16,7 @@ on:
           - simple
           - geometry
           - geometry_explicit
+          - geometry_explicit
       inference_steps:
         description: 'CPU inference steps; 16 tests whether more steps improve visual fidelity'
         type: choice
