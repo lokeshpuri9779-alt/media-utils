@@ -144,6 +144,7 @@ def evaluate(candidate, video_path, *, packet_path=None, review_path=None, publi
             return _result("storybeat_payload_invalid")
         if (type(expected.get("beat")) is not int or expected["beat"] != index
                 or expected.get("speech") != _plain_text(source.get("speech"))
+                or expected.get("story_beat") != _plain_text(source.get("story_beat"))
                 or expected.get("visual_prompt") != _plain_text(
                     source.get("visual_prompt") or source.get("visual"))):
             return _result("storybeat_payload_mismatch")
