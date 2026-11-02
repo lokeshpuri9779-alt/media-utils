@@ -128,6 +128,12 @@ def triage(stories, history=(), use_semantic_index=False):
         item = {"content_id": story.get("content_id"), "title": story.get("title"),
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
+        # Optional reporting only. No changes to issues, routing, approvals or gates.
+        # Keep disabled by default until the standalone tests have been reviewed.
+        import os
+        if os.getenv("ASTRA_CREATIVE_SKILLS_ADVISORY", "0") == "1":
+            from astra_v2.creative_skill_upgrade import story_advisory
+            item["creative_advisory"] = story_advisory(story)
         if "narrative_duplicate" in issues:
             item["novelty_evidence"] = semantic_evidence
         # Independent editorial triage only: explicit causal repetition needs
