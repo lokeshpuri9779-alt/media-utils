@@ -95,6 +95,38 @@ def run(out):
         lamp_object = bpy.data.objects.new("STORY_BEACON_LIGHT", lamp)
         bpy.context.collection.objects.link(lamp_object)
         lamp_object.location = beacon.location.copy()
+        # The point light alone passed state checks but was not visually
+        # readable in the first wide render. Make an actual visible emission
+        # cue at the same physical beacon, without editing the robot or scene.
+        glow = bpy.data.materials.new("STORY_AMBER_VISIBLE_GLOW")
+        glow.use_nodes = True
+        glow_shader = glow.node_tree.nodes["Principled BSDF"]
+        glow_shader.inputs["Base Color"].default_value = AMBER
+        glow_shader.inputs["Emission Color"].default_value = AMBER
+        glow_shader.inputs["Emission Strength"].default_value = 10.0
+        glow_shader.inputs["Roughness"].default_value = 0.24
+        bpy.ops.mesh.primitive_uv_sphere_add(
+            segments=32, ring_count=16, radius=.27,
+            location=beacon.location.copy()
+        )
+        core = bpy.context.object
+        core.name = "STORY_LIGHT_REVEAL_CORE"
+        core.data.materials.append(glow)
+        glow_objects = [core]
+        for radius, offset in ((.48, .30), (.72, .34)):
+            bpy.ops.mesh.primitive_torus_add(
+                major_segments=48, minor_segments=8,
+                major_radius=radius, minor_radius=.045,
+                location=beacon.location + Vector((0, -offset, 0))
+            )
+            halo = bpy.context.object
+            halo.name = f"STORY_LIGHT_REVEAL_RING_{int(radius*100)}"
+            halo.rotation_euler.x = math.pi / 2
+            halo.data.materials.append(glow)
+            glow_objects.append(halo)
+        # Glowing objects are absent from every pre-payoff frame.
+        for obj in glow_objects:
+            obj.hide_render = True
         # The original actor and static world don't change, only camera and light.
         world_static = {
             obj.name: tuple(round(float(v), 6) for v in obj.location)
@@ -178,7 +210,9 @@ def run(out):
             )
             shader.inputs["Emission Color"].default_value = AMBER
             shader.inputs["Emission Strength"].default_value = 6.0 if beacon_on else 0.0
-            lamp.energy = 320 if beacon_on else 0
+            lamp.energy = 430 if beacon_on else 0
+            for obj in glow_objects:
+                obj.hide_render = not beacon_on
             bpy.context.view_layer.update()
 
             for who, point in (
@@ -213,6 +247,9 @@ def run(out):
                 "camera": cam_state,
                 "beacon_on": beacon_on,
                 "beacon_energy": float(lamp.energy),
+                "visible_beacon_glow_objects": sum(
+                    not obj.hide_render for obj in glow_objects
+                ),
                 "orb_xyz": [round(float(v), 5) for v in orb.location],
                 "right_hand_xyz": [round(float(v), 5) for v in hand_center],
                 "foot_contact": feet,
@@ -239,6 +276,12 @@ def run(out):
             "beacon_dark_before_payoff": all(not f["beacon_on"] for f in frames[:15]),
             "beacon_illuminates_in_payoff": all(
                 f["beacon_on"] and f["beacon_energy"] > 0 for f in frames[15:]
+            ),
+            "beacon_glow_hidden_before_payoff": all(
+                f["visible_beacon_glow_objects"] == 0 for f in frames[:15]
+            ),
+            "three_visible_glow_objects_after_payoff": all(
+                f["visible_beacon_glow_objects"] == 3 for f in frames[15:]
             ),
             "spark_on_pedestal_until_pickup": max(before_pickup) < 0.001,
             "spark_secured_after_pickup": max(after_pickup) < 0.015,
