@@ -7,6 +7,8 @@ on:
       - tools/experimental_causal_storyboard.py
       - tools/experimental_causal_story_render.py
       - tools/experimental_causal_visual_audit.py
+      - tools/experimental_video_frame_consistency.py
+      - tools/experimental_story_review_manifest.py
       - tools/experimental_story_review_verify.py
       - tools/experimental_causal_visual_negative_controls.py
       - tools/experimental_robot_walk_pickup.py
@@ -162,6 +164,7 @@ jobs:
           from pathlib import Path
           packet=json.loads(Path('artifacts/experimental-causal-story/story_review_manifest.json').read_text())
           assert packet['technical_evidence_passed'] is True
+          assert packet['video_frame_content_evidence']['passed'] is True
           assert all(packet['checks'].values())
           assert packet['approval']=='manual_review_required'
           assert packet['semantic_quality']=='not_verified'
@@ -180,6 +183,7 @@ jobs:
           path=Path('artifacts/experimental-causal-story/story_review_verification.json')
           r=json.loads(path.read_text())
           assert r['passed'] is True and all(r['checks'].values())
+          assert r['checks']['video_pixels_independently_match_png_sequence'] is True
           assert r['mismatched_files']==[]
           assert r['files_verified']==26
           assert r['manual_visual_review_required'] is True
