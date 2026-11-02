@@ -2,14 +2,15 @@
 
 Four decoded frames and compositor receipts are only evidence for inspection.
 This module does not analyze pixels, approve story scripts, or publish a video.
-An HMAC key issued to an independent reviewer is the trust boundary: never
-issue that secret to the generator, preload worker or untrusted artifact author.
+The Ed25519 private signing key stays with the independent reviewer. The
+producer and publisher receive only the non-secret public verification key.
 """
 from __future__ import annotations
 
 from datetime import datetime
+import base64
+import binascii
 import hashlib
-import hmac
 import json
 from pathlib import Path
 import re
@@ -60,7 +61,7 @@ def _canonical(record):
                       separators=(",", ":"), allow_nan=False).encode("utf-8")
 
 
-def evaluate(candidate, video_path, *, packet_path=None, review_path=None, secret=None):
+def evaluate(candidate, video_path, *, packet_path=None, review_path=None, public_key=None):
     """Authenticate a reviewed MP4 against the exact submitted candidate.
 
     No supplied evidence can elevate a four-frame sample into full-video
@@ -73,8 +74,8 @@ def evaluate(candidate, video_path, *, packet_path=None, review_path=None, secre
         return _result("not_short")
     if not packet_path or not review_path:
         return _result("review_missing")
-    if not isinstance(secret, str) or len(secret.encode("utf-8")) < 32:
-        return _result("trusted_reviewer_key_unavailable")
+    if not isinstance(public_key, str) or not public_key.strip():
+        return _result("trusted_reviewer_public_key_unavailable")
     try:
         packet = _read_json(packet_path, limit=1024 * 1024)
         document = _read_json(review_path, limit=64 * 1024)
@@ -83,19 +84,25 @@ def evaluate(candidate, video_path, *, packet_path=None, review_path=None, secre
     if not isinstance(packet, dict) or not isinstance(document, dict):
         return _result("review_schema_invalid")
     record = document.get("record")
-    signature = document.get("hmac_sha256")
-    if (set(document) != {"record", "hmac_sha256"}
+    signature = document.get("signature_ed25519")
+    if (set(document) != {"record", "signature_ed25519"}
             or not isinstance(record, dict)
             or set(record) != _RECORD_KEYS
-            or not isinstance(signature, str) or not _DIGEST.fullmatch(signature)):
+            or not isinstance(signature, str)):
         return _result("review_schema_invalid")
     try:
-        expected_signature = hmac.new(secret.encode("utf-8"), _canonical(record),
-                                      hashlib.sha256).hexdigest()
-    except (TypeError, ValueError, OverflowError):
-        return _result("review_schema_invalid")
-    if not hmac.compare_digest(signature, expected_signature):
+        from cryptography.exceptions import InvalidSignature
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+        raw_key = base64.b64decode(public_key, validate=True)
+        raw_signature = base64.b64decode(signature, validate=True)
+        if len(raw_key) != 32 or len(raw_signature) != 64:
+            return _result("review_signature_invalid")
+        Ed25519PublicKey.from_public_bytes(raw_key).verify(
+            raw_signature, _canonical(record))
+    except (ValueError, TypeError, binascii.Error, InvalidSignature):
         return _result("review_signature_invalid")
+    except ImportError:
+        return _result("review_crypto_unavailable")
     if record.get("schema_version") != 1 or type(record["schema_version"]) is not int:
         return _result("review_schema_invalid")
     if (record.get("decision") != "approve"
