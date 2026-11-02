@@ -41,15 +41,49 @@ def _host(url):
     host=parsed.hostname.lower()
     return host[4:] if host.startswith('www.') else host
 
-def _distinct_news(items):
+# Do not count regional domains of the same news publisher as independent
+# reporting (e.g. espn.com and espn.ph). This is intentionally conservative.
+_TOPIC_NOISE = frozenset(
+    'why what how is are the a an in on at of for to with and or vs versus '
+    'today latest live score scores news update updates 2025 2026 now '
+    'getting attention trending highlights result results breaking'.split()
+)
+
+
+def _topic_relevant(topic, headline):
+    """Require a headline to mention a meaningful token of the trend topic.
+
+    Trend-provider news lists can contain unrelated headlines. A link's URL or
+    the source's brand alone cannot establish topical relevance.
+    """
+    anchors = {word for word in re.findall(r'[a-z0-9]+', str(topic or '').lower())
+               if len(word) >= 3 and word not in _TOPIC_NOISE}
+    words = set(re.findall(r'[a-z0-9]+', str(headline or '').lower()))
+    return bool(anchors and anchors & words)
+
+
+def _publisher_key(host):
+    parts = host.split('.')
+    if len(parts) < 2:
+        return host
+    if (len(parts) >= 3 and len(parts[-1]) == 2
+            and parts[-2] in {'co', 'com', 'org', 'net', 'ac', 'gov'}):
+        return parts[-3]
+    return parts[-2]
+
+
+def _distinct_news(items, topic):
     out=[]; seen=set()
     for x in items or []:
         if not isinstance(x,dict) or not x.get('title') or not x.get('url') or not x.get('source'):
             continue
         host=_host(x.get('url'))
-        if not host or host in seen:
+        if not host or not _topic_relevant(topic, x.get('title')):
             continue
-        seen.add(host); out.append(x)
+        publisher=_publisher_key(host)
+        if publisher in seen:
+            continue
+        seen.add(publisher); out.append(x)
     return out
 
 def _sensitive(topic, news):
@@ -60,7 +94,7 @@ def sourced_topics(items, limit=5):
     ranked=[]; seen=set()
     for item in items or []:
         topic=' '.join(str(item.get('title') or '').split()).strip()
-        news=_distinct_news(item.get('news') or [])
+        news=_distinct_news(item.get('news') or [], topic)
         key=re.sub(r'[^a-z0-9]+',' ',topic.lower()).strip()
         if not topic or not news or not key or key in seen:
             continue
