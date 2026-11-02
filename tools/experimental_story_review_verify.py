@@ -14,6 +14,7 @@ from pathlib import Path
 from tools.experimental_story_review_manifest import (
     DIMENSIONS, FPS, PROFILES, closed, get_video, png_dimensions,
 )
+from tools.experimental_video_frame_consistency import compare_video
 
 HASHLEN = 64
 SAFETY = ("approved", "published", "production_ready", "paid_apis_used")
@@ -119,6 +120,25 @@ def verify(directory, profile):
     except (OSError, ValueError, KeyError, RuntimeError, IndexError,
             __import__("subprocess").CalledProcessError):
         checks["independently_verified_h264_video"] = False
+
+    # Hashes cannot detect a fabricated, internally self-consistent manifest
+    # around a valid-but-unrelated MP4. Compare independently decoded pixels.
+    # This test checks content correspondence only, not artistic quality.
+    fresh_video_evidence = None
+    if checks["complete_hash_inventory"] and checks["every_file_matches_recorded_sha256"]:
+        try:
+            fresh_video_evidence = compare_video(root, cfg["video"], cfg["frame_count"])
+        except (OSError, ValueError, __import__("subprocess").CalledProcessError,
+                __import__("subprocess").TimeoutExpired):
+            pass
+    checks["video_pixels_independently_match_png_sequence"] = (
+        fresh_video_evidence is not None
+        and fresh_video_evidence.get("passed") is True
+    )
+    checks["manifest_and_independent_fidelity_evidence_agree"] = (
+        fresh_video_evidence is not None
+        and doc.get("video_frame_content_evidence") == fresh_video_evidence
+    )
 
     failed = sorted(k for k, v in checks.items() if v is not True)
     return {
