@@ -4744,6 +4744,18 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-fedff1aaec8709189961",
+      "story_sha256": "96d62ffdc261cd509d7bf3011c07856e80654b1ff5742043769c736d96facf7f",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise and causal mechanism (repairing a broken bridge across a ravine/canopy using specific materials like vines or silk) are highly repetitive of multiple recently published stories in the provided dataset, specifically 'The Canopy Pathfinders and the Root of Whispers', 'The Ranger and the Amber Spore', and 'The Badger and the Amber Spores of Pine Ridge'.",
+        "The narrative structure follows an identical pattern to the provided examples: a sudden environmental threat (storm/ravine split), a collaborative effort between two distinct creatures, a technical solution involving structural reinforcement, and a successful resolution."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
