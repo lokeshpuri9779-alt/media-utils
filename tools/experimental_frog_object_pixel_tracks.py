@@ -162,7 +162,8 @@ def negative_controls(frames, report):
          "paper_region_moves_right_after_contact"),
         ("paper_airplane_returns_to_drain", 19, 13,
          "paper_region_moves_right_after_contact"),
-        ("wrong_rescue_shot", 13, 31, "airplane_bright_pixels_present"),
+        ("wrong_rescue_shot", 17, 31,
+         "paper_region_moves_right_after_contact"),
     )
     for name, destination, source, expected in scenarios:
         corrupted = list(frames)
