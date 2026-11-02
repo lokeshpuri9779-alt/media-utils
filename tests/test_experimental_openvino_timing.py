@@ -159,6 +159,16 @@ class CpuBenchmarkTimingTests(unittest.TestCase):
             self.assertFalse(report["production_ready"])
             self.assertFalse(report["published"])
             self.assertTrue(report["manual_visual_review_required"])
+            review = report["semantic_review"]
+            self.assertEqual(review["status"], "manual_review_required")
+            self.assertEqual(review["criteria"], {
+                "red_cube_present": None,
+                "blue_table_present": None,
+                "cube_on_blue_table": None,
+            })
+            self.assertTrue(review["all_criteria_required"])
+            self.assertFalse(review["automated_semantic_approval"])
+            self.assertEqual(review, persisted["semantic_review"])
 
     def test_missing_safety_result_rejects_image_before_save(self):
         class MissingFlagPipeline(FakePipeline):
