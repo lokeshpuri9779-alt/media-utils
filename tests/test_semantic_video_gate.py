@@ -1,15 +1,16 @@
 """Offline security regressions: independent FULL-MP4 sign-off, never generator approval."""
+import base64
 import hashlib
-import hmac
 import json
 from pathlib import Path
 import tempfile
 import unittest
 
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from cryptography.hazmat.primitives import serialization
+
 from astra_v2.semantic_video_gate import evaluate, _canonical
 
-
-KEY = "independent-reviewer-test-key-32-byte-minimum"
 
 
 def example_story():
@@ -48,6 +49,10 @@ def packet_for(candidate, video_hash):
 
 class SemanticVideoGateTests(unittest.TestCase):
     def setUp(self):
+        self.private_key = Ed25519PrivateKey.generate()
+        raw = self.private_key.public_key().public_bytes(
+            serialization.Encoding.Raw, serialization.PublicFormat.Raw)
+        self.public_key = base64.b64encode(raw).decode("ascii")
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
@@ -83,16 +88,16 @@ class SemanticVideoGateTests(unittest.TestCase):
         self.packet_path.write_text(json.dumps(self.packet, sort_keys=True))
 
     def _sign(self):
-        tag = hmac.new(KEY.encode(), _canonical(self.record),
-                       hashlib.sha256).hexdigest()
+        tag = base64.b64encode(self.private_key.sign(
+            _canonical(self.record))).decode("ascii")
         self.review_path.write_text(
-            json.dumps({"record": self.record, "hmac_sha256": tag}))
+            json.dumps({"record": self.record, "signature_ed25519": tag}))
 
     def assess(self, **kwargs):
         return evaluate(self.candidate, self.video,
                         packet_path=kwargs.get("packet_path", self.packet_path),
                         review_path=kwargs.get("review_path", self.review_path),
-                        secret=kwargs.get("secret", KEY))
+                        public_key=kwargs.get("public_key", self.public_key))
 
     def test_authenticated_full_video_attestation_is_not_publication_approval(self):
         result = self.assess()
@@ -103,9 +108,11 @@ class SemanticVideoGateTests(unittest.TestCase):
 
     def test_without_review_or_key_fails_closed(self):
         self.assertEqual(self.assess(review_path="")["reason"], "review_missing")
-        self.assertEqual(self.assess(secret="")["reason"],
-                         "trusted_reviewer_key_unavailable")
-        self.assertEqual(self.assess(secret="wrong-key-which-is-long-enough-for-tests")["reason"],
+        self.assertEqual(self.assess(public_key="")["reason"],
+                         "trusted_reviewer_public_key_unavailable")
+        other_key = Ed25519PrivateKey.generate().public_key().public_bytes(
+            serialization.Encoding.Raw, serialization.PublicFormat.Raw)
+        self.assertEqual(self.assess(public_key=base64.b64encode(other_key).decode())["reason"],
                          "review_signature_invalid")
 
     def test_actual_video_bytes_must_match_reviewed_hash(self):
