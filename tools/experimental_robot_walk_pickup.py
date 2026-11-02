@@ -208,9 +208,11 @@ def build():
     cd = bpy.data.cameras.new('Fixed story camera')
     camera = bpy.data.objects.new('Fixed story camera',cd)
     bpy.context.collection.objects.link(camera)
-    camera.location = (2.25,-9.2,4.1)
-    camera.rotation_euler = (Vector((-.2,.7,1.42))-camera.location).to_track_quat('-Z','Y').to_euler()
-    cd.lens = 32
+    # Closer, fixed camera: favor readable hand/orb interaction without cuts.
+    # Keep the coast and actor in one shot for objective temporal comparison.
+    camera.location = (1.05,-7.65,3.4)
+    camera.rotation_euler = (Vector((-.2,.55,1.45))-camera.location).to_track_quat('-Z','Y').to_euler()
+    cd.lens = 42
     sc.camera=camera
     bpy.context.view_layer.update()
     fixed=[floor,wall,lighthouse,pedestal,camera]
@@ -244,25 +246,36 @@ def run(out):
                 t=idx/8.0
                 eased=t*t*(3-2*t)
                 root.location.x=-1.25+1.43*eased
-                root.location.z=.035*math.sin(math.pi*t)**2
+                root.location.z=.055*math.sin(math.pi*t)**2
                 arms['RIGHT'].rotation_euler[1]=-.17+.15*math.sin(math.pi*idx/2)
                 arms['LEFT'].rotation_euler[1]=.08-.14*math.sin(math.pi*idx/2)
                 phase='approach'
             elif idx<=11:
                 root.location.x=.18
                 root.location.z=0
-                arms['RIGHT'].rotation_euler[1]=-.17-.25*((idx-8)/3)
+                t=(idx-8)/3
+                smooth=t*t*(3-2*t)
+                arms['RIGHT'].rotation_euler[1]=-.17-.25*smooth
                 arms['LEFT'].rotation_euler[1]=.07
                 phase='reach'
             else:
                 root.location.x=.18
                 root.location.z=0
                 # Feet and leg shafts are positioned in world space below.
-                arms['RIGHT'].rotation_euler[1]=-.42-.73*((idx-12)/7)
+                t=(idx-12)/7
+                smooth=t*t*(3-2*t)
+                arms['RIGHT'].rotation_euler[1]=-.42-.73*smooth
                 arms['LEFT'].rotation_euler[1]=.07
                 phase='pickup_and_lift'
             foot_states=position_legs(legs,float(root.location.x),float(root.location.z),idx)
             all_foot_states.append(foot_states)
+            # An anticipatory glance down toward the object, then look up
+            # while the orb rises; avoid rotating the whole character/feet.
+            down=max(0.0,min(1.0,(idx-5)/6))
+            down=down*down*(3-2*down)
+            up=max(0.0,min(1.0,(idx-14)/5))
+            up=up*up*(3-2*up)
+            head.rotation_euler.x=-.14*down+.22*up
             head.rotation_euler.z=.13*math.sin(math.pi*idx/19)
             # The right claw closes around the orb after the reach phase.
             grip_t=max(0.0,min(1.0,(idx-12)/2.0))
@@ -308,6 +321,7 @@ def run(out):
                 "index":idx, "phase":phase,"file":img.name,
                 "root_x":round(float(root.location.x),5),
                 "head_yaw":round(float(head.rotation_euler.z),5),
+                "head_pitch":round(float(head.rotation_euler.x),5),
                 "right_arm_angle":round(float(arms['RIGHT'].rotation_euler.y),5),
                 "left_leg_angle":round(float(legs['LEFT'][0].rotation_euler.y),5),
                 "orb_xyz":[round(float(v),5) for v in orb.location],
@@ -365,6 +379,14 @@ def run(out):
             "copper_material_preserved":all(abs(x-y)<1e-5 for x,y in zip(mcopper,COPPER)),
             "blue_material_preserved":all(abs(x-y)<1e-5 for x,y in zip(mblue,COBALT)),
             "cycles_cpu_only":sc.render.engine=='CYCLES' and sc.cycles.device=='CPU',
+            "head_expressive_pitch":(
+                frames[11]['head_pitch'] < -.13 and
+                frames[-1]['head_pitch'] > .07
+            ),
+            "camera_tighter_fixed":(
+                tuple(round(float(v),3) for v in sc.camera.location)
+                == (1.05,-7.65,3.4) and abs(sc.camera.data.lens-42)<1e-6
+            ),
         }
         report["success"]=all(report["checks"].values())
     except Exception as exc:
