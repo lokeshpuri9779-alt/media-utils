@@ -10,7 +10,10 @@ from astra_errors import CreativeReject
 _HUMAN = re.compile(
     r"\b(?:stationmaster|courier|thief|thieves|man|woman|boy|girl|"
     r"child|children|person|people|guard|passenger|driver|captain|rescuer|explorer|climber|"
-    r"doctor|dr|professor|researcher|scientist)\b", re.I)
+    r"doctor|dr|professor|researcher|scientist|"
+    r"weaver|miller|loom\s+operator|seamstress|tailor|blacksmith|"
+    r"carpenter|fisherman|fisherwoman|shopkeeper|innkeeper|"
+    r"potter|baker|farmhand|woodcutter)\b", re.I)
 _INTERACTION = re.compile(
     r"\b(?:slides?|sliding|maneuvers?|manoeuvres?|navigates?|"
     r"enters?|entering|retrieves?|retrieving|returns?|returning|"
@@ -21,7 +24,10 @@ _SIGNAL = re.compile(r"\b(?:signal|transmission|radio|frequency|waveform|broadca
 
 _BIOLOGICAL_HUMAN = re.compile(
     r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
-    r"student|pilot|officer|engineer|botanist|researcher|meteorologist|rescuer)\b", re.I)
+    r"student|pilot|officer|engineer|botanist|researcher|meteorologist|rescuer|"
+    r"weaver|miller|loom\s+operator|seamstress|tailor|blacksmith|"
+    r"carpenter|fisherman|fisherwoman|shopkeeper|innkeeper|"
+    r"potter|baker|farmhand|woodcutter)\b", re.I)
 _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)\b", re.I)
 
 # Two independent visual cues identify a visibly embodied figure even when
