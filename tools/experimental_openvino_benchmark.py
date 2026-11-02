@@ -19,6 +19,7 @@ PROMPTS = {
     "baseline": PROMPT,
     "simple": "a small copper toy robot standing in a green forest, full body, centered, illustration",
     "geometry": "a red wooden cube on a plain blue table, centered, simple studio illustration",
+    "geometry_explicit": "single solid red wooden cube resting directly on the flat horizontal surface of one plain blue table, table top visible beneath the cube, isolated studio background, centered composition, no floor, no walls",
     "geometry_explicit": "studio product photograph of one red wooden cube resting directly on top of a flat solid blue tabletop, cube fully supported by the blue table surface, close-up centered composition, no floor visible, plain neutral background",
 }
 
