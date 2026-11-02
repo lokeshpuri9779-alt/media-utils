@@ -1,5 +1,10 @@
 name: ASTRA CPU Image Feasibility (Isolated)
 on:
+  push:
+    branches:
+      - experiment/openvino-int8-model-candidate
+    paths:
+      - .github/workflows/astra-cpu-image-feasibility.yml
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
@@ -15,7 +20,6 @@ on:
           - baseline
           - simple
           - geometry
-          - geometry_explicit
           - geometry_explicit
       inference_steps:
         description: 'CPU inference steps; 16 tests whether more steps improve visual fidelity'
@@ -37,6 +41,7 @@ permissions:
   contents: read
 jobs:
   benchmark:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'experiment: one-shot 16-step explicit geometry CPU benchmark')
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -51,7 +56,7 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           if [ "$EVENT_NAME" = "push" ]; then
-            if [ "$COMMIT_MESSAGE" != "experiment: one-shot 16-step geometry CPU benchmark" ]; then
+            if [ "$COMMIT_MESSAGE" != "experiment: one-shot 16-step explicit geometry CPU benchmark" ]; then
               echo "::error::Push is not the explicitly scoped one-shot benchmark commit"
               exit 1
             fi
@@ -106,7 +111,7 @@ jobs:
           df -h .
       - name: Produce isolated portrait keyframe
         run: |
-          python -m tools.experimental_openvino_benchmark --profile "${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}" --steps "${{ github.event_name == 'push' && '16' || inputs.inference_steps }}" --prompt-profile "${{ github.event_name == 'push' && 'geometry' || inputs.prompt_profile }}"
+          python -m tools.experimental_openvino_benchmark --profile "${{ github.event_name == 'push' && 'preconverted' || inputs.model_profile }}" --steps "${{ github.event_name == 'push' && '16' || inputs.inference_steps }}" --prompt-profile "${{ github.event_name == 'push' && 'geometry_explicit' || inputs.prompt_profile }}"
       - name: Retain review-only benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
