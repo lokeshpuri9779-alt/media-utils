@@ -111,6 +111,23 @@ jobs:
           assert x['production_ready'] is False and x['approved'] is False and x['published'] is False
           print('Seven negative controls rejected, production/editorial gates remain closed')
           PY
+      - name: Bind complete review evidence to frames and video
+        run: |
+          python3 -m tools.experimental_story_review_manifest \
+            --profile frog \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          packet=json.loads(Path('artifacts/experimental-frog-render/story_review_manifest.json').read_text())
+          assert packet['technical_evidence_passed'] is True
+          assert all(packet['checks'].values())
+          assert packet['approval']=='manual_review_required'
+          assert packet['semantic_quality']=='not_verified'
+          assert packet['production_ready'] is False and packet['published'] is False
+          assert packet['approved'] is False and packet['paid_apis_used'] is False
+          print('Bound review manifest: %d files with SHA256, no production approval' % len(packet['sha256']))
+          PY
       - name: Preserve frog video and frames for review
         if: always()
         uses: actions/upload-artifact@v4
