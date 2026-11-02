@@ -5,6 +5,8 @@ on:
       - experiment/astra-robot-walk-and-pickup
     paths:
       - tools/experimental_frog_story_render.py
+      - tools/experimental_visual_motion_audit.py
+      - tools/experimental_visual_motion_negative_controls.py
       - tools/experimental_story_diversity.py
       - .github/workflows/astra-story-diversity.yml
   workflow_dispatch:
@@ -77,6 +79,37 @@ jobs:
           assert x['production_ready'] is False
           assert x['semantic_quality']=='not_verified'
           print('Shared frog contract passed on actual CPU render trace')
+          PY
+      - name: Check visible motion and sprout pixels in actual rendered frames
+        run: |
+          python3 -m tools.experimental_visual_motion_audit \
+            --profile frog --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/visual_motion_audit.json')
+          x=json.loads(p.read_text())
+          assert x['passed'] and all(x['checks'].values())
+          assert x['manual_visual_review_required'] is True
+          assert x['semantic_quality']=='not_verified'
+          assert all(x[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
+          print('Actual render pixels show casting, lifting, planting and sprout, but not semantic quality')
+          PY
+      - name: Inject broken frames to prove image checker fails closed
+        run: |
+          python3 -m tools.experimental_visual_motion_negative_controls \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/visual_motion_negative_controls.json')
+          x=json.loads(p.read_text())
+          assert x['source_render_passed'] is True
+          assert x['all_corruptions_rejected'] is True
+          assert x['negative_case_count']==7
+          assert x['manual_visual_review_required'] is True
+          assert x['production_ready'] is False and x['approved'] is False and x['published'] is False
+          print('Seven negative controls rejected, production/editorial gates remain closed')
           PY
       - name: Preserve frog video and frames for review
         if: always()
