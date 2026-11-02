@@ -7,6 +7,7 @@ on:
       - 'astra_v2/gemini_batch.py'
       - 'astra_v2/omniroute_gemini.py'
       - 'astra_v2/gemini_batch_review.py'
+      - 'astra_v2/creative_preflight_report.py'
   schedule:
     - cron: '17 */6 * * *'
   workflow_dispatch:
@@ -78,6 +79,12 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check \
             'httpx==0.28.1' 'Pillow==11.3.0' 'imageio-ffmpeg==0.6.0' 'numpy==2.2.6'
+      # Read-only, bounded CPU analysis of actual generated story narration and
+      # the SAME renderer compatibility check used at the editorial boundary.
+      # Never generate, approve, publish, or block the independent reviewer here.
+      - name: Audit script and renderer feasibility (diagnostic only)
+        continue-on-error: true
+        run: python -m astra_v2.creative_preflight_report
       - name: Independently review generated proposals
         if: success()
         env:
@@ -155,6 +162,17 @@ jobs:
           model_access = read("gemini-model-access.json")
           if model_access:
               record["model_access"] = model_access
+          creative = read("creative-preflight-report.json")
+          if creative and creative.get("status") == "diagnostic_only":
+              # Only bounded aggregate codes, never scripts, prompts or approval claims.
+              record["creative_preflight"] = {
+                  "generated": creative.get("generated"),
+                  "script_status_counts": creative.get("script_status_counts", {}),
+                  "renderer_status_counts": creative.get("renderer_status_counts", {}),
+                  "renderer_reason_counts": creative.get("renderer_reason_counts", {}),
+                  "editorial_approval": False,
+                  "publication_triggered": False,
+              }
           (Path(sys.argv[1]) / "gemini-batch-diagnostic.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
           print("ASTRA_GEMINI_BATCH_DIAGNOSTIC=" + json.dumps(record))
           PY
@@ -171,6 +189,7 @@ jobs:
           path: |
             runtime-health/gemini-model-access.json
             runtime-health/gemini-proposals.json
+            runtime-health/creative-preflight-report.json
             runtime-health/ai-reviewed-stories.json
             runtime-health/ai-reviewed-decisions.json
             runtime-health/ai-batch-review-audit.json
