@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import struct
 import time
@@ -69,6 +70,7 @@ def run(output_dir):
         'no_paid_apis': True,
         'checks': {},
         'views': {},
+        'motion': {'fps': 6, 'frames': [], 'video': None, 'camera_motion': 'smoothstep-horizontal-orbit'},
     }
     start = time.monotonic()
     try:
@@ -77,7 +79,8 @@ def run(output_dir):
         scene = bpy.context.scene
         scene.render.engine = 'CYCLES'
         scene.cycles.device = 'CPU'
-        scene.cycles.samples = 20
+        scene.cycles.samples = 40
+        report['cycles_samples'] = scene.cycles.samples
         # Ubuntu's Blender CPU build may omit OpenImageDenoiser.
         # Render ordinary Cycles samples without the optional denoiser.
         for layer in scene.view_layers:
@@ -101,6 +104,10 @@ def run(output_dir):
                     material('Blue table', BLUE, 0.56))
         cube = box('Single red cube', (0, 0, 1.07), (0.72, 0.72, 0.72),
                    material('Red cube', RED, 0.68))
+        # Small bevels improve edge highlights without moving any objects.
+        bevel = cube.modifiers.new('Subtle rounded cube edges', 'BEVEL')
+        bevel.width = 0.035
+        bevel.segments = 3
         box('Cream vertical backdrop', (0, 3.2, 3.0), (7.0, 0.1, 3.0),
             material('Cream wall', CREAM, 0.9))
         area_light('Soft key', (-3.5, -4, 7), 850, 4.0)
@@ -151,6 +158,47 @@ def run(output_dir):
                 'png_bytes': image_path.stat().st_size,
                 'render_seconds': round(time.monotonic() - view_start, 2),
             }
+        # Camera-only movement: eight short, evenly timed frames at 6 fps.
+        # Scene objects/materials stay fixed; easing prevents a hard linear start/stop.
+        motion = report['motion']
+        for index in range(8):
+            t = index / 7
+            eased = t * t * (3 - 2 * t)
+            x = -2.85 + 5.70 * eased
+            camera.location = (x, -7.3, 3.8)
+            camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
+            bpy.context.view_layer.update()
+            p = world_to_camera_view(scene, camera, cube.location)
+            if not (0.1 < p.x < 0.9 and 0.1 < p.y < 0.9 and p.z > 0):
+                raise ValueError(f'Cube outside motion frame {index}')
+            frame = output_dir / f'motion_{index:03d}.png'
+            frame.unlink(missing_ok=True)
+            scene.render.filepath = str(frame.resolve())
+            started = time.monotonic()
+            bpy.ops.render.render(write_still=True)
+            if not frame.is_file() or png_size(frame) != (WIDTH, HEIGHT):
+                raise ValueError(f'Missing or malformed motion frame {index}')
+            motion['frames'].append({
+                'index': index,
+                'file': frame.name,
+                'camera_x': round(x, 6),
+                'sha256': hashlib.sha256(frame.read_bytes()).hexdigest(),
+                'png_bytes': frame.stat().st_size,
+                'render_seconds': round(time.monotonic() - started, 2),
+            })
+        report['checks']['eight_complete_motion_frames'] = len(motion['frames']) == 8
+        report['checks']['unique_motion_frames'] = len({
+            f['sha256'] for f in motion['frames']
+        }) == 8
+        report['checks']['monotonic_camera_motion'] = all(
+            motion['frames'][i]['camera_x'] < motion['frames'][i+1]['camera_x']
+            for i in range(7)
+        )
+        report['checks']['static_cube_table_geometry'] = (
+            abs(cube.location.z - 1.07) < 1e-6
+            and abs(table.location.z - 0.175) < 1e-6
+            and abs(cube_bottom - table_top) < 1e-5
+        )
         report['checks']['two_distinct_camera_views'] = (
             len(report['views']) == 2
             and report['views']['camera_left']['camera_position'][0] < 0
