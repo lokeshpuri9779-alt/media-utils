@@ -99,7 +99,8 @@ def research_intake(items: list[dict]) -> dict:
         if not isinstance(item, dict):
             continue
         url = item.get("url", "")
-        if not isinstance(url, str) or len(url) > 2048 or any(ord(c) < 32 for c in url):
+        if (not isinstance(url, str) or len(url) > 2048 or "\\" in url
+                or any(ord(c) < 32 for c in url)):
             continue
         try:
             parsed = urlparse(url)
