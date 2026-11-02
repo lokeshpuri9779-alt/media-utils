@@ -79,6 +79,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_creative_skill_upgrade.py' -v
           python -m unittest discover -s tests -p 'test_creative_preflight_report.py' -v
           python -m unittest discover -s tests -p 'test_story_visual_review_packet.py' -v
+          python -m unittest discover -s tests -p 'test_astra_render_contact_sheet.py' -v
           python -m unittest discover -s tests -p 'test_renderer_aware_writing.py' -v
       - name: Run story and novelty safeguards
         run: |
