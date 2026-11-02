@@ -29,6 +29,18 @@ class StoryInventoryTests(unittest.TestCase):
                         issues[0].startswith("publication_renderer_incompatible:") and
                         "signal_graphic_does_not_depict_narrated_event" in issues[0]
                     ), issues)
+                elif story["title"] == "The Mole and the Turning Market Signs":
+                    # The final beat explicitly requires a carpenter to
+                    # secure the market pegs. A mole/background icon does not
+                    # establish that the narrated human action was depicted.
+                    # Require verified scene artwork before publication.
+                    self.assertEqual(len(issues), 1, issues)
+                    self.assertTrue(issues[0].startswith(
+                        "publication_renderer_incompatible: shot 4:"), issues)
+                    self.assertIn(
+                        "human_actor_not_supported_by_directed_icons",
+                        issues[0],
+                    )
                 elif story["title"] == "The Badger and the Midnight Sprinklers":
                     # Unsupported badger puppets must fail closed until a
                     # verified, scene-matched artwork path is available.
