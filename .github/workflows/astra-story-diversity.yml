@@ -5,6 +5,7 @@ on:
       - experiment/astra-robot-walk-and-pickup
     paths:
       - tools/experimental_frog_story_render.py
+      - tools/experimental_story_review_verify.py
       - tools/experimental_visual_motion_audit.py
       - tools/experimental_visual_motion_negative_controls.py
       - tools/experimental_story_diversity.py
@@ -127,6 +128,25 @@ jobs:
           assert packet['production_ready'] is False and packet['published'] is False
           assert packet['approved'] is False and packet['paid_apis_used'] is False
           print('Bound review manifest: %d files with SHA256, no production approval' % len(packet['sha256']))
+          PY
+      - name: Independently verify packaged frog review files
+        run: |
+          python3 -m tools.experimental_story_review_verify \
+            --profile frog \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('artifacts/experimental-frog-render/story_review_verification.json')
+          r=json.loads(path.read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['mismatched_files']==[]
+          assert r['files_verified']==37
+          assert r['manual_visual_review_required'] is True
+          assert r['approved'] is False and r['published'] is False
+          assert r['production_ready'] is False and r['paid_apis_used'] is False
+          assert r['semantic_quality']=='not_verified'
+          print('Verified 37 independent files against review manifest (review-only)')
           PY
       - name: Preserve frog video and frames for review
         if: always()
