@@ -25,7 +25,7 @@ jobs:
           from pathlib import Path
           x=json.loads(Path('artifacts/experimental-story-diversity/frog_seed_plan.json').read_text())
           assert x['plot_fingerprint'] != x['comparison_story_fingerprint']
-          assert x['shot_count']==3 and x['frame_budget']==20
+          assert x['shot_count']==3 and x['frame_budget']==32
           assert all(x[k] is False for k in ('approved','published','production_ready','paid_apis_used','rendered'))
           assert x['visual_quality']=='not_tested'
           assert x['manual_editorial_review_required'] is True
@@ -40,7 +40,7 @@ jobs:
           blender --background --threads 2 --python-exit-code 1 --python tools/experimental_frog_story_render.py
           ffmpeg -hide_banner -loglevel error -y -framerate 8 -start_number 0 \
             -i artifacts/experimental-frog-render/frame_%03d.png \
-            -frames:v 20 -c:v libx264 -preset veryfast -crf 19 -pix_fmt yuv420p \
+            -frames:v 32 -c:v libx264 -preset veryfast -crf 19 -pix_fmt yuv420p \
             artifacts/experimental-frog-render/frog_story_previs.mp4
           python3 - <<'PY'
           import json
@@ -48,9 +48,13 @@ jobs:
           root=Path('artifacts/experimental-frog-render')
           r=json.loads((root/'review.json').read_text())
           assert r['success'] is True and all(r['checks'].values())
-          assert len(r['frames'])==20 and len(list(root.glob('frame_*.png')))==20
+          assert len(r['frames'])==32 and len(list(root.glob('frame_*.png')))==32
           assert all(r[x] is False for x in ('approved','published','production_ready','paid_apis_used'))
           assert r['editorial_review_required'] is True and r['semantic_quality']=='not_verified'
+          assert r['fps']==8 and r['duration_seconds']==4.0
+          assert r['checks']['magnet_contacts_before_lift'] is True
+          assert r['checks']['seed_continuous_across_camera_cut'] is True
+          assert r['checks']['rain_streaks_precede_sprout'] is True
           assert (root/'frog_story_previs.mp4').stat().st_size>4096
           print('Distinct second story rendered for manual visual review only')
           PY
