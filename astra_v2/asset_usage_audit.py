@@ -201,6 +201,7 @@ def finish(video_path, *, renderer, expected_shots=None):
                         state["review_source"], result,
                         json.loads(Path(evidence["manifest"]).read_text(encoding="utf-8")),
                         Path(evidence["path"]).with_suffix(".story-review.json"),
+                        contact_sheet_path=evidence["path"],
                     )
                     print("ASTRA_STORY_VISUAL_REVIEW_PACKET=" + json.dumps(
                         packet, sort_keys=True), flush=True)
