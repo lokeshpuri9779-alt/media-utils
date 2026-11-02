@@ -6590,11 +6590,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-49290843971f4e313877",
-      "title": "The Badger and the Amber Spores of Pine Ridge",
-      "hook": "Discovering the Broken Span",
-      "question": "Can two woodland companions successfully cross a crumbling ravine by combining their distinct survival skills before a torrential storm breaks?",
-      "answer": "Yes, by weaving resilient vine ropes and sharing amber warmth, they reach the safety of the ridge lodge.",
+      "content_id": "rayvan-gemini-74c519adc37ec4a5de5b",
+      "title": "The Weaver's Choice at Bramble Mill",
+      "hook": "The Hidden Fault",
+      "question": "Can lifelong friends mend a fracture caused by competing village duties?",
+      "answer": "Yes, by sacrificing individual pride to preserve their community's shared harvest.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -6602,66 +6602,139 @@
       ],
       "story_beats": [
         {
-          "headline": "Discovering the Broken Span",
-          "speech": "Look closely at the snapped roots across the canyon. We cannot cross without building a sturdy vine bridge together right now.",
+          "headline": "The Hidden Fault",
+          "speech": "Look at the rotting timbers beneath the floorboards, Bram. Our village mill cannot withstand another autumn flood.",
           "visual": "forest",
-          "label": "Ravine Discovery",
+          "label": "The Discovery",
           "story_beat": "reveal",
-          "visual_prompt": "Bramble the badger and Pip the squirrel stand at the edge of a deep misty forest ravine. Bramble points with a muddy paw at a snapped root bridge while Pip holds a frayed hemp rope with a worried expression.",
+          "visual_prompt": "Close-up of Bram and Thomas examining damp wooden floorboards inside the rustic mill, holding a flickering oil lantern.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Weaving the Amber Anchor",
-          "speech": "Hold this glowing resin tight while I loop the heavy fiber around the stout pine trunk to secure our lifeline.",
-          "visual": "signal",
-          "label": "Securing the Line",
-          "story_beat": "build",
-          "visual_prompt": "Pip the squirrel actively wraps glowing sticky amber resin around a thick pine trunk, holding a glowing sap vial in his tiny paws. Bramble the badger stands nearby steadying the heavy main towline.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Perilous Crossing",
-          "speech": "Step carefully across the swaying rope now. Keep your balance low and steady until your paws touch solid earth.",
+          "headline": "Rising Waters",
+          "speech": "We must carry the precious wool bales up to the loft immediately, before the rushing water ruins everything we own.",
           "visual": "door",
-          "label": "Crossing the Chasm",
-          "story_beat": "mechanism",
-          "visual_prompt": "Pip the squirrel is mid-crossing on a taut vine rope stretched across the foggy chasm, holding a small wooden supply pouch. Bramble the badger firmly grips the anchor knot on the near side of the ravine.",
+          "label": "The Preparation",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Thomas and Bram hoisting heavy wool bales toward the heavy oak storage door against rising muddy water.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Safe Inside the Ridge Lodge",
-          "speech": "We made it across just as the heavy rain starts. Let us close the wooden door and rest safely together.",
+          "headline": "The Jammed Gate",
+          "speech": "The iron winch is completely rusted shut. If I leave my loom now, my winter commission will be entirely lost forever.",
+          "visual": "signal",
+          "label": "The Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Wide shot of Bram struggling with a jammed metal crank lever outside in the rain while Thomas waves a warning red signal flag.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Bond",
+          "speech": "Forget the cloth and pull this beam together with me now, or our entire village will starve through the cold winter.",
           "visual": "ship",
-          "label": "Shelter Achieved",
+          "label": "The Final Payoff",
           "story_beat": "payoff",
-          "visual_prompt": "Bramble the badger and Pip the squirrel stand safely inside a cozy wooden shelter cabin, closing a stout timber door while heavy rain pours outside. Both characters smile warmly, holding dried berries.",
+          "visual_prompt": "Action shot of Bram and Thomas straining together to drop the heavy timber sluice gate as floodwaters swirl safely around the stone foundation.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A sudden torrential rain threatens to wash away the only natural bridge across the deep ravine while their supply pack is stuck on the unstable ledge.",
-      "decisive_choice": "Bramble the badger chooses to stay on the crumbling ledge to anchor the heavy vine line while Pip the squirrel makes the leap across.",
-      "resolution": "Both partners safely unite on the secure side, saving their provisions and securing shelter before the storm crests.",
+      "central_conflict": "A sudden river flood threatens both the communal winter flour sacks and the mill's ancient wooden sluice gate.",
+      "decisive_choice": "Bram abandons his own flooded weaving loom to help his estranged friend lift the heavy sluice beam.",
+      "resolution": "The mill survives the deluge, and the two friends rebuild their workshop together with mutual respect.",
       "visual_bible": {
-        "style": "Warm and detailed storybook illustration with rich forest textures, earthy greens and amber lighting.",
+        "style": "Warm-toned historical realism with rich earth colors and cinematic lighting.",
         "characters": {
-          "Bramble": "An older badger with gray-streaked fur, wearing a canvas utility vest and sturdy leather paw wraps.",
-          "Pip": "A nimble red squirrel with bright amber eyes, wearing a knitted blue scarf and a small pouch."
+          "Bram": "A stocky middle-aged weaver with a thick brown beard, wearing a woolen tunic and leather apron.",
+          "Thomas": "A lean, agile miller with expressive eyes, wearing a patched linen shirt and sturdy work trousers."
         },
         "locations": {
-          "Pine Ridge Ravine": "A deep woodland canyon filled with ancient pines, thick moss, and hanging vines under a stormy sky.",
-          "Ridge Lodge": "A small, sturdy timber cabin nestled safely into the cliffside with a heavy oak door."
+          "Bramble Mill": "A rustic stone watermill nestled beside a fast-flowing river, surrounded by dense autumn forests."
         },
         "objects": {
-          "Vine Rope": "A thick, hand-woven green hemp rope twisted with flexible forest vines.",
-          "Amber Resin Vial": "A small glass bottle filled with glowing golden tree sap that emits a warm light.",
-          "Supply Pouch": "A weathered brown canvas sack tied with leather cord containing dried forest nuts and berries."
+          "oil_lantern": "A tarnished brass lantern casting a warm, flickering golden glow.",
+          "sluice_beam": "A massive, weather-worn oak beam fitted with heavy iron brackets and bolts."
         }
       },
-      "plot_fingerprint": "ec18631817c47156e987b73d3f80941f3b2d04734aacfcf9b75402bc1b8c7e48"
+      "plot_fingerprint": "f246407df20bbdcaf085b9e99fbf7adbd260e13b2ef398777cb88f432531d658"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
+      "title": "The Mystery of Platform Four and the Silent Watchman",
+      "hook": "The Missing Heirloom",
+      "question": "Who stole the station master's brass pocket watch before the midnight express departed?",
+      "answer": "A clever stray terrier named Pip who retrieved the dropped watch from the tracks.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Missing Heirloom",
+          "speech": "My father's brass pocket watch is entirely gone from the mahogany desk before the midnight train arrives.",
+          "visual": "door",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Station master Bram holding an empty chain inside the wood-paneled office doorway, looking stressed under warm gas lighting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Muddy Clues",
+          "speech": "Small damp paw prints lead directly across the cold cobblestone platform toward the dimly lit baggage storage.",
+          "visual": "signal",
+          "label": "The Track",
+          "story_beat": "build",
+          "visual_prompt": "Station master Bram examining tiny mud prints on the railway platform next to a glowing green signal lamp in the fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unexpected Helper",
+          "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully.",
+          "visual": "robot",
+          "label": "The Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A New Partnership",
+          "speech": "The midnight train arrives safely while the grateful station master rewards his brave new canine assistant with biscuits.",
+          "visual": "forest",
+          "label": "The Return",
+          "story_beat": "payoff",
+          "visual_prompt": "Station master Bram kneeling by the steam train tracks at night, smiling warmly as Pip eats a treat with the restored watch nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The station master's heirloom watch vanished right before the midnight express arrived.",
+      "decisive_choice": "Following the muddy paw prints toward the cargo bay instead of waiting for the guard.",
+      "resolution": "Pip proudly returned the shiny heirloom, earning a permanent post as honorary station dog.",
+      "visual_bible": {
+        "style": "Illustrated storybook realism with warm amber lighting, rich textures, and cozy cinematic framing.",
+        "characters": {
+          "Bram": "A middle-aged station master with a thick gray mustache, round spectacles, a dark blue uniform coat with brass buttons, and a peaked cap.",
+          "Pip": "A clever stray wire-haired terrier with scruffy brown-and-white fur, bright dark eyes, and an alert posture."
+        },
+        "locations": {
+          "Terminus Station": "A Victorian-era railway station featuring dark wood paneling, glowing gas lamps, foggy cobblestone platforms, and iron pillars."
+        },
+        "objects": {
+          "Heirloom Watch": "A heavy polished brass pocket watch attached to a sturdy braided leather fob chain.",
+          "Signal Lamp": "A tall iron railway signal post casting a bright green glow through thick glass lenses."
+        }
+      },
+      "plot_fingerprint": "449b9b1e02e0f34fa366613aa05d50b1bc239ae801193b2cb375cf2c99700b01"
     }
   ]
 }
