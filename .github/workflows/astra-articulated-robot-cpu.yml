@@ -82,7 +82,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: astra-articulated-robot-cpu-\${{ github.run_id }}
+          name: astra-articulated-robot-cpu-review
           path: artifacts/experimental-articulated-robot/
           if-no-files-found: warn
           retention-days: 7
