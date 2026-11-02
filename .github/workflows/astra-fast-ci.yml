@@ -75,7 +75,9 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_plot_first_inventory.py' -v
           python -m astra_v2.generator_comparison
       - name: Verify opt-in offline creative skill adapters
-        run: python -m unittest discover -s tests -p 'test_creative_skill_upgrade.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_creative_skill_upgrade.py' -v
+          python -m unittest discover -s tests -p 'test_creative_preflight_report.py' -v
       - name: Run story and novelty safeguards
         run: |
           python -m unittest discover -s tests -p 'test_astra_story_*.py' -v
