@@ -257,7 +257,7 @@ def run(out):
             else:
                 root.location.x=.18
                 root.location.z=0
-                for obj in legs.values(): obj.rotation_euler[1]=0
+                # Feet and leg shafts are positioned in world space below.
                 arms['RIGHT'].rotation_euler[1]=-.42-.73*((idx-12)/7)
                 arms['LEFT'].rotation_euler[1]=.07
                 phase='pickup_and_lift'
