@@ -1,0 +1,40 @@
+name: ASTRA Experimental CPU Benchmark Unit Tests
+on:
+  pull_request:
+    paths:
+      - tools/experimental_openvino_benchmark.py
+      - tests/test_experimental_openvino_timing.py
+      - .github/workflows/astra-experimental-cpu-unit-tests.yml
+      - .github/workflows/astra-cpu-image-feasibility.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-unit-tests:
+    if: github.event_name == 'pull_request' && github.head_ref == 'experiment/openvino-int8-model-candidate'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify guarded benchmark workflow configuration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          workflow = Path('.github/workflows/astra-cpu-image-feasibility.yml').read_text()
+          required = [
+              'experiment/openvino-int8-model-candidate',
+              'experiment: one-shot 16-step explicit geometry CPU benchmark',
+              "'geometry_explicit' || inputs.prompt_profile",
+              'ASTRA_OMNI_IMAGE_ALLOW_PAID:',
+              'actions/upload-artifact@v4',
+          ]
+          missing = [item for item in required if item not in workflow]
+          if missing:
+              raise SystemExit(f'Benchmark trigger guard mismatch: {missing}')
+          print('Benchmark trigger guard configuration verified (not execution).')
+          PY
+      - name: Validate offline benchmark regression tests without model downloads
+        run: python -m unittest discover -s tests -p test_experimental_openvino_timing.py -v
