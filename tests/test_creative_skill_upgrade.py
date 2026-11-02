@@ -15,6 +15,11 @@ class CreativeSkillUpgradeTests(unittest.TestCase):
         self.assertFalse(report["approval"])
         self.assertTrue(report["repeated_sentences"])
 
+    def test_cliche_matches_only_whole_phrases(self):
+        self.assertFalse(anti_slop("This is a game changer.")["pass"])
+        self.assertTrue(anti_slop("The pregame changers arrive.")["pass"])
+        self.assertTrue(anti_slop("We can undelve deeper.")["pass"])
+
     def test_clean_script_not_publication_approval(self):
         report = anti_slop("A copper robot reaches for the amber orb.")
         self.assertTrue(report["pass"])
