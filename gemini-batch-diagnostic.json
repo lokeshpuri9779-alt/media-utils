@@ -1,23 +1,25 @@
 {
-  "observed_at": "2026-11-02T15:46:48.261860+00:00",
-  "generated": 19,
+  "observed_at": "2026-11-02T18:34:01.963212+00:00",
+  "generated": 18,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 16,
+      "index": 12,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 17,
       "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 19,
-  "approved": 0,
+  "reviewed": 18,
+  "approved": 2,
   "review_issues": [
+    "The story 'The Otter and the Silt-Choked Trench' features premises, characters (Pip the sea otter), and causal mechanisms that heavily mirror recently published works in the comparison history, specifically 'The Otter and the Silent Trench'. Both involve Pip solving an underwater blockage issue in a trench, making it too derivative.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 1: Unified Studio: unsupported badger actor requires verified scene artwork",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -70,5 +72,23 @@
       "models/lyria-3.5",
       "models/nano-banana-pro-preview"
     ]
+  },
+  "creative_preflight": {
+    "generated": 18,
+    "script_status_counts": {
+      "no_simple_flags": 18
+    },
+    "renderer_status_counts": {
+      "incompatible": 15,
+      "structurally_eligible": 3
+    },
+    "renderer_reason_counts": {
+      "cast_mismatch": 2,
+      "invalid_visual_shot": 1,
+      "none": 3,
+      "unsupported_human_actor": 12
+    },
+    "editorial_approval": false,
+    "publication_triggered": false
   }
 }
