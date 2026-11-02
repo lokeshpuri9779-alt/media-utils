@@ -25,6 +25,16 @@ class StoryInventoryTests(unittest.TestCase):
                         issues[0].startswith("publication_renderer_incompatible:") and
                         "signal_graphic_does_not_depict_narrated_event" in issues[0]
                     ), issues)
+                elif story["title"] == "The Badger and the Midnight Sprinklers":
+                    # Unsupported badger puppets must fail closed until a
+                    # verified, scene-matched artwork path is available.
+                    self.assertEqual(len(issues), 1, issues)
+                    self.assertTrue(issues[0].startswith(
+                        "publication_renderer_incompatible: shot 1:"), issues)
+                    self.assertIn(
+                        "unsupported badger actor requires verified scene artwork",
+                        issues[0],
+                    )
                 else:
                     self.assertEqual(issues, [])
 
