@@ -71,22 +71,42 @@ cube("STREET",(0,0,-.14),(6,5,.25),concrete)
 cube("DRAIN_WATER",(-1.1,.35,.012),(1.3,1.35,.035),water)
 for i in range(5):
     cube("GRATE_BAR_"+str(i),(-1.65+i*.27,.35,.13),(.07,1.35,.12),black)
-frog=ball("GREEN_FROG_BODY",(.1,0,.56),(.52,.4,.35),green)
-ball("FROG_LEFT_EYE",(-.12,-.31,.78),(.13,.12,.15),paper)
-ball("FROG_RIGHT_EYE",(.27,-.31,.78),(.13,.12,.15),paper)
+# Move the complete character rig, not its torso alone; pupils, eyes, and feet
+# previously lagged behind the body during the approach.
+frog_root=bpy.data.objects.new("FROG_CHARACTER_ROOT",None)
+bpy.context.collection.objects.link(frog_root)
+frog_parts=[ball("GREEN_FROG_BODY",(.1,0,.56),(.52,.4,.35),green)]
+frog_parts.extend([
+    ball("FROG_LEFT_EYE",(-.12,-.31,.78),(.13,.12,.15),paper),
+    ball("FROG_RIGHT_EYE",(.27,-.31,.78),(.13,.12,.15),paper),
+])
 for x in (-.12,.27):
-    ball("FROG_PUPIL",(x,-.425,.79),(.045,.03,.065),black)
+    frog_parts.append(ball("FROG_PUPIL",(x,-.425,.79),(.045,.03,.065),black))
 for x in (-.25,.45):
-    ball("FROG_FOOT",(x,-.27,.23),(.19,.2,.12),green)
-plane=ball("PAPER_AIRPLANE",(-1.12,.25,.23),(.27,.11,.06),paper)
+    frog_parts.append(ball("FROG_FOOT",(x,-.27,.23),(.19,.2,.12),green))
+for part in frog_parts:
+    part.parent=frog_root
+
+# A folded triangular paper airplane, not the prior sphere placeholder.
+# Two separately folded wings and a raised central ridge read as an airplane
+# in the side and overhead story cameras.
+mesh=bpy.data.meshes.new("FOLDED_PAPER_WINGS")
+mesh.from_pydata(
+    [(-.32,-.29,0),(.38,0,.09),(-.30,0,.13),(-.32,.29,0)],
+    [],[(0,1,2),(2,1,3)]
+)
+mesh.materials.append(paper)
+plane=bpy.data.objects.new("PAPER_AIRPLANE",mesh)
+bpy.context.collection.objects.link(plane)
+plane.location=(-1.12,.25,.23)
 clip=ball("PAPER_CLIP",(-1.12,.1,.25),(.065,.04,.04),gold)
-seed=ball("SEED",(-1.12,.25,.31),(.09,.09,.07),soil)
+seed=ball("SEED",(-1.12,.25,.31),(.115,.115,.095),soil)
 cube("POT_BASE",(1.45,.45,.24),(.72,.72,.5),potmat)
 cube("POT_SOIL",(1.45,.45,.51),(.59,.59,.06),soil)
 sprout=rod("SPROUT_STEM",(1.45,.45,.54),(1.45,.45,.86),.04,sproutmat)
 leaf=ball("SPROUT_LEAVES",(1.45,.45,.9),(.23,.09,.12),sproutmat)
 line=rod("MAGNET_LINE",(.15,-.22,.68),(-1.12,.1,.3),.022,gold)
-ball("MAGNET_TIP",(-1.12,.1,.3),(.12,.1,.08),gold)
+magnet=ball("MAGNET_TIP",(-1.12,.1,.3),(.12,.1,.08),gold)
 bpy.ops.object.camera_add(location=(0,-7,5))
 camera=bpy.context.object;scene.camera=camera
 def camera_at(point,lens):
@@ -100,21 +120,24 @@ frames=[]
 for i in range(20):
     if i<6:
         phase="setup"
-        frog.location.x=.1+(.25*i/5)
+        frog_root.location.x=.25*i/5
         plane.location=(-1.12,.25,.23)
+        clip.location=(-1.12,.1,.25)
         seed.location=(-1.12,.25,.31)
-        line.hide_render=True
+        line.hide_render=True;magnet.hide_render=True
         sprout.hide_render=True;leaf.hide_render=True
         camera.location=(0,-7,5);camera_at((0,0,.25),38)
     elif i<15:
         phase="rescue"
         t=(i-6)/8
-        frog.location.x=.35
+        frog_root.location.x=.25
         plane.location=(-1.12+1.1*t,.25,.23+.5*t)
+        clip.location=(plane.location.x,plane.location.y-.15,plane.location.z+.02)
         seed.location=(-1.12+1.1*t,.25,.31+.5*t)
-        line.hide_render=False
+        line.hide_render=False;magnet.hide_render=False
+        magnet.location=clip.location
         # Scale and aim a rigid line from the frog toward the retrieved plane.
-        a=Vector((.15,-.22,.68));b=plane.location.copy()
+        a=Vector((.15,-.22,.68));b=clip.location.copy()
         direction=b-a
         line.location=(a+b)*.5
         line.rotation_euler=direction.to_track_quat('Z','Y').to_euler()
@@ -123,13 +146,19 @@ for i in range(20):
         camera.location=(-.3,-5.5,3.2);camera_at((-.5,.15,.35),45)
     else:
         phase="plant"
-        t=(i-15)/4
-        line.hide_render=True
+        # Keep the seed's last rescue position at the cut, then show it travel
+        # into the pot over three frames before any growth appears.
+        t=min(1.0,(i-15)/2)
+        line.hide_render=True;magnet.hide_render=True
         plane.location=(.15,.2,.3)
-        seed.location=(1.45,.45,.56)
+        seed.location=(-.02+1.47*t,.25+.2*t,.81-.25*t)
         sprout.hide_render=i<18
+        sprout.scale.z=.45 if i==18 else 1.0
         leaf.hide_render=i<19
-        camera.location=(1.35,-3.3,2.7);camera_at((1.45,.45,.48),50)
+        if i<18:
+            camera.location=(.6,-4.6,3.1);camera_at((.7,.25,.6),42)
+        else:
+            camera.location=(1.35,-3.3,2.7);camera_at((1.45,.45,.48),50)
     scene.frame_set(i+1)
     img=out/f"frame_{i:03d}.png"
     scene.render.filepath=str(img.resolve())
@@ -138,7 +167,9 @@ for i in range(20):
     frames.append({"frame":i,"phase":phase,"plane_xyz":[round(float(v),3) for v in plane.location],
                    "seed_xyz":[round(float(v),3) for v in seed.location],
                    "sprout_visible":not sprout.hide_render,
-                   "leaf_visible":not leaf.hide_render})
+                   "leaf_visible":not leaf.hide_render,
+                   "frog_root_x":round(float(frog_root.location.x),3),
+                   "magnet_clip_gap":round(float((magnet.location-clip.location).length),4) if phase=="rescue" else None})
 checks={
     "twenty_frames":len(frames)==20,
     "three_beats":[frames[i]["phase"] for i in (0,6,15)]==["setup","rescue","plant"],
@@ -147,11 +178,16 @@ checks={
     "leaf_after_sprout":not frames[18]["leaf_visible"] and frames[19]["leaf_visible"],
     "story_is_distinct":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
+    "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
+    "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
+    "magnet_tracks_retrieved_plane":all(f["magnet_clip_gap"]<.0001 for f in frames[6:15]),
+    "seed_stays_at_rescue_position_across_cut":max(abs(a-b) for a,b in zip(frames[14]["seed_xyz"],frames[15]["seed_xyz"]))<.001,
+    "seed_visibly_moves_into_pot_before_growth":frames[15]["seed_xyz"][0]<frames[16]["seed_xyz"][0]<frames[17]["seed_xyz"][0] and not frames[17]["sprout_visible"],
 }
 report={"story_id":story["story_id"],"title":story["title"],"frames":frames,"checks":checks,
 "success":all(checks.values()),"approved":False,"published":False,"production_ready":False,
 "paid_apis_used":False,"editorial_review_required":True,"semantic_quality":"not_verified",
-"note":"Geometry-only experimental render; narrative clarity, paper plane, planting and motion need manual review."}
+"note":"Still a simplified geometry preview; manually inspect the folded plane, tracked magnet and seed-to-pot move before trusting narrative quality."}
 (out/"review.json").write_text(json.dumps(report,indent=2)+"\n")
 print("ASTRA_FROG_RENDER="+json.dumps({"success":report["success"],"checks":checks}),flush=True)
 if not report["success"]:raise SystemExit(1)
