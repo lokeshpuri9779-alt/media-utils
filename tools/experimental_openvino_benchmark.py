@@ -38,6 +38,16 @@ def run(*, profile="preconverted", steps=8, prompt_profile="baseline", output=Pa
               "production_ready": False, "still_image_only": True,
               "render_completed": False,
               "semantic_quality": "not_verified",
+              "semantic_review": {
+                  "status": "manual_review_required",
+                  "criteria": {
+                      "red_cube_present": None,
+                      "blue_table_present": None,
+                      "cube_on_blue_table": None,
+                  },
+                  "all_criteria_required": True,
+                  "automated_semantic_approval": False,
+              },
               "manual_visual_review_required": True,
               "safety_rejection_policy": "discard_image_and_fail",
               "safety_false_positive": "not_determined"}
