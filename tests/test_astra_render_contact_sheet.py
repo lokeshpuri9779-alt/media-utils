@@ -46,6 +46,39 @@ class ContactSheetTests(unittest.TestCase):
 
 
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
+                         "ffmpeg and ffprobe needed for beat-aligned sampling")
+    def test_real_video_samples_requested_storybeat_midpoints(self):
+        with tempfile.TemporaryDirectory() as root:
+            video = Path(root) / "source.mp4"
+            output = Path(root) / "review" / "beat-aligned.jpg"
+            subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+                            "-f", "lavfi", "-i", "testsrc2=size=360x640:rate=10",
+                            "-t", "4", "-c:v", "mpeg4", "-y", str(video)],
+                           check=True, timeout=25)
+            times = [0.5, 1.5, 2.5, 3.5]
+            result = create_contact_sheet(video, output,
+                                          sample_times_seconds=times)
+            manifest = json.loads(output.with_suffix(".json").read_text())
+            self.assertEqual(result["sample_strategy"], "planned_beat_midpoints")
+            self.assertEqual(manifest["sample_times_seconds"], times)
+            self.assertEqual(manifest["sample_strategy"], "planned_beat_midpoints")
+            self.assertEqual(manifest["semantic_quality"], "not_verified")
+            self.assertFalse(manifest["publication_approval"])
+            with Image.open(output) as sheet:
+                self.assertEqual(sheet.size, (720, 1280))
+            import hashlib
+            self.assertEqual(manifest["contact_sheet_sha256"],
+                             hashlib.sha256(output.read_bytes()).hexdigest())
+            for invalid in ([0.5, 1.5, 1.5, 3.5],
+                            [-1, 1, 2, 3], [0, 1, 2, 20],
+                            [0, True, 2, 3], [0, float("nan"), 2, 3]):
+                with self.subTest(invalid=invalid), self.assertRaises(ValueError):
+                    create_contact_sheet(video, Path(root) / "invalid.jpg",
+                                         duration_seconds=4,
+                                         sample_times_seconds=invalid)
+                self.assertFalse((Path(root) / "invalid.jpg").exists())
+
+    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
                          "ffmpeg and ffprobe needed for audit integration")
     def test_asset_audit_emits_review_evidence_without_semantic_approval(self):
         import os

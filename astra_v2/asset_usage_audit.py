@@ -187,7 +187,12 @@ def finish(video_path, *, renderer, expected_shots=None):
             from astra_v2.render_contact_sheet import create_contact_sheet
             review_dir = Path(os.getenv(
                 "ASTRA_VISUAL_REVIEW_DIR", "runtime-health/visual-review"))
-            evidence = create_contact_sheet(path, review_dir / f"{safe}-{suffix}.jpg")
+            review_source = state.get("review_source")
+            beat_times = (review_source.get("beat_midpoint_times_seconds")
+                          if isinstance(review_source, dict) else None)
+            evidence = create_contact_sheet(
+                path, review_dir / f"{safe}-{suffix}.jpg",
+                sample_times_seconds=beat_times)
             if evidence["source_mp4_sha256"] != result["video_sha256"]:
                 raise RuntimeError("review_frame_source_hash_mismatch")
             print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps(
