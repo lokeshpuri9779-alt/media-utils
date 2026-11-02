@@ -50,10 +50,10 @@ class VerifyReviewPackageTest(unittest.TestCase):
                     self.root = Path(directory)
                     result = self.prepare(profile)
                     self.assertTrue(result["passed"], result)
-                    self.assertEqual(result["files_verified"],
-                                     len(manifest.PROFILES[profile]["video"]) * 0
-                                     + len(result["mismatched_files"])
-                                     + len(json.loads((self.root/"story_review_manifest.json").read_text())["sha256"]))
+                    expected = len(json.loads(
+                        (self.root / "story_review_manifest.json").read_text()
+                    )["sha256"])
+                    self.assertEqual(result["files_verified"], expected)
                     self.assertTrue(result["manual_visual_review_required"])
                     self.assertFalse(result["production_ready"])
 
