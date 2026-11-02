@@ -70,6 +70,10 @@ def build_packet(source, asset_receipt, contact_manifest):
             or any(c not in "0123456789abcdef" for c in digest)
             or digest != contact_manifest.get("source_mp4_sha256")):
         raise ValueError("encoded_video_hash_mismatch")
+    sheet_digest = contact_manifest.get("contact_sheet_sha256")
+    if (not isinstance(sheet_digest, str) or len(sheet_digest) != 64
+            or any(c not in "0123456789abcdef" for c in sheet_digest)):
+        raise ValueError("contact_sheet_hash_missing")
     if source["content_id"] != asset_receipt.get("content_id"):
         raise ValueError("story_asset_identity_mismatch")
     shot_count = asset_receipt.get("shot_count")
@@ -109,6 +113,7 @@ def build_packet(source, asset_receipt, contact_manifest):
         "title": source["title"],
         "story_sha256": source["story_sha256"],
         "source_mp4_sha256": digest,
+        "contact_sheet_sha256": sheet_digest,
         "story_beat_count": len(rows),
         "rendered_shot_count": shot_count,
         "frame_sample_count": count,
@@ -127,9 +132,18 @@ def build_packet(source, asset_receipt, contact_manifest):
     }
 
 
-def write_packet(source, asset_receipt, contact_manifest, output_path):
-    """Write diagnostic sidecar; never modify approval records or video bytes."""
+def write_packet(source, asset_receipt, contact_manifest, output_path, *, contact_sheet_path):
+    """Only write a packet when the actual contact JPEG matches its SHA256."""
     packet = build_packet(source, asset_receipt, contact_manifest)
+    image = Path(contact_sheet_path)
+    if not image.is_file() or image.stat().st_size == 0:
+        raise ValueError("contact_sheet_missing")
+    digest = hashlib.sha256()
+    with image.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    if digest.hexdigest() != packet["contact_sheet_sha256"]:
+        raise ValueError("contact_sheet_hash_mismatch")
     dest = Path(output_path)
     dest.parent.mkdir(parents=True, exist_ok=True)
     # Use the same directory as the already persisted contact sheet.
@@ -140,6 +154,7 @@ def write_packet(source, asset_receipt, contact_manifest, output_path):
         "content_id": packet["content_id"],
         "story_sha256": packet["story_sha256"],
         "source_mp4_sha256": packet["source_mp4_sha256"],
+        "contact_sheet_sha256": packet["contact_sheet_sha256"],
         "story_beat_count": packet["story_beat_count"],
         "review_status": packet["review_status"],
         "publication_approval": False,
