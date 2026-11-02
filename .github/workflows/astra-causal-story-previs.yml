@@ -7,6 +7,7 @@ on:
       - tools/experimental_causal_storyboard.py
       - tools/experimental_causal_story_render.py
       - tools/experimental_causal_visual_audit.py
+      - tools/experimental_causal_visual_negative_controls.py
       - tools/experimental_robot_walk_pickup.py
       - .github/workflows/astra-causal-story-previs.yml
   workflow_dispatch:
@@ -117,6 +118,23 @@ jobs:
           assert audit['manual_editorial_review_required'] is True
           assert audit['visual_semantic_quality']=='not_verified'
           print('Fixed-image evidence present; editorial and semantic gates still closed')
+          PY
+      - name: Prove image audit rejects missing and mistimed energy effects
+        run: |
+          python3 -m tools.experimental_causal_visual_negative_controls \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('artifacts/experimental-causal-story/negative_controls.json').read_text())
+          assert data['original_render_passed'] is True
+          assert data['all_corruptions_rejected'] is True
+          assert data['negative_case_count']==5
+          assert data['approved'] is False and data['published'] is False
+          assert data['production_ready'] is False and data['paid_apis_used'] is False
+          assert data['manual_review_required'] is True
+          assert data['semantic_quality']=='not_verified'
+          print('Five deliberately damaged frame sequences rejected; no publishing or editorial gate opened')
           PY
       - name: Retain story previsualization, not publication assets
         if: always()
