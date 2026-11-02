@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-11-02T19:27:37.334082+00:00",
+  "last_attempt_at": "2026-11-02T20:42:46.409125+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8261,19 +8261,74 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-02T20:08:04.524372+00:00",
+  "pending": {
+    "nv2qDoRxvxE": {
+      "content_id": "rayvan-gemini-c46977c7362d4dab1684",
+      "title": "Professor Pip and the Midnight Platform Mystery",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-02T20:42:48.063803+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0c9c03d99ef4e307377cae802a08f2d5ebce4aae491af3294495c7d12cbd6a08",
+      "story_beats": [
+        {
+          "headline": "The Missing Parcel",
+          "speech": "Oh dear, the express mail parcel has completely vanished from the oak sorting table right before midnight!",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Professor Pip, a small field mouse with round spectacles and a dark blue wool vest, stands on a wooden railway platform next to a desk. He holds a brass bell in his right paw, looking anxiously at a red signal light glowing in the foggy night background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Paper Trail",
+          "speech": "Look closely at these tiny torn paper scraps left behind on the cold stone floor by the ticket booth.",
+          "visual": "door",
+          "label": "The Clue",
+          "story_beat": "build",
+          "visual_prompt": "Professor Pip kneels on the damp railway platform floor near a heavy wooden station door, holding a magnifying glass in his right paw and inspecting scattered white paper scraps. His expression is intensely focused under the amber lamplight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Freight Lift",
+          "speech": "The rustling noise is coming from the dark freight elevator shaft at the end of the platform.",
+          "visual": "forest",
+          "label": "The Investigation",
+          "story_beat": "mechanism",
+          "visual_prompt": "Professor Pip stands at the edge of the open freight lift shaft at the far end of the railway platform, holding a brass lantern in his left paw and pointing forward with his right paw toward towering pine trees looming in the dark distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Recovery",
+          "speech": "Here is the missing package tucked safely inside the wooden storage box behind the iron lever!",
+          "visual": "ship",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Professor Pip stands triumphantly beside a small wooden box on the railway platform, holding a wrapped parcel in both paws. A brass key rests on the box lid, and an incoming steam train's headlight casts a warm glow across the scene.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-11-02T20:39:05.104206+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-02T20:37:48.879756+00:00",
+    "at": "2026-11-02T20:42:48.409303+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "cancelled",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -8284,7 +8339,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-02T08:25:03.423433+00:00",
+  "last_feedback_attempt_at": "2026-11-02T20:42:33.442764+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -17237,13 +17292,64 @@
       "resolution": "The cache opened successfully, saving the winter supply while leaving Pip's home dark.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-c46977c7362d4dab1684": {
+      "at": "2026-11-02T20:42:46.409105+00:00",
+      "title": "Professor Pip and the Midnight Platform Mystery",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0c9c03d99ef4e307377cae802a08f2d5ebce4aae491af3294495c7d12cbd6a08",
+      "story_beats": [
+        {
+          "headline": "The Missing Parcel",
+          "speech": "Oh dear, the express mail parcel has completely vanished from the oak sorting table right before midnight!",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Professor Pip, a small field mouse with round spectacles and a dark blue wool vest, stands on a wooden railway platform next to a desk. He holds a brass bell in his right paw, looking anxiously at a red signal light glowing in the foggy night background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Paper Trail",
+          "speech": "Look closely at these tiny torn paper scraps left behind on the cold stone floor by the ticket booth.",
+          "visual": "door",
+          "label": "The Clue",
+          "story_beat": "build",
+          "visual_prompt": "Professor Pip kneels on the damp railway platform floor near a heavy wooden station door, holding a magnifying glass in his right paw and inspecting scattered white paper scraps. His expression is intensely focused under the amber lamplight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Freight Lift",
+          "speech": "The rustling noise is coming from the dark freight elevator shaft at the end of the platform.",
+          "visual": "forest",
+          "label": "The Investigation",
+          "story_beat": "mechanism",
+          "visual_prompt": "Professor Pip stands at the edge of the open freight lift shaft at the far end of the railway platform, holding a brass lantern in his left paw and pointing forward with his right paw toward towering pine trees looming in the dark distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Recovery",
+          "speech": "Here is the missing package tucked safely inside the wooden storage box behind the iron lever!",
+          "visual": "ship",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Professor Pip stands triumphantly beside a small wooden box on the railway platform, holding a wrapped parcel in both paws. A brass key rests on the box lid, and an incoming steam train's headlight casts a warm glow across the scene.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-02T20:37:48.879658+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "ready",
-    "character_memory": "not_reported",
+    "at": "2026-11-02T20:42:48.409229+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -17251,68 +17357,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-02T20:37:48.879741+00:00",
+    "at": "2026-11-02T20:42:48.409291+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-02T19:12:25.040337+00:00",
+    "at": "2026-11-02T20:42:33.066208+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-37ebc78259ed9934a0c6",
-    "video_url": "https://www.youtube.com/watch?v=6Ri28C4Xdxw",
+    "content_id": "rayvan-gemini-c46977c7362d4dab1684",
+    "video_url": "https://www.youtube.com/watch?v=nv2qDoRxvxE",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-02T20:37:48.879426+00:00",
+    "at": "2026-11-02T20:42:48.409135+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "cancelled",
-    "job_status_before_persist": "cancelled",
-    "outcome": "published",
-    "reason": "ready",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-02T20:37:48.879651+00:00",
-    "collection_status": "collected",
-    "publish_step": "cancelled",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 17,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
-        },
-        "seen": 34,
-        "total": 173
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 173,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 139,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 139,
-        "remaining": 17
-      }
-    },
+    "at": "2026-11-02T20:42:48.409222+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
