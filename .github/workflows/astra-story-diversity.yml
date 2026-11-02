@@ -34,7 +34,7 @@ jobs:
       - name: Install free CPU Blender and FFmpeg
         run: |
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg libegl1 libgl1 libopengl0
       - name: Render distinct frog story on CPU (review only)
         run: |
           blender --background --threads 2 --python-exit-code 1 --python tools/experimental_frog_story_render.py
