@@ -118,8 +118,11 @@ arm_parts=(upper_arm,lower_arm,plant_claw)
 # The original rescue story explicitly requires rain to water the seed.
 # Blue beads in the final shot are an unambiguous on-screen rain cue.
 rainmat=mat("VISIBLE_RAIN",(.18,.66,.98))
-rain_drops=[ball("PLANT_RAIN_%d"%k,(1.15+.2*k,.2,1.2),(.035,.038,.12),rainmat)
-            for k in range(5)]
+rain_drops=[
+    rod("PLANT_RAIN_STREAK_%d"%k,(1.03+.12*k,.11+.11*(k%3),.8),
+        (1.12+.12*k,.11+.11*(k%3),1.0),.015,rainmat)
+    for k in range(7)
+]
 
 def aim_segment(obj,a,b,original_length):
     a=Vector(a);b=Vector(b)
@@ -140,73 +143,83 @@ bpy.ops.object.light_add(type='AREA',location=(-3,-4,7))
 bpy.context.object.data.energy=750
 bpy.context.object.data.size=5
 frames=[]
+FRAME_COUNT=32
+FPS=8
 original_line_length=Vector((-1.27,.32,-.38)).length
-# Physical starting point of the magnet's rod on the frog.
 magnet_origin=Vector((.52,-.33,.67))
-for i in range(20):
-    # These objects must start hidden until the corresponding action begins.
+for i in range(FRAME_COUNT):
+    # Wider four-second narrative: setup 0-7; fishing 8-21;
+    # planting and watered sprout 22-31. This is preview-only.
     for part in arm_parts:
-        part.hide_render=i<13 or i>=18
+        part.hide_render=i<19 or i>=29
     for drop in rain_drops:
-        drop.hide_render=i<17
-    if i<6:
+        drop.hide_render=i<27
+    if i<8:
         phase="setup"
-        frog_root.location.x=.25*i/5
+        frog_root.location.x=.25*i/7
         plane.location=(-1.12,.25,.23)
         clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(plane.location.x,plane.location.y,plane.location.z+.08)
-        line.hide_render=True;magnet.hide_render=True
-        sprout.hide_render=True;leaf.hide_render=True
-        camera.location=(0,-7,5);camera_at((0,0,.25),38)
-    elif i<15:
+        line.hide_render=True
+        magnet.hide_render=True
+        sprout.hide_render=True
+        leaf.hide_render=True
+        camera.location=(0,-6.25,4.0)
+        camera_at((0,0,.68),48)
+    elif i<22:
         phase="rescue"
         frog_root.location.x=.25
-        # Only lift AFTER the magnet reaches the plane's paper clip.
-        pickup_progress=0 if i<=9 else (i-9)/5
+        # The magnetic head moves for four frames before contact at 12.
+        # Retrieval begins only at frame 13, reaches the frog at 21.
+        pickup_progress=0 if i<=12 else (i-12)/9
         smooth=pickup_progress*pickup_progress*(3-2*pickup_progress)
         plane.location=(-1.12+1.1*smooth,.25,.23+.5*smooth)
         clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(plane.location.x,plane.location.y,plane.location.z+.08)
-        line.hide_render=False;magnet.hide_render=False
-        # Frame 6: magnet launches; frame 9: contact; 10-14: the
-        # attached magnet lifts the folded airplane across the grate.
-        magnet_fraction=max(.08,min(1,(i-6)/3))
+        line.hide_render=False
+        magnet.hide_render=False
+        magnet_fraction=max(.08,min(1,(i-8)/4))
         magnet_target=magnet_origin.lerp(clip.location,magnet_fraction)
         magnet.location=magnet_target
         aim_segment(line,magnet_origin,magnet_target,original_line_length)
-        sprout.hide_render=True;leaf.hide_render=True
-        camera.location=(-.3,-5.5,3.2);camera_at((-.5,.15,.35),45)
+        sprout.hide_render=True
+        leaf.hide_render=True
+        camera.location=(-.3,-5.3,3.1)
+        camera_at((-.52,.15,.70),49)
     else:
         phase="plant"
-        # End of rescue and start of planting share the identical seed
-        # coordinates, so no teleport happens across the camera cut.
-        t=min(1.0,(i-15)/2)
+        t=min(1.0,(i-22)/5)
         eased=t*t*(3-2*t)
-        line.hide_render=True;magnet.hide_render=True
-        plane.location=(-.02,.25,.73-.12*min(i-15,4))
+        line.hide_render=True
+        magnet.hide_render=True
+        # Plane remains beside the frog; the seed alone gets planted.
+        plane.location=(-.02,.25,.73-.07*min(i-22,4))
+        clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(-.02+1.47*eased,.25+.2*eased,.81-.30*eased)
-        sprout.hide_render=i<18
-        sprout.scale.z=.45 if i==18 else 1.0
-        leaf.hide_render=i<19
-        seed.hide_render=i>=18
-        # No hard cut at sprout appearance: a gentle move toward the pot.
-        dolly=max(0.0,(i-17)/2)
-        camera.location=(.6+.48*dolly,-4.6+.9*dolly,3.1-.27*dolly)
-        camera_at((.7+.42*dolly,.25+.12*dolly,.6-.08*dolly),42+3*dolly)
+        sprout.hide_render=i<29
+        sprout.scale.z=.38 if i==29 else (.72 if i==30 else 1.0)
+        leaf.hide_render=i<31
+        seed.hide_render=i>=29
+        dolly=max(0.0,(i-27)/4)
+        camera.location=(.55+.55*dolly,-4.5+.9*dolly,3.25-.3*dolly)
+        camera_at((.68+.48*dolly,.23+.17*dolly,.83-.13*dolly),47+4*dolly)
 
-    # The growing seed is carried by a real articulated green forearm
-    # and gold claw, rather than floating from the frog to the pot.
-    if 13<=i<18:
+    # Frog's visible green arm and gold claw stay attached to the seed from
+    # the end of the rescue to soil contact; no seed teleports at camera cut.
+    if 19<=i<29:
         shoulder=Vector((.65,-.30,.62))
         target=seed.location.copy()
-        elbow=Vector((shoulder.x+.4*(target.x-shoulder.x),-.56,max(.75,target.z+.035)))
+        elbow=Vector((shoulder.x+.40*(target.x-shoulder.x),
+                      -.61,max(.78,target.z+.05)))
         aim_segment(upper_arm,shoulder,elbow,Vector((-.17,-.25,.20)).length)
         aim_segment(lower_arm,elbow,target,Vector((-.43,.4,0)).length)
         plant_claw.location=target+Vector((0,-.065,0))
-    if i>=17:
+    if i>=27:
+        # Slender diagonal strokes, moving down between successive frames,
+        # rather than spheres suspended over the pot.
         for k,drop in enumerate(rain_drops):
-            drop.location=(1.18+.11*k,.34+.10*(k%2),
-                           1.15+.16*k-.20*((i-17+k)%3))
+            drop.location=(1.05+.115*k,.16+.12*(k%3),
+                           .74+.115*k-.15*((i-27+k)%4))
 
     scene.frame_set(i+1)
     img=out/f"frame_{i:03d}.png"
@@ -215,51 +228,52 @@ for i in range(20):
     if not img.is_file():
         raise RuntimeError("Missing rendered frame")
     clip_gap=(magnet.location-clip.location).length if phase=="rescue" else None
-    hand_gap=(plant_claw.location-seed.location).length if 13<=i<18 else None
+    hand_gap=(plant_claw.location-seed.location).length if 19<=i<29 else None
     frames.append({
         "frame":i,"phase":phase,
         "plane_xyz":[round(float(v),4) for v in plane.location],
         "seed_xyz":[round(float(v),4) for v in seed.location],
         "magnet_clip_gap":round(float(clip_gap),4) if clip_gap is not None else None,
         "seed_hand_gap":round(float(hand_gap),4) if hand_gap is not None else None,
-        "arm_visible":13<=i<18,
+        "arm_visible":19<=i<29,
         "seed_visible":not seed.hide_render,
-        "rain_drops_visible":sum(not drop.hide_render for drop in rain_drops),
+        "rain_streaks_visible":sum(not drop.hide_render for drop in rain_drops),
         "sprout_visible":not sprout.hide_render,
         "leaf_visible":not leaf.hide_render,
         "frog_root_x":round(float(frog_root.location.x),4),
-        "camera_xyz":[round(float(v),4) for v in camera.location]
+        "camera_xyz":[round(float(v),4) for v in camera.location],
     })
 checks={
-    "twenty_frames":len(frames)==20,
-    "three_beats":[frames[i]["phase"] for i in (0,6,15)]==["setup","rescue","plant"],
+    "thirty_two_frames":len(frames)==FRAME_COUNT,
+    "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
-    "plane_stays_put_until_magnet_contact":len({tuple(f["plane_xyz"]) for f in frames[:10]})==1,
-    "magnet_moves_before_contact":frames[6]["magnet_clip_gap"]>frames[7]["magnet_clip_gap"]>frames[8]["magnet_clip_gap"]>.1,
-    "magnet_contacts_clip_before_rescue":all(f["magnet_clip_gap"]<.001 for f in frames[9:15]),
-    "airplane_lift_after_contact":frames[9]["plane_xyz"][2]<frames[12]["plane_xyz"][2]<frames[14]["plane_xyz"][2],
-    "arm_visible_before_plant_cut":frames[13]["arm_visible"] and frames[14]["arm_visible"] and frames[15]["arm_visible"],
-    "seed_hand_stays_attached":all(abs(f["seed_hand_gap"]-.065)<.001 for f in frames[13:18]),
-    "seed_stays_at_rescue_position_across_cut":max(abs(a-b) for a,b in zip(frames[14]["seed_xyz"],frames[15]["seed_xyz"]))<.001,
-    "seed_reaches_soil_before_growth":frames[15]["seed_xyz"][0]<frames[16]["seed_xyz"][0]<frames[17]["seed_xyz"][0] and frames[17]["seed_xyz"][2]<.55 and not frames[17]["sprout_visible"],
-    "seed_disappears_under_soil":all(f["seed_visible"] for f in frames[:18]) and all(not f["seed_visible"] for f in frames[18:]),
-    "rain_visible_before_sprout":all(f["rain_drops_visible"]==5 for f in frames[17:]) and all(f["rain_drops_visible"]==0 for f in frames[:17]),
-    "sprout_after_planting":all(not f["sprout_visible"] for f in frames[:18]) and all(f["sprout_visible"] for f in frames[18:]),
-    "leaf_after_stem":not frames[18]["leaf_visible"] and frames[19]["leaf_visible"],
-    "continuous_camera_in_payoff":all(
-        (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.7
-        for i in (16,17,18,19)),
+    "paper_plane_stays_until_magnet_contact":len({tuple(f["plane_xyz"]) for f in frames[:13]})==1,
+    "magnet_moves_toward_clip":frames[8]["magnet_clip_gap"]>frames[9]["magnet_clip_gap"]>frames[10]["magnet_clip_gap"]>.1,
+    "magnet_contacts_before_lift":all(f["magnet_clip_gap"]<.001 for f in frames[12:22]),
+    "paper_airplane_retrieved_after_contact":frames[12]["plane_xyz"][2]<frames[17]["plane_xyz"][2]<frames[21]["plane_xyz"][2],
+    "seed_arm_present_before_plant_cut":frames[19]["arm_visible"] and frames[21]["arm_visible"] and frames[22]["arm_visible"],
+    "gold_claw_tracks_seed":all(abs(f["seed_hand_gap"]-.065)<.001 for f in frames[19:29]),
+    "seed_continuous_across_camera_cut":max(abs(a-b) for a,b in zip(frames[21]["seed_xyz"],frames[22]["seed_xyz"]))<.001,
+    "seed_enters_soil_before_growth":frames[22]["seed_xyz"][0]<frames[25]["seed_xyz"][0]<frames[27]["seed_xyz"][0] and frames[27]["seed_xyz"][2]<.52 and not frames[27]["sprout_visible"],
+    "seed_goes_into_soil":all(f["seed_visible"] for f in frames[:29]) and all(not f["seed_visible"] for f in frames[29:]),
+    "rain_streaks_precede_sprout":all(f["rain_streaks_visible"]==len(rain_drops) for f in frames[27:]) and all(f["rain_streaks_visible"]==0 for f in frames[:27]),
+    "sprout_only_after_planting":all(not f["sprout_visible"] for f in frames[:29]) and all(f["sprout_visible"] for f in frames[29:]),
+    "leaves_after_stem":all(not f["leaf_visible"] for f in frames[:31]) and frames[31]["leaf_visible"],
+    "camera_moves_smoothly_in_payoff":all(
+        (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
+        for i in range(23,32)),
     "different_story_fingerprint":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
 report={
     "story_id":story["story_id"],"title":story["title"],
     "frames":frames,"checks":checks,"success":all(checks.values()),
+    "fps":FPS,"dimensions":[384,576],"duration_seconds":FRAME_COUNT/FPS,
     "approved":False,"published":False,"production_ready":False,
     "paid_apis_used":False,"editorial_review_required":True,
     "semantic_quality":"not_verified","cinematic_quality":"manual_review_required",
-    "note":"Unreviewed mesh-only previsualization. Check readability of airplane, magnetic retrieval, arm-carried planting and rain in actual frames."
+    "note":"Four-second mesh-only review preview; subject framing, planting and pacing require independent visual inspection."
 }
 (out/"review.json").write_text(json.dumps(report,indent=2)+"\n")
 print("ASTRA_FROG_RENDER="+json.dumps({"success":report["success"],"checks":checks}),flush=True)
