@@ -244,7 +244,7 @@ def run():
                             candidate, video,
                             packet_path=os.getenv("ASTRA_SEMANTIC_REVIEW_PACKET"),
                             review_path=os.getenv("ASTRA_SEMANTIC_REVIEW_DECISION"),
-                            secret=os.getenv("ASTRA_SEMANTIC_REVIEW_KEY"),
+                            public_key=os.getenv("ASTRA_SEMANTIC_REVIEW_PUBLIC_KEY"),
                         )
                         report["semantic_video_review"] = {
                             "status": verification["status"],
