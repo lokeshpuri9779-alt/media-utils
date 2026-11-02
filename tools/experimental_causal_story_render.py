@@ -142,8 +142,35 @@ def run(out):
             halo.rotation_euler.x = math.pi / 2
             halo.data.materials.append(ring_material)
             glow_objects.append(halo)
-        # Glowing objects are absent from every pre-payoff frame.
-        for obj in glow_objects:
+        # The missing narrative mechanism: a VISIBLE energy connection from
+        # the carried spark to the distant lighthouse. Beam growth is bounded:
+        # frame 15 launch, 16 transit, 17 contact, and 18-19 beacon ignition.
+        # All beam assets are locally generated mesh; no generative service.
+        energy_material = glow.copy()
+        energy_material.name = "STORY_SPARK_TO_BEACON_ENERGY"
+        energy_shader = energy_material.node_tree.nodes["Principled BSDF"]
+        energy_shader.inputs["Base Color"].default_value = (1.0, .34, .025, 1)
+        energy_shader.inputs["Emission Color"].default_value = (1.0, .42, .045, 1)
+        energy_shader.inputs["Emission Strength"].default_value = 8.0
+        bpy.ops.mesh.primitive_cylinder_add(vertices=24, radius=1.0, depth=2.0)
+        beam = bpy.context.object
+        beam.name = "STORY_VISIBLE_SPARK_BEAM"
+        beam.data.materials.append(energy_material)
+        beam.hide_render = True
+        # A moving bright head makes left-to-right energy travel legible in
+        # a short wide shot, while 3 static-on-beam packets reinforce direction.
+        beam_tip = ACTOR["sph"](
+            "STORY_VISIBLE_ENERGY_TIP", (0, 0, 0),
+            (.16, .16, .16), glow
+        )
+        beam_packets = [
+            ACTOR["sph"](
+                f"STORY_ENERGY_PACKET_{i}", (0, 0, 0),
+                (.075, .075, .075), energy_material
+            ) for i in range(3)
+        ]
+        beam_objects = [beam, beam_tip, *beam_packets]
+        for obj in [*glow_objects, *beam_objects]:
             obj.hide_render = True
         # The original actor and static world don't change, only camera and light.
         world_static = {
@@ -154,6 +181,7 @@ def run(out):
         before_pickup = []
         after_pickup = []
         shot_cameras = {}
+        beam_progress_history = []
         for frame in range(FRAME_COUNT):
             shot = shot_for_frame(storyboard["shots"], frame)
             if frame <= 8:
@@ -206,6 +234,7 @@ def run(out):
                 before_pickup.append((orb.location - orb_init).length)
             if frame >= 14:
                 after_pickup.append((orb.location - grip_target).length)
+            bpy.context.view_layer.update()
 
             camera = scene.camera
             camera.location = shot["camera_xyz"]
@@ -221,8 +250,37 @@ def run(out):
                 raise ValueError(f"Camera drift within shot {shot['id']}")
             shot_cameras[shot["id"]] = cam_state
 
-            # The payoff has a real visible lighting-state change.
-            beacon_on = frame >= 15
+            # The beam must reach the lighthouse BEFORE the beacon illuminates.
+            # A discrete delay after contact is intentional: the viewer sees
+            # the orb power the lighthouse instead of an unexplained cut.
+            beam_started = frame >= 15
+            beam_progress = {
+                15: 0.24, 16: 0.60, 17: 1.0,
+                18: 1.0, 19: 1.0
+            }.get(frame, 0.0)
+            beacon_on = frame >= 18
+            spark_position = orb.matrix_world.translation.copy()
+            beacon_position = beacon.matrix_world.translation.copy()
+            beam_vector = beacon_position - spark_position
+            beam_front = spark_position + beam_vector * beam_progress
+            if beam_started:
+                direction = beam_front - spark_position
+                beam.location = (spark_position + beam_front) / 2
+                beam.rotation_euler = direction.to_track_quat('Z', 'Y').to_euler()
+                beam.scale = (.080, .080, direction.length / 2)
+                beam_tip.location = beam_front
+                for i, particle in enumerate(beam_packets):
+                    fraction = (i + 1) / 4
+                    particle.location = spark_position + direction * fraction
+                for obj in beam_objects:
+                    obj.hide_render = False
+            else:
+                for obj in beam_objects:
+                    obj.hide_render = True
+            beam_progress_history.append(beam_progress)
+            # Existing beacon emission can only activate one frame after
+            # the energy link first reaches the target.
+
             shader.inputs["Base Color"].default_value = (
                 AMBER if beacon_on else (.035, .04, .065, 1)
             )
@@ -244,6 +302,11 @@ def run(out):
                 point = world_to_camera_view(scene, camera, beacon.location)
                 if not (.015 < point.x < .985 and .035 < point.y < .965 and point.z > 0):
                     raise ValueError(f"Beacon offscreen in {shot['id']}: {point[:]}")
+            if beam_started:
+                target_view = world_to_camera_view(scene, camera, beam_front)
+                if not (.02 < target_view.x < .98 and .02 < target_view.y < .98
+                        and target_view.z > 0):
+                    raise ValueError(f"Energy head offscreen in frame {frame}")
             if any(
                 tuple(round(float(v), 6) for v in obj.location) != world_static[obj.name]
                 for obj in fixed if obj != camera
@@ -265,6 +328,17 @@ def run(out):
                 "camera": cam_state,
                 "beacon_on": beacon_on,
                 "beacon_energy": float(lamp.energy),
+                "energy_transfer_started": beam_started,
+                "energy_transfer_progress": beam_progress,
+                "energy_tip_xyz": [
+                    round(float(v), 5) for v in beam_front
+                ] if beam_started else None,
+                "energy_front_at_beacon": (
+                    (beam_front - beacon_position).length < .001
+                ) if beam_started else False,
+                "visible_energy_objects": sum(
+                    not obj.hide_render for obj in beam_objects
+                ),
                 "visible_beacon_glow_objects": sum(
                     not obj.hide_render for obj in glow_objects
                 ),
@@ -298,14 +372,37 @@ def run(out):
                     (.014, .024, .068, 1)
                 )
             ),
-            "beacon_illuminates_in_payoff": all(
-                f["beacon_on"] and f["beacon_energy"] > 0 for f in frames[15:]
+            "beacon_illuminates_after_energy_contact": all(
+                f["beacon_on"] and f["beacon_energy"] > 0 for f in frames[18:]
             ),
-            "beacon_glow_hidden_before_payoff": all(
-                f["visible_beacon_glow_objects"] == 0 for f in frames[:15]
+            "beacon_off_through_energy_arrival": all(
+                not f["beacon_on"] and f["beacon_energy"] == 0
+                for f in frames[:18]
             ),
-            "three_visible_glow_objects_after_payoff": all(
-                f["visible_beacon_glow_objects"] == 3 for f in frames[15:]
+            "beacon_glow_hidden_before_activation": all(
+                f["visible_beacon_glow_objects"] == 0 for f in frames[:18]
+            ),
+            "three_visible_glow_objects_after_activation": all(
+                f["visible_beacon_glow_objects"] == 3 for f in frames[18:]
+            ),
+            "no_energy_before_pickup": all(
+                not f["energy_transfer_started"]
+                and f["visible_energy_objects"] == 0
+                for f in frames[:15]
+            ),
+            "energy_path_grows_toward_beacon": (
+                [round(f["energy_transfer_progress"], 2) for f in frames[15:]]
+                == [.24, .6, 1.0, 1.0, 1.0]
+                and all(f["visible_energy_objects"] == len(beam_objects)
+                        for f in frames[15:])
+            ),
+            "beam_contacts_beacon_before_ignition": (
+                frames[17]["energy_front_at_beacon"]
+                and not frames[17]["beacon_on"]
+                and frames[18]["beacon_on"]
+            ),
+            "same_energy_link_persists_into_payoff": all(
+                f["energy_front_at_beacon"] for f in frames[17:]
             ),
             "spark_on_pedestal_until_pickup": max(before_pickup) < 0.001,
             "spark_secured_after_pickup": max(after_pickup) < 0.015,
