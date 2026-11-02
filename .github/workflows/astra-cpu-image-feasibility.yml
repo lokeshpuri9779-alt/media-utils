@@ -120,3 +120,4 @@ jobs:
           path: artifacts/experimental-openvino/
           if-no-files-found: warn
           retention-days: 7
+# One-shot review-only run: no approval, fallback, or publishing.
