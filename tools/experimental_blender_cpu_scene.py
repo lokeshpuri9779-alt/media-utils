@@ -78,6 +78,11 @@ def run(output_dir):
         scene.render.engine = 'CYCLES'
         scene.cycles.device = 'CPU'
         scene.cycles.samples = 20
+        # Ubuntu's Blender CPU build may omit OpenImageDenoiser.
+        # Render ordinary Cycles samples without the optional denoiser.
+        for layer in scene.view_layers:
+            if hasattr(layer, 'cycles') and hasattr(layer.cycles, 'use_denoising'):
+                layer.cycles.use_denoising = False
         scene.render.resolution_x = WIDTH
         scene.render.resolution_y = HEIGHT
         scene.render.resolution_percentage = 100
@@ -154,7 +159,7 @@ def run(output_dir):
         report['success'] = all(report['checks'].values())
     except Exception as exc:
         report['error_type'] = type(exc).__name__
-        if isinstance(exc, ValueError):
+        if isinstance(exc, (ValueError, RuntimeError)):
             report['error_message'] = str(exc)[:300]
     finally:
         report['total_seconds'] = round(time.monotonic() - start, 2)
