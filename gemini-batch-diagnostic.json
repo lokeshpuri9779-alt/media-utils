@@ -1,25 +1,29 @@
 {
-  "observed_at": "2026-11-02T18:34:01.963212+00:00",
-  "generated": 18,
+  "observed_at": "2026-11-02T18:43:53.347054+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 12,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 17,
-      "reason": "invalid_story_structure"
+      "index": 13,
+      "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 18,
-  "approved": 2,
+  "reviewed": 19,
+  "approved": 11,
   "review_issues": [
-    "The story 'The Otter and the Silt-Choked Trench' features premises, characters (Pip the sea otter), and causal mechanisms that heavily mirror recently published works in the comparison history, specifically 'The Otter and the Silent Trench'. Both involve Pip solving an underwater blockage issue in a trench, making it too derivative.",
+    "The candidate story 'Bram and the Snowbound Signal Flare' heavily mimics the causal mechanism, setting, and plot structure of the recently published comparison story 'The Lynx and the Frozen Signal Ridge' (which features navigating a blizzard/snowstorm to light a signal beacon using a compass).",
+    "The candidate story 'The Lynx and the Summit Beacon' heavily parallels a recently published premise in the comparison history ('The Lynx and the Frozen Signal Ridge', which features a lynx, a sudden blizzard, a mountain pass, and an emergency beacon/lantern).",
+    "The causal mechanism and decisiveness involving grassland navigation, a compass/shadow alignment, and reaching a water source duplicate existing plot patterns.",
+    "The causal mechanisms and resolution involving a lynx navigating a blizzard-stricken mountain pass using a guiding beacon/lantern closely duplicate the narrative beats of the existing published work, violating originality standards.",
+    "The central conflict, decisive choice, and resolution follow the exact same mechanical formula and beat structure as several recently published premises in the comparison history, particularly involving Barnaby using an iron tool or wrench to stop a runaway vehicle or machinery (e.g., 'Barnaby's Brass Berry-Bursting Blunderbuss', 'barnaby the mouse and the midnight signaling slate').",
+    "The narrative structure and resolution heavily overlap with existing entries involving infrastructure repair under time constraints.",
+    "The story premise, character (Barnaby the mouse), and setting closely mirror the recently published example 'barnaby the mouse and the midnight signaling slate', involving very similar railroad-themed conflicts, platform settings, and character actions.",
+    "The story premise, character (Bramble the pangolin), and narrative structure closely mirror previously published items in the dataset, particularly 'pip the pangolin and the dry-grassland navigation challenge' and 'The Badger and the Amber Spores of Pine Ridge'.",
+    "The story relies on a derivative template heavily saturated by recent automated publishing batches from the same content pipeline.",
+    "The story repeats the premise and causal mechanism of repairing a broken bridge over a ravine/river to save travelers or friends, which is conceptually identical to 'The Canopy Pathfinders and the Root of Whispers' and 'The Ranger and the Amber Spore' from the comparison history.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction"
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -74,19 +78,17 @@
     ]
   },
   "creative_preflight": {
-    "generated": 18,
+    "generated": 19,
     "script_status_counts": {
-      "no_simple_flags": 18
+      "no_simple_flags": 19
     },
     "renderer_status_counts": {
-      "incompatible": 15,
-      "structurally_eligible": 3
+      "incompatible": 1,
+      "structurally_eligible": 18
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 2,
-      "invalid_visual_shot": 1,
-      "none": 3,
-      "unsupported_human_actor": 12
+      "none": 18,
+      "unsupported_human_actor": 1
     },
     "editorial_approval": false,
     "publication_triggered": false
