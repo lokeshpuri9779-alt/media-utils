@@ -1,0 +1,31 @@
+name: ASTRA Reusable Action Contracts (Review Only)
+on:
+  push:
+    branches:
+      - experiment/astra-robot-walk-and-pickup
+    paths:
+      - tools/experimental_action_contracts.py
+      - tests/test_astra_experimental_action_contracts.py
+      - .github/workflows/astra-experimental-action-contracts.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/experiment/astra-robot-walk-and-pickup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run reusable story action contract and negative-control tests
+        run: |
+          python3 -m unittest -v tests.test_astra_experimental_action_contracts
+      - name: Confirm review-only scope
+        run: |
+          python3 - <<'PY'
+          from tools.experimental_action_contracts import PROFILES
+          assert set(PROFILES)=={'frog','lighthouse'}
+          assert len(PROFILES['frog']['events'])==7
+          assert len(PROFILES['lighthouse']['events'])==3
+          print('Trace-only contracts have no production or publishing path')
+          PY
