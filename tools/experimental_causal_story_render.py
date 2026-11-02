@@ -83,6 +83,18 @@ def run(out):
             raise ValueError("CPU Cycles mandatory")
         if scene.cycles.samples != 28:
             raise ValueError("Unexpected CPU sample count")
+        # The bright cream studio wall made the first two beacon reveals
+        # imperceptible. Change the *fixed environment only* to dusk. Keep
+        # the lighthouse pillar, actor, camera cuts and action unchanged.
+        backdrop = bpy.data.objects["STATIC_CREAM_HORIZON"]
+        dusk_material = backdrop.data.materials[0].copy()
+        dusk_material.name = "STORY_DEEP_DUSK_SKY"
+        dusk_shader = dusk_material.node_tree.nodes["Principled BSDF"]
+        dusk_shader.inputs["Base Color"].default_value = (.014, .024, .068, 1)
+        backdrop.data.materials[0] = dusk_material
+        scene.world.node_tree.nodes["Background"].inputs["Color"].default_value = (
+            .18, .25, .37, 1
+        )
         # Isolate lighthouse emission from the orb/antenna's shared material.
         beacon = bpy.data.objects["STATIC_LIGHTHOUSE_LIGHT"]
         beacon_material = beacon.data.materials[0].copy()
@@ -103,7 +115,13 @@ def run(out):
         glow_shader = glow.node_tree.nodes["Principled BSDF"]
         glow_shader.inputs["Base Color"].default_value = AMBER
         glow_shader.inputs["Emission Color"].default_value = AMBER
-        glow_shader.inputs["Emission Strength"].default_value = 10.0
+        glow_shader.inputs["Emission Strength"].default_value = 6.0
+        ring_material = glow.copy()
+        ring_material.name = "STORY_SATURATED_AMBER_RINGS"
+        ring_shader = ring_material.node_tree.nodes["Principled BSDF"]
+        ring_shader.inputs["Emission Color"].default_value = (1.0, .28, .015, 1)
+        ring_shader.inputs["Base Color"].default_value = (1.0, .28, .015, 1)
+        ring_shader.inputs["Emission Strength"].default_value = 2.5
         glow_shader.inputs["Roughness"].default_value = 0.24
         bpy.ops.mesh.primitive_uv_sphere_add(
             segments=32, ring_count=16, radius=.27,
@@ -122,7 +140,7 @@ def run(out):
             halo = bpy.context.object
             halo.name = f"STORY_LIGHT_REVEAL_RING_{int(radius*100)}"
             halo.rotation_euler.x = math.pi / 2
-            halo.data.materials.append(glow)
+            halo.data.materials.append(ring_material)
             glow_objects.append(halo)
         # Glowing objects are absent from every pre-payoff frame.
         for obj in glow_objects:
@@ -274,6 +292,12 @@ def run(out):
                 shot_cameras[storyboard["shots"][0]["id"]] !=
                 shot_cameras[storyboard["shots"][1]["id"]],
             "beacon_dark_before_payoff": all(not f["beacon_on"] for f in frames[:15]),
+            "fixed_dusk_backdrop": all(
+                abs(a-b) < .00001 for a,b in zip(
+                    dusk_shader.inputs["Base Color"].default_value,
+                    (.014, .024, .068, 1)
+                )
+            ),
             "beacon_illuminates_in_payoff": all(
                 f["beacon_on"] and f["beacon_energy"] > 0 for f in frames[15:]
             ),
