@@ -1,0 +1,57 @@
+name: ASTRA Blender CPU Two-View Scene (Experimental)
+on:
+  push:
+    branches:
+      - experiment/astra-blender-cpu-two-view
+    paths:
+      - .github/workflows/astra-blender-cpu-scene.yml
+      - tools/experimental_blender_cpu_scene.py
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scene-review:
+    if: github.ref == 'refs/heads/experiment/astra-blender-cpu-two-view'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free Ubuntu Blender package
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender
+          blender --version | head -n 2
+      - name: Render two Cycles CPU views, no publishing
+        run: |
+          blender --background --threads 2 --python-exit-code 1 \
+            --python tools/experimental_blender_cpu_scene.py -- \
+            --output-dir artifacts/experimental-blender-scene/
+      - name: Check structural controls and output PNGs
+        run: |
+          python3 - <<'PY'
+          import json
+          import struct
+          from pathlib import Path
+          root=Path('artifacts/experimental-blender-scene')
+          r=json.loads((root/'review.json').read_text())
+          assert r['success'] is True and all(r['checks'].values())
+          assert r['approved'] is False and r['published'] is False and r['production_ready'] is False
+          assert r['semantic_quality']=='manual_review_required'
+          assert r['no_paid_apis'] is True
+          assert set(r['views']) == {'camera_left', 'camera_right'}
+          for view in r['views'].values():
+              data=(root/view['file']).read_bytes()[:24]
+              assert data.startswith(b'\x89PNG\r\n\x1a\n') and struct.unpack('>II', data[16:24]) == (512,768)
+          print('Geometry assertions and review-only evidence passed; no semantic approval inferred')
+          PY
+      - name: Upload bounded review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-blender-two-view
+          path: artifacts/experimental-blender-scene/
+          if-no-files-found: warn
+          retention-days: 7
