@@ -7270,6 +7270,58 @@
       "central_conflict": "A sudden river flood threatens both the communal winter flour sacks and the mill's ancient wooden sluice gate.",
       "decisive_choice": "Bram abandons his own flooded weaving loom to help his estranged friend lift the heavy sluice beam.",
       "resolution": "The mill survives the deluge, and the two friends rebuild their workshop together with mutual respect."
+    },
+    {
+      "content_id": "rayvan-gemini-37ebc78259ed9934a0c6",
+      "video_id": "6Ri28C4Xdxw",
+      "confirmed_at": "2026-11-02T20:08:05.168925+00:00",
+      "title": "Pip and the Overripe Acorn Cache of Whispering Glade",
+      "plot_fingerprint": "fc928cf6b540db3b921f60ef2b2987af8530d4e7f726f86e7555253f9eed6613",
+      "story_beats": [
+        {
+          "headline": "The Jammed Vault",
+          "speech": "Oh dear, the great root is completely wedged shut against the oak wall, trapping all our food!",
+          "visual": "forest",
+          "label": "Blocked Vault",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the brown squirrel standing inside Whispering Glade forest, staring at a jammed wooden door in a large hollow oak trunk, holding a glowing lantern with a sad expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Seeking a Tool",
+          "speech": "I need a heavy tool to crack this stubborn wood open, even if it means parting with my prize.",
+          "visual": "door",
+          "label": "The Trade",
+          "story_beat": "build",
+          "visual_prompt": "Pip the brown squirrel standing at a carved wooden door in Whispering Glade forest, offering his brass lantern to an empty ledge while gripping a heavy wrench with both paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Prying the Root",
+          "speech": "With all my strength against this iron lever, the wedged root finally starts to fracture and yield.",
+          "visual": "signal",
+          "label": "Lever Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the brown squirrel exerting all his weight to push a heavy wrench wedged into the root of an oak tree in Whispering Glade forest, with glowing dust motes floating upward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Winter Saved",
+          "speech": "The cache is open at last, and our whole woodland community is safely prepared for the coming snow.",
+          "visual": "forest",
+          "label": "Stored Riches",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the brown squirrel smiling happily inside the sunlit hollow oak in Whispering Glade forest, surrounded by neatly stacked piles of acorns and a small iron wrench resting on the floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A swollen root trap jammed the communal acorn cache shut just as winter frost arrived.",
+      "decisive_choice": "Pip traded his cherished brass lantern to an owl for a heavy iron wrench to pry open the root.",
+      "resolution": "The cache opened successfully, saving the winter supply while leaving Pip's home dark."
     }
   ]
 }
