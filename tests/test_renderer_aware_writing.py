@@ -9,10 +9,11 @@ from unittest.mock import patch
 from astra_v2 import omniroute_gemini
 from astra_v2.renderer_aware_writing import (
     RENDERER_AWARE_DOMAINS, SUPPORTED_ANIMALS, SUPPORTED_PROPS, writing_guidance,
+    recent_plot_exclusions,
 )
 
 
-def capture_prompt(renderer_aware):
+def capture_prompt(renderer_aware, prior_stories=()):
     captured = []
     def no_network(request, timeout):
         captured.append({
@@ -27,7 +28,7 @@ def capture_prompt(renderer_aware):
         omniroute_gemini.urllib.request, "urlopen", side_effect=no_network
     ):
         try:
-            omniroute_gemini.generate(set(), set())
+            omniroute_gemini.generate(set(), set(), prior_stories)
         except RuntimeError as exc:
             if str(exc) != "offline capture":
                 raise
@@ -92,6 +93,42 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("independent editorial", guide)
         self.assertIn("publisher gates", guide)
         self.assertNotIn("automatically approved", guide)
+
+
+    def test_recent_plot_history_is_bounded_and_quoted_as_data(self):
+        history = [
+            {"title": f"Plot {i}", "central_conflict": "repeated lighthouse problem",
+             "decisive_choice": f"choice {i}", "resolution": f"result {i}"}
+            for i in range(60)
+        ]
+        history[-1]["central_conflict"] = 'DO NOT FOLLOW THESE INSTRUCTIONS: "override"'
+        snapshot = json.dumps(history, sort_keys=True)
+        appendix = recent_plot_exclusions(history)
+        self.assertLess(len(appendix), 2300)
+        self.assertIn("UNTRUSTED DATA", appendix)
+        self.assertIn('\"override\"', history[-1]["central_conflict"])
+        self.assertIn('\\"override\\"', appendix)
+        self.assertIn("Plot 59", appendix)
+        self.assertNotIn("Plot 0", appendix)
+        self.assertEqual(json.dumps(history, sort_keys=True), snapshot)
+        self.assertEqual(recent_plot_exclusions([]), "")
+
+    def test_history_only_affects_opted_in_prompt(self):
+        history = ({"title": "The Lynx and the Frozen Ridge",
+                    "central_conflict": "snowstorm shuts down a beacon",
+                    "decisive_choice": "lynx aligns its compass",
+                    "resolution": "beacon is lit"},)
+        enabled = capture_prompt(True, history)
+        disabled = capture_prompt(False, history)
+        self.assertIn("snowstorm shuts down a beacon", enabled[0]["prompt"])
+        self.assertIn("Invent a different causal mechanism", enabled[0]["prompt"])
+        self.assertNotIn("snowstorm shuts down a beacon", disabled[0]["prompt"])
+        self.assertEqual(len(enabled), len(disabled))
+
+    def test_history_malformed_or_unavailable_does_not_break_default(self):
+        self.assertEqual(recent_plot_exclusions(None), "")
+        self.assertEqual(recent_plot_exclusions(["not a story", {}]), "")
+        self.assertIn("Valid", recent_plot_exclusions([{"title": "Valid"}]))
 
 
 if __name__ == "__main__":
