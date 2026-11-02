@@ -1785,7 +1785,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     # Begin only after preview/preflight sampling: receipts must originate from
     # the actual FFmpeg frame stream, not QA previews or test renders.
     from astra_v2.asset_usage_audit import begin as begin_asset_audit
-    begin_asset_audit(ch, len(plan))
+    begin_asset_audit(ch, len(plan), plan=plan)
     out=Path(out);out.parent.mkdir(parents=True,exist_ok=True)
     # Keep intermediate audio and encoder logs in RAM when enough tmpfs
     # capacity is available; preserve disk fallback for reliability.

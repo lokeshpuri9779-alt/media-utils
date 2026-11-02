@@ -39,6 +39,10 @@ class ContactSheetTests(unittest.TestCase):
             self.assertFalse(manifest["publication_approval"])
             self.assertEqual(len(manifest["sample_times_seconds"]), 4)
             self.assertEqual(result["source_mp4_sha256"], manifest["source_mp4_sha256"])
+            import hashlib
+            self.assertEqual(manifest["contact_sheet_sha256"],
+                             hashlib.sha256(output.read_bytes()).hexdigest())
+            self.assertEqual(result["contact_sheet_sha256"], manifest["contact_sheet_sha256"])
 
 
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
@@ -71,6 +75,9 @@ class ContactSheetTests(unittest.TestCase):
             self.assertEqual(len(sheets), 1)
             manifest = json.loads(sheets[0].with_suffix(".json").read_text())
             self.assertEqual(manifest["source_mp4_sha256"], receipt["video_sha256"])
+            import hashlib
+            self.assertEqual(manifest["contact_sheet_sha256"],
+                             hashlib.sha256(sheets[0].read_bytes()).hexdigest())
             self.assertEqual(manifest["semantic_quality"], "not_verified")
             self.assertFalse(manifest["publication_approval"])
 

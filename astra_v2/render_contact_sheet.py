@@ -66,6 +66,9 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
         draw.text((x + 8, y + 5), f"Sample {i + 1}  {timestamp:.1f}s", fill=(255, 255, 255))
     output.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(output, format="JPEG", quality=78, optimize=True)
+    # Bind the exact sampled JPEG as well as its source MP4. A replacement
+    # contact sheet with unchanged JSON must not pass independent inspection.
+    sheet_sha256 = hashlib.sha256(output.read_bytes()).hexdigest()
     digest = hashlib.sha256()
     with video.open("rb") as source:
         for chunk in iter(lambda: source.read(1024 * 1024), b""):
@@ -73,6 +76,7 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
     manifest = {
         "schema_version": 1,
         "source_mp4_sha256": digest.hexdigest(),
+        "contact_sheet_sha256": sheet_sha256,
         "sample_times_seconds": times,
         "sample_count": frame_count,
         "visual_review": "required",
@@ -83,5 +87,6 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
     output.with_suffix(".json").write_text(
         json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     return {"path": str(output), "manifest": str(output.with_suffix(".json")),
-            "source_mp4_sha256": digest.hexdigest(), "sample_count": frame_count,
+            "source_mp4_sha256": digest.hexdigest(), "contact_sheet_sha256": sheet_sha256,
+            "sample_count": frame_count,
             "semantic_quality": "not_verified"}

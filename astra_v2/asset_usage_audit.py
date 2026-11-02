@@ -18,12 +18,22 @@ import re
 _ACTIVE = ContextVar("astra_asset_pack_audit", default=None)
 
 
-def begin(story, shot_count):
+def begin(story, shot_count, *, plan=None):
     """Start a fresh candidate audit; do not reuse evidence across stories."""
     if os.getenv("ASTRA_ASSET_PACK_ENABLED") != "1" or os.getenv("ASTRA_ASSET_PACK_AUDIT") != "1":
         _ACTIVE.set(None)
         return False
+    # Capture the exact authored storyboard and renderer shot plan at render
+    # time. This is only a visual inspection aid, not a publication gate.
+    review_source = None
+    if os.getenv("ASTRA_VISUAL_REVIEW_SHEET") == "1":
+        try:
+            from astra_v2.story_visual_review_packet import snapshot
+            review_source = snapshot(story, plan)
+        except (TypeError, ValueError, OverflowError):
+            review_source = None
     _ACTIVE.set({
+        "review_source": review_source,
         "content_id": str(story.get("content_id") or ""),
         "title": str(story.get("title") or ""),
         "shot_count": int(shot_count),
@@ -182,6 +192,24 @@ def finish(video_path, *, renderer, expected_shots=None):
                 raise RuntimeError("review_frame_source_hash_mismatch")
             print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps(
                 evidence, sort_keys=True), flush=True)
+            # Bind actual decoded MP4 samples to the exact authored narration,
+            # visual prompts and compositor decisions, WITHOUT auto-approving.
+            if state.get("review_source") is not None:
+                try:
+                    from astra_v2.story_visual_review_packet import write_packet
+                    packet = write_packet(
+                        state["review_source"], result,
+                        json.loads(Path(evidence["manifest"]).read_text(encoding="utf-8")),
+                        Path(evidence["path"]).with_suffix(".story-review.json"),
+                        contact_sheet_path=evidence["path"],
+                    )
+                    print("ASTRA_STORY_VISUAL_REVIEW_PACKET=" + json.dumps(
+                        packet, sort_keys=True), flush=True)
+                except (OSError, ValueError, TypeError, KeyError) as error:
+                    print("ASTRA_STORY_VISUAL_REVIEW_PACKET=" + json.dumps({
+                        "status": "unavailable", "reason_type": type(error).__name__,
+                        "semantic_quality": "not_verified", "publication_approval": False,
+                    }, sort_keys=True), flush=True)
         except Exception as exc:
             # Log only fixed diagnostic codes: never echo exception text, paths,
             # subprocess stderr, credentials, or other potentially private data.
