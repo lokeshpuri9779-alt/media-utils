@@ -16,7 +16,8 @@ import tempfile
 from PIL import Image, ImageDraw
 
 
-def create_contact_sheet(video_path, output_path, *, duration_seconds=None, frame_count=4):
+def create_contact_sheet(video_path, output_path, *, duration_seconds=None, frame_count=4,
+                         sample_times_seconds=None):
     """Sample a few actual decoded frames; fail rather than invent evidence."""
     video = Path(video_path)
     output = Path(output_path)
@@ -39,8 +40,20 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
     ffmpeg = shutil.which("ffmpeg")
     if not ffmpeg:
         raise RuntimeError("ffmpeg_unavailable")
-    times = [round(duration * (2 * i + 1) / (2 * frame_count), 3)
-             for i in range(frame_count)]
+    if sample_times_seconds is None:
+        times = [round(duration * (2 * i + 1) / (2 * frame_count), 3)
+                 for i in range(frame_count)]
+        strategy = "uniform_quartiles"
+    else:
+        if (not isinstance(sample_times_seconds, (list, tuple))
+                or len(sample_times_seconds) != frame_count
+                or any(type(t) not in (int, float) or not math.isfinite(t)
+                       or t < 0 or t >= duration for t in sample_times_seconds)):
+            raise ValueError("invalid_storybeat_sample_times")
+        times = [round(t, 3) for t in sample_times_seconds]
+        if any(a >= b for a, b in zip(times, times[1:])):
+            raise ValueError("overlapping_storybeat_sample_times")
+        strategy = "planned_beat_midpoints"
     sheet = Image.new("RGB", (720, 1280), (24, 24, 24))
     with tempfile.TemporaryDirectory(prefix="astra-review-frames-") as directory:
         for i, timestamp in enumerate(times):
@@ -78,6 +91,7 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
         "source_mp4_sha256": digest.hexdigest(),
         "contact_sheet_sha256": sheet_sha256,
         "sample_times_seconds": times,
+        "sample_strategy": strategy,
         "sample_count": frame_count,
         "visual_review": "required",
         "semantic_quality": "not_verified",
@@ -88,5 +102,5 @@ def create_contact_sheet(video_path, output_path, *, duration_seconds=None, fram
         json.dumps(manifest, sort_keys=True, indent=2) + "\n", encoding="utf-8")
     return {"path": str(output), "manifest": str(output.with_suffix(".json")),
             "source_mp4_sha256": digest.hexdigest(), "contact_sheet_sha256": sheet_sha256,
-            "sample_count": frame_count,
+            "sample_count": frame_count, "sample_strategy": strategy,
             "semantic_quality": "not_verified"}
