@@ -16,7 +16,7 @@ def anti_slop(script: str) -> dict:
         raise ValueError("script exceeds advisory limit")
     normalized = " ".join(script.casefold().split())
     matches = [phrase for phrase in CLICHES
-               if re.search(r"(?<!\\w)" + re.escape(phrase) + r"(?!\\w)", normalized)]
+               if re.search(r"(?<!\w)" + re.escape(phrase) + r"(?!\w)", normalized)]
     sentences = [s.strip() for s in re.split(r"[.!?]+", normalized) if s.strip()]
     counts = {}
     for sentence in sentences:
