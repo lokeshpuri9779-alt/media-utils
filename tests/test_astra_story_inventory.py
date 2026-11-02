@@ -1,5 +1,6 @@
 """Regression tests for ASTRA's authored and opt-in draft story inventory."""
 import unittest
+from unittest.mock import patch
 
 from astra_v2.story_forge import PILLOW_DUO_PLOTS, PLOTS, REWRITTEN_PLOTS, NEW_AUTHORED_PLOTS, EDITORIAL_OCT2026_PLOTS, CROSSGENRE_DIRECTED_24, AUTHORED_REPLENISHMENT_OCT2026, AUTHORED_BATCH_341, AUTHORED_BATCH_364, AUTHORED_BATCH_407, AUTHORED_BATCH_420, AUTHORED_BATCH_421, AUTHORED_BATCH_422, AUTHORED_BATCH_423, AUTHORED_BATCH_424, AUTHORED_BATCH_473, AUTHORED_BATCH_526, DRAFT_CAUSAL_ARCS, DRAFT_PROBLEMS, catalog, draft_catalog, editorial_screen, plot_fingerprint
 from astra_v2.publication_quality import publication_rejection
@@ -15,7 +16,10 @@ class StoryInventoryTests(unittest.TestCase):
         missing_scene_art = {"The Heron and the Ferry Bell"}
         for story in records:
             with self.subTest(title=story["title"]):
-                issues = candidate_issues(story)
+                # Match the publisher's Studio-enabled production preflight,
+                # regardless of CI runner environment defaults.
+                with patch.dict("os.environ", {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+                    issues = candidate_issues(story)
                 if story["title"] in missing_scene_art:
                     # Do not claim a generic signal graphic depicts the bell.
                     # A future approved, semantic artwork integration may clear
@@ -25,6 +29,16 @@ class StoryInventoryTests(unittest.TestCase):
                         issues[0].startswith("publication_renderer_incompatible:") and
                         "signal_graphic_does_not_depict_narrated_event" in issues[0]
                     ), issues)
+                elif story["title"] == "The Badger and the Midnight Sprinklers":
+                    # Unsupported badger puppets must fail closed until a
+                    # verified, scene-matched artwork path is available.
+                    self.assertEqual(len(issues), 1, issues)
+                    self.assertTrue(issues[0].startswith(
+                        "publication_renderer_incompatible: shot 1:"), issues)
+                    self.assertIn(
+                        "unsupported badger actor requires verified scene artwork",
+                        issues[0],
+                    )
                 else:
                     self.assertEqual(issues, [])
 
@@ -39,7 +53,10 @@ class StoryInventoryTests(unittest.TestCase):
         }
         for story in records:
             with self.subTest(title=story["title"]):
-                issues = candidate_issues(story)
+                # Match the publisher's Studio-enabled production preflight,
+                # regardless of CI runner environment defaults.
+                with patch.dict("os.environ", {"ASTRA_UNIFIED_STORY_ENGINE": "1"}):
+                    issues = candidate_issues(story)
                 if story["title"] in missing_scene_art:
                     self.assertTrue(not issues or (
                         len(issues) == 1 and
