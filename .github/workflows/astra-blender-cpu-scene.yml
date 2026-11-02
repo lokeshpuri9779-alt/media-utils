@@ -65,7 +65,7 @@ jobs:
               assert data.startswith(b'\x89PNG\r\n\x1a\n') and struct.unpack('>II', data[16:24]) == (512,768)
           for frame in motion['frames']:
               b=(root/frame['file']).read_bytes()
-              assert b.startswith(b'\\x89PNG\\r\\n\\x1a\\n') and struct.unpack('>II', b[16:24]) == (512,768)
+              assert b.startswith(b'\x89PNG\r\n\x1a\n') and struct.unpack('>II', b[16:24]) == (512,768)
               assert hashlib.sha256(b).hexdigest() == frame['sha256']
           mp4=root/'camera_orbit.mp4'
           assert mp4.is_file() and mp4.stat().st_size > 4096
@@ -79,7 +79,7 @@ jobs:
           assert int(video['nb_frames']) == 8
           motion['video']={'file':'camera_orbit.mp4','fps':6,'frame_count':8,'codec':'h264',
                            'bytes':mp4.stat().st_size}
-          (root/'review.json').write_text(json.dumps(r,indent=2)+'\\n')
+          (root/'review.json').write_text(json.dumps(r,indent=2)+'\n')
           print('Two still views + 8 motion frames + 1.33 s H.264 clip passed structural review; semantic approval remains disabled')
           PY
       - name: Upload bounded review artifacts
