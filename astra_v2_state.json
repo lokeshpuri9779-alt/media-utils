@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
-  "confirmed_today": 4,
-  "last_attempt_at": "2026-11-02T22:34:11.110347+00:00",
+  "attempts": 6,
+  "confirmed_today": 5,
+  "last_attempt_at": "2026-11-02T23:18:08.711804+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8365,16 +8365,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "3j6i9_bbyFU": {
-      "content_id": "rayvan-gemini-4f2146eb43ac6331ade8",
+    },
+    "rayvan-gemini-4f2146eb43ac6331ade8": {
+      "video_id": "3j6i9_bbyFU",
+      "confirmed_at": "2026-11-02T22:48:59.473687+00:00",
       "title": "Orion the Owl and the Silent Comet Ring",
-      "day": "2026-11-03",
-      "uploaded_at": "2026-11-02T22:34:13.066801+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-02T22:34:13.066801+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "e59622d62d48fb09f3bea495e28dbe16fed864e2d5739ffb06c3db5879be5e9d",
       "story_beats": [
@@ -8419,16 +8417,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "S7XodM8hMxQ": {
+      "content_id": "rayvan-gemini-fa788ab7a8708fe6b26c",
+      "title": "The Fox and Rabbit of Blackberry Hollow",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-02T23:18:10.428148+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7727c85ee9f61ddc8177e5c0f69080c00185aa9c9207e5c8902fc9d2e57ce0d0",
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "Look at the fierce rain falling! The rushing river threatens to wash away our secret log bridge entirely.",
+          "visual": "forest",
+          "label": "The Flood",
+          "story_beat": "reveal",
+          "visual_prompt": "A wide-eyed orange fox and a fluffy white rabbit stand on opposite muddy banks of a rushing forest stream during a heavy downpour, staring at a mossy log about to slip into the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Pooling Their Strength",
+          "speech": "We must push this heavy log back into place right now, or neither of us can reach the shelter.",
+          "visual": "door",
+          "label": "The Push",
+          "story_beat": "build",
+          "visual_prompt": "The orange fox and the fluffy white rabbit stand side by side on the muddy forest bank, pressing their shoulders against a heavy mossy log to secure it against the swollen stream.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Balancing the Weight",
+          "speech": "Hold the compass steady while I steady the log so we do not slip into the freezing water below.",
+          "visual": "signal",
+          "label": "The Balance",
+          "story_beat": "mechanism",
+          "visual_prompt": "The white rabbit holds a small brass compass in its paws on the secured log while the orange fox holds the opposite end steady against the rushing forest river current.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Haven",
+          "speech": "We crossed together just in time before dark! Let us celebrate inside our warm dry den tonight.",
+          "visual": "planet",
+          "label": "The Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "The orange fox and the fluffy white rabbit sit happily together inside a cozy forest clearing under a starry night sky, holding a small glowing lantern between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden rainstorm swells the stream, trapping the rabbit on the wrong side and threatening to wash away their only crossing log.",
+      "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
+      "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-02T22:33:16.115360+00:00",
+  "last_preflight_at": "2026-11-02T22:48:59.110264+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-02T22:34:13.446856+00:00",
+    "at": "2026-11-02T23:18:10.955529+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -17551,10 +17607,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-fa788ab7a8708fe6b26c": {
+      "at": "2026-11-02T23:18:08.711786+00:00",
+      "title": "The Fox and Rabbit of Blackberry Hollow",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7727c85ee9f61ddc8177e5c0f69080c00185aa9c9207e5c8902fc9d2e57ce0d0",
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "Look at the fierce rain falling! The rushing river threatens to wash away our secret log bridge entirely.",
+          "visual": "forest",
+          "label": "The Flood",
+          "story_beat": "reveal",
+          "visual_prompt": "A wide-eyed orange fox and a fluffy white rabbit stand on opposite muddy banks of a rushing forest stream during a heavy downpour, staring at a mossy log about to slip into the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Pooling Their Strength",
+          "speech": "We must push this heavy log back into place right now, or neither of us can reach the shelter.",
+          "visual": "door",
+          "label": "The Push",
+          "story_beat": "build",
+          "visual_prompt": "The orange fox and the fluffy white rabbit stand side by side on the muddy forest bank, pressing their shoulders against a heavy mossy log to secure it against the swollen stream.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Balancing the Weight",
+          "speech": "Hold the compass steady while I steady the log so we do not slip into the freezing water below.",
+          "visual": "signal",
+          "label": "The Balance",
+          "story_beat": "mechanism",
+          "visual_prompt": "The white rabbit holds a small brass compass in its paws on the secured log while the orange fox holds the opposite end steady against the rushing forest river current.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Haven",
+          "speech": "We crossed together just in time before dark! Let us celebrate inside our warm dry den tonight.",
+          "visual": "planet",
+          "label": "The Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "The orange fox and the fluffy white rabbit sit happily together inside a cozy forest clearing under a starry night sky, holding a small glowing lantern between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden rainstorm swells the stream, trapping the rabbit on the wrong side and threatening to wash away their only crossing log.",
+      "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
+      "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-02T22:34:13.446801+00:00",
+    "at": "2026-11-02T23:18:10.955446+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -17565,21 +17675,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-02T22:34:13.446847+00:00",
+    "at": "2026-11-02T23:18:10.955515+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-02T22:33:52.221594+00:00",
+    "at": "2026-11-02T22:49:26.862875+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-4f2146eb43ac6331ade8",
-    "video_url": "https://www.youtube.com/watch?v=3j6i9_bbyFU",
+    "content_id": "rayvan-gemini-fa788ab7a8708fe6b26c",
+    "video_url": "https://www.youtube.com/watch?v=S7XodM8hMxQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-02T22:34:13.446727+00:00",
+    "at": "2026-11-02T23:18:10.955146+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -17591,10 +17701,52 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-02T22:34:13.446797+00:00",
-    "collection_status": "missing_diagnostics",
+    "at": "2026-11-02T23:18:10.955439+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "counters": {},
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 9,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
+        },
+        "seen": 34,
+        "total": 165
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 165,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 131,
+        "title": 0,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 131,
+        "remaining": 9
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "considered": 3,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 2
+      }
+    },
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }

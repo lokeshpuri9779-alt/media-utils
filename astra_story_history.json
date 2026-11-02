@@ -7420,6 +7420,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-4f2146eb43ac6331ade8",
+      "video_id": "3j6i9_bbyFU",
+      "confirmed_at": "2026-11-02T22:48:59.473687+00:00",
+      "title": "Orion the Owl and the Silent Comet Ring",
+      "plot_fingerprint": "e59622d62d48fb09f3bea495e28dbe16fed864e2d5739ffb06c3db5879be5e9d",
+      "story_beats": [
+        {
+          "headline": "The Unexpected Shadow",
+          "speech": "Look closely at the celestial map, my feathered friend, because the outer rings have completely vanished.",
+          "visual": "planet",
+          "label": "Missing Rings",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl protagonist stands inside the domed observatory looking through a brass telescope, pointing at a glowing planet projection on a star chart while holding a silver compass in his right wing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mechanical Alignment",
+          "speech": "We must adjust the copper gears of the focal array before the alignment window closes entirely.",
+          "visual": "signal",
+          "label": "Gear Tuning",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl protagonist stands on a wooden step stool inside the observatory, holding a heavy iron wrench in his right wing while turning a large brass gear attached to the side of a tall telescope.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lens Clearing",
+          "speech": "Hold this glass lantern steady while I brush away the cosmic dust clinging to the main objective lens.",
+          "visual": "door",
+          "label": "Dust Removal",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl protagonist stands on a narrow metal balcony outside the observatory dome at night, holding a lit glass lantern in his left wing and wiping dust from a large circular lens with a soft cloth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Brilliant Return",
+          "speech": "Behold the restored planetary rings shining brilliantly across the night sky just as we calculated.",
+          "visual": "ship",
+          "label": "Radiant Orbit",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl protagonist stands proudly inside the observatory dome next to the large polished telescope, looking up through the open glass roof at a magnificent glowing planet with bright orbital rings.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
