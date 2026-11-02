@@ -20,6 +20,20 @@ def _text(value):
     return value.strip()[:MAX_FIELD_CHARS] if isinstance(value, str) else ""
 
 
+def _midpoint(shot):
+    """Return a rounded, actual narration-shot midpoint or no alignment."""
+    if not isinstance(shot, dict):
+        return None
+    try:
+        start, duration = float(shot.get("start")), float(shot.get("duration"))
+    except (ValueError, TypeError, OverflowError):
+        return None
+    if (not math.isfinite(start) or not math.isfinite(duration)
+            or start < 0 or duration <= 0 or start + duration > 3600):
+        return None
+    return round(start + duration / 2, 3)
+
+
 def snapshot(story, plan=None):
     """Capture an immutable, bounded visual checklist before video encoding."""
     if not isinstance(story, dict) or story.get("genre") != "fiction":
@@ -48,8 +62,20 @@ def snapshot(story, plan=None):
             "planned_subject": _text(shot.get("story_subject")),
             "planned_action": _text(shot.get("story_action")),
             "planned_environment": _text(shot.get("story_environment")),
+            "planned_midpoint_seconds": _midpoint(shot),
         })
+    # The four-frame review sheet can be aligned only when the encoded
+    # four-beat narration plan supplies actual, strictly increasing timings.
+    # Never guess shot times from equal quarters or narrative order.
+    midpoints = [beat["planned_midpoint_seconds"] for beat in expected]
+    aligned_times = (
+        midpoints if len(expected) == 4 and len(plan) == 4
+        and all(t is not None for t in midpoints)
+        and all(a < b for a, b in zip(midpoints, midpoints[1:]))
+        else None
+    )
     return {
+        "beat_midpoint_times_seconds": aligned_times,
         "status": "captured" if expected else "invalid_storyboard",
         "content_id": _text(story.get("content_id")),
         "title": _text(story.get("title")),
@@ -90,6 +116,20 @@ def build_packet(source, asset_receipt, contact_manifest):
             or len(set(times)) != count):
         raise ValueError("invalid_decoded_frame_samples")
 
+    # Only explicitly sampled narration midpoints may claim timestamp
+    # alignment. This is NOT proof that the pixels depict the authored action.
+    planned_times = source.get("beat_midpoint_times_seconds")
+    strategy = contact_manifest.get("sample_strategy")
+    aligned = (
+        strategy == "planned_beat_midpoints"
+        and isinstance(planned_times, list)
+        and len(planned_times) == count
+        and shot_count == len(source["beats"]) == count
+        and all(type(t) in (int, float) and math.isfinite(t) for t in planned_times)
+        and all(abs(a - b) <= 0.001 for a, b in zip(times, planned_times))
+    )
+    if strategy == "planned_beat_midpoints" and not aligned:
+        raise ValueError("storybeat_frame_timestamps_mismatch")
     # A four-frame uniform sample is NOT guaranteed to align with four story
     # shots, even when both happen to have the same count.
     rows = []
@@ -101,6 +141,7 @@ def build_packet(source, asset_receipt, contact_manifest):
             "asset_shot_status": (
                 _text(shot.get("status")) if isinstance(shot, dict) else "not_aligned"
             ),
+            "contact_sheet_frame_index": i if aligned else None,
             "character_visible": "not_verified",
             "narrated_action_visible": "not_verified",
             "visual_prompt_matches_video": "not_verified",
@@ -118,7 +159,7 @@ def build_packet(source, asset_receipt, contact_manifest):
         "rendered_shot_count": shot_count,
         "frame_sample_count": count,
         "sample_times_seconds": times,
-        "sample_alignment": "not_established",
+        "sample_alignment": "planned_storybeat_midpoints" if aligned else "not_established",
         "review_status": "pending_independent_visual_inspection",
         "semantic_quality": "not_verified",
         "publication_approval": False,
