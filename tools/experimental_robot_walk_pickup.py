@@ -112,21 +112,55 @@ def foot_target(index, side):
 
 
 def position_legs(legs, actor_x, actor_z, index):
-    """Separate fixed-height boots from legs; track foot contact in world space."""
-    status={}
-    for side,hip_x in [('LEFT',-0.22),('RIGHT',0.22)]:
-        x,lift,planted=foot_target(index,side)
-        rod,boot=legs[side]
-        boot.location=(x,-0.11,0.15+lift)
-        upper=Vector((actor_x+hip_x,0,0.72+actor_z))
-        lower=Vector((x,-0.06,0.43+lift))
-        direction=upper-lower
-        rod.location=(upper+lower)*0.5
-        rod.scale.z=direction.length*0.5+0.04
-        rod.rotation_euler=direction.to_track_quat('Z','Y').to_euler()
-        bottom=boot.location.z-0.14
-        status[side]={'world_x':round(x,6),'floor_clearance':round(bottom,6),
-                      'planted':planted,'swing_lift':round(lift,6)}
+    """Solve two connected leg segments against fixed world-space boot poses.
+
+    An inexpensive geometric two-bone IK construction. The knee bends toward
+    the camera rather than shortening/disconnecting a single straight shaft.
+    No Blender IK solver, paid APIs, or new render samples are required.
+    """
+    status = {}
+    bone_length = 0.36
+    for side, hip_x in (('LEFT', -0.22), ('RIGHT', 0.22)):
+        x, lift, planted = foot_target(index, side)
+        thigh, shin, knee_joint, boot = legs[side]
+        boot.location = (x, -0.11, 0.15 + lift)
+        hip = Vector((actor_x + hip_x, 0.0, 0.72 + actor_z))
+        ankle = Vector((x, -0.11, 0.35 + lift))
+        axis = ankle - hip
+        distance = axis.length
+        if not (0.1 < distance < 2 * bone_length - 0.005):
+            raise ValueError(f'IK leg out of reach: {side} frame {index}: {distance:.3f}')
+        direction = axis.normalized()
+        preferred = Vector(((-0.12 if side == 'LEFT' else 0.12), -1.0, 0.0))
+        bend = preferred - direction * preferred.dot(direction)
+        if bend.length < 1e-5:
+            raise ValueError(f'Degenerate knee axis: {side} frame {index}')
+        bend.normalize()
+        knee = (hip + ankle) * 0.5 + bend * math.sqrt(
+            bone_length ** 2 - (distance * 0.5) ** 2
+        )
+        knee_joint.location = knee
+        for limb, upper, lower, radius in (
+            (thigh, hip, knee, 0.14),
+            (shin, knee, ankle, 0.125),
+        ):
+            ray = upper - lower
+            limb.location = (upper + lower) * 0.5
+            limb.scale = (radius, radius, ray.length * 0.5 + 0.027)
+            limb.rotation_euler = ray.to_track_quat('Z', 'Y').to_euler()
+        bottom = boot.location.z - 0.14
+        status[side] = {
+            'world_x': round(x, 6),
+            'floor_clearance': round(bottom, 6),
+            'planted': planted,
+            'swing_lift': round(lift, 6),
+            'knee_xyz': [round(float(v), 6) for v in knee],
+            'hip_knee_length': round((hip - knee).length, 6),
+            'knee_ankle_length': round((knee - ankle).length, 6),
+            'knee_forward_offset': round(
+                float(knee.y - (hip.y + ankle.y) * 0.5), 6
+            ),
+        }
     return status
 
 
@@ -193,16 +227,20 @@ def build():
     grip=empty('ANIM_GRIP_RIGHT',(0,-.06,-.70),arms['RIGHT'])
     fingers={}
     for side,sign in [('LEFT',-1),('RIGHT',1)]:
-        p=empty('ANIM_GRIP_FINGER_'+side,(sign*.21,-.22,0),grip)
-        sph('GRIP_FINGER_'+side,(0,-.015,0),(.055,.11,.09),navy,p)
+        # Copper and dark finger tips extend in front of the amber orb.
+        # This makes the open/close silhouette visible at 384x576.
+        p=empty('ANIM_GRIP_FINGER_'+side,(sign*.255,-.16,0),grip)
+        sph('GRIP_FINGER_'+side,(0,-.04,0),(.085,.13,.105),copper,p)
+        sph('GRIP_DARK_TIP_'+side,(0,-.165,0),(.078,.075,.085),navy,p)
         fingers[side]=(p,sign)
-    # World-space boot placement prevents feet sliding during stance.
-    # The leg shafts are pointed from the actor's hip to each current boot.
+    # Articulated two-bone legs share planted world-space boots.
     legs={}
     for name in ('LEFT','RIGHT'):
-        shaft=sph('ACTOR_'+name+'_LEG',(0,0,.44),(.15,.16,.23),navy)
+        thigh=sph('ACTOR_'+name+'_THIGH',(0,0,.6),(.14,.14,.19),copper)
+        shin=sph('ACTOR_'+name+'_SHIN',(0,0,.4),(.125,.125,.19),navy)
+        knee=sph('ACTOR_'+name+'_KNEE',(0,0,.48),(.165,.165,.165),copper)
         shoe=sph('ACTOR_'+name+'_BOOT',(0,0,.15),(.22,.31,.14),copper)
-        legs[name]=(shaft,shoe)
+        legs[name]=(thigh,shin,knee,shoe)
     area('Broad daylight key',(-3.5,-4.4,6.4),930,4.4)
     area('Front fill',(4,-1.4,5.4),320,3.5)
     cd = bpy.data.cameras.new('Fixed story camera')
@@ -280,7 +318,7 @@ def run(out):
             # The right claw closes around the orb after the reach phase.
             grip_t=max(0.0,min(1.0,(idx-12)/2.0))
             for p,sign in fingers.values():
-                p.location.x=sign*(.21-.065*grip_t)
+                p.location.x=sign*(.255-.095*grip_t)
             all_finger_spans.append(
                 abs(fingers['RIGHT'][0].location.x-fingers['LEFT'][0].location.x))
             sc.frame_set(idx+1)
@@ -324,6 +362,8 @@ def run(out):
                 "head_pitch":round(float(head.rotation_euler.x),5),
                 "right_arm_angle":round(float(arms['RIGHT'].rotation_euler.y),5),
                 "left_leg_angle":round(float(legs['LEFT'][0].rotation_euler.y),5),
+                "left_knee_xyz":foot_states['LEFT']['knee_xyz'],
+                "right_knee_xyz":foot_states['RIGHT']['knee_xyz'],
                 "orb_xyz":[round(float(v),5) for v in orb.location],
                 "hand_orb_distance":round(float((orb.matrix_world.translation-hand_center).length),5),
                 "grip_target_error":round(float((orb.matrix_world.translation-grip_target).length),5),
@@ -365,7 +405,16 @@ def run(out):
                 max(state[side]['swing_lift'] for state in all_foot_states[:9])>.09
                 for side in ('LEFT','RIGHT')
             ),
-            "hand_fingers_close_after_contact":all_finger_spans[14]<all_finger_spans[11]-.1,
+            "hand_fingers_close_after_contact":all_finger_spans[14]<all_finger_spans[11]-.15,
+            "two_bone_leg_lengths_stable":all(
+                abs(foot['hip_knee_length']-0.36)<0.002
+                and abs(foot['knee_ankle_length']-0.36)<0.002
+                for frame in all_foot_states for foot in frame.values()
+            ),
+            "visible_forward_knee_bend":all(
+                foot['knee_forward_offset']<-0.15
+                for frame in all_foot_states for foot in frame.values()
+            ),
             "arm_reaches_object":reach_distance<.22,
             "orb_stays_on_pedestal_until_pickup":all(
                 math.dist(f["orb_xyz"],orb_init)<1e-3 for f in frames[:13]),
