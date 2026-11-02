@@ -87,6 +87,49 @@ def png_size(path):
     return struct.unpack('>II', h[16:24])
 
 
+def foot_target(index, side):
+    """World-space planted foot with bounded swing arcs; never drives production."""
+    smooth=lambda t: t*t*(3-2*t)
+    if side == 'LEFT':
+        if index <= 2: return -1.47, 0.0, True
+        if index <= 4:
+            t=(index-2)/3
+            return -1.47+0.98*smooth(t), 0.14*math.sin(math.pi*t), False
+        if index <= 6: return -0.49, 0.0, True
+        if index <= 8:
+            t=(index-6)/2
+            return -0.49+0.45*smooth(t), 0.12*math.sin(math.pi*t), index==8
+        return -0.04, 0.0, True
+    if index <= 1: return -1.03, 0.0, True
+    if index <= 3:
+        t=(index-1)/3
+        return -1.03+0.715*smooth(t), 0.14*math.sin(math.pi*t), False
+    if index <= 5: return -0.315, 0.0, True
+    if index <= 7:
+        t=(index-5)/3
+        return -0.315+0.715*smooth(t), 0.14*math.sin(math.pi*t), False
+    return 0.40, 0.0, True
+
+
+def position_legs(legs, actor_x, actor_z, index):
+    """Separate fixed-height boots from legs; track foot contact in world space."""
+    status={}
+    for side,hip_x in [('LEFT',-0.22),('RIGHT',0.22)]:
+        x,lift,planted=foot_target(index,side)
+        rod,boot=legs[side]
+        boot.location=(x,-0.11,0.15+lift)
+        upper=Vector((actor_x+hip_x,0,0.72+actor_z))
+        lower=Vector((x,-0.06,0.43+lift))
+        direction=upper-lower
+        rod.location=(upper+lower)*0.5
+        rod.scale.z=direction.length*0.5+0.04
+        rod.rotation_euler=direction.to_track_quat('Z','Y').to_euler()
+        bottom=boot.location.z-0.14
+        status[side]={'world_x':round(x,6),'floor_clearance':round(bottom,6),
+                      'planted':planted,'swing_lift':round(lift,6)}
+    return status
+
+
 def build():
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
@@ -147,12 +190,19 @@ def build():
         sph('ACTOR_'+name+'_ARM',(0,0,-.32),(.15,.14,.35),copper,joint)
         hand = sph('ACTOR_'+name+'_HAND',(0,-.06,-.70),(.16,.15,.16),navy,joint)
         arms[name],hands[name] = joint,hand
-    legs = {}
-    for name,x in [('LEFT',-.22),('RIGHT',.22)]:
-        hip = empty('ANIM_'+name+'_HIP',(x,0,.72),root)
-        sph('ACTOR_'+name+'_LEG',(0,0,-.26),(.15,.17,.30),navy,hip)
-        sph('ACTOR_'+name+'_BOOT',(0,-.11,-.57),(.22,.31,.14),copper,hip)
-        legs[name]=hip
+    grip=empty('ANIM_GRIP_RIGHT',(0,-.06,-.70),arms['RIGHT'])
+    fingers={}
+    for side,sign in [('LEFT',-1),('RIGHT',1)]:
+        p=empty('ANIM_GRIP_FINGER_'+side,(sign*.21,-.22,0),grip)
+        sph('GRIP_FINGER_'+side,(0,-.015,0),(.055,.11,.09),navy,p)
+        fingers[side]=(p,sign)
+    # World-space boot placement prevents feet sliding during stance.
+    # The leg shafts are pointed from the actor's hip to each current boot.
+    legs={}
+    for name in ('LEFT','RIGHT'):
+        shaft=sph('ACTOR_'+name+'_LEG',(0,0,.44),(.15,.16,.23),navy)
+        shoe=sph('ACTOR_'+name+'_BOOT',(0,0,.15),(.22,.31,.14),copper)
+        legs[name]=(shaft,shoe)
     area('Broad daylight key',(-3.5,-4.4,6.4),930,4.4)
     area('Front fill',(4,-1.4,5.4),320,3.5)
     cd = bpy.data.cameras.new('Fixed story camera')
@@ -164,7 +214,7 @@ def build():
     sc.camera=camera
     bpy.context.view_layer.update()
     fixed=[floor,wall,lighthouse,pedestal,camera]
-    return sc,root,head,arms,hands,legs,orb,initial_orb,torso,fixed,blue,copper
+    return sc,root,head,arms,hands,legs,grip,fingers,orb,initial_orb,torso,fixed,blue,copper
 
 
 def run(out):
@@ -183,26 +233,24 @@ def run(out):
     }
     start=time.monotonic()
     try:
-        sc,root,head,arms,hands,legs,orb,orb_init,torso,fixed,blue,copper=build()
+        sc,root,head,arms,hands,legs,grip,fingers,orb,orb_init,torso,fixed,blue,copper=build()
         fixed_pos={o.name:tuple(round(float(v),5) for v in o.location) for o in fixed}
         reach_distance=None
         all_carried_distances=[]
+        all_foot_states=[]
+        all_finger_spans=[]
         for idx in range(FRAMES):
             if idx<=8:
                 t=idx/8.0
                 eased=t*t*(3-2*t)
                 root.location.x=-1.25+1.43*eased
                 root.location.z=.035*math.sin(math.pi*t)**2
-                gait=math.sin(math.pi*idx/2.0)*.33*math.sin(math.pi*(1-t))
-                legs['RIGHT'].rotation_euler[1]=gait
-                legs['LEFT'].rotation_euler[1]=-gait
                 arms['RIGHT'].rotation_euler[1]=-.17+.15*math.sin(math.pi*idx/2)
                 arms['LEFT'].rotation_euler[1]=.08-.14*math.sin(math.pi*idx/2)
                 phase='approach'
             elif idx<=11:
                 root.location.x=.18
                 root.location.z=0
-                for obj in legs.values(): obj.rotation_euler[1]=0
                 arms['RIGHT'].rotation_euler[1]=-.17-.25*((idx-8)/3)
                 arms['LEFT'].rotation_euler[1]=.07
                 phase='reach'
@@ -213,24 +261,36 @@ def run(out):
                 arms['RIGHT'].rotation_euler[1]=-.42-.73*((idx-12)/7)
                 arms['LEFT'].rotation_euler[1]=.07
                 phase='pickup_and_lift'
+            foot_states=position_legs(legs,float(root.location.x),float(root.location.z),idx)
+            all_foot_states.append(foot_states)
             head.rotation_euler.z=.13*math.sin(math.pi*idx/19)
+            # The right claw closes around the orb after the reach phase.
+            grip_t=max(0.0,min(1.0,(idx-12)/2.0))
+            for p,sign in fingers.values():
+                p.location.x=sign*(.21-.065*grip_t)
+            all_finger_spans.append(
+                abs(fingers['RIGHT'][0].location.x-fingers['LEFT'][0].location.x))
             sc.frame_set(idx+1)
             bpy.context.view_layer.update()
             hand_center=hands['RIGHT'].matrix_world.translation.copy()
+            grip_target=grip.matrix_world @ Vector((0,-.25,0))
             if idx==11:
                 reach_distance=(hand_center-orb_init).length
                 if reach_distance>.22:
                     raise ValueError(f"Hand did not reach orb: {reach_distance:.4f}")
             if idx>=12:
-                orb.location=hand_center+Vector((.04,-.055,.035))
+                # Blend across two frames rather than teleporting orb to the hand.
+                blend=max(0.0,min(1.0,(idx-12)/2.0))
+                blend=blend*blend*(3-2*blend)
+                orb.location=orb_init.lerp(grip_target,blend)
             else:
                 orb.location=orb_init
             bpy.context.view_layer.update()
-            if idx>=12:
-                distance=(orb.matrix_world.translation-hand_center).length
+            if idx>=14:
+                distance=(orb.matrix_world.translation-grip_target).length
                 all_carried_distances.append(distance)
-                if distance>.12:
-                    raise ValueError("Orb detached from reaching hand")
+                if distance>.015:
+                    raise ValueError("Orb lost hand grip after contact")
             for target in (head.matrix_world.translation,orb.matrix_world.translation):
                 p=world_to_camera_view(sc,sc.camera,target)
                 if not (.06<p.x<.94 and .07<p.y<.94 and p.z>0):
@@ -249,9 +309,12 @@ def run(out):
                 "root_x":round(float(root.location.x),5),
                 "head_yaw":round(float(head.rotation_euler.z),5),
                 "right_arm_angle":round(float(arms['RIGHT'].rotation_euler.y),5),
-                "left_leg_angle":round(float(legs['LEFT'].rotation_euler.y),5),
+                "left_leg_angle":round(float(legs['LEFT'][0].rotation_euler.y),5),
                 "orb_xyz":[round(float(v),5) for v in orb.location],
                 "hand_orb_distance":round(float((orb.matrix_world.translation-hand_center).length),5),
+                "grip_target_error":round(float((orb.matrix_world.translation-grip_target).length),5),
+                "finger_span":round(all_finger_spans[-1],5),
+                "feet":foot_states,
                 "sha256":hashlib.sha256(img.read_bytes()).hexdigest(),
                 "bytes":img.stat().st_size,
                 "render_seconds":round(time.monotonic()-render_start,2),
@@ -264,13 +327,39 @@ def run(out):
             "twenty_complete_frames":len(frames)==FRAMES,
             "unique_frames":len({f["sha256"] for f in frames})==FRAMES,
             "walked_toward_object":frames[8]["root_x"]-frames[0]["root_x"]>1.35,
-            "alternating_leg_gait":max(f["left_leg_angle"] for f in frames[:9])-
-                                    min(f["left_leg_angle"] for f in frames[:9])>.3,
+            "alternating_leg_gait":(
+                any(not s['LEFT']['planted'] for s in all_foot_states[:9])
+                and any(not s['RIGHT']['planted'] for s in all_foot_states[:9])
+                and any(s['LEFT']['planted'] and not s['RIGHT']['planted']
+                        for s in all_foot_states[:9])
+                and any(s['RIGHT']['planted'] and not s['LEFT']['planted']
+                        for s in all_foot_states[:9])
+            ),
+            "feet_above_floor":all(
+                min(foot['floor_clearance'] for foot in state.values())>=-0.001
+                for state in all_foot_states),
+            "stanced_feet_do_not_slide":all(
+                abs(all_foot_states[k][side]['world_x']-all_foot_states[k-1][side]['world_x'])<1e-4
+                for side in ('LEFT','RIGHT') for k in range(1,9)
+                if all_foot_states[k][side]['planted'] and all_foot_states[k-1][side]['planted']
+            ),
+            "feet_land_before_reach":all(
+                state[side]['planted'] and state[side]['floor_clearance']<=.011
+                for state in all_foot_states[9:] for side in ('LEFT','RIGHT')
+            ),
+            "swing_foot_clears_ground":all(
+                max(state[side]['swing_lift'] for state in all_foot_states[:9])>.09
+                for side in ('LEFT','RIGHT')
+            ),
+            "hand_fingers_close_after_contact":all_finger_spans[14]<all_finger_spans[11]-.1,
             "arm_reaches_object":reach_distance<.22,
             "orb_stays_on_pedestal_until_pickup":all(
-                math.dist(f["orb_xyz"],orb_init)<1e-3 for f in frames[:12]),
-            "orb_lifted_after_contact":frames[-1]["orb_xyz"][2]-frames[12]["orb_xyz"][2]>.25,
-            "orb_attached_to_hand_after_pickup":max(all_carried_distances)<.12,
+                math.dist(f["orb_xyz"],orb_init)<1e-3 for f in frames[:13]),
+            "orb_lifted_after_contact":frames[-1]["orb_xyz"][2]-frames[14]["orb_xyz"][2]>.20,
+            "orb_attached_to_hand_after_pickup":max(all_carried_distances)<.015,
+            "pickup_blended_without_teleport":(
+                frames[12]['grip_target_error']>frames[14]['grip_target_error']
+                and frames[14]['grip_target_error']<.015),
             "camera_and_coast_fixed":all(
                 tuple(round(float(v),5) for v in o.location)==fixed_pos[o.name] for o in fixed),
             "copper_material_preserved":all(abs(x-y)<1e-5 for x,y in zip(mcopper,COPPER)),
