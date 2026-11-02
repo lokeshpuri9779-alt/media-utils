@@ -11,17 +11,31 @@ def review_batch(document, history, reviewer=assess):
     if document.get("status") != "unreviewed" or not isinstance(document.get("stories"), list):
         raise ValueError("invalid_unreviewed_batch")
     approved, decisions, audit = [], [], []
+    reviewer_rate_limited = False
     for proposal in document["stories"]:
         # Normalize generated microfiction before independent editorial review.
         story = dict(proposal)
         if story.get("kind") != "microfiction":
             raise ValueError("unexpected_gemini_proposal_kind")
         story["kind"] = "authored_causal_story"
+        if reviewer_rate_limited:
+            # Quota exhaustion is not an editorial decision. Retain the source
+            # proposal in the unreviewed artifact, but do not spend further
+            # provider calls or silently invent approval records.
+            audit.append({"content_id": story["content_id"], "approved": False,
+                          "issues": ["review_deferred:rate_limited"]})
+            continue
         verdict = reviewer(story, history + approved)
+        issues = verdict.get("issues") or []
+        if ("review_failed:HTTP_429" in issues
+                or "review_provider:rate_limited" in issues):
+            reviewer_rate_limited = True
         record = verdict.get("record")
-        accepted = verdict.get("approved") is True and isinstance(record, dict) and record.get("story_sha256") == story_digest(story)
+        accepted = (not reviewer_rate_limited and verdict.get("approved") is True
+                    and isinstance(record, dict)
+                    and record.get("story_sha256") == story_digest(story))
         audit.append({"content_id": story["content_id"], "approved": accepted,
-                      "issues": verdict.get("issues") or ([] if accepted else ["invalid_approval_record"])})
+                      "issues": issues or ([] if accepted else ["invalid_approval_record"])})
         if accepted:
             approved.append(story)
             decisions.append(record)
