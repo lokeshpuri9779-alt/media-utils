@@ -1,10 +1,5 @@
 name: ASTRA CPU Image Feasibility (Isolated)
 on:
-  push:
-    branches:
-      - experiment/openvino-int8-model-candidate
-    paths:
-      - .github/workflows/astra-cpu-image-feasibility.yml
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
