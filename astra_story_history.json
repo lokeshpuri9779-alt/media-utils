@@ -7322,6 +7322,55 @@
       "central_conflict": "A swollen root trap jammed the communal acorn cache shut just as winter frost arrived.",
       "decisive_choice": "Pip traded his cherished brass lantern to an owl for a heavy iron wrench to pry open the root.",
       "resolution": "The cache opened successfully, saving the winter supply while leaving Pip's home dark."
+    },
+    {
+      "content_id": "rayvan-gemini-c46977c7362d4dab1684",
+      "video_id": "nv2qDoRxvxE",
+      "confirmed_at": "2026-11-02T21:02:41.038316+00:00",
+      "title": "Professor Pip and the Midnight Platform Mystery",
+      "plot_fingerprint": "0c9c03d99ef4e307377cae802a08f2d5ebce4aae491af3294495c7d12cbd6a08",
+      "story_beats": [
+        {
+          "headline": "The Missing Parcel",
+          "speech": "Oh dear, the express mail parcel has completely vanished from the oak sorting table right before midnight!",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Professor Pip, a small field mouse with round spectacles and a dark blue wool vest, stands on a wooden railway platform next to a desk. He holds a brass bell in his right paw, looking anxiously at a red signal light glowing in the foggy night background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Paper Trail",
+          "speech": "Look closely at these tiny torn paper scraps left behind on the cold stone floor by the ticket booth.",
+          "visual": "door",
+          "label": "The Clue",
+          "story_beat": "build",
+          "visual_prompt": "Professor Pip kneels on the damp railway platform floor near a heavy wooden station door, holding a magnifying glass in his right paw and inspecting scattered white paper scraps. His expression is intensely focused under the amber lamplight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Freight Lift",
+          "speech": "The rustling noise is coming from the dark freight elevator shaft at the end of the platform.",
+          "visual": "forest",
+          "label": "The Investigation",
+          "story_beat": "mechanism",
+          "visual_prompt": "Professor Pip stands at the edge of the open freight lift shaft at the far end of the railway platform, holding a brass lantern in his left paw and pointing forward with his right paw toward towering pine trees looming in the dark distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Recovery",
+          "speech": "Here is the missing package tucked safely inside the wooden storage box behind the iron lever!",
+          "visual": "ship",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Professor Pip stands triumphantly beside a small wooden box on the railway platform, holding a wrapped parcel in both paws. A brass key rests on the box lid, and an incoming steam train's headlight casts a warm glow across the scene.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
