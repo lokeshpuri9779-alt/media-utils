@@ -793,15 +793,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-74c519adc37ec4a5de5b",
-      "story_sha256": "58c2d72fa4fc23acf7a4597bcd77e3e1850ac1c633832932389a3ff49e829f5c",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is completely original and does not replicate the premises, characters, settings, or causal mechanisms of any recently published examples provided.; The narrative exhibits strong causal coherence, clarity, and a logical progression from conflict to decisive choice and resolution.; There are no copyright or trademark violations, unsafe/misleading content, or YouTube policy risks present in the text.",
-      "reviewed_at": "2026-11-02T18:33:48.321807+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
       "story_sha256": "e77c4a38ba450571c5c902e8b9ec9f865b8ce79bc2393d2534baf028e9b6bf5b",
       "decision": "approve",
@@ -907,6 +898,60 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is structurally coherent, original, and clean of any copyright infringements or unsafe content.; The narrative causal logic flows smoothly from conflict to decisive choice and resolution without duplicating the specific premises of the provided comparison set.",
       "reviewed_at": "2026-11-02T18:43:42.451982+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-d043b9408f31c5ecd912",
+      "story_sha256": "7b099da00874bd7ff5a8023c090844ee85525489939a6121296d0a0772a332bf",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not replicate the characters, settings, or causal mechanisms of the recently published comparison history.; The causal chain from conflict to decisive choice and resolution is coherent and clearly articulated.; There are no copyright, trademark, safety, or policy risks present.",
+      "reviewed_at": "2026-11-02T19:12:53.562466+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-9e451cb4f6df6c659346",
+      "story_sha256": "fd32a2fd3a10c01f1ec96e9965fd52e9208ddf045ab445b040c51f0cfcf71283",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is logically coherent with clear cause-and-effect progression.; There are no copyright infringements, trademarks, or policy violations.; The narrative is unique and does not duplicate any recently published premises or endings in the comparison set.; Audience suitability is broad and safe for general viewers.",
+      "reviewed_at": "2026-11-02T19:12:56.232620+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-cb383d0419ca4ff08a05",
+      "story_sha256": "57caa30d769af47b190749c9255fc85d2a8e03fb9fdc9b9c846bf1d91d78d994",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is causally coherent and follows a logical narrative progression from conflict to resolution.; There are no copyright or trademark violations present.; The content is entirely safe, appropriate for all audiences, and complies with all content guidelines.; The premise, characters, and plot mechanics are sufficiently original and do not duplicate recently published examples.",
+      "reviewed_at": "2026-11-02T19:12:58.166683+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-848b1d4185bf672f8754",
+      "story_sha256": "1e7d59bad1511206a7c01cd327f4960f16c932b9224c655407ff7dfee17e1e8c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is causally coherent with a clear conflict, decisive choice, and resolution.; No copyright or trademark violations detected.; Content is safe, appropriate for all audiences, and complies with YouTube guidelines.; Premise, characters, and plot mechanics are distinct from the provided comparison history.",
+      "reviewed_at": "2026-11-02T19:13:04.417877+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+      "story_sha256": "aecb5a1115f9237639153338763ea84a1139afe4ce36f5075388145a8a73b11c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and adheres to safety and policy guidelines.; It does not duplicate any recently published premises or endings in the comparison set.; The causal chain from conflict to resolution is clear and logical.",
+      "reviewed_at": "2026-11-02T19:13:06.577565+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+      "story_sha256": "660ae6cb607885e24f82b08eea3be513bb2c05d7a2d06aff1532ffd24995dee5",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original, coherent, and clear.; No copyright or trademark infringements detected.; Content is safe, family-friendly, and complies with YouTube guidelines.; Does not duplicate recent publication premises or characters.",
+      "reviewed_at": "2026-11-02T19:13:08.517118+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

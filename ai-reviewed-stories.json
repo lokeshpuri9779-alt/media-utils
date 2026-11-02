@@ -6590,81 +6590,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-74c519adc37ec4a5de5b",
-      "title": "The Weaver's Choice at Bramble Mill",
-      "hook": "The Hidden Fault",
-      "question": "Can lifelong friends mend a fracture caused by competing village duties?",
-      "answer": "Yes, by sacrificing individual pride to preserve their community's shared harvest.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Hidden Fault",
-          "speech": "Look at the rotting timbers beneath the floorboards, Bram. Our village mill cannot withstand another autumn flood.",
-          "visual": "forest",
-          "label": "The Discovery",
-          "story_beat": "reveal",
-          "visual_prompt": "Close-up of Bram and Thomas examining damp wooden floorboards inside the rustic mill, holding a flickering oil lantern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Rising Waters",
-          "speech": "We must carry the precious wool bales up to the loft immediately, before the rushing water ruins everything we own.",
-          "visual": "door",
-          "label": "The Preparation",
-          "story_beat": "build",
-          "visual_prompt": "Medium shot of Thomas and Bram hoisting heavy wool bales toward the heavy oak storage door against rising muddy water.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Jammed Gate",
-          "speech": "The iron winch is completely rusted shut. If I leave my loom now, my winter commission will be entirely lost forever.",
-          "visual": "signal",
-          "label": "The Mechanism",
-          "story_beat": "mechanism",
-          "visual_prompt": "Wide shot of Bram struggling with a jammed metal crank lever outside in the rain while Thomas waves a warning red signal flag.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Shared Bond",
-          "speech": "Forget the cloth and pull this beam together with me now, or our entire village will starve through the cold winter.",
-          "visual": "ship",
-          "label": "The Final Payoff",
-          "story_beat": "payoff",
-          "visual_prompt": "Action shot of Bram and Thomas straining together to drop the heavy timber sluice gate as floodwaters swirl safely around the stone foundation.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A sudden river flood threatens both the communal winter flour sacks and the mill's ancient wooden sluice gate.",
-      "decisive_choice": "Bram abandons his own flooded weaving loom to help his estranged friend lift the heavy sluice beam.",
-      "resolution": "The mill survives the deluge, and the two friends rebuild their workshop together with mutual respect.",
-      "visual_bible": {
-        "style": "Warm-toned historical realism with rich earth colors and cinematic lighting.",
-        "characters": {
-          "Bram": "A stocky middle-aged weaver with a thick brown beard, wearing a woolen tunic and leather apron.",
-          "Thomas": "A lean, agile miller with expressive eyes, wearing a patched linen shirt and sturdy work trousers."
-        },
-        "locations": {
-          "Bramble Mill": "A rustic stone watermill nestled beside a fast-flowing river, surrounded by dense autumn forests."
-        },
-        "objects": {
-          "oil_lantern": "A tarnished brass lantern casting a warm, flickering golden glow.",
-          "sluice_beam": "A massive, weather-worn oak beam fitted with heavy iron brackets and bolts."
-        }
-      },
-      "plot_fingerprint": "f246407df20bbdcaf085b9e99fbf7adbd260e13b2ef398777cb88f432531d658"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
       "title": "The Mystery of Platform Four and the Silent Watchman",
       "hook": "The Missing Heirloom",
@@ -7560,6 +7485,455 @@
         }
       },
       "plot_fingerprint": "10b8bb6234b67d56bb84ae78b4d21ef0ed76e4b9481b9a1ab6f69f2f8e34f74f"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-d043b9408f31c5ecd912",
+      "title": "Ollie and the Salt-Cured Sundial",
+      "hook": "The Rising Tide",
+      "question": "How did Ollie the otter save the summer solstice festival when the coastal tide threatened to swallow the great sundial?",
+      "answer": "Ollie used a heavy brass anchor and a tight rope lattice to hoist the massive stone dial above the rising waterline.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Rising Tide",
+          "speech": "Look at the water climbing up the stone steps. If we do not act right now, the entire festival sundial will vanish beneath the foam.",
+          "visual": "signal",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "Ollie the brown otter with damp fur and a striped sailor cap stands on a slippery wooden pier, pointing urgently with a brass compass toward the sea where foamy waves wash over a carved stone sundial.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering the Gear",
+          "speech": "We need every strong rope and every heavy iron anchor we own to build a stable lifting harness before the surf gets any higher.",
+          "visual": "door",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "Ollie the brown otter wearing a blue vest strains as he drags a heavy iron anchor across the wet wooden planks of a dock toward a weathered storage shed door.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Rigging the Lift",
+          "speech": "Tie this thick rope securely around the carved pillar, then hook the iron anchor firmly into the base to create a high-tension lever.",
+          "visual": "ship",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "Ollie the otter stands on a wooden platform above the splashing tide, tightly knotting a thick hemp rope around a wooden mast while holding a small silver bell in his left paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Solstice Saved",
+          "speech": "The stone sundial hangs safely above the crashing waves. Now our seaside celebration can finally begin under the bright summer sun.",
+          "visual": "forest",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "Ollie the otter sits proudly on a hoisted wooden platform next to the dry stone sundial, holding a shining brass key aloft while lush green coastal pines line the sunny cliffside background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "An unexpected spring tide threatens to submerge the seaside festival's central stone sundial before the solstice celebration begins.",
+      "decisive_choice": "Ollie chooses to abandon his completed festival banquet display to hoist the heavy stone sundial with a sturdy rope lattice.",
+      "resolution": "The sundial is safely suspended above the surging waves, allowing the seaside festival to proceed without interruption.",
+      "visual_bible": {
+        "style": "Bright storybook illustration with crisp outlines, warm golden-hour coastal lighting, and rich textural details on wood, stone, and fur.",
+        "characters": {
+          "Ollie": "A nimble brown otter with sleek fur, bright amber eyes, wearing a neat blue sailor vest and a matching striped cap."
+        },
+        "locations": {
+          "Seaside Pier": "A weathered wooden dock built over turquoise ocean waters, surrounded by smooth coastal rocks and distant green pine forests.",
+          "Storage Shed": "A rustic seaside cabin made of grey salt-bleached wooden planks with a heavy timber door."
+        },
+        "objects": {
+          "anchor": "A heavy, four-pronged iron anchor with a dark, rust-resistant matte finish.",
+          "compass": "A polished brass pocket compass with an intricate glass face and a swinging magnetic needle.",
+          "bell": "A small, gleaming silver handbell with an ornate carved handle.",
+          "key": "A medium-sized brass key with a clover-shaped head and deep notches."
+        }
+      },
+      "plot_fingerprint": "ab1a104bc4f954b66e8da4f7b32050001eb566f61411675a7c9cd974e11cf5fc"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-9e451cb4f6df6c659346",
+      "title": "Bram and the Frost-Crested Pass",
+      "hook": "The Fractured Line",
+      "question": "Can a lone lynx secure a crumbling mountain cable before the blizzard isolates the upper valley?",
+      "answer": "Yes, Bram ties off the fraying iron line with a sturdy brass bell, alerting the herds below just in time.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Fractured Line",
+          "speech": "The upper suspension cable snaps loudly against the frozen rock face, sending a shower of loose shale down into the deep ravine.",
+          "visual": "forest",
+          "label": "Fracture",
+          "story_beat": "reveal",
+          "visual_prompt": "A sharp-eyed lynx stands on a snow-dusted mountain ledge, staring intently at a broken iron cable hanging over a deep pine forest abyss below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Leap",
+          "speech": "Holding the heavy brass compass firmly in his teeth, Bram leaps across the churning white gap toward the swaying anchor post.",
+          "visual": "signal",
+          "label": "Leap",
+          "story_beat": "build",
+          "visual_prompt": "The lynx leaps mid-air across a freezing mountain chasm, carrying a glowing brass compass in his jaws toward a frozen wooden post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secure Anchor",
+          "speech": "Wrapping the fraying wire tightly around the stone pillar, the lynx fastens the heavy latch with a steady paw.",
+          "visual": "door",
+          "label": "Anchor",
+          "story_beat": "mechanism",
+          "visual_prompt": "The lynx uses both paws to wedge a heavy iron key and brass compass into the base of a frozen timber gate on the mountain trail.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Passage",
+          "speech": "With the bridge securely locked in place, the clear bell chime echoes across the valley as the blizzard subsides.",
+          "visual": "ship",
+          "label": "Passage",
+          "story_beat": "payoff",
+          "visual_prompt": "The lynx sits calmly beside a polished brass bell on a secure wooden platform while distant mountain cable cars pass safely overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A heavy rockfall severs the primary suspension cable across the whispering gorge, threatening to plunge the mountain market carts into the abyss.",
+      "decisive_choice": "Bram leaves his safe stone ledge to leap across the icy chasm and anchor the whipping cable with a heavy brass compass.",
+      "resolution": "The bridge cable holds firm against the gale-force winds, allowing the stranded travelers to cross safely to the lower shelter.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion puppet animation with detailed felt textures, realistic snow accumulation, and dramatic warm rim lighting.",
+        "characters": {
+          "Bram": "A sturdy mountain lynx with thick golden-brown fur, white ear tufts, dark amber eyes, and a determined expression."
+        },
+        "locations": {
+          "Whispering Gorge": "A steep, snow-covered mountain pass featuring jagged gray stone cliffs, frozen pine trees, and a wooden suspension bridge."
+        },
+        "objects": {
+          "compass": "A heavy, tarnished brass pocket compass with a scratched glass face and a secure locking clasp.",
+          "bell": "A small, polished brass handbell attached to a frayed red leather strap.",
+          "key": "A thick, iron skeleton key with heavy rust spots along the shaft."
+        }
+      },
+      "plot_fingerprint": "b50ce3c1483da41c9bf341eb546aacc4f152e9b9d57e6cdf779cd96928942703"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-cb383d0419ca4ff08a05",
+      "title": "Orion and the Tidal Shell Mystery",
+      "hook": "The Missing Festival Lantern",
+      "question": "Can the seaside otter solve the missing festival lantern before sunset?",
+      "answer": "Orion uses his compass to trace the hidden coastal current and recover the lantern.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Missing Festival Lantern",
+          "speech": "Oh dear, the grand festival lantern has vanished right from the pavilion ledge just before sunset arrives.",
+          "visual": "signal",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An otter named Orion wearing a blue vest stands on a wooden coastal pavilion looking shocked at an empty hook, holding a brass compass in his right paw, soft afternoon sunlight glinting on the ocean waves behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Following the Current",
+          "speech": "My trusty compass needle spins wildly toward the rocky sea cave where the rogue wave pushed everything.",
+          "visual": "forest",
+          "label": "The Search",
+          "story_beat": "build",
+          "visual_prompt": "Orion the otter in his blue vest stands near damp coastal rocks and tide pools, holding a glowing lantern in both paws while checking a brass compass, surrounded by sea grass under a darkening sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reaching the Sea Cave",
+          "speech": "I must reach inside this slippery crevice before the tide rises any higher and blocks the entrance.",
+          "visual": "door",
+          "label": "The Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the otter in his blue vest reaches carefully into a dark rocky coastal cave opening, holding a small wooden box under his left arm while water laps at his feet.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Festival Restored",
+          "speech": "Look! The festival lantern is safe and glowing brightly once more for our joyful seaside gathering.",
+          "visual": "ship",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the otter in his blue vest stands proudly on a sandy beach at dusk, holding a bright festival lantern aloft in his right paw while cheering animals watch from the background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A rogue wave sweeps the grand festival lantern away from the coastal pavilion just before the equinox celebration.",
+      "decisive_choice": "Orion the otter chooses to dive into the chilly swirling tide pool instead of waiting for the morning low tide.",
+      "resolution": "The grand lantern is retrieved from the sea cave, lighting up the evening beach festival for all the coastal animals.",
+      "visual_bible": {
+        "style": "Charming storybook illustration style with warm lighting and detailed textures",
+        "characters": {
+          "Orion": "A furry brown otter with bright black eyes, a cheerful whiskers twitch, wearing a small fitted blue fabric vest."
+        },
+        "locations": {
+          "Coastal Pavilion": "A weathered wooden deck overlooking the sparkling ocean with hanging hooks and rope railings.",
+          "Tide Pool Rocks": "Damp, mossy coastal rocks surrounded by shallow seawater and tall green sea grass."
+        },
+        "objects": {
+          "compass": "A polished brass pocket compass with a clear glass face and a trembling magnetic needle.",
+          "lantern": "A round glass and metal festival lantern emitting a warm yellow glow.",
+          "box": "A small square wooden storage box with a metal latch."
+        }
+      },
+      "plot_fingerprint": "7b2fd13d4dfcd0e42fb3e023d0f37dee0151473bd6b1ae2a1267badb8b8d4c2e"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-848b1d4185bf672f8754",
+      "title": "Sammy the Squirrel and the Amber Bell",
+      "hook": "The Rising Waters",
+      "question": "How can Sammy unblock the frozen autumn stream before the frost ruins the winter pantry?",
+      "answer": "Sammy uses a heavy brass bell as a wedge to redirect the icy current around the fallen timber.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "Oh no, the icy water is rising fast toward my winter acorn reserves!",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel standing on a wet mossy log in a dense pine forest, looking worried at a rising pool of cold water, paws held near his cheeks, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Finding the Tool",
+          "speech": "This heavy brass bell I found in the hollow tree might just be strong enough to crack this stubborn ice.",
+          "visual": "signal",
+          "label": "The Plan",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel standing beside a frozen stream in a pine forest, holding a heavy polished brass bell with both paws, looking determined.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge",
+          "speech": "I must wedge this bell firmly into the frozen cedar gap to shift the heavy pressure away from my burrow.",
+          "visual": "door",
+          "label": "The Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel pushing a heavy brass bell into a crack within an icy wooden barrier across a forest stream, straining with effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Flow",
+          "speech": "The ice has broken and the stream flows safely past my home just in time!",
+          "visual": "forest",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel standing happily on a dry rock in a pine forest, watching clear water flow past around a resting brass bell.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A thick sheet of autumn ice and fallen cedar debris dams the forest stream, threatening to flood Sammy's lower winter storage burrows.",
+      "decisive_choice": "Sammy rolls a heavy brass bell into the crevice of the ice dam to fracture the frozen blockage.",
+      "resolution": "The ice cracks cleanly and the stream diverts safely away from the burrows, preserving the winter acorn supply.",
+      "visual_bible": {
+        "style": "Warm-toned cinematic storybook illustration with rich forest textures, soft natural lighting, and clear focal points.",
+        "characters": {
+          "Sammy": "A small, nimble squirrel with fluffy brown fur, a bright bushy tail, wide curious dark eyes, and energetic proportions."
+        },
+        "locations": {
+          "pine_forest": "A lush, green and brown woodland setting featuring tall pine trees, moss-covered stones, and a clear running stream."
+        },
+        "objects": {
+          "bell": "A heavy, polished golden-brass handbell with a sturdy handle and a clear, reflective metallic surface."
+        }
+      },
+      "plot_fingerprint": "7b72a1bb441478b2ed12c6d7ad9ba56c3837d359dbd8e91932bece0447068e30"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+      "title": "Pip and the Midnight Railway Signal",
+      "hook": "The Jammed Junction",
+      "question": "How does the platform mouse prevent an impending freight collision on the foggy railway line?",
+      "answer": "Pip maneuvers the heavy mechanical track lever to switch the freight line before the midnight express arrives.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Jammed Junction",
+          "speech": "Oh dear, the signal lever is utterly stuck, and the midnight freight is barreling down the foggy line!",
+          "visual": "signal",
+          "label": "Jammed Lever",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse standing on a dark wooden railway platform next to a tall rusted signal pole, looking up with a worried expression at a stuck iron lever under thick night fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tool Retrieval",
+          "speech": "I must fetch the heavy brass wrench from the station bench before the rumble of the engine grows too loud.",
+          "visual": "ship",
+          "label": "Grabbing the Wrench",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse scrambling across a weathered wooden platform bench, holding a gleaming brass wrench tightly in both paws while railway tracks gleam under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge Mechanism",
+          "speech": "If I jam this heavy wrench right into the rusted gear teeth, the mechanism will finally break free.",
+          "visual": "robot",
+          "label": "Wedge Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse straining with both hind legs against the station floor while shoving the heavy brass wrench directly into the iron gear box of the railway signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Divergence",
+          "speech": "The switch has clicked over just in time, sending the freight train safely down the clear bypass line.",
+          "visual": "door",
+          "label": "Safe Path",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse wiping sweat from his brow, smiling as a distant railway signal lantern glows bright green next to a safely diverted set of tracks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stuck railway signal lever freezes the main track switch as the midnight freight train approaches the foggy platform.",
+      "decisive_choice": "Pip the mouse uses a brass wrench to wedge open the rusted gear housing of the junction switch.",
+      "resolution": "The track lever snaps into the correct position, safely diverting the freight train onto the clear secondary line.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion puppet animation with detailed textures, dramatic lighting, and deep night-time atmospheric fog.",
+        "characters": {
+          "Pip": "A tiny brown mouse with neat fur, round oversized ears, wearing a miniature blue wool vest and brass button."
+        },
+        "locations": {
+          "Platform": "A rustic 19th-century wooden railway platform bathed in cool moonlight, thick fog, and faint glowing amber station lanterns."
+        },
+        "objects": {
+          "wrench": "A heavy, gleaming brass wrench with a well-worn grip and notched head.",
+          "signal": "A tall iron railway signal pole with a mechanical pivot box and red and green glass lenses."
+        }
+      },
+      "plot_fingerprint": "c04c9ae28075f62ee12e574d4edca60232e1297a7201f7780de69f842e85870b"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+      "title": "Finneas and the Flying Fig Fiasco",
+      "hook": "The Runaway Cart",
+      "question": "How did Finneas stop the runaway figcart from smashing the town square?",
+      "answer": "Finneas wedged his heavy iron wrench into the wheel spokes to halt the cart safely.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Runaway Cart",
+          "speech": "Oh no, that heavy wooden cart is rolling down the hill toward the fruit stalls with alarming speed!",
+          "visual": "signal",
+          "label": "Market Panic",
+          "story_beat": "reveal",
+          "visual_prompt": "Finneas the ferret stands wide-eyed on a cobblestone street, watching a wooden figcart roll downhill, holding a heavy iron wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Desperate Chase",
+          "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
+          "visual": "ship",
+          "label": "Swift Pursuit",
+          "story_beat": "build",
+          "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Intervention",
+          "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
+          "visual": "robot",
+          "label": "Wrench Jam",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Safe Market",
+          "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
+          "visual": "door",
+          "label": "Market Saved",
+          "story_beat": "payoff",
+          "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A rogue wooden figcart rolls down the steep cobblestone lane toward the central market.",
+      "decisive_choice": "Finneas wedges his heavy iron wrench directly into the spinning wheel spokes.",
+      "resolution": "The cart stops instantly before reaching the market, saving the fruit stalls from ruin.",
+      "visual_bible": {
+        "style": "Bright, colorful marketplace comedy illustration with crisp outlines and clean family-friendly textures.",
+        "characters": {
+          "Finneas": "A slender ferret with warm golden-brown fur, a cream-colored bib chest, wearing a small blue canvas vest and holding a heavy iron wrench."
+        },
+        "locations": {
+          "Market Lane": "A sunlit medieval cobblestone alleyway lined with rustic wooden market stalls and terracotta tile roofs."
+        },
+        "objects": {
+          "wrench": "A solid, heavy iron wrench with a dull metallic sheen and standard open-end jaw.",
+          "figcart": "A small two-wheeled wooden handcart filled with oversized purple figs and rustic wooden side rails."
+        }
+      },
+      "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad"
     }
   ]
 }
