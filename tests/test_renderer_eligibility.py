@@ -49,7 +49,7 @@ class RendererEligibilityTests(unittest.TestCase):
         shot = {"story_title": title, "visual": "forest",
                 "visual_prompt": "Bram and Thomas hold the lantern at the village mill.",
                 "speech": "We must protect our wool bales before the river rises."}
-        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \\
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
              patch("studio_renderer.make_plan", return_value=[shot]):
             eligible, reason, modes = check_renderer_eligibility(story)
             self.assertFalse(eligible)
