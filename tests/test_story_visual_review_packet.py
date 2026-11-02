@@ -242,6 +242,65 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
             self.assertFalse(packet["publication_approval"])
             self.assertEqual(packet["semantic_quality"], "not_verified")
 
+    def test_actual_asset_audit_forwards_narration_midpoints_to_decoder(self):
+        from astra_v2.asset_usage_audit import begin, observe, finish
+        story = original_story()
+        story["story_beats"] += [
+            {"speech": "A fox places the key.", "visual": "clock"},
+            {"speech": "The clock works.", "visual": "clock"},
+        ]
+        plan = [
+            {"start": 0, "duration": 2, "story_action": "look"},
+            {"start": 2, "duration": 2, "story_action": "pick"},
+            {"start": 4, "duration": 2, "story_action": "hold"},
+            {"start": 6, "duration": 2, "story_action": "look"},
+        ]
+        expected = [1.0, 3.0, 5.0, 7.0]
+        captured = []
+        with tempfile.TemporaryDirectory() as root:
+            folder = Path(root)
+            video = folder / "actual.mp4"
+            video.write_bytes(b"synthetic SHA256 receipt fixture")
+            digest = hashlib.sha256(video.read_bytes()).hexdigest()
+            review_dir = folder / "review"
+            def sampled(_, output, **kwargs):
+                captured.append(kwargs.get("sample_times_seconds"))
+                img = Path(output)
+                img.parent.mkdir(parents=True, exist_ok=True)
+                img.write_bytes(b"fake decoded sheet; unit integration only")
+                sample_manifest = {
+                    "source_mp4_sha256": digest,
+                    "contact_sheet_sha256": hashlib.sha256(img.read_bytes()).hexdigest(),
+                    "sample_count": 4,
+                    "sample_times_seconds": expected,
+                    "sample_strategy": "planned_beat_midpoints",
+                }
+                manifest = img.with_suffix(".json")
+                manifest.write_text(json.dumps(sample_manifest))
+                return {"path": str(img), "manifest": str(manifest),
+                        "source_mp4_sha256": digest, "sample_count": 4}
+            with patch.dict(os.environ, {
+                "ASTRA_ASSET_PACK_ENABLED": "1", "ASTRA_ASSET_PACK_AUDIT": "1",
+                "ASTRA_ASSET_AUDIT_DIR": str(folder / "receipts"),
+                "ASTRA_VISUAL_REVIEW_SHEET": "1",
+                "ASTRA_VISUAL_REVIEW_DIR": str(review_dir),
+            }), patch("astra_v2.render_contact_sheet.create_contact_sheet",
+                      side_effect=sampled):
+                self.assertTrue(begin(story, 4, plan=plan))
+                for i in range(1, 5):
+                    observe(i, {"scene": None, "source_field": None,
+                                "matched_term": None}, "scene_unresolved",
+                            story["content_id"])
+                receipt = finish(video, renderer="studio-test", expected_shots=4)
+            self.assertEqual(captured, [expected])
+            packets = list(review_dir.glob("*.story-review.json"))
+            self.assertEqual(len(packets), 1)
+            packet = json.loads(packets[0].read_text())
+            self.assertEqual(packet["sample_alignment"], "planned_storybeat_midpoints")
+            self.assertEqual(packet["source_mp4_sha256"], receipt["video_sha256"])
+            self.assertFalse(packet["publication_approval"])
+            self.assertEqual(packet["semantic_quality"], "not_verified")
+
     def test_swapped_contact_jpeg_cannot_generate_review_packet(self):
         source = snapshot(original_story())
         receipt, manifest = evidence(source)
