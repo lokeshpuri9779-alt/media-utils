@@ -1,28 +1,23 @@
 {
-  "observed_at": "2026-11-02T05:59:35.403767+00:00",
-  "generated": 13,
+  "observed_at": "2026-11-02T15:46:48.261860+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 5,
+      "index": 16,
       "reason": "invalid_story_structure"
-    },
-    {
-      "index": 14,
-      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 13,
+  "reviewed": 19,
   "approved": 0,
   "review_issues": [
-    "The central conflict involving a sudden river surge threatening a shared structure, resolved by combining resources and abandoning personal reserves to reinforce load-bearing elements, closely mirrors previously published premises in the comparison history (specifically 'The Canopy Trackers and the Fading Roots', 'The Badger and the Amber Spores of Pine Ridge', and 'Juno's Tidal Turbine and the Saltwater Surge').",
-    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
+    "publication_renderer_incompatible: shot 1: Unified Studio: unsupported badger actor requires verified scene artwork",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event"
   ],
   "approval_pair_present": true,
   "model_access": {
