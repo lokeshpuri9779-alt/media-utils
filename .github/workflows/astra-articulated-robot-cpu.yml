@@ -1,0 +1,88 @@
+name: ASTRA Articulated Robot CPU (Review Only)
+on:
+  push:
+    branches:
+      - experiment/astra-articulated-robot-cpu
+    paths:
+      - tools/experimental_articulated_robot_cpu.py
+      - .github/workflows/astra-articulated-robot-cpu.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  motion-review:
+    if: github.ref == 'refs/heads/experiment/astra-articulated-robot-cpu'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free CPU renderer and encoder
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          blender --version | head -n 2
+      - name: Render robot animation frames without publishing
+        run: |
+          blender --background --threads 2 --python-exit-code 1 \
+            --python tools/experimental_articulated_robot_cpu.py -- \
+            --output-dir artifacts/experimental-articulated-robot/
+      - name: Encode 12-frame offline animation
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -framerate 8 -start_number 0 \
+            -i artifacts/experimental-articulated-robot/frame_%03d.png \
+            -frames:v 12 -c:v libx264 -preset veryfast -crf 19 \
+            -pix_fmt yuv420p -movflags +faststart \
+            artifacts/experimental-articulated-robot/robot_wave.mp4
+      - name: Validate geometry continuity, animation and video
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import struct
+          import subprocess
+          from pathlib import Path
+          root = Path('artifacts/experimental-articulated-robot')
+          r = json.loads((root/'review.json').read_text())
+          assert r['success'] is True and all(r['checks'].values())
+          assert r['approved'] is False and r['published'] is False
+          assert r['production_ready'] is False and r['paid_apis_used'] is False
+          assert r['semantic_quality'] == 'manual_review_required'
+          assert r['character_continuity'] == 'not_verified'
+          assert r['motion_quality'] == 'manual_review_required'
+          assert r['resolution'] == [384,576]
+          assert r['cycles_samples'] == 32
+          assert r['fps'] == 8 and len(r['frames']) == 12
+          assert [frame['index'] for frame in r['frames']] == list(range(12))
+          for frame in r['frames']:
+              data = (root/frame['file']).read_bytes()
+              assert data.startswith(b'\x89PNG\r\n\x1a\n')
+              assert struct.unpack('>II',data[16:24]) == (384,576)
+              assert hashlib.sha256(data).hexdigest() == frame['sha256']
+          movie = root/'robot_wave.mp4'
+          assert movie.stat().st_size > 4096
+          info = json.loads(subprocess.check_output([
+              'ffprobe','-v','error','-select_streams','v:0',
+              '-show_entries','stream=codec_name,width,height,nb_frames,r_frame_rate',
+              '-of','json',str(movie)
+          ],text=True))
+          video = info['streams'][0]
+          assert video['codec_name'] == 'h264'
+          assert (video['width'],video['height']) == (384,576)
+          assert int(video['nb_frames']) == 12
+          assert video['r_frame_rate'] == '8/1'
+          r['video'] = {'file':movie.name, 'codec':'h264', 'fps':8, 'frames':12,
+                        'bytes':movie.stat().st_size, 'duration_seconds':1.5}
+          (root/'review.json').write_text(json.dumps(r,indent=2)+'\n')
+          print('Review-only articulated robot: geometry and MP4 checks passed; manual visual review still required.')
+          PY
+      - name: Retain review-only evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-articulated-robot-cpu-\${{ github.run_id }}
+          path: artifacts/experimental-articulated-robot/
+          if-no-files-found: warn
+          retention-days: 7
