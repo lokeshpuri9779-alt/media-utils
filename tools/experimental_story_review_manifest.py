@@ -13,6 +13,8 @@ import struct
 import subprocess
 from pathlib import Path
 
+from tools.experimental_video_frame_consistency import compare_video
+
 PROFILES = {
     "frog": {
         "story_id": "astra-frog-seed-rescue",
@@ -196,6 +198,22 @@ def build(directory, profile):
         and video_path.stat().st_size > 4096
     )
 
+    # Prior manifests authenticated the *files* only. Independently decode the
+    # H.264 video and PNG sequence: a valid-but-unrelated MP4 must fail review.
+    video_frame_content = None
+    if checks["exact_frame_files"] and checks["video_matches_story_frames"]:
+        try:
+            video_frame_content = compare_video(
+                directory, cfg["video"], expected_count
+            )
+        except (OSError, ValueError, subprocess.CalledProcessError,
+                subprocess.TimeoutExpired):
+            pass
+    checks["encoded_video_pixels_match_png_sequence"] = (
+        video_frame_content is not None
+        and video_frame_content.get("passed") is True
+    )
+
     failed = sorted(k for k, v in checks.items() if not v)
     return {
         "kind": "isolated_unapproved_story_review_manifest",
@@ -208,6 +226,7 @@ def build(directory, profile):
         "fps": 8,
         "frame_dimensions": list(DIMENSIONS),
         "video": cfg["video"],
+        "video_frame_content_evidence": video_frame_content,
         "sha256": hashes,
         "approval": "manual_review_required",
         "semantic_quality": "not_verified",
