@@ -56,14 +56,16 @@ def amber_pixels(frame, roi):
             "max_x": max((x for x, _ in found), default=None)}
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--directory", type=Path, default=OUTPUT)
-    args = parser.parse_args()
-    directory = args.directory
-    report_path = directory / "review.json"
-    render_report = json.loads(report_path.read_text(encoding="utf-8"))
-    frames = decode_frames(directory)
+def score_frames(frames, render_report):
+    """Evaluate raw rendered frames; return testable evidence without file I/O.
+
+    Separate this from the CLI so deliberately damaged rendered frames can be
+    rejected in regression tests. This remains a fixed-scene, limited proxy.
+    """
+    if len(frames) != FRAMES:
+        raise ValueError(f"Expected exactly {FRAMES} frames")
+    if any(len(frame) != WIDTH * HEIGHT * 3 for frame in frames):
+        raise ValueError("Unexpected RGB frame size")
 
     # Within payoff shot only, the camera is fixed at 34mm. The travelling
     # beam crosses this unobstructed sky corridor toward the left lighthouse.
@@ -128,6 +130,19 @@ def main():
         "beacon_evidence": beacon,
         "checks": checks,
     }
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--directory", type=Path, default=OUTPUT)
+    args = parser.parse_args()
+    directory = args.directory
+    render_report = json.loads(
+        (directory / "review.json").read_text(encoding="utf-8")
+    )
+    frames = decode_frames(directory)
+    result = score_frames(frames, render_report)
     (directory / "visual_audit.json").write_text(
         json.dumps(result, indent=2) + "\n", encoding="utf-8"
     )
