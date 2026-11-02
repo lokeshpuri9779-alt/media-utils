@@ -66,6 +66,73 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
             self.assertEqual(beat["narrated_action_visible"], "not_verified")
             self.assertEqual(beat["character_visible"], "not_verified")
 
+    def test_four_beats_align_to_actual_narration_timestamps_without_semantic_approval(self):
+        story = original_story()
+        story["story_beats"] += [
+            {"speech": "The fox fits the key into the clock.",
+             "visual_prompt": "A fox turns a brass key.", "visual": "clock",
+             "story_beat": "mechanism"},
+            {"speech": "The clock starts moving again.",
+             "visual_prompt": "A fox smiles beside the working clock.",
+             "visual": "clock", "story_beat": "payoff"},
+        ]
+        plan = [
+            {"start": 0.0, "duration": 2.0, "story_subject": "fox"},
+            {"start": 2.0, "duration": 3.0, "story_subject": "fox"},
+            {"start": 5.0, "duration": 4.0, "story_subject": "fox"},
+            {"start": 9.0, "duration": 1.0, "story_subject": "fox"},
+        ]
+        source = snapshot(story, plan)
+        self.assertEqual(source["beat_midpoint_times_seconds"], [1.0, 3.5, 7.0, 9.5])
+        receipt, manifest = evidence(source)
+        receipt["shot_count"] = 4
+        receipt["composited_shots"] = 4
+        receipt["shots"] += [
+            {"shot": 3, "status": "composited"},
+            {"shot": 4, "status": "composited"},
+        ]
+        manifest["sample_strategy"] = "planned_beat_midpoints"
+        manifest["sample_times_seconds"] = [1.0, 3.5, 7.0, 9.5]
+        packet = build_packet(source, receipt, manifest)
+        self.assertEqual(packet["sample_alignment"], "planned_storybeat_midpoints")
+        self.assertEqual([beat["contact_sheet_frame_index"] for beat in packet["beats"]],
+                         [1, 2, 3, 4])
+        self.assertEqual(packet["semantic_quality"], "not_verified")
+        self.assertFalse(packet["publication_approval"])
+        self.assertTrue(all(b["narrated_action_visible"] == "not_verified"
+                            for b in packet["beats"]))
+        for bad in ([1.0, 3.5, 8.0, 9.5], [1.0, 3.5, 7.0, 9.51]):
+            with self.subTest(bad=bad), self.assertRaisesRegex(
+                    ValueError, "storybeat_frame_timestamps_mismatch"):
+                build_packet(source, receipt, {**manifest, "sample_times_seconds": bad})
+
+    def test_missing_or_ambiguous_plan_does_not_invent_midpoint_alignment(self):
+        story = original_story()
+        story["story_beats"] += [
+            {"speech": "And the key turns."},
+            {"speech": "The clock chimes."},
+        ]
+        plans = [
+            [],
+            [{"start": 0, "duration": 1}] * 4,
+            [{"start": 0, "duration": 1}, {"start": 1, "duration": 1},
+             {"start": 2, "duration": float("nan")},
+             {"start": 3, "duration": 1}],
+        ]
+        for plan in plans:
+            with self.subTest(plan=plan):
+                source = snapshot(story, plan)
+                self.assertIsNone(source["beat_midpoint_times_seconds"])
+                receipt, manifest = evidence(source)
+                receipt["shot_count"] = 4
+                receipt["shots"] *= 2
+                self.assertEqual(build_packet(source, receipt, manifest)["sample_alignment"],
+                                 "not_established")
+                with self.assertRaisesRegex(ValueError, "storybeat_frame_timestamps_mismatch"):
+                    build_packet(source, receipt, {
+                        **manifest,
+                        "sample_strategy": "planned_beat_midpoints"})
+
     def test_hash_and_identity_mismatches_fail_closed(self):
         source = snapshot(original_story())
         receipt, manifest = evidence(source)
