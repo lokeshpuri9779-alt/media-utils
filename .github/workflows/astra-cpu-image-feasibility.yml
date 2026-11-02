@@ -41,7 +41,7 @@ permissions:
   contents: read
 jobs:
   benchmark:
-    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'experiment: one-shot 16-step explicit geometry CPU benchmark')
+    if: "${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'experiment: one-shot 16-step explicit geometry CPU benchmark') }}"
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
