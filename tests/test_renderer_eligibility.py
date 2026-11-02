@@ -57,6 +57,103 @@ class RendererEligibilityTests(unittest.TestCase):
             self.assertEqual(modes, ())
             self.assertIn("renderer_incompatible", publication_rejection(story))
 
+    def test_animal_cast_cannot_hide_a_miller_in_same_scene(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot, draw_story_frame
+        shot = {
+            "story_title": "The Fox and the Miller",
+            "story_cast": ("fox",),
+            "visual": "forest",
+            "speech": "The fox helps the miller lift the jammed sluice.",
+            "visual_prompt": "Fox and miller heave the gate into place together.",
+        }
+        with self.assertRaisesRegex(CreativeReject, "human_actor_not_supported"):
+            validate_story_shot(shot)
+        directed = unittest.mock.Mock()
+        with self.assertRaises(CreativeReject):
+            draw_story_frame(object(), shot, 0.5, draw_directed=directed,
+                             global_time=0.5, accent=(100, 100, 100))
+        directed.assert_not_called()
+
+    def test_two_supported_animals_cannot_hide_a_doctor(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_title": "The Fox and Rabbit Aid the Doctor",
+                "story_cast": ("fox", "rabbit"), "visual": "forest",
+                "speech": "The fox and rabbit carry the doctor's medicine.",
+                "visual_prompt": "The doctor gives the medicine to the two animals."}
+        with self.assertRaisesRegex(CreativeReject, "human_actor_not_supported"):
+            validate_story_shot(shot)
+
+    def test_named_human_in_bible_still_blocks_animal_puppet(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_title": "The Fox's Promise",
+                "story_cast": ("fox",), "visual": "forest",
+                "story_named_humans": ("Thomas",),
+                "visual_prompt": "Thomas carries a box as the fox follows."}
+        with self.assertRaisesRegex(CreativeReject, "human_actor_not_supported"):
+            validate_story_shot(shot)
+
+    def test_animal_wardrobe_action_requires_verified_art(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_title": "The Fox's Coat",
+                "story_cast": ("fox",), "visual": "forest",
+                "visual_prompt": "The fox wears a green coat and holds a copper hammer."}
+        with self.assertRaisesRegex(CreativeReject, "embodied_character_not_supported"):
+            validate_story_shot(shot)
+
+    def test_valid_supported_animal_puppet_unchanged(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        self.assertEqual(validate_story_shot({
+            "story_title": "The Fox's Clock", "story_cast": ("fox",),
+            "visual": "forest", "speech": "The fox looks at a ticking clock."
+        }), "solo")
+        self.assertEqual(validate_story_shot({
+            "story_title": "The Fox and the Rabbit",
+            "story_cast": ("fox", "rabbit"), "visual": "forest",
+            "speech": "The fox and the rabbit look at the river."
+        }), "duo")
+
+    def test_verified_scene_art_routes_mixed_cast_to_directed_not_solo(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_title": "The Fox and the Miller",
+                "story_cast": ("fox",), "visual": "forest",
+                "speech": "The miller and the fox lift the gate."}
+        with patch("astra_v2.directed_scene_contract.validate_directed_scene",
+                   return_value=None) as verified:
+            mode = validate_story_shot(shot)
+        self.assertEqual(mode, "directed")
+        verified.assert_called_once_with(shot)
+
+    def test_mixed_cast_is_rechecked_at_publication_boundary(self):
+        from astra_v2.publication_quality import publication_rejection
+        shot = {"story_title": "The Fox and the Miller",
+                "story_cast": ("fox",), "visual": "forest",
+                "speech": "The fox brings tools to the miller."}
+        story = {"content_id": "mixed-cast-test", "title": "The Fox and the Miller",
+                 "genre": "fiction", "production_ready": True}
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+             patch("studio_renderer.make_plan", return_value=[shot]), \
+             patch("astra_v2.layer_contract.scene_layers",
+                   return_value={"draw_visual": True}):
+            eligible, reason, _ = check_renderer_eligibility(story)
+            rejection = publication_rejection(story)
+        self.assertFalse(eligible)
+        self.assertIn("human_actor_not_supported", reason)
+        self.assertIn("renderer_incompatible", rejection)
+
+    def test_reviewed_human_renderer_path_stays_separate(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_human_actor": "mara", "story_cast": ("fox",),
+                "story_title": "Mara Meets the Fox",
+                "visual_prompt": "Mara takes the fox's lantern."}
+        with patch("astra_v2.human_story_performance.validate_human_scene",
+                   return_value="human") as allowed:
+            self.assertEqual(validate_story_shot(shot), "human")
+        allowed.assert_called_once_with(shot)
+
     def test_other_engine_not_blocked_by_unified_preflight(self):
         with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "0"}):
             self.assertIsNone(publication_renderer_rejection({"genre": "fiction"}))
