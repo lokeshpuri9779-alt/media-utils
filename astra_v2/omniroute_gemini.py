@@ -34,6 +34,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "arctic research expedition and a rescue decision",
         "spacecraft maintenance adventure with a crew disagreement",
     )
+    renderer_aware = os.getenv("ASTRA_GEMINI_RENDERER_AWARE_WRITING", "0") == "1"
+    if renderer_aware:
+        from astra_v2.renderer_aware_writing import RENDERER_AWARE_DOMAINS
+        domains = RENDERER_AWARE_DOMAINS
     import hashlib
     rotation = int(hashlib.sha256(("|".join(sorted(excluded_ids)) + str(len(prior_stories))).encode()).hexdigest()[:8], 16)
     chosen_domain = domains[rotation % len(domains)]
@@ -65,6 +69,9 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Avoid recycled plots, copyrighted characters and these prior titles: "
         + json.dumps(sorted(excluded_titles)[:100]) + "."
     )
+    if renderer_aware:
+        from astra_v2.renderer_aware_writing import writing_guidance
+        prompt += writing_guidance()
     if premise is not None:
         if not isinstance(premise, dict) or premise.get("production_ready") is not False:
             raise ValueError("Premise must be an unapproved editorial-review candidate")
