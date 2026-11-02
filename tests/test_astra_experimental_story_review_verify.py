@@ -27,6 +27,16 @@ class VerifyReviewPackageTest(unittest.TestCase):
             fake = patch.object(module, "get_video", side_effect=self.fake_video)
             fake.start()
             self.addCleanup(fake.stop)
+        # Byte-minimal synthetic fixtures need a mocked decoder. Actual
+        # downloaded CPU render artifacts are decoded by the workflows.
+        self.fidelity = {"passed": True, "mean_rgb_mae": 1.0,
+                         "max_frame_rgb_mae": 1.5, "worst_frame": 0}
+        self.fidelity_patches = []
+        for module in (manifest, verifier):
+            fake = patch.object(module, "compare_video", return_value=self.fidelity)
+            mock = fake.start()
+            self.fidelity_patches.append(mock)
+            self.addCleanup(fake.stop)
 
     def fake_video(self, path):
         # Probe is mocked only for unit fixtures with minimal dummy MP4 bytes.
@@ -77,6 +87,22 @@ class VerifyReviewPackageTest(unittest.TestCase):
         path.write_text(path.read_text() + " ", encoding="utf-8")
         result = verifier.verify(self.root, "lighthouse")
         self.assertIn(path.name, result["mismatched_files"])
+
+    def test_rejects_repackaged_video_with_unrelated_frames(self):
+        # The manifest hashes may be internally consistent, yet a real
+        # encoded MP4 can have the wrong visual content. Independent
+        # frame-by-frame decoding must still reject it.
+        self.prepare("frog")
+        self.fidelity_patches[1].return_value = {
+            "passed": False, "mean_rgb_mae": 30.0,
+            "max_frame_rgb_mae": 55.0, "worst_frame": 5
+        }
+        result = verifier.verify(self.root, "frog")
+        self.assertFalse(result["passed"])
+        self.assertIn("video_pixels_independently_match_png_sequence",
+                      result["failed_checks"])
+        self.assertIn("manifest_and_independent_fidelity_evidence_agree",
+                      result["failed_checks"])
 
     def test_missing_frame_rejected(self):
         self.prepare("frog")
