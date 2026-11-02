@@ -143,7 +143,8 @@ def build(directory, profile):
     )
     checks["no_claim_of_semantic_quality"] = (
         action.get("semantic_quality") == "not_verified"
-        and visual.get("semantic_quality") == "not_verified"
+        and (visual.get("semantic_quality") if profile == "frog"
+             else visual.get("visual_semantic_quality")) == "not_verified"
     )
     frames = review.get("frames")
     expected_count = cfg["frame_count"]
