@@ -6,6 +6,7 @@ on:
     paths:
       - tools/experimental_causal_storyboard.py
       - tools/experimental_causal_story_render.py
+      - tools/experimental_causal_visual_audit.py
       - tools/experimental_robot_walk_pickup.py
       - .github/workflows/astra-causal-story-previs.yml
   workflow_dispatch:
@@ -98,6 +99,24 @@ jobs:
                            'bytes':mp4.stat().st_size}
           (root/'review.json').write_text(json.dumps(report,indent=2)+'\n')
           print('Energy arrival precedes beacon ignition; 20-frame MP4 remains review-only')
+          PY
+      - name: Verify emissive cause-and-effect in rendered pixels (review-only)
+        run: |
+          python3 -m tools.experimental_causal_visual_audit \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          audit=json.loads(Path('artifacts/experimental-causal-story/visual_audit.json').read_text())
+          assert audit['passes_fixed_pixel_checks'] is True
+          assert len(audit['checks'])==8 and all(audit['checks'].values())
+          assert audit['approved'] is False
+          assert audit['published'] is False
+          assert audit['production_ready'] is False
+          assert audit['paid_apis_used'] is False
+          assert audit['manual_editorial_review_required'] is True
+          assert audit['visual_semantic_quality']=='not_verified'
+          print('Fixed-image evidence present; editorial and semantic gates still closed')
           PY
       - name: Retain story previsualization, not publication assets
         if: always()
