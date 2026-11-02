@@ -1,0 +1,29 @@
+name: ASTRA Frog Object Pixel Tracking (Review Only)
+on:
+  push:
+    branches:
+      - experiment/astra-robot-walk-and-pickup
+    paths:
+      - tools/experimental_frog_object_pixel_tracks.py
+      - tests/test_astra_experimental_frog_object_pixel_tracks.py
+      - .github/workflows/astra-frog-object-pixel-tracks.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-color-tracks:
+    if: github.ref == 'refs/heads/experiment/astra-robot-walk-and-pickup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run isolated color-region and corruption-control unit tests
+        run: |
+          python3 -m unittest -v tests.test_astra_experimental_frog_object_pixel_tracks
+      - name: Assert this remains a review-only technical test
+        run: |
+          python3 - <<'PY'
+          from tools.experimental_frog_object_pixel_tracks import W, H, SIZE
+          assert (W,H,SIZE)==(384,576,384*576*3)
+          print('No publication, production routing or paid dependencies')
+          PY
