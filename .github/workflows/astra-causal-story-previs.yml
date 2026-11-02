@@ -136,6 +136,21 @@ jobs:
           assert data['semantic_quality']=='not_verified'
           print('Five deliberately damaged frame sequences rejected; no publishing or editorial gate opened')
           PY
+      - name: Verify shared event-order contract on lighthouse render
+        run: |
+          python3 -m tools.experimental_action_contracts \
+            --profile lighthouse \
+            --report artifacts/experimental-causal-story/review.json \
+            --output artifacts/experimental-causal-story/action_contract.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('artifacts/experimental-causal-story/action_contract.json').read_text())
+          assert r['passed'] and all(r['checks'].values())
+          assert r['events']['spark_launch'] < r['events']['energy_arrives'] < r['events']['beacon_ignites']
+          assert r['approved'] is False and r['published'] is False and r['production_ready'] is False
+          assert r['semantic_quality']=='not_verified'
+          PY
       - name: Retain story previsualization, not publication assets
         if: always()
         uses: actions/upload-artifact@v4
