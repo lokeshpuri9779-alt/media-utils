@@ -140,7 +140,7 @@ bpy.ops.object.light_add(type='AREA',location=(-3,-4,7))
 bpy.context.object.data.energy=750
 bpy.context.object.data.size=5
 frames=[]
-original_line_length=Vector((-.97,.32,-.38)).length
+original_line_length=Vector((-1.27,.32,-.38)).length
 # Physical starting point of the magnet's rod on the frog.
 magnet_origin=Vector((.52,-.33,.67))
 for i in range(20):
@@ -170,7 +170,7 @@ for i in range(20):
         line.hide_render=False;magnet.hide_render=False
         # Frame 6: magnet launches; frame 9: contact; 10-14: the
         # attached magnet lifts the folded airplane across the grate.
-        magnet_fraction=min(1,(i-6)/3)
+        magnet_fraction=max(.08,min(1,(i-6)/3))
         magnet_target=magnet_origin.lerp(clip.location,magnet_fraction)
         magnet.location=magnet_target
         aim_segment(line,magnet_origin,magnet_target,original_line_length)
