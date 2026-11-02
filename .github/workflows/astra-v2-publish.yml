@@ -329,6 +329,12 @@ jobs:
           ASTRA_ASSET_AUDIT_DIR: runtime-health/asset-usage
           ASTRA_VISUAL_REVIEW_SHEET: '1'
           ASTRA_VISUAL_REVIEW_DIR: runtime-health/visual-review
+          # Controlled rollout: enable only after independent reviewer signs
+          # the FULL MP4; the producer never receives the private signing key.
+          ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW: ${{ vars.ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW || '0' }}
+          ASTRA_SEMANTIC_REVIEW_PUBLIC_KEY: ${{ vars.ASTRA_SEMANTIC_REVIEW_PUBLIC_KEY }}
+          ASTRA_SEMANTIC_REVIEW_PACKET: ${{ vars.ASTRA_SEMANTIC_REVIEW_PACKET_PATH }}
+          ASTRA_SEMANTIC_REVIEW_DECISION: ${{ vars.ASTRA_SEMANTIC_REVIEW_DECISION_PATH }}
         shell: bash
         run: |
           set -euo pipefail
