@@ -7,6 +7,7 @@ on:
       - tools/experimental_causal_storyboard.py
       - tools/experimental_causal_story_render.py
       - tools/experimental_causal_visual_audit.py
+      - tools/experimental_story_review_verify.py
       - tools/experimental_causal_visual_negative_controls.py
       - tools/experimental_robot_walk_pickup.py
       - .github/workflows/astra-causal-story-previs.yml
@@ -167,6 +168,25 @@ jobs:
           assert packet['production_ready'] is False and packet['published'] is False
           assert packet['approved'] is False and packet['paid_apis_used'] is False
           print('Bound review manifest: %d files with SHA256, no production approval' % len(packet['sha256']))
+          PY
+      - name: Independently verify packaged lighthouse review files
+        run: |
+          python3 -m tools.experimental_story_review_verify \
+            --profile lighthouse \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('artifacts/experimental-causal-story/story_review_verification.json')
+          r=json.loads(path.read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['mismatched_files']==[]
+          assert r['files_verified']==26
+          assert r['manual_visual_review_required'] is True
+          assert r['approved'] is False and r['published'] is False
+          assert r['production_ready'] is False and r['paid_apis_used'] is False
+          assert r['semantic_quality']=='not_verified'
+          print('Verified 26 independent files against review manifest (review-only)')
           PY
       - name: Retain story previsualization, not publication assets
         if: always()
