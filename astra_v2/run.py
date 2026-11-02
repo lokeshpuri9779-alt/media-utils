@@ -228,6 +228,38 @@ def run():
                 if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
+                # An external, independently authorized FULL-MP4 visual review
+                # can be required before reserving a video ID or uploading.
+                # Existing schedules are unchanged until the controlled
+                # reviewer/key/evidence handoff is deliberately configured.
+                if candidate.get("format") == "short" and candidate.get("genre") == "fiction":
+                    review_required = os.getenv("ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW", "0") == "1"
+                    report["semantic_video_review"] = {
+                        "status": "not_verified", "required": review_required}
+                    if (review_required or
+                            (os.getenv("ASTRA_SEMANTIC_REVIEW_PACKET")
+                             and os.getenv("ASTRA_SEMANTIC_REVIEW_DECISION"))):
+                        from astra_v2.semantic_video_gate import evaluate
+                        verification = evaluate(
+                            candidate, video,
+                            packet_path=os.getenv("ASTRA_SEMANTIC_REVIEW_PACKET"),
+                            review_path=os.getenv("ASTRA_SEMANTIC_REVIEW_DECISION"),
+                            secret=os.getenv("ASTRA_SEMANTIC_REVIEW_KEY"),
+                        )
+                        report["semantic_video_review"] = {
+                            "status": verification["status"],
+                            "reason": verification["reason"],
+                            "required": review_required,
+                        }
+                        if review_required and not verification["verified"]:
+                            # Skip BEFORE reservation, YouTube transfer, or
+                            # publication: absent evidence is never approval.
+                            report.update(
+                                outcome="quality_skip",
+                                reason="semantic_video_review_" + verification["reason"],
+                                content_id=cid,
+                            )
+                            return report
                 # Report whether character memory is eligible for this Short.
                 # This is diagnostic only: it never changes upload eligibility.
                 report["character_memory"] = (
