@@ -234,6 +234,28 @@ def draw_story_stage(d, shot, t):
                 d.arc((x-25,yy-20,x+25,yy+20),195,340,fill=(107,181,121),width=5)
     d.ellipse((65,1215,1025,1340),fill=ground)
     d.ellipse((120,1235,975,1315),fill=(64,115,102) if setting!="harbor" else (51,110,117))
+    # An explicitly narrated broken plank needs a recognizable hazard, not
+    # merely a blue river platform. Draw it behind the actors, inside the
+    # established artwork-safe region; do not infer damage from "bridge" alone.
+    spoken = str(shot.get("speech") or "").lower()
+    if setting == "river" and re.search(r"\bbridge\b", spoken) and re.search(r"\bbroken plank\b", spoken):
+        wood = (174, 125, 83)
+        edge = (97, 72, 62)
+        # Keep the missing plank to the right of the central lantern, which
+        # otherwise occludes the gap in the final composited Shorts frame.
+        # Both decks and the hazard remain within the artwork-safe region.
+        for x0, x1 in ((90, 510), (700, 990)):
+            d.rectangle((x0, 1140, x1, 1194), fill=wood, outline=edge, width=7)
+            for x in range(x0 + 66, x1, 68):
+                d.line((x, 1143, x, 1191), fill=edge, width=5)
+        d.polygon(((489, 1142), (520, 1154), (503, 1175), (514, 1191),
+                   (488, 1191)), fill=(127, 91, 67))
+        d.polygon(((717, 1142), (684, 1151), (701, 1173), (686, 1191),
+                   (720, 1191)), fill=(127, 91, 67))
+        for x in (125, 930):
+            d.rectangle((x, 1025, x + 19, 1140), fill=edge)
+        d.line((135, 1055, 498, 1055), fill=(196, 157, 108), width=11)
+        d.line((709, 1055, 940, 1055), fill=(196, 157, 108), width=11)
     # Story-seeded, fixed environmental dressing: each location has a
     # foreground/midground silhouette. The details never re-roll per frame.
     for k in range(7):
