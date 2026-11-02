@@ -1,0 +1,33 @@
+name: ASTRA Review Artifact Verification (Isolated)
+on:
+  push:
+    branches:
+      - experiment/astra-robot-walk-and-pickup
+    paths:
+      - tools/experimental_story_review_verify.py
+      - tools/experimental_story_review_manifest.py
+      - tests/test_astra_experimental_story_review_verify.py
+      - tests/test_astra_experimental_story_review_manifest.py
+      - .github/workflows/astra-experimental-review-verify.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/experiment/astra-robot-walk-and-pickup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test review-manifest verification and deliberate corruption cases
+        run: |
+          python3 -m unittest -v \
+            tests.test_astra_experimental_story_review_manifest \
+            tests.test_astra_experimental_story_review_verify
+      - name: Assert only isolated profiles supported
+        run: |
+          python3 - <<'PY'
+          from tools.experimental_story_review_verify import PROFILES
+          assert set(PROFILES) == {'frog','lighthouse'}
+          print('Verifier cannot authorize, approve, or publish content')
+          PY
