@@ -6,6 +6,8 @@ on:
     paths:
       - tools/experimental_action_contracts.py
       - tests/test_astra_experimental_action_contracts.py
+      - tools/experimental_story_review_manifest.py
+      - tests/test_astra_experimental_story_review_manifest.py
       - .github/workflows/astra-experimental-action-contracts.yml
   workflow_dispatch:
 permissions:
@@ -19,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run reusable story action contract and negative-control tests
         run: |
-          python3 -m unittest -v tests.test_astra_experimental_action_contracts
+          python3 -m unittest -v tests.test_astra_experimental_action_contracts tests.test_astra_experimental_story_review_manifest
       - name: Confirm review-only scope
         run: |
           python3 - <<'PY'
