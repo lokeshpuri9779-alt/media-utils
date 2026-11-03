@@ -184,3 +184,7 @@ the *new exact one-shot commit message*
 branch, after the three parallel lightweight lanes and aggregate pass.
 Ordinary commits and PR checks do not run model inference. The legacy
 standalone manual benchmark remains separate.
+
+## One-shot planned comparison authorization
+
+The causal-plan PR review-only CI on run #41700681725 passed the three parallel lanes and aggregate. This one commit authorizes exactly one experimental free CPU model comparison using the same pinned Qwen 0.5B GGUF, the pinned llama.cpp revision, and fixed GBNF grammar. New variable: the four-step, plan-digest-stamped input prompt. No API, main integration, automatic publishing, approval, or repeated attempts are authorized. The next result must be judged from the actual generated content.
