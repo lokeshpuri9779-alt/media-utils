@@ -202,8 +202,21 @@ def camera_at(point,lens):
     camera.data.lens=lens
 
 bpy.ops.object.light_add(type='AREA',location=(-3,-4,7))
-bpy.context.object.data.energy=750
-bpy.context.object.data.size=5
+key_light=bpy.context.object
+key_light.name="FROG_SOFT_KEY"
+key_light.data.energy=750
+key_light.data.size=5
+
+# Low-cost cool back-right accent adds a modest silhouette edge to the
+# frog and paper without changing positions, timing, or safety gates.
+# One area lamp only: free CPU EEVEE, no external textures or paid services.
+bpy.ops.object.light_add(type='AREA',location=(2.1,1.0,3.6))
+rim_light=bpy.context.object
+rim_light.name="FROG_COOL_RIM"
+rim_light.data.energy=155
+rim_light.data.size=2.8
+rim_light.data.color=(.65,.80,1.0)
+rim_light.rotation_euler=(Vector((.2,0,.6))-rim_light.location).to_track_quat('-Z','Y').to_euler()
 frames=[]
 FRAME_COUNT=32
 FPS=8
@@ -379,6 +392,13 @@ checks={
     ),
     "sky_clouds_project_onscreen":all(
         frames[i]["sky_clouds_in_frame"]>=2 for i in (0,8,31)
+    ),
+    "review_only_foreground_depth_light":(
+        key_light.data.type=="AREA" and rim_light.data.type=="AREA" and
+        rim_light.data.energy>0 and rim_light.data.energy<=200 and
+        rim_light.data.size>=2 and rim_light.location.y>0 and
+        rim_light.location.z>3 and
+        len([o for o in bpy.data.objects if o.type=="LIGHT"])==2
     ),
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
