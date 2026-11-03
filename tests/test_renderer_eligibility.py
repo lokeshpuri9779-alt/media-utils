@@ -185,6 +185,96 @@ class RendererEligibilityTests(unittest.TestCase):
             self.assertEqual(validate_story_shot(shot), "directed")
         art.assert_called_once_with(shot)
 
+    def test_real_bram_mountain_short_unsupported_large_scale_actions(self):
+        # Four sampled narration beats of preload artifact 13199079710,
+        # MP4 SHA256 296c5d4a...726d92a7e. These are capability regressions,
+        # not independent review of every MP4 frame.
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        title = "Bram and the Frost-Crested Pass"
+        shots = (
+            {
+                "story_title": title, "story_cast": ("lynx",), "visual": "forest",
+                "story_action": "idle",
+                "speech": "The upper suspension cable snaps loudly against the frozen rock face, sending a shower of loose shale down into the deep ravine.",
+                "visual_prompt": "A sharp-eyed lynx stands on a snow-dusted mountain ledge, staring at a broken iron cable hanging over the pine abyss.",
+            },
+            {
+                "story_title": title, "story_cast": ("lynx",), "visual": "forest",
+                "story_action": "carry",
+                "speech": "Holding the heavy brass compass firmly in his teeth, Bram leaps across the churning white gap toward the swaying anchor post.",
+                "visual_prompt": "The lynx leaps mid-air across a freezing mountain chasm, carrying a brass compass toward a wooden post.",
+            },
+            {
+                "story_title": title, "story_cast": ("lynx",), "visual": "forest",
+                "story_action": "idle",
+                "speech": "Wrapping the fraying wire tightly around the stone pillar, the lynx fastens the heavy latch with a steady paw.",
+                "visual_prompt": "The lynx wedges a heavy iron key and brass compass into the frozen timber gate.",
+            },
+            {
+                "story_title": title, "story_cast": ("lynx",), "visual": "forest",
+                "story_action": "idle",
+                "speech": "With the bridge securely locked in place, the clear bell chime echoes across the valley.",
+                "visual_prompt": "The lynx sits beside a bell on a wooden platform as cable cars pass safely.",
+            },
+        )
+        for index, shot in enumerate(shots, 1):
+            with self.subTest(beat=index):
+                with self.assertRaisesRegex(
+                        CreativeReject, "unsupported_scene_scale_action_requires_scene_art"):
+                    validate_story_shot(shot)
+
+    def test_large_scale_scene_requires_verified_art_at_publication_boundary(self):
+        from astra_v2.publication_quality import publication_rejection
+        title = "Bram and the Frost-Crested Pass"
+        story = {"content_id": "bram-geometry-regression",
+                 "title": title, "genre": "fiction",
+                 "kind": "authored_causal_story", "production_ready": True}
+        shot = {"story_title": title, "story_cast": ("lynx",),
+                "visual": "forest", "story_action": "carry",
+                "speech": "Bram leaps across the churning mountain chasm.",
+                "visual_prompt": "A lynx carrying a compass leaps over the deep ravine."}
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+             patch("studio_renderer.make_plan", return_value=[shot]), \
+             patch("astra_v2.layer_contract.scene_layers",
+                   return_value={"draw_visual": True}):
+            eligible, reason, modes = check_renderer_eligibility(story)
+            rejection = publication_rejection(story)
+        self.assertFalse(eligible)
+        self.assertEqual(modes, ())
+        self.assertIn("unsupported_scene_scale_action_requires_scene_art", reason)
+        self.assertIn("renderer_incompatible", rejection)
+
+    def test_simple_puppet_jump_and_incidental_mountains_unchanged(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        safe = (
+            {"story_cast": ("lynx",), "visual": "forest",
+             "speech": "The lynx jumps over a small wooden box.",
+             "visual_prompt": "A lynx bounces on the grass beside a box."},
+            {"story_cast": ("fox",), "visual": "forest",
+             "speech": "The fox admires the peaceful mountain gorge.",
+             "visual_prompt": "A fox quietly watches the mountain vista."},
+            {"story_cast": ("owl",), "visual": "forest",
+             "speech": "The owl hears a bell from the distant bridge.",
+             "visual_prompt": "An owl sits quietly on a branch."},
+            {"story_cast": ("lynx",), "visual": "forest",
+             "speech": "The lynx looks at the old anchor post.",
+             "visual_prompt": "The lynx watches snow fall near a wooden post."},
+        )
+        for shot in safe:
+            with self.subTest(speech=shot["speech"]):
+                self.assertEqual(validate_story_shot(shot), "solo")
+
+    def test_scene_scale_actions_keep_verified_scene_art_exception(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {"story_cast": ("lynx",), "visual": "forest",
+                "speech": "The lynx leaps across a deep chasm.",
+                "visual_prompt": "A lynx crosses a mountain ravine."}
+        with patch("astra_v2.directed_scene_contract.validate_directed_scene",
+                   return_value=None) as verified:
+            self.assertEqual(validate_story_shot(shot), "directed")
+        verified.assert_called_once_with(shot)
+
     def test_valid_supported_animal_puppet_unchanged(self):
         from astra_v2.unified_story_engine import validate_story_shot
         self.assertEqual(validate_story_shot({

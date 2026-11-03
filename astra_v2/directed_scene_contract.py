@@ -41,6 +41,28 @@ _MECHANICAL_OPERATION = re.compile(
     r"unlock(?:s|ed|ing)?|lift(?:s|ed|ing)?)\b", re.I)
 
 
+# Evidence: actual 2026-11-03 Studio Short "Bram and the Frost-Crested
+# Pass" depicted an essentially stationary lynx/compass in 24 sampled frames,
+# despite a narratively important leap over a chasm, snapped suspension cable,
+# fastening wire/latch, and a secured bridge. A puppet jump pose cannot
+# establish crossing a geographically real gap or repairing a bridge. These
+# are deliberately scoped capability warnings, never semantic pixel approval.
+_LARGE_GAP = re.compile(
+    r"\b(?:chasm|ravine|abyss|gorge|canyon|"
+    r"(?:wide|white|mountain|deep)\s+gap)\b", re.I)
+_GAP_CROSSING = re.compile(
+    r"\b(?:leap\w*|jump\w*|cross\w*|vault\w*|swing\w*)\b", re.I)
+_LARGE_STRUCTURE = re.compile(
+    r"\b(?:suspension\s+cable|fraying\s+wire|"
+    r"(?:broken|iron|bridge)\s+cable|heavy\s+latch|"
+    r"bridge(?:\s+anchor)?|anchor\s+post)\b", re.I)
+_STRUCTURE_CHANGED = re.compile(
+    r"\b(?:snaps?|snapped|break(?:s|ing)?|broke|fractur\w*|"
+    r"collaps\w*|wrapp?\w*|fasten\w*|wedg\w*|"
+    r"secur\w*|lock\w*|repair\w*|"
+    r"tension\w*|stabiliz\w*)\b", re.I)
+
+
 _BIOLOGICAL_HUMAN = re.compile(
     r"\b(?:human|person|child|boy|girl|man|woman|teenager|adult|male|female|"
     r"student|pilot|officer|engineer|botanist|researcher|meteorologist|rescuer|"
@@ -100,6 +122,9 @@ def directed_scene_issue(shot):
         return "embodied_character_not_supported_by_directed_icons"
     if _MECHANICAL_RIG.search(text) and _MECHANICAL_OPERATION.search(text):
         return "unsupported_mechanical_rig_action_requires_scene_art"
+    if ((_LARGE_GAP.search(text) and _GAP_CROSSING.search(text))
+            or (_LARGE_STRUCTURE.search(text) and _STRUCTURE_CHANGED.search(text))):
+        return "unsupported_scene_scale_action_requires_scene_art"
     if str(shot.get("visual") or "").lower() == "signal" and not _SIGNAL.search(text):
         return "signal_graphic_does_not_depict_narrated_event"
     subject = str(shot.get("story_subject") or shot.get("visual") or "").lower()
