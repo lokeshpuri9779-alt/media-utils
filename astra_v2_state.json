@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 11,
-  "confirmed_today": 10,
-  "last_attempt_at": "2026-11-03T11:48:37.497764+00:00",
+  "attempts": 12,
+  "confirmed_today": 11,
+  "last_attempt_at": "2026-11-03T16:09:51.911916+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8645,16 +8645,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "DYWaQgJIjCw": {
-      "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
+    },
+    "rayvan-gemini-2da6517ec27d64b5c6e2": {
+      "video_id": "DYWaQgJIjCw",
+      "confirmed_at": "2026-11-03T16:08:29.063897+00:00",
       "title": "Buster and Cleo's Neighborhood Relay Race Blunder",
-      "day": "2026-11-03",
-      "uploaded_at": "2026-11-03T11:48:39.232396+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-03T11:48:39.232396+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "0ef71ffe159381c3d271e1512b92d922633c956becf9e3bdb972d0eda11d10a8",
       "story_beats": [
@@ -8699,16 +8697,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "v7vIv_0USno": {
+      "content_id": "rayvan-gemini-11d6d88a618a3b1febd1",
+      "title": "Orson the Otter and the Sunken Lantern Festival",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-03T16:09:53.450745+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0fb5833b56125f3efff4c254eda4da317bcf0ef7c71601228c9441ade4001745",
+      "story_beats": [
+        {
+          "headline": "The Missing Tide Bell",
+          "speech": "Oh dear, the main tide bell has slipped beneath the waves just before the grand celebration begins tonight.",
+          "visual": "forest",
+          "label": "Tide Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "A wet brown otter protagonist with a white chin and slick fur stands anxiously on a rocky seaside wooden dock, looking down at empty murky water where a brass bell once hung, holding a small metal wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Searching the Cove",
+          "speech": "I must search the coastal kelp beds to find something bright enough to guide our friends safely home.",
+          "visual": "door",
+          "label": "Sea Cave",
+          "story_beat": "build",
+          "visual_prompt": "The same brown otter protagonist stands near a wooden seaside shack door, holding a glowing yellow lantern close to his chest while peering into the evening fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Securing the Beacon",
+          "speech": "If I fasten this glowing lantern firmly to the old wooden piling, the boats will find the harbor entrance easily.",
+          "visual": "signal",
+          "label": "Harbor Edge",
+          "story_beat": "mechanism",
+          "visual_prompt": "The same brown otter protagonist stands on the wooden wharf at dusk, using a wrench to tighten a brass bracket holding a bright glowing lantern to a sturdy post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Seaside Celebration",
+          "speech": "Our festival shines brighter than ever now that the coastal waters are safely lit for everyone.",
+          "visual": "ship",
+          "label": "Celebration Cove",
+          "story_beat": "payoff",
+          "visual_prompt": "The same brown otter protagonist stands cheerfully on the wooden dock waving happily as several small decorated wooden boats drift into the lit harbor under a starry night.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-03T11:47:28.608808+00:00",
+  "last_preflight_at": "2026-11-03T16:08:28.640737+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-03T11:48:39.506865+00:00",
+    "at": "2026-11-03T16:09:53.723380+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -18099,10 +18152,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-11d6d88a618a3b1febd1": {
+      "at": "2026-11-03T16:09:51.911897+00:00",
+      "title": "Orson the Otter and the Sunken Lantern Festival",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0fb5833b56125f3efff4c254eda4da317bcf0ef7c71601228c9441ade4001745",
+      "story_beats": [
+        {
+          "headline": "The Missing Tide Bell",
+          "speech": "Oh dear, the main tide bell has slipped beneath the waves just before the grand celebration begins tonight.",
+          "visual": "forest",
+          "label": "Tide Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "A wet brown otter protagonist with a white chin and slick fur stands anxiously on a rocky seaside wooden dock, looking down at empty murky water where a brass bell once hung, holding a small metal wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Searching the Cove",
+          "speech": "I must search the coastal kelp beds to find something bright enough to guide our friends safely home.",
+          "visual": "door",
+          "label": "Sea Cave",
+          "story_beat": "build",
+          "visual_prompt": "The same brown otter protagonist stands near a wooden seaside shack door, holding a glowing yellow lantern close to his chest while peering into the evening fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Securing the Beacon",
+          "speech": "If I fasten this glowing lantern firmly to the old wooden piling, the boats will find the harbor entrance easily.",
+          "visual": "signal",
+          "label": "Harbor Edge",
+          "story_beat": "mechanism",
+          "visual_prompt": "The same brown otter protagonist stands on the wooden wharf at dusk, using a wrench to tighten a brass bracket holding a bright glowing lantern to a sturdy post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Seaside Celebration",
+          "speech": "Our festival shines brighter than ever now that the coastal waters are safely lit for everyone.",
+          "visual": "ship",
+          "label": "Celebration Cove",
+          "story_beat": "payoff",
+          "visual_prompt": "The same brown otter protagonist stands cheerfully on the wooden dock waving happily as several small decorated wooden boats drift into the lit harbor under a starry night.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-03T11:48:39.506791+00:00",
+    "at": "2026-11-03T16:09:53.723304+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -18113,21 +18217,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-03T11:48:39.506852+00:00",
+    "at": "2026-11-03T16:09:53.723367+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-03T11:48:07.651984+00:00",
+    "at": "2026-11-03T16:09:12.576891+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
-    "video_url": "https://www.youtube.com/watch?v=DYWaQgJIjCw",
+    "content_id": "rayvan-gemini-11d6d88a618a3b1febd1",
+    "video_url": "https://www.youtube.com/watch?v=v7vIv_0USno",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-03T11:48:39.506709+00:00",
+    "at": "2026-11-03T16:09:53.723218+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -18139,7 +18243,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-03T11:48:39.506785+00:00",
+    "at": "2026-11-03T16:09:53.723298+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
