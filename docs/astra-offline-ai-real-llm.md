@@ -245,3 +245,34 @@ passed the story, image, motion and aggregate checks. This document-only
 commit triggers exactly one checksum-verified, CPU-only Qwen 1.5B inference
 in the existing gated experimental workflow, using no production publishing
 path. Future ordinary pushes do not repeat the benchmark.
+
+## Actual 1.5B result: CPU successful; model still copied plan (2026-11-04)
+
+[Unified experimental run #41707761872](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41707761872)
+passed the three parallel test lanes plus aggregate and correctly ran the
+official pinned 1.5B CPU model. 1,117,320,736 bytes and SHA-256
+`6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e`
+were verified before inference. Real local generation exited 0 in
+**16.891 seconds**, with **1,884,680 KiB peak child RSS**.
+
+The real model generated one parseable JSON object with four beats,
+but **all four were too short** for the 25–60-word draft screen.
+The independent plan-copy audit rejected attempt, setback and payoff
+as too similar to the supplied author plan; normalized payoff similarity
+was **1.0** (exact repetition). Report:
+`model_executed=true`, `story_contract_passed=false`,
+`plan_copy_detected=true`,
+`causal_cue_audit_passed=false`,
+`approved=false`, `production_ready=false`,
+`published=false`. The last false means the causal cue check
+was not reached after the structural rejection, **not** that a separate
+causal assessment of this output was completed.
+
+The result does not justify promoting the 1.5B model or simply scaling
+the same plan-copying task to larger models. The actual four-beat output
+is now a regression fixture requiring both the length and copy
+negative controls to reject it. For the next real improvement, test a
+**distinct authoring approach** (not a more expensive model) with
+independent, manually reviewed causal outcomes and side-by-side evidence,
+retaining ASTRA's production protections. No additional model inference
+is triggered by this documentation or regression change.

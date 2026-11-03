@@ -64,6 +64,27 @@ class OfflineLLMTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "length limits"):
             review_candidate(json.dumps(example), "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf")
 
+    def test_actual_qwen15_output_is_rejected_for_plan_copy_and_short_beats(self):
+        # Archived real offline run #41707761872: valid JSON, NOT an original story.
+        from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, audit_plan_copy
+        model_output = {
+            "title": "The Copper Robot's Stormy Repair",
+            "story_beats": [
+                "At a stormy lighthouse, a copper robot notices the warning lamp go dark as a cargo ship approaches an unlit reef.",
+                "The robot climbs inside the lighthouse and finds a corroded switch; it attempts to clean the connector.",
+                "Lightning strikes, cutting power and knocking away the spare battery; the signal remains dark as the ship approaches the dangerous rocks.",
+                "The robot splices its own power cable across the broken switch; the beacon beam shines again, and the ship turns safely away.",
+            ],
+        }
+        copy = audit_plan_copy(model_output["story_beats"], LIGHTHOUSE_CAUSAL_PLAN)
+        self.assertTrue(copy["copy_detected"])
+        self.assertEqual(copy["copied_stages"], ["attempt", "setback", "payoff"])
+        self.assertEqual(copy["similarities"]["payoff"], 1.0)
+        self.assertEqual(copy["originality"], "not_verified")
+        self.assertFalse(copy["production_ready"])
+        with self.assertRaisesRegex(ValueError, "length limits"):
+            review_candidate(json.dumps(model_output), "qwen2.5-1.5b-instruct-q4_k_m.gguf")
+
     def test_bad_structure_and_repetitions_fail_closed(self):
         story = valid_story()
         story["story_beats"] = ["very short"] * 4
