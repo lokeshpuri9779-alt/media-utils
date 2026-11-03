@@ -1,5 +1,5 @@
 {
-  "approved_production_candidates_before_history": 70,
+  "approved_production_candidates_before_history": 69,
   "authored_candidates": 253,
   "block_reasons": {
     "insufficient_narrative_detail": 22,
@@ -7,6 +7,7 @@
     "narrative_duplicate": 95,
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 17,
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 7,
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art": 1,
     "publication_renderer_incompatible: shot 1: Unified Studio: unsupported badger actor requires verified scene artwork": 10,
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 4,
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 9,
@@ -14,13 +15,14 @@
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 12,
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 13,
     "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art": 1,
     "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 13,
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 20,
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 19,
     "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1
   },
   "blocked": 253,
   "eligible": 0,
-  "history_records": 809,
+  "history_records": 810,
   "latest_production_outcome": "processing",
   "latest_production_reason": "",
   "read_only": true,
