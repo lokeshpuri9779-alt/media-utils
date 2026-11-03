@@ -139,6 +139,47 @@ class OfflineLLMTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid payoff"):
             make_prompt("copper robot lighthouse", plan=invalid)
 
+    def test_actual_gbnf_output_rejected_as_plan_copy_even_before_length_gate(self):
+        from tools.astra_offline_story_plan import (
+            LIGHTHOUSE_CAUSAL_PLAN, STAGES, audit_plan_copy,
+        )
+        copied = [
+            f"{stage.title()}: {LIGHTHOUSE_CAUSAL_PLAN[stage]}"
+            for stage in STAGES
+        ]
+        result = audit_plan_copy(copied, LIGHTHOUSE_CAUSAL_PLAN)
+        self.assertTrue(result["copy_detected"])
+        self.assertEqual(result["copied_stages"], list(STAGES))
+        self.assertFalse(result["approved"])
+        self.assertFalse(result["production_ready"])
+        self.assertFalse(result["published"])
+
+    def test_plan_copy_with_filler_words_is_still_rejected(self):
+        from tools.astra_offline_story_plan import (
+            LIGHTHOUSE_CAUSAL_PLAN, STAGES, audit_plan_copy,
+        )
+        padded = [
+            LIGHTHOUSE_CAUSAL_PLAN[stage]
+            + " The character carefully considers the consequence of this moment."
+            for stage in STAGES
+        ]
+        report = audit_plan_copy(padded, LIGHTHOUSE_CAUSAL_PLAN)
+        self.assertTrue(report["copy_detected"])
+        self.assertEqual(len(report["copied_stages"]), 4)
+
+    def test_distinct_narrative_actions_do_not_claim_originality_proof(self):
+        from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, audit_plan_copy
+        independent = [
+            "At the shore a robot stops when a dark warning tower faces a fishing boat entering shallow water.",
+            "It climbs the iron staircase, unscrews the housing and removes a loose contact from behind the lens.",
+            "A burst of wind throws the replacement fuse into the floodwater, leaving the lamp without power.",
+            "The machine joins two stripped wires, starts the light turning and watches the vessel move into clear water.",
+        ]
+        result = audit_plan_copy(independent, LIGHTHOUSE_CAUSAL_PLAN)
+        self.assertFalse(result["copy_detected"])
+        self.assertEqual(result["originality"], "not_verified")
+        self.assertFalse(result["approved"])
+
     def test_prompt_is_bounded(self):
         self.assertIn("Theme: otter", make_prompt("otter"))
         with self.assertRaises(ValueError):

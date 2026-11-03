@@ -188,3 +188,22 @@ standalone manual benchmark remains separate.
 ## One-shot planned comparison authorization
 
 The causal-plan PR review-only CI on run #41700681725 passed the three parallel lanes and aggregate. This one commit authorizes exactly one experimental free CPU model comparison using the same pinned Qwen 0.5B GGUF, the pinned llama.cpp revision, and fixed GBNF grammar. New variable: the four-step, plan-digest-stamped input prompt. No API, main integration, automatic publishing, approval, or repeated attempts are authorized. The next result must be judged from the actual generated content.
+
+## Planned 0.5B comparison result and anti-parrot safeguard
+
+[Planned benchmark #41700835738](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41700835738)
+successfully compiled the pinned CPU runtime and checked the pinned
+397,808,192-byte GGUF. Inference completed in 7.445 seconds at 561,340 KiB
+peak child RSS. The four-beat GBNF output was valid JSON, but each beat
+was little more than the supplied plan sentence with a stage label.
+The 25–60-word review contract correctly rejected this; no candidate was
+approved or published. It is **not** evidence that planned prompting alone
+solved ASTRA's writing-quality problem.
+
+The new review-only plan-copy audit separately records which stages closely
+repeat the supplied plan, including padded copies. The original bad output
+is now a regression fixture and rejected before any review candidate is
+written, even if superficial length checks would eventually pass.
+The audit is conservative and cannot establish independent originality:
+passing is `originality=not_verified` and never authorizes production.
+No additional model runs were triggered.

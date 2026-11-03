@@ -60,6 +60,7 @@ class BenchmarkTests(unittest.TestCase):
         self.assertIn("--single-turn", args[0])
         self.assertIn("--no-display-prompt", args[0])
         self.assertTrue(result["causal_plan_supplied"])
+        self.assertFalse(result["plan_copy_detected"])
         self.assertEqual(len(result["causal_plan_sha256"]), 64)
         self.assertEqual(result["model_followed_plan"], "not_verified")
         prompt_arg = args[0][args[0].index("-p") + 1]
@@ -99,6 +100,28 @@ class BenchmarkTests(unittest.TestCase):
         self.assertFalse((self.output / "story-review.json").exists())
         self.assertTrue((self.output / "review-report.json").exists())
         self.assertFalse(result["production_ready"])
+
+    def test_actual_planned_output_diagnosed_as_copy_and_rejected(self):
+        from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, STAGES
+        story = {
+            "title": "The Copper Robot and the Lighthouse Repair",
+            "story_beats": [
+                f"{stage.title()}: {LIGHTHOUSE_CAUSAL_PLAN[stage]}"
+                for stage in STAGES
+            ],
+        }
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            report = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(report["model_executed"])
+        self.assertFalse(report["story_contract_passed"])
+        self.assertTrue(report["plan_copy_detected"])
+        self.assertEqual(report["plan_copy_audit"]["copied_stages"], list(STAGES))
+        self.assertFalse((self.output / "story-review.json").exists())
+        self.assertFalse(report["approved"])
+        self.assertFalse(report["production_ready"])
 
     def test_invalid_output_retained_as_unapproved_review_evidence(self):
         completed = subprocess.CompletedProcess([], 0, '{"title": "incomplete"}', "")

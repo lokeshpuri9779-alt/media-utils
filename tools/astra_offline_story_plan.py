@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
+from difflib import SequenceMatcher
 
 STAGES = ("setup", "attempt", "setback", "payoff")
 
@@ -68,3 +70,52 @@ def plan_instructions(plan: dict) -> str:
                     for index, (stage, value) in
                     enumerate(zip(STAGES, values), 1))
     )
+
+
+def audit_plan_copy(beats: list[str], plan: dict) -> dict:
+    """Flag near-verbatim plan restatement; passing cannot prove originality.
+
+    Reused named entities are allowed. This only catches long literal overlap
+    and very close paraphrases, not every kind of uncreative model output.
+    """
+    source = validate_plan(plan)
+    if not isinstance(beats, list) or len(beats) != 4 or any(
+        not isinstance(beat, str) for beat in beats
+    ):
+        raise ValueError("expected four model-generated string beats")
+
+    def normalize(text: str) -> str:
+        return " ".join(re.findall(r"[a-z0-9]+", text.casefold()))
+
+    similarities = {}
+    copied = []
+    for stage, prompt, generated in zip(STAGES, source, beats):
+        # A stage label copied from the prompt is not story development.
+        generated = re.sub(
+            rf"^\s*{re.escape(stage)}\s*:\s*", "", generated,
+            flags=re.IGNORECASE,
+        )
+        expected, actual = normalize(prompt), normalize(generated)
+        similarity = SequenceMatcher(None, expected, actual, autojunk=False).ratio()
+        # If text is padded to pass a length gate, the original plan still
+        # appears as one long exact sequence and must be rejected.
+        direct_copy = len(expected) >= 50 and expected in actual
+        suspicious = direct_copy or similarity >= 0.87
+        similarities[stage] = round(similarity, 4)
+        if suspicious:
+            copied.append(stage)
+
+    return {
+        "check_type": "conservative_plan_copy_negative_control",
+        "plan_sha256": plan_digest(plan),
+        "copy_detected": bool(copied),
+        "copied_stages": copied,
+        "similarities": similarities,
+        "passed": not copied,
+        "originality": "not_verified",
+        "semantic_quality": "not_verified",
+        "manual_editorial_review_required": True,
+        "approved": False,
+        "production_ready": False,
+        "published": False,
+    }

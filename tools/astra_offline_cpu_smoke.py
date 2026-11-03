@@ -15,9 +15,9 @@ import resource
 import subprocess
 import time
 
-from tools.astra_offline_llm import make_prompt, review_candidate
+from tools.astra_offline_llm import extract_object, make_prompt, review_candidate
 from tools.astra_offline_causal_audit import audit_lighthouse_repair
-from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, plan_digest
+from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, plan_digest, audit_plan_copy
 
 MODEL_FILENAME = "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf"
 MODEL_SHA256 = "6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653"
@@ -68,6 +68,8 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         "causal_plan_supplied": True,
         "causal_plan_sha256": plan_digest(LIGHTHOUSE_CAUSAL_PLAN),
         "model_followed_plan": "not_verified",
+        "plan_copy_audit": None,
+        "plan_copy_detected": False,
         "grammar": "four_causal_beats_v3",
         "review_only": True,
         "model_executed": False,
@@ -118,6 +120,17 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
             report["error_type"] = "SamplerInitializationFailed"
         else:
             report["model_executed"] = True
+            # Evidence is collected independently of the story length gate:
+            # short plan copies must be visible in the report, not silently
+            # dismissed as a generic word-count failure.
+            try:
+                raw_candidate = extract_object(raw)
+                audit = audit_plan_copy(raw_candidate["story_beats"],
+                                        LIGHTHOUSE_CAUSAL_PLAN)
+                report["plan_copy_audit"] = audit
+                report["plan_copy_detected"] = audit["copy_detected"]
+            except (ValueError, KeyError, TypeError):
+                pass  # Structural validation below is authoritative.
             try:
                 candidate = review_candidate(raw, MODEL_FILENAME)
             except (ValueError, KeyError, TypeError) as exc:
@@ -125,16 +138,19 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
                 report["story_contract_rejection"] = str(exc)[:180]
             else:
                 report["story_contract_passed"] = True
-                cues = audit_lighthouse_repair(candidate["story_beats"])
-                report["causal_cue_audit"] = cues
-                report["causal_cue_audit_passed"] = cues["passed"]
-                if not cues["passed"]:
-                    report["error_type"] = "CausalCueRejection"
+                if report["plan_copy_detected"]:
+                    report["error_type"] = "PlanCopyRejection"
                 else:
-                    (output / "story-review.json").write_text(
-                        json.dumps(candidate, indent=2, ensure_ascii=False) + "\n",
-                        encoding="utf-8")
-                    report["candidate_id"] = candidate["candidate_id"]
+                    cues = audit_lighthouse_repair(candidate["story_beats"])
+                    report["causal_cue_audit"] = cues
+                    report["causal_cue_audit_passed"] = cues["passed"]
+                    if not cues["passed"]:
+                        report["error_type"] = "CausalCueRejection"
+                    else:
+                        (output / "story-review.json").write_text(
+                            json.dumps(candidate, indent=2, ensure_ascii=False) + "\n",
+                            encoding="utf-8")
+                        report["candidate_id"] = candidate["candidate_id"]
     except subprocess.TimeoutExpired:
         report["error_type"] = "TimeoutExpired"
     finally:
@@ -155,7 +171,7 @@ def main():
     report = run_benchmark(args.binary, args.model, args.output, args.timeout_seconds)
     print(json.dumps(report, indent=2))
     if (not report["model_executed"] or not report["story_contract_passed"]
-            or not report["causal_cue_audit_passed"]):
+            or not report["causal_cue_audit_passed"] or report["plan_copy_detected"]):
         raise SystemExit(1)
 
 
