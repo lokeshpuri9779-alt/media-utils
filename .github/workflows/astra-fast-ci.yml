@@ -82,6 +82,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_review_timeline.py' -v
           python -m unittest discover -s tests -p 'test_mp4_motion_evidence.py' -v
           python -m unittest discover -s tests -p 'test_annotated_object_motion.py' -v
+          python -m unittest discover -s tests -p 'test_pixel_track_candidates.py' -v
           python -m unittest discover -s tests -p 'test_astra_render_contact_sheet.py' -v
           python -m unittest discover -s tests -p 'test_renderer_aware_writing.py' -v
           python -m unittest discover -s tests -p 'test_semantic_video_gate.py' -v
