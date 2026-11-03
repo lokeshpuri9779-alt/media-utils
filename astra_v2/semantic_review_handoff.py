@@ -38,7 +38,7 @@ def _git(repo_dir, *args):
     # No shell, untrusted prompts, paths or credentials in commands/logs.
     return subprocess.run(
         ["git", *args], cwd=repo_dir, check=True, capture_output=True,
-        timeout=25, stdout=subprocess.PIPE,
+        timeout=25,
     ).stdout
 
 
