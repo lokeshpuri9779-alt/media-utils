@@ -46,6 +46,9 @@ jobs:
           python-version: '3.11'
       - name: Refuse production-like credentials
         run: python3 -m tools.experimental_guard
+      - name: Install free Pillow required by existing story-novelty tests
+        if: matrix.lane == 'story'
+        run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
       - name: Story local-LLM review contract tests (no model inference)
         if: matrix.lane == 'story'
         run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_local_story_novelty
