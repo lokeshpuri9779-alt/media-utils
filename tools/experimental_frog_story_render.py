@@ -167,8 +167,16 @@ for i in range(FRAME_COUNT):
         magnet.hide_render=True
         sprout.hide_render=True
         leaf.hide_render=True
-        camera.location=(0,-6.25,4.0)
-        camera_at((0,0,.68),48)
+        # Eight-frame cinematic push-in: start with the whole street, then
+        # resolve into the drain/airplane and frog. The final setup camera
+        # exactly matches the rescue camera at frame 8, avoiding a jump cut.
+        setup_t=i/7
+        setup_ease=setup_t*setup_t*(3-2*setup_t)
+        camera.location=(-.30*setup_ease,
+                         -6.25+.95*setup_ease,
+                         4.0-.90*setup_ease)
+        camera_at((-.52*setup_ease,.15*setup_ease,
+                   .68+.02*setup_ease),48+setup_ease)
     elif i<22:
         phase="rescue"
         frog_root.location.x=.25
@@ -249,6 +257,8 @@ for i in range(FRAME_COUNT):
         "leaf_visible":not leaf.hide_render,
         "frog_root_x":round(float(frog_root.location.x),4),
         "camera_xyz":[round(float(v),4) for v in camera.location],
+        "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
+        "camera_lens":round(float(camera.data.lens),4),
     })
 checks={
     "thirty_two_frames":len(frames)==FRAME_COUNT,
@@ -270,6 +280,18 @@ checks={
     "camera_moves_smoothly_in_payoff":all(
         (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
         for i in range(23,32)),
+    "opening_camera_push_in_is_smooth":all(
+        0<(Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.40
+        for i in range(1,8)),
+    "opening_camera_targets_rescue":(
+        all(abs(a-b)<.0001 for a,b in zip(
+            frames[7]["camera_xyz"],frames[8]["camera_xyz"]))
+        and all(abs(a-b)<.0001 for a,b in zip(
+            frames[7]["camera_rotation_xyz"],frames[8]["camera_rotation_xyz"]))
+        and abs(frames[7]["camera_lens"]-frames[8]["camera_lens"])<.0001
+        and all(frames[i]["camera_lens"]<=frames[i+1]["camera_lens"]
+                for i in range(7))
+    ),
     "different_story_fingerprint":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
     "seed_and_soil_use_distinct_materials":seed.data.materials[0] != pot_soil.data.materials[0],
     "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
