@@ -27,6 +27,9 @@ SEED_ROIS = {
 }
 SEED_MIN_PIXELS = {22: 175, 23: 175, 24: 35, 25: 175}
 SPROUT_ROI = (195, 242, 325, 292)
+# Fixed patch on the soil surface, not the rim or moving seed (frames 22-25).
+POT_SOIL_ROI = (276, 296, 286, 306)
+MIN_SEED_SOIL_LUMA_GAP = 25.0
 
 
 def _assert_rgb(frame):
@@ -94,6 +97,7 @@ def seed_brown_center(frame, roi):
     if not (0 <= left < right <= W and 0 <= top < bottom <= H):
         raise ValueError("Invalid seed ROI")
     xs = []
+    lum = 0.0
     for y in range(top, bottom):
         for x in range(left, right):
             k = 3 * (y * W + x)
@@ -102,8 +106,25 @@ def seed_brown_center(frame, roi):
                     and red > green * 1.16 and red < green * 1.68
                     and blue > green * .65 and green > blue * 1.04):
                 xs.append(x)
+                lum += .2126 * red + .7152 * green + .0722 * blue
     return {"pixels": len(xs),
-            "center_x": round(sum(xs) / len(xs), 2) if xs else None}
+            "center_x": round(sum(xs) / len(xs), 2) if xs else None,
+            "luma": round(lum / len(xs), 2) if xs else None}
+
+
+def roi_luma(frame, roi):
+    """Average rendered RGB luminance in a stable soil-only image patch."""
+    _assert_rgb(frame)
+    left, top, right, bottom = roi
+    if not (0 <= left < right <= W and 0 <= top < bottom <= H):
+        raise ValueError("Invalid soil ROI")
+    total = 0.0
+    for y in range(top, bottom):
+        for x in range(left, right):
+            k = 3 * (y * W + x)
+            total += (.2126 * frame[k] + .7152 * frame[k + 1]
+                      + .0722 * frame[k + 2])
+    return round(total / ((right - left) * (bottom - top)), 2)
 
 
 def pale_region_left(frame):
@@ -144,8 +165,11 @@ def score(frames, report):
                 for i, roi in SEED_ROIS.items()}
         sprout = {str(i): green_pixels(frames[i], SPROUT_ROI)
                   for i in (28, 29, 30, 31)}
+        soil_luma = {str(i): roi_luma(frames[i], POT_SOIL_ROI)
+                     for i in SEED_ROIS}
         measurements = {"magnet_gold": gold, "airplane_pale": paper,
-                        "seed_brown": seed, "sprout_green": sprout}
+                        "seed_brown": seed, "sprout_green": sprout,
+                        "pot_soil_luma": soil_luma}
         x = [gold[str(i)]["center_x"] for i in MAGNET_FRAMES]
         p = [paper[str(i)]["left_x"] for i in AIRPLANE_FRAMES]
         checks["magnet_golden_pixels_present"] = all(
@@ -174,6 +198,11 @@ def score(frames, report):
             and all(b - a >= 12 for a, b in zip(seed_x, seed_x[1:]))
             and seed_x[-1] - seed_x[0] >= 105
         )
+        checks["seed_visibly_contrasts_with_pot_soil"] = all(
+            seed[str(i)]["luma"] is not None and
+            seed[str(i)]["luma"] - soil_luma[str(i)] >= MIN_SEED_SOIL_LUMA_GAP
+            for i in SEED_ROIS
+        )
         checks["sprout_pixels_follow_seed_transfer"] = (
             sprout["28"] <= 5 and 80 <= sprout["29"] <= 500
             and 150 <= sprout["30"] <= 800
@@ -190,10 +219,10 @@ def score(frames, report):
         "failed_checks": failed,
         "measurements": measurements,
         "evidence_scope": "fixed-scene color/position proxies from actual RGB PNGs",
-        "limitations": ("Fixed-scene color/position proxies cannot identify "
-                        "objects semantically. Seed-colored pixels become "
-                        "indistinguishable from pot soil after frame 25; "
-                        "subject and cinematic quality require manual review."),
+        "limitations": ("Fixed-scene pixel contrast is not semantic "
+                        "object recognition. Crops and lighting are calibrated "
+                        "to frames 22-25; planting after frame 25 and overall "
+                        "cinematic quality still require manual review."),
         "semantic_quality": "not_verified",
         "cinematic_quality": "not_verified",
         "manual_visual_review_required": True,
@@ -232,6 +261,25 @@ def negative_controls(frames, report):
             "expected_detection": expected,
             "failed_checks": result["failed_checks"],
         })
+    # A visually indistinguishable seed/soil color must be rejected even
+    # when the sequence metadata and seed's x-coordinate remain unchanged.
+    no_contrast = list(frames)
+    modified = bytearray(frames[25])
+    lum = round(unmodified["measurements"]["seed_brown"]["25"]["luma"])
+    left, top, right, bottom = POT_SOIL_ROI
+    for y in range(top, bottom):
+        for x in range(left, right):
+            k = 3 * (y * W + x)
+            modified[k:k + 3] = bytes((lum, lum, lum))
+    no_contrast[25] = modified
+    obscured = score(no_contrast, report)
+    cases.append({
+        "case": "seed_matches_pot_soil_brightness",
+        "rejected": (obscured["passed"] is False and
+                     obscured["checks"].get("seed_visibly_contrasts_with_pot_soil") is False),
+        "expected_detection": "seed_visibly_contrasts_with_pot_soil",
+        "failed_checks": obscured["failed_checks"],
+    })
     output = {
         "source_passed": True,
         "negative_case_count": len(cases),

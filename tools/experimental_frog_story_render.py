@@ -42,7 +42,10 @@ gold=mat("MAGNET_GOLD",(.95,.56,.09),.5)
 water=mat("RAIN_WATER",(.04,.26,.42))
 concrete=mat("STREET",(.32,.35,.39))
 paper=mat("PAPER",(.92,.88,.72))
-soil=mat("SOIL",(.2,.11,.07))
+# Separate the visible chestnut seed from dark potting soil so that a
+# 384x576 review frame does not read as a brown speck on brown soil.
+seedcoat=mat("SEED_CHESTNUT",(.28,.16,.10))
+potsoil=mat("POT_SOIL_DARK",(.065,.055,.045))
 potmat=mat("TERRACOTTA",(.57,.19,.09))
 sproutmat=mat("SPROUT",(.1,.7,.17))
 black=mat("DRAIN",(.06,.08,.09),.4)
@@ -100,9 +103,9 @@ plane=bpy.data.objects.new("PAPER_AIRPLANE",mesh)
 bpy.context.collection.objects.link(plane)
 plane.location=(-1.12,.25,.23)
 clip=ball("PAPER_CLIP",(-1.12,.1,.25),(.065,.04,.04),gold)
-seed=ball("SEED",(-1.12,.25,.31),(.115,.115,.095),soil)
+seed=ball("SEED",(-1.12,.25,.31),(.15,.135,.112),seedcoat)
 cube("POT_BASE",(1.45,.45,.24),(.72,.72,.5),potmat)
-cube("POT_SOIL",(1.45,.45,.51),(.59,.59,.06),soil)
+pot_soil=cube("POT_SOIL",(1.45,.45,.51),(.59,.59,.06),potsoil)
 sprout=rod("SPROUT_STEM",(1.45,.45,.54),(1.45,.45,.86),.04,sproutmat)
 leaf=ball("SPROUT_LEAVES",(1.45,.45,.9),(.23,.09,.12),sproutmat)
 line=rod("MAGNET_LINE",(.15,-.22,.68),(-1.12,.1,.3),.022,gold)
@@ -264,6 +267,8 @@ checks={
         (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
         for i in range(23,32)),
     "different_story_fingerprint":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
+    "seed_and_soil_use_distinct_materials":seed.data.materials[0] != pot_soil.data.materials[0],
+    "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
 report={

@@ -7,7 +7,7 @@ import unittest
 
 from tools.experimental_frog_object_pixel_tracks import (
     SIZE, W, gold_region_center, pale_region_left, seed_brown_center,
-    SEED_ROIS, score, negative_controls,
+    SEED_ROIS, POT_SOIL_ROI, score, negative_controls,
 )
 
 
@@ -31,6 +31,9 @@ def synthetic():
         fill(frames[i], x - 9, y - 5, 18, 10, (112, 82, 62))
     for i, width, height in ((29, 9, 16), (30, 14, 16), (31, 40, 48)):
         fill(frames[i], 240, 242, width, height, (20, 180, 34))
+    l, top, right, bottom = POT_SOIL_ROI
+    for i in range(22, 26):
+        fill(frames[i], l, top, right - l, bottom - top, (50, 50, 45))
 
     report = {
         "success": True,
@@ -56,7 +59,7 @@ class FixedActorPixelTracks(unittest.TestCase):
     def test_clean_object_trajectories_and_sprout_pass(self):
         r = score(self.frames, self.report)
         self.assertTrue(r["passed"], r)
-        self.assertEqual(len(r["checks"]), 8)
+        self.assertEqual(len(r["checks"]), 9)
         self.assertTrue(all(r["checks"].values()))
         self.assertEqual(r["semantic_quality"], "not_verified")
         self.assertFalse(r["production_ready"])
@@ -67,9 +70,9 @@ class FixedActorPixelTracks(unittest.TestCase):
         self.assertEqual(seed_brown_center(
             self.frames[24], SEED_ROIS[24])["center_x"], 167.5)
 
-    def test_nine_corrupted_sequences_rejected(self):
+    def test_ten_corrupted_sequences_rejected(self):
         result = negative_controls(self.frames, self.report)
-        self.assertEqual(result["negative_case_count"], 9)
+        self.assertEqual(result["negative_case_count"], 10)
         self.assertTrue(result["all_corruptions_rejected"], result)
         self.assertEqual(result["semantic_quality"], "not_verified")
 
@@ -116,6 +119,19 @@ class FixedActorPixelTracks(unittest.TestCase):
         self.assertFalse(r["passed"])
         self.assertIn("seed_pixel_path_advances_toward_pot",
                       r["failed_checks"])
+
+    def test_seed_color_matching_soil_rejected(self):
+        frames = self.frames.copy()
+        frames[25] = bytearray(self.frames[25])
+        l, top, right, bottom = POT_SOIL_ROI
+        for y in range(top, bottom):
+            for x in range(l, right):
+                k = 3 * (y * W + x)
+                frames[25][k:k + 3] = bytes((86, 86, 86))
+        result = score(frames, self.report)
+        self.assertFalse(result["passed"])
+        self.assertIn("seed_visibly_contrasts_with_pot_soil",
+                      result["failed_checks"])
 
     def test_metadata_cannot_claim_publication(self):
         for key in ("approved", "published", "production_ready",

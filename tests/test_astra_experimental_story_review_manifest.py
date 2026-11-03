@@ -60,6 +60,7 @@ def fixture(directory, profile):
             "paper_region_moves_right_after_contact": True,
             "seed_brown_blob_before_soil": True,
             "seed_pixel_path_advances_toward_pot": True,
+            "seed_visibly_contrasts_with_pot_soil": True,
             "sprout_pixels_follow_seed_transfer": True,
         }
         write(directory, cfg["object_audit"],
