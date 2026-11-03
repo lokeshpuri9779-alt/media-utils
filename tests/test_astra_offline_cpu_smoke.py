@@ -14,10 +14,10 @@ def story():
     return {
         "title": "The Copper Robot and the Lost Light",
         "story_beats": [
-            "Before sunrise, a copper robot discovers that a coastal lighthouse has stopped warning passing boats of dangerous rocks below.",
-            "The robot climbs the spiral stairs while the storm gathers, tracing the failed circuit to a damaged copper switch behind the lamp.",
-            "When lightning strikes, the robot drops its only spare battery, and the warning light dims while a ship nears the shore.",
-            "The robot reconnects the switch using its own power cable, restoring the beacon just before the ship reaches the rocks.",
+            "Before sunrise, a copper robot discovers that a coastal lighthouse has stopped warning passing boats of dangerous rocks below. One cargo ship is already steering toward the unlit reef.",
+            "The robot climbs the spiral stairs while the storm gathers, tracing the failed circuit to a damaged copper switch behind the lamp. It opens the panel and finds a corroded connector beneath cracked glass.",
+            "When lightning strikes, the robot drops its only spare battery, and the warning light dims while a ship nears the shore. The robot returns down the stairs to retrieve a salvaged cable from its toolbox.",
+            "The robot reconnects the switch using its own power cable, restoring the beacon just before the ship reaches the rocks. The beam returns and the ship steers safely into open water before sunrise.",
         ],
     }
 

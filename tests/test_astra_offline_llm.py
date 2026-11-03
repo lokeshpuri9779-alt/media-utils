@@ -13,10 +13,10 @@ def valid_story():
     return {
         "title": "A Lantern Beneath the Silent Lake",
         "story_beats": [
-            "Before dawn a curious otter discovers a flickering lantern beneath the lake, while the fishing village prepares for a dangerous storm.",
-            "The otter asks a patient heron for help and they follow the light through submerged reeds, discovering a broken warning bell.",
-            "When the first wave hits, the lantern goes dark and the otter must choose between retrieving the bell rope and returning home.",
-            "The heron holds the lantern above the waves while the otter pulls the rope, warning the villagers before the boats leave shore.",
+            "Before dawn a curious otter discovers a flickering lantern beneath the lake, while the fishing village prepares for a dangerous storm. The harbor keeper notices that the lantern flickers whenever the water begins to rise.",
+            "The otter asks a patient heron for help and they follow the light through submerged reeds, discovering a broken warning bell. They realize the missing rope means nobody ashore can hear an emergency warning.",
+            "When the first wave hits, the lantern goes dark and the otter must choose between retrieving the bell rope and returning home. Its choice matters because village boats are already approaching the shallow reef.",
+            "The heron holds the lantern above the waves while the otter pulls the rope, warning the villagers before the boats leave shore. Their warning gives the keepers enough time to secure every boat inside the harbor.",
         ],
     }
 
@@ -48,6 +48,21 @@ class OfflineLLMTests(unittest.TestCase):
         story = review_candidate("llama.cpp banner\n" + json.dumps(valid_story()),
                                  "small.gguf")
         self.assertEqual(story["title"], valid_story()["title"])
+
+    def test_real_grammar_story_is_rejected_for_thin_beats(self):
+        # Artifact from real CPU run #41660334335 passed an older length gate,
+        # but remains too thin and unresolved for review promotion.
+        example = {
+                "title": "The Copper Robot's Repair Mission",
+                "story_beats": [
+                        "A copper robot, tasked with repairing a lighthouse warning signal, finds itself caught in a storm.",
+                        "The robot must navigate through the stormy waters and over the towering lighthouse, where the warning signal is flashing.",
+                        "As the robot tries to navigate through the storm, it realizes that the lighthouse is not just a warning signal, but a lifeline for the town.",
+                        "The copper robot must use its skills and wit to navigate the stormy waters and find a way to repair the lighthouse warning signal before it goes off."
+                ]
+        }
+        with self.assertRaisesRegex(ValueError, "length limits"):
+            review_candidate(json.dumps(example), "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf")
 
     def test_bad_structure_and_repetitions_fail_closed(self):
         story = valid_story()

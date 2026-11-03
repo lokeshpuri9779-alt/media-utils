@@ -57,7 +57,7 @@ def review_candidate(model_output: str, model_name: str) -> dict:
         raise ValueError("title did not meet basic review contract")
     if not isinstance(beats, list) or len(beats) != 4:
         raise ValueError("expected four causal story beats")
-    if any(not isinstance(beat, str) or not 15 <= len(beat.split()) <= 140
+    if any(not isinstance(beat, str) or not 25 <= len(beat.split()) <= 60
            for beat in beats):
         raise ValueError("story beat outside review length limits")
     if len({beat.casefold().strip() for beat in beats}) != 4:

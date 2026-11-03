@@ -117,3 +117,25 @@ The consolidated review workflow was validated in [PR run #41659902726](https://
 ## Unified-run concurrency fix and retry
 
 The initial authorized push run #41660012605 was canceled before reaching inference because a concurrent PR validation for the same SHA shared its concurrency group. No third model output was produced. The workflow now scopes concurrency by event name and GitHub ref; PR checks can no longer cancel the authorized push run. The corrected review-only PR run #41660153898 passed all three parallel lanes and the aggregate. This one-time retry is authorized using the same exact commit-message guard; no extra prompts, models or production permissions are introduced.
+
+## Third real run: grammar worked, story quality failed
+
+[Unified run #41660334335](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41660334335)
+completed successfully with three parallel review lanes, aggregate verification
+and one GBNF-guided CPU model inference. Model checksum was verified; the
+report recorded `model_executed=true`, `story_contract_passed=true`,
+5.089 seconds elapsed and 544,292 KiB peak child RSS. The model produced
+a parseable JSON object with exactly four beats.
+
+However, inspection of the archived text shows generic repeated navigation
+actions and **no accomplished repair** in the supposed payoff. The story
+did not meet the prompt's 25–60-word-per-beat instruction. This is a
+**manual editorial failure**, even though the old 15–140-word automated
+length contract passed. Output is unapproved, unready, unpublished.
+
+The revised minimum automatic draft screen now matches the prompt's
+25–60 word beat range; a regression test reproduces and rejects the exact
+bad four-beat artifact. Longer beats alone would not establish causal
+fidelity or originality: manual review remains mandatory, no production
+promotion is permitted. This change is a validator correction only;
+**no fourth real model inference is authorized or run**.
