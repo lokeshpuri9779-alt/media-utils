@@ -57,6 +57,12 @@ class BenchmarkTests(unittest.TestCase):
         args, kwargs = execute.call_args
         self.assertIn("--single-turn", args[0])
         self.assertIn("--no-display-prompt", args[0])
+        self.assertIn("--json-schema", args[0])
+        schema = json.loads(args[0][args[0].index("--json-schema") + 1])
+        self.assertEqual(schema["properties"]["story_beats"]["minItems"], 4)
+        self.assertEqual(schema["properties"]["story_beats"]["maxItems"], 4)
+        self.assertFalse(schema["additionalProperties"])
+        self.assertTrue(result["constrained_json_schema"])
         self.assertEqual(kwargs["env"]["HF_HUB_OFFLINE"], "1")
         self.assertNotIn("OPENAI_API_KEY", kwargs["env"])
         self.assertFalse(kwargs["shell"])
@@ -71,6 +77,21 @@ class BenchmarkTests(unittest.TestCase):
         self.assertFalse(result["story_contract_passed"])
         self.assertFalse(result["approved"])
         self.assertTrue((self.output / "generated-raw.txt").is_file())
+        self.assertFalse((self.output / "story-review.json").exists())
+
+
+    def test_prior_five_placeholder_beat_failure_remains_rejected(self):
+        prior = {"title": "The Copper Robot's Repairing Mission",
+                 "story_beats": ["An empty beat title"] * 5}
+        completed = subprocess.CompletedProcess([], 0, json.dumps(prior), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertIn("four causal story beats", result["story_contract_rejection"])
+        self.assertFalse(result["production_ready"])
         self.assertFalse((self.output / "story-review.json").exists())
 
     def test_failed_process_never_produces_candidate(self):

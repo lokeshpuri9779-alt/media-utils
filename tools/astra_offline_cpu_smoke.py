@@ -23,6 +23,19 @@ LLAMA_CPP_REVISION = "51fe42c5d14bfb9adf0612ff98a9ab79e0e7275c"
 MODEL_SOURCE = "bartowski/Qwen2.5-0.5B-Instruct-GGUF"
 DEFAULT_THEME = "a copper robot repairing a lighthouse warning signal in a storm"
 
+STORY_JSON_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "title": {"type": "string", "minLength": 12, "maxLength": 100},
+        "story_beats": {
+            "type": "array", "minItems": 4, "maxItems": 4,
+            "items": {"type": "string", "minLength": 100, "maxLength": 500},
+        },
+    },
+    "required": ["title", "story_beats"],
+    "additionalProperties": False,
+}
+
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
@@ -56,6 +69,8 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         "model_filename": MODEL_FILENAME,
         "model_sha256": model_digest,
         "model_bytes": model.stat().st_size,
+        "constrained_json_schema": True,
+        "schema": "four_causal_beats_v2",
         "review_only": True,
         "model_executed": False,
         "story_contract_passed": False,
@@ -80,6 +95,7 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         str(binary), "-m", str(model),
         "-p", make_prompt(DEFAULT_THEME),
         "-n", "700", "-c", "2048",
+        "--json-schema", json.dumps(STORY_JSON_SCHEMA, separators=(",", ":")),
         "--temp", "0.4", "--seed", "42",
         "--single-turn", "--no-display-prompt", "--no-show-timings",
         "-t", "2", "-ngl", "0",

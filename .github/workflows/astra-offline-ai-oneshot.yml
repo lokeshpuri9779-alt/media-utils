@@ -22,7 +22,7 @@ concurrency:
 jobs:
   real-llm-cpu:
     if: >-
-      (github.event_name == 'push' && github.event.head_commit.message == 'experiment(ASTRA): one-shot offline Qwen 0.5B CPU benchmark')
+      (github.event_name == 'push' && github.event.head_commit.message == 'experiment(ASTRA): constrained JSON one-shot CPU retest')
       || (github.event_name == 'workflow_dispatch' && inputs.confirm_benchmark == 'BENCHMARK')
     runs-on: ubuntu-24.04
     timeout-minutes: 17

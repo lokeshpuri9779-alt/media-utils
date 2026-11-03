@@ -21,10 +21,13 @@ def make_prompt(theme: str) -> str:
         "Write one original, coherent, family-friendly short film story. "
         "Return ONLY one JSON object with precisely two keys: "
         "title (a string) and story_beats (an array of four strings). "
-        "Each beat must be 15 to 140 words and follow setup, attempt, "
-        "consequence, and payoff in that order. Show actions that could "
-        "be depicted visually. Avoid repeated beats and generic filler. "
-        "Do not include markdown or publishing instructions. "
+        "Use exactly four substantial story_beats, each 25 to 60 words. "
+        "Beat 1 setup: the character notices a concrete problem. "
+        "Beat 2 attempt: the character performs an action to solve it. "
+        "Beat 3 consequence: that action causes an unexpected obstacle. "
+        "Beat 4 payoff: the character solves the problem through another visible action. "
+        "Each beat must be a complete narrative paragraph, not a label, heading or outline. "
+        "Do not repeat sentences. Do not include markdown, explanation or publishing instructions. "
         "Theme: " + theme
     )
 

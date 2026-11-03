@@ -43,3 +43,11 @@ larger models, API calls, or expensive multi-seed sweeps.
 ## One-shot authorization record
 
 The exact commit message `experiment(ASTRA): one-shot offline Qwen 0.5B CPU benchmark` authorizes this single bounded experiment on the isolated branch. Later ordinary commits do not restart the large-model job.
+
+## First real result and bounded retest
+
+Run #41646109950 successfully built the pinned runtime, verified the exact 397,808,192-byte GGUF, and executed the local model in 17.332 seconds (520,776 KiB peak child RSS). The generated story **failed** the four-beat contract: five short placeholder beats followed by repetitive prose. This is a creative-quality failure, not an execution failure. Review-only flags remained false for approval, readiness, and publishing.
+
+One new bounded retest uses the **same** model, seed, source revision, prompt theme, runner and time budget, but tightens the instruction and passes a strict JSON schema (exactly four 100–500-character beat strings, one title, no extra fields) to llama.cpp. The existing structural editorial gate still separately rejects short or repeated story beats. Constrained JSON can improve output shape, not guarantee causality, originality, or publication quality. No automatic retries or bigger model sweeps.
+
+Exactly one push commit using `experiment(ASTRA): constrained JSON one-shot CPU retest` can trigger this diagnostic. The earlier one-shot authorization message no longer triggers this job.
