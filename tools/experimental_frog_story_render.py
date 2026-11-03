@@ -27,6 +27,33 @@ scene.render.image_settings.file_format="PNG"
 scene.render.film_transparent=False
 scene.render.fps=8
 scene.world.color=(.13,.16,.2)
+# Procedural dusk atmosphere built into Blender; no textures, network access,
+# external models or paid services. View-direction Z drives a restrained
+# vertical gradient behind the existing cloud geometry. Foreground scene
+# geometry, shot timing and main production pipeline remain untouched.
+world=scene.world
+world.use_nodes=True
+sky_nodes=world.node_tree.nodes
+sky_nodes.clear()
+sky_coord=sky_nodes.new("ShaderNodeTexCoord")
+sky_axis=sky_nodes.new("ShaderNodeSeparateXYZ")
+sky_height=sky_nodes.new("ShaderNodeMapRange")
+sky_height.clamp=True
+sky_height.inputs["From Min"].default_value=-.75
+sky_height.inputs["From Max"].default_value=.45
+sky_ramp=sky_nodes.new("ShaderNodeValToRGB")
+sky_ramp.color_ramp.interpolation="EASE"
+sky_ramp.color_ramp.elements[0].color=(.07,.095,.14,1)
+sky_ramp.color_ramp.elements[1].color=(.19,.26,.34,1)
+sky_bg=sky_nodes.new("ShaderNodeBackground")
+sky_bg.inputs["Strength"].default_value=.72
+sky_output=sky_nodes.new("ShaderNodeOutputWorld")
+sky_links=world.node_tree.links
+sky_links.new(sky_coord.outputs["Normal"],sky_axis.inputs["Vector"])
+sky_links.new(sky_axis.outputs["Z"],sky_height.inputs["Value"])
+sky_links.new(sky_height.outputs["Result"],sky_ramp.inputs["Fac"])
+sky_links.new(sky_ramp.outputs["Color"],sky_bg.inputs["Color"])
+sky_links.new(sky_bg.outputs["Background"],sky_output.inputs["Surface"])
 scene.camera=None
 
 def mat(name,color,metal=0):
@@ -338,6 +365,13 @@ checks={
     "different_story_fingerprint":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
     "seed_and_soil_use_distinct_materials":seed.data.materials[0] != pot_soil.data.materials[0],
     "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
+    "procedural_world_dusk_sky":(
+        world.use_nodes and len(sky_ramp.color_ramp.elements)==2 and
+        sky_height.inputs["From Min"].default_value<0 and
+        sky_height.inputs["From Max"].default_value>0 and
+        sky_bg.inputs["Strength"].default_value<=1 and
+        len(sky_links)==5
+    ),
     "static_distant_background_clouds":(
         len(background_clouds)==5 and len(background_cloud_lobes)==15 and
         all(obj.location.y>3 and obj.location.z>1
