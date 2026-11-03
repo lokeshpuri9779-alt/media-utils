@@ -49,6 +49,8 @@ class BenchmarkTests(unittest.TestCase):
             result = smoke.run_benchmark(self.binary, self.model, self.output)
         self.assertTrue(result["model_executed"])
         self.assertTrue(result["story_contract_passed"])
+        self.assertTrue(result["causal_cue_audit_passed"])
+        self.assertEqual(result["causal_cue_audit"]["semantic_quality"], "not_verified")
         self.assertFalse(result["approved"])
         self.assertFalse(result["published"])
         self.assertFalse(result["production_ready"])
@@ -66,6 +68,31 @@ class BenchmarkTests(unittest.TestCase):
         self.assertEqual(kwargs["env"]["HF_HUB_OFFLINE"], "1")
         self.assertNotIn("OPENAI_API_KEY", kwargs["env"])
         self.assertFalse(kwargs["shell"])
+
+    def test_structural_pass_with_unresolved_payoff_still_fails_heuristic(self):
+        story = {
+            "title": "The Copper Robot and the Storm Beacon",
+            "story_beats": [
+                "Before sunrise the copper robot sees the lighthouse warning signal go dark while a ship approaches rocks by the shoreline. The crew cannot see the reef ahead.",
+                "The robot climbs the lighthouse stairs, opens the broken panel and traces a disconnected wire near the warning lamp before the storm worsens. It prepares a backup cable.",
+                "Lightning strikes and the robot drops the copper wire, leaving the warning signal unpowered while the ship draws closer to the reef. Waves block the lower stairs.",
+                "The robot must navigate the stormy lighthouse and find a way to repair the warning signal before the ship arrives, but it remains completely dark."
+            ],
+        }
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertTrue(result["story_contract_passed"])
+        self.assertFalse(result["causal_cue_audit_passed"])
+        self.assertEqual(result["error_type"], "CausalCueRejection")
+        self.assertIn("payoff_has_completed_repair_cue",
+                      result["causal_cue_audit"]["failures"])
+        self.assertFalse((self.output / "story-review.json").exists())
+        self.assertTrue((self.output / "review-report.json").exists())
+        self.assertFalse(result["production_ready"])
 
     def test_invalid_output_retained_as_unapproved_review_evidence(self):
         completed = subprocess.CompletedProcess([], 0, '{"title": "incomplete"}', "")

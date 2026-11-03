@@ -16,6 +16,7 @@ import subprocess
 import time
 
 from tools.astra_offline_llm import make_prompt, review_candidate
+from tools.astra_offline_causal_audit import audit_lighthouse_repair
 
 MODEL_FILENAME = "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf"
 MODEL_SHA256 = "6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653"
@@ -67,6 +68,8 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         "review_only": True,
         "model_executed": False,
         "story_contract_passed": False,
+        "causal_cue_audit_passed": False,
+        "causal_cue_audit": None,
         "story_semantic_quality": "not_verified",
         "character_consistency": "not_verified",
         "manual_editorial_review_required": True,
@@ -117,11 +120,17 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
                 report["error_type"] = type(exc).__name__
                 report["story_contract_rejection"] = str(exc)[:180]
             else:
-                (output / "story-review.json").write_text(
-                    json.dumps(candidate, indent=2, ensure_ascii=False) + "\n",
-                    encoding="utf-8")
                 report["story_contract_passed"] = True
-                report["candidate_id"] = candidate["candidate_id"]
+                cues = audit_lighthouse_repair(candidate["story_beats"])
+                report["causal_cue_audit"] = cues
+                report["causal_cue_audit_passed"] = cues["passed"]
+                if not cues["passed"]:
+                    report["error_type"] = "CausalCueRejection"
+                else:
+                    (output / "story-review.json").write_text(
+                        json.dumps(candidate, indent=2, ensure_ascii=False) + "\n",
+                        encoding="utf-8")
+                    report["candidate_id"] = candidate["candidate_id"]
     except subprocess.TimeoutExpired:
         report["error_type"] = "TimeoutExpired"
     finally:
@@ -141,7 +150,8 @@ def main():
     args = parser.parse_args()
     report = run_benchmark(args.binary, args.model, args.output, args.timeout_seconds)
     print(json.dumps(report, indent=2))
-    if not report["model_executed"] or not report["story_contract_passed"]:
+    if (not report["model_executed"] or not report["story_contract_passed"]
+            or not report["causal_cue_audit_passed"]):
         raise SystemExit(1)
 
 

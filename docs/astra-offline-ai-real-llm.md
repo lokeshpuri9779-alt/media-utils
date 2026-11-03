@@ -139,3 +139,23 @@ bad four-beat artifact. Longer beats alone would not establish causal
 fidelity or originality: manual review remains mandatory, no production
 promotion is permitted. This change is a validator correction only;
 **no fourth real model inference is authorized or run**.
+
+## Review-only causal negative controls after run #41660334335
+
+The real GBNF output achieved valid JSON structure but not meaningful
+story completion. A new **experimental lighthouse-only** deterministic
+negative-control audit now looks for an observable physical attempt,
+a consequential obstacle, a completed repair action and the warning
+signal visibly working in the payoff. It also flags repeated generic
+navigation instead of progress. Unknown profiles fail closed.
+
+The audit is explicitly **not semantic understanding**: keyword cues can
+miss good prose or be fooled by bad prose. It can reject a weak draft
+but cannot approve one. Only candidates passing both the 25–60-word
+four-beat structure contract and conservative causal cues get a
+review-only candidate JSON. Everything still needs human editorial and
+visual review; production-ready, approved and published remain false.
+
+The stronger prompt and new rejection tests do not authorize another
+real model benchmark. ASTRA Main, publication gates, paid services, and
+existing animation/story workflows are unchanged.
