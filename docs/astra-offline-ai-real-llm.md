@@ -109,3 +109,7 @@ remain disabled.
 Once a run finishes, use `review-report.json` plus raw generated output
 to evaluate model execution separately from structural contract and
 human narrative quality. Do not automatically retry or merge.
+
+## Unified one-shot GBNF execution authorization
+
+The consolidated review workflow was validated in [PR run #41659902726](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41659902726): story, image, motion and aggregate passed, and the real-model job correctly skipped because the review event was not the authorized push. One run on the experimental branch now uses the exact commit message `experiment(ASTRA): unified parallel GBNF CPU validation`; it runs the same three lanes plus an aggregate check, and only then permits one bounded CPU model inference. This authorization does not grant publication, automatic approval, paid API use, or production fallback.
