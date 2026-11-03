@@ -7570,6 +7570,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-9e451cb4f6df6c659346",
+      "video_id": "rd6-adDy3E4",
+      "confirmed_at": "2026-11-03T08:56:49.481601+00:00",
+      "title": "Bram and the Frost-Crested Pass",
+      "plot_fingerprint": "b50ce3c1483da41c9bf341eb546aacc4f152e9b9d57e6cdf779cd96928942703",
+      "story_beats": [
+        {
+          "headline": "The Fractured Line",
+          "speech": "The upper suspension cable snaps loudly against the frozen rock face, sending a shower of loose shale down into the deep ravine.",
+          "visual": "forest",
+          "label": "Fracture",
+          "story_beat": "reveal",
+          "visual_prompt": "A sharp-eyed lynx stands on a snow-dusted mountain ledge, staring intently at a broken iron cable hanging over a deep pine forest abyss below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Leap",
+          "speech": "Holding the heavy brass compass firmly in his teeth, Bram leaps across the churning white gap toward the swaying anchor post.",
+          "visual": "signal",
+          "label": "Leap",
+          "story_beat": "build",
+          "visual_prompt": "The lynx leaps mid-air across a freezing mountain chasm, carrying a glowing brass compass in his jaws toward a frozen wooden post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secure Anchor",
+          "speech": "Wrapping the fraying wire tightly around the stone pillar, the lynx fastens the heavy latch with a steady paw.",
+          "visual": "door",
+          "label": "Anchor",
+          "story_beat": "mechanism",
+          "visual_prompt": "The lynx uses both paws to wedge a heavy iron key and brass compass into the base of a frozen timber gate on the mountain trail.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Passage",
+          "speech": "With the bridge securely locked in place, the clear bell chime echoes across the valley as the blizzard subsides.",
+          "visual": "ship",
+          "label": "Passage",
+          "story_beat": "payoff",
+          "visual_prompt": "The lynx sits calmly beside a polished brass bell on a secure wooden platform while distant mountain cable cars pass safely overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
