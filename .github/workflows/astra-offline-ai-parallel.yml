@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/astra-offline-ai-parallel.yml
       - tools/astra_offline_cpu_smoke.py
+      - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
@@ -17,6 +18,7 @@ on:
     paths:
       - tools/astra_offline_llm.py
       - tools/astra_offline_cpu_smoke.py
+      - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
@@ -39,7 +41,7 @@ jobs:
       (github.event_name == 'pull_request' && github.head_ref == 'experiment/astra-offline-ai-parallel-20261103')
       || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103')
       || (github.event_name == 'push' && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
-          && github.event.head_commit.message == 'experiment(ASTRA): unified parallel GBNF CPU validation')
+          && github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation')
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     strategy:
@@ -133,7 +135,7 @@ jobs:
     if: >-
       github.event_name == 'push'
       && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
-      && github.event.head_commit.message == 'experiment(ASTRA): unified parallel GBNF CPU validation'
+      && github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation'
     runs-on: ubuntu-24.04
     timeout-minutes: 17
     env:

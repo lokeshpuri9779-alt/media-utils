@@ -159,3 +159,28 @@ visual review; production-ready, approved and published remain false.
 The stronger prompt and new rejection tests do not authorize another
 real model benchmark. ASTRA Main, publication gates, paid services, and
 existing animation/story workflows are unchanged.
+
+## Planned four-stage causal comparison (next experimental trial)
+
+The baseline real GBNF run #41660334335 produced structurally valid but
+unresolved story text. Repeating the identical freeform prompt would not test
+a meaningful hypothesis. The next single comparison supplies a **fixed,
+review-only four-step causal plan** to the same pinned Qwen 0.5B model:
+problem, attempted fix, lightning setback, completed repair and visible
+beacon outcome.
+
+The plan is data, not an external API or an assertion that the model followed
+it. The model must expand it to four 25–60-word beats without inventing
+a different conclusion. Inference outputs continue through both the structure
+contract and conservative lighthouse-specific negative controls.
+Any passing automated result remains `semantic_quality=not_verified`,
+`approved=false`, `production_ready=false`, and `published=false`.
+The plan digest in the report records exactly what guidance was supplied.
+Manual review is still required to compare actual causal fidelity.
+
+To prevent incidental retries, the single coordinated workflow requires
+the *new exact one-shot commit message*
+`experiment(ASTRA): planned GBNF one-shot CPU validation` on its isolated
+branch, after the three parallel lightweight lanes and aggregate pass.
+Ordinary commits and PR checks do not run model inference. The legacy
+standalone manual benchmark remains separate.

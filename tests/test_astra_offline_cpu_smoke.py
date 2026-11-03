@@ -59,6 +59,12 @@ class BenchmarkTests(unittest.TestCase):
         args, kwargs = execute.call_args
         self.assertIn("--single-turn", args[0])
         self.assertIn("--no-display-prompt", args[0])
+        self.assertTrue(result["causal_plan_supplied"])
+        self.assertEqual(len(result["causal_plan_sha256"]), 64)
+        self.assertEqual(result["model_followed_plan"], "not_verified")
+        prompt_arg = args[0][args[0].index("-p") + 1]
+        self.assertIn("PAYOFF:", prompt_arg)
+        self.assertIn("beacon beam shines again", prompt_arg)
         self.assertIn("--grammar-file", args[0])
         grammar_file = Path(args[0][args[0].index("--grammar-file") + 1])
         self.assertEqual(grammar_file, smoke.GRAMMAR_PATH)

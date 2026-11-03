@@ -17,6 +17,7 @@ import time
 
 from tools.astra_offline_llm import make_prompt, review_candidate
 from tools.astra_offline_causal_audit import audit_lighthouse_repair
+from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, plan_digest
 
 MODEL_FILENAME = "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf"
 MODEL_SHA256 = "6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653"
@@ -64,6 +65,9 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         "model_sha256": model_digest,
         "model_bytes": model.stat().st_size,
         "constrained_grammar": True,
+        "causal_plan_supplied": True,
+        "causal_plan_sha256": plan_digest(LIGHTHOUSE_CAUSAL_PLAN),
+        "model_followed_plan": "not_verified",
         "grammar": "four_causal_beats_v3",
         "review_only": True,
         "model_executed": False,
@@ -89,7 +93,7 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
     }
     command = [
         str(binary), "-m", str(model),
-        "-p", make_prompt(DEFAULT_THEME),
+        "-p", make_prompt(DEFAULT_THEME, plan=LIGHTHOUSE_CAUSAL_PLAN),
         "-n", "700", "-c", "2048",
         "--grammar-file", str(GRAMMAR_PATH),
         "--temp", "0.4", "--seed", "42",

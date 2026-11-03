@@ -11,9 +11,10 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from tools.astra_offline_story_plan import plan_instructions
 
 
-def make_prompt(theme: str) -> str:
+def make_prompt(theme: str, *, plan: dict | None = None) -> str:
     theme = theme.strip()
     if not 3 <= len(theme) <= 140 or "\n" in theme:
         raise ValueError("theme must be 3..140 characters on one line")
@@ -29,6 +30,7 @@ def make_prompt(theme: str) -> str:
         "Each beat must be a complete narrative paragraph, not a label, heading or outline. "
         "Do not replace physical progress with repeated navigation, intention, or promises to find a way. Do not repeat sentences. Do not include markdown, explanation or publishing instructions. "
         "Theme: " + theme
+        + (plan_instructions(plan) if plan is not None else "")
     )
 
 
