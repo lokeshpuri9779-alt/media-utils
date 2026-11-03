@@ -12,6 +12,7 @@ import base64
 import binascii
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 
@@ -72,6 +73,21 @@ def evaluate(candidate, video_path, *, packet_path=None, review_path=None, publi
         return _result("not_fiction")
     if candidate.get("format") != "short":
         return _result("not_short")
+    # The reviewer-operated branch is a transport for separately signed files,
+    # NOT an approval source. Only attempt it under the already-existing strict
+    # gate, never during ordinary scheduled publishing or an unsigned audit.
+    # Explicit file paths take precedence; one missing path stays an error.
+    if (not packet_path and not review_path
+            and os.getenv("ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW", "0") == "1"):
+        try:
+            import tempfile
+            from astra_v2.semantic_review_handoff import restore_review
+            with tempfile.TemporaryDirectory(prefix="astra-signed-review-") as temp:
+                result = restore_review(candidate, video_path, Path(temp) / "evidence",
+                                        public_key)
+                return _result(result["reason"], verified=result["verified"] is True)
+        except (OSError, ValueError, TypeError, RuntimeError):
+            return _result("review_handoff_unavailable")
     if not packet_path or not review_path:
         return _result("review_missing")
     if not isinstance(public_key, str) or not public_key.strip():

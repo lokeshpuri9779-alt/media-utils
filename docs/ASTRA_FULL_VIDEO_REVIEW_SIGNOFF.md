@@ -39,3 +39,35 @@ Existing `astra_v2/run.py` supports `ASTRA_SEMANTIC_REVIEW_PACKET`, `ASTRA_SEMAN
 Only after that handoff is ready, deliberately set `ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW=1` if full human review must be mandatory. Missing evidence then blocks fiction Shorts **before YouTube reservation and upload**. Enabling the flag without a reviewer process can pause unsupervised Shorts publishing. Other editorial and publication gates remain intact.
 
 Unit tests use fake MP4 bytes and generated test-only keys. Passing those tests proves only input and cryptographic binding, **not** actual video semantic accuracy.
+
+## Trusted cross-run handoff: reviewer-managed Git branch
+
+An independently authorized reviewer deposits exactly TWO non-secret documents on the dedicated branch `astra-video-reviews`. Do not put the signing private key, the MP4 or an unsigned claimed approval on this branch:
+
+- `signed-reviews/<sha256-of-UTF8-content-id>/<sha256-of-exact-MP4>/packet.json` — the unmodified `.story-review.json` packet from the same preload run.
+- `signed-reviews/<sha256-of-UTF8-content-id>/<sha256-of-exact-MP4>/signed-review.json` — the signed reviewer decision produced by the offline signing CLI.
+
+Use all 64 lowercase hexadecimal characters for each directory hash. Stage and commit the pair from the *reviewer's* checkout of `astra-video-reviews`, not from an ASTRA rendering or publisher workflow. Protect the reviewer branch and keep the independent signing key off all GitHub runners. The repository branch may not exist until a reviewer creates it.
+
+Reviewers can calculate the target directory on their trusted workstation after signing:
+
+```bash
+python - <<'PY'
+import json, hashlib, shutil
+from pathlib import Path
+story = json.loads(Path('candidate.json').read_text(encoding='utf-8'))
+id_sha = hashlib.sha256(story['content_id'].encode('utf-8')).hexdigest()
+mp4_sha = hashlib.sha256(Path('video.mp4').read_bytes()).hexdigest()
+directory = Path('signed-reviews') / id_sha / mp4_sha
+directory.mkdir(parents=True, exist_ok=False)
+shutil.copyfile('review.story-review.json', directory / 'packet.json')
+shutil.copyfile('independent-review.json', directory / 'signed-review.json')
+print('REVIEW_STAGING_PATH=' + str(directory))
+PY
+```
+
+**Publisher operation:** The existing `ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW=1` switch controls strict verification. When switched on with neither explicit review file path set, the full-video verifier fetches `astra-video-reviews` read-only and looks for the hashed pair for the *actually selected* content ID and encoded MP4. It then verifies the Ed25519 signature using `ASTRA_SEMANTIC_REVIEW_PUBLIC_KEY` before the existing pre-upload boundary.
+
+Missing branch, missing files, missing/untrusted public key, corrupt documents, changed video, or invalid signature all produce `not_verified` and block the selected fiction Short before YouTube reservation/upload. Git fetch success alone is never approval. Exactly one explicitly configured local review path fails closed rather than falling back to the branch.
+
+When strict review is disabled, no reviewer branch is fetched and existing publishing behavior remains unchanged. **Do not enable the strict switch until a real independent reviewer and repeatable deposit process are ready**: without signed evidence, unsupervised fiction Shorts will pause. No paid API, extra production schedule, automated signing, or new publishing authorization is introduced.

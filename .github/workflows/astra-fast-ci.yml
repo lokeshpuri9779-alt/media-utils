@@ -149,6 +149,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_directed_humanoid_fidelity_gate.py' -v
           python -m unittest discover -s tests -p 'test_semantic_video_gate.py' -v
           python -m unittest discover -s tests -p 'test_independent_video_review_signoff.py' -v
+          python -m unittest discover -s tests -p 'test_semantic_review_handoff.py' -v
           python -m unittest discover -s tests -p 'test_astra_renderer_provenance.py' -v
           python -m unittest discover -s tests -p 'test_astra_shorts_fingerprint_lifecycle.py' -v
           python -m unittest discover -s tests -p 'test_astra_preload_novelty.py' -v
