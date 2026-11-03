@@ -118,12 +118,12 @@ lower_arm=rod("FROG_SEED_ARM_FOREARM",(.53,-.5,.78),(.1,-.1,.78),.055,green)
 plant_claw=ball("FROG_SEED_CLAW",(.1,-.1,.78),(.09,.07,.055),gold)
 arm_parts=(upper_arm,lower_arm,plant_claw)
 
-# The original rescue story explicitly requires rain to water the seed.
-# Blue beads in the final shot are an unambiguous on-screen rain cue.
+# Rain stays an isolated review-only cue. Thin slanted streaks, rather
+# than large droplets, read better at 384x576 without obscuring the seed.
 rainmat=mat("VISIBLE_RAIN",(.18,.66,.98))
 rain_drops=[
     rod("PLANT_RAIN_STREAK_%d"%k,(1.03+.12*k,.11+.11*(k%3),.8),
-        (1.12+.12*k,.11+.11*(k%3),1.0),.015,rainmat)
+        (1.12+.12*k,.11+.11*(k%3),1.0),.009,rainmat)
     for k in range(7)
 ]
 
