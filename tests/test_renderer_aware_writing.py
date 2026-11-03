@@ -101,6 +101,12 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("snapping suspension cable", guidance)
         self.assertIn("independently verified complete scene artwork", guidance)
 
+    def test_guidance_avoids_unrenderable_solo_compound_motion(self):
+        guidance = writing_guidance()
+        self.assertIn("jumping or swimming while", guidance)
+        self.assertIn("uses one action track", guidance)
+        self.assertIn("Split sequential actions across beats", guidance)
+
     def test_guidance_never_claims_render_or_publication_approval(self):
         guide = writing_guidance()
         self.assertIn("independent editorial", guide)

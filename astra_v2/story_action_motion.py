@@ -44,6 +44,64 @@ def choose_action(shot):
                 return name
     return "idle"
 
+
+# The animal puppet has ONE action track. It can walk while carrying a
+# staged prop, but jump/swim poses do not keep prop-to-hand contact. Detect
+# only explicitly co-temporal claims involving a tangible supported prop.
+# This is an authoring/renderer capability check, NOT a pixel-level review.
+_PROP_NAME = (
+    r"(?:box|book|ball|flower|lantern|key|bell|compass|shield|"
+    r"rocket|heart|wrench|clock)"
+)
+_CARRYING_PROP = re.compile(
+    r"\b(?:carry|carries|carried|carrying|hold|holds|held|holding|"
+    r"clutch|clutches|clutched|clutching)\b"
+    r"(?:\s+(?:a|an|the|his|her|its|my|their|small|brass|wooden|"
+    r"heavy|bright|old|red|blue|green|tiny|golden)){0,6}\s+"
+    + _PROP_NAME + r"\b", re.I,
+)
+_MOUTH_GRIP = re.compile(
+    r"\b" + _PROP_NAME
+    + r"\s+(?:in|between)\s+(?:(?:his|her|its|the|their)\s+)?"
+    r"(?:teeth|mouth|beak|paws)\b", re.I,
+)
+_JUMP_SWIM = re.compile(
+    r"\b(?:jump|jumps|jumped|jumping|leap|leaps|leapt|leaped|"
+    r"hop|hops|hopped|hopping|swim|swims|swam|swimming)\b", re.I,
+)
+_SEQUENTIAL_BREAK = re.compile(
+    r"[.;!?]|\b(?:and\s+then|then|before|after|later|once)\b", re.I,
+)
+
+
+def unsupported_simultaneous_prop_motion(shot):
+    """True for same-beat carrying+jump/swim, not sequential action lists.
+
+    Only a single authored clause and a recognized tangible prop can trigger
+    the gate. Narration and visual directions are checked independently;
+    merely mentioning two different actions in different fields is not enough.
+    """
+    for field in ("action", "visual_prompt", "speech", "visual_intent"):
+        value = shot.get(field)
+        if not isinstance(value, str):
+            continue
+        for clause in _SEQUENTIAL_BREAK.split(value):
+            # "carried a box and jumped" can be sequential and is not
+            # enough. Require an ongoing carrying/holding gerund, explicit
+            # "while/as" linkage, or a prop described in the character's mouth.
+            carrying = _CARRYING_PROP.search(clause)
+            simultaneous = (
+                re.search(r"\b(?:while|whilst|as|carrying|holding|clutching)\b",
+                          clause, re.I)
+                or _MOUTH_GRIP.search(clause)
+            )
+            if _JUMP_SWIM.search(clause) and carrying and simultaneous:
+                return True
+            if _JUMP_SWIM.search(clause) and _MOUTH_GRIP.search(clause):
+                return True
+    return False
+
+
 def _ease_progress(t, duration=1.2):
     """Clamped cubic ease-in/out for one-shot displacement."""
     u = min(1.0, max(0.0, t / duration))

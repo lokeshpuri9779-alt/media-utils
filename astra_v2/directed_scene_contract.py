@@ -125,6 +125,14 @@ def directed_scene_issue(shot):
     if ((_LARGE_GAP.search(text) and _GAP_CROSSING.search(text))
             or (_LARGE_STRUCTURE.search(text) and _STRUCTURE_CHANGED.search(text))):
         return "unsupported_scene_scale_action_requires_scene_art"
+    # A solo animal puppet can play one action cue, not hold a tangible
+    # object in its paws/teeth while leaping or swimming. Duo and larger casts
+    # need actor-level ownership evidence; do not invent a shared actor here.
+    from astra_v2.story_action_motion import unsupported_simultaneous_prop_motion
+    cast = shot.get("story_cast")
+    if (not isinstance(cast, (tuple, list)) or len(cast) <= 1):
+        if unsupported_simultaneous_prop_motion(shot):
+            return "unsupported_simultaneous_prop_motion_requires_scene_art"
     if str(shot.get("visual") or "").lower() == "signal" and not _SIGNAL.search(text):
         return "signal_graphic_does_not_depict_narrated_event"
     subject = str(shot.get("story_subject") or shot.get("visual") or "").lower()
