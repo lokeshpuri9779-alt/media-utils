@@ -149,12 +149,32 @@ frog_parts.extend([
     ball("FROG_LEFT_EYE",(-.12,-.31,.78),(.13,.12,.15),paper),
     ball("FROG_RIGHT_EYE",(.27,-.31,.78),(.13,.12,.15),paper),
 ])
+frog_pupils=[]
 for x in (-.12,.27):
-    frog_parts.append(ball("FROG_PUPIL",(x,-.425,.79),(.045,.03,.065),black))
+    pupil=ball("FROG_PUPIL",(x,-.425,.79),(.045,.03,.065),black)
+    frog_pupils.append((pupil,x))
+    frog_parts.append(pupil)
 for x in (-.25,.45):
     frog_parts.append(ball("FROG_FOOT",(x,-.27,.23),(.19,.2,.12),green))
 for part in frog_parts:
     part.parent=frog_root
+
+# Facial curves provide legible worried-to-relieved expression without
+# affecting the already validated frog body, rescue props, seed, or soil.
+# All facial lines share the complete character root and follow its walk.
+worried_mouth=[]
+smile_mouth=[]
+worried_points=((- .085,-.416,.468),(.025,-.427,.505),
+               (.165,-.427,.505),(.285,-.416,.468))
+smile_points=((- .085,-.416,.517),(.025,-.427,.475),
+              (.165,-.427,.475),(.285,-.416,.517))
+for label,points,parts in (
+        ("WORRIED",worried_points,worried_mouth),
+        ("SMILE",smile_points,smile_mouth)):
+    for idx,(a,b) in enumerate(zip(points,points[1:])):
+        stroke=rod("FROG_%s_MOUTH_%d"%(label,idx),a,b,.011,black)
+        stroke.parent=frog_root
+        parts.append(stroke)
 
 # A folded triangular paper airplane, not the prior sphere placeholder.
 # Two separately folded wings and a raised central ridge read as an airplane
@@ -221,6 +241,15 @@ magnet_origin=Vector((.52,-.33,.67))
 for i in range(FRAME_COUNT):
     # Wider four-second narrative: setup 0-7; fishing 8-21;
     # planting and watered sprout 22-31. This is preview-only.
+    # Look toward the trapped plane, then toward the pot; the expression
+    # softens only after the recovery. No blink/cut during pixel tracking.
+    gaze=-.033 if i<=12 else (.027 if i>=22 else -.033+.060*(i-12)/10)
+    for pupil,base_x in frog_pupils:
+        pupil.location.x=base_x+gaze
+    for stroke in worried_mouth:
+        stroke.hide_render=i>=19
+    for stroke in smile_mouth:
+        stroke.hide_render=i<19
     for part in arm_parts:
         part.hide_render=i<19 or i>=29
     for drop in rain_drops:
@@ -337,6 +366,8 @@ for i in range(FRAME_COUNT):
         "camera_xyz":[round(float(v),4) for v in camera.location],
         "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
         "camera_lens":round(float(camera.data.lens),4),
+        "frog_gaze_x":round(gaze,4),
+        "frog_expression":"worried" if i<19 else "smile",
         "sky_clouds_in_frame":sky_clouds_in_frame,
     })
 checks={
@@ -344,6 +375,23 @@ checks={
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
+    "frog_expression_geometry_follows_root":(
+        len(worried_mouth)==3 and len(smile_mouth)==3 and
+        all(p.parent==frog_root for p in worried_mouth+smile_mouth)
+    ),
+    "frog_gaze_tracks_story_direction":(
+        frames[0]["frog_gaze_x"]<-.025 and
+        frames[8]["frog_gaze_x"]<-.025 and
+        frames[22]["frog_gaze_x"]>.020 and
+        frames[31]["frog_gaze_x"]>.020 and
+        all(-.04<=f["frog_gaze_x"]<=.04 for f in frames)
+    ),
+    "frog_expression_softens_after_recovery":(
+        all(f["frog_expression"]=="worried" for f in frames[:19]) and
+        all(f["frog_expression"]=="smile" for f in frames[19:]) and
+        all(p.hide_render for p in worried_mouth) and
+        not any(p.hide_render for p in smile_mouth)
+    ),
     "paper_plane_stays_until_magnet_contact":len({tuple(f["plane_xyz"]) for f in frames[:13]})==1,
     "magnet_moves_toward_clip":frames[8]["magnet_clip_gap"]>frames[9]["magnet_clip_gap"]>frames[10]["magnet_clip_gap"]>.1,
     "magnet_contacts_before_lift":all(f["magnet_clip_gap"]<.001 for f in frames[12:22]),
