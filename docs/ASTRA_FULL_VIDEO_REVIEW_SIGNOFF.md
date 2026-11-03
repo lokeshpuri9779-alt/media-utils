@@ -71,3 +71,20 @@ PY
 Missing branch, missing files, missing/untrusted public key, corrupt documents, changed video, or invalid signature all produce `not_verified` and block the selected fiction Short before YouTube reservation/upload. Git fetch success alone is never approval. Exactly one explicitly configured local review path fails closed rather than falling back to the branch.
 
 When strict review is disabled, no reviewer branch is fetched and existing publishing behavior remains unchanged. **Do not enable the strict switch until a real independent reviewer and repeatable deposit process are ready**: without signed evidence, unsupervised fiction Shorts will pause. No paid API, extra production schedule, automated signing, or new publishing authorization is introduced.
+
+## Prepare one reviewer-ready folder from existing Actions artifacts (offline)
+
+GitHub Actions stores the producer's `astra-preloaded-<content_id>` package and its `astra-preload-story-review-<run_id>-<lane>` evidence as **two separate ZIP files**. Do not guess which review packet belongs to the video. Download both ZIPs from the same successful preload workflow run, then run this offline intake (requires only Python standard library):
+
+```bash
+python -m astra_v2.independent_review_bundle \
+  --preload-zip ./astra-preloaded.zip \
+  --visual-review-zip ./astra-preload-story-review.zip \
+  --output-dir ./review-ready
+```
+
+The intake refuses mismatched content IDs, story beats, exact MP4 bytes, JPEG hashes, missing evidence, ambiguous packet matches, duplicate archive members, traversal/symlinks, corrupt provenance or pre-existing destinations. A reviewer ZIP can contain evidence for **other** candidates in the same lane: the intake picks only the uniquely matching packet by its `content_id` and verifies its actual bytes.
+
+The resulting folder contains exactly `candidate.json`, `video.mp4`, `contact.jpg`, `review.story-review.json`, `completed-checklist.json` and `review-intake-status.json`. **All checklist boxes are initially false; no Ed25519 key, signature, approval or publishing action is created.** The reviewer must personally watch the complete MP4 and compare it against all four authored beats. The JPEG is only supporting evidence.
+
+After genuine independent review, a separately authorized reviewer may fill the checklist, run the existing signing CLI against these filenames, and deposit the verified signed decision according to the trusted branch instructions. Publishing still requires the existing editorial, media and publication gates. This intake does not add network/API calls or GitHub Actions storage.
