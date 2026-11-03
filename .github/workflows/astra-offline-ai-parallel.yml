@@ -6,6 +6,7 @@ on:
     paths:
       - tools/astra_offline_llm.py
       - tools/astra_offline_cpu_smoke.py
+      - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
       - .github/workflows/astra-offline-ai-parallel.yml

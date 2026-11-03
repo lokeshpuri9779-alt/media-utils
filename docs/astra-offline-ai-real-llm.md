@@ -55,3 +55,22 @@ Exactly one push commit using `experiment(ASTRA): constrained JSON one-shot CPU 
 ## Constrained retest execution
 
 Second bounded run authorized after the schema and new regression tests passed in parallel review workflow #41656088929. This does not approve the resulting story for production.
+
+## Second real result: JSON-schema sampler failure
+
+Run #41656194405 built pinned llama.cpp, verified the model, then exited in
+0.668 s at sampler initialization with `Failed to initialize samplers:
+std::exception`. No story was generated and the review contract failed.
+The larger JSON schema with long-string min/max limits may have caused the
+sampler failure, but the underlying exception message is insufficient to
+prove that cause.
+
+The next isolated proposal replaces the dynamic JSON-schema conversion with
+a short, explicit GBNF grammar: one title and an array with exactly four JSON
+string beats, in that order, with no other fields. Substantive beat length,
+distinctness, causality and editorial review remain separate fail-closed
+checks. This avoids claiming grammar guarantees story quality.
+
+**No third real-model benchmark was launched in this change.** Future model
+inference requires its separate explicit one-shot authorization; unit and
+preflight CI checks do not download models.

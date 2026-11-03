@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/astra-offline-ai-oneshot.yml
       - tools/astra_offline_cpu_smoke.py
+      - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - docs/astra-offline-ai-real-llm.md
   workflow_dispatch:
@@ -22,7 +23,7 @@ concurrency:
 jobs:
   real-llm-cpu:
     if: >-
-      (github.event_name == 'push' && github.event.head_commit.message == 'experiment(ASTRA): constrained JSON one-shot CPU retest')
+      (github.event_name == 'push' && github.event.head_commit.message == 'experiment(ASTRA): grammar-guided one-shot CPU validation')
       || (github.event_name == 'workflow_dispatch' && inputs.confirm_benchmark == 'BENCHMARK')
     runs-on: ubuntu-24.04
     timeout-minutes: 17

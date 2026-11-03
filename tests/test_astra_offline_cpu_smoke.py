@@ -57,12 +57,12 @@ class BenchmarkTests(unittest.TestCase):
         args, kwargs = execute.call_args
         self.assertIn("--single-turn", args[0])
         self.assertIn("--no-display-prompt", args[0])
-        self.assertIn("--json-schema", args[0])
-        schema = json.loads(args[0][args[0].index("--json-schema") + 1])
-        self.assertEqual(schema["properties"]["story_beats"]["minItems"], 4)
-        self.assertEqual(schema["properties"]["story_beats"]["maxItems"], 4)
-        self.assertFalse(schema["additionalProperties"])
-        self.assertTrue(result["constrained_json_schema"])
+        self.assertIn("--grammar-file", args[0])
+        grammar_file = Path(args[0][args[0].index("--grammar-file") + 1])
+        self.assertEqual(grammar_file, smoke.GRAMMAR_PATH)
+        self.assertTrue(grammar_file.is_file())
+        self.assertTrue(result["constrained_grammar"])
+        self.assertNotIn("--json-schema", args[0])
         self.assertEqual(kwargs["env"]["HF_HUB_OFFLINE"], "1")
         self.assertNotIn("OPENAI_API_KEY", kwargs["env"])
         self.assertFalse(kwargs["shell"])
@@ -114,6 +114,23 @@ class BenchmarkTests(unittest.TestCase):
         self.assertFalse(result["production_ready"])
         self.assertFalse(result["published"])
         self.assertTrue((self.output / "review-report.json").exists())
+
+    def test_missing_grammar_fails_before_model_inference(self):
+        with patch.object(smoke, "GRAMMAR_PATH", self.root / "missing.gbnf"), patch.object(
+            smoke.subprocess, "run"
+        ) as execute, patch.object(smoke, "MODEL_SHA256", self.sha):
+            with self.assertRaisesRegex(ValueError, "grammar"):
+                smoke.run_benchmark(self.binary, self.model, self.output)
+            execute.assert_not_called()
+
+    def test_grammar_structure_has_exactly_four_slots(self):
+        grammar = smoke.GRAMMAR_PATH.read_text(encoding="utf-8")
+        self.assertIn("root ::=", grammar)
+        self.assertIn("story-array ::=", grammar)
+        self.assertIn("\\\"title\\\"", grammar)
+        self.assertIn("\\\"story_beats\\\"", grammar)
+        array_line = next(line for line in grammar.splitlines() if line.startswith("story-array ::="))
+        self.assertEqual(array_line.count("story-string ws"), 4)
 
     def test_timeout_budget_checked_before_inference(self):
         with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
