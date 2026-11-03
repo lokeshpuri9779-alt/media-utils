@@ -25,7 +25,7 @@ def make_prompt(theme: str) -> str:
         "Beat 1 setup: the character notices a concrete problem. "
         "Beat 2 attempt: the character performs an action to solve it. "
         "Beat 3 consequence: that action causes an unexpected obstacle. "
-        "Beat 4 payoff: explicitly show the physical repair completed, the warning signal working again, and its consequence for the endangered ship. "
+        "Beat 4 payoff: show the physical problem actually solved through an observable action and a concrete outcome that matters to the characters. "
         "Each beat must be a complete narrative paragraph, not a label, heading or outline. "
         "Do not replace physical progress with repeated navigation, intention, or promises to find a way. Do not repeat sentences. Do not include markdown, explanation or publishing instructions. "
         "Theme: " + theme

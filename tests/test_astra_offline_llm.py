@@ -110,6 +110,13 @@ class OfflineLLMTests(unittest.TestCase):
                 run_local(self.binary, self.model, "otter and storm", self.output)
         self.assertFalse(self.output.exists())
 
+    def test_prompt_is_not_hardcoded_to_lighthouse_story(self):
+        prompt = make_prompt("a gardener rescues a bird after a storm")
+        self.assertIn("a gardener rescues a bird", prompt)
+        self.assertIn("observable action", prompt)
+        self.assertNotIn("warning signal working", prompt)
+        self.assertNotIn("endangered ship", prompt)
+
     def test_prompt_is_bounded(self):
         self.assertIn("Theme: otter", make_prompt("otter"))
         with self.assertRaises(ValueError):
