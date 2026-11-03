@@ -323,6 +323,7 @@ for i in range(FRAME_COUNT):
     # so this shift does not make the character skate across the ground.
     weight_sway=.024*gait*setup_envelope if i<8 else 0.0
     root_walk_x=.25*walk_ease+weight_sway if i<8 else .25
+    frog_supports=[]
     for foot,base_x in frog_feet:
         step=frog_step_left if base_x<0 else frog_step_right
         # Left foot swings and plants by frame 4; right foot anchors
@@ -338,10 +339,17 @@ for i in range(FRAME_COUNT):
         support=setup_envelope*(1-min(1,step/.105)) if i<8 else 0.0
         foot.scale.x=.19*(1+.06*support)
         foot.scale.z=.12*(1-.08*support)
-    for group,(foot,base_x) in zip(frog_toes,frog_feet):
+        frog_supports.append(support)
+    # Each set of toes must follow ITS OWN planted-foot compression; using
+    # the prior loop's support variable made both feet spread identically.
+    # Outer toes splay sideways and the central toe reaches slightly forward.
+    # The fan stays hidden after frame 7; rescue/plant geometry is unchanged.
+    for group,(foot,base_x),support in zip(frog_toes,frog_feet,frog_supports):
         for toe,dx in group:
-            toe.location.x=foot.location.x+dx*(1+.06*support)
+            toe.location.x=foot.location.x+dx*(1+.09*support)
+            toe.location.y=foot.location.y-.17-.025*(1-abs(dx)/.105)
             toe.location.z=foot.location.z-.04
+            toe.scale.y=.095*(1+.04*support)
             toe.hide_render=i>=8
     for leg,(foot,base_x) in zip(frog_legs,frog_feet):
         thigh,shin,kneecap,hip,thigh_length,shin_length,side=leg
@@ -469,6 +477,11 @@ for i in range(FRAME_COUNT):
             not part.hide_render for leg in frog_legs for part in leg[:3]),
         "frog_toe_pads_visible":sum(
             not toe.hide_render for group in frog_toes for toe,_ in group),
+        "frog_toe_span_x":[round(float(group[2][0].location.x-
+                                       group[0][0].location.x),4)
+                           for group in frog_toes],
+        "frog_toe_center_y":[round(float(group[1][0].location.y),4)
+                             for group in frog_toes],
         "frog_knee_z":[round(float(leg[2].location.z),4) for leg in frog_legs],
         "frog_foot_z":[round(float(foot.location.z),4) for foot,_ in frog_feet],
         "frog_foot_x":[round(float(foot.location.x),4) for foot,_ in frog_feet],
@@ -496,6 +509,20 @@ checks={
         frames[5]["frog_foot_z"][1]>.30 and
         abs(frames[5]["frog_foot_z"][0]-.23)<.0001 and
         any(frames[i]["frog_root_z"]>.005 for i in range(1,7))
+    ),
+    "frog_toe_spread_uses_independent_support":(
+        frames[2]["frog_toe_span_x"][1]>
+            frames[2]["frog_toe_span_x"][0]+.006 and
+        frames[5]["frog_toe_span_x"][0]>
+            frames[5]["frog_toe_span_x"][1]+.006 and
+        all(abs(span-.2100)<.0001
+            for i in (0,7,8,22,31)
+            for span in frames[i]["frog_toe_span_x"])
+    ),
+    "frog_toe_center_advances_ahead_of_outer_pads":all(
+        abs(toe.location.y-(foot.location.y-.195))<.0001
+        for group,(foot,_) in zip(frog_toes,frog_feet)
+        for toe,dx in [group[1]]
     ),
     "frog_toe_anatomy_setup_only":(
         len(frog_toes)==2 and all(len(group)==3 for group in frog_toes) and
