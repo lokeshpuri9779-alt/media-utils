@@ -319,6 +319,18 @@ for i in range(FRAME_COUNT):
     for pupil,base_x in frog_pupils:
         pupil.location.x=base_x+gaze
         pupil.location.z=.79-gaze_height
+    # An isolated expressive beat at the instant the magnet finds the
+    # airplane clip (frame 12). Brows ease upward in anticipation and
+    # return to rest before planting. Do not move the body, eyes, camera,
+    # props or any action-critical pixel-tracked geometry.
+    brow_in=max(0.0,min(1.0,(i-8)/4))
+    brow_out=max(0.0,min(1.0,(i-12)/7))
+    brow_in=brow_in*brow_in*(3-2*brow_in)
+    brow_out=brow_out*brow_out*(3-2*brow_out)
+    brow_surprise=brow_in*(1-brow_out)
+    for j,brow in enumerate(frog_brows):
+        brow.location.z=.915+(.048 if j==0 else .037)*brow_surprise
+        brow.rotation_euler.y=(.08 if j==0 else -.06)*brow_surprise
     for stroke in worried_mouth:
         stroke.hide_render=i>=19
     for stroke in smile_mouth:
@@ -528,6 +540,8 @@ for i in range(FRAME_COUNT):
         "camera_lens":round(float(camera.data.lens),4),
         "frog_gaze_x":round(gaze,4),
         "frog_gaze_z":round(float(frog_pupils[0][0].location.z),4),
+        "frog_brow_surprise":round(float(brow_surprise),4),
+        "frog_brow_z":[round(float(b.location.z),4) for b in frog_brows],
         "frog_expression":"worried" if i<19 else "smile",
         "frog_notice_reach":round(float(notice_reach),4),
         "frog_notice_hand_x":round(float(notice_palm.location.x),4),
@@ -628,6 +642,20 @@ checks={
         and all(all(abs(x-base)<.0001
                     for x,base in zip(frames[i]["frog_foot_x"],(-.25,.45)))
                 for i in (0,7,8,21,22,31))
+    ),
+    "frog_brows_react_at_magnet_contact":(
+        frames[8]["frog_brow_surprise"]==0 and
+        frames[10]["frog_brow_surprise"]>0 and
+        frames[12]["frog_brow_surprise"]==1 and
+        0<frames[16]["frog_brow_surprise"]<1 and
+        frames[19]["frog_brow_surprise"]==0 and
+        frames[12]["frog_brow_z"][0]>frames[8]["frog_brow_z"][0]+.04 and
+        frames[12]["frog_brow_z"][1]>frames[8]["frog_brow_z"][1]+.03 and
+        all(frames[i]["frog_brow_surprise"]==0 for i in
+            (0,7,8,19,22,31)) and
+        all(abs(z-.915)<.0001
+            for i in (0,7,8,19,22,31)
+            for z in frames[i]["frog_brow_z"])
     ),
     "frog_brow_contours_follow_root":(
         len(frog_brows)==2 and all(b.parent==frog_root for b in frog_brows) and
