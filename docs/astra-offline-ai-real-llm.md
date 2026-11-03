@@ -207,3 +207,32 @@ written, even if superficial length checks would eventually pass.
 The audit is conservative and cannot establish independent originality:
 passing is `originality=not_verified` and never authorizes production.
 No additional model runs were triggered.
+
+## Pinned 1.5B comparison to test the capacity hypothesis
+
+The archived 0.5B experiments demonstrate that CPU inference and GBNF
+formatting work but *do not* establish developed original storytelling.
+Plan-guided 0.5B output copied its source plan; the plan-copy detector
+now rejects that.
+
+The next comparison preserves the existing four-stage authored lighthouse
+causal plan, GBNF constraint, seed 42, 700-token ceiling, CPU-only llama.cpp
+revision and structural/causal/plan-copy gates. Only the language model
+changes to official Apache-2.0 `Qwen/Qwen2.5-1.5B-Instruct-GGUF`
+`qwen2.5-1.5b-instruct-q4_k_m.gguf` (1,117,320,736 bytes).
+Published model SHA-256:
+`6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e`.
+Official file listing: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/blob/main/qwen2.5-1.5b-instruct-q4_k_m.gguf
+
+The same single orchestrated experimental workflow runs story, CPU-image and
+motion tests in parallel, then checks aggregate evidence before at most one
+real model inference. The exact opt-in branch message is
+`experiment(ASTRA): Qwen 1.5B bounded CPU comparison`. The existing
+baseline path remains unchanged. A verified checksum is mandatory before
+the offline CPU inference starts; fetching model weights initially needs
+network access but the model never calls a remote inference service.
+
+Technical result ≠ successful original story. The final report must
+separate execution, four-beat length, plan-copy detection, causal cues and
+manual editorial quality. All review-only flags remain false for approval,
+production readiness and publishing. No fallback or publishing integration.

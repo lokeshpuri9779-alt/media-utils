@@ -35,6 +35,45 @@ class BenchmarkTests(unittest.TestCase):
         self.output = self.root / "artifacts"
         self.sha = hashlib.sha256(self.model.read_bytes()).hexdigest()
 
+    def test_model_profiles_are_pinned_and_fail_closed(self):
+        self.assertEqual(smoke.model_config("baseline")["filename"], smoke.MODEL_FILENAME)
+        self.assertEqual(smoke.model_config("qwen15")["filename"], smoke.COMPARISON_MODEL_FILENAME)
+        self.assertEqual(smoke.model_config("qwen15")["sha256"], smoke.COMPARISON_MODEL_SHA256)
+        self.assertEqual(smoke.model_config("qwen15")["source"],
+                         "Qwen/Qwen2.5-1.5B-Instruct-GGUF")
+        with self.assertRaisesRegex(ValueError, "unrecognized"):
+            smoke.model_config("unknown-remote-provider")
+
+    def test_stronger_model_fixture_is_review_only_and_uses_pinned_path(self):
+        stronger = self.root / smoke.COMPARISON_MODEL_FILENAME
+        stronger.write_bytes(b"fixture-not-real-model")
+        stronger_sha = hashlib.sha256(stronger.read_bytes()).hexdigest()
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story()), "")
+        with patch.object(smoke, "COMPARISON_MODEL_SHA256", stronger_sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ) as execute:
+            report = smoke.run_benchmark(self.binary, stronger, self.output,
+                                         model_profile="qwen15")
+        self.assertEqual(report["model_profile"], "qwen15")
+        self.assertEqual(report["model_filename"], smoke.COMPARISON_MODEL_FILENAME)
+        self.assertTrue(report["model_executed"])
+        self.assertTrue(report["story_contract_passed"])
+        self.assertTrue(report["causal_cue_audit_passed"])
+        self.assertFalse(report["approved"])
+        self.assertFalse(report["production_ready"])
+        self.assertFalse(report["published"])
+        self.assertEqual(execute.call_args.args[0][2], str(stronger))
+        self.assertIn("--grammar-file", execute.call_args.args[0])
+
+    def test_stronger_model_wrong_digest_never_executes(self):
+        stronger = self.root / smoke.COMPARISON_MODEL_FILENAME
+        stronger.write_bytes(b"corrupt-test-fixture")
+        with patch.object(smoke.subprocess, "run") as execute:
+            with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                smoke.run_benchmark(self.binary, stronger, self.output,
+                                    model_profile="qwen15")
+            execute.assert_not_called()
+
     def test_checksum_mismatch_refuses_inference(self):
         with patch.object(smoke.subprocess, "run") as execute:
             with self.assertRaisesRegex(ValueError, "checksum mismatch"):

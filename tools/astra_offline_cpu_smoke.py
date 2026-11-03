@@ -23,6 +23,24 @@ MODEL_FILENAME = "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf"
 MODEL_SHA256 = "6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653"
 LLAMA_CPP_REVISION = "51fe42c5d14bfb9adf0612ff98a9ab79e0e7275c"
 MODEL_SOURCE = "bartowski/Qwen2.5-0.5B-Instruct-GGUF"
+# Separate pinned model profile. No auto-upgrade or production routing.
+COMPARISON_MODEL_FILENAME = "qwen2.5-1.5b-instruct-q4_k_m.gguf"
+COMPARISON_MODEL_SHA256 = "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+COMPARISON_MODEL_SOURCE = "Qwen/Qwen2.5-1.5B-Instruct-GGUF"
+COMPARISON_MODEL_SIZE = 1_117_320_736
+
+
+def model_config(profile: str) -> dict:
+    if profile == "baseline":
+        return {"filename": MODEL_FILENAME, "sha256": MODEL_SHA256,
+                "source": MODEL_SOURCE, "max_bytes": 450_000_000}
+    if profile == "qwen15":
+        return {"filename": COMPARISON_MODEL_FILENAME,
+                "sha256": COMPARISON_MODEL_SHA256,
+                "source": COMPARISON_MODEL_SOURCE,
+                "max_bytes": 1_200_000_000}
+    raise ValueError("unrecognized CPU model comparison profile")
+
 DEFAULT_THEME = "a copper robot repairing a lighthouse warning signal in a storm"
 
 # Fixed grammar constrains JSON shape only; minimum story quality remains a
@@ -38,20 +56,22 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int = 180) -> dict:
+def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int = 180,
+                  model_profile: str = "baseline") -> dict:
     binary, model, output = Path(binary).resolve(), Path(model).resolve(), Path(output)
+    config = model_config(model_profile)
     if not binary.is_file() or not os.access(binary, os.X_OK):
         raise ValueError("missing local executable llama-cli")
-    if model.name != MODEL_FILENAME or not model.is_file():
+    if model.name != config["filename"] or not model.is_file():
         raise ValueError("missing pinned local GGUF model")
     if not 1 <= timeout_seconds <= 240:
         raise ValueError("benchmark inference timeout exceeds configured limit")
     model_digest = sha256_file(model)
-    if model_digest != MODEL_SHA256:
+    if model_digest != config["sha256"]:
         raise ValueError("model checksum mismatch; inference refused")
     if not GRAMMAR_PATH.is_file():
         raise ValueError("missing pinned local JSON story grammar")
-    if model.stat().st_size > 450_000_000:
+    if model.stat().st_size > config["max_bytes"]:
         raise ValueError("model exceeds single-run size budget")
 
     output.mkdir(parents=True, exist_ok=True)
@@ -60,8 +80,9 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
     report = {
         "engine": "llama.cpp CPU",
         "engine_revision": LLAMA_CPP_REVISION,
-        "model_repository": MODEL_SOURCE,
-        "model_filename": MODEL_FILENAME,
+        "model_repository": config["source"],
+        "model_filename": config["filename"],
+        "model_profile": model_profile,
         "model_sha256": model_digest,
         "model_bytes": model.stat().st_size,
         "constrained_grammar": True,
@@ -132,7 +153,7 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
             except (ValueError, KeyError, TypeError):
                 pass  # Structural validation below is authoritative.
             try:
-                candidate = review_candidate(raw, MODEL_FILENAME)
+                candidate = review_candidate(raw, config["filename"])
             except (ValueError, KeyError, TypeError) as exc:
                 report["error_type"] = type(exc).__name__
                 report["story_contract_rejection"] = str(exc)[:180]
@@ -163,12 +184,14 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", required=True, type=Path)
+    parser.add_argument("--model-profile", choices=("baseline", "qwen15"), default="baseline")
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--output", default=Path("artifacts/offline-real-llm"),
                         type=Path)
     parser.add_argument("--timeout-seconds", type=int, default=180)
     args = parser.parse_args()
-    report = run_benchmark(args.binary, args.model, args.output, args.timeout_seconds)
+    report = run_benchmark(args.binary, args.model, args.output, args.timeout_seconds,
+                           model_profile=args.model_profile)
     print(json.dumps(report, indent=2))
     if (not report["model_executed"] or not report["story_contract_passed"]
             or not report["causal_cue_audit_passed"] or report["plan_copy_detected"]):

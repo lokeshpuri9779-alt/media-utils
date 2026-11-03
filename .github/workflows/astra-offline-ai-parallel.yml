@@ -41,7 +41,8 @@ jobs:
       (github.event_name == 'pull_request' && github.head_ref == 'experiment/astra-offline-ai-parallel-20261103')
       || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103')
       || (github.event_name == 'push' && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
-          && github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation')
+          && (github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation'
+              || github.event.head_commit.message == 'experiment(ASTRA): Qwen 1.5B bounded CPU comparison'))
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     strategy:
@@ -135,7 +136,8 @@ jobs:
     if: >-
       github.event_name == 'push'
       && github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
-      && github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation'
+      && (github.event.head_commit.message == 'experiment(ASTRA): planned GBNF one-shot CPU validation'
+              || github.event.head_commit.message == 'experiment(ASTRA): Qwen 1.5B bounded CPU comparison')
     runs-on: ubuntu-24.04
     timeout-minutes: 17
     env:
@@ -144,7 +146,8 @@ jobs:
       HF_HUB_OFFLINE: '1'
       TRANSFORMERS_OFFLINE: '1'
       OMP_NUM_THREADS: '2'
-      MODEL_FILE: /tmp/astra-offline-model/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf
+      MODEL_PROFILE: ${{ github.event.head_commit.message == 'experiment(ASTRA): Qwen 1.5B bounded CPU comparison' && 'qwen15' || 'baseline' }}
+      MODEL_FILE: ${{ github.event.head_commit.message == 'experiment(ASTRA): Qwen 1.5B bounded CPU comparison' && '/tmp/astra-offline-model/qwen2.5-1.5b-instruct-q4_k_m.gguf' || '/tmp/astra-offline-model/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -175,10 +178,26 @@ jobs:
       - name: Download and SHA256-verify one small Apache-2.0 model
         run: |
           mkdir -p /tmp/astra-offline-model
+          case "$MODEL_PROFILE" in
+            qwen15)
+              model_url='https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5-1.5b-instruct-q4_k_m.gguf'
+              model_sha='6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e'
+              expected_bytes=1117320736
+              ;;
+            baseline)
+              model_url='https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf'
+              model_sha='6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653'
+              expected_bytes=397808192
+              ;;
+            *)
+              echo "::error::Unknown offline model profile" >&2
+              exit 1
+              ;;
+          esac
           curl --fail --location --silent --show-error --retry 2 --connect-timeout 20 --max-time 240 \
-            --output "$MODEL_FILE" \
-            'https://huggingface.co/bartowski/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf'
-          echo "6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653  $MODEL_FILE" | sha256sum -c -
+            --output "$MODEL_FILE" "$model_url"
+          test "$(stat -c%s "$MODEL_FILE")" -eq "$expected_bytes"
+          echo "$model_sha  $MODEL_FILE" | sha256sum -c -
       - name: Run exactly one CPU-only offline story inference
         run: |
           ulimit -v 6291456
@@ -186,7 +205,8 @@ jobs:
             --binary /tmp/astra-llama-cpp/build/bin/llama-cli \
             --model "$MODEL_FILE" \
             --output artifacts/offline-real-llm/ \
-            --timeout-seconds 180
+            --timeout-seconds 180 \
+            --model-profile "$MODEL_PROFILE"
       - name: Upload unapproved benchmark evidence even if inference fails
         if: always()
         uses: actions/upload-artifact@v4
