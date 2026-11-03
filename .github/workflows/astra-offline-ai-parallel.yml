@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - tools/astra_offline_llm.py
+      - tools/astra_offline_cpu_smoke.py
       - tests/test_astra_offline_llm.py
+      - tests/test_astra_offline_cpu_smoke.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -40,7 +42,7 @@ jobs:
         run: python3 -m tools.experimental_guard
       - name: Story local-LLM review contract tests (no model inference)
         if: matrix.lane == 'story'
-        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_model_story_novelty
+        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_offline_cpu_smoke tests.test_astra_model_story_novelty
       - name: CPU image preflight and guarded mock tests (no model inference)
         if: matrix.lane == 'image'
         run: |

@@ -104,7 +104,8 @@ def run_local(binary: Path, model: Path, theme: str, output: Path,
         "NO_PROXY": "*",
     }
     command = [str(binary), "-m", str(model), "-p", prompt,
-               "-n", "700", "--temp", "0.5", "--seed", "42", "-ngl", "0"]
+               "-n", "700", "--temp", "0.5", "--seed", "42",
+               "--single-turn", "--no-display-prompt", "-ngl", "0"]
     try:
         result = subprocess.run(command, shell=False, check=False,
                                 capture_output=True, text=True,
