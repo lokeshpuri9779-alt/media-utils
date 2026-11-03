@@ -84,3 +84,28 @@ updated harness recognizes that exact fatal marker, records
 `SamplerInitializationFailed`, and keeps `model_executed=false`. A
 fixture regression test locks this behavior; it does not imply a third
 model run.
+
+## Unified parallel GBNF run
+
+ASTRA uses `.github/workflows/astra-offline-ai-parallel.yml` as its single
+coordinating experimental workflow. Its story, image and motion test matrix
+runs in parallel; the aggregate gate verifies all three reports. **Only a
+successful aggregate** permits the one real CPU GGUF inference job to start,
+and only when the isolated branch push uses the exact one-shot commit message
+`experiment(ASTRA): unified parallel GBNF CPU validation`. PR triggers
+and ordinary pushes cannot run real model inference.
+
+The legacy `.github/workflows/astra-offline-ai-oneshot.yml` retains
+manual-only `BENCHMARK` dispatch for diagnostics and no longer responds to
+push commits. It is not invoked as part of this run.
+
+The real job still uses the same checksum-verified 0.5B model, pinned
+llama.cpp source, 2 CPU threads, 700-token ceiling, 180-second process
+timeout and 17-minute job deadline. New for this experiment: the
+`--grammar-file` adapter enforces JSON *structure*, but it cannot prove
+originality, causality, or production suitability. Approval and publishing
+remain disabled.
+
+Once a run finishes, use `review-report.json` plus raw generated output
+to evaluate model execution separately from structural contract and
+human narrative quality. Do not automatically retry or merge.

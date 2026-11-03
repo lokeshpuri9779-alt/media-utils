@@ -1,14 +1,5 @@
 name: ASTRA Offline AI One-Shot GGUF CPU (Isolated)
 on:
-  push:
-    branches:
-      - experiment/astra-offline-ai-parallel-20261103
-    paths:
-      - .github/workflows/astra-offline-ai-oneshot.yml
-      - tools/astra_offline_cpu_smoke.py
-      - tools/grammars/astra_four_beats.gbnf
-      - tests/test_astra_offline_cpu_smoke.py
-      - docs/astra-offline-ai-real-llm.md
   workflow_dispatch:
     inputs:
       confirm_benchmark:
