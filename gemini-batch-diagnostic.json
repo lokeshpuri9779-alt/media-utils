@@ -1,52 +1,31 @@
 {
-  "observed_at": "2026-11-03T11:22:22.445982+00:00",
-  "generated": 13,
+  "observed_at": "2026-11-03T14:19:47.802685+00:00",
+  "generated": 18,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 4,
+      "index": 7,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 9,
+      "index": 8,
       "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 10,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 16,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 17,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 18,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 19,
-      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 13,
+  "reviewed": 18,
   "review_deferred": 0,
-  "approved": 5,
+  "approved": 3,
   "review_issues": [
-    "The candidate story 'Fergus the Ferret and the Overripe Melon Avalanche' closely mirrors the structure, causal mechanism, and resolution of the recently published comparison story 'Felix the Ferret and the Overstuffed Produce Cart', involving a ferret protagonist dealing with a top-heavy/overloaded rolling cart on a steep slope, resolved by wedging an object to stop the cart.",
-    "The candidate story heavily replicates the premise, character pairing (a fox and a rabbit dealing with a frozen/flooded stream crossing a barrier to save provisions), and causal mechanism of the previously published comparison story 'The Fox and Rabbit of Blackberry Hollow'.",
-    "The causal chain relies on ringing a distant distress bell with a wrench rather than addressing the primary conflict directly, making the resolution feel derivative and mechanically weak.",
-    "The causal coherence within the narrative beats is weak; the story beat mentions ringing the brass station bell, but the decisive choice and text indicate climbing the signal post to relight the brass lantern, creating a contradiction in the narrative mechanism.",
-    "The story 'Orion the Owl and the Midnight Railway Signal' repeats a very recently published premise and character from the comparison history ('Pip and the Midnight Railway Signal' and 'Orion the Owl and the Silent Comet Ring'), presenting a duplicate thematic variation and title structure.",
-    "The story premise, characters participating in a community relay race, and conflict involving a dropped or mishandled baton closely mirrors the recently published 'Buster and Cleo's Neighborhood Relay Race Blunder' story provided in the comparison history.",
-    "The story shares extremely similar character archetypes, settings, and causal problem-solving patterns (specifically an otter named Orson dealing with a seaside festival and a submerged/lost brass bell or tide issue) with recently published works in the comparison history, such as 'Orson the Otter and the Sunken Lantern Festival'.",
-    "The story uses a character name and premise (stoat in a snowy forest dealing with a blocked path/delivery box, using a brass tool/compass/wrench and ringing a bell) that closely mirrors multiple recent publications in the comparison history such as 'Bram and the Frost-Crested Pass' and similar forest animal survival tropes.",
+    "The candidate story 'The Forest Fox and Rabbit of Blackberry Ridge' features a central conflict, character pairing (a fox and a rabbit working together near a water or berry obstacle), and resolution that heavily duplicate the recently published premise of 'The Fox and Rabbit of Blackberry Hollow'.",
+    "The candidate story features a character named Orion solving a railway platform mystery involving a signal issue, which closely mirrors the style, premise, and thematic elements of previously published stories in the comparison history such as 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'. Furthermore, it duplicates the established naming conventions and causal narrative structures used repetitively across these automated RAYVAN series outputs.",
+    "The premise, character (Orion the Owl), and railway/platform setting heavily overlap with the recently published title 'Orion the Owl and the Silent Comet Ring' and other station-based animal mystery stories in the comparison history such as 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'.",
+    "The story premise, character (Bram the pangolin), and navigational/survival conflict heavily overlap with the recently published title 'pip the pangolin and the dry-grassland navigation challenge' and other recurring Bram/Pip animal survival narratives in the comparison history.",
+    "The story premise, characters (fox and rabbit), central conflict (blocked entrance to a food cache/winter supply), and cooperative resolution heavily overlap with the previously published 'The Fox and Rabbit of Blackberry Hollow' in the comparison history.",
+    "The story premise, protagonist type (an animal named Pip/Pax using alternative navigation or tools when an item is lost), and structure closely mirror previously published titles in the comparison history such as 'pip the pangolin and the dry-grassland navigation challenge'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -101,17 +80,17 @@
     ]
   },
   "creative_preflight": {
-    "generated": 13,
+    "generated": 18,
     "script_status_counts": {
-      "no_simple_flags": 13
+      "no_simple_flags": 18
     },
     "renderer_status_counts": {
-      "incompatible": 2,
-      "structurally_eligible": 11
+      "incompatible": 9,
+      "structurally_eligible": 9
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 1,
-      "none": 11,
+      "cast_mismatch": 8,
+      "none": 9,
       "unsupported_human_actor": 1
     },
     "editorial_approval": false,
