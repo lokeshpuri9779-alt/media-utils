@@ -164,6 +164,23 @@ for x in (-.25,.45):
 for part in frog_parts:
     part.parent=frog_root
 
+# Two lightweight articulated legs give the opening steps a readable
+# hip-knee-ankle silhouette. These are strictly hidden after setup so
+# magnet/seed/planting pixel ROIs keep the proven original geometry.
+frog_legs=[]
+for foot,base_x in frog_feet:
+    side=-1 if base_x<0 else 1
+    hip=Vector((base_x+.06*side,-.22,.51))
+    knee=Vector((base_x+.085*side,-.345,.365))
+    ankle=Vector((base_x,-.27,.25))
+    thigh=rod("FROG_THIGH_"+str(side),hip,knee,.071,green)
+    shin=rod("FROG_SHIN_"+str(side),knee,ankle,.063,green)
+    kneecap=ball("FROG_KNEE_"+str(side),knee,(.078,.077,.077),green)
+    for part in (thigh,shin,kneecap):
+        part.parent=frog_root
+    frog_legs.append((thigh,shin,kneecap,hip,
+                      (knee-hip).length,(ankle-knee).length,side))
+
 # The added large head dome occluded the seed during planting in the real
 # render. Use small raised brow contours only, outside the seed trajectory;
 # preserve the existing seven-piece character body rig and root motion.
@@ -289,9 +306,23 @@ for i in range(FRAME_COUNT):
         foot.location.x=base_x+.58*step
         foot.location.z=.23+step
     frog_root.location.z=.015*gait*gait*setup_envelope if i<8 else 0.0
+    # Slight side-to-side weight transfer follows the planted leg; zero
+    # at both cuts, with no change to the rescue camera or later action.
+    weight_sway=.024*gait*setup_envelope if i<8 else 0.0
+    for leg,(foot,base_x) in zip(frog_legs,frog_feet):
+        thigh,shin,kneecap,hip,thigh_length,shin_length,side=leg
+        step=frog_step_left if side<0 else frog_step_right
+        knee=Vector((base_x+.085*side+.31*step,-.345,
+                     .365+.47*step))
+        ankle=foot.location.copy()+Vector((0,0,.02))
+        aim_segment(thigh,hip,knee,thigh_length)
+        aim_segment(shin,knee,ankle,shin_length)
+        kneecap.location=knee
+        for part in (thigh,shin,kneecap):
+            part.hide_render=i>=8
     if i<8:
         phase="setup"
-        frog_root.location.x=.25*i/7
+        frog_root.location.x=.25*i/7+weight_sway
         plane.location=(-1.12,.25,.23)
         clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(plane.location.x,plane.location.y,plane.location.z+.08)
@@ -399,6 +430,10 @@ for i in range(FRAME_COUNT):
         "leaf_visible":not leaf.hide_render,
         "frog_root_x":round(float(frog_root.location.x),4),
         "frog_root_z":round(float(frog_root.location.z),4),
+        "frog_weight_sway":round(float(weight_sway),4),
+        "frog_leg_segments_visible":sum(
+            not part.hide_render for leg in frog_legs for part in leg[:3]),
+        "frog_knee_z":[round(float(leg[2].location.z),4) for leg in frog_legs],
         "frog_foot_z":[round(float(foot.location.z),4) for foot,_ in frog_feet],
         "frog_foot_x":[round(float(foot.location.x),4) for foot,_ in frog_feet],
         "camera_xyz":[round(float(v),4) for v in camera.location],
@@ -421,6 +456,21 @@ checks={
         frames[5]["frog_foot_z"][1]>.30 and
         abs(frames[5]["frog_foot_z"][0]-.23)<.0001 and
         any(frames[i]["frog_root_z"]>.005 for i in range(1,7))
+    ),
+    "frog_legs_articulate_only_during_setup":(
+        len(frog_legs)==2 and
+        all(all(part.parent==frog_root for part in leg[:3])
+            for leg in frog_legs) and
+        all(frames[i]["frog_leg_segments_visible"]==6 for i in range(8)) and
+        all(frames[i]["frog_leg_segments_visible"]==0 for i in range(8,32))
+        and frames[2]["frog_knee_z"][0]>frames[0]["frog_knee_z"][0]
+        and frames[5]["frog_knee_z"][1]>frames[0]["frog_knee_z"][1]
+    ),
+    "frog_weight_transfer_resolves_at_cut":(
+        frames[2]["frog_weight_sway"]>0 and
+        frames[5]["frog_weight_sway"]<0 and
+        all(abs(frames[i]["frog_weight_sway"])<.0001
+            for i in (0,7,8,21,22,31))
     ),
     "frog_walk_lands_before_rescue":(
         all(abs(frames[i]["frog_root_z"])<.0001 for i in (0,7,8,21,22,31))
