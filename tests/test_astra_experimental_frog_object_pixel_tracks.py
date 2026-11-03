@@ -102,6 +102,21 @@ class FixedActorPixelTracks(unittest.TestCase):
         self.assertFalse(r["passed"])
         self.assertIn("seed_brown_blob_before_soil", r["failed_checks"])
 
+    def test_pot_soil_not_mistaken_for_rewound_seed(self):
+        # In the real render frame 22 the pot's brown pixels occupy x>=240
+        # within the old frame-25 ROI. The seed itself remains at x~90.
+        frames = self.frames.copy()
+        frames[22] = bytearray(self.frames[22])
+        for y in range(292, 327):
+            for x in range(240, 251):
+                k = 3 * (y * W + x)
+                frames[22][k:k+3] = bytes((112, 82, 62))
+        frames[25] = frames[22]
+        r = score(frames, self.report)
+        self.assertFalse(r["passed"])
+        self.assertIn("seed_pixel_path_advances_toward_pot",
+                      r["failed_checks"])
+
     def test_metadata_cannot_claim_publication(self):
         for key in ("approved", "published", "production_ready",
                     "paid_apis_used"):

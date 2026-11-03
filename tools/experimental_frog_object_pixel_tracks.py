@@ -17,12 +17,13 @@ WARM_ROI = (60, 305, 355, 348)
 PAPER_ROI = (30, 250, 250, 355)
 MAGNET_FRAMES = tuple(range(8, 13))
 AIRPLANE_FRAMES = tuple(range(13, 22))
-# Hand-calibrated from real PNG pixels; stop before brown seed overlaps pot soil.
+# Hand-calibrated from real PNG pixels; frame 25 excludes pot soil at x>=240.
+# Stop before brown seed overlaps pot soil in later frames.
 SEED_ROIS = {
     22: (64, 244, 125, 296),
     23: (83, 249, 145, 295),
     24: (140, 250, 196, 299),
-    25: (192, 270, 251, 327),
+    25: (192, 270, 239, 327),
 }
 SEED_MIN_PIXELS = {22: 175, 23: 175, 24: 35, 25: 175}
 SPROUT_ROI = (195, 242, 325, 292)
