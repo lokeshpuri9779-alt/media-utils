@@ -11,12 +11,21 @@ import argparse
 import json
 from pathlib import Path
 
-from tools.experimental_visual_motion_audit import decode, SIZE, W, H, SCENES
+from tools.experimental_visual_motion_audit import decode, green_pixels, SIZE, W, H, SCENES
 
 WARM_ROI = (60, 305, 355, 348)
 PAPER_ROI = (30, 250, 250, 355)
 MAGNET_FRAMES = tuple(range(8, 13))
 AIRPLANE_FRAMES = tuple(range(13, 22))
+# Hand-calibrated from real PNG pixels; stop before brown seed overlaps pot soil.
+SEED_ROIS = {
+    22: (64, 244, 125, 296),
+    23: (83, 249, 145, 295),
+    24: (140, 250, 196, 299),
+    25: (192, 270, 251, 327),
+}
+SEED_MIN_PIXELS = {22: 175, 23: 175, 24: 35, 25: 175}
+SPROUT_ROI = (195, 242, 325, 292)
 
 
 def _assert_rgb(frame):
@@ -77,6 +86,25 @@ def gold_region_center(frame):
     return {"pixels": best[0], "center_x": best[1]}
 
 
+def seed_brown_center(frame, roi):
+    """Bounded RGB seed-color proxy, independent of renderer position data."""
+    _assert_rgb(frame)
+    left, top, right, bottom = roi
+    if not (0 <= left < right <= W and 0 <= top < bottom <= H):
+        raise ValueError("Invalid seed ROI")
+    xs = []
+    for y in range(top, bottom):
+        for x in range(left, right):
+            k = 3 * (y * W + x)
+            red, green, blue = frame[k], frame[k + 1], frame[k + 2]
+            if (67 < red < 185 and 42 < green < 138 and blue > 28
+                    and red > green * 1.16 and red < green * 1.68
+                    and blue > green * .65 and green > blue * 1.04):
+                xs.append(x)
+    return {"pixels": len(xs),
+            "center_x": round(sum(xs) / len(xs), 2) if xs else None}
+
+
 def pale_region_left(frame):
     """Leftmost bright cream-colored pixel in the airplane shot corridor."""
     _assert_rgb(frame)
@@ -111,7 +139,12 @@ def score(frames, report):
     if valid:
         gold = {str(i): gold_region_center(frames[i]) for i in MAGNET_FRAMES}
         paper = {str(i): pale_region_left(frames[i]) for i in AIRPLANE_FRAMES}
-        measurements = {"magnet_gold": gold, "airplane_pale": paper}
+        seed = {str(i): seed_brown_center(frames[i], roi)
+                for i, roi in SEED_ROIS.items()}
+        sprout = {str(i): green_pixels(frames[i], SPROUT_ROI)
+                  for i in (28, 29, 30, 31)}
+        measurements = {"magnet_gold": gold, "airplane_pale": paper,
+                        "seed_brown": seed, "sprout_green": sprout}
         x = [gold[str(i)]["center_x"] for i in MAGNET_FRAMES]
         p = [paper[str(i)]["left_x"] for i in AIRPLANE_FRAMES]
         checks["magnet_golden_pixels_present"] = all(
@@ -130,8 +163,24 @@ def score(frames, report):
             and all(b > a for a, b in zip(p, p[1:]))
             and p[-1] - p[0] >= 125
         )
-        # Do not confuse these deliberate fixed-color pixel proxies with
-        # proof that a human understands a paper airplane being rescued.
+        seed_x = [seed[str(i)]["center_x"] for i in SEED_ROIS]
+        checks["seed_brown_blob_before_soil"] = all(
+            seed[str(i)]["pixels"] >= SEED_MIN_PIXELS[i]
+            and seed[str(i)]["center_x"] is not None for i in SEED_ROIS
+        )
+        checks["seed_pixel_path_advances_toward_pot"] = (
+            all(x is not None for x in seed_x)
+            and all(b - a >= 12 for a, b in zip(seed_x, seed_x[1:]))
+            and seed_x[-1] - seed_x[0] >= 105
+        )
+        checks["sprout_pixels_follow_seed_transfer"] = (
+            sprout["28"] <= 5 and 80 <= sprout["29"] <= 500
+            and 150 <= sprout["30"] <= 800
+            and 800 <= sprout["31"] <= 5000
+            and sprout["29"] < sprout["30"] < sprout["31"]
+        )
+        # Scene-specific color cues are not semantic recognition, especially
+        # when brown seed pixels overlap the soil after frame 25.
     failed = sorted(name for name, state in checks.items() if not state)
     return {
         "experiment": "isolated frog colored-pixel object tracks",
@@ -140,8 +189,10 @@ def score(frames, report):
         "failed_checks": failed,
         "measurements": measurements,
         "evidence_scope": "fixed-scene color/position proxies from actual RGB PNGs",
-        "limitations": ("Color clusters may not correspond to objects under "
-                        "different lighting, scene or camera arrangements."),
+        "limitations": ("Fixed-scene color/position proxies cannot identify "
+                        "objects semantically. Seed-colored pixels become "
+                        "indistinguishable from pot soil after frame 25; "
+                        "subject and cinematic quality require manual review."),
         "semantic_quality": "not_verified",
         "cinematic_quality": "not_verified",
         "manual_visual_review_required": True,
@@ -164,10 +215,14 @@ def negative_controls(frames, report):
          "paper_region_moves_right_after_contact"),
         ("wrong_rescue_shot", 17, 31,
          "paper_region_moves_right_after_contact"),
+        ("seed_pixels_erased", 24, None, "seed_brown_blob_before_soil"),
+        ("seed_rewinds", 25, 22, "seed_pixel_path_advances_toward_pot"),
+        ("sprout_appears_early", 28, 31, "sprout_pixels_follow_seed_transfer"),
+        ("sprout_never_grows", 31, 28, "sprout_pixels_follow_seed_transfer"),
     )
     for name, destination, source, expected in scenarios:
         corrupted = list(frames)
-        corrupted[destination] = frames[source]
+        corrupted[destination] = frames[source] if source is not None else bytes(SIZE)
         result = score(corrupted, report)
         cases.append({
             "case": name,

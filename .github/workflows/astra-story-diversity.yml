@@ -127,10 +127,10 @@ jobs:
           a=json.loads((root/'object_pixel_tracks.json').read_text())
           n=json.loads((root/'object_pixel_negative_controls.json').read_text())
           assert a['passed'] is True and all(a['checks'].values())
-          assert n['all_corruptions_rejected'] and n['negative_case_count']==5
+          assert n['all_corruptions_rejected'] and n['negative_case_count']==9
           assert all(a[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
           assert a['semantic_quality']=='not_verified'
-          print('Object-color tracks and 5 damaged-frame controls verified; manual review still required')
+          print('Object RGB tracks and 9 damaged-frame controls verified; manual review still required')
           PY
       - name: Bind complete review evidence to frames and video
         run: |

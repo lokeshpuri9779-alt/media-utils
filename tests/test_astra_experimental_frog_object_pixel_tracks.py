@@ -6,7 +6,8 @@ The CPU story workflow separately tests the same code on real rendered frames.
 import unittest
 
 from tools.experimental_frog_object_pixel_tracks import (
-    SIZE, W, gold_region_center, pale_region_left, score, negative_controls,
+    SIZE, W, gold_region_center, pale_region_left, seed_brown_center,
+    SEED_ROIS, score, negative_controls,
 )
 
 
@@ -25,6 +26,11 @@ def synthetic():
         fill(frames[i], x - 7, 319, 15, 10, (200, 130, 30))
     for i, x in enumerate(airplane_left_edges, start=13):
         fill(frames[i], x, 289, 20, 7, (208, 194, 161))
+    for i, x, y in ((22, 90, 282), (23, 112, 285),
+                    (24, 168, 286), (25, 223, 298)):
+        fill(frames[i], x - 9, y - 5, 18, 10, (112, 82, 62))
+    for i, width, height in ((29, 9, 16), (30, 14, 16), (31, 40, 48)):
+        fill(frames[i], 240, 242, width, height, (20, 180, 34))
 
     report = {
         "success": True,
@@ -47,10 +53,10 @@ class FixedActorPixelTracks(unittest.TestCase):
     def setUpClass(cls):
         cls.frames, cls.report = synthetic()
 
-    def test_clean_two_object_trajectories_pass(self):
+    def test_clean_object_trajectories_and_sprout_pass(self):
         r = score(self.frames, self.report)
         self.assertTrue(r["passed"], r)
-        self.assertEqual(len(r["checks"]), 5)
+        self.assertEqual(len(r["checks"]), 8)
         self.assertTrue(all(r["checks"].values()))
         self.assertEqual(r["semantic_quality"], "not_verified")
         self.assertFalse(r["production_ready"])
@@ -58,10 +64,12 @@ class FixedActorPixelTracks(unittest.TestCase):
     def test_individual_color_detector_coordinates(self):
         self.assertEqual(gold_region_center(self.frames[8])["center_x"], 317)
         self.assertEqual(pale_region_left(self.frames[21])["left_x"], 217)
+        self.assertEqual(seed_brown_center(
+            self.frames[24], SEED_ROIS[24])["center_x"], 167.5)
 
-    def test_five_corrupted_sequences_rejected(self):
+    def test_nine_corrupted_sequences_rejected(self):
         result = negative_controls(self.frames, self.report)
-        self.assertEqual(result["negative_case_count"], 5)
+        self.assertEqual(result["negative_case_count"], 9)
         self.assertTrue(result["all_corruptions_rejected"], result)
         self.assertEqual(result["semantic_quality"], "not_verified")
 
@@ -72,6 +80,27 @@ class FixedActorPixelTracks(unittest.TestCase):
         self.assertFalse(r["passed"])
         self.assertIn("paper_region_moves_right_after_contact",
                       r["failed_checks"])
+
+    def test_early_sprout_rejected_with_unchanged_report(self):
+        frames = self.frames.copy()
+        frames[28] = frames[31]
+        r = score(frames, self.report)
+        self.assertFalse(r["passed"])
+        self.assertIn("sprout_pixels_follow_seed_transfer", r["failed_checks"])
+
+    def test_seed_trajectory_reversal_rejected(self):
+        frames = self.frames.copy()
+        frames[25] = frames[22]
+        r = score(frames, self.report)
+        self.assertFalse(r["passed"])
+        self.assertIn("seed_pixel_path_advances_toward_pot", r["failed_checks"])
+
+    def test_erased_seed_rejected(self):
+        frames = self.frames.copy()
+        frames[24] = bytes(SIZE)
+        r = score(frames, self.report)
+        self.assertFalse(r["passed"])
+        self.assertIn("seed_brown_blob_before_soil", r["failed_checks"])
 
     def test_metadata_cannot_claim_publication(self):
         for key in ("approved", "published", "production_ready",

@@ -26,7 +26,7 @@ PROFILES = {
         "negative_count": 7,
         "object_audit": "object_pixel_tracks.json",
         "object_negative": "object_pixel_negative_controls.json",
-        "object_negative_count": 5,
+        "object_negative_count": 9,
     },
     "lighthouse": {
         "story_id": "astra-coastal-spark",
@@ -165,6 +165,9 @@ def build(directory, profile):
             "gold_cluster_travels_leftward_to_clip",
             "airplane_bright_pixels_present",
             "paper_region_moves_right_after_contact",
+            "seed_brown_blob_before_soil",
+            "seed_pixel_path_advances_toward_pot",
+            "sprout_pixels_follow_seed_transfer",
         )
         checks["frog_object_pixel_tracking"] = (
             object_pixel.get("passed") is True

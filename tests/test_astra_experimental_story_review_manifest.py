@@ -58,6 +58,9 @@ def fixture(directory, profile):
             "gold_cluster_travels_leftward_to_clip": True,
             "airplane_bright_pixels_present": True,
             "paper_region_moves_right_after_contact": True,
+            "seed_brown_blob_before_soil": True,
+            "seed_pixel_path_advances_toward_pot": True,
+            "sprout_pixels_follow_seed_transfer": True,
         }
         write(directory, cfg["object_audit"],
               dict(safety, passed=True, checks=object_checks,
@@ -65,8 +68,9 @@ def fixture(directory, profile):
                    semantic_quality="not_verified"))
         write(directory, cfg["object_negative"],
               dict(safety, source_passed=True, all_corruptions_rejected=True,
-                   negative_case_count=5,
-                   cases=[{"case": str(i), "rejected": True} for i in range(5)],
+                   negative_case_count=cfg["object_negative_count"],
+                   cases=[{"case": str(i), "rejected": True}
+                          for i in range(cfg["object_negative_count"])],
                    manual_visual_review_required=True,
                    semantic_quality="not_verified"))
     else:
