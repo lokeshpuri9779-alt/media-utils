@@ -207,16 +207,18 @@ key_light.name="FROG_SOFT_KEY"
 key_light.data.energy=750
 key_light.data.size=5
 
-# Low-cost cool back-right accent adds a modest silhouette edge to the
-# frog and paper without changing positions, timing, or safety gates.
-# One area lamp only: free CPU EEVEE, no external textures or paid services.
-bpy.ops.object.light_add(type='AREA',location=(2.1,1.0,3.6))
+# The first broad area rim brightened distant pot soil and magnet equally;
+# it failed real pixel verification, so aim a restrained small cool spotlight
+# only at the frog. Preserve the pre-existing paper/seed lighting and gates.
+# One extra built-in CPU EEVEE light, with no external assets or paid API.
+bpy.ops.object.light_add(type='SPOT',location=(.10,-1.9,2.7))
 rim_light=bpy.context.object
-rim_light.name="FROG_COOL_RIM"
-rim_light.data.energy=155
-rim_light.data.size=2.8
-rim_light.data.color=(.65,.80,1.0)
-rim_light.rotation_euler=(Vector((.2,0,.6))-rim_light.location).to_track_quat('-Z','Y').to_euler()
+rim_light.name="FROG_LOCAL_COOL_ACCENT"
+rim_light.data.energy=110
+rim_light.data.spot_size=.52
+rim_light.data.spot_blend=.40
+rim_light.data.color=(.68,.81,1.0)
+rim_light.rotation_euler=(Vector((.25,-.1,.6))-rim_light.location).to_track_quat('-Z','Y').to_euler()
 frames=[]
 FRAME_COUNT=32
 FPS=8
@@ -394,10 +396,10 @@ checks={
         frames[i]["sky_clouds_in_frame"]>=2 for i in (0,8,31)
     ),
     "review_only_foreground_depth_light":(
-        key_light.data.type=="AREA" and rim_light.data.type=="AREA" and
-        rim_light.data.energy>0 and rim_light.data.energy<=200 and
-        rim_light.data.size>=2 and rim_light.location.y>0 and
-        rim_light.location.z>3 and
+        key_light.data.type=="AREA" and rim_light.data.type=="SPOT" and
+        rim_light.data.energy>0 and rim_light.data.energy<=150 and
+        .40<=rim_light.data.spot_size<=.60 and
+        rim_light.location.x<.5 and rim_light.location.y<0 and
         len([o for o in bpy.data.objects if o.type=="LIGHT"])==2
     ),
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
