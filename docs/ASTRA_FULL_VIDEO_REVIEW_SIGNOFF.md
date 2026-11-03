@@ -88,3 +88,17 @@ The intake refuses mismatched content IDs, story beats, exact MP4 bytes, JPEG ha
 The resulting folder contains exactly `candidate.json`, `video.mp4`, `contact.jpg`, `review.story-review.json`, `completed-checklist.json` and `review-intake-status.json`. **All checklist boxes are initially false; no Ed25519 key, signature, approval or publishing action is created.** The reviewer must personally watch the complete MP4 and compare it against all four authored beats. The JPEG is only supporting evidence.
 
 After genuine independent review, a separately authorized reviewer may fill the checklist, run the existing signing CLI against these filenames, and deposit the verified signed decision according to the trusted branch instructions. Publishing still requires the existing editorial, media and publication gates. This intake does not add network/API calls or GitHub Actions storage.
+
+## Optional 24-frame human review timeline (no approval)
+
+The existing original four-frame contact JPEG is not enough to establish that events actually happened. For fuller, **still unsigned** visual evidence, use the previously prepared `review-ready` folder:
+
+```bash
+python -m astra_v2.review_timeline --review-dir ./review-ready
+```
+
+This **offline** command requires local `ffmpeg`, `ffprobe` and Pillow (already in ASTRA's video environment). It reads the exact `candidate.json`, `video.mp4` and original `.story-review.json` packet, checks SHA-256 and all four narrated beats, then creates `timeline-24.jpg` and `timeline-24.json` without overwriting the original packet, MP4, checklist or signed decision.
+
+Each of the four narrated beats gets six timestamps inferred from the previously recorded shot-midpoint times. If the source packet has no genuine increasing midpoint alignment, extraction fails instead of guessing equal quarters. These samples are **visual inspection aids**, not proof of correct depiction or a human review. Any decoder failure or mismatched identity fails closed.
+
+The independent reviewer must still personally **watch the entire encoded MP4**, use the 24-frame timeline to flag potential omissions, and independently decide whether every checklist criterion holds. The tool cannot mark a checkbox true, sign a decision, configure branch protection, or publish a video. Do not add timeline-generated files to the signed evidence branch; that branch continues to carry only the original packet and independent signed decision.
