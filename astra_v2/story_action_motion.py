@@ -86,9 +86,18 @@ def unsupported_simultaneous_prop_motion(shot):
         if not isinstance(value, str):
             continue
         for clause in _SEQUENTIAL_BREAK.split(value):
-            if (_JUMP_SWIM.search(clause)
-                    and (_CARRYING_PROP.search(clause)
-                         or _MOUTH_GRIP.search(clause))):
+            # "carried a box and jumped" can be sequential and is not
+            # enough. Require an ongoing carrying/holding gerund, explicit
+            # "while/as" linkage, or a prop described in the character's mouth.
+            carrying = _CARRYING_PROP.search(clause)
+            simultaneous = (
+                re.search(r"\b(?:while|whilst|as|carrying|holding|clutching)\b",
+                          clause, re.I)
+                or _MOUTH_GRIP.search(clause)
+            )
+            if _JUMP_SWIM.search(clause) and carrying and simultaneous:
+                return True
+            if _JUMP_SWIM.search(clause) and _MOUTH_GRIP.search(clause):
                 return True
     return False
 
