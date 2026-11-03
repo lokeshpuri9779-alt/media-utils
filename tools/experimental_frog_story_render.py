@@ -346,6 +346,26 @@ for label,start,end,y_anchor in caption_beats:
         layers.append(text_obj)
     caption_cards.append((label,start,end,layers))
 
+# A continuous, smaller seed-story thread spans the *existing* rescue ->
+# plant shot cut. It identifies the same object across both perspectives,
+# without disturbing the independent fixed-camera action-pixel audit.
+seed_thread_layers=[]
+for role,material,position in (
+        ("SHADOW",caption_shadow,(.009,.468,-2.54)),
+        ("MAIN",caption_white,(0,.485,-2.5))):
+    bpy.ops.object.text_add()
+    label_obj=bpy.context.object
+    label_obj.name="SEED_HANDOFF_THREAD_"+role
+    label_obj.data.body="ONE SEED"
+    label_obj.data.align_x="CENTER"
+    label_obj.data.align_y="CENTER"
+    label_obj.data.size=.094
+    label_obj.data.materials.append(material)
+    label_obj.parent=camera
+    label_obj.location=position
+    label_obj.rotation_euler=(0,0,0)
+    seed_thread_layers.append(label_obj)
+
 bpy.ops.object.light_add(type='AREA',location=(-3,-4,7))
 key_light=bpy.context.object
 key_light.name="FROG_SOFT_KEY"
@@ -363,6 +383,8 @@ for i in range(FRAME_COUNT):
     for label,start,end,layers in caption_cards:
         for layer in layers:
             layer.hide_render=not (start<=i<end)
+    for layer in seed_thread_layers:
+        layer.hide_render=not (19<=i<=25)
     # Less rushed 5 1/3-second animatic at 6 FPS: setup 0-7,
     # rescue 8-21, planting and watered sprout 22-31.
     # Frame-level visual/action evidence stays identical except captions.
@@ -525,24 +547,11 @@ for i in range(FRAME_COUNT):
         leaf.hide_render=i<31
         seed.hide_render=i>=29
         dolly=max(0.0,(i-27)/4)
-        if i<=25:
-            # Four-frame handoff: follow the recovered seed rather than
-            # teleporting the entire view between rescue (21) and plant (22).
-            # Exact previous planting camera restored at frame 25, leaving
-            # all later planting/rain/sprout shots unchanged.
-            bridge_t=max(0.0,min(1.0,(i-21)/4))
-            bridge_ease=bridge_t*bridge_t*(3-2*bridge_t)
-            rescue_cam=Vector((-.3,-5.3,3.1))
-            plant_cam=Vector((.55,-4.5,3.25))
-            rescue_focus=Vector((-.52,.15,.70))
-            plant_focus=Vector((.68,.23,.83))
-            camera.location=rescue_cam.lerp(plant_cam,bridge_ease)
-            camera_at(rescue_focus.lerp(plant_focus,bridge_ease),
-                      49-2*bridge_ease)
-        else:
-            camera.location=(.55+.55*dolly,-4.5+.9*dolly,3.25-.3*dolly)
-            camera_at((.68+.48*dolly,.23+.17*dolly,.83-.13*dolly),
-                      47+4*dolly)
+        # Keep planting camera fixed for the independent rendered-pixel
+        # motion checker. Moving it during frames 22-27 obscured the
+        # seed path and failed the existing fail-closed visual audit.
+        camera.location=(.55+.55*dolly,-4.5+.9*dolly,3.25-.3*dolly)
+        camera_at((.68+.48*dolly,.23+.17*dolly,.83-.13*dolly),47+4*dolly)
 
     # Frog's visible green arm and gold claw stay attached to the seed from
     # the end of the rescue to soil contact; no seed teleports at camera cut.
@@ -577,6 +586,16 @@ for i in range(FRAME_COUNT):
         round(max(p.x for p in projected_caption_corners),4),
         round(max(p.y for p in projected_caption_corners),4),
     ]
+    projected_thread=[
+        world_to_camera_view(scene,camera,layer.matrix_world@Vector(corner))
+        for layer in seed_thread_layers for corner in layer.bound_box
+    ]
+    thread_viewport_bounds=[
+        round(min(p.x for p in projected_thread),4),
+        round(min(p.y for p in projected_thread),4),
+        round(max(p.x for p in projected_thread),4),
+        round(max(p.y for p in projected_thread),4),
+    ]
     img=out/f"frame_{i:03d}.png"
     scene.render.filepath=str(img.resolve())
     bpy.ops.render.render(write_still=True)
@@ -598,6 +617,9 @@ for i in range(FRAME_COUNT):
         "frame":i,"phase":phase,
         "story_caption":story_caption,
         "caption_viewport_bounds":caption_viewport_bounds,
+        "seed_thread_visible_layers":sum(
+            not layer.hide_render for layer in seed_thread_layers),
+        "seed_thread_bounds":thread_viewport_bounds,
         "caption_text_layers_visible":sum(
             not layer.hide_render for _,_,_,layers in caption_cards
             for layer in layers),
@@ -645,6 +667,23 @@ for i in range(FRAME_COUNT):
     })
 checks={
     "thirty_two_frames":len(frames)==FRAME_COUNT,
+    "seed_story_thread_bridges_cut_without_camera_motion":(
+        len(seed_thread_layers)==2 and
+        all(layer.parent==camera and layer.data.body=="ONE SEED"
+            for layer in seed_thread_layers) and
+        all(frames[i]["seed_thread_visible_layers"]==2
+            for i in range(19,26)) and
+        all(frames[i]["seed_thread_visible_layers"]==0
+            for i in list(range(19))+list(range(26,FRAME_COUNT))) and
+        all(frames[i]["camera_xyz"]==frames[22]["camera_xyz"]
+            for i in range(22,28)) and
+        frames[21]["seed_xyz"]==frames[22]["seed_xyz"]
+    ),
+    "seed_story_thread_inside_top_safe_band":all(
+        .10<f["seed_thread_bounds"][0]<f["seed_thread_bounds"][2]<.90 and
+        .60<f["seed_thread_bounds"][1]<f["seed_thread_bounds"][3]<.90
+        for f in frames[19:26]
+    ),
     "five_captions_match_causal_events":(
         len(caption_cards)==5 and
         [(name,start,end) for name,start,end,_ in caption_cards]==[
@@ -827,18 +866,6 @@ checks={
     "camera_moves_smoothly_in_payoff":all(
         (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
         for i in range(23,32)),
-    "rescue_to_plant_camera_handoff_continuous":(
-        all((Vector(frames[i]["camera_xyz"])-
-             Vector(frames[i-1]["camera_xyz"])).length<.45
-            for i in range(22,26))
-        and (Vector(frames[22]["camera_xyz"])-
-             Vector(frames[21]["camera_xyz"])).length<.25
-        and abs(frames[25]["camera_xyz"][0]-.55)<.0001
-        and abs(frames[25]["camera_lens"]-47)<.0001
-        and frames[21]["seed_xyz"]==frames[22]["seed_xyz"]
-        and all(frames[i]["camera_xyz"]!=frames[i-1]["camera_xyz"]
-                for i in range(22,26))
-    ),
     "opening_camera_push_in_is_smooth":all(
         0<(Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.40
         for i in range(1,8)),
@@ -885,7 +912,7 @@ report={
     "approved":False,"published":False,"production_ready":False,
     "paid_apis_used":False,"editorial_review_required":True,
     "semantic_quality":"not_verified","cinematic_quality":"manual_review_required",
-    "note":"Four-second mesh-only review preview; subject framing, planting and pacing require independent visual inspection."
+    "note":"5.33-second mesh-only review preview; story continuity, visual readability and pacing require independent manual inspection."
 }
 (out/"review.json").write_text(json.dumps(report,indent=2)+"\n")
 print("ASTRA_FROG_RENDER="+json.dumps({"success":report["success"],"checks":checks}),flush=True)
