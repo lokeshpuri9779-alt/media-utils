@@ -105,7 +105,7 @@ class AnnotatedObjectMotionTests(unittest.TestCase):
                          (0.1, 0.2, 0.4, 0.8))
         self.assertEqual(_bbox_gap((0, 0, .2, .2), (.4, 0, .6, .2),
                                    250, 444), 50)
-        self.assertEqual(_bbox_iou((0, 0, .2, .2), (.1, 0, .3, .2)), 1 / 3)
+        self.assertAlmostEqual(_bbox_iou((0, 0, .2, .2), (.1, 0, .3, .2)), 1 / 3)
         for invalid in ([0, 0, 0, 1], [0, .1, 2, .5],
                         [0, 0, .1, float("nan")], [0, 0, True, .8],
                         ["0", 0, .5, .5], [0, .1, .2], "bad"):
