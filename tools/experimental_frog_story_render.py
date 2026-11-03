@@ -154,8 +154,13 @@ for x in (-.12,.27):
     pupil=ball("FROG_PUPIL",(x,-.425,.79),(.045,.03,.065),black)
     frog_pupils.append((pupil,x))
     frog_parts.append(pupil)
+# Keep references to the original feet so alternating steps do not require
+# changing the root rig or adding geometry near the seed.
+frog_feet=[]
 for x in (-.25,.45):
-    frog_parts.append(ball("FROG_FOOT",(x,-.27,.23),(.19,.2,.12),green))
+    foot=ball("FROG_FOOT",(x,-.27,.23),(.19,.2,.12),green)
+    frog_feet.append((foot,x))
+    frog_parts.append(foot)
 for part in frog_parts:
     part.parent=frog_root
 
@@ -270,6 +275,20 @@ for i in range(FRAME_COUNT):
         part.hide_render=i<19 or i>=29
     for drop in rain_drops:
         drop.hide_render=i<27
+    # One short left-right walk cycle only in the establishing shot.
+    # Sinusoidal lifts with a zero-to-zero envelope return both feet and
+    # the root to their original positions before frame 8. Rescue and
+    # planting keep the exact previously validated character geometry.
+    setup_phase=2*math.pi*min(i,7)/7
+    setup_envelope=math.sin(math.pi*min(i,7)/7) if i<8 else 0.0
+    gait=math.sin(setup_phase)
+    frog_step_left=.105*max(0.0,gait)*setup_envelope
+    frog_step_right=.105*max(0.0,-gait)*setup_envelope
+    for foot,base_x in frog_feet:
+        step=frog_step_left if base_x<0 else frog_step_right
+        foot.location.x=base_x+.58*step
+        foot.location.z=.23+step
+    frog_root.location.z=.015*gait*gait*setup_envelope if i<8 else 0.0
     if i<8:
         phase="setup"
         frog_root.location.x=.25*i/7
@@ -379,6 +398,9 @@ for i in range(FRAME_COUNT):
         "sprout_visible":not sprout.hide_render,
         "leaf_visible":not leaf.hide_render,
         "frog_root_x":round(float(frog_root.location.x),4),
+        "frog_root_z":round(float(frog_root.location.z),4),
+        "frog_foot_z":[round(float(foot.location.z),4) for foot,_ in frog_feet],
+        "frog_foot_x":[round(float(foot.location.x),4) for foot,_ in frog_feet],
         "camera_xyz":[round(float(v),4) for v in camera.location],
         "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
         "camera_lens":round(float(camera.data.lens),4),
@@ -392,6 +414,22 @@ checks={
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
+    "frog_steps_alternate_during_opening":(
+        len(frog_feet)==2 and
+        frames[2]["frog_foot_z"][0]>.30 and
+        abs(frames[2]["frog_foot_z"][1]-.23)<.0001 and
+        frames[5]["frog_foot_z"][1]>.30 and
+        abs(frames[5]["frog_foot_z"][0]-.23)<.0001 and
+        any(frames[i]["frog_root_z"]>.005 for i in range(1,7))
+    ),
+    "frog_walk_lands_before_rescue":(
+        all(abs(frames[i]["frog_root_z"])<.0001 for i in (0,7,8,21,22,31))
+        and all(all(abs(z-.23)<.0001 for z in frames[i]["frog_foot_z"])
+                for i in (0,7,8,21,22,31))
+        and all(all(abs(x-base)<.0001
+                    for x,base in zip(frames[i]["frog_foot_x"],(-.25,.45)))
+                for i in (0,7,8,21,22,31))
+    ),
     "frog_brow_contours_follow_root":(
         len(frog_brows)==2 and all(b.parent==frog_root for b in frog_brows) and
         all(b.scale.z<.06 for b in frog_brows)
