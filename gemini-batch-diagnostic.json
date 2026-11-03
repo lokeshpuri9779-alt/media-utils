@@ -1,24 +1,46 @@
 {
-  "observed_at": "2026-11-03T09:04:41.652585+00:00",
-  "generated": 15,
+  "observed_at": "2026-11-03T10:55:30.206590+00:00",
+  "generated": 11,
   "requested": 20,
   "generation_failures": [
+    {
+      "index": 1,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 3,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 13,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 14,
+      "reason": "validation_error_unclassified"
+    },
     {
       "index": 15,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 5,
-  "review_deferred": 10,
-  "approved": 0,
+  "reviewed": 11,
+  "review_deferred": 0,
+  "approved": 1,
   "review_issues": [
-    "The candidate story features a title and premise strikingly similar to the recent publication example 'pip the pangolin and the dry-grassland navigation challenge', involving a pangolin navigating a dry grassland/ridge.",
-    "There is a logical contradiction between the narrative elements: the 'answer' field states Pippin trusted 'the sun-baked stones', but the decisive choice and story beats indicate he simply left the compass behind and followed natural paths.",
+    "The candidate story features a character named Barnaby solving a physical obstruction puzzle in a marketplace through structural rearrangement, which strongly mirrors the recently published premise and structural motifs found in 'Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic' and other repetitive template-driven narratives within the dataset.",
+    "The causal mechanism of abandoning a rivalry or solo mission to jointly move a heavy object (a log/box) during a weather-related obstruction is excessively repetitive of existing comparison history.",
+    "The narrative structure and character actions follow a repetitive template common across recent AI-generated submissions for RAYVAN.",
+    "The premise, character choices, and resolution heavily mirror previously published titles and structures in the comparison history, such as 'Barnaby's Brass Berry-Bursting Blunderbuss' and 'Pip and the Overripe Acorn Cache', featuring similar mechanics involving falling/tumbling objects in a public space resolved by using a specific tool to wedge or lever an obstacle.",
+    "The repetitive formula of 'Barnaby + tool/object + marketplace/pathway obstruction + structural solution' indicates a high degree of structural recycling, failing originality standards.",
+    "The story duplicates core premises, character pairings, settings, and causal mechanisms from a very recently published story in the comparison history ('The Fox and Rabbit of Blackberry Hollow', which involves a fox and rabbit cooperating during a seasonal crisis near a stream/ravine using cooperative physical effort).",
+    "The story premise, characters (fox and rabbit), and conflict involving a natural disaster blocking a food/berry cache in a forest closely mirror the previously published entry 'The Fox and Rabbit of Blackberry Hollow'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_deferred:rate_limited",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "review_failed:HTTP_503",
+    "review_failed:JSONDecodeError",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -73,17 +95,18 @@
     ]
   },
   "creative_preflight": {
-    "generated": 15,
+    "generated": 11,
     "script_status_counts": {
-      "no_simple_flags": 15
+      "no_simple_flags": 11
     },
     "renderer_status_counts": {
-      "incompatible": 6,
-      "structurally_eligible": 9
+      "incompatible": 4,
+      "structurally_eligible": 7
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 6,
-      "none": 9
+      "cast_mismatch": 1,
+      "none": 7,
+      "unsupported_human_actor": 3
     },
     "editorial_approval": false,
     "publication_triggered": false
