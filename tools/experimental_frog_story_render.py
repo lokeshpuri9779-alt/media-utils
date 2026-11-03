@@ -8,6 +8,7 @@ import math
 import sys
 from pathlib import Path
 from mathutils import Vector
+from bpy_extras.object_utils import world_to_camera_view
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.experimental_story_diversity import build
@@ -77,11 +78,11 @@ def rod(name,a,b,radius,material):
 # Small low-poly ellipsoids are cheap enough for free CPU Blender preview.
 background_clouds=[]
 for index,(x,y,z,sx,sy,sz) in enumerate((
-    (-2.6,3.4,3.4,.96,.20,.16),
-    (-1.45,3.5,3.55,1.06,.19,.21),
-    (.05,3.45,3.12,.96,.16,.19),
-    (1.45,3.45,3.32,.97,.18,.19),
-    (2.8,3.5,3.42,.92,.18,.16),
+    (-1.95,3.4,1.55,.85,.19,.18),
+    (-.95,3.5,1.75,.95,.19,.19),
+    (.05,3.45,1.6,.88,.16,.20),
+    (1.05,3.45,1.72,.94,.18,.19),
+    (2.0,3.5,1.55,.85,.18,.16),
 )):
     background_clouds.append(ball(
         "DISTANT_CLOUD_%02d"%index,(x,y,z),(sx,sy,sz),
@@ -258,6 +259,16 @@ for i in range(FRAME_COUNT):
     bpy.ops.render.render(write_still=True)
     if not img.is_file():
         raise RuntimeError("Missing rendered frame")
+    # Project cloud anchors through the actual camera. The previous
+    # background objects were above the vertical portrait camera frustum,
+    # so simply checking their existence produced a false visual success.
+    sky_clouds_in_frame=sum(
+        0.05<view.x<0.95 and 0.61<view.y<0.97 and view.z>0
+        for view in (
+            world_to_camera_view(scene,camera,obj.location)
+            for obj in background_clouds
+        )
+    )
     clip_gap=(magnet.location-clip.location).length if phase=="rescue" else None
     hand_gap=(plant_claw.location-seed.location).length if 19<=i<29 else None
     frames.append({
@@ -275,6 +286,7 @@ for i in range(FRAME_COUNT):
         "camera_xyz":[round(float(v),4) for v in camera.location],
         "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
         "camera_lens":round(float(camera.data.lens),4),
+        "sky_clouds_in_frame":sky_clouds_in_frame,
     })
 checks={
     "thirty_two_frames":len(frames)==FRAME_COUNT,
@@ -313,7 +325,10 @@ checks={
     "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
     "static_distant_background_clouds":(
         len(background_clouds)==5 and
-        all(obj.location.y>3 and obj.location.z>3 for obj in background_clouds)
+        all(obj.location.y>3 and obj.location.z>1 for obj in background_clouds)
+    ),
+    "sky_clouds_project_onscreen":all(
+        frames[i]["sky_clouds_in_frame"]>=2 for i in (0,8,31)
     ),
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
