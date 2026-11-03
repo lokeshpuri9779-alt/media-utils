@@ -66,6 +66,13 @@ def mat(name,color,metal=0):
     return m
 
 green=mat("FROG_GREEN",(.08,.53,.19),.2)
+# Material-only foreground separation: restore the last proven lighting
+# setup, retain magnet/seed/soil shader values, and add controlled highlights
+# only on the green frog meshes.
+frog_shader=green.node_tree.nodes.get("Principled BSDF")
+frog_shader.inputs["Roughness"].default_value=.32
+if "Coat Weight" in frog_shader.inputs:
+    frog_shader.inputs["Coat Weight"].default_value=.12
 gold=mat("MAGNET_GOLD",(.95,.56,.09),.5)
 water=mat("RAIN_WATER",(.04,.26,.42))
 concrete=mat("STREET",(.32,.35,.39))
@@ -206,19 +213,6 @@ key_light=bpy.context.object
 key_light.name="FROG_SOFT_KEY"
 key_light.data.energy=750
 key_light.data.size=5
-
-# The first broad area rim brightened distant pot soil and magnet equally;
-# it failed real pixel verification, so aim a restrained small cool spotlight
-# only at the frog. Preserve the pre-existing paper/seed lighting and gates.
-# One extra built-in CPU EEVEE light, with no external assets or paid API.
-bpy.ops.object.light_add(type='SPOT',location=(.10,-1.9,2.7))
-rim_light=bpy.context.object
-rim_light.name="FROG_LOCAL_COOL_ACCENT"
-rim_light.data.energy=110
-rim_light.data.spot_size=.52
-rim_light.data.spot_blend=.40
-rim_light.data.color=(.68,.81,1.0)
-rim_light.rotation_euler=(Vector((.25,-.1,.6))-rim_light.location).to_track_quat('-Z','Y').to_euler()
 frames=[]
 FRAME_COUNT=32
 FPS=8
@@ -395,12 +389,12 @@ checks={
     "sky_clouds_project_onscreen":all(
         frames[i]["sky_clouds_in_frame"]>=2 for i in (0,8,31)
     ),
-    "review_only_foreground_depth_light":(
-        key_light.data.type=="AREA" and rim_light.data.type=="SPOT" and
-        rim_light.data.energy>0 and rim_light.data.energy<=150 and
-        .40<=rim_light.data.spot_size<=.60 and
-        rim_light.location.x<.5 and rim_light.location.y<0 and
-        len([o for o in bpy.data.objects if o.type=="LIGHT"])==2
+    "review_only_frog_material_highlights":(
+        abs(frog_shader.inputs["Roughness"].default_value-.32)<.0001 and
+        frog_shader.inputs["Metallic"].default_value==.2 and
+        len([o for o in bpy.data.objects if o.type=="LIGHT"])==1 and
+        key_light.data.type=="AREA" and
+        key_light.data.energy==750
     ),
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
