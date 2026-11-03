@@ -1,0 +1,110 @@
+name: ASTRA Offline AI Parallel Review (Isolated)
+
+on:
+  push:
+    branches:
+      - experiment/astra-offline-ai-parallel-20261103
+    paths:
+      - tools/astra_offline_llm.py
+      - tests/test_astra_offline_llm.py
+      - .github/workflows/astra-offline-ai-parallel.yml
+      - docs/astra-offline-ai-parallel.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-offline-ai-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  review-lanes:
+    if: github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    strategy:
+      fail-fast: false
+      matrix:
+        lane: [story, image, motion]
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      HF_HUB_OFFLINE: '1'
+      TRANSFORMERS_OFFLINE: '1'
+      ASTRA_LANE: ${{ matrix.lane }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Refuse production-like credentials
+        run: python3 -m tools.experimental_guard
+      - name: Story local-LLM review contract tests (no model inference)
+        if: matrix.lane == 'story'
+        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_local_story_novelty
+      - name: CPU image preflight and guarded mock tests (no model inference)
+        if: matrix.lane == 'image'
+        run: |
+          python3 -m unittest -v tests.test_experimental_cpu_image_benchmark tests.test_experimental_cpu_runtime_probe tests.test_experimental_openvino_timing
+      - name: Install free motion-test dependency (no video model)
+        if: matrix.lane == 'motion'
+        run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+      - name: Motion pixel-change tests (no publishing)
+        if: matrix.lane == 'motion'
+        run: python3 -m unittest -v tests.test_astra_motion_gate
+      - name: Write unapproved review evidence for this lane
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          lane = os.environ['ASTRA_LANE']
+          assert lane in {'story', 'image', 'motion'}
+          report = {
+              'lane': lane, 'type': 'contract_and_regression_tests',
+              'checks_completed': True, 'real_model_inference_executed': False,
+              'semantic_quality': 'not_verified',
+              'manual_visual_review_required': True,
+              'approved': False, 'production_ready': False, 'published': False,
+          }
+          root = Path('artifacts/offline-ai-review')
+          root.mkdir(parents=True, exist_ok=True)
+          (root / (lane + '.json')).write_text(json.dumps(report, indent=2) + '\n')
+          PY
+      - name: Archive this lane's evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-review-${{ matrix.lane }}
+          path: artifacts/offline-ai-review/
+          if-no-files-found: error
+          retention-days: 7
+
+  aggregate-review:
+    needs: [review-lanes]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: astra-offline-review-*
+          path: artifacts/offline-ai-review
+          merge-multiple: true
+      - name: Verify all three independent review reports and fail closed
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('artifacts/offline-ai-review')
+          actual = {p.stem for p in root.glob('*.json')}
+          assert actual == {'story', 'image', 'motion'}, actual
+          for path in root.glob('*.json'):
+              report = json.loads(path.read_text())
+              assert report['lane'] == path.stem
+              assert report['checks_completed'] is True
+              assert report['real_model_inference_executed'] is False
+              assert report['semantic_quality'] == 'not_verified'
+              assert report['manual_visual_review_required'] is True
+              assert all(report[k] is False for k in
+                         ('approved', 'production_ready', 'published'))
+          print('Three parallel offline-AI review lanes passed; no production approval')
+          PY
