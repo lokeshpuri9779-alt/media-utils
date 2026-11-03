@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-11-03T02:58:08.911341+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-11-03T08:03:22.507383+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8474,16 +8474,14 @@
       "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
       "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "uMlmpfgUuq0": {
-      "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+    },
+    "rayvan-gemini-4124fe0994195f92cc12": {
+      "video_id": "uMlmpfgUuq0",
+      "confirmed_at": "2026-11-03T08:02:18.474344+00:00",
       "title": "Pip and the Midnight Railway Signal",
-      "day": "2026-11-03",
-      "uploaded_at": "2026-11-03T02:58:10.527075+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-03T02:58:10.527075+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "c04c9ae28075f62ee12e574d4edca60232e1297a7201f7780de69f842e85870b",
       "story_beats": [
@@ -8528,16 +8526,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "rd6-adDy3E4": {
+      "content_id": "rayvan-gemini-9e451cb4f6df6c659346",
+      "title": "Bram and the Frost-Crested Pass",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-03T08:03:24.099477+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "b50ce3c1483da41c9bf341eb546aacc4f152e9b9d57e6cdf779cd96928942703",
+      "story_beats": [
+        {
+          "headline": "The Fractured Line",
+          "speech": "The upper suspension cable snaps loudly against the frozen rock face, sending a shower of loose shale down into the deep ravine.",
+          "visual": "forest",
+          "label": "Fracture",
+          "story_beat": "reveal",
+          "visual_prompt": "A sharp-eyed lynx stands on a snow-dusted mountain ledge, staring intently at a broken iron cable hanging over a deep pine forest abyss below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Leap",
+          "speech": "Holding the heavy brass compass firmly in his teeth, Bram leaps across the churning white gap toward the swaying anchor post.",
+          "visual": "signal",
+          "label": "Leap",
+          "story_beat": "build",
+          "visual_prompt": "The lynx leaps mid-air across a freezing mountain chasm, carrying a glowing brass compass in his jaws toward a frozen wooden post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secure Anchor",
+          "speech": "Wrapping the fraying wire tightly around the stone pillar, the lynx fastens the heavy latch with a steady paw.",
+          "visual": "door",
+          "label": "Anchor",
+          "story_beat": "mechanism",
+          "visual_prompt": "The lynx uses both paws to wedge a heavy iron key and brass compass into the base of a frozen timber gate on the mountain trail.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Passage",
+          "speech": "With the bridge securely locked in place, the clear bell chime echoes across the valley as the blizzard subsides.",
+          "visual": "ship",
+          "label": "Passage",
+          "story_beat": "payoff",
+          "visual_prompt": "The lynx sits calmly beside a polished brass bell on a secure wooden platform while distant mountain cable cars pass safely overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-03T02:57:21.070418+00:00",
+  "last_preflight_at": "2026-11-03T08:02:17.953421+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-03T02:58:10.871192+00:00",
+    "at": "2026-11-03T08:03:24.363245+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -17765,10 +17818,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9e451cb4f6df6c659346": {
+      "at": "2026-11-03T08:03:22.507364+00:00",
+      "title": "Bram and the Frost-Crested Pass",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "b50ce3c1483da41c9bf341eb546aacc4f152e9b9d57e6cdf779cd96928942703",
+      "story_beats": [
+        {
+          "headline": "The Fractured Line",
+          "speech": "The upper suspension cable snaps loudly against the frozen rock face, sending a shower of loose shale down into the deep ravine.",
+          "visual": "forest",
+          "label": "Fracture",
+          "story_beat": "reveal",
+          "visual_prompt": "A sharp-eyed lynx stands on a snow-dusted mountain ledge, staring intently at a broken iron cable hanging over a deep pine forest abyss below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Dangerous Leap",
+          "speech": "Holding the heavy brass compass firmly in his teeth, Bram leaps across the churning white gap toward the swaying anchor post.",
+          "visual": "signal",
+          "label": "Leap",
+          "story_beat": "build",
+          "visual_prompt": "The lynx leaps mid-air across a freezing mountain chasm, carrying a glowing brass compass in his jaws toward a frozen wooden post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secure Anchor",
+          "speech": "Wrapping the fraying wire tightly around the stone pillar, the lynx fastens the heavy latch with a steady paw.",
+          "visual": "door",
+          "label": "Anchor",
+          "story_beat": "mechanism",
+          "visual_prompt": "The lynx uses both paws to wedge a heavy iron key and brass compass into the base of a frozen timber gate on the mountain trail.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Passage",
+          "speech": "With the bridge securely locked in place, the clear bell chime echoes across the valley as the blizzard subsides.",
+          "visual": "ship",
+          "label": "Passage",
+          "story_beat": "payoff",
+          "visual_prompt": "The lynx sits calmly beside a polished brass bell on a secure wooden platform while distant mountain cable cars pass safely overhead.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-03T02:58:10.871121+00:00",
+    "at": "2026-11-03T08:03:24.363194+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -17779,21 +17883,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-03T02:58:10.871180+00:00",
+    "at": "2026-11-03T08:03:24.363237+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-03T02:57:54.393940+00:00",
+    "at": "2026-11-03T08:02:58.456666+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-4124fe0994195f92cc12",
-    "video_url": "https://www.youtube.com/watch?v=uMlmpfgUuq0",
+    "content_id": "rayvan-gemini-9e451cb4f6df6c659346",
+    "video_url": "https://www.youtube.com/watch?v=rd6-adDy3E4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-03T02:58:10.871029+00:00",
+    "at": "2026-11-03T08:03:24.363121+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -17805,7 +17909,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-03T02:58:10.871115+00:00",
+    "at": "2026-11-03T08:03:24.363189+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},

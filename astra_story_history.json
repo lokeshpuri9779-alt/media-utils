@@ -7521,6 +7521,55 @@
       "central_conflict": "A sudden rainstorm swells the stream, trapping the rabbit on the wrong side and threatening to wash away their only crossing log.",
       "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
       "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache."
+    },
+    {
+      "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+      "video_id": "uMlmpfgUuq0",
+      "confirmed_at": "2026-11-03T08:02:18.474344+00:00",
+      "title": "Pip and the Midnight Railway Signal",
+      "plot_fingerprint": "c04c9ae28075f62ee12e574d4edca60232e1297a7201f7780de69f842e85870b",
+      "story_beats": [
+        {
+          "headline": "The Jammed Junction",
+          "speech": "Oh dear, the signal lever is utterly stuck, and the midnight freight is barreling down the foggy line!",
+          "visual": "signal",
+          "label": "Jammed Lever",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse standing on a dark wooden railway platform next to a tall rusted signal pole, looking up with a worried expression at a stuck iron lever under thick night fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tool Retrieval",
+          "speech": "I must fetch the heavy brass wrench from the station bench before the rumble of the engine grows too loud.",
+          "visual": "ship",
+          "label": "Grabbing the Wrench",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse scrambling across a weathered wooden platform bench, holding a gleaming brass wrench tightly in both paws while railway tracks gleam under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge Mechanism",
+          "speech": "If I jam this heavy wrench right into the rusted gear teeth, the mechanism will finally break free.",
+          "visual": "robot",
+          "label": "Wedge Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse straining with both hind legs against the station floor while shoving the heavy brass wrench directly into the iron gear box of the railway signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Divergence",
+          "speech": "The switch has clicked over just in time, sending the freight train safely down the clear bypass line.",
+          "visual": "door",
+          "label": "Safe Path",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse wiping sweat from his brow, smiling as a distant railway signal lantern glows bright green next to a safely diverted set of tracks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
