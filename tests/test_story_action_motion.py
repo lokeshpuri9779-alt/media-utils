@@ -63,6 +63,48 @@ class StoryActionMotionTests(unittest.TestCase):
         self.assertEqual(choose_action({"speech": "The owl looks up."}), "look")
         self.assertEqual(choose_action({"speech": "The room is quiet."}), "idle")
 
+    def test_simultaneous_prop_and_jump_swim_not_renderable(self):
+        from astra_v2.story_action_motion import unsupported_simultaneous_prop_motion
+        examples = (
+            "The fox jumps over a small box while holding a brass compass.",
+            "The lynx leaps holding the compass in its teeth.",
+            "A mouse swims while carrying a small lantern.",
+            "The fox jumps with a key in its mouth.",
+            "Holding a golden bell, the rabbit hops over a log.",
+            "The otter swims with the flower in her paws.",
+        )
+        for prompt in examples:
+            with self.subTest(prompt=prompt):
+                self.assertTrue(unsupported_simultaneous_prop_motion({
+                    "visual_prompt": prompt,
+                }))
+
+    def test_sequential_and_supported_prop_actions_remain_eligible(self):
+        from astra_v2.story_action_motion import unsupported_simultaneous_prop_motion
+        examples = (
+            "The fox carried a compass and then jumped over the log.",
+            "The fox carried a compass and jumped over a log.",
+            "The fox jumps first, then holds the lantern.",
+            "The fox walks while carrying a lantern.",
+            "The lynx jumps over a wooden box.",
+            "The otter swims near a book.",
+            "The owl holds its breath as it swims.",
+            "The fox carries a bell. Afterward it leaps.",
+        )
+        for prompt in examples:
+            with self.subTest(prompt=prompt):
+                self.assertFalse(unsupported_simultaneous_prop_motion({
+                    "visual_prompt": prompt,
+                }))
+
+    def test_independent_fields_do_not_invent_simultaneity(self):
+        from astra_v2.story_action_motion import unsupported_simultaneous_prop_motion
+        self.assertFalse(unsupported_simultaneous_prop_motion({
+            "action": "The fox jumps.",
+            "visual_prompt": "The fox holds a bell.",
+            "speech": "The fox carries a bell.",
+        }))
+
     def test_motion_is_deterministic(self):
         for action in ("run","jump","dance","hide","walk","look","idle"):
             self.assertEqual(offset(action,1.25),offset(action,1.25))
