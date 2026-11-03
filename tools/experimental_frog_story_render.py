@@ -391,7 +391,7 @@ checks={
     ),
     "review_only_frog_material_highlights":(
         abs(frog_shader.inputs["Roughness"].default_value-.32)<.0001 and
-        frog_shader.inputs["Metallic"].default_value==.2 and
+        abs(frog_shader.inputs["Metallic"].default_value-.2)<.0001 and
         len([o for o in bpy.data.objects if o.type=="LIGHT"])==1 and
         key_light.data.type=="AREA" and
         key_light.data.energy==750
