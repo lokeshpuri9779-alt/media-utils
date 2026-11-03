@@ -159,11 +159,9 @@ for x in (-.25,.45):
 for part in frog_parts:
     part.parent=frog_root
 
-# A low-cost rounded upper head adds an identifiable frog silhouette behind
-# the eyes. Keep the original seven-part body rig and its tracking unchanged.
-# All new features inherit the same walk/root motion.
-frog_head=ball("FROG_ROUNDED_HEAD",(.08,.04,.825),(.425,.315,.24),green)
-frog_head.parent=frog_root
+# The added large head dome occluded the seed during planting in the real
+# render. Use small raised brow contours only, outside the seed trajectory;
+# preserve the existing seven-piece character body rig and root motion.
 frog_brows=[
     ball("FROG_BROW_%d"%j,(x,-.324,.915),(.115,.07,.042),green)
     for j,x in enumerate((-.12,.27))
@@ -394,10 +392,9 @@ checks={
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
-    "frog_head_and_brows_follow_root":(
-        frog_head.parent==frog_root and len(frog_brows)==2 and
-        all(b.parent==frog_root for b in frog_brows) and
-        frog_head.scale.x>=.4 and frog_head.scale.z>=.2
+    "frog_brow_contours_follow_root":(
+        len(frog_brows)==2 and all(b.parent==frog_root for b in frog_brows) and
+        all(b.scale.z<.06 for b in frog_brows)
     ),
     "frog_gaze_eases_into_new_fixation":(
         frames[12]["frog_gaze_x"]<frames[13]["frog_gaze_x"] and
