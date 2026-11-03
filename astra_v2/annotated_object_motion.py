@@ -183,6 +183,9 @@ def build_object_motion_evidence(review_dir, annotation_path=None):
             raise ValueError("object_annotation_frame_identity_mismatch")
         parsed.append({"subject_box": _box(record.get("subject_box")),
                        "prop_box": _box(record.get("prop_box"))})
+    if not any(region["subject_box"] is not None or region["prop_box"] is not None
+               for region in parsed):
+        raise ValueError("object_annotations_empty")
     width, height = frames[0].size
     beat_records = measure_marked_regions(parsed, width, height)
     canvas = Image.new("RGB", (width * 6, height * 4), "white")
