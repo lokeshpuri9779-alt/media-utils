@@ -104,6 +104,24 @@ class BenchmarkTests(unittest.TestCase):
         self.assertFalse(result["story_contract_passed"])
         self.assertFalse((self.output / "story-review.json").exists())
 
+
+    def test_zero_exit_code_sampler_failure_does_not_count_as_generation(self):
+        diagnostic = (
+            "Loading model...\nError: Failed to initialize samplers: "
+            "std::exception\nExiting...\n"
+        )
+        completed = subprocess.CompletedProcess([], 0, diagnostic, "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertEqual(result["process_exit_code"], 0)
+        self.assertEqual(result["error_type"], "SamplerInitializationFailed")
+        self.assertFalse(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertFalse(result["production_ready"])
+        self.assertFalse((self.output / "story-review.json").exists())
+
     def test_timeout_creates_fail_closed_report(self):
         with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
             smoke.subprocess, "run",

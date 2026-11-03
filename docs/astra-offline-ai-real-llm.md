@@ -74,3 +74,13 @@ checks. This avoids claiming grammar guarantees story quality.
 **No third real-model benchmark was launched in this change.** Future model
 inference requires its separate explicit one-shot authorization; unit and
 preflight CI checks do not download models.
+
+### Reporting correction
+
+The second run's `llama-cli` process exited with code 0 despite logging
+`Failed to initialize samplers`. The initial benchmark script marked
+`model_executed=true` based on exit code, which was misleading. The
+updated harness recognizes that exact fatal marker, records
+`SamplerInitializationFailed`, and keeps `model_executed=false`. A
+fixture regression test locks this behavior; it does not imply a third
+model run.

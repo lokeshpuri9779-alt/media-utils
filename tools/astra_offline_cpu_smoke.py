@@ -105,6 +105,10 @@ def run_benchmark(binary: Path, model: Path, output: Path, timeout_seconds: int 
         report["process_exit_code"] = result.returncode
         if result.returncode:
             report["error_type"] = "ProcessFailed"
+        elif "Error: Failed to initialize samplers:" in raw:
+            # llama-cli can print this fatal diagnostic while exiting zero.
+            # A loaded model with an uninitialized sampler did not generate.
+            report["error_type"] = "SamplerInitializationFailed"
         else:
             report["model_executed"] = True
             try:
