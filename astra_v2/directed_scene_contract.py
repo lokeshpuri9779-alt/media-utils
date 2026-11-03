@@ -59,7 +59,7 @@ _LARGE_STRUCTURE = re.compile(
 _STRUCTURE_CHANGED = re.compile(
     r"\b(?:snaps?|snapped|break(?:s|ing)?|broke|fractur\w*|"
     r"collaps\w*|wrapp?\w*|fasten\w*|wedg\w*|"
-    r"anchor\w*|secur\w*|lock\w*|repair\w*|"
+    r"secur\w*|lock\w*|repair\w*|"
     r"tension\w*|stabiliz\w*)\b", re.I)
 
 
