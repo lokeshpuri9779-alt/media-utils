@@ -94,6 +94,13 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("railway signal lever", guide)
         self.assertIn("already-reviewed complete scene artwork", guide)
 
+    def test_guidance_rejects_scene_scale_puppet_shortcuts(self):
+        guidance = writing_guidance()
+        self.assertIn("puppet jump pose does NOT prove", guidance)
+        self.assertIn("mountain chasm", guidance)
+        self.assertIn("snapping suspension cable", guidance)
+        self.assertIn("independently verified complete scene artwork", guidance)
+
     def test_guidance_never_claims_render_or_publication_approval(self):
         guide = writing_guidance()
         self.assertIn("independent editorial", guide)
