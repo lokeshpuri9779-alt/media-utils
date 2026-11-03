@@ -9,6 +9,13 @@ on:
       - tests/test_astra_offline_llm.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
+  pull_request:
+    branches: [main]
+    paths:
+      - tools/astra_offline_llm.py
+      - tests/test_astra_offline_llm.py
+      - .github/workflows/astra-offline-ai-parallel.yml
+      - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
 
 permissions:
@@ -20,7 +27,7 @@ concurrency:
 
 jobs:
   review-lanes:
-    if: github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103'
+    if: github.ref == 'refs/heads/experiment/astra-offline-ai-parallel-20261103' || github.head_ref == 'experiment/astra-offline-ai-parallel-20261103'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     strategy:
