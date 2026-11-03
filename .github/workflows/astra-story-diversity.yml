@@ -5,6 +5,7 @@ on:
       - experiment/astra-robot-walk-and-pickup
     paths:
       - tools/experimental_frog_story_render.py
+      - tools/experimental_frog_payoff_hold.py
       - tools/experimental_frog_object_pixel_tracks.py
       - tools/experimental_video_frame_consistency.py
       - tools/experimental_story_review_manifest.py
@@ -187,6 +188,32 @@ jobs:
           assert r['semantic_quality']=='not_verified'
           print('Verified 39 independent files against review manifest (review-only)')
           PY
+      - name: Build separately verified extended payoff cut (review only)
+        run: |
+          python3 -m tools.experimental_frog_payoff_hold \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-payoff-hold/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-payoff-hold')
+          r=json.loads((root/'payoff_hold_review.json').read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['source_frame_count']==32 and r['additional_held_frames']==6
+          assert 6.32<r['held_duration_seconds']<6.35
+          assert r['manual_visual_review_required'] is True
+          assert all(r[x] is False for x in ('approved','published','production_ready','paid_apis_used'))
+          assert (root/'frog_story_payoff_hold_review_only.mp4').stat().st_size>4096
+          print('Verified optional 1-second sprout hold without modifying canonical video')
+          PY
+      - name: Preserve optional extended payoff cut (not publication evidence)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-frog-payoff-hold-review
+          path: artifacts/experimental-frog-payoff-hold/
+          retention-days: 7
+          if-no-files-found: warn
       - name: Preserve frog video and frames for review
         if: always()
         uses: actions/upload-artifact@v4
