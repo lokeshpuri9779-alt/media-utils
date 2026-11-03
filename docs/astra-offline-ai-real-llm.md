@@ -113,3 +113,7 @@ human narrative quality. Do not automatically retry or merge.
 ## Unified one-shot GBNF execution authorization
 
 The consolidated review workflow was validated in [PR run #41659902726](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41659902726): story, image, motion and aggregate passed, and the real-model job correctly skipped because the review event was not the authorized push. One run on the experimental branch now uses the exact commit message `experiment(ASTRA): unified parallel GBNF CPU validation`; it runs the same three lanes plus an aggregate check, and only then permits one bounded CPU model inference. This authorization does not grant publication, automatic approval, paid API use, or production fallback.
+
+## Unified-run concurrency fix and retry
+
+The initial authorized push run #41660012605 was canceled before reaching inference because a concurrent PR validation for the same SHA shared its concurrency group. No third model output was produced. The workflow now scopes concurrency by event name and GitHub ref; PR checks can no longer cancel the authorized push run. The corrected review-only PR run #41660153898 passed all three parallel lanes and the aggregate. This one-time retry is authorized using the same exact commit-message guard; no extra prompts, models or production permissions are introduced.
