@@ -51,3 +51,7 @@ Run #41646109950 successfully built the pinned runtime, verified the exact 397,8
 One new bounded retest uses the **same** model, seed, source revision, prompt theme, runner and time budget, but tightens the instruction and passes a strict JSON schema (exactly four 100–500-character beat strings, one title, no extra fields) to llama.cpp. The existing structural editorial gate still separately rejects short or repeated story beats. Constrained JSON can improve output shape, not guarantee causality, originality, or publication quality. No automatic retries or bigger model sweeps.
 
 Exactly one push commit using `experiment(ASTRA): constrained JSON one-shot CPU retest` can trigger this diagnostic. The earlier one-shot authorization message no longer triggers this job.
+
+## Constrained retest execution
+
+Second bounded run authorized after the schema and new regression tests passed in parallel review workflow #41656088929. This does not approve the resulting story for production.
