@@ -295,6 +295,46 @@ def camera_at(point,lens):
     camera.rotation_euler=(Vector(point)-camera.location).to_track_quat('-Z','Y').to_euler()
     camera.data.lens=lens
 
+# Storytelling clarity, not decorative world props: three short beat labels
+# let a first-time Shorts viewer understand TRAPPED -> RESCUED -> NEW LIFE.
+# Camera-parented emissive text stays in a safe sky band above all action
+# ROIs; labels remain inside this review-only Blender path, never ASTRA Main.
+def caption_material(name,color,strength):
+    m=bpy.data.materials.new(name)
+    m.use_nodes=True
+    nodes=m.node_tree.nodes
+    nodes.clear()
+    emission=nodes.new("ShaderNodeEmission")
+    emission.inputs["Color"].default_value=(*color,1)
+    emission.inputs["Strength"].default_value=strength
+    output=nodes.new("ShaderNodeOutputMaterial")
+    m.node_tree.links.new(emission.outputs["Emission"],output.inputs["Surface"])
+    return m
+
+caption_white=caption_material("STORY_CAPTION_WARM_WHITE",(.94,.93,.84),1.25)
+caption_shadow=caption_material("STORY_CAPTION_DARK_SHADOW",(.02,.035,.048),.9)
+caption_beats=(("TRAPPED",0,8),("RESCUED",8,22),("NEW LIFE",22,32))
+caption_cards=[]
+for label,start,end in caption_beats:
+    layers=[]
+    for role,material,position in (
+            ("SHADOW",caption_shadow,(.012,.826,-2.54)),
+            ("MAIN",caption_white,(0,.843,-2.5))):
+        bpy.ops.object.text_add()
+        text_obj=bpy.context.object
+        text_obj.name="STORY_BEAT_%s_%s"%(label.replace(" ","_"),role)
+        text_obj.data.body=label
+        text_obj.data.align_x="CENTER"
+        text_obj.data.align_y="CENTER"
+        text_obj.data.size=.185
+        text_obj.data.extrude=0
+        text_obj.data.materials.append(material)
+        text_obj.parent=camera
+        text_obj.location=position
+        text_obj.rotation_euler=(0,0,0)
+        layers.append(text_obj)
+    caption_cards.append((label,start,end,layers))
+
 bpy.ops.object.light_add(type='AREA',location=(-3,-4,7))
 key_light=bpy.context.object
 key_light.name="FROG_SOFT_KEY"
@@ -306,6 +346,11 @@ FPS=8
 original_line_length=Vector((-1.27,.32,-.38)).length
 magnet_origin=Vector((.52,-.33,.67))
 for i in range(FRAME_COUNT):
+    story_caption=next(label for label,start,end,_ in caption_cards
+                       if start<=i<end)
+    for label,start,end,layers in caption_cards:
+        for layer in layers:
+            layer.hide_render=not (start<=i<end)
     # Wider four-second narrative: setup 0-7; fishing 8-21;
     # planting and watered sprout 22-31. This is preview-only.
     # Look toward the trapped plane, then toward the pot; the expression
@@ -507,6 +552,10 @@ for i in range(FRAME_COUNT):
     hand_gap=(plant_claw.location-seed.location).length if 19<=i<29 else None
     frames.append({
         "frame":i,"phase":phase,
+        "story_caption":story_caption,
+        "caption_text_layers_visible":sum(
+            not layer.hide_render for _,_,_,layers in caption_cards
+            for layer in layers),
         "plane_xyz":[round(float(v),4) for v in plane.location],
         "seed_xyz":[round(float(v),4) for v in seed.location],
         "magnet_clip_gap":round(float(clip_gap),4) if clip_gap is not None else None,
@@ -551,6 +600,22 @@ for i in range(FRAME_COUNT):
     })
 checks={
     "thirty_two_frames":len(frames)==FRAME_COUNT,
+    "three_readable_story_beats":(
+        len(caption_cards)==3 and
+        [frames[i]["story_caption"] for i in (0,8,22)]==
+            ["TRAPPED","RESCUED","NEW LIFE"] and
+        all(frames[i]["story_caption"]=="TRAPPED" for i in range(8)) and
+        all(frames[i]["story_caption"]=="RESCUED" for i in range(8,22)) and
+        all(frames[i]["story_caption"]=="NEW LIFE" for i in range(22,32)) and
+        all(f["caption_text_layers_visible"]==2 for f in frames)
+    ),
+    "beat_caption_stays_above_action_roi":all(
+        layer.parent==camera and
+        layer.data.align_x=="CENTER" and layer.data.size<=.19 and
+        layer.location.y>.8 and layer.location.z < -2.0 and
+        abs(layer.location.x)<.03
+        for _,_,_,layers in caption_cards for layer in layers
+    ),
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
