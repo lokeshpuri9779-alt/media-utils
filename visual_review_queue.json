@@ -1,5 +1,5 @@
 {
-  "history_records": 810,
+  "history_records": 812,
   "read_only": true,
   "status": "review_required",
   "stories": [
@@ -966,7 +966,8 @@
       "content_id": "rayvan-forge-3312b1b94a5648f8",
       "distinct_visuals": 2,
       "issues": [
-        "insufficient_visual_variety"
+        "insufficient_visual_variety",
+        "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: unsupported_scene_scale_action_requires_scene_art"
       ],
       "publication_approved_by_report": false,
       "scene_count": 4,
