@@ -78,11 +78,11 @@ def rod(name,a,b,radius,material):
 # Small low-poly ellipsoids are cheap enough for free CPU Blender preview.
 background_clouds=[]
 for index,(x,y,z,sx,sy,sz) in enumerate((
-    (-1.95,3.4,1.55,.85,.19,.18),
-    (-.95,3.5,1.75,.95,.19,.19),
-    (.05,3.45,1.6,.88,.16,.20),
-    (1.05,3.45,1.72,.94,.18,.19),
-    (2.0,3.5,1.55,.85,.18,.16),
+    (-1.95,3.4,1.30,.85,.19,.18),
+    (-.95,3.5,1.45,.95,.19,.19),
+    (.05,3.45,1.35,.88,.16,.20),
+    (1.05,3.45,1.44,.94,.18,.19),
+    (2.0,3.5,1.30,.85,.18,.16),
 )):
     background_clouds.append(ball(
         "DISTANT_CLOUD_%02d"%index,(x,y,z),(sx,sy,sz),
