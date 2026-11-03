@@ -44,7 +44,7 @@ jobs:
       - name: Render distinct frog story on CPU (review only)
         run: |
           blender --background --threads 2 --python-exit-code 1 --python tools/experimental_frog_story_render.py
-          ffmpeg -hide_banner -loglevel error -y -framerate 8 -start_number 0 \
+          ffmpeg -hide_banner -loglevel error -y -framerate 6 -start_number 0 \
             -i artifacts/experimental-frog-render/frame_%03d.png \
             -frames:v 32 -c:v libx264 -preset veryfast -crf 19 -pix_fmt yuv420p \
             artifacts/experimental-frog-render/frog_story_previs.mp4
@@ -57,7 +57,24 @@ jobs:
           assert len(r['frames'])==32 and len(list(root.glob('frame_*.png')))==32
           assert all(r[x] is False for x in ('approved','published','production_ready','paid_apis_used'))
           assert r['editorial_review_required'] is True and r['semantic_quality']=='not_verified'
-          assert r['fps']==8 and r['duration_seconds']==4.0
+          assert r['fps']==6 and abs(r['duration_seconds']-(32/6))<.001
+          assert r['checks']['five_captions_match_causal_events'] is True
+          assert r['checks']['slower_review_playback_preserves_32_frame_actions'] is True
+          # Verify the emitted MP4 itself, not just renderer JSON: require
+          # six actual frames per second, 32 decoded frames and 5.3s runtime.
+          import subprocess
+          probe=subprocess.run(
+              ['ffprobe','-v','error','-count_frames',
+               '-select_streams','v:0',
+               '-show_entries','stream=avg_frame_rate,nb_read_frames',
+               '-show_entries','format=duration','-of','json',
+               str(root/'frog_story_previs.mp4')],
+              capture_output=True,text=True,check=True,timeout=20)
+          actual=json.loads(probe.stdout)
+          stream=actual['streams'][0]
+          assert stream['avg_frame_rate']=='6/1'
+          assert int(stream['nb_read_frames'])==32
+          assert 5.30<float(actual['format']['duration'])<5.40
           assert r['checks']['magnet_contacts_before_lift'] is True
           assert r['checks']['seed_continuous_across_camera_cut'] is True
           assert r['checks']['rain_streaks_precede_sprout'] is True

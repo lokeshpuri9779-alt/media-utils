@@ -316,8 +316,15 @@ caption_shadow=caption_material("STORY_CAPTION_DARK_SHADOW",(.02,.035,.048),.9)
 # The initial test revealed clipping near the upper portrait-frame edge,
 # especially as payoff-camera focal length increases. Per-beat positions
 # give the text a safe top margin without covering the seed or frog.
-caption_beats=(("TRAPPED",0,8,.74),("RESCUED",8,22,.74),
-               ("NEW LIFE",22,32,.64))
+# Short captions now follow actual state changes, not shot starts:
+# the magnet approaches, the recovered plane becomes accessible,
+# the seed is planted, and only then does the sprout appear.
+# The underlying three-shot 32-frame scene and all prop paths stay fixed.
+caption_beats=(("TRAPPED",0,8,.74),
+               ("REACHING",8,19,.74),
+               ("RESCUED",19,22,.74),
+               ("PLANTING",22,29,.64),
+               ("NEW LIFE",29,32,.64))
 caption_cards=[]
 for label,start,end,y_anchor in caption_beats:
     layers=[]
@@ -346,7 +353,8 @@ key_light.data.energy=750
 key_light.data.size=5
 frames=[]
 FRAME_COUNT=32
-FPS=8
+FPS=6
+scene.render.fps=FPS
 original_line_length=Vector((-1.27,.32,-.38)).length
 magnet_origin=Vector((.52,-.33,.67))
 for i in range(FRAME_COUNT):
@@ -355,8 +363,9 @@ for i in range(FRAME_COUNT):
     for label,start,end,layers in caption_cards:
         for layer in layers:
             layer.hide_render=not (start<=i<end)
-    # Wider four-second narrative: setup 0-7; fishing 8-21;
-    # planting and watered sprout 22-31. This is preview-only.
+    # Less rushed 5 1/3-second animatic at 6 FPS: setup 0-7,
+    # rescue 8-21, planting and watered sprout 22-31.
+    # Frame-level visual/action evidence stays identical except captions.
     # Look toward the trapped plane, then toward the pot; the expression
     # softens only after the recovery. No blink/cut during pixel tracking.
     look_t=max(0.0,min(1.0,(i-12)/10))
@@ -620,14 +629,22 @@ for i in range(FRAME_COUNT):
     })
 checks={
     "thirty_two_frames":len(frames)==FRAME_COUNT,
-    "three_readable_story_beats":(
-        len(caption_cards)==3 and
-        [frames[i]["story_caption"] for i in (0,8,22)]==
-            ["TRAPPED","RESCUED","NEW LIFE"] and
-        all(frames[i]["story_caption"]=="TRAPPED" for i in range(8)) and
-        all(frames[i]["story_caption"]=="RESCUED" for i in range(8,22)) and
-        all(frames[i]["story_caption"]=="NEW LIFE" for i in range(22,32)) and
-        all(f["caption_text_layers_visible"]==2 for f in frames)
+    "five_captions_match_causal_events":(
+        len(caption_cards)==5 and
+        [(name,start,end) for name,start,end,_ in caption_cards]==[
+            ("TRAPPED",0,8),("REACHING",8,19),("RESCUED",19,22),
+            ("PLANTING",22,29),("NEW LIFE",29,32)] and
+        all(frames[i]["story_caption"]==name
+            for name,start,end,_ in caption_cards
+            for i in range(start,end)) and
+        all(f["caption_text_layers_visible"]==2 for f in frames) and
+        frames[18]["plane_xyz"][2]<frames[19]["plane_xyz"][2] and
+        frames[22]["seed_visible"] and not frames[29]["seed_visible"] and
+        frames[29]["sprout_visible"]
+    ),
+    "slower_review_playback_preserves_32_frame_actions":(
+        FRAME_COUNT==32 and FPS==6 and scene.render.fps==FPS and
+        5.3<FRAME_COUNT/FPS<5.4
     ),
     "beat_caption_stays_above_action_roi":all(
         layer.parent==camera and
