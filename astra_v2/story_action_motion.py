@@ -15,7 +15,7 @@ ACTION_PATTERNS=(
     ("open",r"\b(?:open|opens|opened|opening|unseal|unsealed)\b"),
     ("push",r"\b(?:push|pushes|pushed|pushing|shove|shoves|shoved)\b"),
     ("pull",r"\b(?:pull|pulls|pulled|pulling|drag|drags|dragged)\b"),
-    ("point",r"\b(?:point|points|pointed|pointing|signal|signals|signaled)\b"),
+    ("point",r"\b(?:point|points|pointed|pointing|signals|signaled|signalling|signaling)\b"),
     ("hug",r"\b(?:hug|hugs|hugged|hugging|embrace|embraced)\b"),
     ("clap",r"\b(?:clap|claps|clapped|clapping|applaud|applauded)\b"),
     ("catch",r"\b(?:catch|catches|caught|catching|intercept|intercepts|intercepted)\b"),
@@ -30,10 +30,18 @@ ACTION_PATTERNS=(
     ("look",r"\b(?:look|looks|looked|looking|watch|watches|watched|stare|stares|stared)\b"),
 )
 def choose_action(shot):
-    text=" ".join(str(shot.get(k) or "") for k in ("action","visual_prompt","visual","speech")).lower()
-    for name,pattern in ACTION_PATTERNS:
-        if re.search(pattern,text):
-            return name
+    """Choose a single animation cue using the authored source's priority.
+
+    The directed action is authoritative; if absent, the visible storyboard
+    direction beats supporting narration. Do NOT let an incidental word in
+    speech (e.g. a "signal" noun) override the action requested for pixels.
+    This is one pose/motion cue, not semantic confirmation of an MP4.
+    """
+    for field in ("action", "visual_prompt", "visual", "speech"):
+        text = str(shot.get(field) or "").lower()
+        for name, pattern in ACTION_PATTERNS:
+            if re.search(pattern, text):
+                return name
     return "idle"
 
 def _ease_progress(t, duration=1.2):
