@@ -87,7 +87,8 @@ def validate_story_shot(shot):
         )
         if directed_scene_issue(shot) in (
                 "human_actor_not_supported_by_directed_icons",
-                "embodied_character_not_supported_by_directed_icons"):
+                "embodied_character_not_supported_by_directed_icons",
+                "unsupported_mechanical_rig_action_requires_scene_art"):
             validate_directed_scene(shot)
             return "directed"
     if not cast:

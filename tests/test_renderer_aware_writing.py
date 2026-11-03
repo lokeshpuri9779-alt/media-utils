@@ -88,6 +88,12 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("Audit script and renderer feasibility (diagnostic only)", flow)
         self.assertIn("continue-on-error: true", flow)
 
+    def test_prompt_distinguishes_wrench_prop_from_mechanical_action(self):
+        guide = writing_guidance()
+        self.assertIn("wrench prop does NOT depict", guide)
+        self.assertIn("railway signal lever", guide)
+        self.assertIn("already-reviewed complete scene artwork", guide)
+
     def test_guidance_never_claims_render_or_publication_approval(self):
         guide = writing_guidance()
         self.assertIn("independent editorial", guide)
