@@ -892,15 +892,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-4b7aec747d28ca1a0d31",
-      "story_sha256": "dc6d43aefc8ae694034ee2fa01723fe9884057bd4a68c965531f520a6141b8c5",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not duplicate recently published premises, characters, or causal mechanisms.; Causal coherence is maintained with a clear progression from conflict to decisive choice and resolution.; The content is safe, appropriate for general audiences, and complies with all standard content policies.",
-      "reviewed_at": "2026-11-03T10:55:11.996150+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-11d6d88a618a3b1febd1",
       "story_sha256": "7d2ddb28f1913bd1f60b86c3d9a0e6d7ee13b7aace51b117d2d4b192a794cb90",
       "decision": "approve",
@@ -919,15 +910,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
-      "story_sha256": "460998f35d55ab7e7e4c7a1bf734693d8ff163db53e9fe3e7e315f7533047bec",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence from the inciting incident through to the resolution.; There are no copyright or trademark violations present.; The content is entirely safe, appropriate for all audiences, and complies with standard content guidelines.",
-      "reviewed_at": "2026-11-03T11:22:02.962221+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
       "story_sha256": "873993ba35a998519d138d666921ea2b3caac5386f732fee1945a83c7908b46c",
       "decision": "approve",
@@ -943,6 +925,33 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original, clear, and causally coherent.; There are no copyright or trademark violations.; Content is safe, family-friendly, and complies with all platform policies.",
       "reviewed_at": "2026-11-03T11:22:04.979213+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-bf5a5c8b506c4cec3de5",
+      "story_sha256": "050d116c4ff547fb1d57900b76d26d42559489ea76adc493b499752e31037140",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and structurally coherent.; There are no copyright or trademark violations.; The content is safe, family-friendly, and adheres to YouTube policies.; The plot and causal mechanisms are distinct from the provided comparison history.",
+      "reviewed_at": "2026-11-03T14:18:53.215100+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-8e83701d224681001c03",
+      "story_sha256": "07a89e021ac3fc5e87c3fb5d64d0c5125412d6e6b53d6b0799fab1f2b1b20898",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and free from copyright, safety, or policy risks.; It maintains an appropriate tone for a general audience and fulfills all structural requirements without duplicating the provided comparison history.",
+      "reviewed_at": "2026-11-03T14:19:15.138982+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-17228c6a4ceb9399c097",
+      "story_sha256": "d4f02bbff98d838617d951351835c7d5056141eba776660253eaede337d6e5b4",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and free of policy violations.; The causal chain is logical and clear.; It does not duplicate any recently published premises or endings in the comparison set.",
+      "reviewed_at": "2026-11-03T14:19:36.890942+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
