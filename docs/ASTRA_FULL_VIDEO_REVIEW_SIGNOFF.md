@@ -138,3 +138,21 @@ The tool rechecks exact encoded MP4 hash, review packet, timeline JPEG and times
 **Important:** The tool does not locate or recognize subjects/props; it only measures user-supplied rectangles. **Box overlap does not demonstrate a real grasp, continuous object motion, or narrative action.** Sparse or missing annotations yield insufficient evidence, not approval. Changes to annotation files or forged full-review flags cannot create a signature. Every output retains `semantic_quality: not_verified` and `publication_approval: false`.
 
 This evidence must NOT be treated as an independent human full-video signoff. The separately authorized reviewer still has to watch every frame of the complete MP4, document the individual beat findings, and sign only under the existing independent review protocol. This command uses no network service or paid model and changes no YouTube publishing workflow.
+
+## Optional provisional pixel matching between human-marked frames
+
+Once `object-region-annotations.json` contains **at least one genuine human-selected subject or prop box** in the exact existing MP4 review timeline, run this optional, offline tool:
+
+```bash
+python -m astra_v2.pixel_track_candidates --review-dir ./review-ready
+```
+
+The tool rechecks the exact encoded MP4, authored story and beat timestamps, review packet, 24-frame timeline and manual annotation provenance. It only looks for matching **JPEG pixel patches** within 16 pixels of a human-marked box or a previously accepted provisional match. For each next frame it requires textured source pixels, high normalized correlation, a distinctive match relative to nonlocal alternatives, and a consistent reverse-frame match.
+
+**Unreliable or repetitive pixels cause abstention, not fabricated trajectories.** The tool never guesses boxes before the first human mark, never bridges a rejected frame, and never continues tracking into the next story beat. A later independent human-selected box can restart that beat's track.
+
+The results are two create-only files: `pixel-track-candidates.json` and `pixel-track-overlay.png`. Manual boxes use thicker outlines than tentative matched boxes. No manual annotation, source video, checklist, prior evidence or signature is replaced.
+
+**Pixel matching is not object detection or identity verification.** An apparently moving patch could be an animated background, scrolling camera, weather, subtitle or repeated texture. Correlation does **not** verify character motion, prop contact, exact action or narrative accuracy. The output always says `semantic_quality: not_verified`, `character_motion_verified: false`, `prop_contact_verified: false`, `publication_approval: false`, and `reviewer_signature_created: false`.
+
+Use this only to prioritize which parts of the **complete encoded MP4** an independent reviewer must inspect. It never creates a human decision, enables strict publishing, calls paid APIs or changes GitHub branch permissions.
