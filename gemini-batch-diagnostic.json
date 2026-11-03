@@ -1,32 +1,27 @@
 {
-  "observed_at": "2026-11-02T19:13:22.225981+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-03T00:57:09.009714+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 17,
+      "index": 4,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 5,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 14,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 17,
-  "review_deferred": 0,
-  "approved": 6,
+  "reviewed": 2,
+  "review_deferred": 10,
+  "approved": 0,
   "review_issues": [
-    "Fails originality checks regarding recently published premises and plot formulas within the provided comparison history.",
-    "The candidate story 'Bram and the Sun-Bleached Ridge' heavily mirrors the premise, character name, and causal mechanism of the recently published comparison story 'Bram and the Frost-Crested Pass' (featuring Bram using a heavy compass/metal item to resolve a physical obstruction on a mountain path/gorge).",
-    "The central premise and decisive choice lack sufficient differentiation from prior generated fables in the dataset.",
-    "The character pairing of Bramble and Pip repeats specific names and tropes from recently published stories (e.g., 'The Badger and the Amber Spores of Pine Ridge').",
-    "The premise, character dynamics, and structural conflict closely mirror recent publications in the comparison history such as 'The Canopy Trackers and the Fading Roots' and 'Kaelen and Silas: The Iron-Root Rescue'.",
-    "The premise, character tropes, and structural beats closely mirror the recently published example 'Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic', involving a fruit-related item rolling or launching out of control in a plaza market and being stopped by an object-inversion or mechanical wedge mechanism.",
-    "The repetition of the protagonist 'Bram', the use of a heavy brass/iron compass as a problem-solving tool, and the mountain obstacle setting indicate a derivative narrative structure that violates originality standards.",
-    "The story 'Pippin and the Sun-Cured Pass' uses a nearly identical causal mechanism and object usage (using a heavy brass/iron compass to anchor or lever against a physical barrier during a travel/crossing obstacle) as the recently published comparison story 'Bram and the Frost-Crested Pass'.",
-    "The story premise, character actions, and resolution heavily mirror the previously published story 'Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic', featuring a remarkably similar setup involving fruit/berries rolling out of control in a plaza and being stopped by a heavy brass object by an alliterative animal character.",
-    "The story premise, conflict, and resolution closely echo 'The Weaver's Choice at Bramble Mill' from the comparison history, where a character abandons their own personal project/property (a weaving loom / prize exhibition fence) to help save communal flour/grain sacks from a sudden water threat (river flood / upstream mudslide).",
-    "The story relies heavily on formulaic narrative templates, character dynamics, and situational resolutions (animal protagonist overcoming an environmental obstacle through a specific mechanical choice and reaching safety) that closely parallel multiple recently published items in the comparison history, specifically matching the pattern of animal-based obstacle navigation and resource/tool usage seen in works like 'The Otter and the Silent Trench' and 'The Badger and the Amber Spores of Pine Ridge'.",
-    "The story shares a nearly identical plot structure, object usage (brass compass), conflict (trapped path or heavy obstruction), and resolution mechanism with recently published premises in the comparison history, specifically matching items involving Bram and Silas utilizing brass tools/compasses to leverage heavy blocks.",
-    "The story uses a heavy brass compass as a weighted wedge to clear a blocked path, which directly repeats the unique causal mechanism and object usage from the recently published story 'Bram and the Frost-Crested Pass' (where Bram anchors a whipping cable with a heavy brass compass).",
-    "The story uses a protagonist named Orion and a brass compass to solve a mechanical problem (jammed gears/lost lantern), which closely mirrors the structure, character names, and causal mechanisms of existing stories in the comparison history, specifically 'Orion and the Tidal Shell Mystery' and 'Bram and the Frost-Crested Pass'.",
-    "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_deferred:rate_limited",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
   ],
@@ -83,15 +78,18 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 12,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 12
     },
     "renderer_status_counts": {
-      "structurally_eligible": 17
+      "incompatible": 5,
+      "structurally_eligible": 7
     },
     "renderer_reason_counts": {
-      "none": 17
+      "cast_mismatch": 4,
+      "none": 7,
+      "unsupported_human_actor": 1
     },
     "editorial_approval": false,
     "publication_triggered": false
