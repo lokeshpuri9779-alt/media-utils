@@ -525,8 +525,24 @@ for i in range(FRAME_COUNT):
         leaf.hide_render=i<31
         seed.hide_render=i>=29
         dolly=max(0.0,(i-27)/4)
-        camera.location=(.55+.55*dolly,-4.5+.9*dolly,3.25-.3*dolly)
-        camera_at((.68+.48*dolly,.23+.17*dolly,.83-.13*dolly),47+4*dolly)
+        if i<=25:
+            # Four-frame handoff: follow the recovered seed rather than
+            # teleporting the entire view between rescue (21) and plant (22).
+            # Exact previous planting camera restored at frame 25, leaving
+            # all later planting/rain/sprout shots unchanged.
+            bridge_t=max(0.0,min(1.0,(i-21)/4))
+            bridge_ease=bridge_t*bridge_t*(3-2*bridge_t)
+            rescue_cam=Vector((-.3,-5.3,3.1))
+            plant_cam=Vector((.55,-4.5,3.25))
+            rescue_focus=Vector((-.52,.15,.70))
+            plant_focus=Vector((.68,.23,.83))
+            camera.location=rescue_cam.lerp(plant_cam,bridge_ease)
+            camera_at(rescue_focus.lerp(plant_focus,bridge_ease),
+                      49-2*bridge_ease)
+        else:
+            camera.location=(.55+.55*dolly,-4.5+.9*dolly,3.25-.3*dolly)
+            camera_at((.68+.48*dolly,.23+.17*dolly,.83-.13*dolly),
+                      47+4*dolly)
 
     # Frog's visible green arm and gold claw stay attached to the seed from
     # the end of the rescue to soil contact; no seed teleports at camera cut.
@@ -811,6 +827,18 @@ checks={
     "camera_moves_smoothly_in_payoff":all(
         (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
         for i in range(23,32)),
+    "rescue_to_plant_camera_handoff_continuous":(
+        all((Vector(frames[i]["camera_xyz"])-
+             Vector(frames[i-1]["camera_xyz"])).length<.45
+            for i in range(22,26))
+        and (Vector(frames[22]["camera_xyz"])-
+             Vector(frames[21]["camera_xyz"])).length<.25
+        and abs(frames[25]["camera_xyz"][0]-.55)<.0001
+        and abs(frames[25]["camera_lens"]-47)<.0001
+        and frames[21]["seed_xyz"]==frames[22]["seed_xyz"]
+        and all(frames[i]["camera_xyz"]!=frames[i-1]["camera_xyz"]
+                for i in range(22,26))
+    ),
     "opening_camera_push_in_is_smooth":all(
         0<(Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.40
         for i in range(1,8)),
