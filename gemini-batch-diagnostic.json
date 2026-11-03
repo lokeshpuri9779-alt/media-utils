@@ -1,25 +1,20 @@
 {
-  "observed_at": "2026-11-03T00:57:09.009714+00:00",
-  "generated": 12,
+  "observed_at": "2026-11-03T09:04:41.652585+00:00",
+  "generated": 15,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 4,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 5,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 14,
+      "index": 15,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 2,
+  "reviewed": 5,
   "review_deferred": 10,
   "approved": 0,
   "review_issues": [
+    "The candidate story features a title and premise strikingly similar to the recent publication example 'pip the pangolin and the dry-grassland navigation challenge', involving a pangolin navigating a dry grassland/ridge.",
+    "There is a logical contradiction between the narrative elements: the 'answer' field states Pippin trusted 'the sun-baked stones', but the decisive choice and story beats indicate he simply left the compass behind and followed natural paths.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "review_deferred:rate_limited",
     "review_failed:HTTP_429",
@@ -78,18 +73,17 @@
     ]
   },
   "creative_preflight": {
-    "generated": 12,
+    "generated": 15,
     "script_status_counts": {
-      "no_simple_flags": 12
+      "no_simple_flags": 15
     },
     "renderer_status_counts": {
-      "incompatible": 5,
-      "structurally_eligible": 7
+      "incompatible": 6,
+      "structurally_eligible": 9
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 4,
-      "none": 7,
-      "unsupported_human_actor": 1
+      "cast_mismatch": 6,
+      "none": 9
     },
     "editorial_approval": false,
     "publication_triggered": false
