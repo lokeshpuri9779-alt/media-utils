@@ -60,7 +60,7 @@ def verify(directory, profile):
             and doc.get("profile") == profile
             and doc.get("story_id") == cfg["story_id"]
             and doc.get("frame_count") == cfg["frame_count"]
-            and doc.get("fps") == 8
+            and doc.get("fps") == cfg["fps"]
             and doc.get("frame_dimensions") == list(DIMENSIONS)
             and doc.get("video") == cfg["video"]
         ),
@@ -116,7 +116,7 @@ def verify(directory, profile):
         checks["independently_verified_h264_video"] = (
             video.get("codec_name") == "h264"
             and (video.get("width"), video.get("height")) == DIMENSIONS
-            and video.get("r_frame_rate") == FPS
+            and video.get("r_frame_rate") == f"{cfg['fps']}/1"
             and int(video.get("nb_frames", -1)) == cfg["frame_count"]
         )
     except (OSError, ValueError, KeyError, RuntimeError, IndexError,

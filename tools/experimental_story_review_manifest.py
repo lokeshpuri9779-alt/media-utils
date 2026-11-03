@@ -19,6 +19,7 @@ PROFILES = {
     "frog": {
         "story_id": "astra-frog-seed-rescue",
         "frame_count": 32,
+        "fps": 6,
         "video": "frog_story_previs.mp4",
         "audit": "visual_motion_audit.json",
         "audit_pass": "passed",
@@ -31,6 +32,7 @@ PROFILES = {
     "lighthouse": {
         "story_id": "astra-coastal-spark",
         "frame_count": 20,
+        "fps": 8,
         "video": "story_previs.mp4",
         "audit": "visual_audit.json",
         "audit_pass": "passes_fixed_pixel_checks",
@@ -240,7 +242,7 @@ def build(directory, profile):
     checks["video_matches_story_frames"] = (
         video.get("codec_name") == "h264"
         and (video.get("width"), video.get("height")) == DIMENSIONS
-        and video.get("r_frame_rate") == FPS
+        and video.get("r_frame_rate") == f"{cfg['fps']}/1"
         and int(video.get("nb_frames", -1)) == expected_count
         and video_path.stat().st_size > 4096
     )
@@ -270,7 +272,7 @@ def build(directory, profile):
         "checks": checks,
         "failed_checks": failed,
         "frame_count": expected_count,
-        "fps": 8,
+        "fps": cfg["fps"],
         "frame_dimensions": list(DIMENSIONS),
         "video": cfg["video"],
         "video_frame_content_evidence": video_frame_content,

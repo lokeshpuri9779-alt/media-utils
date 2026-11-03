@@ -113,6 +113,7 @@ class ReviewManifestTest(unittest.TestCase):
     def configure(self, profile):
         cfg = fixture(self.root, profile)
         self.mock_video.return_value["nb_frames"] = str(cfg["frame_count"])
+        self.mock_video.return_value["r_frame_rate"] = f"{cfg['fps']}/1"
         return cfg
 
     def test_both_distinct_stories_pass_review_packet(self):
@@ -123,6 +124,8 @@ class ReviewManifestTest(unittest.TestCase):
                     fixture(directory, profile)
                     self.mock_video.return_value["nb_frames"] = str(
                         manifest.PROFILES[profile]["frame_count"])
+                    self.mock_video.return_value["r_frame_rate"] = (
+                        f"{manifest.PROFILES[profile]['fps']}/1")
                     result = manifest.build(directory, profile)
                     self.assertTrue(result["technical_evidence_passed"], result)
                     self.assertTrue(all(result["checks"].values()))
@@ -192,6 +195,12 @@ class ReviewManifestTest(unittest.TestCase):
         result = manifest.build(self.root, "lighthouse")
         self.assertIn("lighthouse_existing_frame_hashes_match",
                       result["failed_checks"])
+
+    def test_rejects_wrong_frog_frame_rate(self):
+        self.configure("frog")
+        self.mock_video.return_value["r_frame_rate"] = "8/1"
+        result = manifest.build(self.root, "frog")
+        self.assertIn("video_matches_story_frames", result["failed_checks"])
 
     def test_rejects_fake_video_codec(self):
         self.configure("frog")

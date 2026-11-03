@@ -43,7 +43,8 @@ class VerifyReviewPackageTest(unittest.TestCase):
         n = 32 if "frog" in path.name else 20
         if path.name == "frog_story_previs.mp4":
             n = 32
-        return dict(VIDEO, nb_frames=str(n))
+        fps = manifest.PROFILES["frog" if n == 32 else "lighthouse"]["fps"]
+        return dict(VIDEO, nb_frames=str(n), r_frame_rate=f"{fps}/1")
 
     def prepare(self, profile):
         fixture(self.root, profile)
@@ -60,6 +61,9 @@ class VerifyReviewPackageTest(unittest.TestCase):
                     self.root = Path(directory)
                     result = self.prepare(profile)
                     self.assertTrue(result["passed"], result)
+                    doc = json.loads(
+                        (self.root / "story_review_manifest.json").read_text())
+                    self.assertEqual(doc["fps"], manifest.PROFILES[profile]["fps"])
                     expected = len(json.loads(
                         (self.root / "story_review_manifest.json").read_text()
                     )["sha256"])
