@@ -301,14 +301,30 @@ for i in range(FRAME_COUNT):
     gait=math.sin(setup_phase)
     frog_step_left=.105*max(0.0,gait)*setup_envelope
     frog_step_right=.105*max(0.0,-gait)*setup_envelope
+    frog_root.location.z=.015*gait*gait*setup_envelope if i<8 else 0.0
+    # Ease the torso forward, rather than advancing it at constant speed,
+    # while retaining the original 0 -> .25 travel and exact rescue cut.
+    walk_t=min(i,7)/7
+    walk_ease=walk_t*walk_t*(3-2*walk_t)
+    # Small reciprocal sway. The *planted foot* remains in world space,
+    # so this shift does not make the character skate across the ground.
+    weight_sway=.024*gait*setup_envelope if i<8 else 0.0
+    root_walk_x=.25*walk_ease+weight_sway if i<8 else .25
     for foot,base_x in frog_feet:
         step=frog_step_left if base_x<0 else frog_step_right
-        foot.location.x=base_x+.58*step
+        # Left foot swings and plants by frame 4; right foot anchors
+        # through frame 4, then swings and plants by frame 7. Subtract
+        # the root translation to keep planted feet stationary in world
+        # coordinates, including during body weight transfer.
+        swing_t=(min(i,4)/4) if base_x<0 else max(0,min(1,(i-4)/3))
+        swing_ease=swing_t*swing_t*(3-2*swing_t)
+        foot_world_x=base_x+.25*swing_ease
+        foot.location.x=foot_world_x-root_walk_x
         foot.location.z=.23+step
-    frog_root.location.z=.015*gait*gait*setup_envelope if i<8 else 0.0
-    # Slight side-to-side weight transfer follows the planted leg; zero
-    # at both cuts, with no change to the rescue camera or later action.
-    weight_sway=.024*gait*setup_envelope if i<8 else 0.0
+        foot.rotation_euler.y=.045*step/.105
+        support=setup_envelope*(1-min(1,step/.105)) if i<8 else 0.0
+        foot.scale.x=.19*(1+.06*support)
+        foot.scale.z=.12*(1-.08*support)
     for leg,(foot,base_x) in zip(frog_legs,frog_feet):
         thigh,shin,kneecap,hip,thigh_length,shin_length,side=leg
         step=frog_step_left if side<0 else frog_step_right
@@ -322,7 +338,7 @@ for i in range(FRAME_COUNT):
             part.hide_render=i>=8
     if i<8:
         phase="setup"
-        frog_root.location.x=.25*i/7+weight_sway
+        frog_root.location.x=root_walk_x
         plane.location=(-1.12,.25,.23)
         clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(plane.location.x,plane.location.y,plane.location.z+.08)
@@ -436,6 +452,10 @@ for i in range(FRAME_COUNT):
         "frog_knee_z":[round(float(leg[2].location.z),4) for leg in frog_legs],
         "frog_foot_z":[round(float(foot.location.z),4) for foot,_ in frog_feet],
         "frog_foot_x":[round(float(foot.location.x),4) for foot,_ in frog_feet],
+        "frog_foot_world_x":[round(float(frog_root.location.x+foot.location.x),4)
+                            for foot,_ in frog_feet],
+        "frog_foot_support_scale":[round(float(foot.scale.z),4)
+                                   for foot,_ in frog_feet],
         "camera_xyz":[round(float(v),4) for v in camera.location],
         "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
         "camera_lens":round(float(camera.data.lens),4),
@@ -471,6 +491,29 @@ checks={
         frames[5]["frog_weight_sway"]<0 and
         all(abs(frames[i]["frog_weight_sway"])<.0001
             for i in (0,7,8,21,22,31))
+    ),
+    "frog_plant_foot_no_skating":(
+        all(abs(frames[i]["frog_foot_world_x"][1]-.45)<.0001
+            for i in range(5))
+        and all(abs(frames[i]["frog_foot_world_x"][0])<.0001
+                for i in range(4,8))
+        and abs(frames[0]["frog_foot_world_x"][0]+.25)<.0001
+        and abs(frames[7]["frog_foot_world_x"][1]-.70)<.0001
+    ),
+    "frog_torso_walk_smoothstep":(
+        frames[0]["frog_root_x"]==0 and
+        abs(frames[7]["frog_root_x"]-.25)<.0001 and
+        abs(frames[8]["frog_root_x"]-.25)<.0001 and
+        frames[1]["frog_root_x"]>frames[0]["frog_root_x"] and
+        frames[6]["frog_root_x"]<frames[7]["frog_root_x"] and
+        abs(frames[7]["frog_root_x"]-frames[6]["frog_root_x"])<.04
+    ),
+    "frog_foot_compresses_on_stance":(
+        frames[2]["frog_foot_support_scale"][1]<.12 and
+        frames[5]["frog_foot_support_scale"][0]<.12 and
+        all(abs(z-.12)<.0001
+            for i in (0,7,8,22,31)
+            for z in frames[i]["frog_foot_support_scale"])
     ),
     "frog_walk_lands_before_rescue":(
         all(abs(frames[i]["frog_root_z"])<.0001 for i in (0,7,8,21,22,31))
