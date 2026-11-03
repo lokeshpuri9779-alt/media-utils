@@ -52,6 +52,7 @@ sproutmat=mat("SPROUT",(.1,.7,.17))
 black=mat("DRAIN",(.06,.08,.09),.4)
 distant_cloud=mat("DISTANT_DUSK_CLOUD",(.19,.27,.34))
 cloud_edge=mat("DISTANT_DUSK_CLOUD_EDGE",(.26,.33,.39))
+cloud_shadow=mat("DISTANT_DUSK_CLOUD_SHADOW",(.14,.21,.28))
 
 def cube(name,loc,scale,material):
     bpy.ops.mesh.primitive_cube_add(size=1,location=loc)
@@ -77,6 +78,7 @@ def rod(name,a,b,radius,material):
 # and above the frame-ROI action. It cannot impersonate seed, magnet or frog.
 # Small low-poly ellipsoids are cheap enough for free CPU Blender preview.
 background_clouds=[]
+background_cloud_lobes=[]
 for index,(x,y,z,sx,sy,sz) in enumerate((
     (-1.95,3.4,1.30,.85,.19,.18),
     (-.95,3.5,1.45,.95,.19,.19),
@@ -84,9 +86,22 @@ for index,(x,y,z,sx,sy,sz) in enumerate((
     (1.05,3.45,1.44,.94,.18,.19),
     (2.0,3.5,1.30,.85,.18,.16),
 )):
+    # Preserve camera-calibrated anchors from the last passing render.
     background_clouds.append(ball(
         "DISTANT_CLOUD_%02d"%index,(x,y,z),(sx,sy,sz),
         distant_cloud if index%2==0 else cloud_edge))
+    # Small overlapping lobes break up the previous flat-disc silhouette.
+    # Entirely static and behind the foreground; no procedural textures or
+    # external assets/API calls, and no changes to action timing/cameras.
+    for j,(dx,dz,wx,hz,material) in enumerate((
+        (-.52,.02,.48,.83,cloud_shadow),
+        (-.13,.10,.56,1.08,cloud_edge),
+        (.37,.035,.56,.88,distant_cloud),
+    )):
+        background_cloud_lobes.append(ball(
+            "DISTANT_CLOUD_%02d_LOBE_%d"%(index,j),
+            (x+dx*sx,y+.045*(j-1),z+dz),
+            (sx*wx,sy*(.80+.07*j),sz*hz),material))
 cube("STREET",(0,0,-.14),(6,5,.25),concrete)
 cube("DRAIN_WATER",(-1.1,.35,.012),(1.3,1.35,.035),water)
 for i in range(5):
@@ -324,8 +339,9 @@ checks={
     "seed_and_soil_use_distinct_materials":seed.data.materials[0] != pot_soil.data.materials[0],
     "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
     "static_distant_background_clouds":(
-        len(background_clouds)==5 and
-        all(obj.location.y>3 and obj.location.z>1 for obj in background_clouds)
+        len(background_clouds)==5 and len(background_cloud_lobes)==15 and
+        all(obj.location.y>3 and obj.location.z>1
+            for obj in background_clouds+background_cloud_lobes)
     ),
     "sky_clouds_project_onscreen":all(
         frames[i]["sky_clouds_in_frame"]>=2 for i in (0,8,31)
