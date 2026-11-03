@@ -200,7 +200,11 @@ for i in range(FRAME_COUNT):
         clip.location=(plane.location.x-.2,plane.location.y-.12,plane.location.z+.07)
         seed.location=(-.02+1.47*eased,.25+.2*eased,.81-.30*eased)
         sprout.hide_render=i<29
-        sprout.scale.z=.38 if i==29 else (.72 if i==30 else 1.0)
+        # Smoothstep rather than three abrupt growth jumps. Keep the
+        # existing visibility contract (stem at 29, leaves at 31).
+        growth=max(0.0,min(1.0,(i-28)/3))
+        growth=growth*growth*(3-2*growth)
+        sprout.scale.z=.30+.70*growth
         leaf.hide_render=i<31
         seed.hide_render=i>=29
         dolly=max(0.0,(i-27)/4)
