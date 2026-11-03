@@ -899,6 +899,51 @@
       "review_notes": "The story is original and does not duplicate recently published premises, characters, or causal mechanisms.; Causal coherence is maintained with a clear progression from conflict to decisive choice and resolution.; The content is safe, appropriate for general audiences, and complies with all standard content policies.",
       "reviewed_at": "2026-11-03T10:55:11.996150+00:00",
       "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-11d6d88a618a3b1febd1",
+      "story_sha256": "7d2ddb28f1913bd1f60b86c3d9a0e6d7ee13b7aace51b117d2d4b192a794cb90",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from conflict to resolution.; Characters, settings, and plot mechanisms do not duplicate the provided comparison history.; Content is safe, suitable for general audiences, and complies with all safety and YouTube policy guidelines.",
+      "reviewed_at": "2026-11-03T11:21:57.890036+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-98a7db191b8cbf04e305",
+      "story_sha256": "0c26b0a0616de0ef01d2653f907c09b44217ba2df26d4158146b5a62c87a7065",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence throughout its narrative structure.; There are no copyright or trademark violations, and the content is safe, appropriate for all audiences, and presents no YouTube policy risks.",
+      "reviewed_at": "2026-11-03T11:21:58.870269+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
+      "story_sha256": "460998f35d55ab7e7e4c7a1bf734693d8ff163db53e9fe3e7e315f7533047bec",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from the inciting incident through to the resolution.; There are no copyright or trademark violations present.; The content is entirely safe, appropriate for all audiences, and complies with standard content guidelines.",
+      "reviewed_at": "2026-11-03T11:22:02.962221+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
+      "story_sha256": "873993ba35a998519d138d666921ea2b3caac5386f732fee1945a83c7908b46c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate any recently published premises, characters, or causal mechanisms in the comparison list.; Causal coherence is strong: the problem (runaway cart) directly prompts the decision (wedging the wheel and rerouting), which leads to a logical resolution.; The content is safe, family-friendly, and completely free of copyright or trademark violations.; Audience suitability is appropriate for general viewers, and there are no YouTube policy risks.",
+      "reviewed_at": "2026-11-03T11:22:04.087026+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-23e65e65720310a75bd8",
+      "story_sha256": "e5b1d588263a9f8bbe268c54c64e5d19cd3f794cb4f9cf085657b37e52863f16",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original, clear, and causally coherent.; There are no copyright or trademark violations.; Content is safe, family-friendly, and complies with all platform policies.",
+      "reviewed_at": "2026-11-03T11:22:04.979213+00:00",
+      "review_model": "gemini-3.5-flash-lite"
     }
   ]
 }
