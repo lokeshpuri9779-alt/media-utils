@@ -49,6 +49,8 @@ potsoil=mat("POT_SOIL_DARK",(.065,.055,.045))
 potmat=mat("TERRACOTTA",(.57,.19,.09))
 sproutmat=mat("SPROUT",(.1,.7,.17))
 black=mat("DRAIN",(.06,.08,.09),.4)
+distant_cloud=mat("DISTANT_DUSK_CLOUD",(.19,.27,.34))
+cloud_edge=mat("DISTANT_DUSK_CLOUD_EDGE",(.26,.33,.39))
 
 def cube(name,loc,scale,material):
     bpy.ops.mesh.primitive_cube_add(size=1,location=loc)
@@ -70,6 +72,20 @@ def rod(name,a,b,radius,material):
     o.data.materials.append(material)
     return o
 
+# Distant, static sky decoration: intentionally well behind the subjects
+# and above the frame-ROI action. It cannot impersonate seed, magnet or frog.
+# Small low-poly ellipsoids are cheap enough for free CPU Blender preview.
+background_clouds=[]
+for index,(x,y,z,sx,sy,sz) in enumerate((
+    (-2.6,3.4,3.4,.96,.20,.16),
+    (-1.45,3.5,3.55,1.06,.19,.21),
+    (.05,3.45,3.12,.96,.16,.19),
+    (1.45,3.45,3.32,.97,.18,.19),
+    (2.8,3.5,3.42,.92,.18,.16),
+)):
+    background_clouds.append(ball(
+        "DISTANT_CLOUD_%02d"%index,(x,y,z),(sx,sy,sz),
+        distant_cloud if index%2==0 else cloud_edge))
 cube("STREET",(0,0,-.14),(6,5,.25),concrete)
 cube("DRAIN_WATER",(-1.1,.35,.012),(1.3,1.35,.035),water)
 for i in range(5):
@@ -295,6 +311,10 @@ checks={
     "different_story_fingerprint":story["plot_fingerprint"]!=story["comparison_story_fingerprint"],
     "seed_and_soil_use_distinct_materials":seed.data.materials[0] != pot_soil.data.materials[0],
     "seed_remains_visible_review_scale":seed.scale.x >= .14 and seed.scale.y >= .13,
+    "static_distant_background_clouds":(
+        len(background_clouds)==5 and
+        all(obj.location.y>3 and obj.location.z>3 for obj in background_clouds)
+    ),
     "cpu_no_paid_api":scene.render.engine=="BLENDER_EEVEE",
 }
 report={
