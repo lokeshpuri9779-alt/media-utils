@@ -242,6 +242,28 @@ leaf=ball("SPROUT_LEAVES",(1.45,.45,.9),(.23,.09,.12),sproutmat)
 line=rod("MAGNET_LINE",(.15,-.22,.68),(-1.12,.1,.3),.022,gold)
 magnet=ball("MAGNET_TIP",(-1.12,.1,.3),(.12,.1,.08),gold)
 
+# A short, story-specific worry gesture in the opening: the frog notices
+# the trapped airplane, points left, then withdraws before the rescue.
+# Keep this separate from the planting arm and hide it outside frames 2–6,
+# preserving all validated magnet, seed, and planting camera frames.
+notice_shoulder=Vector((-.32,-.28,.57))
+notice_elbow_rest=Vector((-.41,-.48,.48))
+notice_elbow_reach=Vector((-.59,-.46,.51))
+notice_hand_rest=Vector((-.48,-.57,.42))
+notice_hand_reach=Vector((-.84,-.55,.36))
+notice_tip_rest=Vector((-.55,-.59,.40))
+notice_tip_reach=Vector((-.98,-.56,.32))
+notice_upper=rod("FROG_NOTICE_ARM_UPPER",notice_shoulder,notice_elbow_rest,.053,green)
+notice_forearm=rod("FROG_NOTICE_ARM_FOREARM",notice_elbow_rest,notice_hand_rest,.046,green)
+notice_palm=ball("FROG_NOTICE_HAND",notice_hand_rest,(.077,.058,.050),green)
+notice_finger=rod("FROG_NOTICE_POINTING_FINGER",notice_hand_rest,notice_tip_rest,.027,green)
+notice_parts=(notice_upper,notice_forearm,notice_palm,notice_finger)
+for part in notice_parts:
+    part.parent=frog_root
+notice_upper_length=(notice_elbow_rest-notice_shoulder).length
+notice_forearm_length=(notice_hand_rest-notice_elbow_rest).length
+notice_finger_length=(notice_tip_rest-notice_hand_rest).length
+
 # An articulated, visible hand transfers the recovered seed to the pot.
 # The hand appears as the airplane reaches the frog, not after the camera cut.
 upper_arm=rod("FROG_SEED_ARM_UPPER",(.7,-.25,.58),(.53,-.5,.78),.065,green)
@@ -303,6 +325,18 @@ for i in range(FRAME_COUNT):
         stroke.hide_render=i<19
     for part in arm_parts:
         part.hide_render=i<19 or i>=29
+    # Ease out toward the visible trapped airplane, then retract before cut.
+    notice_phase=max(0.0,min(1.0,(i-1)/6.0))
+    notice_reach=math.sin(math.pi*notice_phase)**2 if 2<=i<=6 else 0.0
+    notice_elbow=notice_elbow_rest.lerp(notice_elbow_reach,notice_reach)
+    notice_hand=notice_hand_rest.lerp(notice_hand_reach,notice_reach)
+    notice_tip=notice_tip_rest.lerp(notice_tip_reach,notice_reach)
+    aim_segment(notice_upper,notice_shoulder,notice_elbow,notice_upper_length)
+    aim_segment(notice_forearm,notice_elbow,notice_hand,notice_forearm_length)
+    aim_segment(notice_finger,notice_hand,notice_tip,notice_finger_length)
+    notice_palm.location=notice_hand
+    for part in notice_parts:
+        part.hide_render=not (2<=i<=6)
     for drop in rain_drops:
         drop.hide_render=i<27
     # One short left-right walk cycle only in the establishing shot.
@@ -495,6 +529,10 @@ for i in range(FRAME_COUNT):
         "frog_gaze_x":round(gaze,4),
         "frog_gaze_z":round(float(frog_pupils[0][0].location.z),4),
         "frog_expression":"worried" if i<19 else "smile",
+        "frog_notice_reach":round(float(notice_reach),4),
+        "frog_notice_hand_x":round(float(notice_palm.location.x),4),
+        "frog_notice_parts_visible":sum(not part.hide_render
+                                        for part in notice_parts),
         "sky_clouds_in_frame":sky_clouds_in_frame,
     })
 checks={
@@ -502,6 +540,21 @@ checks={
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
+    "frog_notices_airplane_before_magnet_rescue":(
+        len(notice_parts)==4 and
+        all(p.parent==frog_root for p in notice_parts) and
+        all(frames[i]["frog_notice_parts_visible"]==4 for i in range(2,7)) and
+        all(frames[i]["frog_notice_parts_visible"]==0
+            for i in list(range(2))+list(range(7,FRAME_COUNT))) and
+        frames[2]["frog_notice_reach"]>0 and
+        frames[4]["frog_notice_reach"]>frames[3]["frog_notice_reach"] and
+        frames[4]["frog_notice_hand_x"]<frames[2]["frog_notice_hand_x"]-.15 and
+        frames[6]["frog_notice_hand_x"]>frames[4]["frog_notice_hand_x"]+.15
+    ),
+    "frog_notice_arm_never_overlaps_publishing_actions":(
+        all(frames[i]["frog_notice_parts_visible"]==0 for i in range(7,32))
+        and all(frames[i]["frog_notice_reach"]==0 for i in range(7,32))
+    ),
     "frog_steps_alternate_during_opening":(
         len(frog_feet)==2 and
         frames[2]["frog_foot_z"][0]>.30 and
