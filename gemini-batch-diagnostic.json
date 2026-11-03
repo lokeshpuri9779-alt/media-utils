@@ -1,46 +1,52 @@
 {
-  "observed_at": "2026-11-03T10:55:30.206590+00:00",
-  "generated": 11,
+  "observed_at": "2026-11-03T11:22:22.445982+00:00",
+  "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 4,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 3,
+      "index": 9,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 13,
+      "index": 10,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 14,
-      "reason": "validation_error_unclassified"
+      "index": 16,
+      "reason": "invalid_story_structure"
     },
     {
-      "index": 15,
-      "reason": "provider_http_429"
+      "index": 17,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 18,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 19,
+      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 11,
+  "reviewed": 13,
   "review_deferred": 0,
-  "approved": 1,
+  "approved": 5,
   "review_issues": [
-    "The candidate story features a character named Barnaby solving a physical obstruction puzzle in a marketplace through structural rearrangement, which strongly mirrors the recently published premise and structural motifs found in 'Barnaby's Brass Berry-Bursting Blunderbuss and the Plaza Panic' and other repetitive template-driven narratives within the dataset.",
-    "The causal mechanism of abandoning a rivalry or solo mission to jointly move a heavy object (a log/box) during a weather-related obstruction is excessively repetitive of existing comparison history.",
-    "The narrative structure and character actions follow a repetitive template common across recent AI-generated submissions for RAYVAN.",
-    "The premise, character choices, and resolution heavily mirror previously published titles and structures in the comparison history, such as 'Barnaby's Brass Berry-Bursting Blunderbuss' and 'Pip and the Overripe Acorn Cache', featuring similar mechanics involving falling/tumbling objects in a public space resolved by using a specific tool to wedge or lever an obstacle.",
-    "The repetitive formula of 'Barnaby + tool/object + marketplace/pathway obstruction + structural solution' indicates a high degree of structural recycling, failing originality standards.",
-    "The story duplicates core premises, character pairings, settings, and causal mechanisms from a very recently published story in the comparison history ('The Fox and Rabbit of Blackberry Hollow', which involves a fox and rabbit cooperating during a seasonal crisis near a stream/ravine using cooperative physical effort).",
-    "The story premise, characters (fox and rabbit), and conflict involving a natural disaster blocking a food/berry cache in a forest closely mirror the previously published entry 'The Fox and Rabbit of Blackberry Hollow'.",
+    "The candidate story 'Fergus the Ferret and the Overripe Melon Avalanche' closely mirrors the structure, causal mechanism, and resolution of the recently published comparison story 'Felix the Ferret and the Overstuffed Produce Cart', involving a ferret protagonist dealing with a top-heavy/overloaded rolling cart on a steep slope, resolved by wedging an object to stop the cart.",
+    "The candidate story heavily replicates the premise, character pairing (a fox and a rabbit dealing with a frozen/flooded stream crossing a barrier to save provisions), and causal mechanism of the previously published comparison story 'The Fox and Rabbit of Blackberry Hollow'.",
+    "The causal chain relies on ringing a distant distress bell with a wrench rather than addressing the primary conflict directly, making the resolution feel derivative and mechanically weak.",
+    "The causal coherence within the narrative beats is weak; the story beat mentions ringing the brass station bell, but the decisive choice and text indicate climbing the signal post to relight the brass lantern, creating a contradiction in the narrative mechanism.",
+    "The story 'Orion the Owl and the Midnight Railway Signal' repeats a very recently published premise and character from the comparison history ('Pip and the Midnight Railway Signal' and 'Orion the Owl and the Silent Comet Ring'), presenting a duplicate thematic variation and title structure.",
+    "The story premise, characters participating in a community relay race, and conflict involving a dropped or mishandled baton closely mirrors the recently published 'Buster and Cleo's Neighborhood Relay Race Blunder' story provided in the comparison history.",
+    "The story shares extremely similar character archetypes, settings, and causal problem-solving patterns (specifically an otter named Orson dealing with a seaside festival and a submerged/lost brass bell or tide issue) with recently published works in the comparison history, such as 'Orson the Otter and the Sunken Lantern Festival'.",
+    "The story uses a character name and premise (stoat in a snowy forest dealing with a blocked path/delivery box, using a brass tool/compass/wrench and ringing a bell) that closely mirrors multiple recent publications in the comparison history such as 'Bram and the Frost-Crested Pass' and similar forest animal survival tropes.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "review_failed:HTTP_503",
-    "review_failed:JSONDecodeError",
-    "review_provider:provider_unavailable"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -95,18 +101,18 @@
     ]
   },
   "creative_preflight": {
-    "generated": 11,
+    "generated": 13,
     "script_status_counts": {
-      "no_simple_flags": 11
+      "no_simple_flags": 13
     },
     "renderer_status_counts": {
-      "incompatible": 4,
-      "structurally_eligible": 7
+      "incompatible": 2,
+      "structurally_eligible": 11
     },
     "renderer_reason_counts": {
       "cast_mismatch": 1,
-      "none": 7,
-      "unsupported_human_actor": 3
+      "none": 11,
+      "unsupported_human_actor": 1
     },
     "editorial_approval": false,
     "publication_triggered": false
