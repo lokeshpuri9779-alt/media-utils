@@ -102,3 +102,17 @@ This **offline** command requires local `ffmpeg`, `ffprobe` and Pillow (already 
 Each of the four narrated beats gets six timestamps inferred from the previously recorded shot-midpoint times. If the source packet has no genuine increasing midpoint alignment, extraction fails instead of guessing equal quarters. These samples are **visual inspection aids**, not proof of correct depiction or a human review. Any decoder failure or mismatched identity fails closed.
 
 The independent reviewer must still personally **watch the entire encoded MP4**, use the 24-frame timeline to flag potential omissions, and independently decide whether every checklist criterion holds. The tool cannot mark a checkbox true, sign a decision, configure branch protection, or publish a video. Do not add timeline-generated files to the signed evidence branch; that branch continues to carry only the original packet and independent signed decision.
+
+## Optional decoded-pixel motion evidence (diagnostic only)
+
+For a reviewer-ready folder containing the **existing** `timeline-24.jpg` and `timeline-24.json` from `astra_v2.review_timeline`, run:
+
+```bash
+python -m astra_v2.mp4_motion_evidence --review-dir ./review-ready
+```
+
+The read-only processor verifies the exact encoded `video.mp4`, candidate and review-packet identities and hashes, 24-frame JPEG hash, all four authored story beats, and the original narration-aligned sample timestamps. It creates *only* `motion-evidence.json` and `motion-heatmap.png` as unsigned evidence. It never changes checklists, signatures or existing video files.
+
+For each story beat, the report measures the median fraction of changed grayscale pixels across five adjacent frame pairs in a **center-stage region**, and a distinct **side background-control region**. The heatmap shows changed center-stage pixels. Where the background is highly dynamic, the hint is `background_motion_confounded`; otherwise it reports a simple low-change hint or that some pixels changed, with **action still unverified**. All values are diagnostic approximations; no metric establishes object identity, character movement, continuous prop contact, physical action or causal story fidelity.
+
+Weather, camera motion, subtitles, animated backgrounds, lighting, cropping and JPEG compression can bias the measurement. A moving puppet can have nonzero pixels even when the narrated action is wrong. The report explicitly leaves `narrated_action_verified`, `character_motion_verified`, `prop_contact_verified`, `complete_video_reviewed`, `publication_approval` and `reviewer_signature_created` false. **The authorized reviewer must still watch the complete encoded MP4 and evaluate each narrated action.** Do not place the heatmap or report on the signed reviewer branch; only the original packet and independently signed decision belong there.
