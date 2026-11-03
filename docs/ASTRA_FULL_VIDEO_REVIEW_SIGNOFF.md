@@ -116,3 +116,25 @@ The read-only processor verifies the exact encoded `video.mp4`, candidate and re
 For each story beat, the report measures the median fraction of changed grayscale pixels across five adjacent frame pairs in a **center-stage region**, and a distinct **side background-control region**. The heatmap shows changed center-stage pixels. Where the background is highly dynamic, the hint is `background_motion_confounded`; otherwise it reports a simple low-change hint or that some pixels changed, with **action still unverified**. All values are diagnostic approximations; no metric establishes object identity, character movement, continuous prop contact, physical action or causal story fidelity.
 
 Weather, camera motion, subtitles, animated backgrounds, lighting, cropping and JPEG compression can bias the measurement. A moving puppet can have nonzero pixels even when the narrated action is wrong. The report explicitly leaves `narrated_action_verified`, `character_motion_verified`, `prop_contact_verified`, `complete_video_reviewed`, `publication_approval` and `reviewer_signature_created` false. **The authorized reviewer must still watch the complete encoded MP4 and evaluate each narrated action.** Do not place the heatmap or report on the signed reviewer branch; only the original packet and independently signed decision belong there.
+
+## Optional marked subject/prop region displacement (human assistance only)
+
+Automatic pixel changes cannot identify a character or prove prop contact. To compare **manually selected regions** in the actual, hash-bound 24-frame review sheet, generate a create-only blank template:
+
+```bash
+python -m astra_v2.annotated_object_motion --review-dir ./review-ready --create-template
+```
+
+An authorized reviewer or analyst can inspect `timeline-24.jpg`, enter visible **subject** and **prop** bounding boxes into `object-region-annotations.json`, and leave all boxes `null` where the region cannot be identified. Boxes are `[x_min, y_min, x_max, y_max]`, **normalized between 0 and 1 within each individual 250×444 image**, excluding the 34-pixel row header. Do not invent boxes merely to show contact. The template starts entirely empty and explicitly unapproved.
+
+Then calculate geometry **offline**:
+
+```bash
+python -m astra_v2.annotated_object_motion --review-dir ./review-ready
+```
+
+The tool rechecks exact encoded MP4 hash, review packet, timeline JPEG and timestamp alignment before accepting the 24-frame annotations. It reports per-beat annotated center displacement, maximum observed span, rectangle separation and box overlap, and creates `object-region-evidence.json` and `object-region-overlay.png` without replacing any existing evidence.
+
+**Important:** The tool does not locate or recognize subjects/props; it only measures user-supplied rectangles. **Box overlap does not demonstrate a real grasp, continuous object motion, or narrative action.** Sparse or missing annotations yield insufficient evidence, not approval. Changes to annotation files or forged full-review flags cannot create a signature. Every output retains `semantic_quality: not_verified` and `publication_approval: false`.
+
+This evidence must NOT be treated as an independent human full-video signoff. The separately authorized reviewer still has to watch every frame of the complete MP4, document the individual beat findings, and sign only under the existing independent review protocol. This command uses no network service or paid model and changes no YouTube publishing workflow.
