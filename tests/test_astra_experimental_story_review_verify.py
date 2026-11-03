@@ -81,6 +81,21 @@ class VerifyReviewPackageTest(unittest.TestCase):
         result = verifier.verify(self.root, "frog")
         self.assertIn("frog_story_previs.mp4", result["mismatched_files"])
 
+    def test_tampered_frog_object_evidence_rejected(self):
+        self.prepare("frog")
+        name = manifest.PROFILES["frog"]["object_audit"]
+        path = self.root / name
+        path.write_text(path.read_text() + " ", encoding="utf-8")
+        result = verifier.verify(self.root, "frog")
+        self.assertIn(name, result["mismatched_files"])
+
+    def test_removed_frog_object_controls_rejected(self):
+        self.prepare("frog")
+        name = manifest.PROFILES["frog"]["object_negative"]
+        (self.root / name).unlink()
+        result = verifier.verify(self.root, "frog")
+        self.assertIn(name, result["mismatched_files"])
+
     def test_modified_audit_rejected(self):
         self.prepare("lighthouse")
         path = self.root/"visual_audit.json"

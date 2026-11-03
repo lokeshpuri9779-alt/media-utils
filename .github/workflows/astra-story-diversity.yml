@@ -115,6 +115,23 @@ jobs:
           assert x['production_ready'] is False and x['approved'] is False and x['published'] is False
           print('Seven negative controls rejected, production/editorial gates remain closed')
           PY
+      - name: Track rendered object pixels before sealing frog review manifest
+        run: |
+          python3 -m tools.experimental_frog_object_pixel_tracks \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-render')
+          a=json.loads((root/'object_pixel_tracks.json').read_text())
+          n=json.loads((root/'object_pixel_negative_controls.json').read_text())
+          assert a['passed'] is True and all(a['checks'].values())
+          assert n['all_corruptions_rejected'] and n['negative_case_count']==5
+          assert all(a[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
+          assert a['semantic_quality']=='not_verified'
+          print('Object-color tracks and 5 damaged-frame controls verified; manual review still required')
+          PY
       - name: Bind complete review evidence to frames and video
         run: |
           python3 -m tools.experimental_story_review_manifest \
@@ -146,38 +163,13 @@ jobs:
           assert r['passed'] is True and all(r['checks'].values())
           assert r['checks']['video_pixels_independently_match_png_sequence'] is True
           assert r['mismatched_files']==[]
-          assert r['files_verified']==37
+          assert r['files_verified']==39
           assert r['manual_visual_review_required'] is True
           assert r['approved'] is False and r['published'] is False
           assert r['production_ready'] is False and r['paid_apis_used'] is False
           assert r['semantic_quality']=='not_verified'
-          print('Verified 37 independent files against review manifest (review-only)')
+          print('Verified 39 independent files against review manifest (review-only)')
           PY
-      - name: Track actual magnet and airplane pixels, reject five substitutions
-        run: |
-          python3 -m tools.experimental_frog_object_pixel_tracks \
-            --directory artifacts/experimental-frog-render/ \
-            --output-directory artifacts/experimental-frog-object-tracks/
-          python3 - <<'PY'
-          import json
-          from pathlib import Path
-          root=Path('artifacts/experimental-frog-object-tracks')
-          a=json.loads((root/'object_pixel_tracks.json').read_text())
-          n=json.loads((root/'object_pixel_negative_controls.json').read_text())
-          assert a['passed'] is True and all(a['checks'].values())
-          assert n['all_corruptions_rejected'] and n['negative_case_count']==5
-          assert all(a[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
-          assert a['semantic_quality']=='not_verified'
-          print('Object-color tracks and 5 damaged-frame controls verified; manual review still required')
-          PY
-      - name: Upload separate object-tracking evidence (not review manifest)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: astra-frog-object-tracks-review-only
-          path: artifacts/experimental-frog-object-tracks/
-          retention-days: 7
-          if-no-files-found: warn
       - name: Preserve frog video and frames for review
         if: always()
         uses: actions/upload-artifact@v4

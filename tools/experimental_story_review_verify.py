@@ -50,6 +50,8 @@ def verify(directory, profile):
     ))
     if profile == "lighthouse":
         names.add("shot_plan.json")
+    else:
+        names.update((cfg["object_audit"], cfg["object_negative"]))
 
     declared = doc.get("sha256")
     checks = {

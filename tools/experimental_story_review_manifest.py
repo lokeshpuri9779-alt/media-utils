@@ -24,6 +24,9 @@ PROFILES = {
         "audit_pass": "passed",
         "negative": "visual_motion_negative_controls.json",
         "negative_count": 7,
+        "object_audit": "object_pixel_tracks.json",
+        "object_negative": "object_pixel_negative_controls.json",
+        "object_negative_count": 5,
     },
     "lighthouse": {
         "story_id": "astra-coastal-spark",
@@ -101,6 +104,11 @@ def build(directory, profile):
         "visual": cfg["audit"],
         "negative": cfg["negative"],
     }
+    if profile == "frog":
+        expected.update({
+            "object_pixel": cfg["object_audit"],
+            "object_negative": cfg["object_negative"],
+        })
     for key, name in expected.items():
         path = directory / name
         if not path.is_file():
@@ -148,6 +156,41 @@ def build(directory, profile):
         and (visual.get("semantic_quality") if profile == "frog"
              else visual.get("visual_semantic_quality")) == "not_verified"
     )
+    if profile == "frog":
+        object_pixel = reports["object_pixel"]
+        object_negative = reports["object_negative"]
+        required_cues = (
+            "review_only_fixed_camera_trace",
+            "magnet_golden_pixels_present",
+            "gold_cluster_travels_leftward_to_clip",
+            "airplane_bright_pixels_present",
+            "paper_region_moves_right_after_contact",
+        )
+        checks["frog_object_pixel_tracking"] = (
+            object_pixel.get("passed") is True
+            and all_checks(object_pixel)
+            and all(object_pixel["checks"].get(cue) is True for cue in required_cues)
+            and object_pixel.get("manual_visual_review_required") is True
+            and object_pixel.get("semantic_quality") == "not_verified"
+        )
+        cases = object_negative.get("cases")
+        checks["frog_object_negative_controls"] = (
+            object_negative.get("source_passed") is True
+            and object_negative.get("all_corruptions_rejected") is True
+            and object_negative.get("negative_case_count")
+                == cfg["object_negative_count"]
+            and isinstance(cases, list)
+            and len(cases) == cfg["object_negative_count"]
+            and all(isinstance(case, dict) and case.get("rejected") is True
+                    for case in cases)
+            and object_negative.get("manual_visual_review_required") is True
+            and object_negative.get("semantic_quality") == "not_verified"
+        )
+        checks["no_claim_of_semantic_quality"] = (
+            checks["no_claim_of_semantic_quality"]
+            and object_pixel.get("semantic_quality") == "not_verified"
+            and object_negative.get("semantic_quality") == "not_verified"
+        )
     frames = review.get("frames")
     expected_count = cfg["frame_count"]
     checks["frame_metadata_complete"] = (

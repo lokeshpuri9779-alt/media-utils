@@ -52,6 +52,23 @@ def fixture(directory, profile):
                       manual_visual_review_required=True,
                       semantic_quality="not_verified")
         negative.update(manual_visual_review_required=True)
+        object_checks = {
+            "review_only_fixed_camera_trace": True,
+            "magnet_golden_pixels_present": True,
+            "gold_cluster_travels_leftward_to_clip": True,
+            "airplane_bright_pixels_present": True,
+            "paper_region_moves_right_after_contact": True,
+        }
+        write(directory, cfg["object_audit"],
+              dict(safety, passed=True, checks=object_checks,
+                   manual_visual_review_required=True,
+                   semantic_quality="not_verified"))
+        write(directory, cfg["object_negative"],
+              dict(safety, source_passed=True, all_corruptions_rejected=True,
+                   negative_case_count=5,
+                   cases=[{"case": str(i), "rejected": True} for i in range(5)],
+                   manual_visual_review_required=True,
+                   semantic_quality="not_verified"))
     else:
         visual.update(passes_fixed_pixel_checks=True,
                       manual_editorial_review_required=True,
@@ -107,6 +124,30 @@ class ReviewManifestTest(unittest.TestCase):
                     self.assertFalse(result["approved"])
                     self.assertFalse(result["production_ready"])
                     self.assertEqual(result["approval"], "manual_review_required")
+
+    def test_missing_frog_object_pixels_fail_closed(self):
+        cfg = self.configure("frog")
+        (self.root / cfg["object_audit"]).unlink()
+        with self.assertRaises(FileNotFoundError):
+            manifest.build(self.root, "frog")
+
+    def test_false_frog_object_motion_rejected(self):
+        cfg = self.configure("frog")
+        name = cfg["object_audit"]
+        data = json.loads((self.root / name).read_text())
+        data["checks"]["gold_cluster_travels_leftward_to_clip"] = False
+        write(self.root, name, data)
+        result = manifest.build(self.root, "frog")
+        self.assertIn("frog_object_pixel_tracking", result["failed_checks"])
+
+    def test_fabricated_frog_object_controls_rejected(self):
+        cfg = self.configure("frog")
+        name = cfg["object_negative"]
+        data = json.loads((self.root / name).read_text())
+        data["cases"][2]["rejected"] = False
+        write(self.root, name, data)
+        result = manifest.build(self.root, "frog")
+        self.assertIn("frog_object_negative_controls", result["failed_checks"])
 
     def test_rejects_missing_visual_evidence(self):
         cfg = self.configure("frog")
