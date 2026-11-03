@@ -159,6 +159,18 @@ for x in (-.25,.45):
 for part in frog_parts:
     part.parent=frog_root
 
+# A low-cost rounded upper head adds an identifiable frog silhouette behind
+# the eyes. Keep the original seven-part body rig and its tracking unchanged.
+# All new features inherit the same walk/root motion.
+frog_head=ball("FROG_ROUNDED_HEAD",(.08,.04,.825),(.425,.315,.24),green)
+frog_head.parent=frog_root
+frog_brows=[
+    ball("FROG_BROW_%d"%j,(x,-.324,.915),(.115,.07,.042),green)
+    for j,x in enumerate((-.12,.27))
+]
+for eyebrow in frog_brows:
+    eyebrow.parent=frog_root
+
 # Facial curves provide legible worried-to-relieved expression without
 # affecting the already validated frog body, rescue props, seed, or soil.
 # All facial lines share the complete character root and follow its walk.
@@ -243,9 +255,15 @@ for i in range(FRAME_COUNT):
     # planting and watered sprout 22-31. This is preview-only.
     # Look toward the trapped plane, then toward the pot; the expression
     # softens only after the recovery. No blink/cut during pixel tracking.
-    gaze=-.033 if i<=12 else (.027 if i>=22 else -.033+.060*(i-12)/10)
+    look_t=max(0.0,min(1.0,(i-12)/10))
+    gaze_ease=look_t*look_t*(3-2*look_t)
+    gaze=-.033+.060*gaze_ease
+    # Ease the eye movement into each fixation instead of linear sliding.
+    # Very slight vertical shift helps the character look toward the pot.
+    gaze_height=.012*gaze_ease
     for pupil,base_x in frog_pupils:
         pupil.location.x=base_x+gaze
+        pupil.location.z=.79-gaze_height
     for stroke in worried_mouth:
         stroke.hide_render=i>=19
     for stroke in smile_mouth:
@@ -367,6 +385,7 @@ for i in range(FRAME_COUNT):
         "camera_rotation_xyz":[round(float(v),5) for v in camera.rotation_euler],
         "camera_lens":round(float(camera.data.lens),4),
         "frog_gaze_x":round(gaze,4),
+        "frog_gaze_z":round(float(frog_pupils[0][0].location.z),4),
         "frog_expression":"worried" if i<19 else "smile",
         "sky_clouds_in_frame":sky_clouds_in_frame,
     })
@@ -375,6 +394,20 @@ checks={
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
     "frog_parts_follow_single_root":len(frog_parts)==7 and all(p.parent==frog_root for p in frog_parts),
+    "frog_head_and_brows_follow_root":(
+        frog_head.parent==frog_root and len(frog_brows)==2 and
+        all(b.parent==frog_root for b in frog_brows) and
+        frog_head.scale.x>=.4 and frog_head.scale.z>=.2
+    ),
+    "frog_gaze_eases_into_new_fixation":(
+        frames[12]["frog_gaze_x"]<frames[13]["frog_gaze_x"] and
+        frames[13]["frog_gaze_x"]<frames[17]["frog_gaze_x"] and
+        frames[17]["frog_gaze_x"]<frames[21]["frog_gaze_x"] and
+        frames[21]["frog_gaze_x"]<frames[22]["frog_gaze_x"] and
+        frames[22]["frog_gaze_z"]<frames[12]["frog_gaze_z"] and
+        (frames[13]["frog_gaze_x"]-frames[12]["frog_gaze_x"])<
+        (frames[16]["frog_gaze_x"]-frames[15]["frog_gaze_x"])
+    ),
     "frog_expression_geometry_follows_root":(
         len(worried_mouth)==3 and len(smile_mouth)==3 and
         all(p.parent==frog_root for p in worried_mouth+smile_mouth)
