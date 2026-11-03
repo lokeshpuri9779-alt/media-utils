@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
+  "attempts": 7,
   "confirmed_today": 6,
-  "last_attempt_at": "2026-11-02T23:18:08.711804+00:00",
+  "last_attempt_at": "2026-11-03T02:58:08.911341+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8476,19 +8476,74 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-03T01:19:13.516035+00:00",
+  "pending": {
+    "uMlmpfgUuq0": {
+      "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+      "title": "Pip and the Midnight Railway Signal",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-03T02:58:10.527075+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c04c9ae28075f62ee12e574d4edca60232e1297a7201f7780de69f842e85870b",
+      "story_beats": [
+        {
+          "headline": "The Jammed Junction",
+          "speech": "Oh dear, the signal lever is utterly stuck, and the midnight freight is barreling down the foggy line!",
+          "visual": "signal",
+          "label": "Jammed Lever",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse standing on a dark wooden railway platform next to a tall rusted signal pole, looking up with a worried expression at a stuck iron lever under thick night fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tool Retrieval",
+          "speech": "I must fetch the heavy brass wrench from the station bench before the rumble of the engine grows too loud.",
+          "visual": "ship",
+          "label": "Grabbing the Wrench",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse scrambling across a weathered wooden platform bench, holding a gleaming brass wrench tightly in both paws while railway tracks gleam under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge Mechanism",
+          "speech": "If I jam this heavy wrench right into the rusted gear teeth, the mechanism will finally break free.",
+          "visual": "robot",
+          "label": "Wedge Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse straining with both hind legs against the station floor while shoving the heavy brass wrench directly into the iron gear box of the railway signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Divergence",
+          "speech": "The switch has clicked over just in time, sending the freight train safely down the clear bypass line.",
+          "visual": "door",
+          "label": "Safe Path",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse wiping sweat from his brow, smiling as a distant railway signal lantern glows bright green next to a safely diverted set of tracks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-11-03T02:57:21.070418+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-03T01:49:21.489085+00:00",
+    "at": "2026-11-03T02:58:10.871192+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "cancelled",
+    "job_status_before_persist": "success",
     "dependencies_step": "success",
-    "publish_step": "cancelled",
+    "publish_step": "success",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -17659,13 +17714,64 @@
       "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-4124fe0994195f92cc12": {
+      "at": "2026-11-03T02:58:08.911322+00:00",
+      "title": "Pip and the Midnight Railway Signal",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c04c9ae28075f62ee12e574d4edca60232e1297a7201f7780de69f842e85870b",
+      "story_beats": [
+        {
+          "headline": "The Jammed Junction",
+          "speech": "Oh dear, the signal lever is utterly stuck, and the midnight freight is barreling down the foggy line!",
+          "visual": "signal",
+          "label": "Jammed Lever",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse standing on a dark wooden railway platform next to a tall rusted signal pole, looking up with a worried expression at a stuck iron lever under thick night fog.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tool Retrieval",
+          "speech": "I must fetch the heavy brass wrench from the station bench before the rumble of the engine grows too loud.",
+          "visual": "ship",
+          "label": "Grabbing the Wrench",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse scrambling across a weathered wooden platform bench, holding a gleaming brass wrench tightly in both paws while railway tracks gleam under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge Mechanism",
+          "speech": "If I jam this heavy wrench right into the rusted gear teeth, the mechanism will finally break free.",
+          "visual": "robot",
+          "label": "Wedge Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse straining with both hind legs against the station floor while shoving the heavy brass wrench directly into the iron gear box of the railway signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Divergence",
+          "speech": "The switch has clicked over just in time, sending the freight train safely down the clear bypass line.",
+          "visual": "door",
+          "label": "Safe Path",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse wiping sweat from his brow, smiling as a distant railway signal lantern glows bright green next to a safely diverted set of tracks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-03T01:49:21.489011+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "ready",
-    "character_memory": "not_reported",
+    "at": "2026-11-03T02:58:10.871121+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -17673,68 +17779,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-03T01:49:21.489075+00:00",
+    "at": "2026-11-03T02:58:10.871180+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-02T22:49:26.862875+00:00",
+    "at": "2026-11-03T02:57:54.393940+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-fa788ab7a8708fe6b26c",
-    "video_url": "https://www.youtube.com/watch?v=S7XodM8hMxQ",
+    "content_id": "rayvan-gemini-4124fe0994195f92cc12",
+    "video_url": "https://www.youtube.com/watch?v=uMlmpfgUuq0",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-03T01:49:21.488780+00:00",
+    "at": "2026-11-03T02:58:10.871029+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "cancelled",
-    "job_status_before_persist": "cancelled",
-    "outcome": "published",
-    "reason": "ready",
-    "fresh_upload_attempted": false,
+    "publish_step": "success",
+    "job_status_before_persist": "success",
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-03T01:49:21.489006+00:00",
-    "collection_status": "collected",
-    "publish_step": "cancelled",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 8,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
-          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
-          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
-          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
-          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
-        },
-        "seen": 34,
-        "total": 164
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 164,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 130,
-        "title": 0,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 130,
-        "remaining": 8
-      }
-    },
+    "at": "2026-11-03T02:58:10.871115+00:00",
+    "collection_status": "missing_diagnostics",
+    "publish_step": "success",
+    "counters": {},
     "note": "Diagnostic counts only; no approval or publishing effect"
   }
 }
