@@ -236,3 +236,12 @@ Technical result ≠ successful original story. The final report must
 separate execution, four-beat length, plan-copy detection, causal cues and
 manual editorial quality. All review-only flags remain false for approval,
 production readiness and publishing. No fallback or publishing integration.
+
+## 1.5B one-shot authorization
+
+The isolated model-profile regression run
+[#41707581498](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41707581498)
+passed the story, image, motion and aggregate checks. This document-only
+commit triggers exactly one checksum-verified, CPU-only Qwen 1.5B inference
+in the existing gated experimental workflow, using no production publishing
+path. Future ordinary pushes do not repeat the benchmark.
