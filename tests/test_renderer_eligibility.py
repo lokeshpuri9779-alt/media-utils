@@ -104,6 +104,87 @@ class RendererEligibilityTests(unittest.TestCase):
         with self.assertRaisesRegex(CreativeReject, "embodied_character_not_supported"):
             validate_story_shot(shot)
 
+    def test_recorded_pip_railway_story_mechanics_rejected_before_render(self):
+        """Real decoded MP4 sample showed mouse, not narrated gearbox work.
+
+        This tests scene capability, NOT the visual semantics of a full MP4.
+        """
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        shots = [
+            {
+                "story_title": "Pip and the Midnight Railway Signal",
+                "story_cast": ("mouse",), "visual": "forest",
+                "speech": "Oh dear, the signal lever is utterly stuck!",
+                "visual_prompt": "Pip the mouse looks at the stuck iron signal lever.",
+            },
+            {
+                "story_title": "Pip and the Midnight Railway Signal",
+                "story_cast": ("mouse",), "visual": "door",
+                "speech": "If I jam this wrench into the gear teeth, it will break free.",
+                "visual_prompt": "Pip the mouse shoving a brass wrench into the iron gear box.",
+            },
+        ]
+        for shot in shots:
+            with self.subTest(prompt=shot["visual_prompt"]):
+                with self.assertRaisesRegex(
+                    CreativeReject, "unsupported_mechanical_rig_action_requires_scene_art"
+                ):
+                    validate_story_shot(shot)
+
+    def test_pip_mechanical_rig_rejected_by_publication_preflight(self):
+        from astra_v2.publication_quality import publication_rejection
+        story = {
+            "content_id": "pip-rig-regression", "genre": "fiction",
+            "kind": "authored_causal_story", "title": "Pip and the Midnight Railway Signal",
+            "production_ready": True,
+        }
+        shot = {
+            "story_title": story["title"], "story_cast": ("mouse",),
+            "speech": "The switch is jammed and the gears cannot turn.",
+            "visual_prompt": "Pip the mouse shoving a wrench into the signal lever.",
+            "visual": "forest",
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+             patch("studio_renderer.make_plan", return_value=[shot]), \
+             patch("astra_v2.layer_contract.scene_layers",
+                   return_value={"draw_visual": True}):
+            eligible, reason, modes = check_renderer_eligibility(story)
+            rejection = publication_rejection(story)
+        self.assertFalse(eligible)
+        self.assertIn("unsupported_mechanical_rig_action_requires_scene_art", reason)
+        self.assertEqual(modes, ())
+        self.assertIn("renderer_incompatible", rejection)
+
+    def test_simple_animal_wrench_and_signal_are_still_eligible(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        examples = (
+            {"story_cast": ("mouse",), "visual": "forest",
+             "speech": "The mouse carries a brass wrench toward the garden.",
+             "visual_prompt": "A mouse walking with a wrench."},
+            {"story_cast": ("fox",), "visual": "forest",
+             "speech": "The radio signal rises as the fox watches the moon.",
+             "visual_prompt": "A fox watches a lantern glow."},
+            {"story_cast": ("owl",), "visual": "forest",
+             "speech": "The owl notices a stationary old gear without touching it.",
+             "visual_prompt": "An owl watches a motionless clock."},
+        )
+        for shot in examples:
+            with self.subTest(shot=shot["speech"]):
+                self.assertEqual(validate_story_shot(shot), "solo")
+
+    def test_verified_mechanical_scene_art_routes_to_directed(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {
+            "story_cast": ("mouse",), "visual": "forest",
+            "speech": "The signal lever is stuck.",
+            "visual_prompt": "Pip the mouse pushes the rusty signal lever.",
+        }
+        with patch("astra_v2.directed_scene_contract.validate_directed_scene",
+                   return_value=None) as art:
+            self.assertEqual(validate_story_shot(shot), "directed")
+        art.assert_called_once_with(shot)
+
     def test_valid_supported_animal_puppet_unchanged(self):
         from astra_v2.unified_story_engine import validate_story_shot
         self.assertEqual(validate_story_shot({
