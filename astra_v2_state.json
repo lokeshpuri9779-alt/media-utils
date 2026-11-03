@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 10,
-  "confirmed_today": 9,
-  "last_attempt_at": "2026-11-03T11:29:34.622933+00:00",
+  "attempts": 11,
+  "confirmed_today": 10,
+  "last_attempt_at": "2026-11-03T11:48:37.497764+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -8592,16 +8592,14 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "3MroCe2WYgM": {
-      "content_id": "rayvan-gemini-4b7aec747d28ca1a0d31",
+    },
+    "rayvan-gemini-4b7aec747d28ca1a0d31": {
+      "video_id": "3MroCe2WYgM",
+      "confirmed_at": "2026-11-03T11:47:28.939790+00:00",
       "title": "Buster and Cleo's Rubber Ball Relay",
-      "day": "2026-11-03",
-      "uploaded_at": "2026-11-03T11:29:37.502217+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-03T11:29:37.502217+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "1f7c85ac0dee6930332dda1a759cf7bd53b953a637684efedf6535f7e87aadb8",
       "story_beats": [
@@ -8646,16 +8644,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "DYWaQgJIjCw": {
+      "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
+      "title": "Buster and Cleo's Neighborhood Relay Race Blunder",
+      "day": "2026-11-03",
+      "uploaded_at": "2026-11-03T11:48:39.232396+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0ef71ffe159381c3d271e1512b92d922633c956becf9e3bdb972d0eda11d10a8",
+      "story_beats": [
+        {
+          "headline": "The Hurdles Tumble",
+          "speech": "Oh dear, my paws are far too big for these tiny wooden hurdles in the community park sports arena!",
+          "visual": "forest",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "Wide shot of Buster the golden retriever dog and Cleo the sleek calico cat in a sunny community park. Buster wears a blue runner headband and stumbles over a knocked-over wooden hurdle. Cleo sits nearby on a park bench looking unimpressed. Buster holds a red rubber ball in his mouth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tangled Vines",
+          "speech": "We need a clever strategy right now before the rival neighborhood pets sprint past our station and win!",
+          "visual": "signal",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Buster the golden retriever dog and Cleo the sleek calico cat standing by a painted park race marker. Cleo holds a brass bell in her paw, ringing it to signal a team meeting. Buster holds a yellow compass, looking confused at the directional needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Swift Retrieval",
+          "speech": "Hold the steady compass right there while I climb this old oak tree branch to fetch our lost relay baton!",
+          "visual": "robot",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "Close-up of Cleo the sleek calico cat perched on a wooden box near the park track, holding a shiny silver key. Buster the golden retriever dog stands firmly below on the grass, holding a heavy iron wrench in his mouth to steady the box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Victorious Finish",
+          "speech": "We finally crossed the dusty finish line together and secured our first ever community sports tournament trophy!",
+          "visual": "door",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "Celebratory shot of Buster the golden retriever dog and Cleo the sleek calico cat standing triumphantly beneath a decorated park archway. Buster holds a large gold trophy cup in his mouth, while Cleo rests her paw on a glowing lantern placed on a wooden crate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-03T11:28:42.145266+00:00",
+  "last_preflight_at": "2026-11-03T11:47:28.608808+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-03T11:29:37.767827+00:00",
+    "at": "2026-11-03T11:48:39.506865+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -17995,10 +18048,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-2da6517ec27d64b5c6e2": {
+      "at": "2026-11-03T11:48:37.497745+00:00",
+      "title": "Buster and Cleo's Neighborhood Relay Race Blunder",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "0ef71ffe159381c3d271e1512b92d922633c956becf9e3bdb972d0eda11d10a8",
+      "story_beats": [
+        {
+          "headline": "The Hurdles Tumble",
+          "speech": "Oh dear, my paws are far too big for these tiny wooden hurdles in the community park sports arena!",
+          "visual": "forest",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "Wide shot of Buster the golden retriever dog and Cleo the sleek calico cat in a sunny community park. Buster wears a blue runner headband and stumbles over a knocked-over wooden hurdle. Cleo sits nearby on a park bench looking unimpressed. Buster holds a red rubber ball in his mouth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tangled Vines",
+          "speech": "We need a clever strategy right now before the rival neighborhood pets sprint past our station and win!",
+          "visual": "signal",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "Medium shot of Buster the golden retriever dog and Cleo the sleek calico cat standing by a painted park race marker. Cleo holds a brass bell in her paw, ringing it to signal a team meeting. Buster holds a yellow compass, looking confused at the directional needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Swift Retrieval",
+          "speech": "Hold the steady compass right there while I climb this old oak tree branch to fetch our lost relay baton!",
+          "visual": "robot",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "Close-up of Cleo the sleek calico cat perched on a wooden box near the park track, holding a shiny silver key. Buster the golden retriever dog stands firmly below on the grass, holding a heavy iron wrench in his mouth to steady the box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Victorious Finish",
+          "speech": "We finally crossed the dusty finish line together and secured our first ever community sports tournament trophy!",
+          "visual": "door",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "Celebratory shot of Buster the golden retriever dog and Cleo the sleek calico cat standing triumphantly beneath a decorated park archway. Buster holds a large gold trophy cup in his mouth, while Cleo rests her paw on a glowing lantern placed on a wooden crate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-03T11:29:37.767765+00:00",
+    "at": "2026-11-03T11:48:39.506791+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -18009,21 +18113,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-03T11:29:37.767820+00:00",
+    "at": "2026-11-03T11:48:39.506852+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-03T11:29:12.341107+00:00",
+    "at": "2026-11-03T11:48:07.651984+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-4b7aec747d28ca1a0d31",
-    "video_url": "https://www.youtube.com/watch?v=3MroCe2WYgM",
+    "content_id": "rayvan-gemini-2da6517ec27d64b5c6e2",
+    "video_url": "https://www.youtube.com/watch?v=DYWaQgJIjCw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-03T11:29:37.767698+00:00",
+    "at": "2026-11-03T11:48:39.506709+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -18035,7 +18139,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-03T11:29:37.767761+00:00",
+    "at": "2026-11-03T11:48:39.506785+00:00",
     "collection_status": "missing_diagnostics",
     "publish_step": "success",
     "counters": {},
