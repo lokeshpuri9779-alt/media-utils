@@ -275,6 +275,74 @@ class RendererEligibilityTests(unittest.TestCase):
             self.assertEqual(validate_story_shot(shot), "directed")
         verified.assert_called_once_with(shot)
 
+    def test_solo_compound_prop_motion_blocked_before_render(self):
+        from astra_errors import CreativeReject
+        from astra_v2.unified_story_engine import validate_story_shot
+        cases = (
+            "The fox jumps over a small box while holding a brass compass.",
+            "The lynx leaps with a key in its teeth.",
+            "The otter swims while carrying a small lantern.",
+        )
+        for prompt, species in zip(cases, ("fox", "lynx", "otter")):
+            with self.subTest(prompt=prompt):
+                with self.assertRaisesRegex(
+                        CreativeReject,
+                        "unsupported_simultaneous_prop_motion_requires_scene_art"):
+                    validate_story_shot({
+                        "story_cast": (species,), "visual": "forest",
+                        "visual_prompt": prompt, "speech": "The story continues.",
+                    })
+
+    def test_compound_action_blocked_at_publication_boundary(self):
+        from astra_v2.publication_quality import publication_rejection
+        story = {
+            "content_id": "compound-action-qa", "genre": "fiction",
+            "kind": "authored_causal_story", "title": "The Fox's Compass",
+            "production_ready": True,
+        }
+        shot = {
+            "story_cast": ("fox",), "visual": "forest",
+            "visual_prompt": "The fox leaps while carrying a brass compass.",
+            "speech": "The fox leaps while carrying a brass compass.",
+        }
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+             patch("studio_renderer.make_plan", return_value=[shot]), \
+             patch("astra_v2.layer_contract.scene_layers",
+                   return_value={"draw_visual": True}):
+            eligible, reason, modes = check_renderer_eligibility(story)
+            rejection = publication_rejection(story)
+        self.assertFalse(eligible)
+        self.assertEqual(modes, ())
+        self.assertIn("unsupported_simultaneous_prop_motion_requires_scene_art", reason)
+        self.assertIn("renderer_incompatible", rejection)
+
+    def test_sequential_and_duo_actions_are_not_conflated(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        for shot, expected in (
+            ({"story_cast": ("fox",), "visual": "forest",
+              "visual_prompt": "The fox carries a lantern, then jumps.",
+              "speech": "The fox carries a lantern, then jumps."}, "solo"),
+            ({"story_cast": ("fox",), "visual": "forest",
+              "visual_prompt": "The fox walks while carrying a lantern.",
+              "speech": "The fox walks while carrying a lantern."}, "solo"),
+            ({"story_cast": ("fox", "rabbit"), "visual": "forest",
+              "visual_prompt": "The fox carries a bell while the rabbit jumps.",
+              "speech": "The fox carries a bell while the rabbit jumps."}, "duo"),
+        ):
+            with self.subTest(shot=shot):
+                self.assertEqual(validate_story_shot(shot), expected)
+
+    def test_independent_art_can_support_compound_solo_scene(self):
+        from astra_v2.unified_story_engine import validate_story_shot
+        shot = {
+            "story_cast": ("fox",), "visual": "forest",
+            "visual_prompt": "The fox leaps while holding a brass compass.",
+        }
+        with patch("astra_v2.directed_scene_contract.validate_directed_scene",
+                   return_value=None) as verified_art:
+            self.assertEqual(validate_story_shot(shot), "directed")
+        verified_art.assert_called_once_with(shot)
+
     def test_valid_supported_animal_puppet_unchanged(self):
         from astra_v2.unified_story_engine import validate_story_shot
         self.assertEqual(validate_story_shot({
