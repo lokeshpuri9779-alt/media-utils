@@ -1,31 +1,33 @@
 {
-  "observed_at": "2026-11-03T14:19:47.802685+00:00",
-  "generated": 18,
+  "observed_at": "2026-11-03T23:22:21.952370+00:00",
+  "generated": 17,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 7,
+      "index": 6,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 8,
+      "index": 11,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 19,
       "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 18,
+  "reviewed": 17,
   "review_deferred": 0,
   "approved": 3,
   "review_issues": [
-    "The candidate story 'The Forest Fox and Rabbit of Blackberry Ridge' features a central conflict, character pairing (a fox and a rabbit working together near a water or berry obstacle), and resolution that heavily duplicate the recently published premise of 'The Fox and Rabbit of Blackberry Hollow'.",
-    "The candidate story features a character named Orion solving a railway platform mystery involving a signal issue, which closely mirrors the style, premise, and thematic elements of previously published stories in the comparison history such as 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'. Furthermore, it duplicates the established naming conventions and causal narrative structures used repetitively across these automated RAYVAN series outputs.",
-    "The premise, character (Orion the Owl), and railway/platform setting heavily overlap with the recently published title 'Orion the Owl and the Silent Comet Ring' and other station-based animal mystery stories in the comparison history such as 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'.",
-    "The story premise, character (Bram the pangolin), and navigational/survival conflict heavily overlap with the recently published title 'pip the pangolin and the dry-grassland navigation challenge' and other recurring Bram/Pip animal survival narratives in the comparison history.",
-    "The story premise, characters (fox and rabbit), central conflict (blocked entrance to a food cache/winter supply), and cooperative resolution heavily overlap with the previously published 'The Fox and Rabbit of Blackberry Hollow' in the comparison history.",
-    "The story premise, protagonist type (an animal named Pip/Pax using alternative navigation or tools when an item is lost), and structure closely mirror previously published titles in the comparison history such as 'pip the pangolin and the dry-grassland navigation challenge'.",
+    "The candidate story features a character named Pip using a wooden box to solve an obstruction barrier (a blocked gate latch), which closely mirrors multiple recently published premises in the comparison history, such as 'Pip and the Overripe Acorn Cache of Whispering Glade' and 'Professor Pip and the Midnight Platform Mystery', failing the originality and repetition check.",
+    "The premise, character pairing (fox and rabbit), and conflict involving a threatened food stash during a storm closely mirror existing published stories in the history such as 'The Fox and Rabbit of Blackberry Hollow'.",
+    "The story 'Orion the Owl and the Silent Starlight Lens' features premises, character types, and causal mechanisms that closely parallel existing works in the comparison history, such as 'Orion the Owl and the Silent Comet Ring' and other similar avian-centric tool or alignment resolution patterns.",
+    "The story premise involving an animal protagonist dealing with a broken transport method (cart/sled/bridge) and using an improvised solution (wooden hauling sled/box) strongly mirrors multiple recently published premises in the comparison history, such as 'Corin and the Kelp-Weave Kite Rig', 'The Fox and Rabbit of Blackberry Hollow', and 'The Weaver's Choice at Bramble Mill'.",
+    "The story premise, character 'Barnaby', and railway platform mystery setting heavily duplicate recently published works in the comparison history, specifically 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'.",
+    "The thematic elements and narrative beats replicate recently published premises from the same dataset without sufficient differentiation in causal structure or originality.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -80,18 +82,17 @@
     ]
   },
   "creative_preflight": {
-    "generated": 18,
+    "generated": 17,
     "script_status_counts": {
-      "no_simple_flags": 18
+      "no_simple_flags": 17
     },
     "renderer_status_counts": {
       "incompatible": 9,
-      "structurally_eligible": 9
+      "structurally_eligible": 8
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 8,
-      "none": 9,
-      "unsupported_human_actor": 1
+      "cast_mismatch": 9,
+      "none": 8
     },
     "editorial_approval": false,
     "publication_triggered": false
