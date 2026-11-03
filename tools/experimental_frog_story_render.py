@@ -164,6 +164,19 @@ for x in (-.25,.45):
 for part in frog_parts:
     part.parent=frog_root
 
+# Three flattened, splayed toe pads per foot. Opening-only geometry makes
+# the walk read more clearly while leaving every rescue/planting frame
+# pixel-identical to the previous passing render.
+frog_toes=[]
+for foot,base_x in frog_feet:
+    toe_group=[]
+    for j,dx in enumerate((-.105,0,.105)):
+        toe=ball("FROG_TOE_%s_%d"%("LEFT" if base_x<0 else "RIGHT",j),
+                 (base_x+dx,-.445,.19),(.068,.095,.035),green)
+        toe.parent=frog_root
+        toe_group.append((toe,dx))
+    frog_toes.append(toe_group)
+
 # Two lightweight articulated legs give the opening steps a readable
 # hip-knee-ankle silhouette. These are strictly hidden after setup so
 # magnet/seed/planting pixel ROIs keep the proven original geometry.
@@ -325,6 +338,11 @@ for i in range(FRAME_COUNT):
         support=setup_envelope*(1-min(1,step/.105)) if i<8 else 0.0
         foot.scale.x=.19*(1+.06*support)
         foot.scale.z=.12*(1-.08*support)
+    for group,(foot,base_x) in zip(frog_toes,frog_feet):
+        for toe,dx in group:
+            toe.location.x=foot.location.x+dx*(1+.06*support)
+            toe.location.z=foot.location.z-.04
+            toe.hide_render=i>=8
     for leg,(foot,base_x) in zip(frog_legs,frog_feet):
         thigh,shin,kneecap,hip,thigh_length,shin_length,side=leg
         step=frog_step_left if side<0 else frog_step_right
@@ -449,6 +467,8 @@ for i in range(FRAME_COUNT):
         "frog_weight_sway":round(float(weight_sway),4),
         "frog_leg_segments_visible":sum(
             not part.hide_render for leg in frog_legs for part in leg[:3]),
+        "frog_toe_pads_visible":sum(
+            not toe.hide_render for group in frog_toes for toe,_ in group),
         "frog_knee_z":[round(float(leg[2].location.z),4) for leg in frog_legs],
         "frog_foot_z":[round(float(foot.location.z),4) for foot,_ in frog_feet],
         "frog_foot_x":[round(float(foot.location.x),4) for foot,_ in frog_feet],
@@ -476,6 +496,12 @@ checks={
         frames[5]["frog_foot_z"][1]>.30 and
         abs(frames[5]["frog_foot_z"][0]-.23)<.0001 and
         any(frames[i]["frog_root_z"]>.005 for i in range(1,7))
+    ),
+    "frog_toe_anatomy_setup_only":(
+        len(frog_toes)==2 and all(len(group)==3 for group in frog_toes) and
+        all(toe.parent==frog_root for group in frog_toes for toe,_ in group)
+        and all(frames[i]["frog_toe_pads_visible"]==6 for i in range(8))
+        and all(frames[i]["frog_toe_pads_visible"]==0 for i in range(8,32))
     ),
     "frog_legs_articulate_only_during_setup":(
         len(frog_legs)==2 and
