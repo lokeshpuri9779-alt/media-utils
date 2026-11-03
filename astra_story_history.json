@@ -7469,6 +7469,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-fa788ab7a8708fe6b26c",
+      "video_id": "S7XodM8hMxQ",
+      "confirmed_at": "2026-11-03T01:19:13.917020+00:00",
+      "title": "The Fox and Rabbit of Blackberry Hollow",
+      "plot_fingerprint": "7727c85ee9f61ddc8177e5c0f69080c00185aa9c9207e5c8902fc9d2e57ce0d0",
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "Look at the fierce rain falling! The rushing river threatens to wash away our secret log bridge entirely.",
+          "visual": "forest",
+          "label": "The Flood",
+          "story_beat": "reveal",
+          "visual_prompt": "A wide-eyed orange fox and a fluffy white rabbit stand on opposite muddy banks of a rushing forest stream during a heavy downpour, staring at a mossy log about to slip into the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Pooling Their Strength",
+          "speech": "We must push this heavy log back into place right now, or neither of us can reach the shelter.",
+          "visual": "door",
+          "label": "The Push",
+          "story_beat": "build",
+          "visual_prompt": "The orange fox and the fluffy white rabbit stand side by side on the muddy forest bank, pressing their shoulders against a heavy mossy log to secure it against the swollen stream.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Balancing the Weight",
+          "speech": "Hold the compass steady while I steady the log so we do not slip into the freezing water below.",
+          "visual": "signal",
+          "label": "The Balance",
+          "story_beat": "mechanism",
+          "visual_prompt": "The white rabbit holds a small brass compass in its paws on the secured log while the orange fox holds the opposite end steady against the rushing forest river current.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Safe Haven",
+          "speech": "We crossed together just in time before dark! Let us celebrate inside our warm dry den tonight.",
+          "visual": "planet",
+          "label": "The Crossing",
+          "story_beat": "payoff",
+          "visual_prompt": "The orange fox and the fluffy white rabbit sit happily together inside a cozy forest clearing under a starry night sky, holding a small glowing lantern between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden rainstorm swells the stream, trapping the rabbit on the wrong side and threatening to wash away their only crossing log.",
+      "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
+      "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache."
     }
   ]
 }

@@ -3,7 +3,7 @@
   "day": "2026-11-03",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 6,
-  "confirmed_today": 5,
+  "confirmed_today": 6,
   "last_attempt_at": "2026-11-02T23:18:08.711804+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -8418,16 +8418,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "S7XodM8hMxQ": {
-      "content_id": "rayvan-gemini-fa788ab7a8708fe6b26c",
+    },
+    "rayvan-gemini-fa788ab7a8708fe6b26c": {
+      "video_id": "S7XodM8hMxQ",
+      "confirmed_at": "2026-11-03T01:19:13.917020+00:00",
       "title": "The Fox and Rabbit of Blackberry Hollow",
-      "day": "2026-11-03",
-      "uploaded_at": "2026-11-02T23:18:10.428148+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-02T23:18:10.428148+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "7727c85ee9f61ddc8177e5c0f69080c00185aa9c9207e5c8902fc9d2e57ce0d0",
       "story_beats": [
@@ -8475,22 +8473,22 @@
       "central_conflict": "A sudden rainstorm swells the stream, trapping the rabbit on the wrong side and threatening to wash away their only crossing log.",
       "decisive_choice": "The fox abandons his usual solo sprint to carry the heavy end of the log alongside the rabbit.",
       "resolution": "Both animals successfully cross the bridge together just as the floodwaters crest, securing their winter food cache.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-02T22:48:59.110264+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-03T01:19:13.516035+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-02T23:18:10.955529+00:00",
+    "at": "2026-11-03T01:49:21.489085+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
+    "job_status_before_persist": "cancelled",
     "dependencies_step": "success",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
@@ -17664,10 +17662,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-02T23:18:10.955446+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-03T01:49:21.489011+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -17675,9 +17673,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-02T23:18:10.955515+00:00",
+    "at": "2026-11-03T01:49:21.489075+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -17689,24 +17687,24 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-02T23:18:10.955146+00:00",
+    "at": "2026-11-03T01:49:21.488780+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "cancelled",
+    "job_status_before_persist": "cancelled",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-02T23:18:10.955439+00:00",
+    "at": "2026-11-03T01:49:21.489006+00:00",
     "collection_status": "collected",
-    "publish_step": "success",
+    "publish_step": "cancelled",
     "counters": {
       "ASTRA_STORY_SUPPLY": {
-        "eligible": 9,
+        "eligible": 8,
         "not_ready": 64,
         "publication_rejected": {
           "not_production_ready": 3,
@@ -17720,31 +17718,21 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
         },
         "seen": 34,
-        "total": 165
+        "total": 164
       },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 165,
+        "before": 164,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 131,
+        "remaining": 130,
         "title": 0,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 131,
-        "remaining": 9
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "considered": 3,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 2
+        "pool": 130,
+        "remaining": 8
       }
     },
     "note": "Diagnostic counts only; no approval or publishing effect"
