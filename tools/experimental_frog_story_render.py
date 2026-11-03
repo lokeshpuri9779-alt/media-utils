@@ -313,13 +313,17 @@ def caption_material(name,color,strength):
 
 caption_white=caption_material("STORY_CAPTION_WARM_WHITE",(.94,.93,.84),1.25)
 caption_shadow=caption_material("STORY_CAPTION_DARK_SHADOW",(.02,.035,.048),.9)
-caption_beats=(("TRAPPED",0,8),("RESCUED",8,22),("NEW LIFE",22,32))
+# The initial test revealed clipping near the upper portrait-frame edge,
+# especially as payoff-camera focal length increases. Per-beat positions
+# give the text a safe top margin without covering the seed or frog.
+caption_beats=(("TRAPPED",0,8,.74),("RESCUED",8,22,.74),
+               ("NEW LIFE",22,32,.64))
 caption_cards=[]
-for label,start,end in caption_beats:
+for label,start,end,y_anchor in caption_beats:
     layers=[]
     for role,material,position in (
-            ("SHADOW",caption_shadow,(.012,.826,-2.54)),
-            ("MAIN",caption_white,(0,.843,-2.5))):
+            ("SHADOW",caption_shadow,(.012,y_anchor-.017,-2.54)),
+            ("MAIN",caption_white,(0,y_anchor,-2.5))):
         bpy.ops.object.text_add()
         text_obj=bpy.context.object
         text_obj.name="STORY_BEAT_%s_%s"%(label.replace(" ","_"),role)
@@ -533,6 +537,21 @@ for i in range(FRAME_COUNT):
                            .74+.115*k-.15*((i-27+k)%4))
 
     scene.frame_set(i+1)
+    bpy.context.view_layer.update()
+    # Project the actual text bounding boxes into each frame, including
+    # payoff camera-lens changes. A merely parented text object can exist
+    # yet render clipped; reject that rather than trusting object presence.
+    projected_caption_corners=[
+        world_to_camera_view(scene,camera,layer.matrix_world@Vector(corner))
+        for label,start,end,layers in caption_cards if start<=i<end
+        for layer in layers for corner in layer.bound_box
+    ]
+    caption_viewport_bounds=[
+        round(min(p.x for p in projected_caption_corners),4),
+        round(min(p.y for p in projected_caption_corners),4),
+        round(max(p.x for p in projected_caption_corners),4),
+        round(max(p.y for p in projected_caption_corners),4),
+    ]
     img=out/f"frame_{i:03d}.png"
     scene.render.filepath=str(img.resolve())
     bpy.ops.render.render(write_still=True)
@@ -553,6 +572,7 @@ for i in range(FRAME_COUNT):
     frames.append({
         "frame":i,"phase":phase,
         "story_caption":story_caption,
+        "caption_viewport_bounds":caption_viewport_bounds,
         "caption_text_layers_visible":sum(
             not layer.hide_render for _,_,_,layers in caption_cards
             for layer in layers),
@@ -612,9 +632,16 @@ checks={
     "beat_caption_stays_above_action_roi":all(
         layer.parent==camera and
         layer.data.align_x=="CENTER" and layer.data.size<=.19 and
-        layer.location.y>.8 and layer.location.z < -2.0 and
+        .60<layer.location.y<.76 and layer.location.z < -2.0 and
         abs(layer.location.x)<.03
         for _,_,_,layers in caption_cards for layer in layers
+    ),
+    "beat_caption_fully_inside_portrait_safe_margin":all(
+        .02<f["caption_viewport_bounds"][0]<
+            f["caption_viewport_bounds"][2]<.98 and
+        .70<f["caption_viewport_bounds"][1]<
+            f["caption_viewport_bounds"][3]<.975
+        for f in frames
     ),
     "three_causal_beats":[frames[i]["phase"] for i in (0,8,22)]==["setup","rescue","plant"],
     "folded_paper_airplane_geometry":len(mesh.vertices)==4 and len(mesh.polygons)==2,
