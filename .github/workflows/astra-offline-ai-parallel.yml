@@ -1,14 +1,6 @@
 name: ASTRA Offline AI Parallel Review (Isolated)
 
 on:
-  push:
-    branches:
-      - experiment/astra-offline-ai-parallel-20261103
-    paths:
-      - tools/astra_offline_llm.py
-      - tests/test_astra_offline_llm.py
-      - .github/workflows/astra-offline-ai-parallel.yml
-      - docs/astra-offline-ai-parallel.md
   pull_request:
     branches: [main]
     paths:
