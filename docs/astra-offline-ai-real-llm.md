@@ -39,3 +39,7 @@ If this model fails the structure contract, the job fails closed while keeping
 bounded raw output and status evidence for debugging. The next experiment
 must be justified using these real results; do not automatically retry with
 larger models, API calls, or expensive multi-seed sweeps.
+
+## One-shot authorization record
+
+The exact commit message `experiment(ASTRA): one-shot offline Qwen 0.5B CPU benchmark` authorizes this single bounded experiment on the isolated branch. Later ordinary commits do not restart the large-model job.
