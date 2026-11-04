@@ -973,15 +973,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-c9c37e127c629aebed51",
-      "story_sha256": "743ead131b83ccd86293d25d9ea937162937bed996f8a4048d9f8d8f042db4dd",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is coherent, original, and properly structured.; It presents a clear causal arc with a distinct conflict, decisive choice, and resolution.; No copyright or trademark infringements detected.; Content is safe, suitable for all audiences, and complies with all content policies.",
-      "reviewed_at": "2026-11-04T12:51:01.725769+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
       "story_sha256": "85b5826e3cda4a023b4c2e4a97a57a41e554cfd6e8994d512ff9e6914bef963e",
       "decision": "approve",
@@ -1069,6 +1060,24 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is completely original and does not plagiarize any pre-existing works or recently published examples in the reference list.; Causal coherence is strong: the accusation of a missing compass leads logically to a joint physical footprint inspection, discovery of the true cause (a squirrel knocking it behind a log), and a sincere apology.; Clarity, grammar, and narrative structure are well-executed and fully parseable.; There are no copyright, trademark, safety, or misleading content concerns present in the text.; The content is entirely suitable for a general audience and complies with all standard YouTube content and safety policies.",
       "reviewed_at": "2026-11-04T14:45:09.467797+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
+      "story_sha256": "409c0a24f475eb6d54d43761244855318c8807e276f9531a83af650f0a9a1a93",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and distinct from the provided comparison examples, which feature different characters, settings, and conflicts.; Causal coherence is maintained: Orion mistakes a clock reflection for a comet, tests the theory using a lantern, and correctly identifies the source.; The content is safe, appropriate for all audiences, and presents no copyright or trademark violations.; There are no policy violations or misleading information present.",
+      "reviewed_at": "2026-11-04T15:06:10.129475+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-f671686eb7c2221f2b9c",
+      "story_sha256": "1c3bab2a608e43d1d665e52bc3d0a769bfe09c11fb4ffda0bbb4c8e146247f78",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains clear causal coherence from the conflict to the resolution.; There are no copyright or trademark infringements detected.; The content is safe, appropriate for all audiences, and complies with standard content guidelines.; No prohibited overlaps with recently published premises or tropes found in the provided history.",
+      "reviewed_at": "2026-11-04T15:06:16.878088+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

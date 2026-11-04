@@ -8089,80 +8089,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-c9c37e127c629aebed51",
-      "title": "Bramble the Stoat and Lyra the Lynx and the Compass Mistake",
-      "hook": "The Hidden Glitch",
-      "question": "How can Bramble and Lyra restore their mutual trust after a hidden error?",
-      "answer": "By bringing the concealed evidence into the open and working together to fix the mistake.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Hidden Glitch",
-          "speech": "I did not mean to drop our compass into the dark briars and hide it from you.",
-          "visual": "forest",
-          "label": "Concealment",
-          "story_beat": "reveal",
-          "visual_prompt": "Bramble the stoat nervously standing in a dense woodland glade under pine trees, holding paws behind their back while hiding a brass compass in the shadows, with Lyra the lynx watching closely.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Rising Shadow",
-          "speech": "We cannot find our way along the overgrown trail without knowing which direction leads home.",
-          "visual": "signal",
-          "label": "Search",
-          "story_beat": "build",
-          "visual_prompt": "Lyra the lynx pacing near a tree stump while pointing a paw toward a foggy forest path, looking concerned as Bramble looks down remorsefully.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Honest Admission",
-          "speech": "Here is the compass I buried in the dirt; I was afraid to tell you I lost it.",
-          "visual": "forest",
-          "label": "Confession",
-          "story_beat": "mechanism",
-          "visual_prompt": "Bramble the stoat digging up the brass compass from a patch of soft moss and extending both paws to give it to Lyra the lynx.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Path Restored",
-          "speech": "Thank you for telling me the truth. Now we can check the needle and walk together.",
-          "visual": "door",
-          "label": "Trust",
-          "story_beat": "payoff",
-          "visual_prompt": "Bramble the stoat and Lyra the lynx sitting side by side on a sunny woodland stone path, both looking down happily at the shiny brass compass held between them.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Bramble the stoat accidentally misplaces a shared compass in the tall brush and hides the mistake out of fear of disappointing Lyra the lynx.",
-      "decisive_choice": "Bramble unearths the hidden compass from the brush and hands it directly to Lyra to confess the truth.",
-      "resolution": "Lyra forgives Bramble, and both friends use the compass properly to navigate the forest trail together.",
-      "visual_bible": {
-        "style": "Charming storybook illustration with warm earthy tones, soft lighting, and detailed fur textures.",
-        "characters": {
-          "Bramble": "A nimble stoat with sleek brown fur, a cream-colored belly, bright curious eyes, and a slender frame.",
-          "Lyra": "A graceful lynx with thick tawny fur, distinctive dark ear tufts, amber eyes, and a calm, reassuring posture."
-        },
-        "locations": {
-          "forest": "A lush, vibrant woodland filled with tall pine trees, soft mossy ground, and dappled sunlight filtering through branches."
-        },
-        "objects": {
-          "compass": "A polished brass pocket compass with a clear glass face and a steady red needle pointing north."
-        }
-      },
-      "plot_fingerprint": "0ff3eba2cac31ac27804b2bf85920876e6f7d07a66b0ddec8cf655a33d8e52e5"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
       "title": "Jasper the Otter and Barnaby the Cat and the Riverbank Lantern",
       "hook": "The Evening Shadow Falls",
@@ -8914,6 +8840,157 @@
         }
       },
       "plot_fingerprint": "bc10e399bab9ddac81fed438a9bcf04bd5df5df5c7280364fa7cf69f00908f2a"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
+      "title": "Orion the Owl and the Midnight Observatory Misreading",
+      "hook": "The Golden Glow",
+      "question": "Why does Orion the owl miscalculate the nocturnal meteor peak inside the stone observatory?",
+      "answer": "Orion mistakes a glowing brass clock face for a bright wandering comet because both emit a steady golden circular light.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Golden Glow",
+          "speech": "An unexpected golden glow pulses across the observatory wall, looking exactly like a distant falling star approaching fast.",
+          "visual": "signal",
+          "label": "The Warning",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands inside a stone observatory looking up at a glowing golden circle cast on the wall, holding a small brass compass in one wing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing the Instruments",
+          "speech": "Orion peers closely at the brass clock on the wooden desk to check if its moving dial matches the strange celestial light.",
+          "visual": "planet",
+          "label": "The Check",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl stands inside a stone observatory, holding a brass clock with both paws on a wooden table, staring intently at the rotating glass face.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lantern Test",
+          "speech": "Holding a bright brass lantern beside the clock face, Orion tests whether the steady firelight explains the mysterious indoor glow.",
+          "visual": "door",
+          "label": "The Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl stands inside a stone observatory, holding a burning brass lantern in one paw right next to a ticking brass clock on a oak desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Realization",
+          "speech": "Orion sees that the clock gears create the golden reflection, laughing softly as the false comet alarm fades away.",
+          "visual": "ship",
+          "label": "The Clarity",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl stands inside a stone observatory with a relaxed expression, pointing one wing at a ticking brass clock while a brass lantern sits safely nearby on a wooden desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl worries that a sudden golden light on the brass clock indicates an unscheduled celestial event threatening the observatory schedule.",
+      "decisive_choice": "Orion steps close to the instrument and compares the ticking clock hands directly against the steady flame of a brass lantern.",
+      "resolution": "Orion realizes the moving glow belongs to the mechanical clock gears rather than the night sky, restoring calm observation.",
+      "visual_bible": {
+        "style": "Clean vector cinematic illustration with warm lighting and rich textures",
+        "characters": {
+          "Orion": "A wise brown owl with large amber eyes, soft feathered wings, and a thoughtful expression."
+        },
+        "locations": {
+          "observatory": "A cozy circular stone room filled with star charts, wooden desks, and brass instruments."
+        },
+        "objects": {
+          "clock": "A polished round brass clock with visible black numbers and ticking metal hands.",
+          "lantern": "A small vintage brass lantern with a clear glass pane and a warm flickering flame inside.",
+          "compass": "A pocket-sized brass navigational compass with a swinging needle."
+        }
+      },
+      "plot_fingerprint": "8e16a0811c0c991a88330cac2909aa79d8460cb5e0718952c7b84e4ba624f576"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f671686eb7c2221f2b9c",
+      "title": "Finn the Ferret and Pip the Marten and the Shared Storage Key",
+      "hook": "The Accusation",
+      "question": "Why did Finn the Ferret refuse to open the communal storage chest during the village harvest festival?",
+      "answer": "Finn was hiding the spare brass key to prevent a reckless group from spoiling the winter reserves, and he exchanged it with Pip the Marten once proper safety measures were established.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Accusation",
+          "speech": "Finn, why do you keep the brass key locked away while the village needs grain right now?",
+          "visual": "door",
+          "label": "Accusation",
+          "story_beat": "reveal",
+          "visual_prompt": "A detailed medium shot in the village square. Pip the Marten stands on weathered cobblestones with an accusatory expression, pointing a paw at Finn the Ferret. Finn stands defensively beside a heavy wooden door, holding a shiny brass key tightly against his chest with both paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secret Purpose",
+          "speech": "If we open the chest without checking the inventory locks first, damp weather will ruin every single sack inside.",
+          "visual": "signal",
+          "label": "Justification",
+          "story_beat": "build",
+          "visual_prompt": "A close-up shot in the village square. Finn the Ferret points an open paw toward a damp corner near a wooden doorway, looking earnestly at Pip. Pip tilts his head in thoughtful hesitation, lowering his accusing paw while listening to Finn's explanation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Handover",
+          "speech": "Take this key, Pip, and let us inspect the inner shelves together to make sure everything stays dry.",
+          "visual": "ship",
+          "label": "Exchange",
+          "story_beat": "mechanism",
+          "visual_prompt": "A medium shot in the village square. Finn the Ferret extends his paws forward, carefully transferring the shiny brass key into the waiting paws of Pip the Marten. Both animals display calm and cooperative expressions in front of the rustic wooden backdrop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fair Distribution",
+          "speech": "With proper care and shared responsibility, our winter harvest is secure and every family gets their fair share.",
+          "visual": "forest",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "A wide shot in the village square bordered by distant green trees. Pip the Marten and Finn the Ferret stand side by side holding the brass key together between them, smiling warmly as they open the large wooden storage chest to reveal neatly stacked grain sacks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn the Ferret hides the sole brass key to the communal grain chest, causing Pip the Marten to accuse him of hoarding winter food supplies for himself in the village square.",
+      "decisive_choice": "Finn steps forward in the village square and hands the gleaming brass key directly to Pip the Marten as a sign of mutual trust.",
+      "resolution": "Pip accepts the key and unlocks the chest alongside Finn, ensuring the harvest is portioned fairly and safely for all villagers.",
+      "visual_bible": {
+        "style": "Warm and charming 3D animated stop-motion storybook aesthetic with soft lighting and rich woodland textures.",
+        "characters": {
+          "Finn the Ferret": "A nimble ferret with sleek cream and brown fur, wearing a fitted forest-green tunic with a small leather pouch. Expressive amber eyes and a determined posture.",
+          "Pip the Marten": "An agile marten with rich chestnut fur and a cream-colored bib on his chest, wearing a snug blue vest. Curious dark eyes and an expressive snout."
+        },
+        "locations": {
+          "village square": "A rustic outdoor village square featuring textured cobblestone ground, weathered wooden walls, and soft natural daylight filtering through overhanging green foliage."
+        },
+        "objects": {
+          "key": "A polished solid brass key with an ornate clover-shaped bow and a short notched shaft.",
+          "door": "A heavy vertical wooden door made of thick oak planks with iron strap hinges.",
+          "chest": "A large rectangular wooden storage chest fitted with metal bands and a sturdy front padlock hasp."
+        }
+      },
+      "plot_fingerprint": "a191dc36f8cbff9aa0ed2951cf0b79514689fd4f7c8d0c5c067487b740ca8374"
     }
   ]
 }
