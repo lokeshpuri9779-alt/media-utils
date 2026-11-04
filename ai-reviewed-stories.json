@@ -8235,6 +8235,456 @@
         }
       },
       "plot_fingerprint": "0b787452e95a799f89de14ee645f711d0ea26dddeea7044e3604254f4138c85e"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-49f2d5d7dc2575fd482c",
+      "title": "Orion the Owl and the Stargazing Clock",
+      "hook": "The Mysterious Ticking",
+      "question": "Why did Orion the Owl hide the brass clock inside the high observatory dome?",
+      "answer": "Orion mistook the loud ticking for an approaching danger and hid it to keep his young nestlings safe.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Mysterious Ticking",
+          "speech": "Orion perched high inside the dusty observatory, his large yellow eyes wide as he listened to the strange metallic clicking.",
+          "visual": "signal",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the Owl perched on a high wooden beam inside a dark stone observatory, staring intently down at a shiny brass clock resting on a table below, feathers fluffed in alarm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protective Choice",
+          "speech": "Believing the rhythmic sound was a hidden danger, the wise owl carefully lifted the heavy clock in his talons.",
+          "visual": "robot",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "Orion the Owl holding a brass clock firmly in his talons while standing on a wooden ledge, wings partially spread to shield the nesting area behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Timepiece",
+          "speech": "He tucked the ticking object deep behind a dark storage box so his family would remain completely safe from harm.",
+          "visual": "door",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the Owl carefully pushing a brass clock behind a dusty wooden box in a shadowy corner of the observatory alcove.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Truth",
+          "speech": "Discovering it was only a harmless timepiece, Orion calmly returned the clock to its rightful place on the desk.",
+          "visual": "forest",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the Owl resting peacefully on the astronomer's desk next to a brass clock, moonlight streaming through the observatory dome window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion hears a loud ticking sound from an unfamiliar brass clock left in the observatory, mistaking it for a mechanical threat to his family.",
+      "decisive_choice": "Orion decides to tuck the ticking clock safely away behind a large wooden cabinet instead of destroying it.",
+      "resolution": "Orion realizes the object is entirely harmless and gently returns it to the astronomer's desk.",
+      "visual_bible": {
+        "style": "Cinematic digital illustration with warm amber lighting, rich textures, and detailed wooden and stone backgrounds.",
+        "characters": {
+          "Orion": "A majestic horned owl with mottled brown and cream feathers, large luminous yellow eyes, and an expressive, watchful posture."
+        },
+        "locations": {
+          "observatory": "An old stone tower interior filled with wooden beams, starry sky views through a glass dome, scattered books, and old furniture."
+        },
+        "objects": {
+          "clock": "A polished round brass mechanical desk clock with two small bells on top and visible black hands.",
+          "box": "A weathered rectangular wooden storage box with dark metal hinges and a dusty surface."
+        }
+      },
+      "plot_fingerprint": "1af1b32fc07621e23ed65d1d177181705e08b1680a849d12c25edaddc7b42159"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-c9c37e127c629aebed51",
+      "title": "Bramble the Stoat and Lyra the Lynx and the Compass Mistake",
+      "hook": "The Hidden Glitch",
+      "question": "How can Bramble and Lyra restore their mutual trust after a hidden error?",
+      "answer": "By bringing the concealed evidence into the open and working together to fix the mistake.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Glitch",
+          "speech": "I did not mean to drop our compass into the dark briars and hide it from you.",
+          "visual": "forest",
+          "label": "Concealment",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the stoat nervously standing in a dense woodland glade under pine trees, holding paws behind their back while hiding a brass compass in the shadows, with Lyra the lynx watching closely.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rising Shadow",
+          "speech": "We cannot find our way along the overgrown trail without knowing which direction leads home.",
+          "visual": "signal",
+          "label": "Search",
+          "story_beat": "build",
+          "visual_prompt": "Lyra the lynx pacing near a tree stump while pointing a paw toward a foggy forest path, looking concerned as Bramble looks down remorsefully.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Admission",
+          "speech": "Here is the compass I buried in the dirt; I was afraid to tell you I lost it.",
+          "visual": "forest",
+          "label": "Confession",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble the stoat digging up the brass compass from a patch of soft moss and extending both paws to give it to Lyra the lynx.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Path Restored",
+          "speech": "Thank you for telling me the truth. Now we can check the needle and walk together.",
+          "visual": "door",
+          "label": "Trust",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the stoat and Lyra the lynx sitting side by side on a sunny woodland stone path, both looking down happily at the shiny brass compass held between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Bramble the stoat accidentally misplaces a shared compass in the tall brush and hides the mistake out of fear of disappointing Lyra the lynx.",
+      "decisive_choice": "Bramble unearths the hidden compass from the brush and hands it directly to Lyra to confess the truth.",
+      "resolution": "Lyra forgives Bramble, and both friends use the compass properly to navigate the forest trail together.",
+      "visual_bible": {
+        "style": "Charming storybook illustration with warm earthy tones, soft lighting, and detailed fur textures.",
+        "characters": {
+          "Bramble": "A nimble stoat with sleek brown fur, a cream-colored belly, bright curious eyes, and a slender frame.",
+          "Lyra": "A graceful lynx with thick tawny fur, distinctive dark ear tufts, amber eyes, and a calm, reassuring posture."
+        },
+        "locations": {
+          "forest": "A lush, vibrant woodland filled with tall pine trees, soft mossy ground, and dappled sunlight filtering through branches."
+        },
+        "objects": {
+          "compass": "A polished brass pocket compass with a clear glass face and a steady red needle pointing north."
+        }
+      },
+      "plot_fingerprint": "0ff3eba2cac31ac27804b2bf85920876e6f7d07a66b0ddec8cf655a33d8e52e5"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+      "title": "Jasper the Otter and Barnaby the Cat and the Riverbank Lantern",
+      "hook": "The Evening Shadow Falls",
+      "question": "How can two animals share a single lantern to light the dusk path?",
+      "answer": "By rotating the placement of the lantern at the midpoint marker every hour.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Evening Shadow Falls",
+          "speech": "Jasper holds the glowing lantern tightly, claiming the dimming riverbank path requires absolute illumination for his evening reading.",
+          "visual": "signal",
+          "label": "The Competing Claim",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the brown otter stands on a grassy riverbank holding a lit brass lantern with a warm yellow glow, while Barnaby the ginger cat sits nearby with crossed arms looking at the light in a dimly lit dusk forest setting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Divided Path",
+          "speech": "Barnaby insists the brass lantern belongs near the northern rocks, leaving Jasper in total darkness without any light source.",
+          "visual": "forest",
+          "label": "The Argument",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds the brass lantern close to his chest near a pile of river rocks, while Jasper the brown otter points toward the southern path with a frustrated expression in a dusky woodland environment.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Midpoint Solution",
+          "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow.",
+          "visual": "door",
+          "label": "The Compromise",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, illuminating both of their open books.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Both companions read happily as the steady lantern beam bridges the distance between their separate nighttime reading spots.",
+          "visual": "planet",
+          "label": "The Peaceful Outcome",
+          "story_beat": "payoff",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat sit on opposite sides of a glowing brass lantern resting on a central flat stone, each peacefully reading an open book under the clear starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Jasper the otter and Barnaby the cat both urgently need the single shared lantern to illuminate their separate evening reading paths along opposite bends of the dark riverbank.",
+      "decisive_choice": "Jasper proposes placing the lantern upon a flat stepping stone exactly halfway between their dens so its glow reaches both paths equally.",
+      "resolution": "Both friends comfortably read their books side by side under the steady glow of the shared lantern.",
+      "visual_bible": {
+        "style": "Warm and inviting storybook illustration style with soft watercolor textures and gentle lighting.",
+        "characters": {
+          "Jasper the otter": "A sleek brown otter with whiskers, wearing a small blue scarf around his neck.",
+          "Barnaby the cat": "A fluffy ginger cat with white paws, wearing a green woolen vest."
+        },
+        "locations": {
+          "Riverbank path": "A lush grassy riverbank lined with smooth stones, ferns, and tall reeds under a twilight sky."
+        },
+        "objects": {
+          "lantern": "A polished brass lantern with glass panels emitting a warm, steady yellow light.",
+          "book": "A thick hardcover book with a faded red cover and cream-colored pages.",
+          "stone": "A broad, flat gray river stone used as a stable surface."
+        }
+      },
+      "plot_fingerprint": "7f7182b420c3a7903d26e16d83085d155d174fc317cc52159a77064d54065a38"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-85eb8696617cd73487cd",
+      "title": "Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue",
+      "hook": "The Mysterious Tracks",
+      "question": "Why are the ripe red garden tomatoes vanishing when two different footprints lead in opposite directions?",
+      "answer": "Sammy hopped lightly across the top fence while Pip bounded through the lower mulch, each harvesting only fallen fruit to clear the patch safely.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Mysterious Tracks",
+          "speech": "Look at these conflicting footprints near the flower bed, proving someone took our favorite garden snacks without asking.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit stand in a sunny garden near a green flower bed, pointing at distinct paw prints in the dirt while holding a small red flower.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Divided Path",
+          "speech": "I investigated the upper fence line all afternoon while you searched the lower bushes, leading us to completely wrong conclusions.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel sits atop a wooden garden fence holding a yellow compass, looking down at Pip the rabbit who stands in the mulch below holding a wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Discovery",
+          "speech": "Instead of blaming each other for the missing harvest, we should place our gathered clues together on this wooden table.",
+          "visual": "door",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit stand side by side next to a weathered wooden table in the garden, examining a shared red flower and a silver key together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Cooperative Harvest",
+          "speech": "Working together from both sides of the garden patch was the secret to keeping our green home safe and well-fed.",
+          "visual": "planet",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit sit happily together on the garden lawn under a bright sunny sky, sharing a bright red flower and a small wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Sammy the squirrel and Pip the rabbit find conflicting evidence of who disturbed the tomato patch, sparking a fierce disagreement over garden rights.",
+      "decisive_choice": "Sammy stops arguing and compares paw prints with Pip, discovering they both worked on opposite sides of the exact same task.",
+      "resolution": "Both animals happily share the harvested garden tomatoes side by side, recognizing their cooperative efforts kept the patch thriving.",
+      "visual_bible": {
+        "style": "Bright, charming stop-motion felt puppet animation style with vibrant natural lighting and detailed tactile textures.",
+        "characters": {
+          "Sammy": "An energetic brown squirrel with a fluffy tail, wearing a tiny blue vest and bright green scarf.",
+          "Pip": "A soft grey rabbit with long floppy ears, wearing a cozy orange sweater and round spectacles."
+        },
+        "locations": {
+          "Garden": "A lush, sunlit suburban garden filled with rich brown soil, green leafy vegetables, wooden fences, and colorful flower beds."
+        },
+        "objects": {
+          "flower": "A vibrant red garden blossom with deep green stem and leaves.",
+          "box": "A small handcrafted wooden storage box with a brass latch.",
+          "compass": "A polished brass pocket compass with a clear glass face and spinning needle.",
+          "key": "A small decorative silver key used for garden shed doors."
+        }
+      },
+      "plot_fingerprint": "f73364de01825739297a0799b7ec433e70453c6395336e91d7b6aa0185073637"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-30c5db2a54bfb295801d",
+      "title": "Pip the Pangolin and Orion the Owl and the Moonlit Signal",
+      "hook": "The Hidden Canyon Mist",
+      "question": "How can two nocturnal forest friends exchange a vital nocturnal message across a misty canyon without words?",
+      "answer": "By using a carefully timed lantern glow and a polished brass bell reflection to bounce light across the treetops.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Canyon Mist",
+          "speech": "Heavy fog blocks our view, masking the midnight seed harvest path completely across the shadowy ravine.",
+          "visual": "signal",
+          "label": "Ravine Mist",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the pangolin holding a polished brass bell stands on a mossy forest log while Orion the owl perches above on a pine branch, looking down into a thick gray canyon fog under a bright silver moon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shadowy Obstacle",
+          "speech": "Our initial lantern signals fade instantly inside the dense mist, hiding the proper harvesting locations from our sight.",
+          "visual": "forest",
+          "label": "Blocked View",
+          "story_beat": "build",
+          "visual_prompt": "Pip the pangolin peers closely at a brass bell on the dark forest floor, while Orion the owl tilts his head in concern beside a glowing lantern on a tree stump surrounded by towering pines.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reflected Beam",
+          "speech": "I must angle this brass bell precisely to bounce your lantern light across the deep gorge.",
+          "visual": "door",
+          "label": "Clearing Path",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the pangolin holds the gleaming brass bell high to catch a beam of light, while Orion the owl holds a glowing lantern nearby on an elevated stone ledge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harvest Success",
+          "speech": "Our synchronized signal pierces the darkness perfectly, guiding us both to a rich midnight harvest.",
+          "visual": "signal",
+          "label": "Shared Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the pangolin and Orion the owl sit side by side on a moonlit forest path, surrounded by small flower patches and holding a shared brass bell under a starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Pip the pangolin and Orion the owl need to coordinate the midnight seed harvest across a wide canyon, but accidental shadows block their view and risk spoiling the gathering schedule.",
+      "decisive_choice": "Pip deliberately positions the polished brass bell to catch the moonlight while Orion flashes the lantern twice, creating an unmistakable cooperative signal.",
+      "resolution": "Both animals successfully sync their harvest timing, filling their clearing with fresh seeds as the canyon mist clears.",
+      "visual_bible": {
+        "style": "Cinematic soft-focus storybook illustration with warm moonlight, deep indigo shadows, and rich natural textures.",
+        "characters": {
+          "Pip the pangolin": "A small, caramel-brown pangolin with gentle amber eyes, neatly patterned overlapping scales, and a curled tail.",
+          "Orion the owl": "A wise barn owl with speckled white and brown feathers, expressive golden eyes, and soft feathered tufts."
+        },
+        "locations": {
+          "Moonlit Forest Path": "A winding dirt trail flanked by ancient moss-covered pines, glowing ferns, and soft silver moonlight filtering through the canopy."
+        },
+        "objects": {
+          "brass bell": "A small, highly polished antique brass bell that reflects bright points of light.",
+          "lantern": "A classic metal lantern casting a warm, steady golden glow."
+        }
+      },
+      "plot_fingerprint": "66ed7b169ffea5c96c41771411b36f7c62b42a85922ddf1098f475f9f494b1c7"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f223b0cd55b658768b63",
+      "title": "Barnaby the Cat and the Courtyard Box Exchange",
+      "hook": "The Mistaken Delivery",
+      "question": "Why did Barnaby the cat carry the heavy wooden box back into the sunny stone courtyard?",
+      "answer": "Barnaby returned the wrongly exchanged box to clear up a mistaken delivery and restore trust with his neighbor.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Oh dear, this wooden box contains books that belong to my neighbor rather than my own belongings.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the ginger cat stands near a rustic wooden door in a sunlit cobblestone courtyard, holding a small wooden box with a puzzled expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inspecting the Contents",
+          "speech": "Let us check the pages inside this mysterious book to verify where the mix-up truly originated.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat sits on a stone bench in the courtyard, looking closely at an open book placed beside the wooden box under bright morning light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Choosing to Return",
+          "speech": "I must lift this heavy box and carry it back across the courtyard before the afternoon shadows grow too long.",
+          "visual": "robot",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the ginger cat firmly grips the wooden box with both front paws, standing resolutely on the courtyard flags preparing to walk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring Honesty",
+          "speech": "Here is your rightful box returned safely, proving that true neighbors always act with complete honesty.",
+          "visual": "door",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the ginger cat sets the wooden box down gently by the neighbor's doorstep in the courtyard, smiling warmly with a relieved expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Barnaby the cat receives a swapped delivery box containing his neighbor's prized possessions instead of his own requested items.",
+      "decisive_choice": "Barnaby picks up the heavy wooden box in his paws and carries it across the cobblestone courtyard to return it.",
+      "resolution": "Barnaby successfully swaps the boxes back, restoring honesty and friendship in the shared sunny courtyard.",
+      "visual_bible": {
+        "style": "Charming storybook illustration style with warm lighting and rich textures.",
+        "characters": {
+          "Barnaby": "A plump ginger cat with bright green eyes, a white chest marking, and a neat tail."
+        },
+        "locations": {
+          "Courtyard": "A sunlit medieval stone courtyard adorned with climbing ivy and weathered cobblestones."
+        },
+        "objects": {
+          "box": "A compact rectangular wooden box with brass hinges and a sliding latch.",
+          "book": "A thick leather-bound hardcover book with faded golden lettering along the spine."
+        }
+      },
+      "plot_fingerprint": "397ccfa119c967817bf23294fba50ae8793298b70cc6aa4c2b9a299969566814"
     }
   ]
 }
