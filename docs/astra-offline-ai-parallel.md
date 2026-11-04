@@ -73,3 +73,35 @@ quality scores, human approval or publication are produced or
 implied. Assistant-authored reference story quality is not
 independently verified. Main and other ASTRA workflows remain
 untouched.
+
+## Five parallel lanes: first real CPU visual proof (November 4)
+
+The isolated PR review workflow now runs story, image, motion, storyboard,
+and **preview** lanes in a single matrix. A fifth independent lane
+installs only free Pillow, checks the runner's existing ffmpeg/ffprobe,
+runs actual Pillow pixel motion tests, and encodes **three small 320×180
+H.264 MP4 videos** (48 frames / four seconds per reference story at
+12 fps) from vector-like colored shapes. Three 4-shot contact sheets
+and a JSON review report accompany the MP4s in
+`astra-offline-procedural-mp4`.
+
+The renderer is `tools/astra_offline_procedural_preview.py`. It has
+bounded, scene-specific action patterns for the existing assistant-
+drafted greenhouse, beaver-bridge, and moon-mirror stories. The
+validation measures changed pixels within scene action regions,
+explicitly excluding the changing captions, and verifies MP4 codec,
+dimensions and decoded frame counts using ffprobe. Negative controls
+ensure identical frames or only-caption changes cannot satisfy the
+pixel-motion gate. The aggregate checks all **five** review lanes.
+
+**These are real rendered pixel animations, not generative-AI
+footage, not photorealistic images, and not publication-ready videos.**
+The checks prove basic encoded scene change, not that each event is
+semantically correct, attractive, or character-consistent to a viewer.
+All videos are silent (no soundtrack), intentionally low-resolution,
+review-only proof-of-concepts. No automatic approval, publishing, GPU,
+downloaded model, paid API or ASTRA Main integration is authorized.
+
+There is no scheduled runner; only existing pull-request review events
+trigger this bounded test. Model-comparison inference is still skipped
+on ordinary PR checks and unrelated workflows are untouched.
