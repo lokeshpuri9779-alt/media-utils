@@ -18,19 +18,56 @@ SUPPORTED_PROPS = (
 # Genre diversity without requesting the unsupported human/robot protagonists
 # responsible for most failures in the 2026-11-02 production diagnostic.
 RENDERER_AWARE_DOMAINS = (
-    "mountain trail suspense with a lynx or fox protagonist",
-    "river ecology mystery with an otter protagonist",
-    "marketplace comedy with a cat or ferret protagonist",
-    "village friendship dilemma with a dog or rabbit protagonist",
-    "forest survival cooperation with a fox and rabbit",
-    "night-time railway platform mystery with a mouse or owl protagonist",
-    "woodland caretaking dilemma with a squirrel protagonist",
-    "seaside celebration mystery with an otter protagonist",
-    "dry-grassland navigation challenge with a pangolin protagonist",
-    "community sports comedy with a dog and cat",
-    "snowy forest rescue decision with a stoat protagonist",
-    "observatory discovery with an owl protagonist",
+    "courtyard honesty dilemma with a cat returning a wrongly exchanged box",
+    "quiet woodland clue mystery with a fox and rabbit comparing a book and a flower",
+    "village friendship misunderstanding with a dog and mouse and one shared ball",
+    "night observatory mistaken inference with an owl comparing a clock and a lantern",
+    "meadow conservation choice with a tapir noticing a change in two flowers",
+    "marketplace fairness decision with a ferret and a marten exchanging a key",
+    "library disagreement with a mouse and rabbit interpreting a book together",
+    "woodland trust reversal with a lynx and stoat comparing a found compass",
+    "riverbank social dilemma with an otter and a cat deciding how to share a lantern",
+    "garden misunderstanding with a squirrel and a rabbit showing conflicting clues",
+    "winter cabin ethical choice with a stoat and a fox sharing a scarce book",
+    "moonlit path cooperation with a pangolin and an owl exchanging a clear signal",
 )
+
+# 13 independent narrative mechanisms, intentionally offset from the twelve
+# scene domains. This yields up to 156 different domain/mechanism pairings
+# before the deterministic pair sequence repeats. No claim of true originality.
+CAUSAL_MODES = (
+    "an accidental mix-up creates a genuine honesty decision; a visible return corrects it",
+    "two characters interpret the same object differently; one tests a competing explanation",
+    "a character could benefit from an unfair advantage but gives it up with a visible consequence",
+    "a warning looks credible but a second observation disproves it before anyone acts",
+    "two characters initially disagree over sharing; they establish and follow a fair rule",
+    "a seemingly selfish action is revealed to protect someone else; trust changes for a reason",
+    "an important promise conflicts with an immediate temptation; the protagonist chooses visibly",
+    "a character blames the wrong friend; physical evidence forces a specific apology",
+    "a nonverbal signal is misunderstood; the protagonist changes it and receives a clear response",
+    "a character conceals a small mistake; later chooses to show the evidence and repair trust",
+    "two modest observations imply opposite outcomes; a safe experiment resolves the uncertainty",
+    "the protagonist takes an attractive shortcut; its cost is shown and a different decision pays off",
+    "a character learns a rival is in difficulty and must choose between victory and helping",
+)
+
+
+def causal_diversity_guidance(prior_count):
+    """Return one bounded prompt-only mechanism; never an approval judgment."""
+    if type(prior_count) is not int or prior_count < 0:
+        raise ValueError("Invalid prior-story count")
+    selected = CAUSAL_MODES[prior_count % len(CAUSAL_MODES)]
+    return (
+        " Distinct required causal mechanism (do not copy this wording as story text): "
+        + selected + ". The conflict, decisive choice and final consequence must "
+        "be visible in four beats and causally different from recent publications. "
+        "Avoid the recently overused relay race, lost festival key, frozen beacon, "
+        "blocked travel route, machinery jam, tool-and-gear repair, and lantern "
+        "restoration formulas. Do not merely rename a character, substitute a "
+        "prop, or move the same premise to another setting. The chosen mechanism "
+        "is prompt guidance only; every proposal still needs independent review."
+    )
+
 
 
 def writing_guidance():

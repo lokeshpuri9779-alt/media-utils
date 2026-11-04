@@ -130,8 +130,11 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         + json.dumps(sorted(excluded_titles)[:50], ensure_ascii=False) + "."
     )
     if renderer_aware:
-        from astra_v2.renderer_aware_writing import writing_guidance, recent_plot_exclusions
-        prompt += writing_guidance() + recent_plot_exclusions(prior_stories)
+        from astra_v2.renderer_aware_writing import (
+            writing_guidance, recent_plot_exclusions, causal_diversity_guidance,
+        )
+        prompt += (writing_guidance() + recent_plot_exclusions(prior_stories)
+                   + causal_diversity_guidance(rotation))
     if premise is not None:
         if not isinstance(premise, dict) or premise.get("production_ready") is not False:
             raise ValueError("Premise must be an unapproved editorial-review candidate")
