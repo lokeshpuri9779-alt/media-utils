@@ -1,33 +1,32 @@
 {
-  "observed_at": "2026-11-03T23:22:21.952370+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-04T06:17:13.131615+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 6,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 11,
-      "reason": "validation_error_unclassified"
-    },
-    {
       "index": 19,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 17,
+  "reviewed": 19,
   "review_deferred": 0,
-  "approved": 3,
+  "approved": 2,
   "review_issues": [
-    "The candidate story features a character named Pip using a wooden box to solve an obstruction barrier (a blocked gate latch), which closely mirrors multiple recently published premises in the comparison history, such as 'Pip and the Overripe Acorn Cache of Whispering Glade' and 'Professor Pip and the Midnight Platform Mystery', failing the originality and repetition check.",
-    "The premise, character pairing (fox and rabbit), and conflict involving a threatened food stash during a storm closely mirror existing published stories in the history such as 'The Fox and Rabbit of Blackberry Hollow'.",
-    "The story 'Orion the Owl and the Silent Starlight Lens' features premises, character types, and causal mechanisms that closely parallel existing works in the comparison history, such as 'Orion the Owl and the Silent Comet Ring' and other similar avian-centric tool or alignment resolution patterns.",
-    "The story premise involving an animal protagonist dealing with a broken transport method (cart/sled/bridge) and using an improvised solution (wooden hauling sled/box) strongly mirrors multiple recently published premises in the comparison history, such as 'Corin and the Kelp-Weave Kite Rig', 'The Fox and Rabbit of Blackberry Hollow', and 'The Weaver's Choice at Bramble Mill'.",
-    "The story premise, character 'Barnaby', and railway platform mystery setting heavily duplicate recently published works in the comparison history, specifically 'Professor Pip and the Midnight Platform Mystery' and 'Pip and the Midnight Railway Signal'.",
-    "The thematic elements and narrative beats replicate recently published premises from the same dataset without sufficient differentiation in causal structure or originality.",
+    "The candidate story 'Rover and Mittens' Community Relay Sprint' repeats the premise, characters, setting, and causal mechanics of the recently published comparison examples 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder'.",
+    "The candidate story closely mirrors previously published premises, characters, and causal mechanisms involving 'Bram' dealing with blocked barriers using tools, specifically repeating character naming conventions and structural patterns found in 'Bram and the Frost-Crested Pass' and related entries.",
+    "The candidate story features 'Bram' navigating an obstacle using a compass on a wooden box, which heavily mirrors the phrasing, structure, and character naming conventions of a recently published premise in the comparison history ('pip the pangolin and the dry-grassland navigation challenge' and multiple 'Bram' and 'Pip' stories).",
+    "The causal mechanism and narrative beats lack sufficient originality compared to the supplied corpus.",
+    "The causal mechanism and narrative structure heavily overlap with existing animal-rescue and environmental-clearing micro-stories in the comparison history, presenting repetitive thematic elements.",
+    "The causal mechanism of using a rigid object (wooden box/bell/stone) to clear a waterway blockage is excessively repetitive of previous premises in the dataset.",
+    "The premise, character (Bram), and causal mechanism of using a heavy bell/ringing object to solve a blockage or navigation crisis in a snowy setting heavily overlaps with recently published premises in the provided comparison history (e.g., 'Bram and the Frost-Crested Pass', 'Sammy the Squirrel and the Amber Bell').",
+    "The story premise featuring an otter character clearing a river blockage using natural materials closely mirrors the published comparison example 'The Otter and the Silent Trench' and 'Orson the Otter and the Sunken Lantern Festival'.",
+    "The story premise, character dynamic (fox and rabbit working together to clear a blocked forest path/barrier), and structural elements heavily overlap with previously published premises in the comparison history, such as 'The Fox and Rabbit of Blackberry Hollow'.",
+    "The story premises, character name (Pip), setting, and causal mechanisms heavily overlap with previously published content in the comparison history, particularly 'Pip and the Overripe Acorn Cache of Whispering Glade' and 'Sammy the Squirrel and the Amber Bell', involving a squirrel named Pip dealing with winter acorn cache access problems using an illuminated object or tool.",
+    "The story relies heavily on formulaic character naming ('Oscar the Otter') and repetitive narrative beats ('an animal character solves a minor mechanical obstacle using a common household item') that closely mirror multiple recently published premises in the provided comparison history.",
+    "The story structure, protagonist (Orson the otter), setting, and causal mechanism heavily mirror recently published animal-problem-solving fables in the comparison history such as 'Orson the Otter and the Sunken Lantern Festival' and 'The Otter and the Silent Trench'.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -82,17 +81,17 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 19,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 19
     },
     "renderer_status_counts": {
-      "incompatible": 9,
-      "structurally_eligible": 8
+      "incompatible": 8,
+      "structurally_eligible": 11
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 9,
-      "none": 8
+      "cast_mismatch": 8,
+      "none": 11
     },
     "editorial_approval": false,
     "publication_triggered": false
