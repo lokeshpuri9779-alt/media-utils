@@ -18,7 +18,7 @@ KIND = "astra_offline_crosspr_lane_v1"
 EXPECTED = {
     "story": {
         "pr": 951,
-        "sha": "b1fb13e98865f0ab177c2df0aa98707f0ac2954a",
+        "sha": "1a393b2234f03d927ededc11b1e25c2afaa9e37c",
         "tests": [
             "tests.test_astra_offline_llm",
             "tests.test_astra_offline_blind_review",
@@ -36,12 +36,14 @@ EXPECTED = {
     },
     "video": {
         "pr": 951,
-        "sha": "b1fb13e98865f0ab177c2df0aa98707f0ac2954a",
+        "sha": "1a393b2234f03d927ededc11b1e25c2afaa9e37c",
         "tests": [
             "tests.test_astra_offline_story_video_handoff",
             "tests.test_astra_offline_procedural_preview",
             "tests.test_astra_offline_visual_cues",
             "tests.test_astra_offline_character_rig",
+            "tests.test_astra_offline_action_links",
+            "tests.test_astra_offline_physical_sequence",
         ],
     },
 }
