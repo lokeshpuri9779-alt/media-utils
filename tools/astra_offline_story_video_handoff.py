@@ -221,6 +221,8 @@ def audit_decoded_frames(cid, frames):
         start, end = _count(first, region, rgb, tol), _count(last, region, rgb, tol)
         cues[name] = {"initial_pixels": start, "final_pixels": end,
                       "passed": start <= maximum and end >= minimum}
+    if not all(x["passed"] for x in per_beat.values()) or not all(x["passed"] for x in cues.values()):
+        raise ValueError("Encoded MP4 fails source-matched visual-action or payoff witnesses: " + cid)
     gestures = {}
     for stage, (label, region, rgb, tolerance, minimum) in PHYSICAL_WITNESSES[cid].items():
         index = STAGES.index(stage)
@@ -236,8 +238,6 @@ def audit_decoded_frames(cid, frames):
         }
     if not all(x["passed"] for x in gestures.values()):
         raise ValueError("Encoded MP4 lacks independent physical-action witnesses: " + cid)
-    if not all(x["passed"] for x in per_beat.values()) or not all(x["passed"] for x in cues.values()):
-        raise ValueError("Encoded MP4 fails source-matched visual-action or payoff witnesses: " + cid)
     return {"four_beat_scene_motion": per_beat, "fixed_profile_payoff_pixels": cues,
             "fixed_profile_physical_actions": gestures,
             "narrative_semantics": "not_verified",
