@@ -145,8 +145,17 @@ def run():
             report["longform_due"] = bool(long_due)
             print("ASTRA_LONGFORM_DUE=" + str(bool(long_due)).lower())
             live_ids, live_titles = youtube.recent(youtube_channel)
+            # Restore complete historical identities, including the independent
+            # pre-reset ledger. A missing or malformed ledger blocks publishing.
+            from astra_v2.proposal_history import protected_content_ids
+            history_args = (
+                os.getenv("ASTRA_PUBLISHER_STATE_PATH", str(STATE_FILE)),
+                os.getenv("ASTRA_STORY_HISTORY_PATH", "astra_story_history.json"),
+            )
+            protected_ids = protected_content_ids(*history_args)
             previous_ids = set(state["published"]) | set(state.get("reserved", {}))
             previous_ids.update(item.get("content_id", "") for item in state["pending"].values())
+            previous_ids.update(protected_ids)
             print("ASTRA_QUEUE_EXCLUSIONS=" + json.dumps({"state_ids": len(previous_ids), "youtube_ids": len(live_ids), "anthology_matches": [{"content_id": cid, "state": cid in previous_ids, "youtube": cid in live_ids} for cid in ("rayvan-anthology-90c111ee3cab7400", "rayvan-anthology-535144f2435abf94")]}))
             with tempfile.TemporaryDirectory(prefix="astra-v2-") as temp:
                 video = Path(temp) / "short.mp4"
@@ -225,7 +234,10 @@ def run():
                     return report
                 cid = candidate["content_id"]
                 title = candidate["title"]
-                if cid in live_ids | previous_ids or title.casefold().strip() in live_titles:
+                # Re-read durable identities at the final upload decision;
+                # never rely only on the pre-render exclusion snapshot.
+                final_protected_ids = protected_content_ids(*history_args)
+                if cid in live_ids | previous_ids | final_protected_ids or title.casefold().strip() in live_titles:
                     report.update(outcome="duplicate_blocked", content_id=cid)
                     return report
                 # An external, independently authorized FULL-MP4 visual review
