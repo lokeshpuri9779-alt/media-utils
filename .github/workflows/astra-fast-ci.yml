@@ -149,6 +149,10 @@ jobs:
           python-version: '3.12'
       - name: Install lightweight API client
         run: python -m pip install --disable-pip-version-check 'httpx==0.28.1' 'cryptography==46.0.1'
+      - name: Verify consolidated publisher health and editorial selection
+        run: |
+          python -m unittest discover -s tests -p 'test_astra_health_journal_validation.py' -v
+          python -m unittest discover -s tests -p 'test_auto_art_candidate_selection.py' -v
       - name: Verify publishing and renderer boundaries
         run: |
           python -m unittest discover -s tests -p 'test_directed_humanoid_fidelity_gate.py' -v
