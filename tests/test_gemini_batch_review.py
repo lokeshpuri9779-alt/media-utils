@@ -1,5 +1,7 @@
 import unittest
-from astra_v2.gemini_batch_review import review_batch
+from astra_v2.gemini_batch_review import (
+    review_batch, deferred_review_count, review_outage_category,
+)
 from astra_v2.editorial_approval_manifest import story_digest
 
 
@@ -10,7 +12,9 @@ class ReviewBatchTests(unittest.TestCase):
             reviewer=lambda s, h: {"approved": False, "record": None, "issues": ["review_failed:HTTP_429"]})
         self.assertEqual(stories["stories"], [])
         self.assertEqual(reviews["reviews"], [])
-        self.assertEqual(audit["reviews"][0]["issues"], ["review_failed:HTTP_429"])
+        self.assertEqual(audit["reviews"][0]["issues"],
+                         ["review_failed:HTTP_429", "review_deferred:rate_limited"])
+        self.assertEqual(deferred_review_count(audit["reviews"]), 1)
 
     def test_reviewer_receives_authored_candidate(self):
         story = {"content_id": "s1", "kind": "microfiction"}
@@ -55,9 +59,89 @@ class ReviewBatchTests(unittest.TestCase):
         self.assertEqual(len(audit["reviews"]), 4)
         self.assertEqual([x["issues"] for x in audit["reviews"][2:]],
                          [["review_deferred:rate_limited"]] * 2)
+        self.assertEqual(audit["reviews"][1]["issues"][-1],
+                         "review_deferred:rate_limited")
+        self.assertEqual(deferred_review_count(audit["reviews"]), 3)
         self.assertTrue(all(x["approved"] is False for x in audit["reviews"][1:]))
         self.assertEqual([x["kind"] for x in batch], ["microfiction"] * 4)
         self.assertEqual(invoked[1][1], ("story-0",))
+
+
+    def test_provider_503_defers_triggering_and_remaining_without_provider_calls(self):
+        batch = [{"content_id": f"new-{i}", "kind": "microfiction"} for i in range(4)]
+        calls = []
+        def reviewer(story, history):
+            calls.append(story["content_id"])
+            if len(calls) == 1:
+                return {"approved": False, "record": None, "issues": ["ai_editorial_rejection"]}
+            if len(calls) == 2:
+                return {"approved": False, "record": None,
+                        "issues": ["review_failed:HTTP_503",
+                                   "review_provider:provider_unavailable"]}
+            self.fail("No more provider calls permitted after HTTP 503")
+        accepted, decisions, audit = review_batch(
+            {"status": "unreviewed", "stories": batch}, [],
+            reviewer=reviewer)
+        self.assertEqual(calls, ["new-0", "new-1"])
+        self.assertEqual(accepted["stories"], [])
+        self.assertEqual(decisions["reviews"], [])
+        self.assertEqual(audit["reviews"][0]["issues"], ["ai_editorial_rejection"])
+        self.assertEqual(audit["reviews"][1]["issues"][-1],
+                         "review_deferred:provider_unavailable")
+        self.assertEqual([r["issues"] for r in audit["reviews"][2:]],
+                         [["review_deferred:provider_unavailable"]] * 2)
+        self.assertEqual(deferred_review_count(audit["reviews"]), 3)
+
+    def test_timeout_defers_unreviewed_without_falsely_rejecting_story(self):
+        batch = [{"content_id": f"new-{i}", "kind": "microfiction"} for i in range(3)]
+        calls = []
+        def reviewer(story, history):
+            calls.append(story["content_id"])
+            return {"approved": False, "record": None,
+                    "issues": ["review_failed:TimeoutError"]}
+        approved, decisions, audit = review_batch(
+            {"status": "unreviewed", "stories": batch}, [], reviewer=reviewer)
+        self.assertEqual(calls, ["new-0"])
+        self.assertEqual(approved["stories"], [])
+        self.assertEqual(decisions["reviews"], [])
+        self.assertEqual(deferred_review_count(audit["reviews"]), 3)
+        self.assertEqual(audit["reviews"][0]["issues"],
+                         ["review_failed:TimeoutError", "review_deferred:timeout"])
+        self.assertEqual(audit["reviews"][1]["issues"], ["review_deferred:timeout"])
+
+    def test_completed_approval_before_outage_remains_digest_bound(self):
+        batch = [{"content_id": f"story-{i}", "kind": "microfiction"}
+                 for i in range(3)]
+        calls = []
+        def reviewer(story, history):
+            calls.append((story["content_id"], len(history)))
+            if story["content_id"] == "story-0":
+                return {"approved": True, "record": {
+                    "content_id": story["content_id"],
+                    "story_sha256": story_digest(story)}, "issues": []}
+            return {"approved": False, "record": None,
+                    "issues": ["review_failed:URLError"]}
+        approved, decisions, audit = review_batch(
+            {"status": "unreviewed", "stories": batch}, [],
+            reviewer=reviewer)
+        self.assertEqual(calls, [("story-0", 0), ("story-1", 1)])
+        self.assertEqual(len(approved["stories"]), 1)
+        self.assertEqual(len(decisions["reviews"]), 1)
+        self.assertEqual(approved["stories"][0]["content_id"], "story-0")
+        self.assertEqual(deferred_review_count(audit["reviews"]), 2)
+        self.assertEqual(audit["reviews"][2]["issues"],
+                         ["review_deferred:transport_unavailable"])
+
+    def test_genuine_editorial_rejection_does_not_look_like_outage(self):
+        self.assertIsNone(review_outage_category(["ai_editorial_rejection"]))
+        self.assertIsNone(review_outage_category(["review_failed:HTTP_404"]))
+        self.assertIsNone(review_outage_category(["review_provider:authentication"]))
+        self.assertEqual(review_outage_category(["review_failed:HTTP_500"]),
+                         "provider_unavailable")
+        self.assertEqual(review_outage_category(["review_failed:HTTP_502"]),
+                         "provider_unavailable")
+        self.assertEqual(review_outage_category(["review_failed:HTTP_504"]),
+                         "provider_unavailable")
 
     def test_non_quota_rejection_does_not_defer_following_candidate(self):
         calls = []
