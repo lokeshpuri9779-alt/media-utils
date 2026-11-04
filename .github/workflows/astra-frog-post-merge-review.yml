@@ -1,0 +1,274 @@
+name: ASTRA Frog Post-Merge Regression (Review Only)
+on:
+  push:
+    branches:
+      - validation/astra-frog-post-merge
+    paths:
+      - tools/experimental_frog_story_render.py
+      - tools/experimental_frog_payoff_hold.py
+      - tools/experimental_frog_transition_dissolve.py
+      - tools/experimental_frog_object_pixel_tracks.py
+      - tools/experimental_video_frame_consistency.py
+      - tools/experimental_story_review_manifest.py
+      - tools/experimental_story_review_verify.py
+      - tools/experimental_visual_motion_audit.py
+      - tools/experimental_visual_motion_negative_controls.py
+      - tools/experimental_story_diversity.py
+      - .github/workflows/astra-frog-post-merge-review.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-story:
+    if: github.ref == 'refs/heads/validation/astra-frog-post-merge'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Verify merged renderer is unchanged
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          expected_blob='459264292763b148764a5073a532a986223fbfec'
+          actual=subprocess.check_output(
+              ['git','hash-object','tools/experimental_frog_story_render.py'],
+              text=True).strip()
+          assert actual==expected_blob, 'Renderer differs from merged source'
+          print('Running merged frog renderer unmodified:', actual)
+          PY
+      - name: Check independent narrative and continuity contract
+        run: |
+          python3 -m tools.experimental_story_diversity
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('artifacts/experimental-story-diversity/frog_seed_plan.json').read_text())
+          assert x['plot_fingerprint'] != x['comparison_story_fingerprint']
+          assert x['shot_count']==3 and x['frame_budget']==32
+          assert all(x[k] is False for k in ('approved','published','production_ready','paid_apis_used','rendered'))
+          assert x['visual_quality']=='not_tested'
+          assert x['manual_editorial_review_required'] is True
+          print('New story passes planning-only contract; rendering and editorial review not yet done')
+          PY
+      - name: Install free CPU Blender and FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg libegl1 libgl1 libopengl0
+      - name: Render distinct frog story on CPU (review only)
+        run: |
+          blender --background --threads 2 --python-exit-code 1 --python tools/experimental_frog_story_render.py
+          ffmpeg -hide_banner -loglevel error -y -framerate 6 -start_number 0 \
+            -i artifacts/experimental-frog-render/frame_%03d.png \
+            -frames:v 32 -c:v libx264 -preset veryfast -crf 19 -pix_fmt yuv420p \
+            artifacts/experimental-frog-render/frog_story_previs.mp4
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-render')
+          r=json.loads((root/'review.json').read_text())
+          assert r['success'] is True and all(r['checks'].values())
+          assert len(r['frames'])==32 and len(list(root.glob('frame_*.png')))==32
+          assert all(r[x] is False for x in ('approved','published','production_ready','paid_apis_used'))
+          assert r['editorial_review_required'] is True and r['semantic_quality']=='not_verified'
+          assert r['fps']==6 and abs(r['duration_seconds']-(32/6))<.001
+          assert r['checks']['five_captions_match_causal_events'] is True
+          assert r['checks']['slower_review_playback_preserves_32_frame_actions'] is True
+          # Verify the emitted MP4 itself, not just renderer JSON: require
+          # six actual frames per second, 32 decoded frames and 5.3s runtime.
+          import subprocess
+          probe=subprocess.run(
+              ['ffprobe','-v','error','-count_frames',
+               '-select_streams','v:0',
+               '-show_entries','stream=avg_frame_rate,nb_read_frames',
+               '-show_entries','format=duration','-of','json',
+               str(root/'frog_story_previs.mp4')],
+              capture_output=True,text=True,check=True,timeout=20)
+          actual=json.loads(probe.stdout)
+          stream=actual['streams'][0]
+          assert stream['avg_frame_rate']=='6/1'
+          assert int(stream['nb_read_frames'])==32
+          assert 5.30<float(actual['format']['duration'])<5.40
+          assert r['checks']['magnet_contacts_before_lift'] is True
+          assert r['checks']['seed_continuous_across_camera_cut'] is True
+          assert r['checks']['rain_streaks_precede_sprout'] is True
+          assert (root/'frog_story_previs.mp4').stat().st_size>4096
+          print('Distinct second story rendered for manual visual review only')
+          PY
+      - name: Apply shared scene-independent action timing contract
+        run: |
+          python3 -m tools.experimental_action_contracts \
+            --profile frog \
+            --report artifacts/experimental-frog-render/review.json \
+            --output artifacts/experimental-frog-render/action_contract.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/action_contract.json')
+          x=json.loads(p.read_text())
+          assert x['passed'] is True and all(x['checks'].values())
+          assert x['events']['magnet_attaches'] < x['events']['airplane_lifted']
+          assert x['events']['seed_in_pot'] <= x['events']['rain_waters_seed']
+          assert x['events']['rain_waters_seed'] < x['events']['stem_sprouts']
+          assert x['approved'] is False and x['published'] is False
+          assert x['production_ready'] is False
+          assert x['semantic_quality']=='not_verified'
+          print('Shared frog contract passed on actual CPU render trace')
+          PY
+      - name: Check visible motion and sprout pixels in actual rendered frames
+        run: |
+          python3 -m tools.experimental_visual_motion_audit \
+            --profile frog --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/visual_motion_audit.json')
+          x=json.loads(p.read_text())
+          assert x['passed'] and all(x['checks'].values())
+          assert x['manual_visual_review_required'] is True
+          assert x['semantic_quality']=='not_verified'
+          assert all(x[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
+          print('Actual render pixels show casting, lifting, planting and sprout, but not semantic quality')
+          PY
+      - name: Inject broken frames to prove image checker fails closed
+        run: |
+          python3 -m tools.experimental_visual_motion_negative_controls \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('artifacts/experimental-frog-render/visual_motion_negative_controls.json')
+          x=json.loads(p.read_text())
+          assert x['source_render_passed'] is True
+          assert x['all_corruptions_rejected'] is True
+          assert x['negative_case_count']==7
+          assert x['manual_visual_review_required'] is True
+          assert x['production_ready'] is False and x['approved'] is False and x['published'] is False
+          print('Seven negative controls rejected, production/editorial gates remain closed')
+          PY
+      - name: Track rendered object pixels before sealing frog review manifest
+        run: |
+          python3 -m tools.experimental_frog_object_pixel_tracks \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-render')
+          a=json.loads((root/'object_pixel_tracks.json').read_text())
+          n=json.loads((root/'object_pixel_negative_controls.json').read_text())
+          assert a['passed'] is True and all(a['checks'].values())
+          assert n['all_corruptions_rejected'] and n['negative_case_count']==10
+          assert all(a[k] is False for k in ('approved','published','production_ready','paid_apis_used'))
+          assert a['semantic_quality']=='not_verified'
+          print('Object RGB contrast and 10 damaged-frame controls verified; manual review still required')
+          PY
+      - name: Bind complete review evidence to frames and video
+        run: |
+          python3 -m tools.experimental_story_review_manifest \
+            --profile frog \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          packet=json.loads(Path('artifacts/experimental-frog-render/story_review_manifest.json').read_text())
+          assert packet['technical_evidence_passed'] is True
+          assert packet['video_frame_content_evidence']['passed'] is True
+          assert all(packet['checks'].values())
+          assert packet['approval']=='manual_review_required'
+          assert packet['semantic_quality']=='not_verified'
+          assert packet['production_ready'] is False and packet['published'] is False
+          assert packet['approved'] is False and packet['paid_apis_used'] is False
+          print('Bound review manifest: %d files with SHA256, no production approval' % len(packet['sha256']))
+          PY
+      - name: Independently verify packaged frog review files
+        run: |
+          python3 -m tools.experimental_story_review_verify \
+            --profile frog \
+            --directory artifacts/experimental-frog-render/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('artifacts/experimental-frog-render/story_review_verification.json')
+          r=json.loads(path.read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['checks']['video_pixels_independently_match_png_sequence'] is True
+          assert r['mismatched_files']==[]
+          assert r['files_verified']==39
+          assert r['manual_visual_review_required'] is True
+          assert r['approved'] is False and r['published'] is False
+          assert r['production_ready'] is False and r['paid_apis_used'] is False
+          assert r['semantic_quality']=='not_verified'
+          print('Verified 39 independent files against review manifest (review-only)')
+          PY
+      - name: Build separately verified extended payoff cut (review only)
+        run: |
+          python3 -m tools.experimental_frog_payoff_hold \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-payoff-hold/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-payoff-hold')
+          r=json.loads((root/'payoff_hold_review.json').read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['source_frame_count']==32 and r['additional_held_frames']==6
+          assert 6.32<r['held_duration_seconds']<6.35
+          assert r['manual_visual_review_required'] is True
+          assert all(r[x] is False for x in ('approved','published','production_ready','paid_apis_used'))
+          assert (root/'frog_story_payoff_hold_review_only.mp4').stat().st_size>4096
+          print('Verified optional 1-second sprout hold without modifying canonical video')
+          PY
+      - name: Build independently verified rescue-to-plant dip-to-dusk cut (review only)
+        run: |
+          python3 -m tools.experimental_frog_transition_dissolve \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-transition-dissolve/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-transition-dissolve')
+          result=json.loads((root/'transition_dip_review.json').read_text())
+          assert result['passed'] and all(result['checks'].values())
+          assert result['source_frame_count']==32
+          assert result['new_transition_frames']==2
+          assert result['new_payoff_hold_frames']==6
+          assert 6.65<result['extended_duration_seconds']<6.69
+          assert all(result[field] is False for field in
+                     ('approved','published','production_ready','paid_apis_used'))
+          assert result['manual_visual_review_required'] is True
+          assert (root/'frog_story_transition_dip_review_only.mp4').stat().st_size>4096
+          print('40-frame optional transition verified, 32 canonical action frames preserved')
+          PY
+      - name: Preserve optional transition dip cut (not publication evidence)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-frog-transition-dip-review
+          path: artifacts/experimental-frog-transition-dissolve/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve optional extended payoff cut (not publication evidence)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-frog-payoff-hold-review
+          path: artifacts/experimental-frog-payoff-hold/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve frog video and frames for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-frog-story-review
+          path: artifacts/experimental-frog-render/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve story plan for manual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-distinct-story-plan
+          path: artifacts/experimental-story-diversity/
+          retention-days: 7
+          if-no-files-found: error
