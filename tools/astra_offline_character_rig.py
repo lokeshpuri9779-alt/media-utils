@@ -61,10 +61,7 @@ def _beetle(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
     _disc(d, x+17, cy-16, 2, (234, 165, 74))
     _disc(d, x+22, cy-17, 2, (234, 165, 74))
     # Mechanical intervention: facing hand and foreleg change by beat.
-    reach = [(x+18, cy-4-9*t),
-             (x+24+20*t, cy-22-23*t),
-             (x+21-7*t, cy-35+12*t),
-             (x+25+12*t, cy-22-27*t)][stage]
+    reach = actor_grip_position("glasshouse-sunshade", stage, t)
     _line(d, (x+12, cy+2), reach, (23, 87, 64), 3)
     _disc(d, *reach, 3, (57, 151, 105))
     _disc(d, x-4, cy+3, 6, mark)
@@ -87,10 +84,7 @@ def _beaver(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
         _line(d, (x+dx, y+12), (x+dx+2, y+18),
               (77, 51, 39), 3)
     # An articulated front paw reaches toward the loose bridge plank.
-    end = [(x+22+2*t, y+5-4*t),
-           (x+25+24*t, y+6-5*t),
-           (x+36-19*t, y+11+12*t),
-           (x+25+4*t, y+3-5*t)][stage]
+    end = actor_grip_position("footbridge-ducklings", stage, t)
     _line(d, (x+10, y+8), end, (95, 61, 43), 4)
     _disc(d, *end, 4, (147, 90, 59))
     # Same blue scarf on each scene is a stronger continuity anchor than
@@ -120,14 +114,42 @@ def _moth(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
     _disc(d, x+3, y-10, 2, (20, 27, 41))
     # Linen apron, cyan badge and reach toward the bracket or mirror.
     d.rectangle((int(x-5), y-1, int(x+5), y+12), fill=(222, 208, 192, 255))
-    end = [(x+9, y+4-5*t),
-           (x+19+7*t, y-4-14*t),
-           (x+10-8*t, y-12+15*t),
-           (x+20+7*t, y-4-13*t)][stage]
+    end = actor_grip_position("moon-mirror-garden", stage, t)
     _line(d, (x+5, y+4), end, (151, 112, 187), 3)
     _disc(d, *end, 3, (179, 136, 197))
     _disc(d, x, y+5, 6, mark)
 
+
+
+def actor_grip_position(case_id: str, stage: int, progress: float) -> tuple[int, int]:
+    """Shared exact arm-tip anchor; used by rig and prop-connection overlays."""
+    if case_id not in PROFILES or type(stage) is not int or stage not in range(4):
+        raise ValueError("unsupported character grip")
+    if not isinstance(progress, (int, float)) or not math.isfinite(progress) or not 0 <= progress <= 1:
+        raise ValueError("invalid grip progress")
+    t = progress
+    if case_id == "glasshouse-sunshade":
+        x = [30 + 9*t, 40 + 5*t, 44 - 8*t, 38 + 9*t][stage]
+        cy = 142
+        reach = [(x+18, cy-4-9*t),
+                 (x+24+20*t, cy-22-23*t),
+                 (x+21-7*t, cy-35+12*t),
+                 (x+25+12*t, cy-22-27*t)][stage]
+    elif case_id == "footbridge-ducklings":
+        x = [41 + 6*t, 44 + 5*t, 49 - 7*t, 24 + 1*t][stage]
+        y = 99
+        reach = [(x+22+2*t, y+5-4*t),
+                 (x+25+24*t, y+6-5*t),
+                 (x+36-19*t, y+11+12*t),
+                 (x+25+4*t, y+3-5*t)][stage]
+    else:
+        x = [40+10*t, 50+158*t, 208-8*t, 204+8*t][stage]
+        y = 103
+        reach = [(x+9, y+4-5*t),
+                 (x+19+7*t, y-4-14*t),
+                 (x+10-8*t, y-12+15*t),
+                 (x+20+7*t, y-4-13*t)][stage]
+    return int(reach[0]), int(reach[1])
 
 def render_actor_layer(case_id: str, stage: int,
                        progress: float) -> Image.Image:

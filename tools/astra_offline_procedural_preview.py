@@ -20,6 +20,7 @@ from PIL import Image, ImageChops, ImageDraw
 from tools.astra_offline_storyboard import build_packet
 from tools.astra_offline_visual_cues import audit_visible_outcome
 from tools.astra_offline_character_rig import render_actor_layer, audit_character_presence
+from tools.astra_offline_action_links import render_action_link, audit_action_link, ACTION_STAGES
 
 W, H = 320, 180
 FPS = 12
@@ -150,8 +151,11 @@ def render_frame(case_id: str, stage: int, progress: float) -> Image.Image:
         _mirror(draw, stage, progress)
     # The same small hand-articulated character rig persists across all
     # four shots. This is a pixel-level cue, not semantic identity proof.
-    image = Image.alpha_composite(
+    composited = Image.alpha_composite(
         image.convert("RGBA"), render_actor_layer(case_id, stage, progress)
+    )
+    image = Image.alpha_composite(
+        composited, render_action_link(case_id, stage, progress)
     ).convert("RGB")
     draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, W, 28), fill=(17, 24, 35))
@@ -223,6 +227,12 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
             raw_actor_audit = audit_character_presence(case, previews)
             if not raw_actor_audit["passed"]:
                 raise ValueError(f"{case} missing persistent rendered actor")
+            raw_action_links = [
+                audit_action_link(case, stage, 1.0, previews[stage])
+                for stage in ACTION_STAGES
+            ]
+            if not all(item["passed"] for item in raw_action_links):
+                raise ValueError(f"{case} rendered hand-to-prop link missing")
             contact = Image.new("RGB", (W*4, H), (15, 15, 15))
             for i, img in enumerate(previews):
                 contact.paste(img, (i*W, 0))
@@ -285,6 +295,12 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
             decoded_actor_audit = audit_character_presence(case, decoded_stage_ends)
             if not decoded_actor_audit["passed"]:
                 raise ValueError(f"{case} encoded MP4 missing character continuity cue: {decoded_actor_audit['marker_pixel_counts']}")
+            decoded_action_links = [
+                audit_action_link(case, stage, 1.0, decoded_stage_ends[stage])
+                for stage in ACTION_STAGES
+            ]
+            if not all(item["passed"] for item in decoded_action_links):
+                raise ValueError(f"{case} encoded MP4 missing attached action link: {decoded_action_links}")
             results.append({
                 "case_id": case, "file": mp4.name, "contact_sheet": contact_path.name,
                 "sha256": _sha_file(mp4), "bytes": mp4.stat().st_size,
@@ -297,6 +313,8 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                 "decoded_mp4_visual_cues": decoded_visual_cues,
                 "rendered_character_presence_cues": raw_actor_audit,
                 "decoded_character_presence_cues": decoded_actor_audit,
+                "rendered_hand_to_prop_links": raw_action_links,
+                "decoded_hand_to_prop_links": decoded_action_links,
                 "decoded_frame_count_verified": TOTAL_FRAMES,
                 "visible_story_outcome_cues_verified": True,
                 "story_semantic_accuracy": "not_verified",
@@ -311,6 +329,7 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
         "real_mp4_encoded": True, "actual_scene_pixel_differences_checked": True,
         "decoded_mp4_outcome_cues_checked": True,
         "decoded_mp4_character_presence_cues_checked": True,
+        "decoded_mp4_hand_to_prop_cues_checked": True,
         "gpu_used": False, "image_generation_model_used": False,
         "model_inference_executed": False, "audio_included": False,
         "production_quality": "not_verified",

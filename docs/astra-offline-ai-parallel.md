@@ -163,3 +163,29 @@ This update is inside the same experimental preview lane, with the
 five parallel lanes and aggregate gating unchanged. Clips remain
 silent, low-resolution, CPU-only, unpublished 4-second proofs.
 No new AI model, paid API, production route or automatic approval.
+
+## Explicit hand-to-prop contact geometry (November 4, isolated preview)
+
+The experimental `preview` lane now draws six hand-authored interaction
+connections: greenhouse beetle pulling the canopy through a visible rope
+and pulley in the attempt/payoff, beaver gripping a plank and tying a
+line toward the bridge post, and moth keeper reaching the mirror's
+handle and repair bracket. The shared `actor_grip_position` function
+defines the rig hand endpoint for both character animation and each
+action-link overlay; the two can no longer silently disagree on the
+joint position in the source geometry.
+
+`tools/astra_offline_action_links.py` tests a line sampled between
+each actual grip and declared target in both **raw scene endpoints and
+frames decoded from the H.264 MP4**. Negative controls intentionally
+erase expected connections, swap to caption-only pixels, and test
+off-catalog scenes. The encoder must fail closed if one of the six
+links disappears; all earlier outcome and character-marker gates
+remain in place. Existing five parallel review lanes and their single
+aggregate gate remain unchanged.
+
+This is manually scripted 2D previsualization: lines and colored
+targets are explicit artifacts and **cannot certify natural grasping
+mechanics, physics, cinematic visuals, semantic fidelity, or
+publication quality**. Videos remain 320×180, four seconds, silent,
+offline, CPU-only, unapproved, and unpublished.
