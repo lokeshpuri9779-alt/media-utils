@@ -1,32 +1,27 @@
 {
-  "observed_at": "2026-11-04T06:17:13.131615+00:00",
-  "generated": 19,
+  "observed_at": "2026-11-04T12:25:05.823277+00:00",
+  "generated": 20,
   "requested": 20,
-  "generation_failures": [
-    {
-      "index": 19,
-      "reason": "invalid_story_structure"
-    }
-  ],
-  "reviewed": 19,
+  "generation_failures": [],
+  "reviewed": 20,
   "review_deferred": 0,
-  "approved": 2,
+  "approved": 0,
   "review_issues": [
-    "The candidate story 'Rover and Mittens' Community Relay Sprint' repeats the premise, characters, setting, and causal mechanics of the recently published comparison examples 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder'.",
-    "The candidate story closely mirrors previously published premises, characters, and causal mechanisms involving 'Bram' dealing with blocked barriers using tools, specifically repeating character naming conventions and structural patterns found in 'Bram and the Frost-Crested Pass' and related entries.",
-    "The candidate story features 'Bram' navigating an obstacle using a compass on a wooden box, which heavily mirrors the phrasing, structure, and character naming conventions of a recently published premise in the comparison history ('pip the pangolin and the dry-grassland navigation challenge' and multiple 'Bram' and 'Pip' stories).",
-    "The causal mechanism and narrative beats lack sufficient originality compared to the supplied corpus.",
-    "The causal mechanism and narrative structure heavily overlap with existing animal-rescue and environmental-clearing micro-stories in the comparison history, presenting repetitive thematic elements.",
-    "The causal mechanism of using a rigid object (wooden box/bell/stone) to clear a waterway blockage is excessively repetitive of previous premises in the dataset.",
-    "The premise, character (Bram), and causal mechanism of using a heavy bell/ringing object to solve a blockage or navigation crisis in a snowy setting heavily overlaps with recently published premises in the provided comparison history (e.g., 'Bram and the Frost-Crested Pass', 'Sammy the Squirrel and the Amber Bell').",
-    "The story premise featuring an otter character clearing a river blockage using natural materials closely mirrors the published comparison example 'The Otter and the Silent Trench' and 'Orson the Otter and the Sunken Lantern Festival'.",
-    "The story premise, character dynamic (fox and rabbit working together to clear a blocked forest path/barrier), and structural elements heavily overlap with previously published premises in the comparison history, such as 'The Fox and Rabbit of Blackberry Hollow'.",
-    "The story premises, character name (Pip), setting, and causal mechanisms heavily overlap with previously published content in the comparison history, particularly 'Pip and the Overripe Acorn Cache of Whispering Glade' and 'Sammy the Squirrel and the Amber Bell', involving a squirrel named Pip dealing with winter acorn cache access problems using an illuminated object or tool.",
-    "The story relies heavily on formulaic character naming ('Oscar the Otter') and repetitive narrative beats ('an animal character solves a minor mechanical obstacle using a common household item') that closely mirror multiple recently published premises in the provided comparison history.",
-    "The story structure, protagonist (Orson the otter), setting, and causal mechanism heavily mirror recently published animal-problem-solving fables in the comparison history such as 'Orson the Otter and the Sunken Lantern Festival' and 'The Otter and the Silent Trench'.",
+    "The candidate story 'Barnaby the Dog and Cleo the Cat's Community Sports Day Relay' shares excessive premise, character dynamics, and naming conventions with recently published titles in the comparison history, specifically 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder'.",
+    "The candidate story features Buster and Cleo (or Barnaby and Cleo) engaging in a relay race / sports day obstacle challenge, which heavily mirrors recently published premises in the comparison history such as 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder'.",
+    "The candidate story features a forest animal (Sasha the squirrel) saving an evening festival after a sudden disruption (wind blowing out lanterns/lights) by using a makeshift container or item to solve the problem, which directly repeats the narrative formulas, character archetypes, and causal mechanisms of multiple recently published titles in the comparison history such as 'Orson the Otter and the Sunken Lantern Festival', 'Sammy the Squirrel and the Amber Bell', and 'Pip and the Overripe Acorn Cache of Whispering Glade'.",
+    "The causal mechanism and narrative structure heavily overlap with existing dataset tropes of woodland or avian characters resolving machinery/environmental jams using specific metal tools.",
+    "The causal mechanism of following a trail of wet debris to a hidden container to recover a lost festival object is repetitive compared to prior published premises in the comparison history.",
+    "The central conflict, character choices, and narrative structure closely replicate existing patterns in the comparison history involving tool-based mechanical fixes (e.g., using wrenches or tools to clear stuck gears or mechanisms), reducing overall originality.",
+    "The story features an anthropomorphic owl character (Orion) fixing a stuck mechanical device with a brass tool, which closely mirrors multiple recently published premises in the comparison history, such as 'Orion the Owl and the Silent Comet Ring' and similar animal-mechanic problem-solving narratives.",
+    "The story premise, character 'Bram', and setting strongly parallel existing recent works such as 'Bram and the Frost-Crested Pass' and 'Bramen the Stoat and the Frozen Ravine Beacon', failing the originality assessment against the provided comparison history.",
+    "The story premise, character (Pip the pangolin), and navigation-based conflict closely duplicate the recently published comparison history item 'pip the pangolin and the dry-grassland navigation challenge'.",
+    "The story premise, character (an otter protagonist solving a coastal/waterway mechanism issue with tools), and causal structure heavily mirror recently published works in the comparison history, specifically involving otters managing coastal or water-related infrastructure problems (e.g., Orson the Otter and the Sunken Lantern Festival, Ollie the Otter and the Sunken Festival Key).",
+    "The story relies on an extremely repetitive formulaic template (Pip clearing a blocked water/acorn/supply route using a specific wooden tool or lever) heavily featured across multiple recent publication examples in the comparison history, failing the originality and distinct premise criteria.",
+    "The story's protagonist (Oswin the otter), setting, and plot closely mirror previous entries involving otters recovering lost festival items, such as 'Orson the Otter and the Sunken Lantern Festival' and 'Ollie the Otter and the Sunken Festival Key'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -81,17 +76,18 @@
     ]
   },
   "creative_preflight": {
-    "generated": 19,
+    "generated": 20,
     "script_status_counts": {
-      "no_simple_flags": 19
+      "no_simple_flags": 20
     },
     "renderer_status_counts": {
-      "incompatible": 8,
-      "structurally_eligible": 11
+      "incompatible": 10,
+      "structurally_eligible": 10
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 8,
-      "none": 11
+      "cast_mismatch": 9,
+      "none": 10,
+      "unsupported_human_actor": 1
     },
     "editorial_approval": false,
     "publication_triggered": false
