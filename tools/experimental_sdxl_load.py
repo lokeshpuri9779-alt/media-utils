@@ -44,7 +44,16 @@ def selected(name):
         'merges.txt', 'vocab.json', 'tokenizer_config.json', 'special_tokens_map.json')
 
 
-def image_budget_callback(save_report, started, clock=time.monotonic):
+def time_budget(one_image=False, performance_probe=False, slow_review=False):
+    """An explicit review-only timebox; normal/probe defaults never expand."""
+    if slow_review:
+        if not one_image or performance_probe:
+            raise ValueError('slow_review requires one_image and excludes performance_probe')
+        return 2400, 2700
+    return (450 if performance_probe else 900), 1200
+
+
+def image_budget_callback(save_report, started, clock=time.monotonic, inference_limit=900):
     """Keep the 20-step call intact; reject a slow run before decoding."""
     previous = started
     intervals = []
@@ -57,13 +66,13 @@ def image_budget_callback(save_report, started, clock=time.monotonic):
         previous = now
         if step_index == 2:
             projected = now - started + 17 * max(intervals[1:3]) + 180
-            within_budget = projected <= 900
+            within_budget = projected <= inference_limit
             save_report('inference-budget.json', {
                 'status': 'continue_inference' if within_budget else 'inference_budget_exceeded',
                 'elapsed_seconds': now - started,
                 'step_intervals_seconds': list(intervals),
                 'projected_total_seconds': projected,
-                'decode_reserve_seconds': 180, 'inference_limit_seconds': 900,
+                'decode_reserve_seconds': 180, 'inference_limit_seconds': inference_limit,
                 'approved': False, 'production_ready': False, 'published': False,
                 'manual_visual_review_required': True})
             if not within_budget:
@@ -71,7 +80,8 @@ def image_budget_callback(save_report, started, clock=time.monotonic):
         return payload
     return callback
 
-def worker(one_image=False, performance_probe=False):
+def worker(one_image=False, performance_probe=False, slow_review=False):
+    inference_limit, _ = time_budget(one_image, performance_probe, slow_review)
     stage('download')
     started = time.monotonic()
     url = f'https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true'
@@ -186,7 +196,7 @@ def worker(one_image=False, performance_probe=False):
             negative_original_size=size, negative_target_size=size,
             negative_crops_coords_top_left=crop,
             latents=noise, output_type='pil',
-            callback_on_step_end=image_budget_callback(save, started),
+            callback_on_step_end=image_budget_callback(save, started, inference_limit=inference_limit),
             callback_on_step_end_tensor_inputs=['latents'])
         if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
             raise ValueError('Expected exactly one 1024x1024 diagnostic image')
@@ -221,7 +231,7 @@ def available_memory():
             available = min(available, max(0, int(maximum) - int((root / 'memory.current').read_text())))
     return available
 
-def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None, inference_limit=900):
+def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None, inference_limit=900, overall_limit=1200):
     if rss >= 12 * GIB:
         return 'rss_limit'
     if available < 2 * GIB:
@@ -230,11 +240,12 @@ def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None, 
         return 'load_compile_timeout'
     if inference_elapsed is not None and inference_elapsed >= inference_limit:
         return 'inference_timeout'
-    if elapsed >= 1200:
+    if elapsed >= overall_limit:
         return 'overall_timeout'
     return None
 
-def supervise(one_image=False, performance_probe=False):
+def supervise(one_image=False, performance_probe=False, slow_review=False):
+    inference_limit, overall_limit = time_budget(one_image, performance_probe, slow_review)
     import psutil
     import shutil
     OUT.mkdir(parents=True, exist_ok=True)
@@ -245,10 +256,11 @@ def supervise(one_image=False, performance_probe=False):
         'production_ready': False, 'published': False, 'manual_visual_review_required': True,
         'semantic_quality': 'not_verified', 'character_consistency': 'not_verified',
         'images_generated': 0, 'mode': 'performance_probe' if performance_probe else ('single_image' if one_image else 'load_only'),
+        'time_budget_profile': 'slow_review' if slow_review else 'standard',
         'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
         'initial_available_ram_bytes': available_memory(), 'initial_disk_free_bytes': shutil.disk_usage('/tmp').free,
         'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
-                   'load_compile_seconds': 600, 'inference_seconds': 450 if performance_probe else 900, 'overall_seconds': 1200},
+                   'load_compile_seconds': 600, 'inference_seconds': inference_limit, 'overall_seconds': overall_limit},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()
@@ -261,6 +273,8 @@ def supervise(one_image=False, performance_probe=False):
             command.append('--performance-probe')
         elif one_image:
             command.append('--one-image')
+        if slow_review:
+            command.append('--slow-review')
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         while process.poll() is None:
             try:
@@ -281,7 +295,7 @@ def supervise(one_image=False, performance_probe=False):
             reason = limit_reason(rss, available_memory(), now - started,
                 now - load_started if current in ('load', 'compile') and load_started is not None else None,
                 now - inference_started if current == 'inference' and inference_started is not None else None,
-                inference_limit=450 if performance_probe else 900)
+                inference_limit=inference_limit, overall_limit=overall_limit)
             if reason:
                 os.killpg(process.pid, signal.SIGKILL)
                 break
@@ -300,6 +314,8 @@ def supervise(one_image=False, performance_probe=False):
 
 if __name__ == '__main__':
     if '--worker' in sys.argv:
-        worker(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv)
+        worker(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv,
+               slow_review='--slow-review' in sys.argv)
     else:
-        raise SystemExit(supervise(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv))
+        raise SystemExit(supervise(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv,
+                                  slow_review='--slow-review' in sys.argv))

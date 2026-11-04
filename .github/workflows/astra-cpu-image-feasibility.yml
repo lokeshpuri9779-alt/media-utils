@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
-        description: 'Enter BENCHMARK; uses available GitHub Actions minutes, never a paid API'
+        description: 'BENCHMARK normally; BENCHMARK_SLOW_REVIEW for one SDXL image with a 40-minute inference cap; no paid API'
         required: true
         type: string
       sdxl_one_image:
@@ -76,9 +76,9 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   sdxl-one-image:
-    if: inputs.confirm_cpu_benchmark == 'BENCHMARK' && inputs.sdxl_one_image
+    if: inputs.sdxl_one_image && (inputs.confirm_cpu_benchmark == 'BENCHMARK' || (inputs.confirm_cpu_benchmark == 'BENCHMARK_SLOW_REVIEW' && !inputs.sdxl_load))
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: ${{ inputs.confirm_cpu_benchmark == 'BENCHMARK_SLOW_REVIEW' && 65 || 40 }}
     env:
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
       HF_HUB_DISABLE_TELEMETRY: '1'
@@ -95,8 +95,11 @@ jobs:
       - name: Verify single-image guardrails without loading weights
         run: python -m unittest discover -s tests -p 'test_experimental_sdxl*.py' -v
       - name: Produce one fixed-seed unapproved SDXL diagnostic
-        if: ${{ !inputs.sdxl_load }}
+        if: ${{ !inputs.sdxl_load && inputs.confirm_cpu_benchmark == 'BENCHMARK' }}
         run: python -m tools.experimental_sdxl_load --one-image
+      - name: Produce one fixed-seed unapproved SDXL slow review
+        if: ${{ inputs.confirm_cpu_benchmark == 'BENCHMARK_SLOW_REVIEW' }}
+        run: python -m tools.experimental_sdxl_load --one-image --slow-review
       - name: Measure three SDXL steps without decoding an image
         if: ${{ inputs.sdxl_load }}
         run: python -m tools.experimental_sdxl_load --performance-probe
@@ -182,3 +185,4 @@ jobs:
           path: artifacts/experimental-openvino/
           if-no-files-found: warn
           retention-days: 7
+
