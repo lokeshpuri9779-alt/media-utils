@@ -42,3 +42,18 @@ def load_history(publisher_path="astra_v2_state.json", story_path="astra_story_h
             raise ValueError("Invalid protected story history")
         records.extend(ledger["stories"])
     return records
+
+
+def protected_content_ids(publisher_path="astra_v2_state.json",
+                          story_path="astra_story_history.json"):
+    """Require the pre-reset protected ledger and return all known story IDs.
+
+    Do not infer an empty history when a durable state file is missing.
+    The existing shared history loader validates every present journal and
+    the ledger's published/stories structure before any ID is returned.
+    """
+    ledger = Path(publisher_path).with_name("astra_duplicate_protection.json")
+    if not ledger.is_file():
+        raise FileNotFoundError("Protected publication history missing")
+    return {str(record["content_id"]) for record in load_history(publisher_path, story_path)
+            if isinstance(record, dict) and record.get("content_id")}
