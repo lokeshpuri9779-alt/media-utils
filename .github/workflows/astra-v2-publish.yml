@@ -80,6 +80,11 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
+          # Protected pre-reset history is mandatory, not an optional fallback.
+          # Fail closed rather than silently repeating an already-published ID.
+          git show origin/astra-state:astra_duplicate_protection.json > astra_duplicate_protection.json
+          test -s astra_duplicate_protection.json
+          echo 'ASTRA_PROTECTED_HISTORY=restored'
           # Restore the latest AI editorial evidence as an inseparable pair.
           # Approval remains subject to current hash and publication-history gates.
           for f in ai-reviewed-stories.json ai-reviewed-decisions.json ai-editorial-reviews.json; do
