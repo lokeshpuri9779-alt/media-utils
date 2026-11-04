@@ -7824,6 +7824,55 @@
       "central_conflict": "A thick sheet of autumn ice and fallen cedar debris dams the forest stream, threatening to flood Sammy's lower winter storage burrows.",
       "decisive_choice": "Sammy rolls a heavy brass bell into the crevice of the ice dam to fracture the frozen blockage.",
       "resolution": "The ice cracks cleanly and the stream diverts safely away from the burrows, preserving the winter acorn supply."
+    },
+    {
+      "content_id": "rayvan-gemini-bf5a5c8b506c4cec3de5",
+      "video_id": "wOy6XcCKJs4",
+      "confirmed_at": "2026-11-04T08:06:48.206379+00:00",
+      "title": "Ollie the Otter and the Sunken Festival Key",
+      "plot_fingerprint": "b97991613490080ccaa4f329b7f61326b3c90fc8d299625398d07777c3021642",
+      "story_beats": [
+        {
+          "headline": "The Missing Key",
+          "speech": "Oh dear, the golden festival key is missing right before our grand seaside celebration begins today!",
+          "visual": "signal",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Ollie the otter with a worried expression stands on a weathered wooden seaside dock holding a brass compass, looking down at the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Box",
+          "speech": "Look closely down through the clear shallow water, for a locked wooden box rests right against the pier pilings.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Ollie the otter leans over the wooden dock edge, pointing a paw toward a small wooden box submerged near the barnacled pilings.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Prying Tool",
+          "speech": "We must wedge this metal wrench beneath the stubborn lid to release the clasp safely without breaking anything.",
+          "visual": "ship",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Ollie the otter sits on the sunlit wooden dock, holding a small metal wrench with a determined expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Celebration Saved",
+          "speech": "The golden key is finally free, so our seaside village festival can begin with joyful music and cheering!",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Ollie the otter stands proudly on the seaside dock holding a gleaming golden key aloft, surrounded by bright colorful flowers.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
