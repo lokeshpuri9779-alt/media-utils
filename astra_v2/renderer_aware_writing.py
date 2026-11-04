@@ -5,6 +5,9 @@ No Pillow/Blender imports: Gemini generation runs before renderer dependencies i
 The regression suite ensures names remain a subset of the actual actor/prop library.
 """
 
+from astra_v2.visual_artifact_library import SCENES
+
+
 SUPPORTED_ANIMALS = (
     "fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel",
     "tapir", "pangolin", "stoat", "lynx", "ferret", "marten",
@@ -70,6 +73,28 @@ def causal_diversity_guidance(prior_count):
 
 
 
+
+def background_scene_authoring_guidance():
+    """Scene-taxonomy awareness for unreviewed drafts, not artwork approval."""
+    return (
+        " ASTRA Studio's background TAXONOMY currently recognizes these "
+        "environment names (a name is not proof that suitable verified "
+        "background art or a faithful action image exists): "
+        + ", ".join(SCENES)
+        + ". Every beat's visual_prompt must state the ACTUAL visible location "
+        "in plain words, including beats two, three and four; do not rely "
+        "on opening narration or a previous beat for setting continuity. "
+        "When the authentic scene matches a listed environment, name it "
+        "consistently across the relevant beats. Do NOT mislabel grassland "
+        "as desert, a wooden indoor cabin as forest, or a marketplace/courtyard "
+        "as city just to force a background match. If the original story "
+        "requires an unlisted environment, describe it accurately for "
+        "independent scene-artwork review; never pretend that a listed "
+        "background depicts it. The taxonomy does not verify the artwork, "
+        "the cast, the action, or the ability to publish a video."
+    )
+
+
 def writing_guidance():
     """Constrain model proposals to existing renderable actors/props, not approval."""
     return (
@@ -111,6 +136,7 @@ def writing_guidance():
         "If the premise requires unsupported visuals, invent a different "
         "premise before returning JSON. Output is still an unreviewed proposal "
         "and must pass all independent editorial, artwork, and publisher gates."
+        + background_scene_authoring_guidance()
     )
 
 
