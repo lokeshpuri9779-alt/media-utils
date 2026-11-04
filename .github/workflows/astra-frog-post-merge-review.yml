@@ -31,11 +31,12 @@ jobs:
         run: |
           python3 - <<'PY'
           import subprocess
-          base='9e63c4d205bd50c991aa6dddb7fff7148c873d17'
-          source=subprocess.check_output(['git','show',base+':tools/experimental_frog_story_render.py'])
-          current=open('tools/experimental_frog_story_render.py','rb').read()
-          assert source==current, 'Renderer differs from merged source'
-          print('Running merged frog renderer unmodified')
+          expected_blob='459264292763b148764a5073a532a986223fbfec'
+          actual=subprocess.check_output(
+              ['git','hash-object','tools/experimental_frog_story_render.py'],
+              text=True).strip()
+          assert actual==expected_blob, 'Renderer differs from merged source'
+          print('Running merged frog renderer unmodified:', actual)
           PY
       - name: Check independent narrative and continuity contract
         run: |
