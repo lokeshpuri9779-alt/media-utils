@@ -37,7 +37,7 @@ def load_history(publisher_path="astra_v2_state.json", story_path="astra_story_h
         for cid, item in ledger["published"].items():
             if not isinstance(item, dict):
                 raise ValueError("Invalid protected publication")
-            records.append({"content_id": str(cid), **item})
+            records.append({**item, "content_id": str(cid)})
         if any(not isinstance(item, dict) for item in ledger["stories"]):
             raise ValueError("Invalid protected story history")
         records.extend(ledger["stories"])
