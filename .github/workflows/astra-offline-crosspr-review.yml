@@ -10,7 +10,9 @@ on:
       - '.github/workflows/astra-offline-crosspr-review.yml'
       - 'tools/astra_offline_crosspr_gate.py'
       - 'tools/astra_offline_story_video_handoff.py'
+      - 'tools/astra_offline_manual_scene_review.py'
       - 'tests/test_astra_offline_story_video_handoff.py'
+      - 'tests/test_astra_offline_manual_scene_review.py'
       - 'tests/test_astra_offline_crosspr_gate.py'
 
 permissions:
@@ -109,6 +111,32 @@ jobs:
             --preview-dir offline-crosspr-detail/previews \
             --source-sha "$(git -C isolated-source rev-parse HEAD)" \
             --output offline-crosspr/video-evidence.json
+      - name: Test unreviewed physical-action and human-evidence rejection gates
+        if: matrix.lane == 'video'
+        run: |
+          python3 -m unittest -v tests.test_astra_offline_manual_scene_review
+      - name: Extract source-bound encoded-frame sheet and blank human review template
+        if: matrix.lane == 'video'
+        run: |
+          python3 -m tools.astra_offline_manual_scene_review \
+            --storyboard offline-crosspr-detail/packet.json \
+            --preview-dir offline-crosspr-detail/previews \
+            --evidence offline-crosspr/video-evidence.json \
+            --source-sha "$(git -C isolated-source rev-parse HEAD)" \
+            --output offline-crosspr-human-review
+      - name: Archive visual review packet, all source MP4s and storyboard
+        if: matrix.lane == 'video'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-human-visual-review-unapproved
+          path: |
+            offline-crosspr-human-review/
+            offline-crosspr-detail/packet.json
+            offline-crosspr-detail/previews/*.mp4
+            offline-crosspr-detail/previews/review-report.json
+            offline-crosspr/video-evidence.json
+          retention-days: 7
+          if-no-files-found: error
       - name: Record checked source revision and closed gates
         shell: bash
         run: |
