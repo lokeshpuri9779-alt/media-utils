@@ -1,20 +1,61 @@
 {
-  "observed_at": "2026-11-04T15:12:05.645969+00:00",
-  "generated": 2,
+  "observed_at": "2026-11-04T15:39:33.295200+00:00",
+  "generated": 10,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 2,
-      "reason": "provider_http_503"
+      "index": 3,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 6,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 7,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 8,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 9,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 10,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 11,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 12,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 13,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 14,
+      "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 2,
-  "review_deferred": 0,
-  "approved": 0,
+  "reviewed": 8,
+  "review_deferred": 2,
+  "approved": 4,
   "review_issues": [
-    "review_failed:HTTP_503",
-    "review_failed:TimeoutError",
-    "review_provider:provider_unavailable"
+    "The candidate story features Orion the owl investigating a mechanical/celestial dial in an observatory, which closely mirrors the previously published premise and setting of 'Orion the Owl and the Frosty Observatory Dial'. Additionally, the character name 'Orion the owl' is repeated across multiple recent stories.",
+    "The candidate story features characters 'Sammy the Squirrel' and 'Pip the Rabbit' in a garden/forest setting, which closely mirrors multiple recently published premises in the comparison history (e.g., 'Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue', 'The Fox and Rabbit of Blackberry Hollow', and various Pip and Sammy stories).",
+    "The character pairing and thematic naming convention strongly duplicate existing titles and narrative formulas within the provided comparison dataset.",
+    "The story premises, character dynamics, and object disputes heavily replicate recently published content within the same dataset, specifically repeating themes regarding Buster, Cleo, and rubber ball relays or shared items like 'Buster and Cleo's Rubber Ball Relay'.",
+    "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_deferred:timeout",
+    "review_failed:TimeoutError"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -69,20 +110,23 @@
     ]
   },
   "creative_preflight": {
-    "generated": 2,
+    "generated": 10,
     "script_status_counts": {
-      "no_simple_flags": 2
+      "no_simple_flags": 10
     },
     "renderer_status_counts": {
-      "structurally_eligible": 2
+      "incompatible": 2,
+      "structurally_eligible": 8
     },
     "renderer_reason_counts": {
-      "none": 2
+      "cast_mismatch": 1,
+      "none": 8,
+      "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 2
+      "all_shots_recognized": 10
     },
-    "scene_taxonomy_recognized_shots": 8,
+    "scene_taxonomy_recognized_shots": 40,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
