@@ -8127,6 +8127,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-c9c37e127c629aebed51",
+      "video_id": "kPXIN1Y6UfA",
+      "confirmed_at": "2026-11-04T14:47:32.968028+00:00",
+      "title": "Bramble the Stoat and Lyra the Lynx and the Compass Mistake",
+      "plot_fingerprint": "0ff3eba2cac31ac27804b2bf85920876e6f7d07a66b0ddec8cf655a33d8e52e5",
+      "story_beats": [
+        {
+          "headline": "The Hidden Glitch",
+          "speech": "I did not mean to drop our compass into the dark briars and hide it from you.",
+          "visual": "forest",
+          "label": "Concealment",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the stoat nervously standing in a dense woodland glade under pine trees, holding paws behind their back while hiding a brass compass in the shadows, with Lyra the lynx watching closely.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rising Shadow",
+          "speech": "We cannot find our way along the overgrown trail without knowing which direction leads home.",
+          "visual": "signal",
+          "label": "Search",
+          "story_beat": "build",
+          "visual_prompt": "Lyra the lynx pacing near a tree stump while pointing a paw toward a foggy forest path, looking concerned as Bramble looks down remorsefully.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Admission",
+          "speech": "Here is the compass I buried in the dirt; I was afraid to tell you I lost it.",
+          "visual": "forest",
+          "label": "Confession",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble the stoat digging up the brass compass from a patch of soft moss and extending both paws to give it to Lyra the lynx.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Path Restored",
+          "speech": "Thank you for telling me the truth. Now we can check the needle and walk together.",
+          "visual": "door",
+          "label": "Trust",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the stoat and Lyra the lynx sitting side by side on a sunny woodland stone path, both looking down happily at the shiny brass compass held between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
