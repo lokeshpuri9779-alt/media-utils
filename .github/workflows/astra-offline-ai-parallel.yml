@@ -16,6 +16,7 @@ on:
       - tools/astra_offline_visual_cues.py
       - tools/astra_offline_character_rig.py
       - tools/astra_offline_action_links.py
+      - tools/astra_offline_physical_sequence.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
@@ -26,6 +27,7 @@ on:
       - tests/test_astra_offline_visual_cues.py
       - tests/test_astra_offline_character_rig.py
       - tests/test_astra_offline_action_links.py
+      - tests/test_astra_offline_physical_sequence.py
       - docs/astra-offline-ai-real-llm.md
       - docs/astra-offline-blind-review.md
   pull_request:
@@ -42,6 +44,7 @@ on:
       - tools/astra_offline_visual_cues.py
       - tools/astra_offline_character_rig.py
       - tools/astra_offline_action_links.py
+      - tools/astra_offline_physical_sequence.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
@@ -53,6 +56,7 @@ on:
       - tests/test_astra_offline_visual_cues.py
       - tests/test_astra_offline_character_rig.py
       - tests/test_astra_offline_action_links.py
+      - tests/test_astra_offline_physical_sequence.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -154,7 +158,7 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
       - name: Validate preview pixel motion and negative controls
         if: matrix.lane == 'preview'
-        run: python3 -m unittest -v tests.test_astra_offline_procedural_preview tests.test_astra_offline_visual_cues tests.test_astra_offline_character_rig tests.test_astra_offline_action_links
+        run: python3 -m unittest -v tests.test_astra_offline_procedural_preview tests.test_astra_offline_visual_cues tests.test_astra_offline_character_rig tests.test_astra_offline_action_links tests.test_astra_offline_physical_sequence
       - name: Install free FFmpeg CPU encoder in isolated preview lane
         if: matrix.lane == 'preview'
         run: |
