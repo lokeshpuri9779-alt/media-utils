@@ -179,6 +179,26 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         self.assertEqual(report["missing_shots"], [
             {"shot": 1, "reason": "no_matching_background", "scene": "railway"}])
 
+    def test_background_preflight_blocks_partial_and_caches_missing_scene(self):
+        def matching(root, *, kind, tags, video_format, limit):
+            return [{"id": "forest-art"}] if tags == ("forest",) else []
+
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root)}):
+            with patch("astra_v2.quality_asset_selector.select_assets",
+                       side_effect=matching) as selector:
+                report = preflight_fiction_backgrounds([
+                    {"story_environment": "forest"},
+                    {"story_environment": "railway"},
+                    {"story_environment": "railway"},
+                ], genre="fiction")
+        self.assertEqual(report["status"], "blocked")
+        self.assertEqual(report["missing_shots"], [
+            {"shot": 2, "reason": "no_matching_background", "scene": "railway"},
+            {"shot": 3, "reason": "no_matching_background", "scene": "railway"},
+        ])
+        self.assertEqual(selector.call_count, 2)
+        self.assertFalse(report["publication_approval"])
+
     def test_background_preflight_missing_pack_and_opt_out(self):
         with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root / "missing")}):
             report = preflight_fiction_backgrounds([
