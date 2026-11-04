@@ -1,7 +1,8 @@
 """Source-pinned, review-only ASTRA cross-experiment integration contract.
 
-The actual story and motion regressions run independently in the same CI run.
-This file combines their *test completion* receipts, not their media or models.
+Independent story and motion unit regressions run alongside one bounded CPU
+video-render/decode lane. The aggregate binds test receipts to its encoded
+story-video evidence, but does not transfer approval between experiments.
 Even a passing receipt cannot authorize output, semantic quality or publishing.
 """
 from __future__ import annotations
@@ -46,7 +47,7 @@ EXPECTED = {
 }
 CLOSED = ("approved", "published", "production_ready", "paid_apis_used",
           "production_routing_enabled", "real_model_inference_executed",
-          "new_render_executed")
+          )
 
 
 def digest(document):
@@ -80,7 +81,7 @@ def lane_report(lane, source_sha, evidence_sha=None):
         "paid_apis_used": False,
         "production_routing_enabled": False,
         "real_model_inference_executed": False,
-        "new_render_executed": False,
+        "new_render_executed": lane == "video",
     }
     if lane == "video":
         if not isinstance(evidence_sha, str) or not re.fullmatch("[0-9a-f]{64}", evidence_sha):
