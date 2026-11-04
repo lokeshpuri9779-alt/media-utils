@@ -7571,82 +7571,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-bf5a5c8b506c4cec3de5",
-      "title": "Ollie the Otter and the Sunken Festival Key",
-      "hook": "The Missing Key",
-      "question": "Where is the golden festival key hidden beneath the tidal docks?",
-      "answer": "The key is trapped inside a sealed wooden box wedged beneath the pier pilings.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Missing Key",
-          "speech": "Oh dear, the golden festival key is missing right before our grand seaside celebration begins today!",
-          "visual": "signal",
-          "label": "Reveal",
-          "story_beat": "reveal",
-          "visual_prompt": "Ollie the otter with a worried expression stands on a weathered wooden seaside dock holding a brass compass, looking down at the water.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hidden Box",
-          "speech": "Look closely down through the clear shallow water, for a locked wooden box rests right against the pier pilings.",
-          "visual": "door",
-          "label": "Build",
-          "story_beat": "build",
-          "visual_prompt": "Ollie the otter leans over the wooden dock edge, pointing a paw toward a small wooden box submerged near the barnacled pilings.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Prying Tool",
-          "speech": "We must wedge this metal wrench beneath the stubborn lid to release the clasp safely without breaking anything.",
-          "visual": "ship",
-          "label": "Mechanism",
-          "story_beat": "mechanism",
-          "visual_prompt": "Ollie the otter sits on the sunlit wooden dock, holding a small metal wrench with a determined expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Celebration Saved",
-          "speech": "The golden key is finally free, so our seaside village festival can begin with joyful music and cheering!",
-          "visual": "forest",
-          "label": "Payoff",
-          "story_beat": "payoff",
-          "visual_prompt": "Ollie the otter stands proudly on the seaside dock holding a gleaming golden key aloft, surrounded by bright colorful flowers.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A heavy wooden box containing the community festival key is jammed beneath the pier pilings by shifting tide sand.",
-      "decisive_choice": "Ollie decides to use a small metal wrench to pry open the jammed lid rather than attempting to haul the entire box ashore.",
-      "resolution": "Ollie retrieves the festival key just in time for the seaside celebration to begin without delay.",
-      "visual_bible": {
-        "style": "Bright storybook illustration style with clean outlines, vibrant coastal colors, and warm lighting.",
-        "characters": {
-          "Ollie the otter": "A cheerful brown otter with bright whiskers, wearing a sky-blue linen vest and holding a brass compass."
-        },
-        "locations": {
-          "Seaside docks": "A weathered wooden pier built over clear blue coastal waters, decorated with bright summer flowers."
-        },
-        "objects": {
-          "compass": "A polished brass pocket compass with a clear glass face and a trembling needle.",
-          "wrench": "A compact silvery metal wrench with a sturdy handle and an adjustable jaw.",
-          "box": "A small rectangular wooden box with metal corner brackets and a closed clasp.",
-          "flower": "A cluster of bright yellow coastal daisy blossoms tied together with a green stem."
-        }
-      },
-      "plot_fingerprint": "b97991613490080ccaa4f329b7f61326b3c90fc8d299625398d07777c3021642"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-8e83701d224681001c03",
       "title": "Barnaby the Rabbit and the Orchard Gate Key",
       "hook": "The Locked Orchard",
@@ -8013,6 +7937,155 @@
         }
       },
       "plot_fingerprint": "1462ec1d7bcef978e74c04e9d8e6e5db4406cf46b7fbcd937c5424f4b9171b41"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-61a5f06360f49b21536c",
+      "title": "Bram and the Overgrown Bramble Barrier",
+      "hook": "Blocked Pathway",
+      "question": "How can Bram clear the blocked path before nightfall?",
+      "answer": "Bram uses a small brass key to unlock the garden gate.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Blocked Pathway",
+          "speech": "Oh dear, these thorny brambles have completely blocked our passage to the upper orchard today.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Bram the brown squirrel standing in a sunlit pine forest looking at tangled brambles holding a brass key.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Locked Gate",
+          "speech": "We must open this old wooden gate quickly before the evening shadows start to stretch across the path.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Bram the brown squirrel inserting a small brass key into a mossy wooden garden gate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clearing the Vines",
+          "speech": "Let us carefully remove these heavy green vines so the sunlight can reach the delicious berries below.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bram the brown squirrel holding a brass lantern near a glowing beacon post in the deep forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clear Path",
+          "speech": "Look how beautifully the path opens up for everyone to travel safely toward the sweet orchard harvest.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram the brown squirrel smiling beside a wide open woodland trail with a lit lantern resting on a flat stone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Thick thorny vines block the passage to the high orchard fruit trees.",
+      "decisive_choice": "Bram cuts the main vine root instead of climbing over.",
+      "resolution": "The path opens fully and provides a safe route to the upper orchard.",
+      "visual_bible": {
+        "style": "Warm storybook watercolor illustration with clear silhouettes and soft natural lighting.",
+        "characters": {
+          "Bram": "A small brown squirrel with fluffy tail, wearing a tiny red scarf."
+        },
+        "locations": {
+          "pine_forest": "A lush woodland with tall pine trees, soft mossy ground, and dappled sunlight."
+        },
+        "objects": {
+          "brass_key": "A shiny golden brass key with an ornate handle.",
+          "brass_lantern": "A small polished brass lantern casting a warm yellow glow."
+        }
+      },
+      "plot_fingerprint": "e535d388ceee15922b821a65e280db774c74bad450efa6c834df7f9fa17ef0fb"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-03efd648c8d49e385fc9",
+      "title": "Sammy the Squirrel and the Overgrown Oak Gate",
+      "hook": "The Jammed Canopy Gate",
+      "question": "How can Sammy clear the blocked canopy gate before the autumn harvest rush?",
+      "answer": "Sammy uses a heavy wooden wrench to adjust the pulley mechanism, opening the passage just in time.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Jammed Canopy Gate",
+          "speech": "Oh dear, the harvest gate is completely stuck. I must find a way to open this heavy wooden latch before sundown.",
+          "visual": "door",
+          "label": "Canopy Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel with fluffy grey fur and a striped waistcoat stands facing a large wooden door covered in thick green vines in a lush forest, looking worried and holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Finding the Tool",
+          "speech": "This sturdy wooden wrench is just the right size to fit into the tight space behind the jammed gear mechanism.",
+          "visual": "robot",
+          "label": "Tool Storage",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel stands next to a wooden box in the forest, holding a simple wooden wrench with both paws and examining a mechanical gear.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Adjusting the Mechanism",
+          "speech": "If I turn the wrench slowly, the gear will release the vines without snapping the delicate wooden spokes of the wheel.",
+          "visual": "signal",
+          "label": "Pulley Assembly",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel stands on tiptoe by a large forest tree trunk, using the wooden wrench to turn a wooden gear assembly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Gate Opens",
+          "speech": "The gate is finally clear and wide open. The harvest carts can now pass safely through the woodland boundary.",
+          "visual": "forest",
+          "label": "Open Gate",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel stands triumphantly in a sunlit forest clearing next to a fully open wooden door, holding a small flower while smiling.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A tangled vine jams the wooden pulley mechanism of the upper canopy gate, preventing the harvest cart from passing through.",
+      "decisive_choice": "Sammy decides to use a sturdy wooden wrench to manually release the jammed wooden gear instead of pulling the vines by hand.",
+      "resolution": "The gate mechanism clicks open smoothly, allowing the canopy harvest to resume without further delay.",
+      "visual_bible": {
+        "style": "Bright, charming storybook illustration with warm lighting, detailed textures of wood and fur, and a vibrant natural color palette.",
+        "characters": {
+          "Sammy": "A small, agile squirrel with soft grey fur, bright black eyes, wearing a neat red and yellow striped waistcoat."
+        },
+        "locations": {
+          "forest": "An enchanted woodland featuring massive ancient trees, dappled sunlight, lush green ferns, and rustic wooden structures."
+        },
+        "objects": {
+          "wrench": "A carved wooden tool with a sturdy handle and a hexagonal head designed for simple wooden machinery.",
+          "box": "A weathered oak storage crate with visible grain and metal corner brackets.",
+          "flower": "A bright yellow woodland blossom with broad petals and a vibrant green stem."
+        }
+      },
+      "plot_fingerprint": "5591370f2cec4393f74c19960aeb419bb48f1eb85faad57d7d14969f6ecd2198"
     }
   ]
 }

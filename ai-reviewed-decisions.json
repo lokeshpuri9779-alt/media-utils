@@ -910,15 +910,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-bf5a5c8b506c4cec3de5",
-      "story_sha256": "050d116c4ff547fb1d57900b76d26d42559489ea76adc493b499752e31037140",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and structurally coherent.; There are no copyright or trademark violations.; The content is safe, family-friendly, and adheres to YouTube policies.; The plot and causal mechanisms are distinct from the provided comparison history.",
-      "reviewed_at": "2026-11-03T14:18:53.215100+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-8e83701d224681001c03",
       "story_sha256": "07a89e021ac3fc5e87c3fb5d64d0c5125412d6e6b53d6b0799fab1f2b1b20898",
       "decision": "approve",
@@ -961,6 +952,24 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original and maintains strong causal coherence.; The narrative structure is clear and follows a logical sequence of events.; No copyright or trademark infringements detected.; Content is safe, family-friendly, and fully compliant with YouTube policies.; The plot and mechanics do not duplicate any recently published examples provided.",
       "reviewed_at": "2026-11-03T23:22:07.668873+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-61a5f06360f49b21536c",
+      "story_sha256": "73788765104af391406caa4d3a498cbca24b5da4e6b500a72ecf91fdf30d831a",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is structurally sound and follows clear causal logic.; There are no copyright, trademark, or safety violations.; It does not duplicate the premises, characters, or causal mechanisms of the provided comparison history.",
+      "reviewed_at": "2026-11-04T06:16:43.525328+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-03efd648c8d49e385fc9",
+      "story_sha256": "0784bf5a264460cba809abf76e8dd1f15e510124d975d1483ab939ea7bd33177",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from conflict to resolution.; There are no copyright or trademark violations, and the content is entirely safe for all audiences.; The narrative structure and character actions fit well within established guidelines and present zero YouTube policy risks.",
+      "reviewed_at": "2026-11-04T06:16:54.028311+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
