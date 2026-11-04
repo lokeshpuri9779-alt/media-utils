@@ -1,34 +1,40 @@
 {
-  "observed_at": "2026-11-04T14:45:21.694831+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-04T15:07:18.663503+00:00",
+  "generated": 16,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 7,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 12,
       "reason": "validation_error_unclassified"
     },
     {
       "index": 13,
-      "reason": "invalid_story_structure"
+      "reason": "validation_error_unclassified"
     },
     {
-      "index": 16,
+      "index": 18,
       "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 17,
+  "reviewed": 16,
   "review_deferred": 0,
-  "approved": 7,
+  "approved": 2,
   "review_issues": [
-    "The repetitive formula of a dispute between two contrasting animals resolved by sharing or splitting a resource demonstrates insufficient originality under the comparison dataset.",
-    "The story premises, character dynamics, and cooperative resolution involving animal disputes over shared toys closely mirror recently published works in the comparison history, such as Buster and Cleo's Rubber Ball Relay and Orion the Owl and the Midnight Observatory Clock.",
-    "The story relies on extremely formulaic anthropomorphic animal pairings (Basil the Fox and Clover the Rabbit) investigating a minor woodland dispute using a cooperative physical comparison, which closely mirrors multiple recently published premises in the comparison history such as 'Barnaby the Cat and Sammy the Squirrel's Bramble Clue' and 'Bramen the Stoat and Vesper the Fox's Shared Winter Tome'.",
+    "The candidate story features characters 'Bramble the Stoat' and 'Lyra the Lynx', which directly duplicates the characters and naming convention present in the recent publication example 'Bramble the Stoat and Lyra the Lynx and the Compass Mistake'.",
+    "The causal mechanism and resolution\u2014an animal hoarding an item and then deciding to share it to play together\u2014closely echo previously generated content patterns, failing originality standards.",
+    "The story relies heavily on characters (Pip the Rabbit) and naming patterns (Basil and Pip, animal names paired with botanical or object clues) that closely mimic recently published templates and premises in the comparison history, failing the originality threshold for distinct story concepts.",
+    "The story relies on an extremely repetitive template ('[Character 1] and [Character 2] and the [Object]') and mirrors recently published premises featuring animal companions resolving minor conflicts over shared items (such as 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder').",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_failed:TimeoutError"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -83,18 +89,18 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 16,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 16
     },
     "renderer_status_counts": {
-      "incompatible": 6,
-      "structurally_eligible": 11
+      "incompatible": 9,
+      "structurally_eligible": 7
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 5,
-      "none": 11,
-      "unsupported_human_actor": 1
+      "cast_mismatch": 7,
+      "none": 7,
+      "unsupported_human_actor": 2
     },
     "editorial_approval": false,
     "publication_triggered": false
