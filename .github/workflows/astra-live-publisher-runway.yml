@@ -7,16 +7,21 @@ on:
       - '.github/workflows/astra-live-publisher-runway.yml'
       - 'tools/astra_live_publisher_runway.py'
       - 'tests/test_astra_live_publisher_runway.py'
+      - 'tools/astra_publisher_actions_probe.py'
+      - 'tests/test_astra_publisher_actions_probe.py'
   push:
     branches: [main]
     paths:
       - '.github/workflows/astra-live-publisher-runway.yml'
       - 'tools/astra_live_publisher_runway.py'
       - 'tests/test_astra_live_publisher_runway.py'
+      - 'tools/astra_publisher_actions_probe.py'
+      - 'tests/test_astra_publisher_actions_probe.py'
   workflow_dispatch:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   audit-signed-story-runway:
@@ -34,7 +39,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Run read-only negative controls
-        run: python -m unittest tests.test_astra_live_publisher_runway -v
+        run: python -m unittest tests.test_astra_live_publisher_runway tests.test_astra_publisher_actions_probe -v
       - name: Install bounded free CPU renderer preflight dependencies
         run: |
           python -m pip install --disable-pip-version-check \
@@ -57,11 +62,19 @@ jobs:
           python -m tools.astra_live_publisher_runway \
             --state-dir runtime-artifacts/live-runway-state \
             --output runtime-health/astra-live-runway.json
+      - name: Read recent publisher and preload Actions metadata only
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python -m tools.astra_publisher_actions_probe             --output runtime-health/astra-publisher-actions.json
       - name: Archive safe summary only
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: astra-live-runway-readonly-${{ github.run_id }}
-          path: runtime-health/astra-live-runway.json
+          path: |
+            runtime-health/astra-live-runway.json
+            runtime-health/astra-publisher-actions.json
           if-no-files-found: ignore
           retention-days: 5
