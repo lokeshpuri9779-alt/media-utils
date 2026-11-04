@@ -173,5 +173,85 @@ class GeminiRouteTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_beat_quality(beats, "Gemini")
 
+    def test_recent_stories_not_alphabetical_old_titles_guide_generation(self):
+        import json
+        old = [
+            {"title": "A-old-title-%03d" % index, "content_id": "a%d" % index,
+             "confirmed_at": "2026-10-01T00:00:00+00:00"}
+            for index in range(130)
+        ]
+        newest = {
+            "title": "Zebra-endangered-observatory-recovery",
+            "content_id": "newest", "confirmed_at": "2026-11-04T12:05:00+00:00",
+            "central_conflict": "Orchestra loses its shared rehearsal hall to a storm",
+            "decisive_choice": "Neighbors share time slots after mediating a dispute",
+        }
+        prompt = []
+        def capture(request, timeout):
+            prompt.append(json.loads(request.data)["contents"][0]["parts"][0]["text"])
+            raise RuntimeError("captured no network")
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+        }, clear=True), patch.object(
+            omniroute_gemini.urllib.request, "urlopen", side_effect=capture
+        ):
+            with self.assertRaisesRegex(RuntimeError, "captured no network"):
+                omniroute_gemini.generate(
+                    {x["content_id"] for x in old} | {"newest"},
+                    {x["title"].casefold() for x in old} | {newest["title"].casefold()},
+                    prior_stories=[*old, newest])
+        self.assertEqual(len(prompt), 1)
+        self.assertIn(newest["title"], prompt[0])
+        self.assertIn("Neighbors share time slots", prompt[0])
+        self.assertIn("fresh causal mechanism", prompt[0])
+        self.assertLess(len(prompt[0]), 13000)
+
+    def test_recent_exclusion_context_is_bounded_and_filters_invalid_data(self):
+        recent = omniroute_gemini.recent_story_exclusions([
+            None, {}, {"title": 123}, {"title": "  "},
+            {"title": "Old", "confirmed_at": "2026-10-01T12:00:00+00:00"},
+            {"title": "New", "confirmed_at": "2026-11-04T12:00:00+00:00",
+             "central_conflict": "n" * 250},
+            {"title": "New", "confirmed_at": "2026-11-03T12:00:00+00:00"},
+        ])
+        self.assertEqual([x["title"] for x in recent], ["New", "Old"])
+        self.assertLessEqual(len(recent[0]["central_conflict"]), 135)
+        for limit in (0, 33, True):
+            with self.assertRaises(ValueError):
+                omniroute_gemini.recent_story_exclusions([], limit=limit)
+
+    def test_twelve_batch_calls_cover_all_twelve_domain_constraints(self):
+        import json
+        prompts = []
+        def capture(request, timeout):
+            prompts.append(json.loads(request.data)["contents"][0]["parts"][0]["text"])
+            raise RuntimeError("captured no network")
+        history = [{"title": "Fixed %d" % i,
+                    "content_id": "fixed-%d" % i,
+                    "confirmed_at": "2026-10-30T12:00:00+00:00"}
+                   for i in range(15)]
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+        }, clear=True), patch.object(
+            omniroute_gemini.urllib.request, "urlopen", side_effect=capture
+        ):
+            for i in range(12):
+                prior = history + [
+                    {"title": "New experiment %d" % j,
+                     "content_id": "generated-%d" % j, "kind": "microfiction",
+                     "production_ready": True}
+                    for j in range(i)
+                ]
+                with self.assertRaisesRegex(RuntimeError, "captured no network"):
+                    omniroute_gemini.generate(
+                        {x["content_id"] for x in prior},
+                        {x["title"].casefold() for x in prior}, prior_stories=prior)
+        domains = [p.split("Required distinct creative domain: ", 1)[1].split(". ", 1)[0]
+                   for p in prompts]
+        self.assertEqual(len(set(domains)), 12, domains)
+        self.assertTrue(all("recent accepted, pending or batch-candidate" in p
+                            for p in prompts))
+
+
 if __name__ == "__main__":
     unittest.main()
