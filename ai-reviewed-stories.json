@@ -8771,80 +8771,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-90f252744db1398b94c4",
-      "title": "Lyra the Lynx and Bramen the Stoat's Misplaced Compass Blunder",
-      "hook": "The Missing Instrument",
-      "question": "How can two woodland friends resolve a false accusation regarding a missing compass?",
-      "answer": "By examining physical footprints together and offering a sincere, evidence-based apology.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Missing Instrument",
-          "speech": "Lyra stared angrily at Bramen, demanding to know why her polished brass compass had vanished from the mossy stone.",
-          "visual": "signal",
-          "label": "Accusation",
-          "story_beat": "reveal",
-          "visual_prompt": "Lyra the lynx stands with an upset expression on a mossy stone inside a pine forest, pointing an accusatory paw at Bramen the stoat, who holds empty paws in surprise.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Shared Inspection",
-          "speech": "Bramen held up his empty paws to prove his innocence, suggesting they inspect the muddy ground around the stone table.",
-          "visual": "forest",
-          "label": "Investigation",
-          "story_beat": "build",
-          "visual_prompt": "Bramen the stoat and Lyra the lynx stand side by side on the damp forest floor, looking down at a set of tiny muddy paw prints near a rotten log.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hidden Truth",
-          "speech": "Leaning closer, they spotted the brass compass glinting behind the log, half-buried under dry pine needles and fallen leaves.",
-          "visual": "door",
-          "label": "Discovery",
-          "story_beat": "mechanism",
-          "visual_prompt": "Lyra the lynx and Bramen the stoat crouch together beside a fallen rotten log in the pine forest, pointing paws at a shiny brass compass half-buried under pine needles.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Sincere Apology",
-          "speech": "Lyra lowered her ears in regret, gently sliding the brass compass toward Bramen as a token of her sincere apology.",
-          "visual": "signal",
-          "label": "Resolution",
-          "story_beat": "payoff",
-          "visual_prompt": "Lyra the lynx holds out the brass compass on her open paw toward Bramen the stoat in the pine forest, sharing a friendly smile of reconciliation.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Lyra the lynx accuses Bramen the stoat of stealing her brass compass, but physical footprint evidence reveals the compass was simply knocked behind a rotten log by a passing squirrel.",
-      "decisive_choice": "Lyra decides to step closer to the muddy log with Bramen, point directly at the mismatched squirrel prints, and apologize for her hasty accusation.",
-      "resolution": "Bramen accepts the apology, and both friends retrieve the brass compass together, restoring complete trust in the quiet pine grove.",
-      "visual_bible": {
-        "style": "Warm storybook digital illustration with soft lighting, painterly textures, and a cozy woodland color palette.",
-        "characters": {
-          "Lyra the lynx": "A sleek lynx with golden-brown spotted fur, expressive amber eyes, tufted ears, and a calm yet determined posture.",
-          "Bramen the stoat": "A small, agile stoat with warm brown fur, a creamy white belly, bright black eyes, and an earnest expression."
-        },
-        "locations": {
-          "pine forest": "A serene woodland setting featuring tall pine trees, soft mossy ground, scattered fallen logs, and filtered golden sunlight."
-        },
-        "objects": {
-          "compass": "A small, polished brass pocket compass with a hinged lid and a delicate glass face showing a tiny magnetic needle."
-        }
-      },
-      "plot_fingerprint": "bc10e399bab9ddac81fed438a9bcf04bd5df5df5c7280364fa7cf69f00908f2a"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
       "title": "Orion the Owl and the Midnight Observatory Misreading",
       "hook": "The Golden Glow",
@@ -8991,6 +8917,306 @@
         }
       },
       "plot_fingerprint": "a191dc36f8cbff9aa0ed2951cf0b79514689fd4f7c8d0c5c067487b740ca8374"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-448f77d9e9775e83e3c2",
+      "title": "Jasper the Otter and Barnaby the Cat Share the Lantern",
+      "hook": "The Hidden Crack",
+      "question": "How can Jasper the Otter and Barnaby the Cat share the riverbank lantern fairly when night falls?",
+      "answer": "By taking turns holding the lantern to guide their evening fishing across the riverbank waters.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Crack",
+          "speech": "Jasper stared at the tiny crack in the glass lantern, wondering anxiously if he should hide the damage from Barnaby.",
+          "visual": "forest",
+          "label": "The Hidden Crack",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the otter standing near the riverbank in the forest, holding a cracked lantern with a worried expression, facing Barnaby the cat.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Rising Shadows",
+          "speech": "As twilight deepened over the murky riverbank, the dimming light made it harder to navigate the slippery stones safely.",
+          "visual": "signal",
+          "label": "Rising Shadows",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter and Barnaby the cat standing by the riverbank in the forest as dark shadows gather, looking nervously at the flickering lantern light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Jasper stepped forward into the lantern glow, holding out the damaged glass and admitting his mistake without any hesitation.",
+          "visual": "door",
+          "label": "The Honest Confession",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter holding out the cracked lantern toward Barnaby the cat on the riverbank in the forest, looking remorseful and sincere.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Guidance",
+          "speech": "Barnaby nodded warmly, taking the lantern handle to lead the way while Jasper walked proudly beside him.",
+          "visual": "signal",
+          "label": "Shared Guidance",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the cat holding the glowing lantern with Jasper the otter walking side by side along the riverbank in the forest, smiling happily.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Jasper tries to hide a small crack he accidentally made in the lantern glass, fearing Barnaby will be angry and refuse to let him use it.",
+      "decisive_choice": "Jasper chooses to show the cracked lantern to Barnaby and proposes alternating turns carrying it to prevent further damage.",
+      "resolution": "Barnaby forgives Jasper, and both animals successfully share the lantern to illuminate their riverbank path together.",
+      "visual_bible": {
+        "style": "Warm storybook watercolor illustration with soft lighting and detailed animal textures.",
+        "characters": {
+          "Jasper the Otter": "A sleek brown otter with whiskers, wearing a small blue scarf around his neck.",
+          "Barnaby the Cat": "A fluffy orange tabby cat with green eyes, wearing a neat green vest."
+        },
+        "locations": {
+          "riverbank": "A lush, grassy riverbank surrounded by tall reeds, smooth stones, and dense forest trees under a twilight sky."
+        },
+        "objects": {
+          "lantern": "A small brass lantern with a glass pane showing a slight hairline crack on one side, glowing with a warm amber flame."
+        }
+      },
+      "plot_fingerprint": "c3225fe9c1247fc6eeda90ea9ff7ffc7966039f35c4dc3efa6785255912b2851"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-8febac41960669c51a13",
+      "title": "Bramen the Stoat and Faelen the Fox and the Shared Winter Tome",
+      "hook": "The Rivalry over the Tome",
+      "question": "How can two rival animals share a single scarce book during a freezing winter without ruining the binding?",
+      "answer": "By alternating chapter study sessions by the hearth instead of pulling the pages apart.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Rivalry over the Tome",
+          "speech": "We cannot both read this single volume by the flickering hearth fire at the exact same hour.",
+          "visual": "door",
+          "label": "Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a rustic snowfield cabin with a wooden door, Bramen the stoat and Faelen the fox stand on opposite sides of a rustic wooden table, both holding onto a single old book with worried expressions.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Shortcut",
+          "speech": "If I pull the spine open quickly, I can memorize my half before you even notice the separation.",
+          "visual": "forest",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Inside the snowfield cabin near a frosted window looking out at a snowy forest, Bramen the stoat tugs impatiently on the book while Faelen the fox holds his ground with a protective paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Arrangement",
+          "speech": "Let us take turns holding the book and reading aloud so neither of us damages the delicate binding.",
+          "visual": "signal",
+          "label": "Agreement",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the cozy snowfield cabin by the stone hearth, Faelen the fox holds the book open while Bramen the stoat sits upright nearby, pointing a tiny paw at the page in a cooperative gesture.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cooperative Reward",
+          "speech": "By sharing our winter knowledge page by page, we have both learned how to weather the deep cold.",
+          "visual": "planet",
+          "label": "Harmony",
+          "story_beat": "payoff",
+          "visual_prompt": "Inside the warmly lit snowfield cabin, Bramen the stoat and Faelen the fox sit side by side on a woven rug near the hearth, resting together peacefully with the book lying safely closed between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Bramen the stoat and Faelen the fox both claim sole right to the only remaining winter survival guide in the snowfield cabin.",
+      "decisive_choice": "Bramen chooses to propose a strict reading schedule where each animal turns the page for the other.",
+      "resolution": "Both animals peacefully master the survival techniques together and survive the harsh winter with the book intact.",
+      "visual_bible": {
+        "style": "Cozy storybook illustration with warm cinematic lighting and rich winter textures",
+        "characters": {
+          "Bramen": "A small agile stoat with soft brown and white fur, wearing a tiny knitted blue scarf.",
+          "Faelen": "A clever red fox with bright amber eyes, a thick bushy tail, and neat white-tipped paws."
+        },
+        "locations": {
+          "cabin": "A cozy wooden mountain cabin interior with rough-hewn timber walls, a glowing stone hearth, and a frosted window overlooking a snowy landscape."
+        },
+        "objects": {
+          "book": "An old leather-bound volume with faded gold lettering on the spine and slightly yellowed parchment pages."
+        }
+      },
+      "plot_fingerprint": "593ebe795dbb2b556e4315f91bad34517a03ff8f39a1139050a79e58a6cba19c"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-bc3d1955900ba3040627",
+      "title": "Felix the Cat and the Courtyard Box Return",
+      "hook": "The Wrong Delivery",
+      "question": "Will Felix return the wrongly delivered box or keep its valuable contents?",
+      "answer": "Felix chooses absolute honesty, returning the exchanged package to its rightful owner.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Wrong Delivery",
+          "speech": "Felix opened the heavy cardboard box on his stone step and stared in utter surprise at the folded red scarf inside instead of his ordered book.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the cat stands by a wooden doorway in a sunny village courtyard, looking down into an open brown cardboard box holding a red scarf while holding a small key in his paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Inspection",
+          "speech": "He lifted the soft fabric with his paw, realizing someone in the courtyard had received his book while he held their winter apparel.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "build",
+          "visual_prompt": "Felix the cat stands in the center of the village courtyard, holding up a red scarf from an open box on the cobblestone ground, looking thoughtfully toward a nearby stone wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Courtyard Trek",
+          "speech": "Carrying the box securely in his paws, Felix crossed the sunny pathway toward the opposite porch to make the exchange right.",
+          "visual": "ship",
+          "label": "Twist",
+          "story_beat": "twist",
+          "visual_prompt": "Felix the cat walks carefully across the sunny village courtyard carrying a closed brown cardboard box tightly in his paws, maintaining his balance on the round cobblestones.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Return",
+          "speech": "Felix presented the misplaced package to his smiling neighbor, successfully restoring the rightful belongings and proving his dependable character.",
+          "visual": "door",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the cat stands smiling on a wooden porch in the village courtyard, handing a brown cardboard box containing a red scarf to a friendly cat neighbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Felix the cat receives a heavy cardboard box meant for his neighbor, containing a rare knitted scarf instead of his own requested book.",
+      "decisive_choice": "Felix chooses to walk across the sunny cobblestone courtyard to hand-deliver the mistakenly swapped package back to the feline neighbor.",
+      "resolution": "The neighbor gratefully accepts her scarf and rewards Felix with a warm greeting, restoring neighborhood trust.",
+      "visual_bible": {
+        "style": "Bright storybook illustration with clean outlines, warm natural lighting, and a charming handcrafted aesthetic.",
+        "characters": {
+          "Felix": "A sleek, short-haired grey cat with bright green eyes, wearing a simple blue collar and maintaining expressive postures."
+        },
+        "locations": {
+          "village": "A quaint, sunlit cobblestone courtyard surrounded by whitewashed stucco walls, wooden doors, and flowerpots."
+        },
+        "objects": {
+          "box": "A neat, square brown cardboard box sized perfectly for an animal puppet to carry in both paws.",
+          "key": "A small, shiny brass key with a classic round bow and simple serrated blade.",
+          "bell": "A polished brass hand-bell with a small wooden handle and a clear, reflective surface.",
+          "book": "A thick hardcover book with a dark blue cover and aged paper pages."
+        }
+      },
+      "plot_fingerprint": "3e237e0ed239a838054583354ded77bab75a97123f1af5b1faa4b9015ee831f3"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-061eb1b4b87eeedb9069",
+      "title": "Finn the Fox and Barnaby the Rabbit and the Woodland Folio",
+      "hook": "The Disputed Folio",
+      "question": "Can two woodland friends agree on whether an ancient botanical folio describes a magical spell or a practical gardening guide?",
+      "answer": "By planting the disputed seed found inside the book, they discover it grows into a genuine healing flower, proving both interpretations correct.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Disputed Folio",
+          "speech": "Finn the fox holds the worn leather book tightly, claiming its glowing pages contain secret potion spells.",
+          "visual": "forest",
+          "label": "Folio Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "In the lush forest clearing, Finn the bright orange fox with white-tipped tail and large pointed ears stands upright, wearing a small green waistcoat. Finn holds a weathered leather book with golden leaf patterns on the cover. Next to him, Barnaby the fluffy cream-colored rabbit with long floppy ears and a blue neckerchief points a paw at the pages. Soft afternoon sunlight filters through tall oak trees onto the mossy ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Interpretations",
+          "speech": "Barnaby the rabbit opens a fresh flower beneath the canopy, proving the text is simply about botany.",
+          "visual": "signal",
+          "label": "Flower Test",
+          "story_beat": "build",
+          "visual_prompt": "In the lush forest clearing, Barnaby the cream-colored rabbit wearing a blue neckerchief holds up a bright yellow woodland flower next to the open book resting on a flat tree stump. Finn the orange fox stands beside him with ears perked forward in curiosity, gazing at the flower petals. Soft golden light highlights the detailed texture of the flower and the inked pages of the book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Clue",
+          "speech": "Finn places the seed into the rich soil while Barnaby carefully marks the spot with a small wooden key.",
+          "visual": "door",
+          "label": "The Planting",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush forest clearing, Finn the orange fox with a green waistcoat kneels on the damp earth, pressing a small seed into a fresh patch of soil. Barnaby the cream-colored rabbit stands beside him, holding a small metal key used as a garden marker near the freshly turned dirt. The open book rests on a nearby mossy rock under the shade of a ferns.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Luminous Sprout",
+          "speech": "The seedling blooms instantly into a radiant blossom, combining magical light and practical botany.",
+          "visual": "forest",
+          "label": "Shared Truth",
+          "story_beat": "payoff",
+          "visual_prompt": "In the lush forest clearing at twilight, Finn the orange fox and Barnaby the cream-colored rabbit sit side by side on the mossy ground, looking down at a newly sprouted flower that emits a warm, magical golden glow. The weathered book lies open nearby, reflecting the soft light onto both smiling animal faces as fireflies drift through the dim background trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn the fox insists the ancient book is a spellbook of glowing woodland potions, while Barnaby the rabbit argues it is purely a farming manual for cultivating rare flora.",
+      "decisive_choice": "Barnaby chooses to plant the seed pressed inside the middle pages of the folio in the garden soil while Finn reads the corresponding passage aloud.",
+      "resolution": "The seed sprouts into a luminous medicinal flower that illuminates the clearing, validating both the magical reading and the practical gardening method.",
+      "visual_bible": {
+        "style": "Charming, high-detail storybook illustration with warm cinematic lighting, rich textures of fur, moss, and aged paper.",
+        "characters": {
+          "Finn": "An agile red fox with bright orange fur, a bushy white-tipped tail, alert pointed ears, intelligent amber eyes, and wearing a tailored forest-green cotton waistcoat.",
+          "Barnaby": "A gentle, sturdy rabbit with soft cream-colored fur, long expressive floppy ears, twitching pink nose, and wearing a tidy cornflower-blue neckerchief tied around his neck."
+        },
+        "locations": {
+          "forest": "An enchanted, sun-dappled woodland clearing featuring ancient oak trees, thick emerald moss patches, scattered ferns, and soft natural ground cover."
+        },
+        "objects": {
+          "book": "A thick, ancient leather-bound folio with worn edges, faded gold embossing on the spine, and yellowed parchment pages filled with botanical sketches.",
+          "flower": "A vibrant five-petaled woodland blossom with bright yellow outer leaves and a soft iridescent core that catches the light.",
+          "key": "A heavy, tarnished brass key with an ornate clover-shaped bow, used as a clever garden marker by the animals."
+        }
+      },
+      "plot_fingerprint": "547557d562d07bd6444c6bb079841b3ab67f85f17ffe69ca5e17ac524fb9d285"
     }
   ]
 }
