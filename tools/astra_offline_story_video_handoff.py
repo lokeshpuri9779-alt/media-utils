@@ -16,7 +16,7 @@ from pathlib import Path
 
 from PIL import Image, ImageChops
 
-SOURCE_SHA = "b1fb13e98865f0ab177c2df0aa98707f0ac2954a"
+SOURCE_SHA = "1a393b2234f03d927ededc11b1e25c2afaa9e37c"
 SOURCE_PR = 951
 STAGES = ("setup", "attempt", "setback", "payoff")
 SIZE = (320, 180)
