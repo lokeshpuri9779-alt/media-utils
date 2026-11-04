@@ -19,6 +19,7 @@ from PIL import Image, ImageChops, ImageDraw
 
 from tools.astra_offline_storyboard import build_packet
 from tools.astra_offline_visual_cues import audit_visible_outcome
+from tools.astra_offline_character_rig import render_actor_layer, audit_character_presence
 
 W, H = 320, 180
 FPS = 12
@@ -60,10 +61,6 @@ def _greenhouse(draw: ImageDraw.ImageDraw, stage: int, t: float) -> None:
         draw.line((48+shade, 79, 104, y), fill=(117, 70, 41), width=2)
     if stage == 3:
         draw.line((48+shade, 74, 295, 128), fill=(152, 91, 36), width=4)
-    beetle_x = 22 + int((28 if stage == 0 else 12) * t)
-    _disc(draw, beetle_x+12, 152, 12, (43, 129, 96))
-    _disc(draw, beetle_x+21, 144, 6, (68, 150, 99))
-    draw.line((beetle_x+20, 140, beetle_x+23, 133), fill=(165, 107, 41), width=2)
     if stage == 3:
         # Visible foliage shading progress: darker leaves beneath pulled canopy.
         for x in (65, 147, 229):
@@ -95,10 +92,6 @@ def _bridge(draw: ImageDraw.ImageDraw, stage: int, t: float) -> None:
     if stage == 3:
         for x in (101, 225):
             draw.line((x, 106, x+2, 85), fill=(211, 195, 126), width=3)
-    beaver_x = 34 + int((17 if stage == 0 else 6) * t)
-    _disc(draw, beaver_x, 100, 13, (115, 74, 47))
-    _disc(draw, beaver_x+12, 95, 7, (150, 96, 59))
-    draw.ellipse((beaver_x-27, 105, beaver_x-7, 119), fill=(88, 58, 45))
     for i in range(3):
         if stage == 3:
             duck_x = int(262 - 215 * t) + i*16
@@ -140,10 +133,6 @@ def _mirror(draw: ImageDraw.ImageDraw, stage: int, t: float) -> None:
         draw.line((267, 67, 281, int(72+16*t)), fill=(210, 112, 87), width=3)
     if stage == 3:
         draw.rectangle((268, 69, 276, 78), fill=(221, 178, 95))
-    moth_x = 34 + int((24 if stage == 0 else 9) * t)
-    _disc(draw, moth_x, 105, 10, (124, 95, 164))
-    draw.ellipse((moth_x-15, 96, moth_x-3, 110), fill=(166, 134, 200))
-    draw.ellipse((moth_x+3, 96, moth_x+15, 110), fill=(166, 134, 200))
 
 
 def render_frame(case_id: str, stage: int, progress: float) -> Image.Image:
@@ -159,6 +148,12 @@ def render_frame(case_id: str, stage: int, progress: float) -> Image.Image:
         _bridge(draw, stage, progress)
     else:
         _mirror(draw, stage, progress)
+    # The same small hand-articulated character rig persists across all
+    # four shots. This is a pixel-level cue, not semantic identity proof.
+    image = Image.alpha_composite(
+        image.convert("RGBA"), render_actor_layer(case_id, stage, progress)
+    ).convert("RGB")
+    draw = ImageDraw.Draw(image)
     draw.rectangle((0, 0, W, 28), fill=(17, 24, 35))
     draw.text((7, 8), case_id + " | " + STAGES[stage], fill=(230, 236, 240))
     draw.rectangle((0, 160, W, 180), fill=(19, 25, 32))
@@ -225,6 +220,9 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
             )
             if not raw_visual_cues["passed"]:
                 raise ValueError(f"{case} missing rendered outcome cues: {raw_visual_cues['failed_cues']}")
+            raw_actor_audit = audit_character_presence(case, previews)
+            if not raw_actor_audit["passed"]:
+                raise ValueError(f"{case} missing persistent rendered actor")
             contact = Image.new("RGB", (W*4, H), (15, 15, 15))
             for i, img in enumerate(previews):
                 contact.paste(img, (i*W, 0))
@@ -274,6 +272,19 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
             )
             if not decoded_visual_cues["passed"]:
                 raise ValueError(f"{case} encoded MP4 misses outcome cues: {decoded_visual_cues['failed_cues']}")
+            decoded_stage_ends = [
+                Image.frombytes(
+                    "RGB", (W, H),
+                    decoded.stdout[
+                        ((stage+1)*FRAMES_PER_SCENE-1)*frame_bytes:
+                        ((stage+1)*FRAMES_PER_SCENE)*frame_bytes
+                    ],
+                )
+                for stage in range(len(STAGES))
+            ]
+            decoded_actor_audit = audit_character_presence(case, decoded_stage_ends)
+            if not decoded_actor_audit["passed"]:
+                raise ValueError(f"{case} encoded MP4 missing character continuity cue")
             results.append({
                 "case_id": case, "file": mp4.name, "contact_sheet": contact_path.name,
                 "sha256": _sha_file(mp4), "bytes": mp4.stat().st_size,
@@ -284,6 +295,8 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                 "pixel_changes_verified": True,
                 "raw_rendered_visual_cues": raw_visual_cues,
                 "decoded_mp4_visual_cues": decoded_visual_cues,
+                "rendered_character_presence_cues": raw_actor_audit,
+                "decoded_character_presence_cues": decoded_actor_audit,
                 "decoded_frame_count_verified": TOTAL_FRAMES,
                 "visible_story_outcome_cues_verified": True,
                 "story_semantic_accuracy": "not_verified",
@@ -297,6 +310,7 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
         "video_count": len(results), "video_previews": results,
         "real_mp4_encoded": True, "actual_scene_pixel_differences_checked": True,
         "decoded_mp4_outcome_cues_checked": True,
+        "decoded_mp4_character_presence_cues_checked": True,
         "gpu_used": False, "image_generation_model_used": False,
         "model_inference_executed": False, "audio_included": False,
         "production_quality": "not_verified",

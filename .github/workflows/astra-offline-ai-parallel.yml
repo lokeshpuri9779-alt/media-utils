@@ -14,6 +14,7 @@ on:
       - tools/astra_offline_storyboard.py
       - tools/astra_offline_procedural_preview.py
       - tools/astra_offline_visual_cues.py
+      - tools/astra_offline_character_rig.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
@@ -22,6 +23,7 @@ on:
       - tests/test_astra_offline_storyboard.py
       - tests/test_astra_offline_procedural_preview.py
       - tests/test_astra_offline_visual_cues.py
+      - tests/test_astra_offline_character_rig.py
       - docs/astra-offline-ai-real-llm.md
       - docs/astra-offline-blind-review.md
   pull_request:
@@ -36,6 +38,7 @@ on:
       - tools/astra_offline_storyboard.py
       - tools/astra_offline_procedural_preview.py
       - tools/astra_offline_visual_cues.py
+      - tools/astra_offline_character_rig.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
@@ -45,6 +48,7 @@ on:
       - tests/test_astra_offline_storyboard.py
       - tests/test_astra_offline_procedural_preview.py
       - tests/test_astra_offline_visual_cues.py
+      - tests/test_astra_offline_character_rig.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -146,7 +150,7 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
       - name: Validate preview pixel motion and negative controls
         if: matrix.lane == 'preview'
-        run: python3 -m unittest -v tests.test_astra_offline_procedural_preview tests.test_astra_offline_visual_cues
+        run: python3 -m unittest -v tests.test_astra_offline_procedural_preview tests.test_astra_offline_visual_cues tests.test_astra_offline_character_rig
       - name: Install free FFmpeg CPU encoder in isolated preview lane
         if: matrix.lane == 'preview'
         run: |

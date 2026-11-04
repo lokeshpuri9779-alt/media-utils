@@ -139,3 +139,27 @@ it is not a semantic visual-understanding model and cannot establish
 whether the animation is attractive, character-consistent across all
 scenes, photorealistic or publication-ready. No generative media model,
 paid APIs, production changes, or publishing path were added.
+
+## Articulated character rig and decoded four-scene identity cues (November 4)
+
+A new `tools/astra_offline_character_rig.py` supplies three **small, fully
+hand-authored 2D rigs** (Mina the beetle, bridge-builder beaver and rooftop
+moth keeper). Each has a consistent palette/emblem and a few moving
+body parts and stage-specific hand/wing gestures. The preview renderer
+no longer paints the earlier one- or two-circle substitute over the top:
+it alpha-composites the matching rig into the existing scene before
+drawing captions.
+
+For each story, the preview validator checks **character-marker pixels
+in all four rendered scene endpoints and all four decoded H.264 scene
+endpoints**. The tests reject missing/hidden character markers, invalid
+pose instructions, still rigs, and caption-only false positives.
+The audit deliberately includes a demonstration that a fake badge-colored
+rectangle can fool it: the flags therefore say character identity and
+art quality are `not_verified`. These are narrow hand-authored
+continuity cues, **not actual image recognition or naturalistic acting**.
+
+This update is inside the same experimental preview lane, with the
+five parallel lanes and aggregate gating unchanged. Clips remain
+silent, low-resolution, CPU-only, unpublished 4-second proofs.
+No new AI model, paid API, production route or automatic approval.
