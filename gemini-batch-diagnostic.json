@@ -1,36 +1,46 @@
 {
-  "observed_at": "2026-11-04T12:41:15.927063+00:00",
-  "generated": 18,
+  "observed_at": "2026-11-04T12:51:57.739515+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 14,
+      "index": 7,
       "reason": "validation_error_unclassified"
     },
     {
-      "index": 19,
-      "reason": "invalid_story_structure"
+      "index": 10,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 11,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 12,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 13,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 14,
+      "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 18,
+  "reviewed": 14,
   "review_deferred": 0,
-  "approved": 3,
+  "approved": 6,
   "review_issues": [
-    "The candidate story features a protagonist named Ollie the otter solving a nearly identical mechanical problem (wedging a sturdy wooden box beneath a tilting/slipping wooden object on a sloping or unstable surface to halt its movement) as found in the heavily represented pattern of AI-generated stories in the comparison history, such as 'Silas the Squirrel and the Overturned Seed Sieve' ('wedges a sturdy wooden box beneath the rim of the tilted sieve'). This constitutes a repetitive premise and causal mechanism within the provided comparison dataset.",
-    "The candidate story features a protagonist stabilizing a tilting display/structure with a sturdy wooden box to prevent falling objects (melons/fruit), which structurally and causally mirrors the recently published 'Silas the Squirrel and the Overturned Seed Sieve' where a character wedges a sturdy wooden box beneath the rim of a tilted sieve to halt its movement.",
-    "The candidate story utilizes the exact same narrative structure, character archetype naming convention, and plot beats (animal protagonist with a name starting with B, facing a precarious towering stack/dam/bridge blocking an item, making a physical intervention to shift weight/log/bell, and achieving immediate resolution) as numerous recently published examples in the comparison history, such as 'Buster and Cleo's Neighborhood Relay Race Blunder', 'Sammy the Squirrel and the Amber Bell', and 'Bramen the Stoat and the Frozen Ravine Beacon'.",
-    "The causal mechanism and narrative beats repeat the exact same template of formulaic AI-generated children's/fable shorts currently flooding the platform, raising YouTube policy risks regarding low-effort, repetitive programmatic content.",
-    "The central conflict, decisive choice, and resolution closely mirror previously published premises in the comparison history, specifically matching the pattern and mechanics of 'Silas the Squirrel and the Overturned Seed Sieve' where a heavy wooden container tipping over is halted by wedging a sturdy wooden box beneath it.",
-    "The combination of animal characters (Pip the rabbit and Finn the fox), an environmental obstacle involving a rolling/sliding object near a hazard, and a cooperative resolution shares excessive structural and thematic overlap with recent titles.",
-    "The story premise, characters (Pip and a fox), setting, and causal mechanism closely mirror previously published stories in the comparison history, specifically 'The Fox and Rabbit of Blackberry Hollow' and other 'Pip and' animal cooperation tales in the dataset.",
-    "The story premise, protagonist (Bramen), and causal mechanics closely mirror previously published titles in the comparison history, such as 'Bramen the Stoat and the Frozen Ravine Beacon' and other similar winter-survival obstruction-clearing stories.",
-    "The story relies on an extremely formulaic structural template and plot pattern (character, animal/creature name, problem involving a weather or environmental obstruction, brass/metal tool used as a decisive choice, and a clean resolution) that closely mirrors multiple recently published titles and premises in the comparison history, such as 'Bramen the Stoat and the Frozen Ravine Beacon', 'Pip and the Midnight Railway Signal', and 'Orion the Owl and the Silent Comet Ring'.",
-    "The story repeats premises, characters, and settings from recently published examples in the comparison history, specifically reusing the characters Buster and Cleo in a neighborhood relay race scenario ('Buster and Cleo's Neighborhood Relay Race Blunder').",
+    "Fails originality checks regarding recently published premises and character combinations.",
+    "The premise, character pairing (Barnaby and Pip / Buster and Cleo), and conflict involving a dispute over a rubber ball closely mirror existing published items in the comparison history such as 'Buster and Cleo's Rubber Ball Relay'.",
+    "The premise, character pairing, and conflict closely mirror recently published stories in the comparison history\u2014specifically 'Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue', which involves two animal characters arguing over conflicting evidence/rights and resolving it by comparing their clues side by side on a surface.",
+    "The story premise, character dynamic (Buster the dog and a companion dealing with a misplaced/disputed toy), and narrative structure closely replicate recently published content within the provided comparison history, specifically matching titles and themes like 'Buster and Cleo's Rubber Ball Relay'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "review_failed:TimeoutError"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -85,19 +95,19 @@
     ]
   },
   "creative_preflight": {
-    "generated": 18,
+    "generated": 14,
     "script_status_counts": {
-      "no_simple_flags": 18
+      "no_simple_flags": 14
     },
     "renderer_status_counts": {
-      "incompatible": 7,
-      "structurally_eligible": 11
+      "incompatible": 4,
+      "structurally_eligible": 10
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 4,
-      "missing_verified_artwork": 1,
-      "none": 11,
-      "unsupported_human_actor": 2
+      "cast_mismatch": 2,
+      "invalid_visual_shot": 1,
+      "none": 10,
+      "unsupported_human_actor": 1
     },
     "editorial_approval": false,
     "publication_triggered": false
