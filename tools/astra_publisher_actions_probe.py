@@ -39,7 +39,7 @@ def collect(repo, token, *, transport=None):
         try:
             with fetch(request, timeout=18) as response:
                 payload = json.load(response)
-        except (urllib.error.URLError, TimeoutError, ValueError) as exc:
+        except (OSError, TimeoutError, ValueError) as exc:
             # Never log token, URL, raw response, or exception text.
             raise RuntimeError(
                 "Workflow run metadata unavailable: " + label + " / "
