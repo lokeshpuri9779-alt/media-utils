@@ -276,3 +276,31 @@ negative controls to reject it. For the next real improvement, test a
 independent, manually reviewed causal outcomes and side-by-side evidence,
 retaining ASTRA's production protections. No additional model inference
 is triggered by this documentation or regression change.
+
+## November 4: independent assistant-drafted reference benchmark
+
+After real CPU run #41707761872 proved that Qwen 1.5B largely copied the
+supplied four-beat causal plan, the next low-cost experiment changes the
+evaluation material rather than increasing model size.
+
+`tools/astra_offline_reference_benchmark.py` contains **three newly
+assistant-drafted, distinct stories** about a jammed greenhouse shade,
+a flood-damaged duckling footbridge, and a rooftop moonlight mirror.
+Each includes four 25–60-word beats with an explicit event-state ledger
+for setup, attempt, setback, and observable payoff. The ledger validator
+fails closed on missing prerequisites, impossible/redundant transitions,
+reordered scenes, unresolved ending states, duplicate identifiers, and
+unbounded text. It does **not** prove the prose or visuals correspond to
+the declared ledger; assistant drafts are not human-quality ground truth.
+
+The existing **story** lane tests these cases without any AI inference,
+then exports a deterministic JSON packet for a separate human editorial
+and visual comparison. The **image** and **motion** regression lanes
+continue in parallel; the aggregate still fails closed on their reports.
+No new real-model invocation, model download, paid API, fallback,
+automatic approval, production integration, or publishing occurs.
+
+The packet explicitly records `reference_is_quality_ground_truth=false`,
+`model_quality_conclusion=no_new_evidence`, and all approval/production/
+publishing flags false. It should only be used to inspect what a coherent
+four-scene sequence looks like before choosing a future authoring method.

@@ -9,9 +9,11 @@ on:
       - tools/astra_offline_cpu_smoke.py
       - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
+      - tools/astra_offline_reference_benchmark.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
+      - tests/test_astra_offline_reference_benchmark.py
       - docs/astra-offline-ai-real-llm.md
   pull_request:
     branches: [main]
@@ -20,10 +22,12 @@ on:
       - tools/astra_offline_cpu_smoke.py
       - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
+      - tools/astra_offline_reference_benchmark.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
+      - tests/test_astra_offline_reference_benchmark.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -63,7 +67,18 @@ jobs:
         run: python3 -m tools.experimental_guard
       - name: Story local-LLM review contract tests (no model inference)
         if: matrix.lane == 'story'
-        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_offline_cpu_smoke tests.test_astra_offline_causal_audit tests.test_astra_model_story_novelty
+        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_offline_cpu_smoke tests.test_astra_offline_causal_audit tests.test_astra_offline_reference_benchmark tests.test_astra_model_story_novelty
+      - name: Build review-only independent story reference packet
+        if: matrix.lane == 'story'
+        run: python3 -m tools.astra_offline_reference_benchmark --output artifacts/offline-reference-benchmark/packet.json
+      - name: Archive human-review reference packet
+        if: matrix.lane == 'story'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-story-reference
+          path: artifacts/offline-reference-benchmark/packet.json
+          if-no-files-found: error
+          retention-days: 7
       - name: CPU image preflight and guarded mock tests (no model inference)
         if: matrix.lane == 'image'
         run: |
