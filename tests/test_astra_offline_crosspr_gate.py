@@ -78,6 +78,17 @@ class CrossExperimentReviewGateTests(unittest.TestCase):
         self.assertEqual(output["motion_semantic_fidelity"], "not_verified")
         self.assertEqual(output["cross_story_motion_alignment"], "not_verified")
 
+    def test_video_receipt_truthfully_records_rendering_without_approval(self):
+        video_sha = hashlib.sha256((self.root / "video-evidence.json").read_bytes()).hexdigest()
+        video = lane_report("video", EXPECTED["video"]["sha"], evidence_sha=video_sha)
+        self.assertTrue(video["new_render_executed"])
+        for lane in ("story", "motion"):
+            self.assertFalse(lane_report(lane, EXPECTED[lane]["sha"])["new_render_executed"])
+        self.assertFalse(video["real_model_inference_executed"])
+        self.assertFalse(video["production_routing_enabled"])
+        self.assertFalse(video["paid_apis_used"])
+        self.assertFalse(video["approved"])
+
     def test_missing_one_lane_fails(self):
         (self.root / "motion.json").unlink()
         with self.assertRaisesRegex(ValueError, "All three pinned"):
