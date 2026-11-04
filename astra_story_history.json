@@ -8225,6 +8225,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f5cb52d4c3b22417f895",
+      "video_id": "hrCax_6BWoQ",
+      "confirmed_at": "2026-11-04T20:38:24.798049+00:00",
+      "title": "Barnaby the Cat and Sammy the Squirrel's Bramble Clue",
+      "plot_fingerprint": "1f928c5e03192d0890124003fe93162cbbe031adc349ab25b2cdd887f2d78dc3",
+      "story_beats": [
+        {
+          "headline": "The Conflicting Trails",
+          "speech": "Look closely at these muddy footprints near the flower bed. They point directly toward the western garden shed.",
+          "visual": "signal",
+          "label": "Clue Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the cat and Sammy the squirrel stand near a sunlit garden wall in a whimsical storybook style. Barnaby holds a small flower, looking down at muddy paw prints on the soil, while Sammy points an inquisitive paw toward the west.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Disputed Direction",
+          "speech": "My furry whiskers tell me the ripe harvest lies beyond the eastern wooden fence, not the shed at all.",
+          "visual": "forest",
+          "label": "Path Debate",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the cat and Sammy the squirrel stand beside a wooden garden fence surrounded by lush green foliage. Sammy gestures toward the east with an expressive paw, while Barnaby holds a small bell and looks skeptical.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Joint Experiment",
+          "speech": "Let us place our compass and flower right here in the center to test which breeze carries the sweetest scent.",
+          "visual": "door",
+          "label": "Safe Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the cat and Sammy the squirrel sit together on a smooth stone path beside a garden gate. Sammy holds a brass compass on the flat stones, and Barnaby gently places a bright flower beside it to check the gentle wind direction.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sweet Discovery",
+          "speech": "The gentle breeze confirms the golden melon patch rests right here in the warm eastern sunlight.",
+          "visual": "planet",
+          "label": "Joyful Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the cat and Sammy the squirrel stand side-by-side smiling in front of a flourishing golden melon patch in the eastern garden terrace. Barnaby holds a shiny key and Sammy holds a small bell, basking in the warm afternoon light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
