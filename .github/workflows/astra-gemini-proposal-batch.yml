@@ -158,10 +158,12 @@ jobs:
               "generated": proposals.get("generated") if proposals else None,
               "requested": proposals.get("requested") if proposals else None,
               "generation_failures": proposals.get("failures", []) if proposals else ["generation_not_completed"],
-              "reviewed": sum("review_deferred:rate_limited" not in x.get("issues", [])
+              "reviewed": sum(not any(str(issue).startswith("review_deferred:")
+                                      for issue in x.get("issues", []))
                               for x in reviews.get("reviews", [])) if reviews else None,
-              "review_deferred": sum("review_deferred:rate_limited" in x.get("issues", [])
-                                     for x in reviews.get("reviews", [])) if reviews else None,
+              "review_deferred": sum(any(str(issue).startswith("review_deferred:")
+                                           for issue in x.get("issues", []))
+                                      for x in reviews.get("reviews", [])) if reviews else None,
               "approved": sum(x.get("approved") is True for x in reviews.get("reviews", [])) if reviews else None,
               "review_issues": sorted(set(issue for item in reviews.get("reviews", []) for issue in item.get("issues", []))) if reviews else ["review_not_completed"],
               "approval_pair_present": (root / "ai-reviewed-stories.json").is_file() and (root / "ai-reviewed-decisions.json").is_file(),
