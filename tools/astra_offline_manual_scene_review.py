@@ -16,7 +16,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from tools.astra_offline_story_video_handoff import (
-    FRAMES_PER_STAGE, SIZE, SOURCE_SHA, STAGES, STORIES,
+    FRAMES_PER_STAGE, SIZE, SOURCE_SHA, STAGES, STORIES, PHYSICAL_WITNESSES,
     decode_frames, validate_metadata, verify,
 )
 
@@ -90,6 +90,14 @@ def plan_review(storyboard, evidence):
         if not all(isinstance(item, dict) and item.get("passed") is True
                    for item in list(checks.values()) + list(outcome.values())):
             raise ValueError("Decoded visual controls must pass before review handoff")
+        material = ref.get("fixed_profile_physical_actions")
+        if (not isinstance(material, dict)
+                or set(material) != set(PHYSICAL_WITNESSES[case_id])
+                or any(not isinstance(v, dict)
+                       or v.get("passed") is not True
+                       or v.get("gesture") != PHYSICAL_WITNESSES[case_id][stage][0]
+                       for stage, v in material.items())):
+            raise ValueError("Missing independent decoded physical repair evidence")
         for stage_index, stage in enumerate(STAGES):
             shot = shots[stage_index]
             if (not isinstance(shot, dict) or shot.get("stage") != stage
@@ -113,6 +121,9 @@ def plan_review(storyboard, evidence):
                 "expected_props": list(shot["props"]),
                 "claimed_focus_state": shot["focus_state"],
                 "decoded_motion_pixels_passed": True,
+                "decoded_material_repair_witness": (
+                    material[stage]["gesture"] if stage in material else None),
+                "physical_semantics_still_unverified": True,
                 "human_action_visibility": "unreviewed",
                 "human_character_continuity": "unreviewed",
                 "human_prop_contact": "unreviewed",
@@ -225,14 +236,40 @@ def build(storyboard_path, preview_dir, evidence_path, output_dir, *, source_sha
     root = Path(output_dir)
     root.mkdir(parents=True, exist_ok=True)
     sheet = Image.new("RGB", (SIZE[0] * 4, SIZE[1] * 3), (20, 25, 30))
+    frames_by_case = {}
     for row, case_id in enumerate(sorted(STORIES)):
         video_path = Path(preview_dir) / (case_id + ".mp4")
         frames = decode_frames(video_path)
+        frames_by_case[case_id] = frames
         for stage in range(4):
             sheet.paste(frames[(stage+1)*FRAMES_PER_STAGE-1],
                         (stage*SIZE[0], row*SIZE[1]))
     image_path = root / "encoded-story-review-sheet.png"
     sheet.save(image_path)
+    # Six paired, enlarged BEFORE/AFTER crops from the actual H.264 decode.
+    # A visual reviewer can inspect whether the geometry is understandable.
+    details = [(cid, stage, spec[1])
+               for cid in sorted(STORIES)
+               for stage, spec in PHYSICAL_WITNESSES[cid].items()]
+    compare = Image.new("RGB", (480, 180 * len(details)), (20, 25, 30))
+    annotation = ImageDraw.Draw(compare)
+    for row, (cid, stage, region) in enumerate(details):
+        ix = STAGES.index(stage)
+        frames = frames_by_case[cid]
+        x0, y0, x1, y1 = region
+        crop = (max(0, x0-17), max(28, y0-16),
+                min(SIZE[0], x1+17), min(160, y1+16))
+        for col, frame_idx in enumerate((ix*FRAMES_PER_STAGE,
+                                          (ix+1)*FRAMES_PER_STAGE-1)):
+            thumb = frames[frame_idx].crop(crop).resize(
+                (240, 148), Image.Resampling.NEAREST)
+            compare.paste(thumb, (col * 240, row * 180 + 29))
+        annotation.text((5, row*180+7),
+                        cid + " / " + stage + "  [before | after]",
+                        fill=(235, 234, 224))
+    closeup_path = root / "encoded-repair-closeups.png"
+    compare.save(closeup_path)
+    packet["encoded_repair_closeups_sha256"] = sha(closeup_path)
     packet["encoded_frame_sheet_sha256"] = sha(image_path)
     packet["encoded_video_evidence_sha256"] = sha(evidence_path)
     packet_path = root / "review-packet.json"
