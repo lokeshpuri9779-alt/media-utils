@@ -1,0 +1,202 @@
+name: ASTRA Causal Story Shot Previs (Isolated)
+on:
+  push:
+    branches:
+      - experiment/astra-robot-walk-and-pickup
+    paths:
+      - tools/experimental_causal_storyboard.py
+      - tools/experimental_causal_story_render.py
+      - tools/experimental_causal_visual_audit.py
+      - tools/experimental_video_frame_consistency.py
+      - tools/experimental_story_review_manifest.py
+      - tools/experimental_story_review_verify.py
+      - tools/experimental_causal_visual_negative_controls.py
+      - tools/experimental_robot_walk_pickup.py
+      - .github/workflows/astra-causal-story-previs.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  review:
+    if: github.ref == 'refs/heads/experiment/astra-robot-walk-and-pickup'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate three-beat episode plan against ASTRA's planner
+        run: |
+          python3 -m tools.experimental_causal_storyboard \
+            --output artifacts/experimental-causal-story/shot_plan.json
+      - name: Install free CPU Blender and FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          blender --version | head -n 2
+      - name: Render three causal shots with physically unchanged characters
+        run: |
+          blender --background --threads 2 --python-exit-code 1 \
+            --python tools/experimental_causal_story_render.py -- \
+            --output-dir artifacts/experimental-causal-story/
+      - name: Encode silent three-shot narrative MP4
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -framerate 8 -start_number 0 \
+            -i artifacts/experimental-causal-story/frame_%03d.png \
+            -frames:v 20 -c:v libx264 -preset veryfast -crf 19 \
+            -pix_fmt yuv420p -movflags +faststart \
+            artifacts/experimental-causal-story/story_previs.mp4
+      - name: Verify shot structure, narrative states and delivery gates
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import struct
+          import subprocess
+          from pathlib import Path
+          root=Path('artifacts/experimental-causal-story')
+          shot=json.loads((root/'shot_plan.json').read_text())
+          report=json.loads((root/'review.json').read_text())
+          assert report['success'] is True and all(report['checks'].values())
+          assert shot['plot_fingerprint']==report['plot_fingerprint']
+          assert shot['shot_count']==3 and report['shot_count']==3
+          assert [s['beat'] for s in shot['shots']]==['setup','attempt','payoff']
+          assert [s['first_frame'] for s in shot['shots']]==[0,6,15]
+          assert [s['last_frame'] for s in shot['shots']]==[5,14,19]
+          assert shot['frame_count']==20 and report['fps']==8
+          assert report['cycles_samples']==28
+          assert report['dimensions']==[384,576]
+          assert report['checks']['no_energy_before_pickup'] is True
+          assert report['checks']['energy_path_grows_toward_beacon'] is True
+          assert report['checks']['beam_contacts_beacon_before_ignition'] is True
+          assert report['checks']['beacon_off_through_energy_arrival'] is True
+          assert report['checks']['beacon_illuminates_after_energy_contact'] is True
+          assert [f['beacon_on'] for f in report['frames']]==[False]*18+[True]*2
+          assert [f['visible_energy_objects']>0 for f in report['frames']]==[False]*15+[True]*5
+          for state in (shot,report):
+              assert state['approved'] is False and state['published'] is False
+              assert state['production_ready'] is False and state['paid_apis_used'] is False
+          assert report['editorial_review_required'] is True
+          assert report['visual_review_required'] is True
+          assert report['semantic_quality']=='manual_review_required'
+          assert report['character_continuity']=='not_verified'
+          assert report['cinematic_quality']=='not_verified'
+          assert len(report['frames'])==20
+          assert [f['frame'] for f in report['frames']]==list(range(20))
+          for f in report['frames']:
+              img=(root/f['file']).read_bytes()
+              assert img.startswith(b'\x89PNG\r\n\x1a\n')
+              assert struct.unpack('>II',img[16:24])==(384,576)
+              assert hashlib.sha256(img).hexdigest()==f['sha256']
+          mp4=root/'story_previs.mp4'
+          assert mp4.is_file() and mp4.stat().st_size>4096
+          video=json.loads(subprocess.check_output([
+              'ffprobe','-v','error','-select_streams','v:0',
+              '-show_entries','stream=codec_name,width,height,r_frame_rate,nb_frames',
+              '-of','json',str(mp4)],text=True))['streams'][0]
+          assert video['codec_name']=='h264'
+          assert (video['width'],video['height'])==(384,576)
+          assert video['r_frame_rate']=='8/1' and int(video['nb_frames'])==20
+          report['video']={'file':mp4.name,'codec':'h264','fps':8,
+                           'frames':20,'duration_seconds':2.5,
+                           'bytes':mp4.stat().st_size}
+          (root/'review.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('Energy arrival precedes beacon ignition; 20-frame MP4 remains review-only')
+          PY
+      - name: Verify emissive cause-and-effect in rendered pixels (review-only)
+        run: |
+          python3 -m tools.experimental_causal_visual_audit \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          audit=json.loads(Path('artifacts/experimental-causal-story/visual_audit.json').read_text())
+          assert audit['passes_fixed_pixel_checks'] is True
+          assert len(audit['checks'])==8 and all(audit['checks'].values())
+          assert audit['approved'] is False
+          assert audit['published'] is False
+          assert audit['production_ready'] is False
+          assert audit['paid_apis_used'] is False
+          assert audit['manual_editorial_review_required'] is True
+          assert audit['visual_semantic_quality']=='not_verified'
+          print('Fixed-image evidence present; editorial and semantic gates still closed')
+          PY
+      - name: Prove image audit rejects missing and mistimed energy effects
+        run: |
+          python3 -m tools.experimental_causal_visual_negative_controls \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('artifacts/experimental-causal-story/negative_controls.json').read_text())
+          assert data['original_render_passed'] is True
+          assert data['all_corruptions_rejected'] is True
+          assert data['negative_case_count']==5
+          assert data['approved'] is False and data['published'] is False
+          assert data['production_ready'] is False and data['paid_apis_used'] is False
+          assert data['manual_review_required'] is True
+          assert data['semantic_quality']=='not_verified'
+          print('Five deliberately damaged frame sequences rejected; no publishing or editorial gate opened')
+          PY
+      - name: Verify shared event-order contract on lighthouse render
+        run: |
+          python3 -m tools.experimental_action_contracts \
+            --profile lighthouse \
+            --report artifacts/experimental-causal-story/review.json \
+            --output artifacts/experimental-causal-story/action_contract.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('artifacts/experimental-causal-story/action_contract.json').read_text())
+          assert r['passed'] and all(r['checks'].values())
+          assert r['events']['spark_launch'] < r['events']['energy_arrives'] < r['events']['beacon_ignites']
+          assert r['approved'] is False and r['published'] is False and r['production_ready'] is False
+          assert r['semantic_quality']=='not_verified'
+          PY
+      - name: Bind complete review evidence to frames and video
+        run: |
+          python3 -m tools.experimental_story_review_manifest \
+            --profile lighthouse \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          packet=json.loads(Path('artifacts/experimental-causal-story/story_review_manifest.json').read_text())
+          assert packet['technical_evidence_passed'] is True
+          assert packet['video_frame_content_evidence']['passed'] is True
+          assert all(packet['checks'].values())
+          assert packet['approval']=='manual_review_required'
+          assert packet['semantic_quality']=='not_verified'
+          assert packet['production_ready'] is False and packet['published'] is False
+          assert packet['approved'] is False and packet['paid_apis_used'] is False
+          print('Bound review manifest: %d files with SHA256, no production approval' % len(packet['sha256']))
+          PY
+      - name: Independently verify packaged lighthouse review files
+        run: |
+          python3 -m tools.experimental_story_review_verify \
+            --profile lighthouse \
+            --directory artifacts/experimental-causal-story/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          path=Path('artifacts/experimental-causal-story/story_review_verification.json')
+          r=json.loads(path.read_text())
+          assert r['passed'] is True and all(r['checks'].values())
+          assert r['checks']['video_pixels_independently_match_png_sequence'] is True
+          assert r['mismatched_files']==[]
+          assert r['files_verified']==26
+          assert r['manual_visual_review_required'] is True
+          assert r['approved'] is False and r['published'] is False
+          assert r['production_ready'] is False and r['paid_apis_used'] is False
+          assert r['semantic_quality']=='not_verified'
+          print('Verified 26 independent files against review manifest (review-only)')
+          PY
+      - name: Retain story previsualization, not publication assets
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-causal-story-review
+          path: artifacts/experimental-causal-story/
+          retention-days: 7
+          if-no-files-found: warn
