@@ -118,6 +118,11 @@ jobs:
               echo "ASTRA_STATE_RESTORE=$f:missing"
             fi
           done
+          # The pre-reset publication ledger must accompany every preload lane.
+          # A missing ledger must never be replaced with an empty history.
+          git show origin/astra-state:astra_duplicate_protection.json > astra_duplicate_protection.json
+          test -s astra_duplicate_protection.json
+          echo 'ASTRA_PROTECTED_HISTORY=restored'
           # Match publisher intake: restore the immutable Gemini approval pair
           # from the same durable state, never infer approval from a proposal.
           mkdir -p runtime-health
