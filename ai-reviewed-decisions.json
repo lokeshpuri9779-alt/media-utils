@@ -883,15 +883,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-98a7db191b8cbf04e305",
-      "story_sha256": "0c26b0a0616de0ef01d2653f907c09b44217ba2df26d4158146b5a62c87a7065",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence throughout its narrative structure.; There are no copyright or trademark violations, and the content is safe, appropriate for all audiences, and presents no YouTube policy risks.",
-      "reviewed_at": "2026-11-03T11:21:58.870269+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
       "story_sha256": "873993ba35a998519d138d666921ea2b3caac5386f732fee1945a83c7908b46c",
       "decision": "approve",
@@ -919,15 +910,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-17228c6a4ceb9399c097",
-      "story_sha256": "d4f02bbff98d838617d951351835c7d5056141eba776660253eaede337d6e5b4",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is coherent, original, and free of policy violations.; The causal chain is logical and clear.; It does not duplicate any recently published premises or endings in the comparison set.",
-      "reviewed_at": "2026-11-03T14:19:36.890942+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-c744af270c95633974e0",
       "story_sha256": "1cc2a1ea574a4b1de05e0323114e224e3ea5e5f39b886c2f1b4a9b590ef5aa4c",
       "decision": "approve",
@@ -952,15 +934,6 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is structurally sound and follows clear causal logic.; There are no copyright, trademark, or safety violations.; It does not duplicate the premises, characters, or causal mechanisms of the provided comparison history.",
       "reviewed_at": "2026-11-04T06:16:43.525328+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-03efd648c8d49e385fc9",
-      "story_sha256": "0784bf5a264460cba809abf76e8dd1f15e510124d975d1483ab939ea7bd33177",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence from conflict to resolution.; There are no copyright or trademark violations, and the content is entirely safe for all audiences.; The narrative structure and character actions fit well within established guidelines and present zero YouTube policy risks.",
-      "reviewed_at": "2026-11-04T06:16:54.028311+00:00",
       "review_model": "gemini-3.5-flash-lite"
     },
     {
@@ -1018,15 +991,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-85eb8696617cd73487cd",
-      "story_sha256": "c29b73f1c5f1cd51272aaea3473c9c923a04d9c6cefa879c977da68aea4401c0",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence between the conflict, decisive choice, and resolution.; There are no copyright, trademark, safety, or policy violations.; The content is suitable for general audiences and fits well within the stylistic expectations of the platform.",
-      "reviewed_at": "2026-11-04T12:51:13.777141+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-30c5db2a54bfb295801d",
       "story_sha256": "d4912111addee0d0251ef246616569045222af8065e1687723ebd4f9da2c1e63",
       "decision": "approve",
@@ -1042,6 +1006,69 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is coherent, original, and free from safety or copyright issues.; It adheres to the required format and does not duplicate the premises or causal mechanisms of the provided comparison history.",
       "reviewed_at": "2026-11-04T12:51:35.817259+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-61faf35cd3d171f0e936",
+      "story_sha256": "0eada371646b6e46ccb63551bd0bf4d804f13bb6dce0917bdb6712f558dbd1d7",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is completely original and coherent, following a logical narrative structure with clear character motivations.; No copyright or trademark infringements detected.; The content is entirely safe, family-friendly, and compliant with all YouTube publishing policies.; While it features characters like 'Orion the owl', the specific plot involving the brass observatory clock and Barnaby the mouse is distinct from previously listed publication examples.",
+      "reviewed_at": "2026-11-04T14:43:12.924453+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-f5cb52d4c3b22417f895",
+      "story_sha256": "042625fe86b947ca1bd6f53f795bfa54cee6f06aadeb2ce000c236103d405b4e",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from the clue discovery to the joint experiment and final resolution.; Characters, settings, and causal mechanisms are distinct from the provided comparison history, avoiding repetitive premises.; Content is safe, appropriate for general audiences, and carries no trademark or YouTube policy risks.",
+      "reviewed_at": "2026-11-04T14:43:30.040258+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-61b884322ce6d9d8476f",
+      "story_sha256": "24c93f6885d41ff13f7829860ff9804ce8f6bb6a3444c34e19e25e4efbfefb66",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is fully original with distinct character combinations and plot progression.; It maintains causal coherence between the conflict, decisive cooperative choice, and peaceful resolution.; There are no copyright, trademark, safety, or policy violations.; The narrative elements are clean and suitable for general audiences.",
+      "reviewed_at": "2026-11-04T14:43:40.584400+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-9b9925184b36b30b0174",
+      "story_sha256": "601692f83426106f65fbb586757581f6b2a3f93ed3c07a574b5e4c4e23fcbf61",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original, coherent, and meets all clarity and audience suitability standards.; There are no copyright or trademark violations, and no unsafe or misleading elements present.; The causal mechanism and narrative progression are distinct from recent publication examples.",
+      "reviewed_at": "2026-11-04T14:44:23.769424+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-796f0a5efc13f02bbd12",
+      "story_sha256": "1495ffd3a2b16c0a6372151effb791d5b0ba5f8f124f9031349ededbc53fe849",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not repeat the premises, characters, settings, or causal mechanisms of the provided comparison history.; Causal coherence is clear, showing a logical progression from the dispute over the key, the revelation of the hidden ledger, the shared burden, and the resolution.; The content is safe, appropriate for general audiences, and adheres to YouTube policies with no misleading elements or copyright concerns.",
+      "reviewed_at": "2026-11-04T14:44:32.879983+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-355bca03c37b0af5893e",
+      "story_sha256": "19f053f8d566078e721a76e7b132db3330e15567910623338ea041f0e242dd8c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not replicate the premises, characters, or conflicts of the provided comparison examples.; Causal coherence is strong: the conflict involves a disagreement over library silence, the decisive choice is a silent gesture of pointing and sliding the book, and the resolution successfully resolves the tension without breaking the rules.; Content is safe, appropriate for all audiences, and presents no YouTube policy risks.",
+      "reviewed_at": "2026-11-04T14:44:51.272807+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-90f252744db1398b94c4",
+      "story_sha256": "5b24732880ce2e362eb5609e41c5251cd05c4b0fa93077adc511a3e880802a2c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is completely original and does not plagiarize any pre-existing works or recently published examples in the reference list.; Causal coherence is strong: the accusation of a missing compass leads logically to a joint physical footprint inspection, discovery of the true cause (a squirrel knocking it behind a log), and a sincere apology.; Clarity, grammar, and narrative structure are well-executed and fully parseable.; There are no copyright, trademark, safety, or misleading content concerns present in the text.; The content is entirely suitable for a general audience and complies with all standard YouTube content and safety policies.",
+      "reviewed_at": "2026-11-04T14:45:09.467797+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
