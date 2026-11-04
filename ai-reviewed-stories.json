@@ -7794,80 +7794,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-d65c65a0ecb8726fb0be",
-      "title": "Bramen the Stoat and the Frozen Ravine Beacon",
-      "hook": "The Hidden Hazard",
-      "question": "How can a lone stoat guide a stranded traveler across a treacherous, snow-choked ravine when the path is entirely obscured?",
-      "answer": "Bramen ignites a high-contrast signal lantern and places it precisely upon a sturdy wooden box, creating a guiding focal point.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Hidden Hazard",
-          "speech": "The fierce blizzard has completely erased the mountain trail, leaving our traveler stranded in the blinding white snow.",
-          "visual": "forest",
-          "label": "Blizzard Wall",
-          "story_beat": "reveal",
-          "visual_prompt": "Bramen the stoat, wearing a thick winter scarf, stands on a snowy ridge peering into a thick whiteout snowstorm in a pine forest.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Prepared Position",
-          "speech": "We must establish a high-visibility point right here before the fading daylight leaves us in total darkness.",
-          "visual": "door",
-          "label": "Wooden Box",
-          "story_beat": "build",
-          "visual_prompt": "Bramen the stoat pushes a sturdy wooden box into position near a snowy ledge in the forest, surrounded by tall pine trees.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Beacon's Flame",
-          "speech": "This glowing lantern will pierce through the blowing snow and serve as a reliable beacon across the steep gorge.",
-          "visual": "signal",
-          "label": "Signal Lantern",
-          "story_beat": "mechanism",
-          "visual_prompt": "Bramen the stoat sets a glowing brass lantern atop the wooden box on the snowy ledge, casting a warm yellow light against the dark forest backdrop.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Safe Arrival",
-          "speech": "The bright guiding light cut through the storm just in time, bringing our traveler safely to the warm shelter.",
-          "visual": "forest",
-          "label": "Path Clear",
-          "story_beat": "payoff",
-          "visual_prompt": "Bramen the stoat stands next to the glowing lantern on the wooden box as the snowstorm clears over the forest ridge.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A dense blizzard blocks all visibility across the steep snowy ravine, threatening to trap a lost traveler in the freezing cold.",
-      "decisive_choice": "Bramen chooses to position a bright signal lantern atop a wooden box at the cliff edge instead of attempting to search the valley blindly.",
-      "resolution": "The glowing beacon cuts cleanly through the swirling whiteout, successfully guiding the traveler to safety.",
-      "visual_bible": {
-        "style": "A warm, charming storybook illustration style featuring detailed fur textures, soft lighting, and wintry atmospheric effects.",
-        "characters": {
-          "Bramen": "A nimble stoat with sleek brown-and-white winter fur, wearing a cozy red knitted scarf around his neck."
-        },
-        "locations": {
-          "Snowy Forest Ridge": "A high mountain cliffside lined with snow-dusted evergreen pine trees and deep white drifts."
-        },
-        "objects": {
-          "wooden box": "A rustic, weathered rectangular wooden storage box resting firmly in the snow.",
-          "lantern": "A classic brass-framed glass lantern casting a steady, warm golden flame."
-        }
-      },
-      "plot_fingerprint": "ba349fb63bbfaeb63b5da3bdad173e5029e1420ac6c7ba44c77683e5fd9c0ba4"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-13979844443c4a1c6504",
       "title": "Barnaby the Ferret and the Market Spice Spillage",
       "hook": "The Spice Spill",
@@ -8086,6 +8012,229 @@
         }
       },
       "plot_fingerprint": "5591370f2cec4393f74c19960aeb419bb48f1eb85faad57d7d14969f6ecd2198"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-98421acb2d4775f6ea85",
+      "title": "Silas the Squirrel and the Overturned Seed Sieve",
+      "hook": "The Tilted Sieve",
+      "question": "How can Silas secure the woodland seed supply before the afternoon gale scatters the harvest?",
+      "answer": "Silas places a heavy wooden box against the rolling sieve frame to anchor it securely on the forest floor.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Tilted Sieve",
+          "speech": "Oh no, the heavy wooden seed sieve has tipped over on the slope and threatens to roll away into the thick brush.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Silas the squirrel stands on a sloping forest floor, looking with a worried expression at a large wooden seed sieve tilted dangerously on the moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fetching the Anchor",
+          "speech": "I must act quickly to find a sturdy wooden box that is heavy enough to hold the rolling sieve in place.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Silas the squirrel stands near a mossy tree root, gripping a small wooden box tightly with both paws while looking up the slope.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Wedging the Frame",
+          "speech": "By pushing this heavy box firmly beneath the lower rim of the sieve frame, I can stop it from rolling further.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas the squirrel pushes a heavy wooden box beneath the tilted edge of the wooden seed sieve on the forest floor, straining with focused effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Harvest Secured",
+          "speech": "The sieve is completely stable now, and the precious woodland seeds are safely preserved for the coming season.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Silas the squirrel sits happily beside the securely anchored wooden seed sieve on the flat forest floor, surrounded by neat piles of collected seeds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A heavy wooden seed sieve tips over on a sloping woodland bank, spilling its contents and threatening to roll away into the brush.",
+      "decisive_choice": "Silas wedges a sturdy wooden box beneath the rim of the tilted sieve to halt its movement.",
+      "resolution": "The sieve stops rolling completely, preserving the remaining seeds and allowing Silas to gather the harvest safely.",
+      "visual_bible": {
+        "style": "Warm storybook digital illustration with soft lighting and rich natural textures.",
+        "characters": {
+          "Silas": "A nimble brown squirrel with bright amber eyes, wearing a simple woven leaf vest and holding items with his small paws."
+        },
+        "locations": {
+          "forest": "An enchanted woodland clearing featuring ancient mossy tree roots, soft green grass, and dappled sunlight filtering through the canopy."
+        },
+        "objects": {
+          "box": "A sturdy, dark brown wooden box with visible grain and metal corner brackets.",
+          "sieve": "A large circular wooden frame fitted with a fine woven mesh for sorting woodland seeds."
+        }
+      },
+      "plot_fingerprint": "5627e6b0d37e52dfe2ae6b167312ff6296e3f1690948256bd20aff92d8cc3484"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-4d872eadbf95456a610f",
+      "title": "Pippin the Pangolin and the Sun-Baked Trail Marker",
+      "hook": "The Disrupted Path",
+      "question": "How did Pippin guide his clan across the scorching dry grassland when the path markers fell?",
+      "answer": "He used a heavy carved compass to realign the fallen stone trail markers in the dust.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Disrupted Path",
+          "speech": "Oh no, the fierce wind has knocked down our wooden navigation markers across the dusty grassland plains completely.",
+          "visual": "signal",
+          "label": "Storm Aftermath",
+          "story_beat": "reveal",
+          "visual_prompt": "Pippin the pangolin stands on dry cracked earth holding a brass compass, looking sadly at a fallen wooden sign post in a sun-scorched grassland under a bright yellow sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Checking the Heading",
+          "speech": "I must use this brass compass to find our exact bearing before the midday heat slows our journey down.",
+          "visual": "robot",
+          "label": "Reading the Needle",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Pippin the pangolin kneeling in dry grass, carefully holding an open brass compass with his paws, examining the spinning needle with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Leveraging the Post",
+          "speech": "With steady paw strength, I will lift this heavy marker back into its upright socket in the hard earth.",
+          "visual": "door",
+          "label": "Restoring Order",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pippin the pangolin pushes his scaled back against a heavy wooden post lying in the dust, straining to lift it upright on the arid grassland.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Correct Direction",
+          "speech": "Now the compass points true and the marker stands tall, guiding every traveler safely toward the distant hills.",
+          "visual": "forest",
+          "label": "Path Restored",
+          "story_beat": "payoff",
+          "visual_prompt": "Pippin the pangolin stands proudly next to a re-erected wooden sign post pointing toward distant green hills, holding a brass compass while smiling under a clear sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A scorching windstorm blows over the heavy wooden trail markers across the dry grassland, confusing the clan's migration path.",
+      "decisive_choice": "Pippin sets a heavy brass compass in the dirt to calculate true north and manually rights the principal marker post.",
+      "resolution": "The aligned marker points the correct route across the sun-baked plains, allowing the pangolin clan to continue their migration safely.",
+      "visual_bible": {
+        "style": "Bright, clean storybook illustration style with warm golden sunlight, soft shadows, and vibrant natural color palettes.",
+        "characters": {
+          "Pippin": "A small, cute pangolin with amber-brown overlapping scales, gentle dark eyes, short rounded snout, and a long flexible tail."
+        },
+        "locations": {
+          "Grassland Plains": "A vast, sun-baked landscape of dry yellow grass, scattered pebbles, cracked earth, and faint distant hills under a warm sky."
+        },
+        "objects": {
+          "compass": "A polished round brass pocket compass with a hinged glass lid and a clearly visible red magnetic needle.",
+          "signpost": "A weathered vertical wooden post with a carved directional arrow pointing toward the horizon."
+        }
+      },
+      "plot_fingerprint": "0ea4fde6ac25d927f0b1ec640aada8242cf769c7da9d4e7c84459c46bf368b56"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-83a3632b24a89173d967",
+      "title": "Orion the Owl and the Starlight Observatory Lens",
+      "hook": "Obscuring Dust",
+      "question": "How can Orion restore the clouded observatory telescope before the rare comet eclipse begins?",
+      "answer": "Orion cleans the antique objective lens with a soft cloth and aligns the brass gear.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Obscuring Dust",
+          "speech": "Oh no, the observatory lens is clouded over with thick dust right before the grand comet arrives tonight.",
+          "visual": "signal",
+          "label": "Lens Fogged",
+          "story_beat": "reveal",
+          "visual_prompt": "An observant brown owl standing inside a stone tower observatory, looking worriedly at a massive dusty telescope lens illuminated by a glowing star map signal on the wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Polishing the Glass",
+          "speech": "I must clean this glass surface immediately so we do not miss the stellar alignment in the night sky.",
+          "visual": "robot",
+          "label": "Wiping Grime",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl holding a small cloth in his beak while carefully wiping the heavy brass telescope barrel inside the moonlit observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Turning the Gear",
+          "speech": "Now I need to adjust the brass focus ring to bring the distant constellation into sharp clear focus.",
+          "visual": "ship",
+          "label": "Adjusting Focus",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl standing on a wooden stool, turning a heavy brass dial on the side of the observatory telescope pointing toward a starry sky portal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Stellar Payoff",
+          "speech": "Look at that brilliant comet arc across the night sky, perfectly framed through our freshly cleaned observatory lens!",
+          "visual": "planet",
+          "label": "Clear Comet View",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl smiling happily atop his wooden perch inside the cozy observatory, gazing through the pristine telescope at a vibrant glowing planet and comet.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Dust and grime obscure the large observatory telescope lens just as the rare comet passes overhead.",
+      "decisive_choice": "Orion wipes the heavy glass with a cleansing cloth and turns the brass focus wheel.",
+      "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet.",
+      "visual_bible": {
+        "style": "Warm whimsical storybook illustration with rich night blues, amber golds, and soft glowing starlight.",
+        "characters": {
+          "Orion": "A wise brown owl with soft feathered plumage, amber-yellow eyes, wearing a tiny midnight-blue scholar cap."
+        },
+        "locations": {
+          "Observatory": "A round stone tower room filled with ancient star charts, wooden bookshelves, and a massive brass telescope."
+        },
+        "objects": {
+          "telescope": "A polished brass and iron telescope with a large glass objective lens and intricate focus gears.",
+          "stool": "A short sturdy wooden stool used by the owl to reach the upper telescope controls.",
+          "map": "A rolled parchment star chart glowing softly with faint golden ink."
+        }
+      },
+      "plot_fingerprint": "0b787452e95a799f89de14ee645f711d0ea26dddeea7044e3604254f4138c85e"
     }
   ]
 }
