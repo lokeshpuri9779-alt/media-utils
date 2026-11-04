@@ -8176,6 +8176,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-90f252744db1398b94c4",
+      "video_id": "zUkKzpiYsdo",
+      "confirmed_at": "2026-11-04T16:15:45.635764+00:00",
+      "title": "Lyra the Lynx and Bramen the Stoat's Misplaced Compass Blunder",
+      "plot_fingerprint": "bc10e399bab9ddac81fed438a9bcf04bd5df5df5c7280364fa7cf69f00908f2a",
+      "story_beats": [
+        {
+          "headline": "The Missing Instrument",
+          "speech": "Lyra stared angrily at Bramen, demanding to know why her polished brass compass had vanished from the mossy stone.",
+          "visual": "signal",
+          "label": "Accusation",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra the lynx stands with an upset expression on a mossy stone inside a pine forest, pointing an accusatory paw at Bramen the stoat, who holds empty paws in surprise.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Inspection",
+          "speech": "Bramen held up his empty paws to prove his innocence, suggesting they inspect the muddy ground around the stone table.",
+          "visual": "forest",
+          "label": "Investigation",
+          "story_beat": "build",
+          "visual_prompt": "Bramen the stoat and Lyra the lynx stand side by side on the damp forest floor, looking down at a set of tiny muddy paw prints near a rotten log.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Truth",
+          "speech": "Leaning closer, they spotted the brass compass glinting behind the log, half-buried under dry pine needles and fallen leaves.",
+          "visual": "door",
+          "label": "Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Lyra the lynx and Bramen the stoat crouch together beside a fallen rotten log in the pine forest, pointing paws at a shiny brass compass half-buried under pine needles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sincere Apology",
+          "speech": "Lyra lowered her ears in regret, gently sliding the brass compass toward Bramen as a token of her sincere apology.",
+          "visual": "signal",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Lyra the lynx holds out the brass compass on her open paw toward Bramen the stoat in the pine forest, sharing a friendly smile of reconciliation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
