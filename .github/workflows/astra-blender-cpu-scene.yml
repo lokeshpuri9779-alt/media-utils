@@ -1,0 +1,92 @@
+name: ASTRA Blender CPU Scene and Motion (Experimental)
+on:
+  push:
+    branches:
+      - experiment/astra-blender-cpu-two-view
+    paths:
+      - .github/workflows/astra-blender-cpu-scene.yml
+      - tools/experimental_blender_cpu_scene.py
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scene-review:
+    if: github.ref == 'refs/heads/experiment/astra-blender-cpu-two-view'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install free Ubuntu Blender and FFmpeg packages
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends blender ffmpeg
+          blender --version | head -n 2
+      - name: Render two Cycles CPU views, no publishing
+        run: |
+          blender --background --threads 2 --python-exit-code 1 \
+            --python tools/experimental_blender_cpu_scene.py -- \
+            --output-dir artifacts/experimental-blender-scene/
+      - name: Encode short CPU camera animation (no upload or publishing)
+        run: |
+          ffmpeg -hide_banner -loglevel error -y -framerate 6 -start_number 0 \
+            -i artifacts/experimental-blender-scene/motion_%03d.png \
+            -frames:v 8 -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p \
+            -movflags +faststart artifacts/experimental-blender-scene/camera_orbit.mp4
+      - name: Check structural controls, all motion frames, and MP4
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import struct
+          import subprocess
+          from pathlib import Path
+          root=Path('artifacts/experimental-blender-scene')
+          r=json.loads((root/'review.json').read_text())
+          assert r['success'] is True and all(r['checks'].values())
+          assert r['approved'] is False and r['published'] is False and r['production_ready'] is False
+          assert r['semantic_quality']=='manual_review_required'
+          assert r['no_paid_apis'] is True
+          assert set(r['views']) == {'camera_left', 'camera_right'}
+          assert r['cycles_samples'] == 40
+          motion=r['motion']
+          assert motion['fps'] == 6 and len(motion['frames']) == 8
+          assert [f['index'] for f in motion['frames']] == list(range(8))
+          assert len({f['sha256'] for f in motion['frames']}) == 8
+          assert all(motion['frames'][i]['camera_x'] < motion['frames'][i+1]['camera_x'] for i in range(7))
+          assert r['checks']['static_cube_table_geometry']
+          assert r['photorealism'] == 'not_verified'
+          assert r['animation_quality'] == 'not_verified'
+          assert r['character_continuity'] == 'not_verified'
+          for view in r['views'].values():
+              data=(root/view['file']).read_bytes()[:24]
+              assert data.startswith(b'\x89PNG\r\n\x1a\n') and struct.unpack('>II', data[16:24]) == (512,768)
+          for frame in motion['frames']:
+              b=(root/frame['file']).read_bytes()
+              assert b.startswith(b'\x89PNG\r\n\x1a\n') and struct.unpack('>II', b[16:24]) == (512,768)
+              assert hashlib.sha256(b).hexdigest() == frame['sha256']
+          mp4=root/'camera_orbit.mp4'
+          assert mp4.is_file() and mp4.stat().st_size > 4096
+          info=json.loads(subprocess.check_output([
+              'ffprobe','-v','error','-select_streams','v:0',
+              '-show_entries','stream=codec_name,width,height,nb_frames',
+              '-of','json',str(mp4)], text=True))
+          video=info['streams'][0]
+          assert video['codec_name']=='h264'
+          assert (video['width'],video['height']) == (512,768)
+          assert int(video['nb_frames']) == 8
+          motion['video']={'file':'camera_orbit.mp4','fps':6,'frame_count':8,'codec':'h264',
+                           'bytes':mp4.stat().st_size}
+          (root/'review.json').write_text(json.dumps(r,indent=2)+'\n')
+          print('Two still views + 8 motion frames + 1.33 s H.264 clip passed structural review; semantic approval remains disabled')
+          PY
+      - name: Upload bounded review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-blender-two-view
+          path: artifacts/experimental-blender-scene/
+          if-no-files-found: warn
+          retention-days: 7
