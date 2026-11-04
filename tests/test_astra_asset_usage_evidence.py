@@ -270,7 +270,7 @@ class AssetUsageEvidenceTests(unittest.TestCase):
     def test_missing_shot_report_includes_bounded_authored_evidence(self):
         selection = {}
         story = {"content_id": "repair-candidate", "story_beats": [
-            {"speech": "  The  wave\\n   changed direction.  ",
+            {"speech": "  The  wave\n   changed direction.  ",
              "visual_prompt": "A" * 700},
             {"speech": "A neighboring fox watched."}]}
         report = {"status": "blocked", "reason": "missing_backgrounds",
