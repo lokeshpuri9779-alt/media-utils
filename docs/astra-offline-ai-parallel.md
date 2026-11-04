@@ -114,3 +114,28 @@ runner image did not include FFmpeg. The isolated `preview` lane now
 installs Ubuntu's free `ffmpeg` package and verifies both `ffprobe`
 and H.264 encoding before creating MP4s. No other lane gets that
 dependency, and none of the production workflow is changed.
+
+## Actual decoded-video outcome cues (November 4)
+
+A second validation layer now checks **each procedural story's visible
+outcome**, not merely generic motion. Its small, explicit and bounded
+palette-region tests check a shade over greenhouse seedlings, a stable
+wooden bridge and **ducklings visibly reaching the safe bank**, and a
+moonlight patch with opened flowers. The bridge animation was corrected
+to move the ducklings all the way to the bank; the earlier four-second
+MP4 left them stranded mid-bridge at the last frame.
+
+`tools/astra_offline_visual_cues.py` evaluates these cues on the original
+Pillow frames **and on frames decoded from the actual H.264 MP4s**.
+The encoder still runs offline on CPU and ffprobe verifies decoded
+frame count, codec, and dimensions. A false cue, tampered payoff image,
+frozen scene or caption-only change fails closed. The report explicitly
+labels all passes `procedural_palette_and_location_cues_only` and
+keeps `story_semantics=not_verified`, `approved=false`,
+`production_ready=false`, and `published=false`.
+
+This only checks a **small subset of a fixed procedural animation**;
+it is not a semantic visual-understanding model and cannot establish
+whether the animation is attractive, character-consistent across all
+scenes, photorealistic or publication-ready. No generative media model,
+paid APIs, production changes, or publishing path were added.

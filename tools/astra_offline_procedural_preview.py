@@ -18,6 +18,7 @@ from pathlib import Path
 from PIL import Image, ImageChops, ImageDraw
 
 from tools.astra_offline_storyboard import build_packet
+from tools.astra_offline_visual_cues import audit_visible_outcome
 
 W, H = 320, 180
 FPS = 12
@@ -100,7 +101,7 @@ def _bridge(draw: ImageDraw.ImageDraw, stage: int, t: float) -> None:
     draw.ellipse((beaver_x-27, 105, beaver_x-7, 119), fill=(88, 58, 45))
     for i in range(3):
         if stage == 3:
-            duck_x = int(262 - 116 * t) + i*19
+            duck_x = int(262 - 215 * t) + i*16
             duck_y = 99
         else:
             duck_x = 253+i*16 + int(3*t)
@@ -219,6 +220,11 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                     index += 1
             if index != TOTAL_FRAMES:
                 raise ValueError("wrong output frame count")
+            raw_visual_cues = audit_visible_outcome(
+                case, render_frame(case, 0, 0.0), render_frame(case, 3, 1.0)
+            )
+            if not raw_visual_cues["passed"]:
+                raise ValueError(f"{case} missing rendered outcome cues: {raw_visual_cues['failed_cues']}")
             contact = Image.new("RGB", (W*4, H), (15, 15, 15))
             for i, img in enumerate(previews):
                 contact.paste(img, (i*W, 0))
@@ -253,6 +259,21 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                 raise ValueError("MP4 decode/frame count mismatch")
             if not 1024 <= mp4.stat().st_size <= 6_000_000:
                 raise ValueError("unexpected MP4 size; refuse misleading preview")
+            decoded = subprocess.run(
+                [ffmpeg, "-v", "error", "-nostdin", "-i", str(mp4),
+                 "-f", "rawvideo", "-pix_fmt", "rgb24", "-an", "pipe:1"],
+                check=True, timeout=60, capture_output=True,
+            )
+            frame_bytes = W * H * 3
+            if len(decoded.stdout) != TOTAL_FRAMES * frame_bytes:
+                raise ValueError("decoded MP4 pixel payload does not contain all frames")
+            first_decoded = Image.frombytes("RGB", (W, H), decoded.stdout[:frame_bytes])
+            last_decoded = Image.frombytes("RGB", (W, H), decoded.stdout[-frame_bytes:])
+            decoded_visual_cues = audit_visible_outcome(
+                case, first_decoded, last_decoded
+            )
+            if not decoded_visual_cues["passed"]:
+                raise ValueError(f"{case} encoded MP4 misses outcome cues: {decoded_visual_cues['failed_cues']}")
             results.append({
                 "case_id": case, "file": mp4.name, "contact_sheet": contact_path.name,
                 "sha256": _sha_file(mp4), "bytes": mp4.stat().st_size,
@@ -261,6 +282,10 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                 "codec": "h264", "dimensions": [W, H],
                 "shot_pixel_evidence": per_shot,
                 "pixel_changes_verified": True,
+                "raw_rendered_visual_cues": raw_visual_cues,
+                "decoded_mp4_visual_cues": decoded_visual_cues,
+                "decoded_frame_count_verified": TOTAL_FRAMES,
+                "visible_story_outcome_cues_verified": True,
                 "story_semantic_accuracy": "not_verified",
                 "character_continuity_by_visual_model": "not_verified",
                 "render_style": "simple_procedural_2d_shapes",
@@ -271,6 +296,7 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
         "experiment": "astra-cpu-procedural-motion-proofs-v1",
         "video_count": len(results), "video_previews": results,
         "real_mp4_encoded": True, "actual_scene_pixel_differences_checked": True,
+        "decoded_mp4_outcome_cues_checked": True,
         "gpu_used": False, "image_generation_model_used": False,
         "model_inference_executed": False, "audio_included": False,
         "production_quality": "not_verified",
