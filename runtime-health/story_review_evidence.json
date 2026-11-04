@@ -2,7 +2,7 @@
   "approved_count": 0,
   "assessments": [
     {
-      "content_id": "astra-proposal-2d4a44965cd5ac998dd3",
+      "content_id": "astra-proposal-8374dd5e728f6c9e9261",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -11,13 +11,13 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "4a8debe0a9ed84bd295280b0598ddaf578b2cad98c65e0e942ae95c319669801",
+      "story_sha256": "c400546e56487f68432a3de298117c3fd8e162b6a69da83543e282421e8bdfd4",
       "structural_pass": false,
       "unique_visuals": 4,
-      "word_count": 214
+      "word_count": 203
     },
     {
-      "content_id": "astra-proposal-3f9ffe0694260fe93a45",
+      "content_id": "astra-proposal-b9f70dff37d512ee1248",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -26,13 +26,13 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "b16217599581f330fda91ddf7ffa92baab9e896ce86e4dd930dd3a8f566ed719",
+      "story_sha256": "54dd608873c9bedfa1de9ccb5b49aae6b684b208c63f1c4a4639b3396a798141",
       "structural_pass": false,
       "unique_visuals": 4,
-      "word_count": 221
+      "word_count": 208
     },
     {
-      "content_id": "astra-proposal-1efe19b6fe3d0fd7b0a1",
+      "content_id": "astra-proposal-e517836b7de81a1abbda",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -41,253 +41,13 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "8e988eaf3d66a6ff1a3f92c708d6797092d49691ff5eea49618b1087672f60a1",
-      "structural_pass": false,
-      "unique_visuals": 3,
-      "word_count": 218
-    },
-    {
-      "content_id": "astra-proposal-07997108b6531a67b303",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "95cb517cf9ded7e1e38812af8423933fd982836e0256faee205cf57e3de0ef66",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 214
-    },
-    {
-      "content_id": "astra-proposal-af54d629c1907df08f1b",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "a8cd4e6d4d9e151796281b0ff3c0e49b02df6accbe30631de4d8d9e3c854485f",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 209
-    },
-    {
-      "content_id": "astra-proposal-75a211fcc07f5569b372",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "69b78f5aac046e9fb9260024ac1c61123b6e1cd8ffd0c2378e171c7cf5406c9c",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 221
-    },
-    {
-      "content_id": "astra-proposal-bf51853dc9485be78fb5",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "380f9fc5f686bac94ef869d090c652dd703759c6706244713e5ae78bea4f161f",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 206
-    },
-    {
-      "content_id": "astra-proposal-8635b17db7f5fc6351b3",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "e609b244032401f50a51e3fc54c023e0be836125e851288ca2fcecef303f7fe6",
-      "structural_pass": false,
-      "unique_visuals": 3,
-      "word_count": 218
-    },
-    {
-      "content_id": "astra-proposal-2105b60d6f9b9599f295",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "7989aec077bb4a5cae9752b578db41e3c4db3d90906a67cc9e56f55c791b1edd",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 215
-    },
-    {
-      "content_id": "astra-proposal-5e08637f9352d2996cbb",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "e3b60c74b7590a5af687a029d753dc5223364379a6f7883ec7cafd23c54fe36e",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 211
-    },
-    {
-      "content_id": "astra-proposal-fffe309f68e6c5ed481f",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "8a9f70a2112225935e95fa5c28becfdf25ac420ea06aae27486c22a5864fbbbd",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 222
-    },
-    {
-      "content_id": "astra-proposal-f51d3a0b8ea5241384aa",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "442054baa3eed73f0938a79f826c3bbf0b15d6e13933788a7ff6ea2f69889972",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 217
-    },
-    {
-      "content_id": "astra-proposal-a3b0afc41c80d4d27010",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "021691258bb3d8fe487f8ec5638bc43f38c01d61df3f19c14c3ca2c440add7ad",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 207
-    },
-    {
-      "content_id": "astra-proposal-e422b53da9276018bf3a",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "2d4a846cb1461bb367cecc8cf03b148aa0dc1526cdaea422e218a643a583c4e7",
-      "structural_pass": false,
-      "unique_visuals": 3,
-      "word_count": 218
-    },
-    {
-      "content_id": "astra-proposal-41ef0dafe8aef6fdf1ef",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "d90f5fa8e27ee3335cdd2eb2c5975bf8137b59af5f5dfadf4b87ad8c75cb22a7",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 223
-    },
-    {
-      "content_id": "astra-proposal-07ebcfcacf9db0e831ce",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "4e2554eb72594f58d0de5f7b17905650485830e8fbffd539ffba7af9b75bf6c6",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 215
-    },
-    {
-      "content_id": "astra-proposal-8a97ec80f92e0cbee03c",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "fbc943c5cbfefb2792d3958d5fd98d4ba9629e81873e56106ecce940887700c1",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 217
-    },
-    {
-      "content_id": "astra-proposal-883af041e211cb5bca0b",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "b941713f9489416230e82eec22b9172d3ec4630575406a96eff9442693aaf935",
-      "structural_pass": false,
-      "unique_visuals": 4,
-      "word_count": 213
-    },
-    {
-      "content_id": "astra-proposal-2f632e1c85e5c67cf8f6",
-      "decision": "not_approved",
-      "issues": [
-        "human_or_model_editorial_review_required",
-        "publication_unreviewed_causal_draft"
-      ],
-      "production_ready": false,
-      "publication_triggered": false,
-      "recommendation": "reject_or_revise",
-      "story_sha256": "515dfa952d1b2510a09b1d4c942d9fb01acd997d690ce1126930c42e30a9196a",
+      "story_sha256": "baf47e031be211352d6f705e29e6dceb200a5d34b81c466edff92e2630d71130",
       "structural_pass": false,
       "unique_visuals": 4,
       "word_count": 210
     },
     {
-      "content_id": "astra-proposal-bade329f67434b5cc937",
+      "content_id": "astra-proposal-d2287849dde4885adffa",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -296,13 +56,28 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "d2d4254b3d298a2ccea54a1567e93bc53e87d9be3fdd704baee6bb1f12429cfd",
+      "story_sha256": "4f3763d1b97ebb8deb272041b6c5e4629bb98e8f71499657a7ed236820db43a5",
       "structural_pass": false,
       "unique_visuals": 4,
+      "word_count": 218
+    },
+    {
+      "content_id": "astra-proposal-e517a5cacc1937437a73",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "6c0510fd300b85dec7adfabedcc82aa9cc70a6bf2bbf0a51469faab915571305",
+      "structural_pass": false,
+      "unique_visuals": 3,
       "word_count": 215
     },
     {
-      "content_id": "astra-proposal-ed45fd60200166d876a6",
+      "content_id": "astra-proposal-1511e7e81dd7f91876c8",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -311,13 +86,13 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "0d11a4201e86b7b0f6fa396f514aab27f26c14198f9454c366d670bfb9847c48",
+      "story_sha256": "010de1811268a57436333525889d3c93f0979f4486b22fb6fda0d2d296e5fbf4",
       "structural_pass": false,
       "unique_visuals": 4,
-      "word_count": 220
+      "word_count": 210
     },
     {
-      "content_id": "astra-proposal-65fbd8b45fb863f06892",
+      "content_id": "astra-proposal-00e0c22acbdd7256f5cd",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -326,13 +101,88 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "d96b746d69c9e2cbff7008eef089fc69ccb6eae8f6b714769958c6462bf98f81",
+      "story_sha256": "c8b285ea48b70f644f9a8f02d32733614d93df6820bf42c8a9225c54450e20b8",
       "structural_pass": false,
-      "unique_visuals": 3,
+      "unique_visuals": 4,
+      "word_count": 210
+    },
+    {
+      "content_id": "astra-proposal-944f3331cffce5ef97bb",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "6ad51470f63080272fd5a9f412086823cf5df85b398f3282e0d4dd87a8887bc7",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 214
+    },
+    {
+      "content_id": "astra-proposal-d6c3883676372c09998d",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "8fb86a6c6019945bb8e5e86931105f27529261286e90e8a88c01aacdfd059957",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 213
+    },
+    {
+      "content_id": "astra-proposal-3be450f022ce283f01ef",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "50d465d513114edc8660b0631f5e542edf2f0f4943f2da876a80f2ffcd1403c6",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 204
+    },
+    {
+      "content_id": "astra-proposal-4de7f310493bf3e0f350",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "7ddc30b0079c0b84b8ec48a4c13b4b65cd5998413d64acc35735d67e78ce2fcc",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 216
+    },
+    {
+      "content_id": "astra-proposal-98419e93cf5d98383e47",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "5f0a1e787245a829b34c4119196ea9938f8e7248ab96aa0ea08a157f444aadc2",
+      "structural_pass": false,
+      "unique_visuals": 4,
       "word_count": 217
     },
     {
-      "content_id": "astra-proposal-d2beeb9709d450919957",
+      "content_id": "astra-proposal-183450dad24979808c6a",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -341,13 +191,13 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "95f5d47dd1bbf8e2f7336f50ccc4c59785ec14ee026a7188e34a8c6dffb52948",
+      "story_sha256": "10bb97a8bdd5e06e0261364baf0419495260dbb35ef8cafcec70f1a1aee9156d",
       "structural_pass": false,
       "unique_visuals": 4,
-      "word_count": 213
+      "word_count": 225
     },
     {
-      "content_id": "astra-proposal-1f5283dad98e2a8c48ff",
+      "content_id": "astra-proposal-62a40bf7eb340e28f8d0",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -356,13 +206,88 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "ab34919a0792aff24c854ab51c48134f634ea4bea39a00dad520b62253fac439",
+      "story_sha256": "f5cf0ad87cbfb9c4062941388d0cb8ca5170472c1d3d2371a43383c171ea1423",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 207
+    },
+    {
+      "content_id": "astra-proposal-74437c1562460fee9c57",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "e325e517714313b9ab28559f605c6acff433ef5f6dc2188a8701ad981e2d70a9",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 205
+    },
+    {
+      "content_id": "astra-proposal-09100e28391d2d3a194d",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "9156a32745d21c4ee70143bf7eb9730c739089b1e6cb5ee22d0a5c82a0e5e628",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 214
+    },
+    {
+      "content_id": "astra-proposal-05f1d430d171ff994dd8",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "dfa5d0195efce2a51fbc1e4c4f3825455f9d7ebb466ac84c5d1aefb5e8b52f3c",
+      "structural_pass": false,
+      "unique_visuals": 3,
+      "word_count": 222
+    },
+    {
+      "content_id": "astra-proposal-31b76d77319d3542bdb7",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "76b8bbea9c652c2e87dabbf6cbb9147113993ae5cdfe1c4aba3df0251aea2843",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 207
+    },
+    {
+      "content_id": "astra-proposal-ee93d95f8b358dabee41",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "2a5799af43306c5bcc529433ef0367869e60e2ee85c5b7a69d625f3a6b35370b",
       "structural_pass": false,
       "unique_visuals": 4,
       "word_count": 220
     },
     {
-      "content_id": "astra-proposal-0a5a9d17acfa60ca6aba",
+      "content_id": "astra-proposal-e6d27ed2d474cc27d361",
       "decision": "not_approved",
       "issues": [
         "human_or_model_editorial_review_required",
@@ -371,10 +296,85 @@
       "production_ready": false,
       "publication_triggered": false,
       "recommendation": "reject_or_revise",
-      "story_sha256": "4a705d4380d437255dc9c78f0242dcacd24db9df13576d4c5e77a110e5537071",
+      "story_sha256": "e26c63daef527b64d36eb6c9ed5ed6a0ce3990d99dccf120af1ca336c0e11ed2",
       "structural_pass": false,
-      "unique_visuals": 3,
-      "word_count": 213
+      "unique_visuals": 4,
+      "word_count": 217
+    },
+    {
+      "content_id": "astra-proposal-83e617e985e80eff3180",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "e70d19f8ac3bd3ee725da34a61b66238c7addd81e4fb0ff9997bb3370dd4a463",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 217
+    },
+    {
+      "content_id": "astra-proposal-fb89eadf37db080a2f77",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "d303150ff8c3b301443aa6f3330f6d55a21b3e6635b07573a580e5f92fe92aa4",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 210
+    },
+    {
+      "content_id": "astra-proposal-85bfefc4694e0c8045cd",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "74bb21c0d5f3e98110c0be74075f561f3626528dc82a61d860e5e138d60dd80e",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 217
+    },
+    {
+      "content_id": "astra-proposal-223867849dac517caa3f",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "9f337df9979f10dce05046e8f1b9e3b7707f2b057b5093caf8fa37326958e988",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 210
+    },
+    {
+      "content_id": "astra-proposal-f323580e33a9468a1bf6",
+      "decision": "not_approved",
+      "issues": [
+        "human_or_model_editorial_review_required",
+        "publication_unreviewed_causal_draft"
+      ],
+      "production_ready": false,
+      "publication_triggered": false,
+      "recommendation": "reject_or_revise",
+      "story_sha256": "45cc90fb4ece813fc9743d93aa7d18e43569e84f151a23a7d4f58d040471b982",
+      "structural_pass": false,
+      "unique_visuals": 4,
+      "word_count": 221
     }
   ],
   "publication_triggered": false,
