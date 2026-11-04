@@ -7873,6 +7873,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-d65c65a0ecb8726fb0be",
+      "video_id": "QyEJs5Z7HFk",
+      "confirmed_at": "2026-11-04T08:25:44.521596+00:00",
+      "title": "Bramen the Stoat and the Frozen Ravine Beacon",
+      "plot_fingerprint": "ba349fb63bbfaeb63b5da3bdad173e5029e1420ac6c7ba44c77683e5fd9c0ba4",
+      "story_beats": [
+        {
+          "headline": "The Hidden Hazard",
+          "speech": "The fierce blizzard has completely erased the mountain trail, leaving our traveler stranded in the blinding white snow.",
+          "visual": "forest",
+          "label": "Blizzard Wall",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramen the stoat, wearing a thick winter scarf, stands on a snowy ridge peering into a thick whiteout snowstorm in a pine forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Prepared Position",
+          "speech": "We must establish a high-visibility point right here before the fading daylight leaves us in total darkness.",
+          "visual": "door",
+          "label": "Wooden Box",
+          "story_beat": "build",
+          "visual_prompt": "Bramen the stoat pushes a sturdy wooden box into position near a snowy ledge in the forest, surrounded by tall pine trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Beacon's Flame",
+          "speech": "This glowing lantern will pierce through the blowing snow and serve as a reliable beacon across the steep gorge.",
+          "visual": "signal",
+          "label": "Signal Lantern",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramen the stoat sets a glowing brass lantern atop the wooden box on the snowy ledge, casting a warm yellow light against the dark forest backdrop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Arrival",
+          "speech": "The bright guiding light cut through the storm just in time, bringing our traveler safely to the warm shelter.",
+          "visual": "forest",
+          "label": "Path Clear",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramen the stoat stands next to the glowing lantern on the wooden box as the snowstorm clears over the forest ridge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
