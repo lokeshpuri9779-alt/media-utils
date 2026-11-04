@@ -15,6 +15,11 @@ import subprocess
 from pathlib import Path
 
 KIND = "astra_offline_crosspr_lane_v1"
+PHYSICAL_STAGES = {
+    "glasshouse-sunshade": {"attempt", "payoff"},
+    "footbridge-ducklings": {"setback", "payoff"},
+    "moon-mirror-garden": {"attempt", "payoff"},
+}
 EXPECTED = {
     "story": {
         "pr": 951,
@@ -130,6 +135,7 @@ def aggregate(directory):
             ]
             or video_evidence.get("story_video_identity_contract_passed") is not True
             or video_evidence.get("decoded_video_motion_and_payoff_pixels_passed") is not True
+            or video_evidence.get("decoded_video_authored_physical_action_pixels_passed") is not True
             or video_evidence.get("source_type") != "assistant_authored_reference_not_ai_generated_story"
             or video_evidence.get("cross_model_story_to_animation_alignment") != "not_verified"
             or video_evidence.get("manual_editorial_and_visual_review_required") is not True
@@ -144,10 +150,15 @@ def aggregate(directory):
                    or len(item.get("four_beat_scene_motion", {})) != 4
                    or not all(v.get("passed") is True
                               for v in item["four_beat_scene_motion"].values())
+                   or not isinstance(item.get("fixed_profile_physical_actions"), dict)
+                   or set(item["fixed_profile_physical_actions"]) != PHYSICAL_STAGES[case_id]
+                   or not all(isinstance(v, dict) and v.get("passed") is True
+                              and isinstance(v.get("gesture"), str)
+                              for v in item["fixed_profile_physical_actions"].values())
                    or len(item.get("fixed_profile_payoff_pixels", {})) != 2
                    or not all(v.get("passed") is True
                               for v in item["fixed_profile_payoff_pixels"].values())
-                   for item in proof.values())):
+                   for case_id, item in proof.items())):
         raise ValueError("Incomplete per-story encoded action/payoff evidence")
     evidence_sha = hashlib.sha256(evidence_bytes).hexdigest()
     hashes = {}
