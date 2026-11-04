@@ -1,5 +1,6 @@
 """Offline checks: free Gemini OmniRoute is opt-in and fails closed."""
 import os
+import urllib.error
 import unittest
 from unittest.mock import patch
 from astra_v2 import omniroute_gemini
@@ -43,6 +44,47 @@ class GeminiRouteTests(unittest.TestCase):
                 omniroute_gemini.generate(set(), set())
         self.assertEqual(len(requested), 2)
         self.assertIn("gemini-2.5-flash-lite", requested[-1])
+
+    def test_default_fallback_avoids_legacy_25_model(self):
+        import io
+        import json
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            if "gemini-3.5-flash-lite" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+            return io.BytesIO(json.dumps({"candidates": []}).encode())
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.5-flash-lite",
+        }, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=fake_urlopen):
+            with self.assertRaisesRegex(ValueError, "no candidates"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-3.1-flash-lite", requested[-1])
+        self.assertNotIn("gemini-2.5-flash-lite", requested[-1])
+
+    def test_default_model_pair_has_independent_404_fallback(self):
+        import io
+        import json
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            if "gemini-3.5-flash-lite" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+            return io.BytesIO(json.dumps({"candidates": []}).encode())
+        with patch.dict(os.environ, {"GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1"}, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=fake_urlopen):
+            with self.assertRaisesRegex(ValueError, "no candidates"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-3.5-flash-lite", requested[0])
+        self.assertIn("gemini-3.1-flash-lite", requested[1])
+
+    def test_publisher_configures_distinct_free_model_pair(self):
+        from pathlib import Path
+        workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/astra-v2-publish.yml").read_text(encoding="utf-8")
+        self.assertIn("ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'", workflow)
+        self.assertIn("ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'", workflow)
 
     def test_authentication_error_never_falls_back(self):
         import urllib.error

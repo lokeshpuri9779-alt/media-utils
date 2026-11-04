@@ -50,7 +50,8 @@ jobs:
       ASTRA_NVIDIA_FREE_CONFIRMED: ${{ vars.ASTRA_NVIDIA_FREE_CONFIRMED || '0' }}
       ASTRA_NVIDIA_MODEL: ${{ vars.ASTRA_NVIDIA_MODEL || '' }}
       ASTRA_OPENROUTER_MODEL: 'openrouter/free'
-      ASTRA_GEMINI_MODEL: 'gemini-3.1-flash-lite'
+      ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
+      ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
@@ -80,6 +81,11 @@ jobs:
           for f in performance.json astra_v2_state.json astra_stage_feedback.json SHORTS.md; do
             git checkout origin/astra-state -- "$f" 2>/dev/null || true
           done
+          # Protected pre-reset history is mandatory, not an optional fallback.
+          # Fail closed rather than silently repeating an already-published ID.
+          git show origin/astra-state:astra_duplicate_protection.json > astra_duplicate_protection.json
+          test -s astra_duplicate_protection.json
+          echo 'ASTRA_PROTECTED_HISTORY=restored'
           # Restore the latest AI editorial evidence as an inseparable pair.
           # Approval remains subject to current hash and publication-history gates.
           for f in ai-reviewed-stories.json ai-reviewed-decisions.json ai-editorial-reviews.json; do

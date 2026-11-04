@@ -86,6 +86,10 @@ jobs:
           subprocess.run([get_ffmpeg_exe(),'-v','error','-i',video,'-map','0:v:0','-map','0:a:0','-f','null','-'],check=True)
           print('ASTRA_DUO_MP4_DECODE_OK')
           PY
+      - name: Verify decoded broken-bridge MP4 evidence and negative controls
+        run: |
+          python -m unittest discover -s tests -p 'test_broken_bridge_video_evidence.py' -v
+          python -m tools.verify_broken_bridge_mp4 duo-preview/duo-short.mp4 --output duo-preview/broken-bridge-pixel-evidence.json
       - name: Render all 80 authored story beats as storyboard contact sheet
         run: python -m tools.editorial_oct2026_preview
       - uses: actions/upload-artifact@v4
