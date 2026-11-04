@@ -1,0 +1,46 @@
+name: ASTRA Ensemble Engine Active (Artifact Only)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-ensemble-active.yml'
+      - 'tools/astra_ensemble_active.py'
+  schedule:
+    - cron: '17 1 * * *'
+permissions:
+  contents: read
+jobs:
+  ensemble-engine:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      ASTRA_EXPERIMENT_ENSEMBLE: '1'
+      ASTRA_OPENAI_ENABLED: '0'
+      ORT_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install pinned free renderer dependencies
+        run: uv pip install --system -r requirements.txt
+      - name: Activate independent narrated ensemble engine
+        run: python -m tools.astra_ensemble_active
+      - name: Verify full video and audio decoding
+        run: |
+          python - <<'PY'
+          import subprocess
+          from imageio_ffmpeg import get_ffmpeg_exe
+          subprocess.run([get_ffmpeg_exe(),'-v','error','-i','preview/astra-ensemble-activated.mp4','-f','null','-'],check=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-ensemble-active-output
+          path: |
+            preview/astra-ensemble-activated.mp4
+            preview/astra-ensemble-activated.json
+          retention-days: 7
+          if-no-files-found: error
