@@ -4,7 +4,7 @@ import unittest
 
 from tools import astra_offline_manual_scene_review as human
 from tests.test_astra_offline_story_video_handoff import source_fixture
-from tools.astra_offline_story_video_handoff import STORIES, STAGES, SOURCE_SHA
+from tools.astra_offline_story_video_handoff import STORIES, STAGES, SOURCE_SHA, PHYSICAL_WITNESSES
 
 
 def fixture():
@@ -24,6 +24,10 @@ def fixture():
             "fixed_profile_payoff_pixels": {
                 "first_outcome": {"passed": True},
                 "second_outcome": {"passed": True},
+            },
+            "fixed_profile_physical_actions": {
+                stage: {"gesture": spec[0], "passed": True}
+                for stage, spec in PHYSICAL_WITNESSES[p["case_id"]].items()
             },
         }
     evidence = {
@@ -88,6 +92,12 @@ class ManualSceneReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "visual controls"):
             human.plan_review(self.board, p)
 
+    def test_missing_human_repair_cue_cannot_be_handed_off(self):
+        p = deepcopy(self.evidence)
+        p["video_evidence"]["glasshouse-sunshade"]["fixed_profile_physical_actions"].pop("payoff")
+        with self.assertRaisesRegex(ValueError, "decoded physical repair"):
+            human.plan_review(self.board, p)
+        
     def test_forged_production_approval_fails_closed(self):
         for flag in ("approved", "published", "production_ready", "paid_apis_used"):
             p = deepcopy(self.evidence)
