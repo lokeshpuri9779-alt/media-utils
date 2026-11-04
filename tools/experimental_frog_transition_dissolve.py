@@ -1,4 +1,4 @@
-"""Build and validate an optional two-frame rescue-to-plant dissolve.
+"""Build and validate an optional two-frame dip-to-dusk rescue-to-plant handoff.
 
 No changes to the canonical 32-frame render, its independent evidence or
 publication gates. All 32 decoded action frames are preserved in order.
@@ -46,10 +46,14 @@ def blend_frame(first, second, numerator, denominator):
 
 
 def expected_layout(source_frames):
+    # Direct crossfading ghosted the frog, grate and captions. Dim each
+    # shot toward the same dusk-black instead. Outgoing/incoming camera
+    # views are NEVER double-exposed; canonical 32 frames stay untouched.
+    neutral = bytes([16] * (WIDTH * HEIGHT) +
+                    [128] * (WIDTH * HEIGHT // 2))
     bridge = [
-        blend_frame(source_frames[BRIDGE_AFTER],
-                    source_frames[BRIDGE_AFTER + 1], i, BRIDGE_FRAMES + 1)
-        for i in range(1, BRIDGE_FRAMES + 1)
+        blend_frame(source_frames[BRIDGE_AFTER], neutral, 3, 5),
+        blend_frame(neutral, source_frames[BRIDGE_AFTER + 1], 2, 5),
     ]
     return (source_frames[:BRIDGE_AFTER + 1] + bridge +
             source_frames[BRIDGE_AFTER + 1:] +
@@ -64,7 +68,7 @@ def checks_for_hashes(original_hashes, extended_hashes, bridge_hashes):
     total = CANONICAL_FRAMES + BRIDGE_FRAMES + HOLD_FRAMES
     if len(original_hashes) != CANONICAL_FRAMES or len(extended_hashes) != total:
         return {'all_action_frames_preserved_exactly': False,
-                'dissolve_interpolations_exact': False,
+                'dusk_dip_interpolations_exact': False,
                 'ending_hold_pixel_exact': False}
     indices = [(i, i if i <= BRIDGE_AFTER else i + BRIDGE_FRAMES)
                for i in range(CANONICAL_FRAMES)]
@@ -72,7 +76,7 @@ def checks_for_hashes(original_hashes, extended_hashes, bridge_hashes):
         'all_action_frames_preserved_exactly': all(
             extended_hashes[j] == original_hashes[i] for i, j in indices
         ),
-        'dissolve_interpolations_exact': (
+        'dusk_dip_interpolations_exact': (
             extended_hashes[BRIDGE_AFTER + 1:
                             BRIDGE_AFTER + 1 + BRIDGE_FRAMES] ==
             bridge_hashes and
@@ -125,7 +129,7 @@ def main():
     extended, bridge = expected_layout(frames)
     bridge_hashes = [frame_md5(f) for f in bridge]
     dest.mkdir(parents=True, exist_ok=True)
-    target = dest / 'frog_story_transition_dissolve_review_only.mp4'
+    target = dest / 'frog_story_transition_dip_review_only.mp4'
     result = subprocess.run(
         ['ffmpeg','-hide_banner','-loglevel','error','-y',
          '-f','rawvideo','-pix_fmt','yuv420p',
@@ -168,13 +172,13 @@ def main():
         )['all_action_frames_preserved_exactly'],
         'corrupted_dissolve_rejected': not checks_for_hashes(
             src_hashes, bridge_mutation, bridge_hashes
-        )['dissolve_interpolations_exact'],
+        )['dusk_dip_interpolations_exact'],
         'corrupted_ending_rejected': not checks_for_hashes(
             src_hashes, payoff_mutation, bridge_hashes
         )['ending_hold_pixel_exact'],
     }
     report = {
-        'kind': 'astra_frog_optional_rescue_plant_dissolve',
+        'kind': 'astra_frog_optional_rescue_plant_dusk_dip',
         'source_frame_count': CANONICAL_FRAMES,
         'new_transition_frames': BRIDGE_FRAMES,
         'new_payoff_hold_frames': HOLD_FRAMES,
@@ -190,14 +194,14 @@ def main():
         'manual_visual_review_required': True,
         'approved': False, 'published': False, 'production_ready': False,
         'paid_apis_used': False,
-        'note': ('Two interpolated camera-cut frames may ghost moving objects; '
-                 'this remains an optional human-review cut, not published '
+        'note': ('Short dim-to-dusk cut avoids double-exposing moving subjects; '
+                 'this is still an optional human-review edit, not published '
                  'quality or replacement canonical evidence.'),
     }
-    (dest / 'transition_dissolve_review.json').write_text(
+    (dest / 'transition_dip_review.json').write_text(
         json.dumps(report, indent=2) + '\n'
     )
-    print('ASTRA_FROG_TRANSITION_DISSOLVE=' + json.dumps(report), flush=True)
+    print('ASTRA_FROG_TRANSITION_DIP=' + json.dumps(report), flush=True)
     if not report['passed']:
         raise SystemExit(1)
 

@@ -207,7 +207,7 @@ jobs:
           assert (root/'frog_story_payoff_hold_review_only.mp4').stat().st_size>4096
           print('Verified optional 1-second sprout hold without modifying canonical video')
           PY
-      - name: Build independently verified rescue-to-plant dissolve cut (review only)
+      - name: Build independently verified rescue-to-plant dip-to-dusk cut (review only)
         run: |
           python3 -m tools.experimental_frog_transition_dissolve \
             --directory artifacts/experimental-frog-render/ \
@@ -216,7 +216,7 @@ jobs:
           import json
           from pathlib import Path
           root=Path('artifacts/experimental-frog-transition-dissolve')
-          result=json.loads((root/'transition_dissolve_review.json').read_text())
+          result=json.loads((root/'transition_dip_review.json').read_text())
           assert result['passed'] and all(result['checks'].values())
           assert result['source_frame_count']==32
           assert result['new_transition_frames']==2
@@ -225,14 +225,14 @@ jobs:
           assert all(result[field] is False for field in
                      ('approved','published','production_ready','paid_apis_used'))
           assert result['manual_visual_review_required'] is True
-          assert (root/'frog_story_transition_dissolve_review_only.mp4').stat().st_size>4096
+          assert (root/'frog_story_transition_dip_review_only.mp4').stat().st_size>4096
           print('40-frame optional transition verified, 32 canonical action frames preserved')
           PY
-      - name: Preserve optional transition dissolve cut (not publication evidence)
+      - name: Preserve optional transition dip cut (not publication evidence)
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: astra-frog-transition-dissolve-review
+          name: astra-frog-transition-dip-review
           path: artifacts/experimental-frog-transition-dissolve/
           retention-days: 7
           if-no-files-found: warn
