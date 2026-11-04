@@ -1,13 +1,16 @@
 name: ASTRA Offline Cross-PR Safety Review (Isolated)
 
 # Review-only compatibility checks for the exact audited #951 and #929 commits.
-# No production triggers, model execution, rendering, publishing or paid API.
+# No production triggers, model inference, publishing or paid API.
+# One isolated CPU lane renders three tiny reference MP4s for independent decoding.
 on:
   pull_request:
     branches: [main]
     paths:
       - '.github/workflows/astra-offline-crosspr-review.yml'
       - 'tools/astra_offline_crosspr_gate.py'
+      - 'tools/astra_offline_story_video_handoff.py'
+      - 'tests/test_astra_offline_story_video_handoff.py'
       - 'tests/test_astra_offline_crosspr_gate.py'
 
 permissions:
@@ -24,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [story, motion]
+        lane: [story, motion, video]
     env:
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'
@@ -41,11 +44,11 @@ jobs:
         with:
           python-version: '3.11'
       - name: Source-pinned story review checkout (#951)
-        if: matrix.lane == 'story'
+        if: matrix.lane == 'story' || matrix.lane == 'video'
         uses: actions/checkout@v4
         with:
           repository: lokeshpuri9779-alt/media-utils
-          ref: 63f98ea1e62eece7847311c0fe6d59165ba6a863
+          ref: b1fb13e98865f0ab177c2df0aa98707f0ac2954a
           path: isolated-source
           persist-credentials: false
       - name: Source-pinned animation review checkout (#929)
@@ -75,17 +78,58 @@ jobs:
             tests.test_astra_experimental_action_contracts \
             tests.test_astra_experimental_story_review_verify \
             tests.test_astra_experimental_video_frame_consistency
-      - name: Record checked source revision and closed gates
+      - name: Install free CPU frame validation and FFmpeg
+        if: matrix.lane == 'video'
         run: |
-          python3 -m tools.astra_offline_crosspr_gate lane \
-            --lane "${{ matrix.lane }}" \
-            --source-dir isolated-source \
-            --output "offline-crosspr/${{ matrix.lane }}.json"
+          python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg
+      - name: Verify source video and story regression controls
+        if: matrix.lane == 'video'
+        working-directory: isolated-source
+        run: |
+          python3 -m unittest -v \
+            tests.test_astra_offline_procedural_preview \
+            tests.test_astra_offline_visual_cues \
+            tests.test_astra_offline_character_rig
+      - name: Verify independent mismatched-story and missing-payoff controls
+        if: matrix.lane == 'video'
+        run: python3 -m unittest -v tests.test_astra_offline_story_video_handoff
+      - name: Generate three review-only CPU MP4 previews from same pinned storyboards
+        if: matrix.lane == 'video'
+        working-directory: isolated-source
+        run: |
+          python3 -m tools.astra_offline_storyboard --output ../offline-crosspr-detail/packet.json
+          python3 -m tools.astra_offline_procedural_preview --output ../offline-crosspr-detail/previews
+      - name: Independently decode every MP4 frame and bind it to the correct story
+        if: matrix.lane == 'video'
+        run: |
+          python3 -m tools.astra_offline_story_video_handoff \
+            --storyboard offline-crosspr-detail/packet.json \
+            --preview-dir offline-crosspr-detail/previews \
+            --source-sha "$(git -C isolated-source rev-parse HEAD)" \
+            --output offline-crosspr/video-evidence.json
+      - name: Record checked source revision and closed gates
+        shell: bash
+        run: |
+          if [[ "${{ matrix.lane }}" == "video" ]]; then
+            python3 -m tools.astra_offline_crosspr_gate lane \
+              --lane video --source-dir isolated-source \
+              --evidence-file offline-crosspr/video-evidence.json \
+              --output offline-crosspr/video.json
+          else
+            python3 -m tools.astra_offline_crosspr_gate lane \
+              --lane "${{ matrix.lane }}" \
+              --source-dir isolated-source \
+              --output "offline-crosspr/${{ matrix.lane }}.json"
+          fi
       - name: Archive unsigned review-only test receipt
         uses: actions/upload-artifact@v4
         with:
           name: astra-crosspr-review-${{ matrix.lane }}
-          path: offline-crosspr/${{ matrix.lane }}.json
+          path: |
+            offline-crosspr/${{ matrix.lane }}.json
+            offline-crosspr/video-evidence.json
           retention-days: 7
           if-no-files-found: error
 
