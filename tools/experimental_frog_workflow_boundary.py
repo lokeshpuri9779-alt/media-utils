@@ -92,7 +92,7 @@ def boundary_errors(review: str, publisher: str, preload: str) -> list[str]:
         "python3 -m tools.experimental_frog_object_pixel_tracks",
         "python3 -m tools.experimental_story_review_verify",
         "python3 -m tools.experimental_visual_motion_negative_controls",
-        "approved', 'published', 'production_ready', 'paid_apis_used'",
+        "('approved','published','production_ready','paid_apis_used')",
     ):
         if contract not in review:
             errors.append(f"missing fail-closed review step: {contract}")
