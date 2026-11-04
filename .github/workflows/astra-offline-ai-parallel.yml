@@ -143,7 +143,12 @@ jobs:
       - name: Validate preview pixel motion and negative controls
         if: matrix.lane == 'preview'
         run: python3 -m unittest -v tests.test_astra_offline_procedural_preview
-      - name: Verify free CPU video encoder is installed
+      - name: Install free FFmpeg CPU encoder in isolated preview lane
+        if: matrix.lane == 'preview'
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ffmpeg
+      - name: Verify FFmpeg and H.264 encoder are available
         if: matrix.lane == 'preview'
         run: |
           command -v ffmpeg

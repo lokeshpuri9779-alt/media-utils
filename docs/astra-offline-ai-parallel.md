@@ -78,7 +78,7 @@ untouched.
 
 The isolated PR review workflow now runs story, image, motion, storyboard,
 and **preview** lanes in a single matrix. A fifth independent lane
-installs only free Pillow, checks the runner's existing ffmpeg/ffprobe,
+installs only free Pillow, installs free distro-packaged ffmpeg/ffprobe after the runner image lacked them,
 runs actual Pillow pixel motion tests, and encodes **three small 320×180
 H.264 MP4 videos** (48 frames / four seconds per reference story at
 12 fps) from vector-like colored shapes. Three 4-shot contact sheets
@@ -105,3 +105,12 @@ downloaded model, paid API or ASTRA Main integration is authorized.
 There is no scheduled runner; only existing pull-request review events
 trigger this bounded test. Model-comparison inference is still skipped
 on ordinary PR checks and unrelated workflows are untouched.
+
+### Runner dependency correction
+
+The first real preview CI attempt ran all seven frame-motion negative
+controls successfully but failed at `command -v ffmpeg`: this Ubuntu
+runner image did not include FFmpeg. The isolated `preview` lane now
+installs Ubuntu's free `ffmpeg` package and verifies both `ffprobe`
+and H.264 encoding before creating MP4s. No other lane gets that
+dependency, and none of the production workflow is changed.
