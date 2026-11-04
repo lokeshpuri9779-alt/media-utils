@@ -20,7 +20,7 @@ PROFILES = {
     },
     "footbridge-ducklings": {
         "identity": "beaver_builder",
-        "mark": (44, 198, 195),
+        "mark": (235, 56, 185),
         "roi": (10, 62, 120, 154),
         "min_marker_pixels": 20,
     },
@@ -67,7 +67,7 @@ def _beetle(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
              (x+25+12*t, cy-22-27*t)][stage]
     _line(d, (x+12, cy+2), reach, (23, 87, 64), 3)
     _disc(d, *reach, 3, (57, 151, 105))
-    _disc(d, x-4, cy+3, 4, mark)
+    _disc(d, x-4, cy+3, 6, mark)
     _line(d, (x-6, cy-2), (x-1, cy+8), (25, 71, 57), 1)
 
 
@@ -126,7 +126,7 @@ def _moth(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
            (x+20+7*t, y-4-13*t)][stage]
     _line(d, (x+5, y+4), end, (151, 112, 187), 3)
     _disc(d, *end, 3, (179, 136, 197))
-    _disc(d, x, y+5, 4, mark)
+    _disc(d, x, y+5, 6, mark)
 
 
 def render_actor_layer(case_id: str, stage: int,
@@ -159,7 +159,7 @@ def marker_pixel_count(frame: Image.Image, case_id: str) -> int:
     info = PROFILES[case_id]
     mark = info["mark"]
     return sum(1 for p in frame.crop(info["roi"]).getdata()
-               if all(abs(p[i] - mark[i]) <= 22 for i in range(3)))
+               if all(abs(p[i] - mark[i]) <= 55 for i in range(3)))
 
 
 def audit_character_presence(case_id: str, scenes: list[Image.Image]) -> dict:

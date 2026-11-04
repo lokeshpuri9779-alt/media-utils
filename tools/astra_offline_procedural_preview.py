@@ -284,7 +284,7 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
             ]
             decoded_actor_audit = audit_character_presence(case, decoded_stage_ends)
             if not decoded_actor_audit["passed"]:
-                raise ValueError(f"{case} encoded MP4 missing character continuity cue")
+                raise ValueError(f"{case} encoded MP4 missing character continuity cue: {decoded_actor_audit['marker_pixel_counts']}")
             results.append({
                 "case_id": case, "file": mp4.name, "contact_sheet": contact_path.name,
                 "sha256": _sha_file(mp4), "bytes": mp4.stat().st_size,
