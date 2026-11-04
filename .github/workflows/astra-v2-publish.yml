@@ -50,7 +50,9 @@ jobs:
       ASTRA_NVIDIA_FREE_CONFIRMED: ${{ vars.ASTRA_NVIDIA_FREE_CONFIRMED || '0' }}
       ASTRA_NVIDIA_MODEL: ${{ vars.ASTRA_NVIDIA_MODEL || '' }}
       ASTRA_OPENROUTER_MODEL: 'openrouter/free'
-      ASTRA_GEMINI_MODEL: 'gemini-3.1-flash-lite'
+      # Match the existing Story Factory free-tier model order; legacy 2.5 fallback returned 404.
+      ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
+      ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       ASTRA_OPENAI_ENABLED: '0'
       ASTRA_OPENAI_ALLOW_PAID_API: '0'

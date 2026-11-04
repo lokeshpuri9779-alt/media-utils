@@ -23,6 +23,22 @@ class GeminiRouteTests(unittest.TestCase):
                 omniroute_gemini.generate(set(), set())
 
 
+    def test_default_fallback_uses_current_free_tier_model_not_restricted_legacy(self):
+        requested = []
+        def unavailable(request, timeout=None):
+            requested.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.5-flash-lite",
+        }, clear=True), patch.object(omniroute_gemini.urllib.request, "urlopen", side_effect=unavailable):
+            with self.assertRaisesRegex(RuntimeError, "Gemini HTTP 404 model=gemini-3.1-flash-lite"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-3.5-flash-lite", requested[0])
+        self.assertIn("gemini-3.1-flash-lite", requested[1])
+        self.assertTrue(all("gemini-2.5" not in url for url in requested))
+
     def test_missing_primary_model_uses_free_fallback(self):
         import io
         import json
