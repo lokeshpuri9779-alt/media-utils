@@ -177,6 +177,10 @@ jobs:
                   "script_status_counts": creative.get("script_status_counts", {}),
                   "renderer_status_counts": creative.get("renderer_status_counts", {}),
                   "renderer_reason_counts": creative.get("renderer_reason_counts", {}),
+                  "scene_taxonomy_status_counts": creative.get("scene_taxonomy_status_counts", {}),
+                  "scene_taxonomy_recognized_shots": creative.get("scene_taxonomy_recognized_shots", 0),
+                  "scene_taxonomy_unresolved_shots": creative.get("scene_taxonomy_unresolved_shots", 0),
+                  "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
                   "editorial_approval": False,
                   "publication_triggered": False,
               }

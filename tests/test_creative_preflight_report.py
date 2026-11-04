@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from astra_v2.creative_preflight_report import analyze_batch, main
+from astra_v2.creative_preflight_report import analyze_batch, main, scene_taxonomy_diagnostic
 from astra_v2.editorial_approval_manifest import story_digest
 
 
@@ -36,6 +36,74 @@ class CreativePreflightReportTests(unittest.TestCase):
         self.assertFalse(report["publication_triggered"])
         self.assertFalse(report["editorial_approval"])
         self.assertEqual(json.dumps(story, sort_keys=True), before)
+
+
+    def test_planned_scene_taxonomy_resolves_only_known_labels(self):
+        story = sample_story()
+        before = json.dumps(story, sort_keys=True)
+        plan = [
+            {"story_environment": "forest", "speech": "A fox sees a lantern."},
+            {"visual_prompt": "An indoor cabin with a wooden hearth"},
+            {"visual_prompt": "A telescope in an observatory"},
+        ]
+        with patch("studio_renderer.make_plan", return_value=plan) as make_plan:
+            result = scene_taxonomy_diagnostic(story)
+        self.assertEqual(result["status"], "partially_recognized")
+        self.assertEqual(result["shot_count"], 3)
+        self.assertEqual(result["recognized_shots"], 2)
+        self.assertEqual(result["unresolved_shots"], 1)
+        make_plan.assert_called_once()
+        self.assertEqual(json.dumps(story, sort_keys=True), before)
+
+    def test_diagnostic_does_not_claim_artwork_or_editorial_approval(self):
+        story = sample_story()
+        with patch("studio_renderer.make_plan", return_value=[
+            {"story_environment": "forest"}, {"visual_prompt": "underwater reef"}]):
+            report = analyze_batch({"status": "unreviewed", "stories": [story]},
+                                   checker=lambda _: (True, None, ("solo", "solo")))
+        self.assertEqual(report["scene_taxonomy_status_counts"],
+                         {"all_shots_recognized": 1})
+        self.assertEqual(report["scene_taxonomy_recognized_shots"], 2)
+        self.assertEqual(report["scene_taxonomy_unresolved_shots"], 0)
+        self.assertEqual(report["scene_taxonomy_scope"],
+                         "planning_only_no_verified_artwork_or_semantic_approval")
+        self.assertFalse(report["candidates"][0]["publication_approved"])
+        self.assertFalse(report["editorial_approval"])
+
+    def test_unknown_scene_or_failure_never_becomes_recognized(self):
+        story = sample_story()
+        with patch("studio_renderer.make_plan", return_value=[
+            {"visual_prompt": "A meadow and a wooden courtyard"}]):
+            result = scene_taxonomy_diagnostic(story)
+        self.assertEqual(result["status"], "no_shots_recognized")
+        self.assertEqual(result["unresolved_shots"], 1)
+        with patch("studio_renderer.make_plan", side_effect=RuntimeError("PRIVATE_TOKEN")):
+            failed = scene_taxonomy_diagnostic(story)
+        self.assertEqual(failed["status"], "unavailable")
+        self.assertNotIn("PRIVATE_TOKEN", str(failed))
+        self.assertEqual(failed["recognized_shots"], 0)
+        with patch("studio_renderer.make_plan") as build:
+            non_fiction = {**story, "genre": "documentary"}
+            self.assertEqual(scene_taxonomy_diagnostic(non_fiction)["status"],
+                             "not_applicable")
+            build.assert_not_called()
+
+    def test_scene_diagnostic_batch_remains_bounded_and_separate_from_approval(self):
+        rows = [
+            {"visual_prompt": "in a forest"},
+            {"visual_prompt": "on a grassland"},
+            {"visual_prompt": "on a city street"},
+        ]
+        with patch("studio_renderer.make_plan", return_value=rows):
+            report = analyze_batch({"status": "unreviewed",
+                                    "stories": [sample_story()]},
+                                   checker=lambda _: (False, "cast mismatch", ()))
+        self.assertEqual(report["scene_taxonomy_status_counts"],
+                         {"partially_recognized": 1})
+        self.assertEqual(report["scene_taxonomy_recognized_shots"], 2)
+        self.assertEqual(report["scene_taxonomy_unresolved_shots"], 1)
+        self.assertEqual(report["renderer_status_counts"], {"incompatible": 1})
+        self.assertFalse(report["publication_triggered"])
 
     def test_unsupported_human_actor_is_classified_without_leaking_reason(self):
         story = sample_story("Delve deep as a keeper unlocks the lighthouse.")
@@ -97,6 +165,8 @@ class CreativePreflightReportTests(unittest.TestCase):
             self.assertNotIn("PRIVATE_SCRIPT_SENTINEL", stream.getvalue())
             self.assertEqual(report["generated"], 1)
             self.assertFalse(report["publication_triggered"])
+            self.assertIn("scene_taxonomy_status_counts", report)
+            self.assertNotIn("PRIVATE_SCRIPT_SENTINEL", stream.getvalue())
 
     def test_empty_batch_is_not_approval(self):
         report = analyze_batch({"status": "unreviewed", "stories": []},
