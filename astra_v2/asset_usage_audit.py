@@ -81,6 +81,49 @@ def observe(shot_number, analysis, status, identity, *, asset=None, before=None,
 
 
 
+def preflight_fiction_backgrounds(plan, *, genre):
+    """Reject provably missing fiction backgrounds before costly media rendering.
+
+    This is only a necessary asset-availability check, not compositor proof,
+    semantic QA, editorial approval, or permission to publish. The original
+    hash-bound post-encode compositor receipt remains mandatory.
+    """
+    if (genre != "fiction" or os.getenv("ASTRA_ASSET_PACK_ENABLED") != "1"
+            or os.getenv("ASTRA_ASSET_PACK_AUDIT") != "1"):
+        return None
+    from astra_v2.visual_artifact_backdrop import analyze_story_scene
+    from astra_v2.quality_asset_selector import select_assets
+
+    root_name = os.getenv("ASTRA_ASSET_PACK_ROOT")
+    root = Path(root_name) if root_name else None
+    if root is None or not (root / "art" / "manifest.json").is_file():
+        return {"status": "blocked", "reason": "verified_asset_pack_missing",
+                "shot_count": len(plan), "missing_shots": [],
+                "semantic_quality": "not_verified", "publication_approval": False}
+
+    # Exactly the same scene analyser and verified, portrait-format asset
+    # selector as the real Studio compositor. Cache decisions by scene so
+    # repeated environments do not revalidate the complete pack per shot.
+    scene_has_art = {}
+    missing = []
+    for index, shot in enumerate(plan, 1):
+        scene = analyze_story_scene(shot)["scene"]
+        if scene is None:
+            missing.append({"shot": index, "reason": "scene_unresolved"})
+            continue
+        if scene not in scene_has_art:
+            scene_has_art[scene] = bool(select_assets(
+                root, kind="background", tags=(scene,),
+                video_format="shorts", limit=1))
+        if not scene_has_art[scene]:
+            missing.append({"shot": index, "reason": "no_matching_background",
+                            "scene": scene})
+    return {"status": "blocked" if missing else "possible",
+            "reason": "missing_backgrounds" if missing else "verified_matches_available",
+            "shot_count": len(plan), "missing_shots": missing,
+            "semantic_quality": "not_verified", "publication_approval": False}
+
+
 def fiction_compositor_coverage_rejection(story, rendered):
     """Block audited fiction with unresolved backgrounds before upload.
 
