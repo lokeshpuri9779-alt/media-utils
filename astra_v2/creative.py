@@ -3,6 +3,7 @@ import json
 import hashlib
 import os
 import subprocess
+from astra_errors import StoryBackgroundPreflightReject
 
 
 class CreativeSkip(Exception):
@@ -69,6 +70,34 @@ def publisher_history_ids(state):
         ids.update(str(record["content_id"]) for record in records.values()
                    if isinstance(record, dict) and record.get("content_id"))
     return ids
+
+
+
+def record_background_preflight_gap(selection, story, report):
+    """Report concrete story-art gaps for review; never approve or substitute."""
+    if not isinstance(report, dict) or report.get("status") != "blocked":
+        raise ValueError("expected a blocked background preflight report")
+    missing = [
+        {"shot": row.get("shot"), "reason": row.get("reason"),
+         **({"scene": row["scene"]} if row.get("scene") else {})}
+        for row in (report.get("missing_shots") or [])[:24]
+        if isinstance(row, dict)
+    ]
+    item = {
+        "content_id": story.get("content_id"),
+        "shot_count": report.get("shot_count"),
+        "reason": report.get("reason"),
+        "missing_shots": missing,
+        "publication_approval": False,
+        "semantic_quality": "not_verified",
+    }
+    selection["background_preflight_rejected"] = (
+        selection.get("background_preflight_rejected", 0) + 1)
+    if len(selection.setdefault("background_review_gaps", [])) < 24:
+        selection["background_review_gaps"].append(item)
+    print("ASTRA_CANDIDATE_BACKGROUND_REVIEW_GAP=" +
+          json.dumps(item, sort_keys=True), flush=True)
+    return item
 
 
 def make_candidate(path, excluded_ids, excluded_titles):
@@ -319,6 +348,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
     selection = {"considered": 0, "not_ready": 0, "policy_rejected": {},
                  "already_seen": 0, "duration_rejected": 0,
                  "render_qa_rejected": 0, "render_exception": {},
+                 "background_preflight_rejected": 0, "background_review_gaps": [],
                  "approved": 0}
     for story in premium_stories:
         selection["considered"] += 1
@@ -415,6 +445,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
             break
+        except StoryBackgroundPreflightReject as exc:
+            record_background_preflight_gap(selection, story, exc.report)
         except Exception as exc:
             kind = type(exc).__name__
             selection["render_exception"][kind] = selection["render_exception"].get(kind, 0) + 1
@@ -429,9 +461,13 @@ def make_candidate(path, excluded_ids, excluded_titles):
         selection["rejection_total"] = (selection["not_ready"] + selection["already_seen"]
             + selection["duration_rejected"] + selection["render_qa_rejected"]
             + sum(selection["policy_rejected"].values())
-            + sum(selection["render_exception"].values()))
-        selection["next_action"] = ("replenish_approved_story_supply" if not selection["approved"]
-            else "investigate_render_or_policy_gates")
+            + sum(selection["render_exception"].values())
+            + selection["background_preflight_rejected"])
+        selection["next_action"] = (
+            "review_missing_story_scene_backgrounds"
+            if selection["background_preflight_rejected"]
+            else ("replenish_approved_story_supply" if not selection["approved"]
+                  else "investigate_render_or_policy_gates"))
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane', selection=selection)
         # Do not waste a full render on the unreviewed legacy template pool.
