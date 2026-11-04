@@ -9,7 +9,7 @@ from unittest.mock import patch
 from astra_v2 import omniroute_gemini
 from astra_v2.renderer_aware_writing import (
     RENDERER_AWARE_DOMAINS, SUPPORTED_ANIMALS, SUPPORTED_PROPS, writing_guidance,
-    recent_plot_exclusions,
+    recent_plot_exclusions, CAUSAL_MODES, causal_diversity_guidance,
 )
 
 
@@ -68,9 +68,48 @@ class RendererAwareWritingTests(unittest.TestCase):
 
     def test_enabled_domain_is_selected_from_supported_domain_bank(self):
         prompt = capture_prompt(True)[0]["prompt"]
-        rot = int(hashlib.sha256(b"0").hexdigest()[:8], 16)
+        rot = int(hashlib.sha256(b"").hexdigest()[:8], 16)
         expected = RENDERER_AWARE_DOMAINS[rot % len(RENDERER_AWARE_DOMAINS)]
         self.assertIn("Required distinct creative domain: " + expected, prompt)
+
+    def test_causal_domains_and_modes_cycle_without_repeating_in_one_batch(self):
+        fixed = [{"content_id": "fixed-" + str(i), "title": "Old " + str(i),
+                  "confirmed_at": "2026-11-03T12:00:00+00:00"}
+                 for i in range(12)]
+        domains = []
+        modes = []
+        for i in range(12):
+            history = fixed + [
+                {"content_id": "candidate-" + str(j),
+                 "title": "Batch candidate " + str(j),
+                 "kind": "microfiction", "production_ready": True}
+                for j in range(i)
+            ]
+            prompt = capture_prompt(True, history)[0]["prompt"]
+            domain = prompt.split("Required distinct creative domain: ", 1)[1].split(". ", 1)[0]
+            mode = prompt.split("Distinct required causal mechanism (do not copy this wording as story text): ", 1)[1].split(". The conflict", 1)[0]
+            domains.append(domain)
+            modes.append(mode)
+            self.assertIn("independent review", prompt)
+            self.assertIn("Do not merely rename a character", prompt)
+        self.assertEqual(len(set(domains)), 12, domains)
+        self.assertEqual(len(set(modes)), 12, modes)
+        self.assertEqual(len(CAUSAL_MODES), 13)
+
+    def test_guidance_is_only_a_prompt_not_an_approval_or_paid_api(self):
+        from pathlib import Path
+        self.assertEqual(len(set(CAUSAL_MODES)), 13)
+        for bad in (-1, True, 1.5, "1"):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                causal_diversity_guidance(bad)
+        text = causal_diversity_guidance(0)
+        for forbidden in ("automatically approve", "enable publishing", "paid API"):
+            self.assertNotIn(forbidden, text)
+        self.assertIn("independent review", text)
+        self.assertIn("tool-and-gear repair", text)
+        source = (Path(__file__).resolve().parents[1] /
+                  "astra_v2/renderer_aware_writing.py").read_text(encoding="utf-8")
+        self.assertNotIn("urllib.request", source)
 
     def test_workflow_enables_guidance_only_for_generator_and_keeps_review(self):
         root = Path(__file__).resolve().parents[1]
@@ -141,7 +180,11 @@ class RendererAwareWritingTests(unittest.TestCase):
         disabled = capture_prompt(False, history)
         self.assertIn("snowstorm shuts down a beacon", enabled[0]["prompt"])
         self.assertIn("Invent a different causal mechanism", enabled[0]["prompt"])
-        self.assertNotIn("snowstorm shuts down a beacon", disabled[0]["prompt"])
+        # Newest publication comparisons are now included in the common
+        # generator prompt as untrusted data as well.
+        self.assertIn("snowstorm shuts down a beacon", disabled[0]["prompt"])
+        self.assertIn("Distinct required causal mechanism", enabled[0]["prompt"])
+        self.assertNotIn("Distinct required causal mechanism", disabled[0]["prompt"])
         self.assertEqual(len(enabled), len(disabled))
 
     def test_history_malformed_or_unavailable_does_not_break_default(self):
