@@ -12,7 +12,7 @@ import os
 # Disable ONNX telemetry before any import can initialize its native runtime.
 os.environ['ORT_DISABLE_TELEMETRY'] = '1'
 from pathlib import Path
-from astra_errors import CreativeReject
+from astra_errors import CreativeReject, StoryBackgroundPreflightReject
 import re
 import subprocess
 import tempfile
@@ -1758,9 +1758,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
         print('ASTRA_FICTION_BACKGROUND_PREFLIGHT=' + json.dumps(
             background_check, sort_keys=True))
         if background_check['status'] == 'blocked':
-            raise CreativeReject(
-                'Fiction background preflight rejected before rendering: '
-                + background_check['reason'])
+            raise StoryBackgroundPreflightReject(background_check)
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
