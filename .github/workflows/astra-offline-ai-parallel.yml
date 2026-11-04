@@ -11,11 +11,13 @@ on:
       - tools/astra_offline_causal_audit.py
       - tools/astra_offline_reference_benchmark.py
       - tools/astra_offline_blind_review.py
+      - tools/astra_offline_storyboard.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
       - tests/test_astra_offline_reference_benchmark.py
       - tests/test_astra_offline_blind_review.py
+      - tests/test_astra_offline_storyboard.py
       - docs/astra-offline-ai-real-llm.md
       - docs/astra-offline-blind-review.md
   pull_request:
@@ -27,12 +29,14 @@ on:
       - tools/astra_offline_causal_audit.py
       - tools/astra_offline_reference_benchmark.py
       - tools/astra_offline_blind_review.py
+      - tools/astra_offline_storyboard.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
       - tests/test_astra_offline_reference_benchmark.py
       - tests/test_astra_offline_blind_review.py
+      - tests/test_astra_offline_storyboard.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -57,7 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [story, image, motion]
+        lane: [story, image, motion, storyboard]
     env:
       ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
       HF_HUB_OFFLINE: '1'
@@ -115,6 +119,20 @@ jobs:
       - name: Motion pixel-change tests (no publishing)
         if: matrix.lane == 'motion'
         run: python3 -m unittest -v tests.test_astra_motion_gate
+      - name: Validate four-scene storyboard and continuity contracts (no frames)
+        if: matrix.lane == 'storyboard'
+        run: python3 -m unittest -v tests.test_astra_offline_storyboard
+      - name: Export 12 review-only shot cards (no media generation)
+        if: matrix.lane == 'storyboard'
+        run: python3 -m tools.astra_offline_storyboard --output artifacts/offline-storyboards/packet.json
+      - name: Archive previsualization shot packet
+        if: matrix.lane == 'storyboard'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-storyboards
+          path: artifacts/offline-storyboards/packet.json
+          if-no-files-found: error
+          retention-days: 7
       - name: Write unapproved review evidence for this lane
         run: |
           python3 - <<'PY'
@@ -122,7 +140,7 @@ jobs:
           import os
           from pathlib import Path
           lane = os.environ['ASTRA_LANE']
-          assert lane in {'story', 'image', 'motion'}
+          assert lane in {'story', 'image', 'motion', 'storyboard'}
           report = {
               'lane': lane, 'type': 'contract_and_regression_tests',
               'checks_completed': True, 'real_model_inference_executed': False,
@@ -159,7 +177,7 @@ jobs:
           from pathlib import Path
           root = Path('artifacts/offline-ai-review')
           actual = {p.stem for p in root.glob('*.json')}
-          assert actual == {'story', 'image', 'motion'}, actual
+          assert actual == {'story', 'image', 'motion', 'storyboard'}, actual
           for path in root.glob('*.json'):
               report = json.loads(path.read_text())
               assert report['lane'] == path.stem
@@ -169,7 +187,7 @@ jobs:
               assert report['manual_visual_review_required'] is True
               assert all(report[k] is False for k in
                          ('approved', 'production_ready', 'published'))
-          print('Three parallel offline-AI review lanes passed; no production approval')
+          print('Four parallel offline-AI review lanes passed; no production approval')
           PY
 
   real-llm-cpu:

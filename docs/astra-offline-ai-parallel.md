@@ -46,3 +46,30 @@ visual review. None of these results authorizes production fallback.
 Next safe steps: run the three review-test lanes; separately supply a locally
 cached, licensed GGUF for an opt-in bounded CPU test; compare real image
 semantics and motion consistency before proposing any integration.
+
+## Coordinated four-lane review-only pipeline (November 4)
+
+The **same** `.github/workflows/astra-offline-ai-parallel.yml` now runs
+four parallel review lanes: story, image, motion and **storyboard**.
+The new storyboard lane is stdlib-only and tests
+`tools/astra_offline_storyboard.py`, then exports
+`astra-offline-storyboards` (3 assistant-drafted reference stories ×
+4 scene cards = 12 cards). Each card tracks an explicitly authored
+action, camera frame, character/location anchor, props, and the exact
+before/after event-state ledger. The exporter fails closed if visual
+props are undeclared, scene order changes, state handoffs fail, or the
+declared focus state does not result from that shot.
+
+The aggregate job now verifies all **four** independent lane reports
+before a run can be considered a review success. The historical,
+exact-commit-message-only CPU inference gate remains unchanged and
+is not activated by ordinary PR review runs. The separate legacy
+manual-only one-shot diagnostic is not part of this coordinating
+workflow.
+
+**This is previsualization DATA, not an image/video rendering run.**
+No frames, animation, visual-semantic model inference, AI story
+quality scores, human approval or publication are produced or
+implied. Assistant-authored reference story quality is not
+independently verified. Main and other ASTRA workflows remain
+untouched.
