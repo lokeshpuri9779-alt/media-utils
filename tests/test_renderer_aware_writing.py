@@ -9,6 +9,7 @@ from unittest.mock import patch
 from astra_v2 import omniroute_gemini
 from astra_v2.renderer_aware_writing import (
     RENDERER_AWARE_DOMAINS, SUPPORTED_ANIMALS, SUPPORTED_PROPS, writing_guidance,
+    background_scene_authoring_guidance,
     recent_plot_exclusions, CAUSAL_MODES, causal_diversity_guidance,
 )
 
@@ -58,6 +59,30 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("genuinely original causal mechanism", prompt)
         self.assertEqual(captured[0]["schema"]["properties"]["beats"]["minItems"], 4)
         self.assertIn("/v1beta/models/", captured[0]["url"])
+
+    def test_background_guidance_matches_real_taxonomy_without_fake_coverage(self):
+        from astra_v2.visual_artifact_library import SCENES
+        guidance = background_scene_authoring_guidance()
+        self.assertEqual(len(SCENES), 20)
+        self.assertEqual(len(set(SCENES)), len(SCENES))
+        self.assertIn(", ".join(SCENES), guidance)
+        self.assertIn("do not rely", guidance)
+        self.assertIn("Do NOT mislabel grassland", guidance)
+        self.assertIn("wooden indoor cabin", guidance)
+        self.assertIn("marketplace/courtyard", guidance)
+        self.assertIn("independent scene-artwork review", guidance)
+        self.assertIn("does not verify the artwork", guidance)
+
+    def test_gemini_prompt_grounded_in_shot_setting_only_when_opted_in(self):
+        request = capture_prompt(True)[0]
+        prompt = request["prompt"]
+        self.assertIn("background TAXONOMY", prompt)
+        self.assertIn("Every beat's visual_prompt must state the ACTUAL visible location", prompt)
+        self.assertIn("Do NOT mislabel grassland", prompt)
+        self.assertIn("independent scene-artwork review", prompt)
+        self.assertNotIn("story_environment",
+                         request["schema"]["properties"]["beats"]["items"]["required"])
+        self.assertNotIn("background TAXONOMY", capture_prompt(False)[0]["prompt"])
 
     def test_default_prompt_unchanged_when_not_opted_in(self):
         captured = capture_prompt(False)
