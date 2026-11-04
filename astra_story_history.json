@@ -7977,6 +7977,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-98a7db191b8cbf04e305",
+      "video_id": "OiKIxd3_oKw",
+      "confirmed_at": "2026-11-04T14:00:39.070055+00:00",
+      "title": "Soren the Otter and the Tidal Shell Chime",
+      "plot_fingerprint": "efcb15e39847bf6aeb8a9031906b4d8cc46518a8b6537ea951f918cd75745942",
+      "story_beats": [
+        {
+          "headline": "The Silent Pillar",
+          "speech": "Oh dear, the grand tide chime is broken and the celebration starts at dusk!",
+          "visual": "signal",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An otter named Soren with damp brown fur, wearing a striped blue scarf, stands on a weathered wooden seaside dock. Soren is looking up with a shocked expression at a broken wooden frame where a chime used to hang. The background shows a calm ocean under an evening sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Chimes",
+          "speech": "I must collect the resonant spiral shells from the shore before the tide rises too high.",
+          "visual": "forest",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Soren the otter in his striped blue scarf stands on a sandy beach next to coastal dune grass. Soren is holding a smooth wooden box in both paws, carefully placing a pale spiral shell inside it. The ocean waves lap softly at the edge of the sand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fastening the Cords",
+          "speech": "Tying these shells tightly to the sturdy dock post will create a wonderful new ringing melody.",
+          "visual": "door",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Soren the otter in his striped blue scarf stands on the wooden pier next to a heavy vertical support post. Soren holds a glowing lantern in one paw to illuminate his work while knotting a fiber cord securing a row of hanging shells to the post.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Festive Ring",
+          "speech": "Listen to the sweet coastal breeze play our new chime, perfectly opening the festival!",
+          "visual": "ship",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Soren the otter in his striped blue scarf stands proudly on the wooden dock next to the newly hung shell chime, which dangles gently in the sea breeze. In the background, a small wooden sailing ship rests in the calm harbor under a starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The annual coastal tide chime breaks apart before the solstice celebration begins, leaving the harbor without its traditional opening melody.",
+      "decisive_choice": "Soren chooses to assemble a backup resonant shell chime using found driftwood and hollow shells instead of waiting for a metal smith.",
+      "resolution": "The improvised shell chime rings clearly in the sea breeze, successfully opening the harbor celebration to the delight of all coastal residents."
     }
   ]
 }
