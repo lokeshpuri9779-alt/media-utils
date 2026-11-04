@@ -30,6 +30,7 @@ EXPECTED_SIZE = {"shorts": (540, 960), "long": (1280, 720)}
 MAX_PACK_MEMBERS = 3301
 MAX_TOTAL_BYTES = 150_000_000
 MAX_SINGLE_BYTES = 1_000_000
+MAX_MANIFEST_BYTES = 4_000_000
 
 
 def _safe_archive_members(zipper: ZipFile, prefix: str) -> set[str]:
@@ -42,7 +43,8 @@ def _safe_archive_members(zipper: ZipFile, prefix: str) -> set[str]:
         chunks = name.split("/")
         if (not name.startswith(prefix) or name.startswith("/") or
                 ".." in chunks or "\\" in name or member.is_dir() or
-                member.file_size <= 0 or member.file_size > MAX_SINGLE_BYTES or
+                member.file_size <= 0 or member.file_size > (
+                    MAX_MANIFEST_BYTES if name == MANIFEST else MAX_SINGLE_BYTES) or
                 member.flag_bits & 0x1):
             raise ValueError("unsafe or unsupported ZIP member")
         uncompressed += member.file_size
