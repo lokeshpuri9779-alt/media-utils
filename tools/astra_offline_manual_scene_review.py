@@ -164,11 +164,24 @@ def review_sheet(packet):
             "action_visible": None, "character_consistent": None,
             "prop_contact_visible": None, "evidence_note": "",
         })
+    critical_tasks = []
+    for case_id in sorted(CRITICAL_DETAILS):
+        for stage, spec in PHYSICAL_WITNESSES[case_id].items():
+            critical_tasks.append({
+                "case_id": case_id, "stage": stage,
+                "gesture": spec[0],
+                "question": CRITICAL_DETAILS[case_id][
+                    list(PHYSICAL_WITNESSES[case_id]).index(stage)],
+                "visible_and_understandable": None,
+                "mechanical_contact_clear": None,
+                "evidence_note": "",
+            })
     return {
         "kind": "astra_offline_manual_review_submission_v1",
         "review_packet_sha256": document_hash(packet),
         "reviewer_id": "",
         "tasks": tasks,
+        "critical_repair_tasks": critical_tasks,
         "completed": False,
         "approved": False, "production_ready": False,
         "published": False, "paid_apis_used": False,
@@ -211,10 +224,38 @@ def validate_submission(packet, submission):
         note = task.get("evidence_note")
         if not isinstance(note, str) or not 20 <= len(note.strip()) <= 800:
             raise ValueError("Each human assessment requires a specific evidence note")
+    # A frame-wide positive rating cannot silently stand in for the six
+    # concrete, physically understandable repairs. These are separate human
+    # questions, left blank by CI and source-bound by packet hash.
+    details = submission.get("critical_repair_tasks")
+    expected = review_sheet(packet)["critical_repair_tasks"]
+    if not isinstance(details, list) or len(details) != len(expected):
+        raise ValueError("Every critical repair requires separate human review")
+    critical_flags = []
+    for task, source in zip(details, expected):
+        if not isinstance(task, dict) or any(
+            task.get(name) != source[name]
+            for name in ("case_id", "stage", "gesture", "question")
+        ):
+            raise ValueError("Critical repair identity or prompt changed")
+        for name in ("visible_and_understandable", "mechanical_contact_clear"):
+            if task.get(name) not in REVIEW_STATUSES:
+                raise ValueError("Critical repair rating missing: " + name)
+            if task[name] != "visible":
+                critical_flags.append({
+                    "case_id": source["case_id"], "stage": source["stage"],
+                    "gesture": source["gesture"], "field": name,
+                    "status": task[name],
+                })
+        note = task.get("evidence_note")
+        if not isinstance(note, str) or not 20 <= len(note.strip()) <= 800:
+            raise ValueError("Critical repair requires a specific human evidence note")
     return {
         "kind": "astra_offline_manual_visual_assessment_v1",
         "human_review_submitted": True, "reviewed_beats": len(tasks),
         "unverified_or_missing": flagged,
+        "critical_repair_reviewed": len(details),
+        "critical_repairs_unclear_or_missing": critical_flags,
         "no_full_semantic_certification": True,
         "human_identity_independently_verified": False,
         "manual_editorial_review_required": True,
