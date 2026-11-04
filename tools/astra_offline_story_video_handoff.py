@@ -49,6 +49,24 @@ WITNESSES = {
         "open_pink_petals": ((80, 95, 210, 122), (235, 163, 228), 35, 20, 100),
     },
 }
+# Independent encoded-H.264 material witnesses for the six authored repair
+# gestures. Fixed ROIs are version-pinned to #951; these are NOT semantic tests.
+# Format: stage -> (expected gesture, ROI, RGB, tolerance, minimum late pixels).
+PHYSICAL_WITNESSES = {
+    "glasshouse-sunshade": {
+        "attempt": ("thin_cord_loops_pulley", (92, 34, 118, 59), (244, 195, 112), 40, 23),
+        "payoff": ("braided_rope_knotted_to_frame", (273, 102, 310, 135), (239, 219, 160), 40, 32),
+    },
+    "footbridge-ducklings": {
+        "setback": ("plank_retrieval_hook_visible", (89, 114, 132, 145), (196, 87, 42), 26, 48),
+        "payoff": ("reed_binding_at_both_bridge_posts", (237, 83, 255, 116), (246, 226, 163), 38, 26),
+    },
+    "moon-mirror-garden": {
+        "attempt": ("brass_handle_rotates", (251, 65, 264, 81), (246, 168, 90), 38, 28),
+        "payoff": ("replacement_metal_clip_locks_mirror", (258, 59, 285, 94), (236, 235, 212), 38, 34),
+    },
+}
+
 SAFETY = ("approved", "published", "production_ready")
 
 
@@ -68,6 +86,7 @@ def validate_metadata(storyboard, video_report):
             or video_report.get("model_inference_executed") is not False
             or video_report.get("human_visual_review_required") is not True
             or video_report.get("production_quality") != "not_verified"
+            or video_report.get("decoded_mp4_physical_repair_cues_checked") is not True
             or video_report.get("video_count") != 3
             or storyboard.get("reference_count") != 3
             or storyboard.get("total_shots") != 12):
@@ -131,6 +150,20 @@ def validate_metadata(storyboard, video_report):
                 or actor.get("passed") is not True
                 or actor.get("character_identity_semantics") != "not_verified"):
             raise ValueError("Missing independent decode evidence or mismatched preview: " + cid)
+        gestures = item.get("decoded_mp4_physical_repair_details")
+        expected = PHYSICAL_WITNESSES[cid]
+        if (not isinstance(gestures, list) or len(gestures) != len(expected)
+                or {g.get("stage") for g in gestures if isinstance(g, dict)} != set(expected)):
+            raise ValueError("Missing or unrecognized physical repair evidence: " + cid)
+        for g in gestures:
+            if (not isinstance(g, dict) or g.get("case_id") != cid
+                    or g.get("witness") != expected[g["stage"]][0]
+                    or g.get("passed") is not True
+                    or g.get("semantics") != "not_verified"
+                    or g.get("hand_prop_mechanics") != "not_verified"
+                    or g.get("manual_review_required") is not True
+                    or not _closed(g)):
+                raise ValueError("Incomplete physical action evidence: " + cid)
         video_by_id[cid] = item
     return story_by_id, video_by_id
 
@@ -188,9 +221,25 @@ def audit_decoded_frames(cid, frames):
         start, end = _count(first, region, rgb, tol), _count(last, region, rgb, tol)
         cues[name] = {"initial_pixels": start, "final_pixels": end,
                       "passed": start <= maximum and end >= minimum}
+    gestures = {}
+    for stage, (label, region, rgb, tolerance, minimum) in PHYSICAL_WITNESSES[cid].items():
+        index = STAGES.index(stage)
+        start_frame = frames[index * FRAMES_PER_STAGE]
+        end_frame = frames[(index+1)*FRAMES_PER_STAGE-1]
+        before = _count(start_frame, region, rgb, tolerance)
+        after = _count(end_frame, region, rgb, tolerance)
+        gestures[stage] = {
+            "gesture": label,
+            "early_material_pixels": before,
+            "late_material_pixels": after,
+            "passed": after >= minimum and after > before + 5,
+        }
+    if not all(x["passed"] for x in gestures.values()):
+        raise ValueError("Encoded MP4 lacks independent physical-action witnesses: " + cid)
     if not all(x["passed"] for x in per_beat.values()) or not all(x["passed"] for x in cues.values()):
         raise ValueError("Encoded MP4 fails source-matched visual-action or payoff witnesses: " + cid)
     return {"four_beat_scene_motion": per_beat, "fixed_profile_payoff_pixels": cues,
+            "fixed_profile_physical_actions": gestures,
             "narrative_semantics": "not_verified",
             "character_identity_semantics": "not_verified",
             "manual_visual_and_editorial_review_required": True,
@@ -228,6 +277,7 @@ def verify(storyboard_path, previews_dir, source_sha, *, ffmpeg="ffmpeg", ffprob
         "source_pr": SOURCE_PR, "source_sha": SOURCE_SHA,
         "case_ids": sorted(STORIES), "story_video_identity_contract_passed": True,
         "decoded_video_motion_and_payoff_pixels_passed": True,
+        "decoded_video_authored_physical_action_pixels_passed": True,
         "video_evidence": evidence,
         "source_type": "assistant_authored_reference_not_ai_generated_story",
         "cross_model_story_to_animation_alignment": "not_verified",
