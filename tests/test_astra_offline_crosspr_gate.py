@@ -23,6 +23,7 @@ class CrossExperimentReviewGateTests(unittest.TestCase):
             "case_ids": list(cases),
             "story_video_identity_contract_passed": True,
             "decoded_video_motion_and_payoff_pixels_passed": True,
+            "decoded_video_authored_physical_action_pixels_passed": True,
             "source_type": "assistant_authored_reference_not_ai_generated_story",
             "cross_model_story_to_animation_alignment": "not_verified",
             "manual_editorial_and_visual_review_required": True,
@@ -35,6 +36,11 @@ class CrossExperimentReviewGateTests(unittest.TestCase):
                     "four_beat_scene_motion": {
                         stage: {"passed": True}
                         for stage in ("setup", "attempt", "setback", "payoff")
+                    },
+                    "fixed_profile_physical_actions": {
+                        stage: {"gesture": stage + "_gesture", "passed": True}
+                        for stage in (("setback", "payoff") if name == "footbridge-ducklings"
+                                      else ("attempt", "payoff"))
                     },
                     "fixed_profile_payoff_pixels": {
                         "cue_1": {"passed": True}, "cue_2": {"passed": True}
@@ -143,6 +149,14 @@ class CrossExperimentReviewGateTests(unittest.TestCase):
         value["report_sha256"] = digest(value)
         self.write("story", value)
         with self.assertRaises(ValueError):
+            aggregate(self.root)
+
+    def test_six_action_evidence_required_for_aggregate(self):
+        path = self.root / "video-evidence.json"
+        data = json.loads(path.read_text())
+        data["video_evidence"]["moon-mirror-garden"]["fixed_profile_physical_actions"].pop("payoff")
+        path.write_text(json.dumps(data, sort_keys=True))
+        with self.assertRaisesRegex(ValueError, "Incomplete per-story"):
             aggregate(self.root)
 
     def test_missing_video_evidence_fails_closed(self):
