@@ -8323,6 +8323,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f671686eb7c2221f2b9c",
+      "video_id": "EicpdfAmIIw",
+      "confirmed_at": "2026-11-04T21:58:35.261410+00:00",
+      "title": "Finn the Ferret and Pip the Marten and the Shared Storage Key",
+      "plot_fingerprint": "a191dc36f8cbff9aa0ed2951cf0b79514689fd4f7c8d0c5c067487b740ca8374",
+      "story_beats": [
+        {
+          "headline": "The Accusation",
+          "speech": "Finn, why do you keep the brass key locked away while the village needs grain right now?",
+          "visual": "door",
+          "label": "Accusation",
+          "story_beat": "reveal",
+          "visual_prompt": "A detailed medium shot in the village square. Pip the Marten stands on weathered cobblestones with an accusatory expression, pointing a paw at Finn the Ferret. Finn stands defensively beside a heavy wooden door, holding a shiny brass key tightly against his chest with both paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Secret Purpose",
+          "speech": "If we open the chest without checking the inventory locks first, damp weather will ruin every single sack inside.",
+          "visual": "signal",
+          "label": "Justification",
+          "story_beat": "build",
+          "visual_prompt": "A close-up shot in the village square. Finn the Ferret points an open paw toward a damp corner near a wooden doorway, looking earnestly at Pip. Pip tilts his head in thoughtful hesitation, lowering his accusing paw while listening to Finn's explanation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Handover",
+          "speech": "Take this key, Pip, and let us inspect the inner shelves together to make sure everything stays dry.",
+          "visual": "ship",
+          "label": "Exchange",
+          "story_beat": "mechanism",
+          "visual_prompt": "A medium shot in the village square. Finn the Ferret extends his paws forward, carefully transferring the shiny brass key into the waiting paws of Pip the Marten. Both animals display calm and cooperative expressions in front of the rustic wooden backdrop.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fair Distribution",
+          "speech": "With proper care and shared responsibility, our winter harvest is secure and every family gets their fair share.",
+          "visual": "forest",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "A wide shot in the village square bordered by distant green trees. Pip the Marten and Finn the Ferret stand side by side holding the brass key together between them, smiling warmly as they open the large wooden storage chest to reveal neatly stacked grain sacks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
