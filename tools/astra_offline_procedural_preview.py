@@ -271,7 +271,7 @@ def render_review_videos(output: Path, *, ffmpeg: str = "ffmpeg",
                 case, first_decoded, last_decoded
             )
             if not decoded_visual_cues["passed"]:
-                raise ValueError(f"{case} encoded MP4 misses outcome cues: {decoded_visual_cues['failed_cues']}")
+                raise ValueError(f"{case} encoded MP4 misses outcome cues: {decoded_visual_cues['checks']}")
             decoded_stage_ends = [
                 Image.frombytes(
                     "RGB", (W, H),

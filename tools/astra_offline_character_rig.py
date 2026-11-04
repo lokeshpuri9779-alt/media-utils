@@ -72,7 +72,7 @@ def _beetle(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
 
 
 def _beaver(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
-    x = [41 + 6*t, 44 + 5*t, 49 - 7*t, 42 + 9*t][stage]
+    x = [41 + 6*t, 44 + 5*t, 49 - 7*t, 24 + 1*t][stage]
     y = 99
     d.ellipse((int(x-36), int(y+2), int(x-10), int(y+15)),
               fill=(94, 62, 46, 255))
@@ -90,7 +90,7 @@ def _beaver(d: ImageDraw.ImageDraw, stage: int, t: float, mark) -> None:
     end = [(x+22+2*t, y+5-4*t),
            (x+25+24*t, y+6-5*t),
            (x+36-19*t, y+11+12*t),
-           (x+25+16*t, y+3-5*t)][stage]
+           (x+25+4*t, y+3-5*t)][stage]
     _line(d, (x+10, y+8), end, (95, 61, 43), 4)
     _disc(d, *end, 4, (147, 90, 59))
     # Same blue scarf on each scene is a stronger continuity anchor than

@@ -35,6 +35,21 @@ class RigTests(unittest.TestCase):
                     self.assertIsNotNone(start.getchannel("A").getbbox())
                     self.assertIsNotNone(finish.getchannel("A").getbbox())
 
+    def test_beaver_at_payoff_does_not_cover_ducklings_on_safe_bank(self):
+        from tools.astra_offline_visual_cues import (
+            CUES, cue_pixel_count, audit_visible_outcome,
+        )
+        case = "footbridge-ducklings"
+        final = preview.render_frame(case, 3, 1.0)
+        original = preview.render_frame(case, 0, 0.0)
+        status = audit_visible_outcome(case, original, final)
+        self.assertTrue(status["passed"])
+        region, color, tolerance, _, minimum = CUES[case]["ducklings_on_safe_bank"]
+        # Require a large reserve of visible duckling pixels to remain
+        # legible after normal low-resolution H264 chroma subsampling.
+        self.assertGreaterEqual(cue_pixel_count(final, region, color, tolerance),
+                                minimum * 2)
+
     def test_missing_or_obscured_rig_marker_rejected(self):
         for case in preview.KINDS:
             frames = [preview.render_frame(case, stage, 1)
