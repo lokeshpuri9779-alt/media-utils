@@ -70,6 +70,12 @@ class ManualSceneReviewTests(unittest.TestCase):
         self.assertEqual(template["review_packet_sha256"], human.document_hash(self.packet))
         self.assertFalse(template["completed"])
         self.assertEqual(len(template["tasks"]), 12)
+        self.assertEqual(len(template["critical_repair_tasks"]), 6)
+        self.assertTrue(all(
+            t["visible_and_understandable"] is None
+            and t["mechanical_contact_clear"] is None
+            for t in template["critical_repair_tasks"]
+        ))
         self.assertEqual(template["reviewer_id"], "")
         self.assertTrue(all(t["action_visible"] is None and
                             t["character_consistent"] is None and
@@ -113,6 +119,12 @@ class ManualSceneReviewTests(unittest.TestCase):
             item.update(action_visible="unclear", character_consistent="visible",
                         prop_contact_visible="missing",
                         evidence_note="Test-only evidence note: prop contact is not visible.")
+        for item in t["critical_repair_tasks"]:
+            item.update(
+                visible_and_understandable="unclear",
+                mechanical_contact_clear="missing",
+                evidence_note="Test-only note: this physical repair is not understandable.",
+            )
         return t
 
     def test_even_filled_form_cannot_approve_or_publish(self):
@@ -120,6 +132,8 @@ class ManualSceneReviewTests(unittest.TestCase):
         self.assertTrue(report["human_review_submitted"])
         self.assertEqual(report["reviewed_beats"], 12)
         self.assertGreater(len(report["unverified_or_missing"]), 0)
+        self.assertEqual(report["critical_repair_reviewed"], 6)
+        self.assertEqual(len(report["critical_repairs_unclear_or_missing"]), 12)
         self.assertFalse(report["approved"])
         self.assertFalse(report["production_ready"])
         self.assertFalse(report["published"])
@@ -140,6 +154,33 @@ class ManualSceneReviewTests(unittest.TestCase):
                 t["tasks"][0]["encoded_frame_number_zero_based"] = 99
             with self.subTest(bad=bad), self.assertRaises(ValueError):
                 human.validate_submission(self.packet, t)
+
+    def test_missing_critical_repair_ratings_fail_closed(self):
+        for mutation in ("missing", "rating", "note", "gesture", "duplicate"):
+            t = self.completed_template()
+            if mutation == "missing":
+                t.pop("critical_repair_tasks")
+            elif mutation == "rating":
+                t["critical_repair_tasks"][0]["mechanical_contact_clear"] = None
+            elif mutation == "note":
+                t["critical_repair_tasks"][0]["evidence_note"] = "unclear"
+            elif mutation == "gesture":
+                t["critical_repair_tasks"][0]["gesture"] = "different-gesture"
+            else:
+                t["critical_repair_tasks"][0] = deepcopy(t["critical_repair_tasks"][1])
+            with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                human.validate_submission(self.packet, t)
+
+    def test_critical_details_are_independently_reviewed_not_auto_approved(self):
+        t = self.completed_template()
+        for detail in t["critical_repair_tasks"]:
+            detail["visible_and_understandable"] = "visible"
+            detail["mechanical_contact_clear"] = "visible"
+        result = human.validate_submission(self.packet, t)
+        self.assertEqual(result["critical_repairs_unclear_or_missing"], [])
+        self.assertFalse(result["approved"])
+        self.assertFalse(result["production_ready"])
+        self.assertFalse(result["published"])
 
     def test_nobody_can_mark_completed_without_all_twelve_tasks(self):
         t = self.completed_template()
