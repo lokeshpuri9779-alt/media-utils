@@ -73,13 +73,37 @@ def publisher_history_ids(state):
 
 
 
+
+def authored_scene_repair_context(story, shot_number):
+    """Bounded original storyboard fields; no inferred scene or rewrite."""
+    beats = story.get("story_beats") if isinstance(story, dict) else None
+    if (not isinstance(beats, (list, tuple)) or type(shot_number) is not int
+            or not 1 <= shot_number <= len(beats)
+            or not isinstance(beats[shot_number - 1], dict)):
+        return {"source_beat_found": False, "review_only": True}
+    beat = beats[shot_number - 1]
+    fields = ("story_environment", "scene_environment", "scene_location",
+              "setting", "visual_prompt", "visual_intent", "visual", "speech")
+    excerpts = {}
+    for key in fields:
+        value = beat.get(key)
+        if isinstance(value, str) and value.strip():
+            excerpts[key] = " ".join(value.split())[:160]
+    top = story.get("story_environment")
+    if isinstance(top, str) and top.strip():
+        excerpts["story_level_environment"] = " ".join(top.split())[:160]
+    return {"source_beat_found": True, "authored_fields": excerpts,
+            "source": "unmodified_story_input", "review_only": True}
+
+
 def record_background_preflight_gap(selection, story, report):
     """Report concrete story-art gaps for review; never approve or substitute."""
     if not isinstance(report, dict) or report.get("status") != "blocked":
         raise ValueError("expected a blocked background preflight report")
     missing = [
         {"shot": row.get("shot"), "reason": row.get("reason"),
-         **({"scene": row["scene"]} if row.get("scene") else {})}
+         **({"scene": row["scene"]} if row.get("scene") else {}),
+         "authored_context": authored_scene_repair_context(story, row.get("shot"))}
         for row in (report.get("missing_shots") or [])[:24]
         if isinstance(row, dict)
     ]
