@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: lokeshpuri9779-alt/media-utils
-          ref: b1fb13e98865f0ab177c2df0aa98707f0ac2954a
+          ref: 1a393b2234f03d927ededc11b1e25c2afaa9e37c
           path: isolated-source
           persist-credentials: false
       - name: Source-pinned animation review checkout (#929)
@@ -93,7 +93,9 @@ jobs:
           python3 -m unittest -v \
             tests.test_astra_offline_procedural_preview \
             tests.test_astra_offline_visual_cues \
-            tests.test_astra_offline_character_rig
+            tests.test_astra_offline_character_rig \
+            tests.test_astra_offline_action_links \
+            tests.test_astra_offline_physical_sequence
       - name: Verify independent mismatched-story and missing-payoff controls
         if: matrix.lane == 'video'
         run: python3 -m unittest -v tests.test_astra_offline_story_video_handoff
