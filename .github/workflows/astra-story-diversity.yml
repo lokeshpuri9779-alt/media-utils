@@ -6,6 +6,7 @@ on:
     paths:
       - tools/experimental_frog_story_render.py
       - tools/experimental_frog_payoff_hold.py
+      - tools/experimental_frog_transition_dissolve.py
       - tools/experimental_frog_object_pixel_tracks.py
       - tools/experimental_video_frame_consistency.py
       - tools/experimental_story_review_manifest.py
@@ -206,6 +207,35 @@ jobs:
           assert (root/'frog_story_payoff_hold_review_only.mp4').stat().st_size>4096
           print('Verified optional 1-second sprout hold without modifying canonical video')
           PY
+      - name: Build independently verified rescue-to-plant dissolve cut (review only)
+        run: |
+          python3 -m tools.experimental_frog_transition_dissolve \
+            --directory artifacts/experimental-frog-render/ \
+            --output-directory artifacts/experimental-frog-transition-dissolve/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('artifacts/experimental-frog-transition-dissolve')
+          result=json.loads((root/'transition_dissolve_review.json').read_text())
+          assert result['passed'] and all(result['checks'].values())
+          assert result['source_frame_count']==32
+          assert result['new_transition_frames']==2
+          assert result['new_payoff_hold_frames']==6
+          assert 6.65<result['extended_duration_seconds']<6.69
+          assert all(result[field] is False for field in
+                     ('approved','published','production_ready','paid_apis_used'))
+          assert result['manual_visual_review_required'] is True
+          assert (root/'frog_story_transition_dissolve_review_only.mp4').stat().st_size>4096
+          print('40-frame optional transition verified, 32 canonical action frames preserved')
+          PY
+      - name: Preserve optional transition dissolve cut (not publication evidence)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-frog-transition-dissolve-review
+          path: artifacts/experimental-frog-transition-dissolve/
+          retention-days: 7
+          if-no-files-found: warn
       - name: Preserve optional extended payoff cut (not publication evidence)
         if: always()
         uses: actions/upload-artifact@v4
