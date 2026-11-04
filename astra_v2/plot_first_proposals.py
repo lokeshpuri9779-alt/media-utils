@@ -6,6 +6,7 @@ The finite source is deliberately not advertised as unlimited originality.
 import hashlib
 from astra_v2.story_forge import DRAFT_PROBLEMS, DRAFT_CAUSAL_ARCS, catalog
 from astra_v2.story_editorial import editorial_issues
+from astra_v2.original_moral_story_patterns import pattern_for
 
 
 SCENES = {
@@ -120,6 +121,7 @@ def proposals(limit=100, excluded_plot_hashes=(), excluded_structural_keys=()):
                         beats, visuals)
                 ],
             }
+            story["narrative_design"] = pattern_for(arc_index)
             story["editorial_issues"] = editorial_issues(story, history)
             output.append(story)
             if len(output) >= limit:
