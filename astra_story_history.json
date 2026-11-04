@@ -7772,6 +7772,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-848b1d4185bf672f8754",
+      "video_id": "F9AMSeSq4o4",
+      "confirmed_at": "2026-11-04T00:05:51.708275+00:00",
+      "title": "Sammy the Squirrel and the Amber Bell",
+      "plot_fingerprint": "7b72a1bb441478b2ed12c6d7ad9ba56c3837d359dbd8e91932bece0447068e30",
+      "story_beats": [
+        {
+          "headline": "The Rising Waters",
+          "speech": "Oh no, the icy water is rising fast toward my winter acorn reserves!",
+          "visual": "forest",
+          "label": "The Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel standing on a wet mossy log in a dense pine forest, looking worried at a rising pool of cold water, paws held near his cheeks, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Finding the Tool",
+          "speech": "This heavy brass bell I found in the hollow tree might just be strong enough to crack this stubborn ice.",
+          "visual": "signal",
+          "label": "The Plan",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel standing beside a frozen stream in a pine forest, holding a heavy polished brass bell with both paws, looking determined.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge",
+          "speech": "I must wedge this bell firmly into the frozen cedar gap to shift the heavy pressure away from my burrow.",
+          "visual": "door",
+          "label": "The Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel pushing a heavy brass bell into a crack within an icy wooden barrier across a forest stream, straining with effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Flow",
+          "speech": "The ice has broken and the stream flows safely past my home just in time!",
+          "visual": "forest",
+          "label": "The Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel standing happily on a dry rock in a pine forest, watching clear water flow past around a resting brass bell.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A thick sheet of autumn ice and fallen cedar debris dams the forest stream, threatening to flood Sammy's lower winter storage burrows.",
+      "decisive_choice": "Sammy rolls a heavy brass bell into the crevice of the ice dam to fracture the frozen blockage.",
+      "resolution": "The ice cracks cleanly and the stream diverts safely away from the burrows, preserving the winter acorn supply."
     }
   ]
 }
