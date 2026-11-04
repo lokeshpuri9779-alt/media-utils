@@ -56,6 +56,7 @@ jobs:
       - name: Verify per-shot production asset usage evidence
         run: |
           python -m unittest discover -s tests -p 'test_astra_asset_usage_evidence.py' -v
+          python -m unittest discover -s tests -p 'test_astra_story_asset_preflight.py' -v
           python -m unittest discover -s tests -p 'test_astra_render_contact_sheet.py' -v
           python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
           python -m unittest discover -s tests -p 'test_quality_asset_selector.py' -v
