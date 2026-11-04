@@ -1,22 +1,14 @@
 {
-  "observed_at": "2026-11-04T15:39:33.295200+00:00",
-  "generated": 10,
+  "observed_at": "2026-11-04T23:40:30.574604+00:00",
+  "generated": 7,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 3,
+      "index": 5,
       "reason": "validation_error_unclassified"
     },
     {
       "index": 6,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 7,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 8,
       "reason": "validation_error_unclassified"
     },
     {
@@ -42,20 +34,24 @@
     {
       "index": 14,
       "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 15,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 16,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 8,
-  "review_deferred": 2,
-  "approved": 4,
+  "reviewed": 7,
+  "review_deferred": 0,
+  "approved": 2,
   "review_issues": [
-    "The candidate story features Orion the owl investigating a mechanical/celestial dial in an observatory, which closely mirrors the previously published premise and setting of 'Orion the Owl and the Frosty Observatory Dial'. Additionally, the character name 'Orion the owl' is repeated across multiple recent stories.",
-    "The candidate story features characters 'Sammy the Squirrel' and 'Pip the Rabbit' in a garden/forest setting, which closely mirrors multiple recently published premises in the comparison history (e.g., 'Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue', 'The Fox and Rabbit of Blackberry Hollow', and various Pip and Sammy stories).",
-    "The character pairing and thematic naming convention strongly duplicate existing titles and narrative formulas within the provided comparison dataset.",
-    "The story premises, character dynamics, and object disputes heavily replicate recently published content within the same dataset, specifically repeating themes regarding Buster, Cleo, and rubber ball relays or shared items like 'Buster and Cleo's Rubber Ball Relay'.",
+    "The candidate story features characters 'Lyra the Lynx' and 'Bramen the Stoat' engaged in a dispute involving a compass and a misplaced item ('Lyra the Lynx and Bramen the Stoat's Misplaced Compass Blunder' / 'Bramble the Stoat and Lyra the Lynx and the Compass Mistake'), which closely duplicates recently published premises, character combinations, and causal conflicts in the provided comparison history.",
+    "The candidate story features recurring characters 'Sammy the Squirrel' and 'Pip the Rabbit' in a narrative pattern heavily mirrored in the comparison history (e.g., 'Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue'), indicating derivative content and a failure to meet originality standards.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_deferred:timeout",
-    "review_failed:TimeoutError"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -110,24 +106,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 10,
+    "generated": 7,
     "script_status_counts": {
-      "no_simple_flags": 10
+      "no_simple_flags": 7
     },
     "renderer_status_counts": {
-      "incompatible": 2,
-      "structurally_eligible": 8
+      "incompatible": 3,
+      "structurally_eligible": 4
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 1,
-      "none": 8,
-      "unsupported_human_actor": 1
+      "cast_mismatch": 3,
+      "none": 4
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 10
+      "all_shots_recognized": 5,
+      "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 40,
-    "scene_taxonomy_unresolved_shots": 0,
+    "scene_taxonomy_recognized_shots": 25,
+    "scene_taxonomy_unresolved_shots": 3,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
