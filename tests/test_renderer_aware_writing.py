@@ -180,9 +180,9 @@ class RendererAwareWritingTests(unittest.TestCase):
         disabled = capture_prompt(False, history)
         self.assertIn("snowstorm shuts down a beacon", enabled[0]["prompt"])
         self.assertIn("Invent a different causal mechanism", enabled[0]["prompt"])
-        # Newest publication comparisons are now included in the common
-        # generator prompt as untrusted data as well.
-        self.assertIn("snowstorm shuts down a beacon", disabled[0]["prompt"])
+        # Undated bare examples are not trusted recent-publication evidence
+        # for the common route; renderer-aware history still informs drafting.
+        self.assertNotIn("snowstorm shuts down a beacon", disabled[0]["prompt"])
         self.assertIn("Distinct required causal mechanism", enabled[0]["prompt"])
         self.assertNotIn("Distinct required causal mechanism", disabled[0]["prompt"])
         self.assertEqual(len(enabled), len(disabled))
