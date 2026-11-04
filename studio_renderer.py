@@ -1749,6 +1749,18 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                     validate_story_shot(shot)
                 except CreativeReject as exc:
                     raise CreativeReject(f'Unified Studio preflight shot {index + 1}: {exc}') from exc
+    # Cheap necessary-condition check before media acquisition and FFmpeg.
+    # Never substitutes for actual post-encode compositor/visual approval.
+    if (genre == 'fiction' and os.environ.get('ASTRA_ASSET_PACK_ENABLED') == '1'
+            and os.environ.get('ASTRA_ASSET_PACK_AUDIT') == '1'):
+        from astra_v2.asset_usage_audit import preflight_fiction_backgrounds
+        background_check = preflight_fiction_backgrounds(plan, genre=genre)
+        print('ASTRA_FICTION_BACKGROUND_PREFLIGHT=' + json.dumps(
+            background_check, sort_keys=True))
+        if background_check['status'] == 'blocked':
+            raise CreativeReject(
+                'Fiction background preflight rejected before rendering: '
+                + background_check['reason'])
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
