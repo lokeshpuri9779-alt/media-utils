@@ -10,7 +10,7 @@ from unittest.mock import patch
 from PIL import Image
 
 from astra_v2.asset_usage_audit import (begin, finish, fiction_compositor_coverage_rejection,
-                                        fiction_preload_coverage_rejection)
+                                        fiction_preload_coverage_rejection, preflight_fiction_backgrounds)
 from astra_v2.visual_artifact_backdrop import apply_pack_background
 
 
@@ -143,6 +143,65 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         self.assertIsNone(fiction_preload_coverage_rejection({**valid, "genre": "current"}))
         with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
             self.assertIsNone(fiction_preload_coverage_rejection({**valid, "asset_pack_usage": None}))
+
+    def test_background_preflight_reports_possible_not_approved(self):
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root)}):
+            with patch("astra_v2.quality_asset_selector.select_assets",
+                       return_value=[{"id": "forest-art"}]) as selector:
+                report = preflight_fiction_backgrounds([
+                    {"story_environment": "forest"},
+                    {"story_environment": "forest"},
+                ], genre="fiction")
+        self.assertEqual(report["status"], "possible")
+        self.assertEqual(report["missing_shots"], [])
+        self.assertEqual(report["semantic_quality"], "not_verified")
+        self.assertFalse(report["publication_approval"])
+        selector.assert_called_once()
+
+    def test_background_preflight_rejects_unresolved_scene_without_guessing(self):
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root)}):
+            with patch("astra_v2.quality_asset_selector.select_assets") as selector:
+                report = preflight_fiction_backgrounds([
+                    {"story_environment": "unrecognized dreamworld"},
+                ], genre="fiction")
+        self.assertEqual(report["status"], "blocked")
+        self.assertEqual(report["missing_shots"],
+                         [{"shot": 1, "reason": "scene_unresolved"}])
+        selector.assert_not_called()
+
+    def test_background_preflight_rejects_verified_pack_without_scene_art(self):
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root)}):
+            with patch("astra_v2.quality_asset_selector.select_assets", return_value=[]):
+                report = preflight_fiction_backgrounds([
+                    {"story_environment": "railway"},
+                ], genre="fiction")
+        self.assertEqual(report["status"], "blocked")
+        self.assertEqual(report["missing_shots"], [
+            {"shot": 1, "reason": "no_matching_background", "scene": "railway"}])
+
+    def test_background_preflight_missing_pack_and_opt_out(self):
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_ROOT": str(self.root / "missing")}):
+            report = preflight_fiction_backgrounds([
+                {"story_environment": "railway"}], genre="fiction")
+        self.assertEqual(report["reason"], "verified_asset_pack_missing")
+        self.assertFalse(report["publication_approval"])
+        self.assertIsNone(preflight_fiction_backgrounds(
+            [{"story_environment": "railway"}], genre="current"))
+        with patch.dict(os.environ, {"ASTRA_ASSET_PACK_AUDIT": "0"}):
+            self.assertIsNone(preflight_fiction_backgrounds(
+                [{"story_environment": "railway"}], genre="fiction"))
+
+    def test_background_preflight_runs_before_media_acquisition_and_encoding(self):
+        source = (Path(__file__).resolve().parents[1] /
+                  "studio_renderer.py").read_text(encoding="utf-8")
+        preflight_at = source.index("preflight_fiction_backgrounds(plan, genre=genre)")
+        media_at = source.index("    assets=asset_manifest(ch,plan)")
+        encoder_at = source.index("    with tempfile.TemporaryDirectory(", media_at)
+        self.assertLess(preflight_at, media_at)
+        self.assertLess(media_at, encoder_at)
+        self.assertIn("fiction_compositor_coverage_rejection(story, rendered)",
+                      (Path(__file__).resolve().parents[1] /
+                       "astra_v2/creative.py").read_text(encoding="utf-8"))
 
     def test_preload_workflow_enables_fiction_audit(self):
         workflow = (Path(__file__).resolve().parents[1] /
