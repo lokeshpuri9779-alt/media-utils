@@ -12,6 +12,8 @@ from PIL import Image
 from astra_v2.asset_usage_audit import (begin, finish, fiction_compositor_coverage_rejection,
                                         fiction_preload_coverage_rejection, preflight_fiction_backgrounds)
 from astra_v2.visual_artifact_backdrop import apply_pack_background
+from astra_errors import CreativeReject, StoryBackgroundPreflightReject
+from astra_v2.creative import record_background_preflight_gap
 
 
 class AssetUsageEvidenceTests(unittest.TestCase):
@@ -222,6 +224,41 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         self.assertIn("fiction_compositor_coverage_rejection(story, rendered)",
                       (Path(__file__).resolve().parents[1] /
                        "astra_v2/creative.py").read_text(encoding="utf-8"))
+
+    def test_background_rejection_keeps_failing_closed_and_review_only(self):
+        report = {"status": "blocked", "reason": "missing_backgrounds",
+                  "shot_count": 4, "missing_shots": [
+                      {"shot": 1, "reason": "scene_unresolved"}]}
+        exc = StoryBackgroundPreflightReject(report)
+        self.assertIsInstance(exc, CreativeReject)
+        self.assertFalse(exc.report["publication_approval"])
+        self.assertEqual(exc.report["semantic_quality"], "not_verified")
+        with self.assertRaises(ValueError):
+            StoryBackgroundPreflightReject({"status": "possible"})
+
+    def test_structured_background_gap_reports_missing_shots_without_approval(self):
+        selection = {"background_preflight_rejected": 0, "background_review_gaps": []}
+        report = {"status": "blocked", "reason": "missing_backgrounds",
+                  "shot_count": 3, "missing_shots": [
+                      {"shot": 1, "reason": "scene_unresolved"},
+                      {"shot": 3, "reason": "no_matching_background", "scene": "railway"}]}
+        with patch("builtins.print"):
+            gap = record_background_preflight_gap(selection,
+                {"content_id": "story-gap"}, report)
+        self.assertEqual(selection["background_preflight_rejected"], 1)
+        self.assertEqual(selection["background_review_gaps"], [gap])
+        self.assertEqual([s["shot"] for s in gap["missing_shots"]], [1, 3])
+        self.assertFalse(gap["publication_approval"])
+        self.assertEqual(gap["semantic_quality"], "not_verified")
+
+    def test_review_gap_does_not_remove_final_compositor_gate(self):
+        renderer = (Path(__file__).resolve().parents[1] /
+                    "studio_renderer.py").read_text(encoding="utf-8")
+        self.assertIn("raise StoryBackgroundPreflightReject(background_check)", renderer)
+        creative = (Path(__file__).resolve().parents[1] /
+                    "astra_v2/creative.py").read_text(encoding="utf-8")
+        self.assertIn("except StoryBackgroundPreflightReject as exc:", creative)
+        self.assertIn("fiction_compositor_coverage_rejection(story, rendered)", creative)
 
     def test_preload_workflow_enables_fiction_audit(self):
         workflow = (Path(__file__).resolve().parents[1] /
