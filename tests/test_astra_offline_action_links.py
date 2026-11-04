@@ -71,6 +71,46 @@ class ActionLinkTests(unittest.TestCase):
             self.assertFalse(links.audit_action_link(
                 case, 1, 1.0, blank)["passed"])
 
+    def test_materials_replace_oversized_orange_debug_guides(self):
+        self.assertEqual(links.LINE_WIDTH, 4)
+        self.assertEqual(set(links.MATERIALS), set(links.CASES))
+        for case in links.CASES:
+            for stage in links.ACTION_STAGES:
+                with self.subTest(case=case, stage=stage):
+                    pal = links.MATERIALS[case]
+                    self.assertIn(pal["kind"], (
+                        "hemp_pulley_cord", "reed_binding_rope",
+                        "steel_adjustment_link"))
+                    self.assertNotEqual(pal["stroke"], links.LINK_COLOR)
+                    layer = links.render_action_link(case, stage, 1.0)
+                    self.assertNotIn(
+                        (*links.LINK_COLOR, 255), set(layer.getdata()))
+                    frame = preview.render_frame(case, stage, 1.0)
+                    report = links.audit_action_link(case, stage, 1.0, frame)
+                    self.assertTrue(report["passed"], report)
+                    self.assertEqual(report["material"], pal["kind"])
+                    self.assertFalse(report["diagnostic_orange_is_rendered"])
+                    self.assertEqual(report["prop_interaction_semantics"],
+                                     "not_verified")
+
+    def test_unrelated_material_patch_cannot_replace_a_real_connection(self):
+        for case in links.CASES:
+            wrong_color = ((160, 216, 231) if case != "moon-mirror-garden"
+                           else (130, 93, 57))
+            for stage in links.ACTION_STAGES:
+                with self.subTest(case=case, stage=stage):
+                    frame = preview.render_frame(case, stage, 1.0).copy()
+                    path = links.connection_path(case, stage, 1.0)
+                    a, b = path[0], path[1]
+                    midpoint = (round((a[0]+b[0])/2),
+                                round((a[1]+b[1])/2))
+                    ImageDraw.Draw(frame).rectangle(
+                        (midpoint[0]-8, midpoint[1]-8,
+                         midpoint[0]+8, midpoint[1]+8),
+                        fill=wrong_color)
+                    self.assertFalse(
+                        links.audit_action_link(case, stage, 1.0, frame)["passed"])
+
     def test_invalid_parameters_fail_closed(self):
         for bad in ("invalid-case", "", "production-story"):
             with self.assertRaisesRegex(ValueError, "unsupported"):

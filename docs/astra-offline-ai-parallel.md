@@ -189,3 +189,29 @@ targets are explicit artifacts and **cannot certify natural grasping
 mechanics, physics, cinematic visuals, semantic fidelity, or
 publication quality**. Videos remain 320×180, four seconds, silent,
 offline, CPU-only, unapproved, and unpublished.
+
+## Natural-material connection layer (November 4)
+
+The isolated CPU preview renderer's six action links now use **three
+specific reusable hand-authored material palettes**: umber hemp cord
+with small brass pulley details (greenhouse), brown reed-fiber binding
+and knots (bridge), and a slender pale-steel adjustment rod with
+hardware at the mirror. All paths still share the exact rig grip
+endpoint and connect to the modeled prop. The 6-pixel bright-orange
+debug line is now a **test sentinel only**; the rendered line width is
+4 pixels with a restrained contrast edge.
+
+The existing decoded-H.264 gate still checks the material-colored
+line at the expected geometric segment midpoints. Additional negative
+controls reject removed link pixels, wrong-material substitutions,
+caption-only coloring, malformed endpoints, and reintroduction of
+the exact diagnostic orange in the isolated link layers. Explicit
+material labels are included in review JSON so the provenance of the
+colors is visible; the report **does not** claim physical rope
+simulation, grasping realism, semantic story alignment or production
+readiness.
+
+This is a small **legibility/visual-polish experiment**, not a
+photorealistic 3D asset system. The three 320×180 silent four-second
+procedural MP4s remain review-only. No model inference, GPU, paid API,
+production merge, approval or publishing is enabled.
