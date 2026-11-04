@@ -10,11 +10,14 @@ on:
       - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
       - tools/astra_offline_reference_benchmark.py
+      - tools/astra_offline_blind_review.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
       - tests/test_astra_offline_reference_benchmark.py
+      - tests/test_astra_offline_blind_review.py
       - docs/astra-offline-ai-real-llm.md
+      - docs/astra-offline-blind-review.md
   pull_request:
     branches: [main]
     paths:
@@ -23,11 +26,13 @@ on:
       - tools/astra_offline_story_plan.py
       - tools/astra_offline_causal_audit.py
       - tools/astra_offline_reference_benchmark.py
+      - tools/astra_offline_blind_review.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
       - tests/test_astra_offline_cpu_smoke.py
       - tests/test_astra_offline_causal_audit.py
       - tests/test_astra_offline_reference_benchmark.py
+      - tests/test_astra_offline_blind_review.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
   workflow_dispatch:
@@ -67,7 +72,7 @@ jobs:
         run: python3 -m tools.experimental_guard
       - name: Story local-LLM review contract tests (no model inference)
         if: matrix.lane == 'story'
-        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_offline_cpu_smoke tests.test_astra_offline_causal_audit tests.test_astra_offline_reference_benchmark tests.test_astra_model_story_novelty
+        run: python3 -m unittest -v tests.test_astra_offline_llm tests.test_astra_offline_cpu_smoke tests.test_astra_offline_causal_audit tests.test_astra_offline_reference_benchmark tests.test_astra_offline_blind_review tests.test_astra_model_story_novelty
       - name: Build review-only independent story reference packet
         if: matrix.lane == 'story'
         run: python3 -m tools.astra_offline_reference_benchmark --output artifacts/offline-reference-benchmark/packet.json
@@ -77,6 +82,27 @@ jobs:
         with:
           name: astra-offline-story-reference
           path: artifacts/offline-reference-benchmark/packet.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Build review-only source-masked comparison packet
+        if: matrix.lane == 'story'
+        run: python3 -m tools.astra_offline_blind_review --output-dir artifacts/offline-blind-story-review
+      - name: Archive source-masked texts and blank human-rating sheet
+        if: matrix.lane == 'story'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-blind-review
+          path: |
+            artifacts/offline-blind-story-review/blind-review.json
+            artifacts/offline-blind-story-review/rating-template.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Archive separate provenance key for later unblinding
+        if: matrix.lane == 'story'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-blind-source-key
+          path: artifacts/offline-blind-story-review/source-key.json
           if-no-files-found: error
           retention-days: 7
       - name: CPU image preflight and guarded mock tests (no model inference)

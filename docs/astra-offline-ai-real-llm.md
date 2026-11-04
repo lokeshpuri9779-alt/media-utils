@@ -304,3 +304,7 @@ The packet explicitly records `reference_is_quality_ground_truth=false`,
 `model_quality_conclusion=no_new_evidence`, and all approval/production/
 publishing flags false. It should only be used to inspect what a coherent
 four-scene sequence looks like before choosing a future authoring method.
+
+## Source-masked review next step
+
+See `docs/astra-offline-blind-review.md` for source-masked comparison of the archived 0.5B and 1.5B model outputs with one post-hoc assistant-authored reference, validated score sheets, and explicit non-promotion safeguards. This adds no fresh model inference, no automated scoring and no claim of a fair model ranking.
