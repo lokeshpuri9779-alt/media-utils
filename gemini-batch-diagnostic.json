@@ -1,40 +1,20 @@
 {
-  "observed_at": "2026-11-04T15:07:18.663503+00:00",
-  "generated": 16,
+  "observed_at": "2026-11-04T15:12:05.645969+00:00",
+  "generated": 2,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 7,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 12,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 13,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 18,
-      "reason": "validation_error_unclassified"
+      "index": 2,
+      "reason": "provider_http_503"
     }
   ],
-  "reviewed": 16,
+  "reviewed": 2,
   "review_deferred": 0,
-  "approved": 2,
+  "approved": 0,
   "review_issues": [
-    "The candidate story features characters 'Bramble the Stoat' and 'Lyra the Lynx', which directly duplicates the characters and naming convention present in the recent publication example 'Bramble the Stoat and Lyra the Lynx and the Compass Mistake'.",
-    "The causal mechanism and resolution\u2014an animal hoarding an item and then deciding to share it to play together\u2014closely echo previously generated content patterns, failing originality standards.",
-    "The story relies heavily on characters (Pip the Rabbit) and naming patterns (Basil and Pip, animal names paired with botanical or object clues) that closely mimic recently published templates and premises in the comparison history, failing the originality threshold for distinct story concepts.",
-    "The story relies on an extremely repetitive template ('[Character 1] and [Character 2] and the [Object]') and mirrors recently published premises featuring animal companions resolving minor conflicts over shared items (such as 'Buster and Cleo's Rubber Ball Relay' and 'Buster and Cleo's Neighborhood Relay Race Blunder').",
-    "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_failed:TimeoutError"
+    "review_failed:HTTP_503",
+    "review_failed:TimeoutError",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -89,19 +69,22 @@
     ]
   },
   "creative_preflight": {
-    "generated": 16,
+    "generated": 2,
     "script_status_counts": {
-      "no_simple_flags": 16
+      "no_simple_flags": 2
     },
     "renderer_status_counts": {
-      "incompatible": 9,
-      "structurally_eligible": 7
+      "structurally_eligible": 2
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 7,
-      "none": 7,
-      "unsupported_human_actor": 2
+      "none": 2
     },
+    "scene_taxonomy_status_counts": {
+      "all_shots_recognized": 2
+    },
+    "scene_taxonomy_recognized_shots": 8,
+    "scene_taxonomy_unresolved_shots": 0,
+    "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
   }
