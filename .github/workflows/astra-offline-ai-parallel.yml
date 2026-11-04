@@ -16,6 +16,7 @@ on:
       - tools/astra_offline_visual_cues.py
       - tools/astra_offline_character_rig.py
       - tools/astra_offline_action_links.py
+      - tools/astra_offline_visual_pack_audit.py
       - tools/astra_offline_physical_sequence.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_cpu_smoke.py
@@ -27,6 +28,7 @@ on:
       - tests/test_astra_offline_visual_cues.py
       - tests/test_astra_offline_character_rig.py
       - tests/test_astra_offline_action_links.py
+      - tests/test_astra_offline_visual_pack_audit.py
       - tests/test_astra_offline_physical_sequence.py
       - docs/astra-offline-ai-real-llm.md
       - docs/astra-offline-blind-review.md
@@ -44,6 +46,7 @@ on:
       - tools/astra_offline_visual_cues.py
       - tools/astra_offline_character_rig.py
       - tools/astra_offline_action_links.py
+      - tools/astra_offline_visual_pack_audit.py
       - tools/astra_offline_physical_sequence.py
       - tools/grammars/astra_four_beats.gbnf
       - tests/test_astra_offline_llm.py
@@ -56,6 +59,7 @@ on:
       - tests/test_astra_offline_visual_cues.py
       - tests/test_astra_offline_character_rig.py
       - tests/test_astra_offline_action_links.py
+      - tests/test_astra_offline_visual_pack_audit.py
       - tests/test_astra_offline_physical_sequence.py
       - .github/workflows/astra-offline-ai-parallel.yml
       - docs/astra-offline-ai-parallel.md
@@ -63,6 +67,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: astra-offline-ai-review-${{ github.event_name }}-${{ github.ref }}
@@ -133,6 +138,35 @@ jobs:
         if: matrix.lane == 'image'
         run: |
           python3 -m unittest -v tests.test_experimental_cpu_image_benchmark tests.test_experimental_cpu_runtime_probe tests.test_experimental_openvino_timing
+      - name: Install Pillow for isolated asset-pack verification
+        if: matrix.lane == 'image'
+        run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+      - name: Verify archive-audit and non-promotion negative controls
+        if: matrix.lane == 'image'
+        run: python3 -m unittest -v tests.test_astra_offline_visual_pack_audit
+      - name: Retrieve existing original background pack (no generation)
+        if: matrix.lane == 'image'
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: artifacts/offline-visual-pack-source
+      - name: Audit 3200 real asset checksums and storyboard gaps
+        if: matrix.lane == 'image'
+        run: |
+          python3 -m tools.astra_offline_visual_pack_audit \
+            --artifact-zip artifacts/offline-visual-pack-source/astra-visual-pack.zip \
+            --output artifacts/offline-visual-coverage \
+            --expected 3200
+      - name: Archive unapproved background coverage report and visual samples
+        if: matrix.lane == 'image'
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-offline-visual-coverage
+          path: artifacts/offline-visual-coverage/
+          if-no-files-found: error
+          retention-days: 7
       - name: Install free motion-test dependency (no video model)
         if: matrix.lane == 'motion'
         run: python3 -m pip install --disable-pip-version-check 'Pillow>=10,<12'
