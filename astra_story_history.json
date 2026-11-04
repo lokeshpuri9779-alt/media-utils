@@ -8029,6 +8029,55 @@
       "central_conflict": "The annual coastal tide chime breaks apart before the solstice celebration begins, leaving the harbor without its traditional opening melody.",
       "decisive_choice": "Soren chooses to assemble a backup resonant shell chime using found driftwood and hollow shells instead of waiting for a metal smith.",
       "resolution": "The improvised shell chime rings clearly in the sea breeze, successfully opening the harbor celebration to the delight of all coastal residents."
+    },
+    {
+      "content_id": "rayvan-gemini-85eb8696617cd73487cd",
+      "video_id": "WlTVJoJWgco",
+      "confirmed_at": "2026-11-04T14:28:10.950819+00:00",
+      "title": "Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue",
+      "plot_fingerprint": "f73364de01825739297a0799b7ec433e70453c6395336e91d7b6aa0185073637",
+      "story_beats": [
+        {
+          "headline": "The Mysterious Tracks",
+          "speech": "Look at these conflicting footprints near the flower bed, proving someone took our favorite garden snacks without asking.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit stand in a sunny garden near a green flower bed, pointing at distinct paw prints in the dirt while holding a small red flower.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Divided Path",
+          "speech": "I investigated the upper fence line all afternoon while you searched the lower bushes, leading us to completely wrong conclusions.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel sits atop a wooden garden fence holding a yellow compass, looking down at Pip the rabbit who stands in the mulch below holding a wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Discovery",
+          "speech": "Instead of blaming each other for the missing harvest, we should place our gathered clues together on this wooden table.",
+          "visual": "door",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit stand side by side next to a weathered wooden table in the garden, examining a shared red flower and a silver key together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Cooperative Harvest",
+          "speech": "Working together from both sides of the garden patch was the secret to keeping our green home safe and well-fed.",
+          "visual": "planet",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel and Pip the rabbit sit happily together on the garden lawn under a bright sunny sky, sharing a bright red flower and a small wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
