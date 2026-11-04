@@ -124,6 +124,25 @@ def record_background_preflight_gap(selection, story, report):
     return item
 
 
+
+def archive_background_review_gaps(selection):
+    """Optional, non-blocking diagnostic; never changes rendering or approval."""
+    if os.getenv("ASTRA_ARTWORK_GAP_REPORT", "0") != "1":
+        return
+    if not selection.get("background_review_gaps"):
+        return
+    try:
+        from astra_v2.artwork_gap_queue import save_repair_queue
+        result = save_repair_queue(
+            selection, lane=int(os.getenv("ASTRA_PRELOAD_LANE", "0")))
+        if result:
+            print("ASTRA_ARTWORK_GAP_REPAIR_QUEUE=" + json.dumps(
+                result, sort_keys=True), flush=True)
+    except (OSError, ValueError, TypeError) as exc:
+        print("ASTRA_ARTWORK_GAP_REPAIR_QUEUE_UNAVAILABLE=" +
+              type(exc).__name__, flush=True)
+
+
 def make_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from ypp_safety import enforce
@@ -468,6 +487,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 + "\nOriginal visuals; AI-assisted synthetic narration. #Shorts"
                 + "\nSubscribe: https://www.youtube.com/channel/" + legacy.expected_channel_id())
             print("ASTRA_STORY_SELECTION=" + json.dumps(selection, sort_keys=True))
+            archive_background_review_gaps(selection)
             break
         except StoryBackgroundPreflightReject as exc:
             record_background_preflight_gap(selection, story, exc.report)
@@ -492,6 +512,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
             if selection["background_preflight_rejected"]
             else ("replenish_approved_story_supply" if not selection["approved"]
                   else "investigate_render_or_policy_gates"))
+        archive_background_review_gaps(selection)
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane', selection=selection)
         # Do not waste a full render on the unreviewed legacy template pool.
