@@ -89,6 +89,24 @@ class EnsembleExperimentsTests(unittest.TestCase):
                               ("crowd","clue","confrontation","reaction","action","reveal","resolution"))
                 self.assertTrue(beat["story_visual_seed"])
 
+    def test_animal_only_bridge_scene_does_not_invent_human_passenger(self):
+        from astra_v2.directed_scene_contract import directed_scene_issue
+        from astra_v2.unified_story_engine import validate_story_shot
+        bridge = next(story for story in catalog()
+                      if story["title"] == "The Bridge That Wouldn't Collapse")
+        scene = next(beat for beat in bridge["story_beats"]
+                     if beat["headline"] == "THE RIVER TOOK THE BRIDGE")
+        self.assertEqual(len(scene["story_cast"]), 8)
+        self.assertNotEqual(directed_scene_issue(scene),
+                            "human_actor_not_supported_by_directed_icons")
+        self.assertEqual(validate_story_shot(scene), "ensemble")
+        # Keep genuine human co-actors blocked without verified scene artwork.
+        with self.assertRaisesRegex(Exception, "human_actor_not_supported"):
+            validate_story_shot({
+                **scene,
+                "speech": "A human passenger stood on the bridge with the fox.",
+            })
+
     def test_real_studio_render_uses_ensemble_only_when_enabled(self):
         from studio_renderer import render_frame, RATE
         beat=dict(catalog()[0]["story_beats"][0])
