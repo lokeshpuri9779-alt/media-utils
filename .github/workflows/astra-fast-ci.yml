@@ -152,6 +152,7 @@ jobs:
       - name: Verify consolidated publisher health and editorial selection
         run: |
           python -m unittest discover -s tests -p 'test_astra_health_journal_validation.py' -v
+          python -m unittest discover -s tests -p 'test_astra_publisher_selection_diagnostic.py' -v
           python -m unittest discover -s tests -p 'test_astra_protected_publication_history.py' -v
           python -m unittest discover -s tests -p 'test_auto_art_candidate_selection.py' -v
       - name: Verify publishing and renderer boundaries
