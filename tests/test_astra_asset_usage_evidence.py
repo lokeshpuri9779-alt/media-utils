@@ -13,7 +13,8 @@ from astra_v2.asset_usage_audit import (begin, finish, fiction_compositor_covera
                                         fiction_preload_coverage_rejection, preflight_fiction_backgrounds)
 from astra_v2.visual_artifact_backdrop import apply_pack_background
 from astra_errors import CreativeReject, StoryBackgroundPreflightReject
-from astra_v2.creative import record_background_preflight_gap
+from astra_v2.creative import (record_background_preflight_gap,
+                                authored_scene_repair_context)
 
 
 class AssetUsageEvidenceTests(unittest.TestCase):
@@ -250,6 +251,50 @@ class AssetUsageEvidenceTests(unittest.TestCase):
         self.assertEqual([s["shot"] for s in gap["missing_shots"]], [1, 3])
         self.assertFalse(gap["publication_approval"])
         self.assertEqual(gap["semantic_quality"], "not_verified")
+
+    def test_authored_scene_repair_context_uses_only_original_beat(self):
+        story = {"story_environment": "an old mountain village",
+                 "story_beats": [
+                     {"speech": "A fox crossed the old bridge.", "visual": "Wooden bridge"},
+                     {"speech": "Then a faint sound came from nowhere.",
+                      "visual_intent": "Mysterious reflection"}]}
+        context = authored_scene_repair_context(story, 2)
+        self.assertEqual(context["source"], "unmodified_story_input")
+        self.assertEqual(context["authored_fields"]["visual_intent"],
+                         "Mysterious reflection")
+        self.assertEqual(context["authored_fields"]["story_level_environment"],
+                         "an old mountain village")
+        self.assertNotIn("scene", context)
+        self.assertTrue(context["review_only"])
+
+    def test_missing_shot_report_includes_bounded_authored_evidence(self):
+        selection = {}
+        story = {"content_id": "repair-candidate", "story_beats": [
+            {"speech": "  The  wave\n   changed direction.  ",
+             "visual_prompt": "A" * 700},
+            {"speech": "A neighboring fox watched."}]}
+        report = {"status": "blocked", "reason": "missing_backgrounds",
+                  "shot_count": 2, "missing_shots": [
+                      {"shot": 1, "reason": "scene_unresolved"},
+                      {"shot": 9, "reason": "scene_unresolved"}]}
+        with patch("builtins.print"):
+            result = record_background_preflight_gap(selection, story, report)
+        rows = result["missing_shots"]
+        self.assertEqual(rows[0]["authored_context"]["authored_fields"]["speech"],
+                         "The wave changed direction.")
+        self.assertEqual(len(rows[0]["authored_context"]["authored_fields"]["visual_prompt"]), 160)
+        self.assertFalse(rows[1]["authored_context"]["source_beat_found"])
+        self.assertFalse(result["publication_approval"])
+        self.assertEqual(selection["background_preflight_rejected"], 1)
+
+    def test_authored_scene_context_rejects_unusable_shot_references(self):
+        story = {"story_beats": [{"speech": "The cat jumped."}]}
+        for index in (0, 2, -1, True, "1", None):
+            with self.subTest(index=index):
+                self.assertFalse(authored_scene_repair_context(
+                    story, index)["source_beat_found"])
+        self.assertFalse(authored_scene_repair_context(
+            {"story_beats": "invalid"}, 1)["source_beat_found"])
 
     def test_review_gap_does_not_remove_final_compositor_gate(self):
         renderer = (Path(__file__).resolve().parents[1] /
