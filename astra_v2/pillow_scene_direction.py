@@ -252,6 +252,16 @@ def draw_story_stage(d, shot, t):
                    (488, 1191)), fill=(127, 91, 67))
         d.polygon(((717, 1142), (684, 1151), (701, 1173), (686, 1191),
                    (720, 1191)), fill=(127, 91, 67))
+        # Keep a snapped plank fragment visibly falling *within* the gap.
+        # An empty blue slot alone was mistaken for a continuous blue deck
+        # in the actual 1080x1920 encoded Fox/Rabbit Short. The separate
+        # jagged board makes the missing-plank event readable without
+        # inventing a floating warning icon or painting over the captions.
+        shard = ((588, 1137), (631, 1149), (686, 1260),
+                 (646, 1282), (611, 1215), (592, 1194))
+        d.polygon(shard, fill=(194, 137, 83))
+        d.line(shard + (shard[0],), fill=edge, width=7)
+        d.line((611, 1170, 644, 1222), fill=(241, 178, 115), width=6)
         for x in (125, 930):
             d.rectangle((x, 1025, x + 19, 1140), fill=edge)
         d.line((135, 1055, 498, 1055), fill=(196, 157, 108), width=11)
