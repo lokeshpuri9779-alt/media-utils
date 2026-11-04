@@ -8078,6 +8078,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-03efd648c8d49e385fc9",
+      "video_id": "Qx1UuIWgUJo",
+      "confirmed_at": "2026-11-04T14:33:49.822904+00:00",
+      "title": "Sammy the Squirrel and the Overgrown Oak Gate",
+      "plot_fingerprint": "5591370f2cec4393f74c19960aeb419bb48f1eb85faad57d7d14969f6ecd2198",
+      "story_beats": [
+        {
+          "headline": "The Jammed Canopy Gate",
+          "speech": "Oh dear, the harvest gate is completely stuck. I must find a way to open this heavy wooden latch before sundown.",
+          "visual": "door",
+          "label": "Canopy Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "Sammy the squirrel with fluffy grey fur and a striped waistcoat stands facing a large wooden door covered in thick green vines in a lush forest, looking worried and holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Finding the Tool",
+          "speech": "This sturdy wooden wrench is just the right size to fit into the tight space behind the jammed gear mechanism.",
+          "visual": "robot",
+          "label": "Tool Storage",
+          "story_beat": "build",
+          "visual_prompt": "Sammy the squirrel stands next to a wooden box in the forest, holding a simple wooden wrench with both paws and examining a mechanical gear.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Adjusting the Mechanism",
+          "speech": "If I turn the wrench slowly, the gear will release the vines without snapping the delicate wooden spokes of the wheel.",
+          "visual": "signal",
+          "label": "Pulley Assembly",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel stands on tiptoe by a large forest tree trunk, using the wooden wrench to turn a wooden gear assembly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Gate Opens",
+          "speech": "The gate is finally clear and wide open. The harvest carts can now pass safely through the woodland boundary.",
+          "visual": "forest",
+          "label": "Open Gate",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel stands triumphantly in a sunlit forest clearing next to a fully open wooden door, holding a small flower while smiling.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
