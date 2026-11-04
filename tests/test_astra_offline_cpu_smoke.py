@@ -1,0 +1,258 @@
+"""Offline CPU benchmark guardrails using fixtures only; no downloads."""
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import tempfile
+import unittest
+from unittest.mock import patch
+
+from tools import astra_offline_cpu_smoke as smoke
+
+
+def story():
+    return {
+        "title": "The Copper Robot and the Lost Light",
+        "story_beats": [
+            "Before sunrise, a copper robot discovers that a coastal lighthouse has stopped warning passing boats of dangerous rocks below. One cargo ship is already steering toward the unlit reef.",
+            "The robot climbs the spiral stairs while the storm gathers, tracing the failed circuit to a damaged copper switch behind the lamp. It opens the panel and finds a corroded connector beneath cracked glass.",
+            "When lightning strikes, the robot drops its only spare battery, and the warning light dims while a ship nears the shore. The robot returns down the stairs to retrieve a salvaged cable from its toolbox.",
+            "The robot reconnects the switch using its own power cable, restoring the beacon just before the ship reaches the rocks. The beam returns and the ship steers safely into open water before sunrise.",
+        ],
+    }
+
+
+class BenchmarkTests(unittest.TestCase):
+    def setUp(self):
+        d = tempfile.TemporaryDirectory()
+        self.addCleanup(d.cleanup)
+        self.root = Path(d.name)
+        self.binary = self.root / "llama-cli"
+        self.binary.write_text("#!/bin/sh\nexit 0\n")
+        self.binary.chmod(0o755)
+        self.model = self.root / smoke.MODEL_FILENAME
+        self.model.write_bytes(b"model-test-fixture")
+        self.output = self.root / "artifacts"
+        self.sha = hashlib.sha256(self.model.read_bytes()).hexdigest()
+
+    def test_model_profiles_are_pinned_and_fail_closed(self):
+        self.assertEqual(smoke.model_config("baseline")["filename"], smoke.MODEL_FILENAME)
+        self.assertEqual(smoke.model_config("qwen15")["filename"], smoke.COMPARISON_MODEL_FILENAME)
+        self.assertEqual(smoke.model_config("qwen15")["sha256"], smoke.COMPARISON_MODEL_SHA256)
+        self.assertEqual(smoke.model_config("qwen15")["source"],
+                         "Qwen/Qwen2.5-1.5B-Instruct-GGUF")
+        with self.assertRaisesRegex(ValueError, "unrecognized"):
+            smoke.model_config("unknown-remote-provider")
+
+    def test_stronger_model_fixture_is_review_only_and_uses_pinned_path(self):
+        stronger = self.root / smoke.COMPARISON_MODEL_FILENAME
+        stronger.write_bytes(b"fixture-not-real-model")
+        stronger_sha = hashlib.sha256(stronger.read_bytes()).hexdigest()
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story()), "")
+        with patch.object(smoke, "COMPARISON_MODEL_SHA256", stronger_sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ) as execute:
+            report = smoke.run_benchmark(self.binary, stronger, self.output,
+                                         model_profile="qwen15")
+        self.assertEqual(report["model_profile"], "qwen15")
+        self.assertEqual(report["model_filename"], smoke.COMPARISON_MODEL_FILENAME)
+        self.assertTrue(report["model_executed"])
+        self.assertTrue(report["story_contract_passed"])
+        self.assertTrue(report["causal_cue_audit_passed"])
+        self.assertFalse(report["approved"])
+        self.assertFalse(report["production_ready"])
+        self.assertFalse(report["published"])
+        self.assertEqual(execute.call_args.args[0][2], str(stronger))
+        self.assertIn("--grammar-file", execute.call_args.args[0])
+
+    def test_stronger_model_wrong_digest_never_executes(self):
+        stronger = self.root / smoke.COMPARISON_MODEL_FILENAME
+        stronger.write_bytes(b"corrupt-test-fixture")
+        with patch.object(smoke.subprocess, "run") as execute:
+            with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                smoke.run_benchmark(self.binary, stronger, self.output,
+                                    model_profile="qwen15")
+            execute.assert_not_called()
+
+    def test_checksum_mismatch_refuses_inference(self):
+        with patch.object(smoke.subprocess, "run") as execute:
+            with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                smoke.run_benchmark(self.binary, self.model, self.output)
+            execute.assert_not_called()
+
+    def test_bounded_success_remains_unapproved(self):
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story()), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ) as execute:
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertTrue(result["story_contract_passed"])
+        self.assertTrue(result["causal_cue_audit_passed"])
+        self.assertEqual(result["causal_cue_audit"]["semantic_quality"], "not_verified")
+        self.assertFalse(result["approved"])
+        self.assertFalse(result["published"])
+        self.assertFalse(result["production_ready"])
+        self.assertTrue(result["manual_editorial_review_required"])
+        self.assertTrue((self.output / "story-review.json").is_file())
+        args, kwargs = execute.call_args
+        self.assertIn("--single-turn", args[0])
+        self.assertIn("--no-display-prompt", args[0])
+        self.assertTrue(result["causal_plan_supplied"])
+        self.assertFalse(result["plan_copy_detected"])
+        self.assertEqual(len(result["causal_plan_sha256"]), 64)
+        self.assertEqual(result["model_followed_plan"], "not_verified")
+        prompt_arg = args[0][args[0].index("-p") + 1]
+        self.assertIn("PAYOFF:", prompt_arg)
+        self.assertIn("beacon beam shines again", prompt_arg)
+        self.assertIn("--grammar-file", args[0])
+        grammar_file = Path(args[0][args[0].index("--grammar-file") + 1])
+        self.assertEqual(grammar_file, smoke.GRAMMAR_PATH)
+        self.assertTrue(grammar_file.is_file())
+        self.assertTrue(result["constrained_grammar"])
+        self.assertNotIn("--json-schema", args[0])
+        self.assertEqual(kwargs["env"]["HF_HUB_OFFLINE"], "1")
+        self.assertNotIn("OPENAI_API_KEY", kwargs["env"])
+        self.assertFalse(kwargs["shell"])
+
+    def test_structural_pass_with_unresolved_payoff_still_fails_heuristic(self):
+        story = {
+            "title": "The Copper Robot and the Storm Beacon",
+            "story_beats": [
+                "Before sunrise the copper robot sees the lighthouse warning signal go dark while a ship approaches rocks by the shoreline. The crew cannot see the reef ahead.",
+                "The robot climbs the lighthouse stairs, opens the broken panel and traces a disconnected wire near the warning lamp before the storm worsens. It prepares a backup cable.",
+                "Lightning strikes and the robot drops the copper wire, leaving the warning signal unpowered while the ship draws closer to the reef. Waves block the lower stairs.",
+                "The robot must navigate the stormy lighthouse and find a way to repair the warning signal before the ship arrives, but it remains completely dark."
+            ],
+        }
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertTrue(result["story_contract_passed"])
+        self.assertFalse(result["causal_cue_audit_passed"])
+        self.assertEqual(result["error_type"], "CausalCueRejection")
+        self.assertIn("payoff_has_completed_repair_cue",
+                      result["causal_cue_audit"]["failures"])
+        self.assertFalse((self.output / "story-review.json").exists())
+        self.assertTrue((self.output / "review-report.json").exists())
+        self.assertFalse(result["production_ready"])
+
+    def test_actual_planned_output_diagnosed_as_copy_and_rejected(self):
+        from tools.astra_offline_story_plan import LIGHTHOUSE_CAUSAL_PLAN, STAGES
+        story = {
+            "title": "The Copper Robot and the Lighthouse Repair",
+            "story_beats": [
+                f"{stage.title()}: {LIGHTHOUSE_CAUSAL_PLAN[stage]}"
+                for stage in STAGES
+            ],
+        }
+        completed = subprocess.CompletedProcess([], 0, json.dumps(story), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            report = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(report["model_executed"])
+        self.assertFalse(report["story_contract_passed"])
+        self.assertTrue(report["plan_copy_detected"])
+        self.assertEqual(report["plan_copy_audit"]["copied_stages"], list(STAGES))
+        self.assertFalse((self.output / "story-review.json").exists())
+        self.assertFalse(report["approved"])
+        self.assertFalse(report["production_ready"])
+
+    def test_invalid_output_retained_as_unapproved_review_evidence(self):
+        completed = subprocess.CompletedProcess([], 0, '{"title": "incomplete"}', "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertFalse(result["approved"])
+        self.assertTrue((self.output / "generated-raw.txt").is_file())
+        self.assertFalse((self.output / "story-review.json").exists())
+
+
+    def test_prior_five_placeholder_beat_failure_remains_rejected(self):
+        prior = {"title": "The Copper Robot's Repairing Mission",
+                 "story_beats": ["An empty beat title"] * 5}
+        completed = subprocess.CompletedProcess([], 0, json.dumps(prior), "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertTrue(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertIn("four causal story beats", result["story_contract_rejection"])
+        self.assertFalse(result["production_ready"])
+        self.assertFalse((self.output / "story-review.json").exists())
+
+    def test_failed_process_never_produces_candidate(self):
+        completed = subprocess.CompletedProcess([], 1, "", "synthetic failure")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertFalse(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertFalse((self.output / "story-review.json").exists())
+
+
+    def test_zero_exit_code_sampler_failure_does_not_count_as_generation(self):
+        diagnostic = (
+            "Loading model...\nError: Failed to initialize samplers: "
+            "std::exception\nExiting...\n"
+        )
+        completed = subprocess.CompletedProcess([], 0, diagnostic, "")
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run", return_value=completed
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertEqual(result["process_exit_code"], 0)
+        self.assertEqual(result["error_type"], "SamplerInitializationFailed")
+        self.assertFalse(result["model_executed"])
+        self.assertFalse(result["story_contract_passed"])
+        self.assertFalse(result["production_ready"])
+        self.assertFalse((self.output / "story-review.json").exists())
+
+    def test_timeout_creates_fail_closed_report(self):
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run",
+            side_effect=subprocess.TimeoutExpired("llama-cli", 180)
+        ):
+            result = smoke.run_benchmark(self.binary, self.model, self.output)
+        self.assertEqual(result["error_type"], "TimeoutExpired")
+        self.assertFalse(result["production_ready"])
+        self.assertFalse(result["published"])
+        self.assertTrue((self.output / "review-report.json").exists())
+
+    def test_missing_grammar_fails_before_model_inference(self):
+        with patch.object(smoke, "GRAMMAR_PATH", self.root / "missing.gbnf"), patch.object(
+            smoke.subprocess, "run"
+        ) as execute, patch.object(smoke, "MODEL_SHA256", self.sha):
+            with self.assertRaisesRegex(ValueError, "grammar"):
+                smoke.run_benchmark(self.binary, self.model, self.output)
+            execute.assert_not_called()
+
+    def test_grammar_structure_has_exactly_four_slots(self):
+        grammar = smoke.GRAMMAR_PATH.read_text(encoding="utf-8")
+        self.assertIn("root ::=", grammar)
+        self.assertIn("story-array ::=", grammar)
+        self.assertIn("\\\"title\\\"", grammar)
+        self.assertIn("\\\"story_beats\\\"", grammar)
+        array_line = next(line for line in grammar.splitlines() if line.startswith("story-array ::="))
+        self.assertEqual(array_line.count("story-string ws"), 4)
+
+    def test_timeout_budget_checked_before_inference(self):
+        with patch.object(smoke, "MODEL_SHA256", self.sha), patch.object(
+            smoke.subprocess, "run"
+        ) as execute:
+            with self.assertRaisesRegex(ValueError, "timeout"):
+                smoke.run_benchmark(self.binary, self.model, self.output, 9999)
+            execute.assert_not_called()
+
+
+if __name__ == "__main__":
+    unittest.main()
