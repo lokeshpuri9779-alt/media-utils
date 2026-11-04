@@ -66,7 +66,7 @@ def boundary_errors(review: str, publisher: str, preload: str) -> list[str]:
             continue
         path_block = body.split("    paths:\n", 1)[1]
         paths = [
-            x.strip().strip("'\\"")
+            x.strip().strip("'").strip(chr(34))
             for x in re.findall(r"(?m)^      - (.+)$", path_block)
         ]
         if len(paths) != len(ALLOWED_PATHS) or set(paths) != ALLOWED_PATHS:
