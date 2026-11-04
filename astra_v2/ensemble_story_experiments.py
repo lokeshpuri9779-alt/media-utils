@@ -74,7 +74,7 @@ PILOTS = [
             ("THE ROPE LED UNDERGROUND","The mouse followed a taut rope into an old tunnel. Beneath the bridge, a hidden counterweight was holding everyone above the river.","clue",{"mouse":"run","owl":"point","otter":"look","dog":"look"}),
             ("THE COUNTERWEIGHT WAS MOVING","The otter spotted the water rising against the tunnel door. When it opened, the counterweight would fall and take the bridge with it.","confrontation",{"otter":"point","squirrel":"hide","fox":"wave","rabbit":"look"}),
             ("THEY CHOSE TO BREAK IT FIRST","The fox and dog pulled the evacuation bell. The cat and rabbit cleared the road while the others cut the empty bridge free.","action",{"fox":"pull","dog":"pull","cat":"run","rabbit":"run","owl":"wave","mouse":"point","otter":"push","squirrel":"hide"}),
-            ("THE RIVER TOOK THE BRIDGE","The bridge fell without a passenger on it. A moment later, the counterweight tore through the tunnel as they had feared.","reveal",{"fox":"look","otter":"look","owl":"point","mouse":"hide"}),
+            ("THE RIVER TOOK THE BRIDGE","The bridge fell with none of the eight animal rescuers on it. A moment later, the counterweight tore through the tunnel as they had feared.","reveal",{"fox":"look","otter":"look","owl":"point","mouse":"hide"}),
             ("THE SAFEST CROSSING WAS A DETOUR","The squirrel led the eight rescuers through a dry hillside path nobody had used in years. They saved the village by abandoning the obvious road.","resolution",{"squirrel":"point","fox":"clap","rabbit":"wave","cat":"wave","dog":"clap","owl":"look","mouse":"clap","otter":"wave"}),
         ],
     },
