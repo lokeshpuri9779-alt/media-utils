@@ -107,7 +107,7 @@ class EnsembleExperimentsTests(unittest.TestCase):
                 "speech": "A human passenger stood on the bridge with the fox.",
             })
 
-    def test_real_studio_render_uses_ensemble_only_when_enabled(self):
+    def test_real_unified_studio_uses_explicit_ensemble_without_publishing(self):
         from studio_renderer import render_frame, RATE
         beat=dict(catalog()[0]["story_beats"][0])
         beat.update(start=0,end=2.4,duration=2.4,voice_start=.08,
@@ -115,15 +115,18 @@ class EnsembleExperimentsTests(unittest.TestCase):
                     story_subject="owl",story_visual_seed="demo",
                     creative_format="microfiction_cinematic",
                     director_camera="still")
-        with patch.dict(os.environ,{"ASTRA_EXPERIMENT_ENSEMBLE":"1"}):
-            with patch("astra_v2.ensemble_scene.ensemble_frame",wraps=ensemble_frame) as spy:
-                frame=render_frame([beat],.3,"fiction",2.4)
-            self.assertEqual(spy.call_count,1)
-            self.assertEqual(frame.size,(1080,1920))
-        with patch.dict(os.environ,{"ASTRA_EXPERIMENT_ENSEMBLE":"0"}):
-            with patch("astra_v2.ensemble_scene.ensemble_frame",wraps=ensemble_frame) as spy:
-                render_frame([beat],.3,"fiction",2.4)
-            spy.assert_not_called()
+        # Unified Studio imports the implementation at module load time, so
+        # spy on the actual entry point rather than an obsolete source alias.
+        # This checks frame rendering, NOT publication eligibility.
+        for toggle in ("1", "0"):
+            with self.subTest(experimental_preview_enabled=toggle):
+                with patch.dict(os.environ,{"ASTRA_EXPERIMENT_ENSEMBLE":toggle}):
+                    with patch("astra_v2.unified_story_engine.ensemble_frame",
+                               wraps=ensemble_frame) as spy:
+                        frame=render_frame([beat],.3,"fiction",2.4)
+                    self.assertEqual(spy.call_count,1)
+                    self.assertEqual(frame.size,(1080,1920))
+        self.assertEqual(publication_rejection(catalog()[0]), "not_production_ready")
 
 if __name__=="__main__":
     unittest.main()
