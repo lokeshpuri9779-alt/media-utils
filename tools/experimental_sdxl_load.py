@@ -43,6 +43,34 @@ def selected(name):
     return group in ('tokenizer', 'tokenizer_2') and file in (
         'merges.txt', 'vocab.json', 'tokenizer_config.json', 'special_tokens_map.json')
 
+
+def image_budget_callback(save_report, started, clock=time.monotonic):
+    """Keep the 20-step call intact; reject a slow run before decoding."""
+    previous = started
+    intervals = []
+    def callback(pipeline, step_index, timestep, payload):
+        nonlocal previous
+        if step_index != len(intervals):
+            raise RuntimeError('Unexpected image callback order')
+        now = clock()
+        intervals.append(now - previous)
+        previous = now
+        if step_index == 2:
+            projected = now - started + 17 * max(intervals[1:3]) + 180
+            within_budget = projected <= 900
+            save_report('inference-budget.json', {
+                'status': 'continue_inference' if within_budget else 'inference_budget_exceeded',
+                'elapsed_seconds': now - started,
+                'step_intervals_seconds': list(intervals),
+                'projected_total_seconds': projected,
+                'decode_reserve_seconds': 180, 'inference_limit_seconds': 900,
+                'approved': False, 'production_ready': False, 'published': False,
+                'manual_visual_review_required': True})
+            if not within_budget:
+                raise RuntimeError('inference_budget_exceeded')
+        return payload
+    return callback
+
 def worker(one_image=False, performance_probe=False):
     stage('download')
     started = time.monotonic()
@@ -157,7 +185,9 @@ def worker(one_image=False, performance_probe=False):
             original_size=size, target_size=size, crops_coords_top_left=crop,
             negative_original_size=size, negative_target_size=size,
             negative_crops_coords_top_left=crop,
-            latents=noise, output_type='pil')
+            latents=noise, output_type='pil',
+            callback_on_step_end=image_budget_callback(save, started),
+            callback_on_step_end_tensor_inputs=['latents'])
         if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
             raise ValueError('Expected exactly one 1024x1024 diagnostic image')
         location = OUT / 'sdxl-fixed-seed-42.png'
