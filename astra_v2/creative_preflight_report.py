@@ -35,6 +35,48 @@ def _reason_category(reason):
     return "other_renderer_incompatibility"
 
 
+
+def scene_taxonomy_diagnostic(story):
+    """Inspect the same pre-render Studio shot plan without trusting art coverage.
+
+    This measures recognizable scene terms only: no asset inventory, rendered
+    pixels, semantic fidelity, editorial decision, model call or publication.
+    """
+    if story.get("genre") != "fiction":
+        return {"status": "not_applicable", "shot_count": 0,
+                "recognized_shots": 0, "unresolved_shots": 0}
+    try:
+        from copy import deepcopy
+        from studio_renderer import make_plan
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
+        plan = make_plan(deepcopy(story))
+        if not isinstance(plan, (list, tuple)) or not 1 <= len(plan) <= 100:
+            raise ValueError("invalid_studio_plan")
+        recognized = 0
+        unresolved = 0
+        for shot in plan:
+            if not isinstance(shot, dict):
+                raise ValueError("invalid_studio_shot")
+            analysis = analyze_story_scene(shot)
+            if analysis.get("scene") is None:
+                unresolved += 1
+            else:
+                recognized += 1
+        if recognized == len(plan):
+            status = "all_shots_recognized"
+        elif unresolved == len(plan):
+            status = "no_shots_recognized"
+        else:
+            status = "partially_recognized"
+        return {"status": status, "shot_count": len(plan),
+                "recognized_shots": recognized, "unresolved_shots": unresolved}
+    except Exception:
+        # This optional diagnostic never blocks independent editorial review.
+        # Do not leak prompt/credential paths or report unknown shots as good.
+        return {"status": "unavailable", "shot_count": 0,
+                "recognized_shots": 0, "unresolved_shots": 0}
+
+
 def analyze_batch(document, checker=None):
     """Generate per-candidate diagnostics without modifying source proposals.
 
@@ -82,8 +124,10 @@ def analyze_batch(document, checker=None):
                 # Diagnostics are isolated and never turn failure into eligibility.
                 status, category, shot_count = "unavailable", "renderer_check_failed", 0
 
+        scene = scene_taxonomy_diagnostic(story)
         rows.append({
             "index": index, "story_sha256": digest,
+            "scene_taxonomy": scene,
             "script": script,
             "renderer_status": status,
             "renderer_reason_category": category,
@@ -99,6 +143,10 @@ def analyze_batch(document, checker=None):
         "script_status_counts": dict(sorted(Counter(row["script"]["status"] for row in rows).items())),
         "renderer_status_counts": dict(sorted(Counter(row["renderer_status"] for row in rows).items())),
         "renderer_reason_counts": dict(sorted(Counter(row["renderer_reason_category"] for row in rows).items())),
+        "scene_taxonomy_status_counts": dict(sorted(Counter(row["scene_taxonomy"]["status"] for row in rows).items())),
+        "scene_taxonomy_recognized_shots": sum(row["scene_taxonomy"]["recognized_shots"] for row in rows),
+        "scene_taxonomy_unresolved_shots": sum(row["scene_taxonomy"]["unresolved_shots"] for row in rows),
+        "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
         "candidates": rows,
         "semantic_visual_approval": False,
         "editorial_approval": False,
@@ -124,6 +172,8 @@ def main(argv=None):
         "generated": report["generated"],
         "renderer_status_counts": report["renderer_status_counts"],
         "script_status_counts": report["script_status_counts"],
+        "scene_taxonomy_status_counts": report["scene_taxonomy_status_counts"],
+        "scene_taxonomy_unresolved_shots": report["scene_taxonomy_unresolved_shots"],
         "approval": False,
     }, sort_keys=True))
 
