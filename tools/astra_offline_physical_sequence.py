@@ -37,7 +37,7 @@ WITNESSES = {
     },
     "moon-mirror-garden": {
         "attempt": ("brass_handle_rotates",
-                    (235, 65, 264, 100), HANDLE, 38, 28),
+                    (251, 65, 264, 81), HANDLE, 38, 28),
         "payoff": ("replacement_metal_clip_locks_mirror",
                    (258, 59, 285, 94), CLIP, 38, 34),
     },
@@ -161,7 +161,8 @@ def _matching_pixels(image, box, color, tolerance):
 
 def audit_physical_sequence(case_id, stage, early, late):
     """Encoded-frame material witnesses, deliberately not semantic approval."""
-    if case_id not in WITNESSES or STAGES[stage] not in WITNESSES[case_id]:
+    if (case_id not in WITNESSES or type(stage) is not int or stage not in range(4)
+            or STAGES[stage] not in WITNESSES[case_id]):
         raise ValueError("Unknown or unsupported authored repair moment")
     label, region, color, tolerance, minimum = WITNESSES[case_id][STAGES[stage]]
     before = _matching_pixels(early, region, color, tolerance)
