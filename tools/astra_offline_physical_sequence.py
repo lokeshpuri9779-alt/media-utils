@@ -14,7 +14,7 @@ CASES = ("glasshouse-sunshade", "footbridge-ducklings", "moon-mirror-garden")
 # Distinct material colors, NOT semantic/character recognition.
 HEMP = (244, 195, 112)
 KNOT = (239, 219, 160)
-HOOK = (235, 216, 147)
+HOOK = (196, 87, 42)
 LASH = (246, 226, 163)
 HANDLE = (246, 168, 90)
 CLIP = (236, 235, 212)
@@ -31,7 +31,7 @@ WITNESSES = {
     },
     "footbridge-ducklings": {
         "setback": ("plank_retrieval_hook_visible",
-                    (68, 107, 129, 145), HOOK, 40, 48),
+                    (89, 114, 132, 145), HOOK, 26, 48),
         "payoff": ("reed_binding_at_both_bridge_posts",
                    (237, 83, 255, 116), LASH, 38, 26),
     },
