@@ -13,6 +13,55 @@ def enabled():
     return os.getenv("ASTRA_GEMINI_ENABLED") == "1" and bool(os.getenv("GEMINI_API_KEY"))
 
 
+
+def recent_story_exclusions(prior_stories, limit=18):
+    """Bounded newest-first story comparisons; not publication approval.
+
+    The history loader appends multiple journals, including older protected
+    history, so relying on list order or alphabetic titles hides current
+    repeats. Sort only dated entries, then include undated *in-batch* stories
+    when present. Never use this list as the actual duplicate safety ledger.
+    """
+    if type(limit) is not int or not 1 <= limit <= 32:
+        raise ValueError("Invalid recent exclusion limit")
+    dated, undated = [], []
+    for position, item in enumerate(prior_stories):
+        if not isinstance(item, dict):
+            continue
+        title = item.get("title")
+        if not isinstance(title, str) or not title.strip():
+            continue
+        clean_title = " ".join(title.split())[:105]
+        record = {"title": clean_title}
+        for name in ("central_conflict", "decisive_choice", "resolution"):
+            raw = item.get(name)
+            if isinstance(raw, str) and raw.strip():
+                record[name] = " ".join(raw.split())[:135]
+        stamp = next((
+            item.get(name) for name in ("confirmed_at", "uploaded_at", "at")
+            if isinstance(item.get(name), str) and item[name][:4].isdigit()
+        ), "")
+        if stamp:
+            dated.append((stamp, position, record))
+        elif item.get("kind") in ("microfiction", "authored_causal_story") and item.get("production_ready") is True:
+            # Fresh unreviewed generator outputs lack publication timestamps.
+            # These appear at the end of the batch history, not in the ledger.
+            undated.append((position, record))
+    dated.sort(key=lambda row: (row[0], row[1]), reverse=True)
+    # New batch candidates first, then newest accepted or pending history.
+    ordered = [item for _, item in reversed(undated[-8:])] + [
+        item for _, _, item in dated
+    ]
+    result, seen = [], set()
+    for item in ordered:
+        key = item["title"].casefold()
+        if key not in seen:
+            result.append(item)
+            seen.add(key)
+        if len(result) == limit:
+            break
+    return result
+
 def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     if not enabled():
         return None
@@ -39,7 +88,13 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         from astra_v2.renderer_aware_writing import RENDERER_AWARE_DOMAINS
         domains = RENDERER_AWARE_DOMAINS
     import hashlib
-    rotation = int(hashlib.sha256(("|".join(sorted(excluded_ids)) + str(len(prior_stories))).encode()).hexdigest()[:8], 16)
+    # Fix the start once per batch, then cycle across distinct domains.
+    # Hashing the growing excluded-ID set on every request previously allowed
+    # the same domain to repeat while other domains received no candidates.
+    seed = "|".join(str(item.get("content_id", ""))
+                    for item in tuple(prior_stories)[:12] if isinstance(item, dict))
+    rotation = (int(hashlib.sha256(seed.encode()).hexdigest()[:8], 16)
+                + len(prior_stories))
     chosen_domain = domains[rotation % len(domains)]
     prompt = (
         "Required distinct creative domain: " + chosen_domain + ". "
@@ -66,8 +121,13 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Use story_beat reveal for beat one and payoff for beat four; "
         "beats two and three must be build, mechanism or twist. "
         "Title 8-75 characters. "
-        "Avoid recycled plots, copyrighted characters and these prior titles: "
-        + json.dumps(sorted(excluded_titles)[:100]) + "."
+        "Avoid recycled plots, copyrighted characters and recycled repair "
+        "mechanisms, even if the names, animal species or props are changed. "
+        "Before writing, invent a fresh causal mechanism different from "
+        "these recent accepted, pending or batch-candidate narratives: "
+        + json.dumps(recent_story_exclusions(prior_stories), ensure_ascii=False)
+        + ". Avoid these additional exact published titles: "
+        + json.dumps(sorted(excluded_titles)[:50], ensure_ascii=False) + "."
     )
     if renderer_aware:
         from astra_v2.renderer_aware_writing import writing_guidance, recent_plot_exclusions
