@@ -51,7 +51,7 @@ class LiveRunwayTests(unittest.TestCase):
         self.assertEqual(report["current_intake_eligible"], 2)
         self.assertEqual(report["current_intake_blocked"], 1)
         self.assertEqual(report["current_intake_blocking_categories"],
-                         {"publication_": 1})
+                         {"publication_renderer_incompatible": 1})
         self.assertFalse(report["recent_persisted_story_intake"][0]["intake_eligible"])
         for name in ("publication_triggered", "automatic_approval",
                      "paid_provider_called", "production_route_modified"):
