@@ -7928,6 +7928,55 @@
       "video_id": "I1-ozlRuI3I",
       "confirmed_at": "2026-11-04T12:23:34.251310+00:00",
       "title": "Why why does nevada take so long to count votes Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-17228c6a4ceb9399c097",
+      "video_id": "rAkutRPSFUE",
+      "confirmed_at": "2026-11-04T13:18:58.048176+00:00",
+      "title": "Orion the Owl and the Frosty Observatory Dial",
+      "plot_fingerprint": "a3c8084329cb07ca2c00d10e166b9a663120c6c6ebec9a6a13628509e0e7e2f3",
+      "story_beats": [
+        {
+          "headline": "Frozen Instrument",
+          "speech": "The frost has frozen the azimuth ring completely solid, blocking all telescope movement tonight.",
+          "visual": "door",
+          "label": "Frosty Dome",
+          "story_beat": "reveal",
+          "visual_prompt": "A wise brown owl protagonist standing inside a stone observatory tower, looking up at a frosted circular door mechanism, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Warming the Tool",
+          "speech": "I must warm this copper wrench by the hearth fire to melt the thick ice.",
+          "visual": "signal",
+          "label": "Hearth Warmth",
+          "story_beat": "build",
+          "visual_prompt": "The brown owl protagonist holding a small copper wrench near a glowing stone hearth inside the observatory room.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Applying Heat",
+          "speech": "Applying gentle heat to the jammed gear will release the frozen metal.",
+          "visual": "robot",
+          "label": "Gear Freeing",
+          "story_beat": "mechanism",
+          "visual_prompt": "The brown owl protagonist touching the warm copper wrench to the frosted circular mechanism on the stone wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Successful Tracking",
+          "speech": "The ring spins freely now, projecting the brilliant meteor shower across the dome ceiling.",
+          "visual": "planet",
+          "label": "Meteor Display",
+          "story_beat": "payoff",
+          "visual_prompt": "The brown owl protagonist looking up at the spinning observatory mechanism with bright meteor patterns glowing overhead, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
