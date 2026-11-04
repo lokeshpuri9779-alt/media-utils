@@ -44,6 +44,46 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertEqual(len(requested), 2)
         self.assertIn("gemini-2.5-flash-lite", requested[-1])
 
+    def test_primary_404_uses_current_default_free_tier_fallback(self):
+        import io
+        import json
+        import urllib.error
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            if "gemini-3.1-flash-lite" in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+            return io.BytesIO(json.dumps({"candidates": []}).encode())
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "fixture-only",
+            "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.1-flash-lite",
+        }, clear=True), patch.object(
+                omniroute_gemini.urllib.request, "urlopen",
+                side_effect=fake_urlopen):
+            with self.assertRaisesRegex(ValueError, "no candidates"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-3.5-flash-lite", requested[1])
+
+    def test_two_404s_fail_closed_without_extra_models(self):
+        import urllib.error
+        requested = []
+        def fake_urlopen(request, timeout):
+            requested.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 404, "not found", {}, None)
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "fixture-only",
+            "ASTRA_GEMINI_ENABLED": "1",
+            "ASTRA_GEMINI_MODEL": "gemini-3.1-flash-lite",
+        }, clear=True), patch.object(
+                omniroute_gemini.urllib.request, "urlopen",
+                side_effect=fake_urlopen):
+            with self.assertRaisesRegex(RuntimeError, "Gemini HTTP 404"):
+                omniroute_gemini.generate(set(), set())
+        self.assertEqual(len(requested), 2)
+        self.assertIn("gemini-3.5-flash-lite", requested[-1])
+
     def test_authentication_error_never_falls_back(self):
         import urllib.error
         requested = []
