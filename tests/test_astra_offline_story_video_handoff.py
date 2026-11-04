@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 from tools.astra_offline_story_video_handoff import (
-    FRAMES, SIZE, SOURCE_SHA, STAGES, STORIES, WITNESSES,
+    FRAMES, SIZE, SOURCE_SHA, STAGES, STORIES, WITNESSES, PHYSICAL_WITNESSES,
     audit_decoded_frames, validate_metadata, verify,
 )
 
@@ -43,6 +43,16 @@ def source_fixture():
             "pixel_changes_verified": True, "visible_story_outcome_cues_verified": True,
             "shot_pixel_evidence": [{"stage": stage} for stage in STAGES],
             "decoded_mp4_visual_cues": {"case_id": case, "passed": True},
+            "decoded_mp4_physical_repair_details": [
+                {
+                    "case_id": case, "stage": stage, "witness": spec[0],
+                    "passed": True, "semantics": "not_verified",
+                    "hand_prop_mechanics": "not_verified",
+                    "manual_review_required": True,
+                    "approved": False, "published": False, "production_ready": False,
+                }
+                for stage, spec in PHYSICAL_WITNESSES[case].items()
+            ],
             "decoded_character_presence_cues": {
                 "case_id": case, "character_id": actor, "passed": True,
                 "character_identity_semantics": "not_verified",
@@ -61,6 +71,7 @@ def source_fixture():
     }, {
         "experiment": "astra-cpu-procedural-motion-proofs-v1",
         "video_count": 3, "video_previews": video_previews,
+        "decoded_mp4_physical_repair_cues_checked": True,
         "model_inference_executed": False,
         "human_visual_review_required": True, "production_quality": "not_verified",
         "approved": False, "published": False, "production_ready": False,
@@ -78,6 +89,13 @@ def decoded_fixture(cid):
         if cid == "moon-mirror-garden":
             x0, x1 = (130, 168) if index == 0 else (82, 120)
         final.rectangle((x0, y0, x1-1, y1-1), fill=color)
+    # Draw material witnesses *only at the relevant beat-end frames*.
+    # This is a positive synthetic control, not real visual quality proof.
+    for stage, (_, region, color, _, _) in PHYSICAL_WITNESSES[cid].items():
+        x0, y0, x1, y1 = region
+        idx = (STAGES.index(stage)+1) * 12 - 1
+        ImageDraw.Draw(frames[idx]).rectangle(
+            (x0, y0, x1-1, y1-1), fill=color)
     return frames
 
 
@@ -156,6 +174,31 @@ class OfflineStoryVideoHandoffTests(unittest.TestCase):
             audit_decoded_frames("unsupported-case", decoded_fixture(next(iter(STORIES))))
         with self.assertRaises(ValueError):
             audit_decoded_frames(next(iter(STORIES)), [Image.new("RGB", SIZE)]*47)
+
+    def test_missing_encoded_physical_details_fail_closed(self):
+        board, preview = source_fixture()
+        preview["video_previews"][0]["decoded_mp4_physical_repair_details"].pop()
+        with self.assertRaisesRegex(ValueError, "physical repair evidence"):
+            validate_metadata(board, preview)
+
+    def test_missing_decoded_assembly_gesture_fails(self):
+        case = "footbridge-ducklings"
+        frames = decoded_fixture(case)
+        idx = (STAGES.index("payoff")+1) * 12 - 1
+        spec = PHYSICAL_WITNESSES[case]["payoff"]
+        ImageDraw.Draw(frames[idx]).rectangle(spec[1], fill=(3, 8, 12))
+        with self.assertRaisesRegex(ValueError, "physical-action"):
+            audit_decoded_frames(case, frames)
+
+    def test_color_only_in_headline_cannot_fake_physical_mechanics(self):
+        case = "moon-mirror-garden"
+        frames = decoded_fixture(case)
+        idx = (STAGES.index("attempt")+1) * 12 - 1
+        spec = PHYSICAL_WITNESSES[case]["attempt"]
+        ImageDraw.Draw(frames[idx]).rectangle(spec[1], fill=(5, 12, 20))
+        ImageDraw.Draw(frames[idx]).rectangle((0, 0, 320, 27), fill=spec[2])
+        with self.assertRaisesRegex(ValueError, "physical-action"):
+            audit_decoded_frames(case, frames)
 
     def test_stale_source_sha_rejected_before_any_decode(self):
         board, preview = source_fixture()
