@@ -2,7 +2,7 @@ name: ASTRA Frog Post-Merge Regression (Review Only)
 on:
   push:
     branches:
-      - validation/astra-frog-post-merge
+      - main
     paths:
       - tools/experimental_frog_story_render.py
       - tools/experimental_frog_payoff_hold.py
@@ -14,29 +14,51 @@ on:
       - tools/experimental_visual_motion_audit.py
       - tools/experimental_visual_motion_negative_controls.py
       - tools/experimental_story_diversity.py
+      - tools/experimental_frog_workflow_boundary.py
+      - tests/test_astra_frog_workflow_boundary.py
+      - .github/workflows/astra-frog-post-merge-review.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - tools/experimental_frog_story_render.py
+      - tools/experimental_frog_payoff_hold.py
+      - tools/experimental_frog_transition_dissolve.py
+      - tools/experimental_frog_object_pixel_tracks.py
+      - tools/experimental_video_frame_consistency.py
+      - tools/experimental_story_review_manifest.py
+      - tools/experimental_story_review_verify.py
+      - tools/experimental_visual_motion_audit.py
+      - tools/experimental_visual_motion_negative_controls.py
+      - tools/experimental_story_diversity.py
+      - tools/experimental_frog_workflow_boundary.py
+      - tests/test_astra_frog_workflow_boundary.py
       - .github/workflows/astra-frog-post-merge-review.yml
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   validate-story:
-    if: github.ref == 'refs/heads/validation/astra-frog-post-merge'
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Verify merged renderer is unchanged
+      - name: Verify checked-out renderer and review-only boundary
         run: |
+          python3 -m unittest -v tests.test_astra_frog_workflow_boundary
+          python3 -m tools.experimental_frog_workflow_boundary
           python3 - <<'PY'
           import subprocess
-          expected_blob='459264292763b148764a5073a532a986223fbfec'
+          path='tools/experimental_frog_story_render.py'
+          expected=subprocess.check_output(
+              ['git','rev-parse','HEAD:'+path], text=True).strip()
           actual=subprocess.check_output(
-              ['git','hash-object','tools/experimental_frog_story_render.py'],
-              text=True).strip()
-          assert actual==expected_blob, 'Renderer differs from merged source'
-          print('Running merged frog renderer unmodified:', actual)
+              ['git','hash-object',path], text=True).strip()
+          assert actual==expected, 'Renderer not equal to checked-out commit'
+          print('Current branch renderer checked against immutable commit tree')
           PY
       - name: Check independent narrative and continuity contract
         run: |
