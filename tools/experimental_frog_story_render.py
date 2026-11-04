@@ -238,7 +238,13 @@ seed=ball("SEED",(-1.12,.25,.31),(.15,.135,.112),seedcoat)
 cube("POT_BASE",(1.45,.45,.24),(.72,.72,.5),potmat)
 pot_soil=cube("POT_SOIL",(1.45,.45,.51),(.59,.59,.06),potsoil)
 sprout=rod("SPROUT_STEM",(1.45,.45,.54),(1.45,.45,.86),.04,sproutmat)
-leaf=ball("SPROUT_LEAVES",(1.45,.45,.9),(.23,.09,.12),sproutmat)
+# Distinct emerging cotyledons instead of one flattened oval canopy.
+# The original last-frame foliage resembled a mushroom at review scale.
+# Both leaves retain the original frame-31-only timing.
+leaf=ball("SPROUT_LEAF_LEFT",(1.335,.45,.925),(.157,.076,.070),sproutmat)
+leaf_right=ball("SPROUT_LEAF_RIGHT",(1.565,.45,.925),(.157,.076,.070),sproutmat)
+leaf.rotation_euler.y=math.radians(-24)
+leaf_right.rotation_euler.y=math.radians(24)
 line=rod("MAGNET_LINE",(.15,-.22,.68),(-1.12,.1,.3),.022,gold)
 magnet=ball("MAGNET_TIP",(-1.12,.1,.3),(.12,.1,.08),gold)
 
@@ -570,6 +576,9 @@ for i in range(FRAME_COUNT):
             drop.location=(1.05+.115*k,.16+.12*(k%3),
                            .74+.115*k-.15*((i-27+k)%4))
 
+    # Both leaves reveal together after the stem, never during the
+    # seed motion/tracking window.
+    leaf_right.hide_render=leaf.hide_render
     scene.frame_set(i+1)
     bpy.context.view_layer.update()
     # Project the actual text bounding boxes into each frame, including
@@ -631,7 +640,9 @@ for i in range(FRAME_COUNT):
         "seed_visible":not seed.hide_render,
         "rain_streaks_visible":sum(not drop.hide_render for drop in rain_drops),
         "sprout_visible":not sprout.hide_render,
-        "leaf_visible":not leaf.hide_render,
+        "leaf_visible":not leaf.hide_render and not leaf_right.hide_render,
+        "sprout_leaf_count":sum(not part.hide_render
+                                for part in (leaf,leaf_right)),
         "frog_root_x":round(float(frog_root.location.x),4),
         "frog_root_z":round(float(frog_root.location.z),4),
         "frog_weight_sway":round(float(weight_sway),4),
@@ -863,6 +874,17 @@ checks={
     "rain_streaks_precede_sprout":all(f["rain_streaks_visible"]==len(rain_drops) for f in frames[27:]) and all(f["rain_streaks_visible"]==0 for f in frames[:27]),
     "sprout_only_after_planting":all(not f["sprout_visible"] for f in frames[:29]) and all(f["sprout_visible"] for f in frames[29:]),
     "leaves_after_stem":all(not f["leaf_visible"] for f in frames[:31]) and frames[31]["leaf_visible"],
+    "separate_cotyledons_replace_mushroom_shape":(
+        leaf.name=="SPROUT_LEAF_LEFT" and
+        leaf_right.name=="SPROUT_LEAF_RIGHT" and
+        leaf.location.x<sprout.location.x<leaf_right.location.x and
+        (leaf_right.location.x-leaf.location.x)>.20 and
+        all(f["sprout_leaf_count"]==0 for f in frames[:31]) and
+        frames[31]["sprout_leaf_count"]==2 and
+        leaf.scale.z<.08 and leaf_right.scale.z<.08 and
+        abs(leaf.rotation_euler.y)>.35 and
+        abs(leaf_right.rotation_euler.y)>.35
+    ),
     "camera_moves_smoothly_in_payoff":all(
         (Vector(frames[i]["camera_xyz"])-Vector(frames[i-1]["camera_xyz"])).length<.5
         for i in range(23,32)),
