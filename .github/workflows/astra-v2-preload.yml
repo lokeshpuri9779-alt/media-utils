@@ -94,6 +94,7 @@ jobs:
       ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
       # Match publisher: never queue fiction without a compositor coverage receipt.
       ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ARTWORK_GAP_REPORT: '1'
       # Four decoded MP4 samples plus a storyboard comparison packet, review-only.
       ASTRA_VISUAL_REVIEW_SHEET: '1'
       ASTRA_VISUAL_REVIEW_DIR: runtime-health/visual-review
@@ -481,6 +482,14 @@ jobs:
           name: astra-preloaded-${{ steps.render.outputs.content_id }}
           path: preload-package/
           if-no-files-found: error
+          retention-days: 14
+      - name: Archive unapproved fiction artwork repair queue
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-artwork-gaps-${{ github.run_id }}-${{ matrix.lane }}
+          path: runtime-health/artwork-gap-reports/
+          if-no-files-found: ignore
           retention-days: 14
       - name: Archive MP4-bound storyboard inspection evidence
         if: steps.render.outputs.content_id != ''
