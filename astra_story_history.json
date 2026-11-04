@@ -8274,6 +8274,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-9b9925184b36b30b0174",
+      "video_id": "W7aSq_G6TDM",
+      "confirmed_at": "2026-11-04T20:46:40.282786+00:00",
+      "title": "Tobias the Tapir and the Two-Flower Meadow Rule",
+      "plot_fingerprint": "4a3910e458618fc14b7f6f66fdd5b899c1849514a8d2d2fa63a1ffc1b957a38a",
+      "story_beats": [
+        {
+          "headline": "The Disputed Bloom",
+          "speech": "We cannot both drink from these same two fragile blossoms every single afternoon without crushing the stems.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Tobias the tapir standing in a lush green meadow, staring intently at two brightly colored flowers with a worried expression, soft sunlight filtering through tall meadow grass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wooden Sign",
+          "speech": "I will carve a clear schedule onto this wooden sign so we each know our designated flower day.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Tobias the tapir holding a small wooden sign with his front paws, pressing it gently into the rich soil between the two flowers in the sunlit meadow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Sharing",
+          "speech": "When you visit the left blossom today, I will happily tend the right blossom without any dispute.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Tobias the tapir gently pointing his snout toward the left flower while his neighbor drinks calmly from the right flower in the vibrant meadow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Harmonious Meadow",
+          "speech": "Sharing our treasured blooms brings endless peace and vibrant growth to our shared home every season.",
+          "visual": "planet",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Tobias the tapir sitting happily beside the wooden sign and two fully blooming flowers, surrounded by lush green foliage under a bright golden afternoon sun.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
