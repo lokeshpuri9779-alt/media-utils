@@ -1,10 +1,18 @@
 {
-  "observed_at": "2026-11-05T13:09:34.175274+00:00",
+  "observed_at": "2026-11-05T13:15:14.813764+00:00",
   "generated": 5,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 3,
+      "reason": "insufficient_visual_diversity"
+    },
+    {
+      "index": 4,
+      "reason": "insufficient_visual_diversity"
+    },
+    {
+      "index": 5,
       "reason": "insufficient_visual_diversity"
     },
     {
@@ -53,14 +61,6 @@
     },
     {
       "index": 17,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 18,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 19,
       "reason": "insufficient_visual_diversity"
     }
   ],
@@ -136,11 +136,11 @@
       "none": 5
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 3,
-      "partially_recognized": 2
+      "all_shots_recognized": 4,
+      "partially_recognized": 1
     },
-    "scene_taxonomy_recognized_shots": 16,
-    "scene_taxonomy_unresolved_shots": 4,
+    "scene_taxonomy_recognized_shots": 19,
+    "scene_taxonomy_unresolved_shots": 1,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
