@@ -1,18 +1,10 @@
 {
-  "observed_at": "2026-11-05T13:15:14.813764+00:00",
-  "generated": 5,
+  "observed_at": "2026-11-05T13:55:34.092902+00:00",
+  "generated": 16,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 3,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 4,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 5,
+      "index": 1,
       "reason": "insufficient_visual_diversity"
     },
     {
@@ -24,50 +16,17 @@
       "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 8,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 9,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 10,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 11,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 12,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 13,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 14,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 15,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 16,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 17,
+      "index": 18,
       "reason": "insufficient_visual_diversity"
     }
   ],
-  "reviewed": 0,
-  "review_deferred": 5,
+  "reviewed": 1,
+  "review_deferred": 15,
   "approved": 0,
   "review_issues": [
+    "The candidate story features animal characters (an otter and a cat) solving a localized environmental obstruction dispute (clearing river reeds/debris with a tool), which strongly parallels the structural premises, character types, and thematic resolutions of recently published stories in the comparison history (such as Jasper the Otter and Barnaby the Cat, Orson the Otter, and various animal cooperation tales).",
+    "The causal mechanism of searching through natural debris for a misplaced item to resolve a blockage in a water setting closely mirrors existing catalog items.",
+    "ai_editorial_rejection",
     "review_deferred:provider_unavailable",
     "review_failed:HTTP_503",
     "review_provider:provider_unavailable"
@@ -125,22 +84,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 5,
+    "generated": 16,
     "script_status_counts": {
-      "no_simple_flags": 5
+      "no_simple_flags": 16
     },
     "renderer_status_counts": {
-      "structurally_eligible": 5
+      "incompatible": 4,
+      "structurally_eligible": 12
     },
     "renderer_reason_counts": {
-      "none": 5
+      "cast_mismatch": 4,
+      "none": 12
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 4,
-      "partially_recognized": 1
+      "all_shots_recognized": 13,
+      "partially_recognized": 3
     },
-    "scene_taxonomy_recognized_shots": 19,
-    "scene_taxonomy_unresolved_shots": 1,
+    "scene_taxonomy_recognized_shots": 58,
+    "scene_taxonomy_unresolved_shots": 6,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
