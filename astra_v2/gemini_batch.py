@@ -13,6 +13,10 @@ def _failure_reason(exc):
         return "provider_http_" + code if code.isdigit() else "provider_http_error"
     if message.startswith("Gemini transport failed:"):
         return "provider_transport_error"
+    # Both configured free-tier models failed after their bounded retries.
+    # This is provider unavailability, not a story quality rejection.
+    if message == "Gemini exhausted configured free-tier models without a response":
+        return "provider_models_exhausted"
     if isinstance(exc, KeyError):
         return "missing_required_field"
     if isinstance(exc, json.JSONDecodeError):
@@ -67,7 +71,9 @@ def generate_batch(count, generator=generate, history=()):
         except (RuntimeError, ValueError, KeyError) as exc:
             reason = _failure_reason(exc)
             failures.append({"index": i, "reason": reason})
-            if reason.startswith("provider_http_") or reason == "provider_transport_error":
+            if reason.startswith("provider_http_") or reason in (
+                    "provider_transport_error", "provider_models_exhausted"):
+                # Avoid calling the same unavailable service on every slot.
                 break
     return {"status": "unreviewed", "requested": count, "stories": stories,
             "generated": len(stories), "failures": failures}

@@ -44,6 +44,37 @@ class BatchTests(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertEqual(result["failures"][0]["reason"], "provider_http_404")
 
+    def test_exhausted_models_stops_batch_after_one_failed_slot(self):
+        calls = []
+        def provider(*args):
+            calls.append(True)
+            raise RuntimeError(
+                "Gemini exhausted configured free-tier models without a response")
+        result = generate_batch(20, generator=provider)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(result["generated"], 0)
+        self.assertEqual(result["requested"], 20)
+        self.assertEqual(result["failures"], [
+            {"index": 0, "reason": "provider_models_exhausted"}])
+        self.assertEqual(result["status"], "unreviewed")
+
+    def test_exhaustion_keeps_prior_stories_unreviewed_and_never_continues(self):
+        calls = []
+        def provider(*args):
+            calls.append(True)
+            if len(calls) == 1:
+                return {"content_id": "new-a", "title": "Original Story A"}
+            raise RuntimeError(
+                "Gemini exhausted configured free-tier models without a response")
+        result = generate_batch(20, generator=provider)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(result["generated"], 1)
+        self.assertEqual(result["stories"], [
+            {"content_id": "new-a", "title": "Original Story A"}])
+        self.assertEqual(result["failures"], [
+            {"index": 1, "reason": "provider_models_exhausted"}])
+        self.assertEqual(result["status"], "unreviewed")
+
     def test_sanitized_failure_categories_and_continue(self):
         messages = [
             ValueError("Generated story failed causal planning"),
