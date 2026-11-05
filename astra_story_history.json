@@ -8721,6 +8721,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-c4b683f163bb27a1182b",
+      "video_id": "BIpcEtsL-18",
+      "confirmed_at": "2026-11-05T22:53:52.447749+00:00",
+      "title": "Barnaby the Cat and the Courtyard Box Exchange",
+      "plot_fingerprint": "da8e1a48b011495b299d7a4f3eb8ed19df4c489ba0e9b565b56b62854fa37646",
+      "story_beats": [
+        {
+          "headline": "The Unexpected Discovery",
+          "speech": "Barnaby opened the wooden delivery container and realized the market vendor had given him the wrong box entirely.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the ginger cat stands inside a sunlit stone village courtyard next to an open wooden box, looking down with a surprised expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Weight of Choice",
+          "speech": "He could easily keep the contents and win the seasonal contest, but his conscience pulled him toward the truth.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds a small brass bell in the village courtyard, looking conflicted as he gazes across the cobblestones.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Walk",
+          "speech": "Carrying the heavy package back across the cobblestones required courage, yet every step felt lighter than before.",
+          "visual": "ship",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the ginger cat carries a securely closed wooden box across the sunlit stone village courtyard toward the opposing market stall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Exchange",
+          "speech": "Restoring the misplaced item earned genuine respect from his neighbor, proving that integrity matters above all victory.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the ginger cat hands the wooden box to a friendly grey cat in the village courtyard, both smiling happily under morning light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
