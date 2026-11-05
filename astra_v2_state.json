@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-05",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
-  "confirmed_today": 2,
-  "last_attempt_at": "2026-11-05T01:14:47.611127+00:00",
+  "attempts": 4,
+  "confirmed_today": 3,
+  "last_attempt_at": "2026-11-05T02:14:30.646193+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -9405,16 +9405,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "mkft_ibQ0LM": {
-      "content_id": "rayvan-gemini-8febac41960669c51a13",
+    },
+    "rayvan-gemini-8febac41960669c51a13": {
+      "video_id": "mkft_ibQ0LM",
+      "confirmed_at": "2026-11-05T02:13:40.285529+00:00",
       "title": "Bramen the Stoat and Faelen the Fox and the Shared Winter Tome",
-      "day": "2026-11-05",
-      "uploaded_at": "2026-11-05T01:14:49.546992+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-05T01:14:49.546992+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "593ebe795dbb2b556e4315f91bad34517a03ff8f39a1139050a79e58a6cba19c",
       "story_beats": [
@@ -9459,16 +9457,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "9rXVie88XyE": {
+      "content_id": "rayvan-gemini-448f77d9e9775e83e3c2",
+      "title": "Jasper the Otter and Barnaby the Cat Share the Lantern",
+      "day": "2026-11-05",
+      "uploaded_at": "2026-11-05T02:14:32.274906+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c3225fe9c1247fc6eeda90ea9ff7ffc7966039f35c4dc3efa6785255912b2851",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crack",
+          "speech": "Jasper stared at the tiny crack in the glass lantern, wondering anxiously if he should hide the damage from Barnaby.",
+          "visual": "forest",
+          "label": "The Hidden Crack",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the otter standing near the riverbank in the forest, holding a cracked lantern with a worried expression, facing Barnaby the cat.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Rising Shadows",
+          "speech": "As twilight deepened over the murky riverbank, the dimming light made it harder to navigate the slippery stones safely.",
+          "visual": "signal",
+          "label": "Rising Shadows",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter and Barnaby the cat standing by the riverbank in the forest as dark shadows gather, looking nervously at the flickering lantern light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Jasper stepped forward into the lantern glow, holding out the damaged glass and admitting his mistake without any hesitation.",
+          "visual": "door",
+          "label": "The Honest Confession",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter holding out the cracked lantern toward Barnaby the cat on the riverbank in the forest, looking remorseful and sincere.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Guidance",
+          "speech": "Barnaby nodded warmly, taking the lantern handle to lead the way while Jasper walked proudly beside him.",
+          "visual": "signal",
+          "label": "Shared Guidance",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the cat holding the glowing lantern with Jasper the otter walking side by side along the riverbank in the forest, smiling happily.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-05T01:12:59.421593+00:00",
+  "last_preflight_at": "2026-11-05T02:13:39.868658+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-05T01:14:49.901090+00:00",
+    "at": "2026-11-05T02:14:32.606522+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -19589,10 +19642,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-448f77d9e9775e83e3c2": {
+      "at": "2026-11-05T02:14:30.646172+00:00",
+      "title": "Jasper the Otter and Barnaby the Cat Share the Lantern",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c3225fe9c1247fc6eeda90ea9ff7ffc7966039f35c4dc3efa6785255912b2851",
+      "story_beats": [
+        {
+          "headline": "The Hidden Crack",
+          "speech": "Jasper stared at the tiny crack in the glass lantern, wondering anxiously if he should hide the damage from Barnaby.",
+          "visual": "forest",
+          "label": "The Hidden Crack",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the otter standing near the riverbank in the forest, holding a cracked lantern with a worried expression, facing Barnaby the cat.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Rising Shadows",
+          "speech": "As twilight deepened over the murky riverbank, the dimming light made it harder to navigate the slippery stones safely.",
+          "visual": "signal",
+          "label": "Rising Shadows",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter and Barnaby the cat standing by the riverbank in the forest as dark shadows gather, looking nervously at the flickering lantern light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Jasper stepped forward into the lantern glow, holding out the damaged glass and admitting his mistake without any hesitation.",
+          "visual": "door",
+          "label": "The Honest Confession",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter holding out the cracked lantern toward Barnaby the cat on the riverbank in the forest, looking remorseful and sincere.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Guidance",
+          "speech": "Barnaby nodded warmly, taking the lantern handle to lead the way while Jasper walked proudly beside him.",
+          "visual": "signal",
+          "label": "Shared Guidance",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the cat holding the glowing lantern with Jasper the otter walking side by side along the riverbank in the forest, smiling happily.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-05T01:14:49.901013+00:00",
+    "at": "2026-11-05T02:14:32.606445+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -19603,21 +19707,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-05T01:14:49.901076+00:00",
+    "at": "2026-11-05T02:14:32.606508+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-05T01:14:30.775070+00:00",
+    "at": "2026-11-05T02:14:10.215322+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-8febac41960669c51a13",
-    "video_url": "https://www.youtube.com/watch?v=mkft_ibQ0LM",
+    "content_id": "rayvan-gemini-448f77d9e9775e83e3c2",
+    "video_url": "https://www.youtube.com/watch?v=9rXVie88XyE",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-05T01:14:49.900049+00:00",
+    "at": "2026-11-05T02:14:32.605576+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -19629,7 +19733,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-05T01:14:49.900918+00:00",
+    "at": "2026-11-05T02:14:32.606350+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",

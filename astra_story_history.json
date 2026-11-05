@@ -8372,6 +8372,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-8febac41960669c51a13",
+      "video_id": "mkft_ibQ0LM",
+      "confirmed_at": "2026-11-05T02:13:40.285529+00:00",
+      "title": "Bramen the Stoat and Faelen the Fox and the Shared Winter Tome",
+      "plot_fingerprint": "593ebe795dbb2b556e4315f91bad34517a03ff8f39a1139050a79e58a6cba19c",
+      "story_beats": [
+        {
+          "headline": "The Rivalry over the Tome",
+          "speech": "We cannot both read this single volume by the flickering hearth fire at the exact same hour.",
+          "visual": "door",
+          "label": "Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a rustic snowfield cabin with a wooden door, Bramen the stoat and Faelen the fox stand on opposite sides of a rustic wooden table, both holding onto a single old book with worried expressions.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Shortcut",
+          "speech": "If I pull the spine open quickly, I can memorize my half before you even notice the separation.",
+          "visual": "forest",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Inside the snowfield cabin near a frosted window looking out at a snowy forest, Bramen the stoat tugs impatiently on the book while Faelen the fox holds his ground with a protective paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Arrangement",
+          "speech": "Let us take turns holding the book and reading aloud so neither of us damages the delicate binding.",
+          "visual": "signal",
+          "label": "Agreement",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the cozy snowfield cabin by the stone hearth, Faelen the fox holds the book open while Bramen the stoat sits upright nearby, pointing a tiny paw at the page in a cooperative gesture.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cooperative Reward",
+          "speech": "By sharing our winter knowledge page by page, we have both learned how to weather the deep cold.",
+          "visual": "planet",
+          "label": "Harmony",
+          "story_beat": "payoff",
+          "visual_prompt": "Inside the warmly lit snowfield cabin, Bramen the stoat and Faelen the fox sit side by side on a woven rug near the hearth, resting together peacefully with the book lying safely closed between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
