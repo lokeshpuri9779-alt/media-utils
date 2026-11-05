@@ -67,6 +67,32 @@ class BatchTests(unittest.TestCase):
         self.assertNotIn("private", str(result))
         self.assertEqual(messages, [])
 
+    def test_known_gemini_beat_quality_failures_have_sanitized_categories(self):
+        # The production generator calls validate_beat_quality(beats, "Gemini").
+        # These are validator errors, not evidence of semantic acceptance.
+        messages = [
+            ValueError("Gemini requires exactly four beats"),
+            ValueError("Gemini narration needs at least 12 words per beat"),
+            ValueError("Gemini needs at least three distinct visual types"),
+        ]
+        def fail(*args):
+            raise messages.pop(0)
+        result = generate_batch(3, generator=fail)
+        self.assertEqual(result["generated"], 0)
+        self.assertEqual([row["reason"] for row in result["failures"]], [
+            "invalid_beat_count",
+            "insufficient_beat_narration",
+            "insufficient_visual_diversity",
+        ])
+        self.assertEqual(messages, [])
+        self.assertEqual(result["status"], "unreviewed")
+
+    def test_unknown_gemini_validator_message_stays_unclassified_and_private(self):
+        from astra_v2.gemini_batch import _failure_reason
+        self.assertEqual(
+            _failure_reason(ValueError("Gemini private prompt rejected: API_KEY_SENTINEL")),
+            "validation_error_unclassified")
+
     def test_invalid_json_and_unknown_runtime_are_sanitized(self):
         from astra_v2.gemini_batch import _failure_reason
         import json
