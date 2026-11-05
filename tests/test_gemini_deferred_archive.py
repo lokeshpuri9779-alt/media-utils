@@ -117,7 +117,13 @@ class GeminiDeferredArchiveTests(unittest.TestCase):
         self.assertIn("python -m astra_v2.gemini_deferred_archive", block)
         self.assertIn("gemini-deferred-review-archive.json", block)
         self.assertNotIn("gemini_inventory_merge", block)
-        self.assertNotIn("publish", block.lower())
+        # Reading --publisher-state for offline history checks is permitted.
+        # Actual publishing/approval intake must remain absent.
+        for prohibited in ("youtube_upload", "ASTRA_PUBLISH",
+                           "python -m astra_v2.publisher",
+                           "ai-reviewed-stories.json",
+                           "ai-reviewed-decisions.json"):
+            self.assertNotIn(prohibited, block)
 
 
 if __name__ == "__main__":
