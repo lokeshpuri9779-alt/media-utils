@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-06",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
-  "confirmed_today": 0,
-  "last_attempt_at": "2026-11-05T20:56:06.184180+00:00",
+  "attempts": 2,
+  "confirmed_today": 1,
+  "last_attempt_at": "2026-11-05T22:52:22.491420+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -9735,16 +9735,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "Vt_VoztMdh8": {
-      "content_id": "rayvan-gemini-49f2d5d7dc2575fd482c",
+    },
+    "rayvan-gemini-49f2d5d7dc2575fd482c": {
+      "video_id": "Vt_VoztMdh8",
+      "confirmed_at": "2026-11-05T22:51:14.812484+00:00",
       "title": "Orion the Owl and the Stargazing Clock",
-      "day": "2026-11-06",
-      "uploaded_at": "2026-11-05T20:56:08.372323+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-05T20:56:08.372323+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "1af1b32fc07621e23ed65d1d177181705e08b1680a849d12c25edaddc7b42159",
       "story_beats": [
@@ -9789,16 +9787,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "BIpcEtsL-18": {
+      "content_id": "rayvan-gemini-c4b683f163bb27a1182b",
+      "title": "Barnaby the Cat and the Courtyard Box Exchange",
+      "day": "2026-11-06",
+      "uploaded_at": "2026-11-05T22:52:24.649848+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "da8e1a48b011495b299d7a4f3eb8ed19df4c489ba0e9b565b56b62854fa37646",
+      "story_beats": [
+        {
+          "headline": "The Unexpected Discovery",
+          "speech": "Barnaby opened the wooden delivery container and realized the market vendor had given him the wrong box entirely.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the ginger cat stands inside a sunlit stone village courtyard next to an open wooden box, looking down with a surprised expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Weight of Choice",
+          "speech": "He could easily keep the contents and win the seasonal contest, but his conscience pulled him toward the truth.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds a small brass bell in the village courtyard, looking conflicted as he gazes across the cobblestones.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Walk",
+          "speech": "Carrying the heavy package back across the cobblestones required courage, yet every step felt lighter than before.",
+          "visual": "ship",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the ginger cat carries a securely closed wooden box across the sunlit stone village courtyard toward the opposing market stall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Exchange",
+          "speech": "Restoring the misplaced item earned genuine respect from his neighbor, proving that integrity matters above all victory.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the ginger cat hands the wooden box to a friendly grey cat in the village courtyard, both smiling happily under morning light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-05T20:55:01.168973+00:00",
+  "last_preflight_at": "2026-11-05T22:51:14.293936+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-05T20:56:08.718694+00:00",
+    "at": "2026-11-05T22:52:25.020930+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -20235,10 +20288,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-c4b683f163bb27a1182b": {
+      "at": "2026-11-05T22:52:22.491402+00:00",
+      "title": "Barnaby the Cat and the Courtyard Box Exchange",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "da8e1a48b011495b299d7a4f3eb8ed19df4c489ba0e9b565b56b62854fa37646",
+      "story_beats": [
+        {
+          "headline": "The Unexpected Discovery",
+          "speech": "Barnaby opened the wooden delivery container and realized the market vendor had given him the wrong box entirely.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the ginger cat stands inside a sunlit stone village courtyard next to an open wooden box, looking down with a surprised expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Weight of Choice",
+          "speech": "He could easily keep the contents and win the seasonal contest, but his conscience pulled him toward the truth.",
+          "visual": "signal",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds a small brass bell in the village courtyard, looking conflicted as he gazes across the cobblestones.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Walk",
+          "speech": "Carrying the heavy package back across the cobblestones required courage, yet every step felt lighter than before.",
+          "visual": "ship",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the ginger cat carries a securely closed wooden box across the sunlit stone village courtyard toward the opposing market stall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Exchange",
+          "speech": "Restoring the misplaced item earned genuine respect from his neighbor, proving that integrity matters above all victory.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the ginger cat hands the wooden box to a friendly grey cat in the village courtyard, both smiling happily under morning light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-05T20:56:08.718616+00:00",
+    "at": "2026-11-05T22:52:25.020855+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -20249,21 +20353,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-05T20:56:08.718680+00:00",
+    "at": "2026-11-05T22:52:25.020917+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-05T20:55:39.470829+00:00",
+    "at": "2026-11-05T22:51:50.102362+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-49f2d5d7dc2575fd482c",
-    "video_url": "https://www.youtube.com/watch?v=Vt_VoztMdh8",
+    "content_id": "rayvan-gemini-c4b683f163bb27a1182b",
+    "video_url": "https://www.youtube.com/watch?v=BIpcEtsL-18",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-05T20:56:08.717761+00:00",
+    "at": "2026-11-05T22:52:25.019962+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -20275,7 +20379,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-05T20:56:08.718530+00:00",
+    "at": "2026-11-05T22:52:25.020750+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",

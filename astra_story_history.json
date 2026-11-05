@@ -8672,6 +8672,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-49f2d5d7dc2575fd482c",
+      "video_id": "Vt_VoztMdh8",
+      "confirmed_at": "2026-11-05T22:51:14.812484+00:00",
+      "title": "Orion the Owl and the Stargazing Clock",
+      "plot_fingerprint": "1af1b32fc07621e23ed65d1d177181705e08b1680a849d12c25edaddc7b42159",
+      "story_beats": [
+        {
+          "headline": "The Mysterious Ticking",
+          "speech": "Orion perched high inside the dusty observatory, his large yellow eyes wide as he listened to the strange metallic clicking.",
+          "visual": "signal",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the Owl perched on a high wooden beam inside a dark stone observatory, staring intently down at a shiny brass clock resting on a table below, feathers fluffed in alarm.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protective Choice",
+          "speech": "Believing the rhythmic sound was a hidden danger, the wise owl carefully lifted the heavy clock in his talons.",
+          "visual": "robot",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "Orion the Owl holding a brass clock firmly in his talons while standing on a wooden ledge, wings partially spread to shield the nesting area behind him.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Timepiece",
+          "speech": "He tucked the ticking object deep behind a dark storage box so his family would remain completely safe from harm.",
+          "visual": "door",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the Owl carefully pushing a brass clock behind a dusty wooden box in a shadowy corner of the observatory alcove.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Truth",
+          "speech": "Discovering it was only a harmless timepiece, Orion calmly returned the clock to its rightful place on the desk.",
+          "visual": "forest",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the Owl resting peacefully on the astronomer's desk next to a brass clock, moonlight streaming through the observatory dome window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
