@@ -134,6 +134,29 @@ jobs:
             git push origin HEAD:refs/heads/astra-state
           )
           git worktree remove --force "$STATE_DIR"
+      - name: Archive deferred Gemini proposals (review only)
+        if: success()
+        run: |
+          # Keep provider-deferred drafts separate from approved inventory.
+          # This step neither calls Gemini nor grants publication eligibility.
+          git config user.name "astra-bot"
+          git config user.email "astra-bot@users.noreply.github.com"
+          git fetch origin astra-state
+          STATE_DIR="$(mktemp -d)"
+          git worktree add --detach "$STATE_DIR" origin/astra-state
+          python -m astra_v2.gemini_deferred_archive \
+            --input runtime-health/gemini-proposals.json \
+            --audit runtime-health/ai-batch-review-audit.json \
+            --output "$STATE_DIR/gemini-deferred-review-archive.json"
+          (
+            cd "$STATE_DIR"
+            git add gemini-deferred-review-archive.json
+            git diff --cached --quiet || {
+              git commit -m "Archive unapproved Gemini drafts deferred by reviewer outage"
+              git push origin HEAD:refs/heads/astra-state
+            }
+          )
+          git worktree remove --force "$STATE_DIR"
       - name: Persist Gemini batch diagnostic
         if: always()
         run: |
