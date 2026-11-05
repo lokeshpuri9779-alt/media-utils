@@ -1,31 +1,18 @@
 {
-  "observed_at": "2026-11-05T13:55:34.092902+00:00",
-  "generated": 16,
+  "observed_at": "2026-11-05T19:46:57.934112+00:00",
+  "generated": 19,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 6,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 7,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 18,
+      "index": 3,
       "reason": "insufficient_visual_diversity"
     }
   ],
   "reviewed": 1,
-  "review_deferred": 15,
+  "review_deferred": 18,
   "approved": 0,
   "review_issues": [
-    "The candidate story features animal characters (an otter and a cat) solving a localized environmental obstruction dispute (clearing river reeds/debris with a tool), which strongly parallels the structural premises, character types, and thematic resolutions of recently published stories in the comparison history (such as Jasper the Otter and Barnaby the Cat, Orson the Otter, and various animal cooperation tales).",
-    "The causal mechanism of searching through natural debris for a misplaced item to resolve a blockage in a water setting closely mirrors existing catalog items.",
+    "The candidate story features characters 'Buster' and 'Pip' disputing over a rubber ball (Buster and Pip's Rubber Ball Relay), which closely replicates the themes and character name combinations of recently published works in the comparison history such as 'Buster and Cleo's Rubber Ball Relay' and 'Sammy the Squirrel and Pip the Rabbit'.",
     "ai_editorial_rejection",
     "review_deferred:provider_unavailable",
     "review_failed:HTTP_503",
@@ -72,6 +59,7 @@
       "models/gemini-flash-lite-latest",
       "models/gemini-nano-banana-2.1",
       "models/gemini-omni-1.1-flash",
+      "models/gemini-omni-1.2-flash",
       "models/gemini-omni-flash-preview",
       "models/gemini-pro-latest",
       "models/gemini-robotics-er-2-preview",
@@ -84,24 +72,25 @@
     ]
   },
   "creative_preflight": {
-    "generated": 16,
+    "generated": 19,
     "script_status_counts": {
-      "no_simple_flags": 16
+      "no_simple_flags": 19
     },
     "renderer_status_counts": {
       "incompatible": 4,
-      "structurally_eligible": 12
+      "structurally_eligible": 15
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 4,
-      "none": 12
+      "cast_mismatch": 2,
+      "none": 15,
+      "unsupported_human_actor": 2
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 13,
-      "partially_recognized": 3
+      "all_shots_recognized": 17,
+      "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 58,
-    "scene_taxonomy_unresolved_shots": 6,
+    "scene_taxonomy_recognized_shots": 72,
+    "scene_taxonomy_unresolved_shots": 4,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
