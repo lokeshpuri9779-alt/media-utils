@@ -8525,6 +8525,55 @@
       "video_id": "ZfQy8cxr2Oo",
       "confirmed_at": "2026-11-05T09:36:19.140465+00:00",
       "title": "Why midterm election results senate Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
+      "video_id": "QyRh_VccUR8",
+      "confirmed_at": "2026-11-05T16:52:57.151581+00:00",
+      "title": "Orion the Owl and the Midnight Observatory Misreading",
+      "plot_fingerprint": "8e16a0811c0c991a88330cac2909aa79d8460cb5e0718952c7b84e4ba624f576",
+      "story_beats": [
+        {
+          "headline": "The Golden Glow",
+          "speech": "An unexpected golden glow pulses across the observatory wall, looking exactly like a distant falling star approaching fast.",
+          "visual": "signal",
+          "label": "The Warning",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands inside a stone observatory looking up at a glowing golden circle cast on the wall, holding a small brass compass in one wing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing the Instruments",
+          "speech": "Orion peers closely at the brass clock on the wooden desk to check if its moving dial matches the strange celestial light.",
+          "visual": "planet",
+          "label": "The Check",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl stands inside a stone observatory, holding a brass clock with both paws on a wooden table, staring intently at the rotating glass face.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lantern Test",
+          "speech": "Holding a bright brass lantern beside the clock face, Orion tests whether the steady firelight explains the mysterious indoor glow.",
+          "visual": "door",
+          "label": "The Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl stands inside a stone observatory, holding a burning brass lantern in one paw right next to a ticking brass clock on a oak desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Realization",
+          "speech": "Orion sees that the clock gears create the golden reflection, laughing softly as the false comet alarm fades away.",
+          "visual": "ship",
+          "label": "The Clarity",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl stands inside a stone observatory with a relaxed expression, pointing one wing at a ticking brass clock while a brass lantern sits safely nearby on a wooden desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

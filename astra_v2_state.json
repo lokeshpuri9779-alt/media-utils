@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-05",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-11-05T09:37:15.596701+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-11-05T16:53:44.888446+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -9576,16 +9576,14 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "QyRh_VccUR8": {
-      "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
+    },
+    "rayvan-gemini-58f994a7e3318a2e2420": {
+      "video_id": "QyRh_VccUR8",
+      "confirmed_at": "2026-11-05T16:52:57.151581+00:00",
       "title": "Orion the Owl and the Midnight Observatory Misreading",
-      "day": "2026-11-05",
-      "uploaded_at": "2026-11-05T09:37:16.821627+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-05T09:37:16.821627+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "8e16a0811c0c991a88330cac2909aa79d8460cb5e0718952c7b84e4ba624f576",
       "story_beats": [
@@ -9630,16 +9628,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "Vxq54JeDNVA": {
+      "content_id": "rayvan-gemini-061eb1b4b87eeedb9069",
+      "title": "Finn the Fox and Barnaby the Rabbit and the Woodland Folio",
+      "day": "2026-11-05",
+      "uploaded_at": "2026-11-05T16:53:46.218968+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "547557d562d07bd6444c6bb079841b3ab67f85f17ffe69ca5e17ac524fb9d285",
+      "story_beats": [
+        {
+          "headline": "The Disputed Folio",
+          "speech": "Finn the fox holds the worn leather book tightly, claiming its glowing pages contain secret potion spells.",
+          "visual": "forest",
+          "label": "Folio Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "In the lush forest clearing, Finn the bright orange fox with white-tipped tail and large pointed ears stands upright, wearing a small green waistcoat. Finn holds a weathered leather book with golden leaf patterns on the cover. Next to him, Barnaby the fluffy cream-colored rabbit with long floppy ears and a blue neckerchief points a paw at the pages. Soft afternoon sunlight filters through tall oak trees onto the mossy ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Interpretations",
+          "speech": "Barnaby the rabbit opens a fresh flower beneath the canopy, proving the text is simply about botany.",
+          "visual": "signal",
+          "label": "Flower Test",
+          "story_beat": "build",
+          "visual_prompt": "In the lush forest clearing, Barnaby the cream-colored rabbit wearing a blue neckerchief holds up a bright yellow woodland flower next to the open book resting on a flat tree stump. Finn the orange fox stands beside him with ears perked forward in curiosity, gazing at the flower petals. Soft golden light highlights the detailed texture of the flower and the inked pages of the book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Clue",
+          "speech": "Finn places the seed into the rich soil while Barnaby carefully marks the spot with a small wooden key.",
+          "visual": "door",
+          "label": "The Planting",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush forest clearing, Finn the orange fox with a green waistcoat kneels on the damp earth, pressing a small seed into a fresh patch of soil. Barnaby the cream-colored rabbit stands beside him, holding a small metal key used as a garden marker near the freshly turned dirt. The open book rests on a nearby mossy rock under the shade of a ferns.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Luminous Sprout",
+          "speech": "The seedling blooms instantly into a radiant blossom, combining magical light and practical botany.",
+          "visual": "forest",
+          "label": "Shared Truth",
+          "story_beat": "payoff",
+          "visual_prompt": "In the lush forest clearing at twilight, Finn the orange fox and Barnaby the cream-colored rabbit sit side by side on the mossy ground, looking down at a newly sprouted flower that emits a warm, magical golden glow. The weathered book lies open nearby, reflecting the soft light onto both smiling animal faces as fireflies drift through the dim background trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-05T09:36:18.745090+00:00",
+  "last_preflight_at": "2026-11-05T16:52:56.625676+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-05T09:37:17.144771+00:00",
+    "at": "2026-11-05T16:53:46.594612+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -9656,7 +9709,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-05T01:14:31.213482+00:00",
+  "last_feedback_attempt_at": "2026-11-05T16:53:31.016940+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -19923,10 +19976,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-061eb1b4b87eeedb9069": {
+      "at": "2026-11-05T16:53:44.888421+00:00",
+      "title": "Finn the Fox and Barnaby the Rabbit and the Woodland Folio",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "547557d562d07bd6444c6bb079841b3ab67f85f17ffe69ca5e17ac524fb9d285",
+      "story_beats": [
+        {
+          "headline": "The Disputed Folio",
+          "speech": "Finn the fox holds the worn leather book tightly, claiming its glowing pages contain secret potion spells.",
+          "visual": "forest",
+          "label": "Folio Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "In the lush forest clearing, Finn the bright orange fox with white-tipped tail and large pointed ears stands upright, wearing a small green waistcoat. Finn holds a weathered leather book with golden leaf patterns on the cover. Next to him, Barnaby the fluffy cream-colored rabbit with long floppy ears and a blue neckerchief points a paw at the pages. Soft afternoon sunlight filters through tall oak trees onto the mossy ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Interpretations",
+          "speech": "Barnaby the rabbit opens a fresh flower beneath the canopy, proving the text is simply about botany.",
+          "visual": "signal",
+          "label": "Flower Test",
+          "story_beat": "build",
+          "visual_prompt": "In the lush forest clearing, Barnaby the cream-colored rabbit wearing a blue neckerchief holds up a bright yellow woodland flower next to the open book resting on a flat tree stump. Finn the orange fox stands beside him with ears perked forward in curiosity, gazing at the flower petals. Soft golden light highlights the detailed texture of the flower and the inked pages of the book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Clue",
+          "speech": "Finn places the seed into the rich soil while Barnaby carefully marks the spot with a small wooden key.",
+          "visual": "door",
+          "label": "The Planting",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush forest clearing, Finn the orange fox with a green waistcoat kneels on the damp earth, pressing a small seed into a fresh patch of soil. Barnaby the cream-colored rabbit stands beside him, holding a small metal key used as a garden marker near the freshly turned dirt. The open book rests on a nearby mossy rock under the shade of a ferns.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Luminous Sprout",
+          "speech": "The seedling blooms instantly into a radiant blossom, combining magical light and practical botany.",
+          "visual": "forest",
+          "label": "Shared Truth",
+          "story_beat": "payoff",
+          "visual_prompt": "In the lush forest clearing at twilight, Finn the orange fox and Barnaby the cream-colored rabbit sit side by side on the mossy ground, looking down at a newly sprouted flower that emits a warm, magical golden glow. The weathered book lies open nearby, reflecting the soft light onto both smiling animal faces as fireflies drift through the dim background trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-05T09:37:17.144692+00:00",
+    "at": "2026-11-05T16:53:46.594543+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -19937,21 +20041,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-05T09:37:17.144756+00:00",
+    "at": "2026-11-05T16:53:46.594600+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-05T09:36:52.978354+00:00",
+    "at": "2026-11-05T16:53:30.685680+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-58f994a7e3318a2e2420",
-    "video_url": "https://www.youtube.com/watch?v=QyRh_VccUR8",
+    "content_id": "rayvan-gemini-061eb1b4b87eeedb9069",
+    "video_url": "https://www.youtube.com/watch?v=Vxq54JeDNVA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-05T09:37:17.143800+00:00",
+    "at": "2026-11-05T16:53:46.593650+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -19963,7 +20067,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-05T09:37:17.144606+00:00",
+    "at": "2026-11-05T16:53:46.594454+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
