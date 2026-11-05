@@ -8470,6 +8470,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-bc3d1955900ba3040627",
+      "video_id": "-WBPRmbEfF0",
+      "confirmed_at": "2026-11-05T08:50:15.604417+00:00",
+      "title": "Felix the Cat and the Courtyard Box Return",
+      "plot_fingerprint": "3e237e0ed239a838054583354ded77bab75a97123f1af5b1faa4b9015ee831f3",
+      "story_beats": [
+        {
+          "headline": "The Wrong Delivery",
+          "speech": "Felix opened the heavy cardboard box on his stone step and stared in utter surprise at the folded red scarf inside instead of his ordered book.",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the cat stands by a wooden doorway in a sunny village courtyard, looking down into an open brown cardboard box holding a red scarf while holding a small key in his paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Inspection",
+          "speech": "He lifted the soft fabric with his paw, realizing someone in the courtyard had received his book while he held their winter apparel.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "build",
+          "visual_prompt": "Felix the cat stands in the center of the village courtyard, holding up a red scarf from an open box on the cobblestone ground, looking thoughtfully toward a nearby stone wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Courtyard Trek",
+          "speech": "Carrying the box securely in his paws, Felix crossed the sunny pathway toward the opposite porch to make the exchange right.",
+          "visual": "ship",
+          "label": "Twist",
+          "story_beat": "twist",
+          "visual_prompt": "Felix the cat walks carefully across the sunny village courtyard carrying a closed brown cardboard box tightly in his paws, maintaining his balance on the round cobblestones.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Return",
+          "speech": "Felix presented the misplaced package to his smiling neighbor, successfully restoring the rightful belongings and proving his dependable character.",
+          "visual": "door",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the cat stands smiling on a wooden porch in the village courtyard, handing a brown cardboard box containing a red scarf to a friendly cat neighbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
