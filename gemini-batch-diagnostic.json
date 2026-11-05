@@ -1,30 +1,10 @@
 {
-  "observed_at": "2026-11-04T23:40:30.574604+00:00",
-  "generated": 7,
+  "observed_at": "2026-11-05T06:45:40.733905+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
       "index": 5,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 6,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 9,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 10,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 11,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 12,
       "reason": "validation_error_unclassified"
     },
     {
@@ -41,17 +21,31 @@
     },
     {
       "index": 16,
-      "reason": "provider_http_429"
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 17,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 18,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 19,
+      "reason": "validation_error_unclassified"
     }
   ],
-  "reviewed": 7,
-  "review_deferred": 0,
-  "approved": 2,
+  "reviewed": 2,
+  "review_deferred": 10,
+  "approved": 0,
   "review_issues": [
-    "The candidate story features characters 'Lyra the Lynx' and 'Bramen the Stoat' engaged in a dispute involving a compass and a misplaced item ('Lyra the Lynx and Bramen the Stoat's Misplaced Compass Blunder' / 'Bramble the Stoat and Lyra the Lynx and the Compass Mistake'), which closely duplicates recently published premises, character combinations, and causal conflicts in the provided comparison history.",
-    "The candidate story features recurring characters 'Sammy the Squirrel' and 'Pip the Rabbit' in a narrative pattern heavily mirrored in the comparison history (e.g., 'Sammy the Squirrel and Pip the Rabbit and the Tomato Patch Clue'), indicating derivative content and a failure to meet originality standards.",
+    "The candidate story features animal protagonists (Barnaby the cat) and plot structures that heavily replicate recently published formulas in the provided comparison history, specifically matching the pattern of animal name-based titles and similar moral dilemma formats (e.g., Barnaby the Cat and Sammy the Squirrel's Bramble Clue).",
+    "The premise, characters (Pip the Pangolin and Orion the Owl), and structural naming conventions closely duplicate recently published titles and character combinations in the comparison history, such as 'pip the pangolin and the dry-grassland navigation challenge' and 'Orion the Owl and the Silent Comet Ring'.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -106,24 +100,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 7,
+    "generated": 12,
     "script_status_counts": {
-      "no_simple_flags": 7
+      "no_simple_flags": 12
     },
     "renderer_status_counts": {
-      "incompatible": 3,
-      "structurally_eligible": 4
+      "incompatible": 2,
+      "structurally_eligible": 10
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 3,
-      "none": 4
+      "cast_mismatch": 2,
+      "none": 10
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 5,
+      "all_shots_recognized": 10,
       "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 25,
-    "scene_taxonomy_unresolved_shots": 3,
+    "scene_taxonomy_recognized_shots": 43,
+    "scene_taxonomy_unresolved_shots": 5,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
