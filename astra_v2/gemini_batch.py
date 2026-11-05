@@ -31,6 +31,10 @@ def _failure_reason(exc):
             "Invalid beat": "invalid_beat",
             "Invalid beat text": "invalid_beat",
             "Invalid beat visual or narrative role": "invalid_beat",
+            # Exact trusted validator messages only; never persist model text.
+            "Gemini requires exactly four beats": "invalid_beat_count",
+            "Gemini narration needs at least 12 words per beat": "insufficient_beat_narration",
+            "Gemini needs at least three distinct visual types": "insufficient_visual_diversity",
             "Invalid story summary": "invalid_story_summary",
             "Invalid Gemini model": "invalid_model_configuration",
             "Invalid Gemini fallback model": "invalid_model_configuration",
