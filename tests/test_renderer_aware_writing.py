@@ -91,6 +91,21 @@ class RendererAwareWritingTests(unittest.TestCase):
         # The legacy domain rotation remains unchanged for the other callers.
         self.assertIn("Required distinct creative domain:", captured[0]["prompt"])
 
+    def test_prompt_guides_truthful_visual_diversity_without_relabeling(self):
+        aware = capture_prompt(True)[0]
+        prompt = aware["prompt"]
+        self.assertIn("at least THREE DISTINCT visual labels", prompt)
+        self.assertIn("Count the distinct labels before returning JSON", prompt)
+        self.assertIn("Do not simply relabel identical shots", prompt)
+        self.assertIn("rewrite the four-beat storyboard", prompt)
+        self.assertIn("not a substitute for describing the real scene", prompt)
+        self.assertNotIn("at least THREE DISTINCT visual labels",
+                         capture_prompt(False)[0]["prompt"])
+        from astra_v2.openai_creative import VISUALS
+        visual = aware["schema"]["properties"]["beats"]["items"]["properties"]["visual"]
+        self.assertEqual(set(visual["enum"]), VISUALS)
+        self.assertEqual(len(VISUALS), 6)
+
     def test_enabled_domain_is_selected_from_supported_domain_bank(self):
         prompt = capture_prompt(True)[0]["prompt"]
         rot = int(hashlib.sha256(b"").hexdigest()[:8], 16)
