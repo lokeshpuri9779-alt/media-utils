@@ -8574,6 +8574,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-061eb1b4b87eeedb9069",
+      "video_id": "Vxq54JeDNVA",
+      "confirmed_at": "2026-11-05T17:38:24.909401+00:00",
+      "title": "Finn the Fox and Barnaby the Rabbit and the Woodland Folio",
+      "plot_fingerprint": "547557d562d07bd6444c6bb079841b3ab67f85f17ffe69ca5e17ac524fb9d285",
+      "story_beats": [
+        {
+          "headline": "The Disputed Folio",
+          "speech": "Finn the fox holds the worn leather book tightly, claiming its glowing pages contain secret potion spells.",
+          "visual": "forest",
+          "label": "Folio Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "In the lush forest clearing, Finn the bright orange fox with white-tipped tail and large pointed ears stands upright, wearing a small green waistcoat. Finn holds a weathered leather book with golden leaf patterns on the cover. Next to him, Barnaby the fluffy cream-colored rabbit with long floppy ears and a blue neckerchief points a paw at the pages. Soft afternoon sunlight filters through tall oak trees onto the mossy ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Interpretations",
+          "speech": "Barnaby the rabbit opens a fresh flower beneath the canopy, proving the text is simply about botany.",
+          "visual": "signal",
+          "label": "Flower Test",
+          "story_beat": "build",
+          "visual_prompt": "In the lush forest clearing, Barnaby the cream-colored rabbit wearing a blue neckerchief holds up a bright yellow woodland flower next to the open book resting on a flat tree stump. Finn the orange fox stands beside him with ears perked forward in curiosity, gazing at the flower petals. Soft golden light highlights the detailed texture of the flower and the inked pages of the book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Planting the Clue",
+          "speech": "Finn places the seed into the rich soil while Barnaby carefully marks the spot with a small wooden key.",
+          "visual": "door",
+          "label": "The Planting",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush forest clearing, Finn the orange fox with a green waistcoat kneels on the damp earth, pressing a small seed into a fresh patch of soil. Barnaby the cream-colored rabbit stands beside him, holding a small metal key used as a garden marker near the freshly turned dirt. The open book rests on a nearby mossy rock under the shade of a ferns.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Luminous Sprout",
+          "speech": "The seedling blooms instantly into a radiant blossom, combining magical light and practical botany.",
+          "visual": "forest",
+          "label": "Shared Truth",
+          "story_beat": "payoff",
+          "visual_prompt": "In the lush forest clearing at twilight, Finn the orange fox and Barnaby the cream-colored rabbit sit side by side on the mossy ground, looking down at a newly sprouted flower that emits a warm, magical golden glow. The weathered book lies open nearby, reflecting the soft light onto both smiling animal faces as fireflies drift through the dim background trees.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
