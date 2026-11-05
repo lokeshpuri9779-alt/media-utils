@@ -17,6 +17,7 @@ ROOT = Path('/tmp/astra-sdxl-int8')
 GIB = 1024 ** 3
 ONE_IMAGE_SEED = 42
 ONE_IMAGE_STEPS = 20
+INFERENCE_STAGES = ('inference', 'decode')
 ONE_IMAGE_PROMPT = ('One red toy fire engine, one vehicle only, centered in a single '
     'side-view composition on a white studio background, fully visible, '
     'with attached wheels and one roof ladder.')
@@ -53,7 +54,52 @@ def time_budget(one_image=False, performance_probe=False, slow_review=False):
     return (450 if performance_probe else 900), 1200
 
 
-def image_budget_callback(save_report, started, clock=time.monotonic, inference_limit=900):
+def prepare_decode(pipeline, latents):
+    """Checkpoint the final latent and release compiled models no longer needed."""
+    import gc
+    import numpy as np
+    import psutil
+
+    array = latents.detach().cpu().numpy()
+    if array.shape != (1, 4, 128, 128) or array.dtype != np.float32 or not np.isfinite(array).all():
+        raise ValueError('Unexpected final SDXL latent')
+    OUT.mkdir(parents=True, exist_ok=True)
+    location = OUT / 'denoised-latents.npy'
+    temporary = OUT / 'denoised-latents.npy.tmp'
+    with temporary.open('wb') as handle:
+        np.save(handle, array, allow_pickle=False)
+    temporary.replace(location)
+    save('denoised-latents.json', {
+        'file': location.name, 'sha256': hashlib.sha256(location.read_bytes()).hexdigest(),
+        'model': MODEL, 'revision': REVISION, 'seed': ONE_IMAGE_SEED,
+        'steps_completed': ONE_IMAGE_STEPS, 'shape': list(array.shape), 'dtype': str(array.dtype),
+        'scaling': 'raw_scheduler_output_unscaled',
+        'run_id': os.getenv('GITHUB_RUN_ID'), 'commit': os.getenv('GITHUB_SHA'),
+        'images_generated': 0, 'approved': False, 'production_ready': False,
+        'published': False, 'manual_visual_review_required': True})
+
+    # The pipeline's normal VAE decode/scaling/postprocessing remain untouched.
+    # Optimum 2.2.0 clear_requests() releases the compiled request, not the IR model.
+    stage('decode')
+    process = psutil.Process()
+    before = process.memory_info().rss
+    released = []
+    for name in ('unet', 'text_encoder', 'text_encoder_2', 'vae_encoder'):
+        component = getattr(pipeline, name, None)
+        if component is not None:
+            component.clear_requests()
+            released.append(name)
+    gc.collect()
+    save('decode-memory.json', {
+        'status': 'unused_compiled_requests_released', 'components': released,
+        'worker_rss_before_bytes': before, 'worker_rss_after_bytes': process.memory_info().rss,
+        'measurement': 'current worker RSS; supervisor still enforces process-tree RSS',
+        'approved': False, 'production_ready': False, 'published': False,
+        'manual_visual_review_required': True})
+
+
+def image_budget_callback(save_report, started, clock=time.monotonic, inference_limit=900,
+                          on_denoised=None):
     """Keep the 20-step call intact; reject a slow run before decoding."""
     previous = started
     intervals = []
@@ -77,6 +123,12 @@ def image_budget_callback(save_report, started, clock=time.monotonic, inference_
                 'manual_visual_review_required': True})
             if not within_budget:
                 raise RuntimeError('inference_budget_exceeded')
+        if step_index == ONE_IMAGE_STEPS - 1 and on_denoised is not None:
+            save_report('denoising.json', {
+                'completed_steps': ONE_IMAGE_STEPS, 'elapsed_seconds': now - started,
+                'approved': False, 'production_ready': False, 'published': False,
+                'manual_visual_review_required': True})
+            on_denoised(pipeline, payload['latents'])
         return payload
     return callback
 
@@ -196,7 +248,8 @@ def worker(one_image=False, performance_probe=False, slow_review=False):
             negative_original_size=size, negative_target_size=size,
             negative_crops_coords_top_left=crop,
             latents=noise, output_type='pil',
-            callback_on_step_end=image_budget_callback(save, started, inference_limit=inference_limit),
+            callback_on_step_end=image_budget_callback(save, started, inference_limit=inference_limit,
+                                                       on_denoised=prepare_decode),
             callback_on_step_end_tensor_inputs=['latents'])
         if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
             raise ValueError('Expected exactly one 1024x1024 diagnostic image')
@@ -283,7 +336,7 @@ def supervise(one_image=False, performance_probe=False, slow_review=False):
                 current = 'startup'
             if current in ('load', 'compile') and load_started is None:
                 load_started = time.monotonic()
-            if current == 'inference' and inference_started is None:
+            if current in INFERENCE_STAGES and inference_started is None:
                 inference_started = time.monotonic()
             try:
                 root = psutil.Process(process.pid)
@@ -294,7 +347,7 @@ def supervise(one_image=False, performance_probe=False, slow_review=False):
             now = time.monotonic()
             reason = limit_reason(rss, available_memory(), now - started,
                 now - load_started if current in ('load', 'compile') and load_started is not None else None,
-                now - inference_started if current == 'inference' and inference_started is not None else None,
+                now - inference_started if current in INFERENCE_STAGES and inference_started is not None else None,
                 inference_limit=inference_limit, overall_limit=overall_limit)
             if reason:
                 os.killpg(process.pid, signal.SIGKILL)
