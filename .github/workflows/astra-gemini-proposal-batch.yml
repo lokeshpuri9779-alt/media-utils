@@ -148,9 +148,14 @@ jobs:
             --input runtime-health/gemini-proposals.json \
             --audit runtime-health/ai-batch-review-audit.json \
             --output "$STATE_DIR/gemini-deferred-review-archive.json"
+          ASTRA_UNIFIED_STORY_ENGINE=1 python -m astra_v2.gemini_deferred_triage \
+            --archive "$STATE_DIR/gemini-deferred-review-archive.json" \
+            --publisher-state astra_v2_state.json \
+            --story-history astra_story_history.json \
+            --output "$STATE_DIR/gemini-deferred-triage.json"
           (
             cd "$STATE_DIR"
-            git add gemini-deferred-review-archive.json
+            git add gemini-deferred-review-archive.json gemini-deferred-triage.json
             git diff --cached --quiet || {
               git commit -m "Archive unapproved Gemini drafts deferred by reviewer outage"
               git push origin HEAD:refs/heads/astra-state
