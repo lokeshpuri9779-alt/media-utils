@@ -8623,6 +8623,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-355bca03c37b0af5893e",
+      "video_id": "hw9aX1uvxMg",
+      "confirmed_at": "2026-11-05T20:55:01.651533+00:00",
+      "title": "Pip the Mouse and Clover the Rabbit's Midnight Library Promise",
+      "plot_fingerprint": "b7631a307af7d0a5c27fb67dc9dba2483ec5538273944e8fd6d6e1851df30eaf",
+      "story_beats": [
+        {
+          "headline": "The Glowing Discovery",
+          "speech": "Look at this mysterious book resting upon the dusty reading table under the pale moonlight.",
+          "visual": "signal",
+          "label": "Reveal Beat",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the tiny brown mouse and Clover the fluffy white rabbit stand beside a large open book on a polished oak table inside a moonlit library, staring at the glowing pages.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Whisper",
+          "speech": "I want to read the secret words out loud to you right now before the night ends.",
+          "visual": "forest",
+          "label": "Build Beat",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse opens his mouth to speak excitedly, pointing a tiny paw at the book while Clover the rabbit holds up a warning paw to remind him of the silence rule.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Silent Gesture",
+          "speech": "Let us point our paws at the pictures together instead of breaking our midnight promise of quiet.",
+          "visual": "door",
+          "label": "Mechanism Beat",
+          "story_beat": "mechanism",
+          "visual_prompt": "Clover the rabbit slides the heavy book slightly across the wooden table toward Pip, pressing her index finger gently against the printed illustration to share its meaning silently.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Page",
+          "speech": "We understand the grand adventure perfectly through silent teamwork and keep the library peaceful.",
+          "visual": "signal",
+          "label": "Payoff Beat",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse and Clover the rabbit sit side by side on the reading bench, looking down contentedly at the open book while holding a small brass key together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
