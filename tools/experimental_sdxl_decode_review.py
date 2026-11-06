@@ -216,8 +216,42 @@ def worker():
         'decode_seconds': decode_seconds, 'worker_elapsed_seconds': time.monotonic() - started})
 
 
-def supervise():
+def run_bounded_worker(out, module, timed_stage):
+    """Supervise an isolated review worker under the run-76 CPU memory limits."""
     import psutil
+    started = time.monotonic()
+    peaks = {}
+    load_started = operation_started = None
+    reason = None
+    with (out / 'worker.log').open('w') as log:
+        process = subprocess.Popen([sys.executable, '-m', module, '--worker'],
+            stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        while process.poll() is None:
+            current = json.loads((out / 'stage.json').read_text())['stage'] if (out / 'stage.json').exists() else 'startup'
+            now = time.monotonic()
+            if current == 'load' and load_started is None:
+                load_started = now
+            if current == timed_stage and operation_started is None:
+                operation_started = now
+            try:
+                root = psutil.Process(process.pid)
+                rss = sum(p.memory_info().rss for p in [root] + root.children(recursive=True) if p.is_running())
+            except psutil.NoSuchProcess:
+                rss = 0
+            peaks[current] = max(peaks.get(current, 0), rss)
+            reason = limit_reason(rss, available_memory(), now - started,
+                now - load_started if current == 'load' and load_started is not None else None,
+                now - operation_started if operation_started is not None else None,
+                inference_limit=900, overall_limit=1200)
+            if reason:
+                os.killpg(process.pid, signal.SIGKILL)
+                break
+            time.sleep(0.2)
+        code = process.wait()
+    return code, reason, time.monotonic() - started, peaks
+
+
+def supervise():
     if OUT.exists() and any(OUT.iterdir()):
         raise RuntimeError('Output directory already contains a prior attempt')
     OUT.mkdir(parents=True, exist_ok=True)
@@ -229,39 +263,13 @@ def supervise():
         'peak_rss_bytes_by_stage': {},
         'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
     save('report.json', {**report, 'status': 'started'})
-    started = time.monotonic()
-    load_started = decode_started = None
-    reason = None
-    with (OUT / 'worker.log').open('w') as log:
-        process = subprocess.Popen([sys.executable, '-m', 'tools.experimental_sdxl_decode_review', '--worker'],
-            stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
-        while process.poll() is None:
-            current = json.loads((OUT / 'stage.json').read_text())['stage'] if (OUT / 'stage.json').exists() else 'startup'
-            now = time.monotonic()
-            if current == 'load' and load_started is None:
-                load_started = now
-            if current == 'decode' and decode_started is None:
-                decode_started = now
-            try:
-                root = psutil.Process(process.pid)
-                rss = sum(p.memory_info().rss for p in [root] + root.children(recursive=True) if p.is_running())
-            except psutil.NoSuchProcess:
-                rss = 0
-            report['peak_rss_bytes_by_stage'][current] = max(report['peak_rss_bytes_by_stage'].get(current, 0), rss)
-            reason = limit_reason(rss, available_memory(), now - started,
-                now - load_started if current == 'load' and load_started is not None else None,
-                now - decode_started if decode_started is not None else None,
-                inference_limit=900, overall_limit=1200)
-            if reason:
-                os.killpg(process.pid, signal.SIGKILL)
-                break
-            time.sleep(0.2)
-        code = process.wait()
+    code, reason, elapsed, peaks = run_bounded_worker(OUT, 'tools.experimental_sdxl_decode_review', 'decode')
+    report['peak_rss_bytes_by_stage'] = peaks
     result = json.loads((OUT / 'worker-result.json').read_text()) if (OUT / 'worker-result.json').exists() else {}
     success = (code == 0 and result.get('status') == 'decode_completed_review_only'
                and (OUT / 'reference-vae.png').exists() and (OUT / 'comparison.json').exists())
     report.update(status=reason or ('decode_completed_review_only' if success else 'worker_failed'),
-                  worker_exit_code=code, elapsed_seconds=time.monotonic() - started,
+                  worker_exit_code=code, elapsed_seconds=elapsed,
                   images_generated=1 if success else 0)
     save('report.json', report)
     print(json.dumps({**report, **GUARDS}, indent=2))

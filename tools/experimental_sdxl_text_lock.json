@@ -1,0 +1,190 @@
+{
+  "export": {
+    "scheduler/scheduler_config.json": [
+      676,
+      "042a1410e49afa22f2baefef1ebf7d10bc76decd73345d2edc79bd436091ee3d"
+    ],
+    "text_encoder/config.json": [
+      627,
+      "6718bf3654cf22fbd6e59babfeb3eff2f8b6b62e4c709859ea4637b73013b7be"
+    ],
+    "text_encoder/openvino_model.bin": [
+      123822587,
+      "bf47ff8daef7300e30c0199e22edb13ffe3a0730cfa9458f822fa39c5c8b7145"
+    ],
+    "text_encoder/openvino_model.xml": [
+      619237,
+      "3290395c9375e16df51590d1b592a74c14b02fed012f8d1c22e9a420c40bb3a3"
+    ],
+    "text_encoder_2/config.json": [
+      653,
+      "59e5b52aff789715b181b013d2ecd16631dfa0d0b772b61e259bb43307077eaa"
+    ],
+    "text_encoder_2/openvino_model.bin": [
+      697523959,
+      "4b896739fee160c8a4c1c05a9f142521634d9627b6ab1a3805d1bbe1a62af277"
+    ],
+    "text_encoder_2/openvino_model.xml": [
+      1587457,
+      "d1434195dabc16b68e77c044634c8e258804ab3d6243d7ceb1dbf09a69eae0aa"
+    ],
+    "tokenizer/merges.txt": [
+      524619,
+      "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+    ],
+    "tokenizer/special_tokens_map.json": [
+      472,
+      "c4864a9376a8401918425bed71fc14fc0e81f9b59ec45c1cf96cccb2df508eac"
+    ],
+    "tokenizer/tokenizer_config.json": [
+      734,
+      "ef26e72cbecdce464701ab0fc60394601091b2df69d35209a9bbb9e9c9461bd2"
+    ],
+    "tokenizer/vocab.json": [
+      1059962,
+      "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+    ],
+    "tokenizer_2/merges.txt": [
+      524619,
+      "9fd691f7c8039210e0fced15865466c65820d09b63988b0174bfe25de299051a"
+    ],
+    "tokenizer_2/special_tokens_map.json": [
+      460,
+      "f118ab3a983206e4f32583448de6bd6aae4ee21869135cef1f5848a753cdaab6"
+    ],
+    "tokenizer_2/tokenizer_config.json": [
+      885,
+      "b91e0a1eba063043b4ee76bec870f2fa0c12a3ff404155b30e64c77d25c0758f"
+    ],
+    "tokenizer_2/vocab.json": [
+      1059962,
+      "e089ad92ba36837a0d31433e555c8f45fe601ab5c221d4f607ded32d9f7a4349"
+    ],
+    "unet/config.json": [
+      1939,
+      "d042b6f7cfcbc146a99b48b6f5f49826fc71c771cd76baa76d6a5107b2be9d1f"
+    ]
+  },
+  "reference": {
+    "scheduler/scheduler_config.json": [
+      479,
+      "e5bc8421e047838523be7acfb6720f167f7382f6"
+    ],
+    "text_encoder/config.json": [
+      565,
+      "cde352ada4bb95fdad2fc503b8121257cef215a6"
+    ],
+    "text_encoder/model.safetensors": [
+      492265168,
+      "5c3d6454dd2d23414b56aa1b5858a72487a656937847b6fea8d0606d7a42cdbc"
+    ],
+    "text_encoder_2/config.json": [
+      575,
+      "da1848b5ed17b676f021578838f12c4023b86379"
+    ],
+    "text_encoder_2/model.safetensors": [
+      2778702264,
+      "3a6032f63d37ae02bbc74ccd6a27440578cd71701f96532229d0154f55a8d3ff"
+    ],
+    "tokenizer/merges.txt": [
+      524619,
+      "76e821f1b6f0a9709293c3b6b51ed90980b3166b"
+    ],
+    "tokenizer/special_tokens_map.json": [
+      472,
+      "2c2130b544c0c5a72d5d00da071ba130a9800fb2"
+    ],
+    "tokenizer/tokenizer_config.json": [
+      737,
+      "2e8612a429492973fe60635b3f44a28b065cfac0"
+    ],
+    "tokenizer/vocab.json": [
+      1059962,
+      "469be27c5c010538f845f518c4f5e8574c78f7c8"
+    ],
+    "tokenizer_2/merges.txt": [
+      524619,
+      "76e821f1b6f0a9709293c3b6b51ed90980b3166b"
+    ],
+    "tokenizer_2/special_tokens_map.json": [
+      460,
+      "ae0c5be6f35217e51c4c000fd325d8de0294e99c"
+    ],
+    "tokenizer_2/tokenizer_config.json": [
+      725,
+      "a8438e020c4497a429240d6b89e0bf9a6e2ffa92"
+    ],
+    "tokenizer_2/vocab.json": [
+      1059962,
+      "469be27c5c010538f845f518c4f5e8574c78f7c8"
+    ],
+    "unet/config.json": [
+      1680,
+      "c8714c90f0e2409156da42781954416cb7df36af"
+    ]
+  },
+  "expected_ids": {
+    "positive": [
+      49406,
+      637,
+      736,
+      5988,
+      1769,
+      5857,
+      267,
+      637,
+      5299,
+      1033,
+      267,
+      24584,
+      530,
+      320,
+      2688,
+      1145,
+      268,
+      1093,
+      17510,
+      525,
+      320,
+      1579,
+      3155,
+      5994,
+      267,
+      2401,
+      8626,
+      267,
+      593,
+      11038,
+      8025,
+      537,
+      637,
+      6449,
+      16637,
+      269,
+      49407
+    ],
+    "negative": [
+      49406,
+      1047,
+      267,
+      4160,
+      267,
+      2709,
+      267,
+      2505,
+      2110,
+      267,
+      5750,
+      267,
+      21977,
+      267,
+      561,
+      6528,
+      8025,
+      267,
+      3423,
+      16637,
+      49407
+    ]
+  }
+}
