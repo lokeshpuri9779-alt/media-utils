@@ -8822,6 +8822,58 @@
       "central_conflict": "The festival's traditional brass horn is missing right before the celebration, leaving the gathering completely silent.",
       "decisive_choice": "Ollie stops searching the crowd and instead tests a large ribbed seashell against the ocean breeze.",
       "resolution": "The seashell captures the coastal wind and sounds a resonant note that fills the cove, saving the anniversary celebration."
+    },
+    {
+      "content_id": "rayvan-gemini-61a5f06360f49b21536c",
+      "video_id": "3PUknvZpQLE",
+      "confirmed_at": "2026-11-06T08:50:13.526288+00:00",
+      "title": "Bram and the Overgrown Bramble Barrier",
+      "plot_fingerprint": "e535d388ceee15922b821a65e280db774c74bad450efa6c834df7f9fa17ef0fb",
+      "story_beats": [
+        {
+          "headline": "Blocked Pathway",
+          "speech": "Oh dear, these thorny brambles have completely blocked our passage to the upper orchard today.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Bram the brown squirrel standing in a sunlit pine forest looking at tangled brambles holding a brass key.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Locked Gate",
+          "speech": "We must open this old wooden gate quickly before the evening shadows start to stretch across the path.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Bram the brown squirrel inserting a small brass key into a mossy wooden garden gate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clearing the Vines",
+          "speech": "Let us carefully remove these heavy green vines so the sunlight can reach the delicious berries below.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bram the brown squirrel holding a brass lantern near a glowing beacon post in the deep forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clear Path",
+          "speech": "Look how beautifully the path opens up for everyone to travel safely toward the sweet orchard harvest.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram the brown squirrel smiling beside a wide open woodland trail with a lit lantern resting on a flat stone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Thick thorny vines block the passage to the high orchard fruit trees.",
+      "decisive_choice": "Bram cuts the main vine root instead of climbing over.",
+      "resolution": "The path opens fully and provides a safe route to the upper orchard."
     }
   ]
 }
