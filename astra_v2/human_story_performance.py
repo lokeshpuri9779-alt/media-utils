@@ -434,6 +434,41 @@ def _city_power(draw, t):
                                 x+27+k*34,1015-height+27+m*29),fill=col)
 
 
+# Episode 1's blackout must remain VISIBLE after the actual Studio stage
+# camera crop, not only in the uncropped original Pillow source frame.
+# The old x=688..947 skyline was cropped to one window in the late reaction
+# close-up. This original city silhouette stays in the camera's common field.
+BLACKOUT_TOWERS = tuple(
+    (535 + i * 37, 714 + (i % 3) * 17, 565 + i * 37, 836)
+    for i in range(5)
+)
+
+
+def _blackout_skyline(draw, event):
+    """Draw a sequential city power loss; pixel evidence is NOT semantic review."""
+    if (not isinstance(draw, ImageDraw.ImageDraw)
+            or type(event) not in (int, float) or not math.isfinite(event)
+            or not 0 <= event <= 1):
+        raise CreativeReject("Invalid blackout shot canvas or event")
+    lit_buildings = 0
+    for i, (left, top, right, bottom) in enumerate(BLACKOUT_TOWERS):
+        draw.rectangle((left, top, right, bottom), fill=(27, 36, 57),
+                       outline=(83, 105, 126), width=2)
+        illuminated = event < (i + 1) / len(BLACKOUT_TOWERS)
+        lit_buildings += int(illuminated)
+        # Six real illuminated windows per building read as a skyline,
+        # not a single yellow status LED.
+        for row in range(3):
+            for col in range(2):
+                x = left + 5 + 12 * col
+                y = top + 12 + 21 * row
+                draw.rectangle((x, y, x + 7, y + 11),
+                               fill=GOLD if illuminated else (44, 54, 71))
+    return {"buildings": len(BLACKOUT_TOWERS),
+            "lit_buildings": lit_buildings,
+            "verified_visual_semantics": False}
+
+
 def _alternate_city(draw, t, *, progress=1.0):
     """Vacant, starless skyline through the open observatory doorway."""
     draw.polygon(((680,695),(955,695),(981,1164),(667,1164)),
@@ -632,12 +667,9 @@ def draw_human_scene(image, shot, t):
     elif action == "hear_warning":
         _door(d,0.32+0.08*math.sin(t))
         _radio(d,748,1065,t,glow=True,portable=True)
-        # City blackout as an on-screen event, not a static caption.
-        for j in range(5):
-            cx=688+j*57
-            d.rectangle((cx,710,cx+31,812), fill=(27,36,57))
-            if state.event < (j+1)/5:
-                d.rectangle((cx+7,736,cx+21,755),fill=GOLD)
+        # Keep all five blackout towers in the actual late close-up crop.
+        # No text overlay, semantic approval, or replacement media source.
+        _blackout_skyline(d, state.event)
         performer(d,350,872,t,reaching=True,alarm=True)
     elif action == "flee_door":
         openness=max(.08,.76-state.progress*.63)
