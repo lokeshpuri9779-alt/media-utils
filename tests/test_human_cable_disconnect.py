@@ -7,7 +7,8 @@ from PIL import Image, ImageDraw, ImageChops
 from astra_errors import CreativeReject
 from astra_v2.human_action_choreography import ACTION_SEQUENCE, action_state
 from astra_v2.human_cable_disconnect import (
-    RADIO_PORT, unplug_pose, draw_radio_cable_disconnect, draw_wrist_grip_on_plug,
+    RADIO_PORT, unplug_pose, blackout_after_unplug,
+    draw_radio_cable_disconnect, draw_wrist_grip_on_plug,
 )
 from astra_v2.human_story_composition import stage_crop_box
 from astra_v2.human_cinematic_camera import apply_human_camera
@@ -28,12 +29,19 @@ class PhysicalUnplugBeforeBlackoutTests(unittest.TestCase):
     def test_unplugging_is_finished_before_power_loss_begins(self):
         self.assertIn("unplug cable",ACTION_SEQUENCE["hear_warning"][1])
         self.assertEqual(unplug_pose(0)["plug_tip"],RADIO_PORT)
-        self.assertEqual(unplug_pose(.20)["plug_tip"],RADIO_PORT)
-        self.assertEqual(unplug_pose(.44)["disconnection_fraction"],1.)
-        self.assertTrue(unplug_pose(.44)["fully_disconnected"])
-        self.assertGreater(math.dist(unplug_pose(.44)["plug_tip"],RADIO_PORT),60)
-        self.assertEqual(action_state("hear_warning",.45*12,12).event,0.)
-        self.assertGreater(action_state("hear_warning",.50*12,12).event,0.)
+        self.assertEqual(unplug_pose(.04)["plug_tip"],RADIO_PORT)
+        self.assertGreater(unplug_pose(.20)["disconnection_fraction"],.9)
+        self.assertEqual(unplug_pose(.23)["disconnection_fraction"],1.)
+        self.assertTrue(unplug_pose(.23)["fully_disconnected"])
+        self.assertGreater(math.dist(unplug_pose(.23)["plug_tip"],RADIO_PORT),60)
+        # Five city towers: event >= .2 makes the first tower go dark.
+        # The prior encoded MP4 kept all five lit while the subtitles
+        # already said that streetlights were going dark.
+        self.assertLess(blackout_after_unplug(.23),.2)
+        self.assertLess(blackout_after_unplug(.27),.2)
+        self.assertGreaterEqual(blackout_after_unplug(.28),.2)
+        self.assertLess(blackout_after_unplug(.35),.6)
+        self.assertEqual(blackout_after_unplug(.68),1.)
         for p in (0,.1,.23,.33,.44,.55,.9,1):
             self.assertFalse(unplug_pose(p)["narrated_action_visible"]=="verified")
         self.assertEqual(unplug_pose(1)["narrated_action_visible"],"not_verified")
@@ -74,7 +82,7 @@ class PhysicalUnplugBeforeBlackoutTests(unittest.TestCase):
     def test_socket_and_connector_pixels_show_real_separation(self):
         attached=Image.new("RGB",(1080,1920),(23,35,50))
         detached=attached.copy()
-        a=draw_radio_cable_disconnect(ImageDraw.Draw(attached),.1)
+        a=draw_radio_cable_disconnect(ImageDraw.Draw(attached),.01)
         b=draw_radio_cable_disconnect(ImageDraw.Draw(detached),.7)
         self.assertEqual(a["plug_tip"],RADIO_PORT)
         self.assertTrue(b["fully_disconnected"])
@@ -84,6 +92,21 @@ class PhysicalUnplugBeforeBlackoutTests(unittest.TestCase):
         self.assertEqual(draw_wrist_grip_on_plug(
             ImageDraw.Draw(detached),b["grip"],b)["plug_gripped"],True)
         self.assertEqual(b["narrated_action_visible"],"not_verified")
+
+    def test_actual_warning_scene_uses_narration_aligned_blackout_clock(self):
+        shot=pilot_warning()
+        from astra_v2.human_story_performance import _blackout_skyline
+        for p in (.23,.27,.28,.35,.68):
+            frame=Image.new("RGB",(1080,1920),(23,35,50))
+            with patch("astra_v2.human_story_performance._blackout_skyline",
+                       wraps=_blackout_skyline) as skyline:
+                self.assertTrue(draw_human_scene(frame,shot,p*12.))
+            skyline.assert_called_once()
+            actual=skyline.call_args.args[1]
+            self.assertAlmostEqual(actual,blackout_after_unplug(p),places=6)
+        for invalid in (-.01,1.01,float("nan"),float("inf"),None,True,".5"):
+            with self.subTest(invalid=invalid),self.assertRaises(CreativeReject):
+                blackout_after_unplug(invalid)
 
     def test_wrong_hand_invalid_time_and_missing_draw_surface_fail_closed(self):
         for invalid in (-.01,1.01,float("nan"),float("inf"),None,True,".5"):
