@@ -71,3 +71,80 @@ def draw_floorboard_hatch(draw, event):
     # The hinge is a real fixed attachment to the floor, not a moving label.
     draw.ellipse((210, 1176, 234, 1200), fill=(164, 167, 162), outline=(49, 59, 71), width=3)
     return {"hatch_open_fraction": fraction, "verified_semantics": False}
+
+# Source radio socket -> visible cable across the floor -> concealed hatch.
+# Both endpoints are in the same coordinate space as the original Episode 1
+# draw_human_scene. The second (under-floor) segment stays hidden until the
+# hatch opens; the second receiver itself is handled by the performance layer.
+EXPOSED_CABLE = ((750, 1038), (713, 1092), (654, 1141),
+                 (548, 1182), (471, 1168))
+CONCEALED_CABLE = ((471, 1168), (414, 1130), (358, 1110))
+
+
+def _cable_progress_point(path, fraction):
+    """Interpolate along the polyline by physical length, not vertex count."""
+    if type(fraction) not in (int, float) or not math.isfinite(fraction) or not 0 <= fraction <= 1:
+        raise CreativeReject("Invalid floor-cable trace progress")
+    lengths = [math.dist(a, b) for a, b in zip(path, path[1:])]
+    remaining = fraction * sum(lengths)
+    for index, length in enumerate(lengths):
+        if remaining <= length:
+            q = remaining / length if length else 0.
+            a, b = path[index:index + 2]
+            return (round(a[0] + q * (b[0] - a[0])),
+                    round(a[1] + q * (b[1] - a[1])))
+        remaining -= length
+    return path[-1]
+
+
+def draw_floor_cable_trace(draw, attention, event):
+    """Animate following a visible physical cable into the floorboard hatch.
+
+    A moving trace spot conveys inspection; it is NOT evidence that Mara's hand
+    physically followed the wire in the encoded MP4. This remains review-only.
+    """
+    if (not isinstance(draw, ImageDraw.ImageDraw)
+            or any(type(v) not in (int, float) or not math.isfinite(v)
+                   or not 0 <= v <= 1 for v in (attention, event))):
+        raise CreativeReject("Invalid authored floor-cable trace")
+    # The wire has an actual dark sheath and copper core, not just a short gold
+    # overlay that can be mistaken for floor decoration at the Studio zoom.
+    draw.line(EXPOSED_CABLE, fill=(10, 27, 40), width=20, joint="curve")
+    draw.line(EXPOSED_CABLE, fill=(205, 144, 73), width=10, joint="curve")
+    # Grounded socket at the original radio's lower edge.
+    sx, sy = EXPOSED_CABLE[0]
+    draw.rounded_rectangle((sx - 14, sy - 11, sx + 14, sy + 11), radius=5,
+                           fill=(56, 75, 91), outline=(248, 200, 131), width=3)
+
+    # Follow the wire continuously rather than switching on several segments
+    # instantaneously at the floorboard discovery moment.
+    marker = _cable_progress_point(EXPOSED_CABLE, attention)
+    # Use the exact travelled distance to light only the visited wire section.
+    total = sum(math.dist(a, b) for a, b in zip(EXPOSED_CABLE, EXPOSED_CABLE[1:]))
+    target = attention * total
+    lit = [EXPOSED_CABLE[0]]
+    for a, b in zip(EXPOSED_CABLE, EXPOSED_CABLE[1:]):
+        seg = math.dist(a, b)
+        if target >= seg:
+            lit.append(b)
+            target -= seg
+        else:
+            if target > 0:
+                q = target / seg
+                lit.append((round(a[0] + q * (b[0] - a[0])),
+                            round(a[1] + q * (b[1] - a[1]))))
+            break
+    if len(lit) > 1:
+        draw.line(lit, fill=(246, 206, 110), width=7, joint="curve")
+    mx, my = marker
+    draw.ellipse((mx - 13, my - 13, mx + 13, my + 13),
+                 fill=(249, 230, 156), outline=(71, 104, 111), width=4)
+
+    # The continuation into the hidden floor space is disclosed ONLY after
+    # the existing hatch event has progressed and the second radio can appear.
+    revealed = event >= .25
+    if revealed:
+        draw.line(CONCEALED_CABLE, fill=(13, 31, 45), width=18, joint="curve")
+        draw.line(CONCEALED_CABLE, fill=(249, 190, 92), width=9, joint="curve")
+    return {"marker": marker, "underfloor_connection_visible": revealed,
+            "visual_semantics_verified": False}

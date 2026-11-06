@@ -649,13 +649,14 @@ def draw_human_scene(image, shot, t):
         _radio(d,757,945,t)
         # Establish a physical floorboard hatch and progressively expose the
         # lower room. The second receiver appears only after this reveal.
-        from astra_v2.human_floorboard_reveal import draw_floorboard_hatch
+        from astra_v2.human_floorboard_reveal import (
+            draw_floorboard_hatch, draw_floor_cable_trace,
+        )
         draw_floorboard_hatch(d,state.event)
-        # Distinct floor cable connecting radios, read as a traceable object.
-        # Light travels along the cable; the discovery is not present at frame one.
-        path=((751,1039),(718,1158),(540,1185),(373,1108))
-        shown=max(1,round(1+2*state.event))
-        _line(d,path[:shown+1],GOLD,10)
+        # Give the authored act of tracing a physically connected cable its
+        # own visible path and moving inspection cue. The underfloor segment
+        # is still concealed until the existing narrated hatch reveal.
+        draw_floor_cable_trace(d,state.attention,state.event)
         # The narration discovers a SECOND receiver only after following
         # the cable beneath the floor. It must not already be on screen at
         # the start of the beat (observed in decoded Episode 1 MP4 frames).
