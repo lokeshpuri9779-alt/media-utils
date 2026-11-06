@@ -281,7 +281,10 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
                     type(v) not in (int,float) or not math.isfinite(v)
                     for v in right_hand_target)):
             raise CreativeReject("Invalid authored absolute wrist target")
-        local=(float(right_hand_target[0])-x,
+        # The painted shoulder and final exported wrist are based on
+        # shoulder_x, which includes authored acting-cue lean; using x alone
+        # introduced a 7-17px hand-to-cable separation in real render tests.
+        local=(float(right_hand_target[0])-(x+round(lean)),
                float(right_hand_target[1])-y)
         pose=solve_mara_pose(t,reaching=reaching,running=running,
                              carrying=carrying,gesture=gesture,
