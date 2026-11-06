@@ -415,9 +415,13 @@ def make_plan(ch):
         visual_seed = str(ch.get('content_id') or ch.get('title') or '')
         from astra_v2.pillow_scene_direction import story_setting
         first_beat = (ch.get('story_beats') or [{}])[0]
+        # The coarse 'visual' enum is not the authored scene description.
+        # Use the opening beat's actual visual prompt to establish continuity.
         story_location = story_setting({'speech': str(first_beat.get('speech') or ''),
-                                        'visual_prompt': str(first_beat.get('visual') or ''),
+                                        'visual_prompt': str(first_beat.get('visual_prompt')
+                                                             or first_beat.get('visual') or ''),
                                         'story_environment': str(ch.get('story_environment') or '')})
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
         from astra_v2.directed_scene_contract import named_human_characters
         named_humans = named_human_characters(ch.get("visual_bible"))
         unified_mode = os.environ.get("ASTRA_UNIFIED_STORY_ENGINE", "0") == "1"
@@ -459,8 +463,16 @@ def make_plan(ch):
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            # Keep the authored opening location unless a beat explicitly names another.
-            shot.setdefault('story_environment', story_location)
+            # A beat with its own explicit visual location must not inherit
+            # the opening backdrop. Use the exact taxonomy that the pack
+            # compositor and review-only scene preflight already share.
+            # Explicit per-shot story_environment remains authoritative;
+            # unknown shot locations retain the opening-story fallback.
+            if not shot.get('story_environment'):
+                scene_hint = analyze_story_scene({
+                    'visual_prompt': str(shot.get('visual_prompt') or '')
+                })['scene']
+                shot['story_environment'] = scene_hint or story_location
             if unified_mode:
                 if not fixed_cast:
                     # The narration and visual prompt can introduce a new
