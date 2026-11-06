@@ -67,6 +67,28 @@ class HumanStoryChoreographyTests(unittest.TestCase):
                             pic.crop(region), reference.crop(region)).getbbox(),
                             "Action overlapped headline or caption-safe region")
 
+    def test_pilot_second_radio_is_hidden_until_narrated_discovery(self):
+        # Regression from the real Episode 1 MP4: the second radio was already
+        # visible at ~16.4s, before its narrated reveal at ~22s.
+        from unittest.mock import patch
+        from astra_v2.human_story_performance import draw_human_scene, _radio
+        beat = next(shot for shot in records()
+                    if shot["story_human_action"] == "trace_cable")
+        seen = []
+        for progress in (.12, .49, .62, .88):
+            canvas = Image.new("RGB", (1080, 1920), (13, 22, 37))
+            with patch("astra_v2.human_story_performance._radio",
+                       wraps=_radio) as calls:
+                self.assertTrue(draw_human_scene(canvas, beat, progress * DURATION))
+            radios = [(call.args[1], call.args[2]) for call in calls.call_args_list]
+            self.assertIn((757, 945), radios)
+            seen.append(radios)
+        self.assertEqual([len(radios) for radios in seen], [1, 1, 2, 2])
+        self.assertNotIn((342, 1109), seen[0])
+        self.assertNotIn((342, 1109), seen[1])
+        self.assertIn((342, 1109), seen[2])
+        self.assertIn((342, 1109), seen[3])
+
     def test_break_glass_key_reveals_two_halves_after_setup(self):
         beat = next(shot for shot in records()
                     if shot["story_human_action"] == "split_glass_key")
