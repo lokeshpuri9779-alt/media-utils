@@ -42,9 +42,12 @@ DIRECTED_SHOTS={
 # constrained before final encoding.
 CRITICAL_HORIZONTAL_SPANS={
     "discover_radio": (275,880),
-    "trace_cable": (490,919),
-    "hear_warning": (260,450),
-    "flee_door": (190,510),
+    # The actual decoded pilot lost the second receiver, the city blackout
+    # lights and the closing door at later narration times. Preserve the
+    # entire on-screen narrative prop span as well as the performer.
+    "trace_cable": (245,919),     # discovered receiver at x~252; primary at x~870
+    "hear_warning": (255,950),    # Mara plus five city streetlight panels
+    "flee_door": (190,1007),      # Mara plus physical far edge of door
     "guard_knocking_door": (275,938),
     "inspect_generator_clue": (282,973),
     "inspect_future_photograph": (237,905),
