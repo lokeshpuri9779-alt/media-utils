@@ -9076,6 +9076,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-1748550647231b965750",
+      "video_id": "2JyMXrCsyHg",
+      "confirmed_at": "2026-11-06T23:41:48.835616+00:00",
+      "title": "Buster the Dog and Pip the Mouse and the Shared Ball",
+      "plot_fingerprint": "90b921d9fdb76f6981b2ce7ee9cc269ebfbdf98eeee47a88f4237f797304eecf",
+      "story_beats": [
+        {
+          "headline": "The Village Match Begins",
+          "speech": "Look at how fast the ball rolls across the village square today, ready for our big game.",
+          "visual": "door",
+          "label": "Village Square Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "In the sunny village square outdoors, Buster the shaggy brown dog and Pip the tiny gray mouse stand near a rustic wooden door, holding a bright red ball together with joyful expressions under clear daylight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rival Stumbles",
+          "speech": "Our competitor ahead has tripped over a stray pebble right before reaching the final goal post.",
+          "visual": "forest",
+          "label": "Village Pathway",
+          "story_beat": "build",
+          "visual_prompt": "On the dusty village pathway bordered by green forest trees, Buster the shaggy brown dog and Pip the tiny gray mouse pause their run, staring in surprise at a fallen competitor who dropped a small wooden stick.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Choice to Help",
+          "speech": "We must leave the winning line right now and use our shared ball to assist them.",
+          "visual": "signal",
+          "label": "Path Marker Signal",
+          "story_beat": "mechanism",
+          "visual_prompt": "Along the village pathway marked by a painted wooden signal post, Buster the shaggy brown dog and Pip the tiny gray mouse gently nudge the bright red ball toward the fallen rival to help them stand up.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Shared Victory",
+          "speech": "True friendship wins every time when we share our games and lift each other up together.",
+          "visual": "planet",
+          "label": "Village Celebration",
+          "story_beat": "payoff",
+          "visual_prompt": "In the vibrant village square beneath a colorful festival banner strung overhead, Buster the shaggy brown dog, Pip the tiny gray mouse, and their rival happily pass the bright red ball together in a circle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
