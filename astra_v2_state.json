@@ -3,7 +3,7 @@
   "day": "2026-11-06",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 7,
-  "confirmed_today": 6,
+  "confirmed_today": 7,
   "last_attempt_at": "2026-11-06T17:43:33.390680+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -10018,16 +10018,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "lpb6L0Xb-QQ": {
-      "content_id": "rayvan-gemini-30fc094e10cff7112999",
+    },
+    "rayvan-gemini-30fc094e10cff7112999": {
+      "video_id": "lpb6L0Xb-QQ",
+      "confirmed_at": "2026-11-06T17:45:12.245729+00:00",
       "title": "Tansy the Tapir and the Changing Meadow Blossoms",
-      "day": "2026-11-06",
-      "uploaded_at": "2026-11-06T17:43:34.933386+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-06T17:43:34.933386+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "2e356dddddd1053b903bfb57a12846ab15bcca5b937d1d2194339ae6300fb8d6",
       "story_beats": [
@@ -10072,31 +10070,31 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-06T17:42:35.311352+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-06T17:45:11.614847+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-06T17:43:35.286023+00:00",
+    "at": "2026-11-06T17:45:12.349829+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-06T09:08:57.583833+00:00",
   "reserved": {
@@ -20792,10 +20790,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-06T17:43:35.285945+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-06T17:45:12.349740+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -20803,9 +20801,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-06T17:43:35.286008+00:00",
+    "at": "2026-11-06T17:45:12.349814+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -20817,22 +20815,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-06T17:43:35.285057+00:00",
-    "preflight_due": "true",
+    "at": "2026-11-06T17:45:12.348902+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-06T17:43:35.285859+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
-    "publish_step": "success",
-    "selection_source": "preload_artifact",
+    "at": "2026-11-06T17:45:12.349659+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }

@@ -8929,6 +8929,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-30fc094e10cff7112999",
+      "video_id": "lpb6L0Xb-QQ",
+      "confirmed_at": "2026-11-06T17:45:12.245729+00:00",
+      "title": "Tansy the Tapir and the Changing Meadow Blossoms",
+      "plot_fingerprint": "2e356dddddd1053b903bfb57a12846ab15bcca5b937d1d2194339ae6300fb8d6",
+      "story_beats": [
+        {
+          "headline": "The Fading Petals",
+          "speech": "Tansy paused near the sunlit clearing, wondering why the twin blossoms had shifted from deep indigo to pale lavender so suddenly today.",
+          "visual": "forest",
+          "label": "sunlit meadow clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy the tapir standing in a lush green forest clearing, staring curiously at two pale lavender flower props growing in the soft dirt, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing the Blooms",
+          "speech": "She knelt in the soft green moss to hold a single fresh flower close to the fading ones, checking for any hidden soil deficiency.",
+          "visual": "signal",
+          "label": "flower comparison spot",
+          "story_beat": "build",
+          "visual_prompt": "Tansy the tapir kneeling in a green forest environment, holding a single bright flower prop up next to the two planted flower props to compare their colors.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Soil",
+          "speech": "Pressing a small metal wrench into the damp earth beside the roots, she uncovered a blocked channel keeping vital water away.",
+          "visual": "robot",
+          "label": "earth digging area",
+          "story_beat": "mechanism",
+          "visual_prompt": "Tansy the tapir crouching in a green forest setting, holding a small metal wrench prop near the roots of the flower props while examining the turned-up soil.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Restored Meadow",
+          "speech": "Cool water rushed into the roots immediately, causing the twin blossoms to brighten back into their rich indigo glory as Tansy smiled.",
+          "visual": "forest",
+          "label": "restored blossom patch",
+          "story_beat": "payoff",
+          "visual_prompt": "Tansy the tapir standing proudly in the green forest setting, looking down at the two flower props which now display vibrant indigo petals, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
