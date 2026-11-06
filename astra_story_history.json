@@ -9027,6 +9027,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-8e83701d224681001c03",
+      "video_id": "WtsrVNw4b2c",
+      "confirmed_at": "2026-11-06T22:25:31.815852+00:00",
+      "title": "Barnaby the Rabbit and the Orchard Gate Key",
+      "plot_fingerprint": "015b54a97c7b5a3daf10d62800ccf5f9a39ae5fef906379a4f0a48ab1222b3c1",
+      "story_beats": [
+        {
+          "headline": "The Locked Orchard",
+          "speech": "Oh dear, the gate is securely locked, and the sweet pears are waiting just beyond the heavy wooden planks.",
+          "visual": "door",
+          "label": "Locked Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the brown rabbit stands in front of a rustic wooden door in a sunlit village square, looking up with a sad expression, holding a small brass key in his imagination.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Stacking Plan",
+          "speech": "If I place this sturdy wooden box directly beneath the stone wall, I can safely climb up to reach the hidden ledge.",
+          "visual": "signal",
+          "label": "Preparation",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the brown rabbit pushes a small wooden box across cobblestone ground toward a weathered stone wall under a bright midday sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reach for the Key",
+          "speech": "Stretching just a little bit further with my paws will allow me to grasp the shiny iron key hanging on the peg.",
+          "visual": "robot",
+          "label": "Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the brown rabbit stands upright on top of the wooden box next to the stone wall, stretching his front paws upward toward a key resting on a stone ledge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harvest Unlocked",
+          "speech": "The latch turns smoothly at last, opening the grand orchard gate so all our village friends can share the autumn harvest.",
+          "visual": "forest",
+          "label": "Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the brown rabbit stands smiling proudly inside an open wooden orchard gate, holding a shiny key while lush green trees and ripe fruit hang in the background.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
