@@ -14,7 +14,11 @@ from astra_errors import CreativeReject
 # The boarded trapdoor sits beside the visible cable end and the authored
 # second radio (center 342, 1109). Keep all geometry in the middle scene stage.
 OPENING = ((238, 1078), (468, 1078), (500, 1190), (217, 1190))
-LIFTED_BOARD = ((166, 947), (249, 985), (225, 1185), (178, 1166))
+# Rotate around the FAR edge of the cavity. The original leftward-open
+# panel left the camera crop in the decoded MP4 despite passing pixel tests.
+# Raising the near edge toward the back of the set leaves a visibly upright
+# wooden hatch IN the approved Stage close-up, behind the delayed second radio.
+LIFTED_BOARD = ((238, 1078), (468, 1078), (468, 840), (238, 840))
 WOOD = (106, 76, 57)
 WOOD_GRAIN = (162, 122, 84)
 VOID = (11, 24, 37)
