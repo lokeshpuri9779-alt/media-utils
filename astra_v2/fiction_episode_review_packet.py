@@ -123,6 +123,11 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                 "narrated_action_visible": "not_verified",
                 "character_and_prop_fidelity": "not_verified",
             })
+    # Never overwrite an existing index or create a packet when it would
+    # fail to create the matching frame evidence index.
+    index_path = output_path.with_name("review-frame-index.json")
+    if frame_rows is not None and index_path.exists():
+        raise ValueError("frame_index_already_exists")
     # Reuse the existing fail-closed reviewer packet format only after all
     # requested evidence files have been checked. It never grants approval.
     result = write_packet(source, receipt, contact_manifest, output_path,
@@ -139,9 +144,6 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
             "publication_approval": False,
             "publication_triggered": False,
         }
-        index_path = output_path.with_name("review-frame-index.json")
-        if index_path.exists():
-            raise ValueError("frame_index_already_exists")
         index_path.write_text(json.dumps(evidence, indent=2) + "\n",
                               encoding="utf-8")
     return result
