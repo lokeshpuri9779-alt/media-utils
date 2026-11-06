@@ -10,8 +10,28 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from PIL import Image
 
 from astra_v2.story_visual_review_packet import snapshot, write_packet
+
+MAX_DECODED_PNG_BYTES = 15_000_000
+
+
+def _decoded_frame_sha256(path):
+    """Accept real 1080x1920 decoded PNGs, never arbitrary renamed files."""
+    image = Path(path)
+    if not image.is_file() or image.is_symlink():
+        raise ValueError("missing_actual_decoded_frame")
+    if not 0 < image.stat().st_size <= MAX_DECODED_PNG_BYTES:
+        raise ValueError("oversized_actual_decoded_frame")
+    try:
+        with Image.open(image) as frame:
+            if frame.format != "PNG" or frame.size != (1080, 1920):
+                raise ValueError("invalid_actual_decoded_png")
+            frame.verify()
+    except (OSError, ValueError) as exc:
+        raise ValueError("invalid_actual_decoded_png") from exc
+    return _hash(image)
 
 
 def _hash(path):
@@ -84,19 +104,30 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                 ("late", f"temporal-beat-{i:02d}-late.png"),
             ):
                 file = root / filename
-                if not file.is_file() or file.stat().st_size == 0:
-                    raise ValueError("missing_actual_decoded_frame")
                 images[label] = {
                     "filename": filename,
-                    "sha256": _hash(file),
+                    "sha256": _decoded_frame_sha256(file),
                 }
+            # This compares storyboard and Studio METADATA, not any pixels.
+            # Keep the generic motion label separate from the authored human
+            # choreography so reviewers do not mistake "idle" for the script.
+            action_context = source["beats"][i - 1]
             frame_rows.append({
                 "beat": i, "narration_midpoint_seconds": midpoint,
                 "planned_action": str(scene.get("story_human_action") or "")[:100],
+                "generic_studio_action": action_context["planned_action"],
+                "authored_human_action": action_context["authored_human_action"],
+                "planned_human_action": action_context["planned_human_action"],
+                "human_action_metadata_status": action_context["human_action_metadata_status"],
                 "actual_decoded_frames": images,
                 "narrated_action_visible": "not_verified",
                 "character_and_prop_fidelity": "not_verified",
             })
+    # Never overwrite an existing index or create a packet when it would
+    # fail to create the matching frame evidence index.
+    index_path = output_path.with_name("review-frame-index.json")
+    if frame_rows is not None and index_path.exists():
+        raise ValueError("frame_index_already_exists")
     # Reuse the existing fail-closed reviewer packet format only after all
     # requested evidence files have been checked. It never grants approval.
     result = write_packet(source, receipt, contact_manifest, output_path,
@@ -113,9 +144,6 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
             "publication_approval": False,
             "publication_triggered": False,
         }
-        index_path = output_path.with_name("review-frame-index.json")
-        if index_path.exists():
-            raise ValueError("frame_index_already_exists")
         index_path.write_text(json.dumps(evidence, indent=2) + "\n",
                               encoding="utf-8")
     return result

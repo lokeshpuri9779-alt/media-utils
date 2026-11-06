@@ -34,6 +34,17 @@ def _midpoint(shot):
     return round(start + duration / 2, 3)
 
 
+def _human_action_metadata_status(beat, shot):
+    """Compare action IDENTIFIERS only; never infer action visible in MP4."""
+    authored = _text(beat.get("story_human_action"))
+    rendered = _text(shot.get("story_human_action"))
+    if not authored:
+        return "not_declared"
+    if not rendered:
+        return "missing_in_plan"
+    return "matched_in_metadata" if authored == rendered else "mismatch"
+
+
 def snapshot(story, plan=None):
     """Capture an immutable, bounded visual checklist before video encoding."""
     if not isinstance(story, dict) or story.get("genre") != "fiction":
@@ -57,10 +68,21 @@ def snapshot(story, plan=None):
             "beat": i,
             "speech": _text(beat.get("speech")),
             "visual_prompt": _text(beat.get("visual_prompt") or beat.get("visual")),
+            "visual_prompt_provenance": ("authored_visual_prompt"
+                                         if _text(beat.get("visual_prompt"))
+                                         else "fallback_visual_label"),
             "story_beat": _text(beat.get("story_beat")),
             "planned_visual": _text(shot.get("visual") or beat.get("visual")),
             "planned_subject": _text(shot.get("story_subject")),
+            # Generic Studio action (idle/open/pick) and the explicit human
+            # performance cue are different fields. Preserve BOTH for a
+            # reviewer; never silently present idle as the narrated action.
             "planned_action": _text(shot.get("story_action")),
+            "authored_human_actor": _text(beat.get("story_human_actor")),
+            "authored_human_action": _text(beat.get("story_human_action")),
+            "planned_human_actor": _text(shot.get("story_human_actor")),
+            "planned_human_action": _text(shot.get("story_human_action")),
+            "human_action_metadata_status": _human_action_metadata_status(beat, shot),
             "planned_environment": _text(shot.get("story_environment")),
             "planned_midpoint_seconds": _midpoint(shot),
         })
