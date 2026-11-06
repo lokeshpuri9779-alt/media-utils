@@ -8978,6 +8978,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-13979844443c4a1c6504",
+      "video_id": "ygjJ_sRaVvY",
+      "confirmed_at": "2026-11-06T20:12:05.565290+00:00",
+      "title": "Barnaby the Ferret and the Market Spice Spillage",
+      "plot_fingerprint": "1462ec1d7bcef978e74c04e9d8e6e5db4406cf46b7fbcd937c5424f4b9171b41",
+      "story_beats": [
+        {
+          "headline": "The Spice Spill",
+          "speech": "Oh dear, the peppercorn sack has completely burst right across the main trading walkway!",
+          "visual": "door",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Barnaby the ferret stands in a cobblestone market lane looking shocked at a pile of dark peppercorns spilled from a torn canvas sack near a wooden stall door, holding nothing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Tools",
+          "speech": "I must grab this wooden box and a small brush to collect every single loose grain.",
+          "visual": "ship",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ferret stands beside a wooden stall structure shaped like a rustic timber facade, holding a small empty wooden box with both paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sweeping the Lane",
+          "speech": "By guiding the peppercorns gently into the wooden box, the path will soon be clear.",
+          "visual": "robot",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Barnaby the ferret is kneeling on the cobblestone market lane, pushing dark peppercorn grains toward a resting wooden box using steady paw movements.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Clear Path",
+          "speech": "The lane is spotless now, and the morning carts can safely pass through the bazaar.",
+          "visual": "signal",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the ferret stands proudly beside a full wooden box filled with dark peppercorns, pointing a paw toward the clear market lane stretching into the sunlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
