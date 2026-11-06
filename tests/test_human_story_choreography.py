@@ -89,6 +89,64 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertIn((342, 1109), seen[2])
         self.assertIn((342, 1109), seen[3])
 
+    def test_pilot_city_blackout_is_visible_through_actual_stage_camera(self):
+        # The pre-fix source skyline had towers near x=688..947. Studio's
+        # reaction close-up crops at x~27..727, hiding four of five towers.
+        # This checks *the real composed output* rather than raw Pillow art.
+        from PIL import ImageDraw
+        from astra_v2.human_story_performance import (
+            BLACKOUT_TOWERS, _blackout_skyline, draw_human_scene, GOLD,
+        )
+        from astra_v2.human_story_composition import stage_crop_box
+        from astra_v2.human_cinematic_camera import apply_human_camera
+
+        beat = next(shot for shot in records()
+                    if shot["story_human_action"] == "hear_warning")
+        self.assertEqual(len(BLACKOUT_TOWERS), 5)
+        for progress in (.10, .30, .60, .88, .99):
+            with self.subTest(progress=progress):
+                left, top, right, bottom = stage_crop_box(
+                    "hear_warning", progress * DURATION, DURATION)
+                for x0, y0, x1, y1 in BLACKOUT_TOWERS:
+                    self.assertGreaterEqual(x0, left)
+                    self.assertLessEqual(x1, right)
+                    self.assertGreaterEqual(y0, top)
+                    self.assertLessEqual(y1, bottom)
+
+        snapshots = []
+        for progress in (.10, .90):
+            original = Image.new("RGB", (1080, 1920), (13, 22, 37))
+            self.assertTrue(draw_human_scene(original, beat, progress * DURATION))
+            stage = apply_human_camera(original, beat, progress * DURATION)
+            left, top, right, bottom = stage_crop_box(
+                "hear_warning", progress * DURATION, DURATION)
+            colors = []
+            for x0, y0, _, _ in BLACKOUT_TOWERS:
+                # Center of a real skyline-window, *after* camera resampling.
+                src_x, src_y = x0 + 8, y0 + 17
+                x = round((src_x - left) * 1080 / (right - left))
+                y = 480 + round((src_y - top) * 890 / (bottom - top))
+                colors.append(stage.getpixel((x, y)))
+            snapshots.append(colors)
+        early, late = snapshots
+        # At least four distinct lit windows must be visible despite the
+        # actor and camera transform, then turn dark within the shot.
+        self.assertGreaterEqual(sum(c[0] > 180 and c[1] > 125
+                                    for c in early), 4, early)
+        self.assertGreaterEqual(sum(c[0] < 140 and c[1] < 140
+                                    for c in late), 4, late)
+        self.assertNotEqual(early, late)
+
+        for event, expected in ((0.0, 5), (.5, 3), (1.0, 0)):
+            canvas = Image.new("RGB", (1080, 1920))
+            result = _blackout_skyline(ImageDraw.Draw(canvas), event)
+            self.assertEqual(result["lit_buildings"], expected)
+            self.assertFalse(result["verified_visual_semantics"])
+        for bad in (-.1, 1.1, float("nan"), "invalid"):
+            with self.assertRaises(CreativeReject):
+                _blackout_skyline(ImageDraw.Draw(
+                    Image.new("RGB", (1080, 1920))), bad)
+
     def test_break_glass_key_reveals_two_halves_after_setup(self):
         beat = next(shot for shot in records()
                     if shot["story_human_action"] == "split_glass_key")
