@@ -702,11 +702,14 @@ def draw_human_scene(image, shot, t):
         _radio(d,620,1050,t,glow=True,portable=True)
         from astra_v2.human_cable_disconnect import (
             draw_radio_cable_disconnect, draw_wrist_grip_on_plug,
+            blackout_after_unplug,
         )
         unplug=draw_radio_cable_disconnect(d,state.progress)
-        # The unplug is completed by progress=.44, prior to the first city
-        # blackout frame (event starts after progress=.46).
-        _blackout_skyline(d,state.event)
+        # The actual caption introduces dark streetlights ~28% into this
+        # shot. Plug withdrawal finishes at .23; the first tower darkens
+        # ~.28, followed by the remaining buildings as narration continues.
+        # Use the *visible window* cue, not the generic late action event.
+        _blackout_skyline(d,blackout_after_unplug(state.progress))
         actor=performer(d,365,975,t,right_hand_target=unplug["grip"],
                         alarm=True)
         draw_wrist_grip_on_plug(d,actor["right_hand"],unplug)
