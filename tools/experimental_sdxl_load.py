@@ -45,8 +45,10 @@ def selected(name):
         'merges.txt', 'vocab.json', 'tokenizer_config.json', 'special_tokens_map.json')
 
 
-def time_budget(one_image=False, performance_probe=False, slow_review=False):
+def time_budget(one_image=False, performance_probe=False, slow_review=False, reference_image=False):
     """An explicit review-only timebox; normal/probe defaults never expand."""
+    if reference_image and not (one_image and slow_review and not performance_probe):
+        raise ValueError('reference_image requires one_image and slow_review only')
     if slow_review:
         if not one_image or performance_probe:
             raise ValueError('slow_review requires one_image and excludes performance_probe')
@@ -132,8 +134,11 @@ def image_budget_callback(save_report, started, clock=time.monotonic, inference_
         return payload
     return callback
 
-def worker(one_image=False, performance_probe=False, slow_review=False):
-    inference_limit, _ = time_budget(one_image, performance_probe, slow_review)
+def worker(one_image=False, performance_probe=False, slow_review=False, reference_image=False):
+    inference_limit, _ = time_budget(one_image, performance_probe, slow_review, reference_image)
+    if reference_image:
+        from tools.experimental_sdxl_reference_image import load_inputs, render
+        reference_sources = load_inputs()
     stage('download')
     started = time.monotonic()
     url = f'https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true'
@@ -240,8 +245,7 @@ def worker(one_image=False, performance_probe=False, slow_review=False):
                 'packages': {p: importlib.metadata.version(p) for p in
                     ('openvino', 'optimum-intel', 'diffusers', 'transformers', 'torch', 'psutil')}})
             return
-        generated = pipe(
-            ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT,
+        options = dict(
             height=1024, width=1024, num_inference_steps=ONE_IMAGE_STEPS,
             guidance_scale=7.5,
             original_size=size, target_size=size, crops_coords_top_left=crop,
@@ -251,6 +255,10 @@ def worker(one_image=False, performance_probe=False, slow_review=False):
             callback_on_step_end=image_budget_callback(save, started, inference_limit=inference_limit,
                                                        on_denoised=prepare_decode),
             callback_on_step_end_tensor_inputs=['latents'])
+        if reference_image:
+            generated = render(pipe, reference_sources, save, **options)
+        else:
+            generated = pipe(ONE_IMAGE_PROMPT, negative_prompt=ONE_IMAGE_NEGATIVE_PROMPT, **options)
         if len(generated.images) != 1 or generated.images[0].size != (1024, 1024):
             raise ValueError('Expected exactly one 1024x1024 diagnostic image')
         location = OUT / 'sdxl-fixed-seed-42.png'
@@ -258,6 +266,8 @@ def worker(one_image=False, performance_probe=False, slow_review=False):
         timings['inference_seconds'] = time.monotonic() - started
         save('timings.json', timings)
         save('image-review.json', {
+            **({'text_conditioning_run': '42192924660', 'first_prediction_run': '42232753910',
+                'text_conditioning': 'source_fp32_reference'} if reference_image else {}),
             'model': MODEL, 'revision': REVISION, 'seed': ONE_IMAGE_SEED,
             'steps': ONE_IMAGE_STEPS, 'prompt': ONE_IMAGE_PROMPT,
             'negative_prompt': ONE_IMAGE_NEGATIVE_PROMPT,
@@ -297,8 +307,8 @@ def limit_reason(rss, available, elapsed, load_elapsed, inference_elapsed=None, 
         return 'overall_timeout'
     return None
 
-def supervise(one_image=False, performance_probe=False, slow_review=False):
-    inference_limit, overall_limit = time_budget(one_image, performance_probe, slow_review)
+def supervise(one_image=False, performance_probe=False, slow_review=False, reference_image=False):
+    inference_limit, overall_limit = time_budget(one_image, performance_probe, slow_review, reference_image)
     import psutil
     import shutil
     OUT.mkdir(parents=True, exist_ok=True)
@@ -315,6 +325,8 @@ def supervise(one_image=False, performance_probe=False, slow_review=False):
         'limits': {'rss_bytes': 12 * GIB, 'minimum_available_ram_bytes': 2 * GIB,
                    'load_compile_seconds': 600, 'inference_seconds': inference_limit, 'overall_seconds': overall_limit},
         'peak_rss_bytes_by_stage': {}, 'rss_measurement': 'sampled process-tree RSS every 0.2 seconds; shared pages may be counted more than once'}
+    if reference_image:
+        report['mode'] = 'reference_text_single_image'
     save('report.json', {**report, 'status': 'started'})
     started = time.monotonic()
     load_started = None
@@ -328,6 +340,8 @@ def supervise(one_image=False, performance_probe=False, slow_review=False):
             command.append('--one-image')
         if slow_review:
             command.append('--slow-review')
+        if reference_image:
+            command.append('--reference-image')
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         while process.poll() is None:
             try:
@@ -368,7 +382,7 @@ def supervise(one_image=False, performance_probe=False, slow_review=False):
 if __name__ == '__main__':
     if '--worker' in sys.argv:
         worker(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv,
-               slow_review='--slow-review' in sys.argv)
+               slow_review='--slow-review' in sys.argv, reference_image='--reference-image' in sys.argv)
     else:
         raise SystemExit(supervise(one_image='--one-image' in sys.argv, performance_probe='--performance-probe' in sys.argv,
-                                  slow_review='--slow-review' in sys.argv))
+                                  slow_review='--slow-review' in sys.argv, reference_image='--reference-image' in sys.argv))
