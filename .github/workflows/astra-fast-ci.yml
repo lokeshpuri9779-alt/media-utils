@@ -60,6 +60,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_astra_story_asset_preflight.py' -v
           python -m unittest discover -s tests -p 'test_astra_studio_scene_location.py' -v
           python -m unittest discover -s tests -p 'test_pilot_cable_hand_contact.py' -v
+          python -m unittest discover -s tests -p 'test_human_cable_disconnect.py' -v
           python -m unittest discover -s tests -p 'test_human_floorboard_reveal.py' -v
           python -m unittest discover -s tests -p 'test_astra_render_contact_sheet.py' -v
           python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v

@@ -695,11 +695,24 @@ def draw_human_scene(image, shot, t):
         d.arc((hx-23,hy-23,hx+23,hy+23),206,334,fill=(247,203,111),width=5)
     elif action == "hear_warning":
         _door(d,0.32+0.08*math.sin(t))
-        _radio(d,748,1065,t,glow=True,portable=True)
-        # Keep all five blackout towers in the actual late close-up crop.
-        # No text overlay, semantic approval, or replacement media source.
-        _blackout_skyline(d, state.event)
-        performer(d,350,872,t,reaching=True,alarm=True)
+        # The authored line explicitly starts with Mara unplugging the cable.
+        # Keep the receiver and jack inside the same shot as the skyline,
+        # rather than showing only a reaction portrait and an unexplained
+        # blackout. This radio continues to pulse AFTER it is disconnected.
+        _radio(d,620,1050,t,glow=True,portable=True)
+        from astra_v2.human_cable_disconnect import (
+            draw_radio_cable_disconnect, draw_wrist_grip_on_plug,
+            blackout_after_unplug,
+        )
+        unplug=draw_radio_cable_disconnect(d,state.progress)
+        # The actual caption introduces dark streetlights ~28% into this
+        # shot. Plug withdrawal finishes at .23; the first tower darkens
+        # ~.28, followed by the remaining buildings as narration continues.
+        # Use the *visible window* cue, not the generic late action event.
+        _blackout_skyline(d,blackout_after_unplug(state.progress))
+        actor=performer(d,365,975,t,right_hand_target=unplug["grip"],
+                        alarm=True)
+        draw_wrist_grip_on_plug(d,actor["right_hand"],unplug)
     elif action == "flee_door":
         openness=max(.08,.76-state.progress*.63)
         _door(d,openness)

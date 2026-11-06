@@ -16,7 +16,7 @@ from astra_errors import CreativeReject
 ACTION_SEQUENCE = {
     "discover_radio": ("notice cabinet", "approach radio", "tune signal", "read response"),
     "trace_cable": ("inspect first radio", "follow cable", "discover second radio", "compare pulses"),
-    "hear_warning": ("listen to transmission", "hear countdown", "see city blackouts", "turn toward door"),
+    "hear_warning": ("listen to transmission", "unplug cable; countdown continues", "see city blackouts", "turn toward door"),
     "flee_door": ("grab portable radio", "begin escape", "race across observatory", "reach narrowing door"),
     "guard_knocking_door": ("face closed door", "hear approaching steps", "hear urgent knocking", "guard entry"),
     "inspect_generator_clue": ("check generator", "open notebook", "match repeated glyph", "recognize clue"),
