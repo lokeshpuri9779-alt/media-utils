@@ -25,13 +25,13 @@ def _smooth(progress):
 def unplug_pose(progress):
     """Fixed plug and socket geometry from the Episode 1 story clock.
 
-    The cable detaches fully by progress=.44, BEFORE the city blackout
-    begins at progress>.46. A moving character wrist can grip exactly the
+    The cable detaches fully by progress=.23, BEFORE the first city
+    windows become dark around .28. A moving wrist grips exactly the
     same connector location. Values are source-frame pixels before crop.
     """
     if type(progress) not in (int, float) or not math.isfinite(progress) or not 0 <= progress <= 1:
         raise CreativeReject("Invalid narrated cable-disconnect time")
-    fraction = _smooth((progress - .22) / .22)
+    fraction = _smooth((progress - .05) / .18)
     grip = (round(509 - 70 * fraction), round(1070 - 29 * fraction))
     tip = (grip[0] + 21, grip[1])
     return {
@@ -42,6 +42,19 @@ def unplug_pose(progress):
         "fully_disconnected": fraction >= 1,
         "narrated_action_visible": "not_verified",
     }
+
+
+def blackout_after_unplug(progress):
+    """Stage city windows against the narrated disconnect and streetlights.
+
+    The first building goes dark at about progress=.28, only *after* the
+    physical plug fully separates at .23. Later buildings follow gradually
+    while the narration describes the growing city-wide power failure.
+    This is local artwork timing, not a semantic-verification score.
+    """
+    if type(progress) not in (int,float) or not math.isfinite(progress) or not 0 <= progress <= 1:
+        raise CreativeReject("Invalid narrated city-blackout time")
+    return _smooth((progress - .12) / .55)
 
 
 def draw_radio_cable_disconnect(draw, progress):
