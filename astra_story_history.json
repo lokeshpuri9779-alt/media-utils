@@ -8880,6 +8880,55 @@
       "video_id": "3cyKi2JlgFw",
       "confirmed_at": "2026-11-06T10:45:23.952015+00:00",
       "title": "Why zelda switch 2 console Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-551dabdebc1422e64035",
+      "video_id": "Rrzcs7WOXIo",
+      "confirmed_at": "2026-11-06T11:41:48.955672+00:00",
+      "title": "Orion the Owl and the Silent Platform Bell",
+      "plot_fingerprint": "acd2df25afff6183c4da1f1d68ab6b18bbd2ccbb9737e603fb332a0b1e173492",
+      "story_beats": [
+        {
+          "headline": "The Phantom Chime",
+          "speech": "Listen closely to the dark rail. That sudden metallic echo warns of trouble on the freight line tonight.",
+          "visual": "signal",
+          "label": "Platform Mystery",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl protagonist perched on a dark wooden railway platform edge at midnight, holding a small glowing lantern, looking alert at a distant signal post under a starless sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tracing the Wire",
+          "speech": "Follow this taut brass line along the roof beams. It vibrates whenever the cold wind sweeps across the valley.",
+          "visual": "door",
+          "label": "The Clue",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl protagonist inspecting a closed wooden service door on the station wall, holding a brass compass in one claw while dark railway tracks stretch into the foggy distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Jammed Gear",
+          "speech": "Look inside this rusty mechanism. The inner wheel is stuck fast, causing the sudden midnight bell strike.",
+          "visual": "robot",
+          "label": "The Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl protagonist standing on a metal storage crate inside the station porch, holding a heavy iron wrench near a rusted mechanical gear clock box mounted on the brick wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Peace Restored",
+          "speech": "The wire is firm now and the bell is silent. The midnight express can finally pass through safely.",
+          "visual": "forest",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl protagonist resting peacefully on a wooden bench at the edge of the railway platform, holding a bright brass bell next to a quiet forest edge under silver moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
