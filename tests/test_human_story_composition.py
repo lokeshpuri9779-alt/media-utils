@@ -59,7 +59,9 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
         self.assertTrue(all(sizes[a]<1.20 for a in (
             "confront_mara_double","face_duplicate_at_countdown",
             "warn_parallel_cities","split_glass_key")))
-        self.assertGreater(sizes["hear_warning"]-sizes["survey_dead_city"],.35)
+        # Episode 1's close portrait must include Mara AND the city blackout.
+        # A 1.55x crop magnified her face but concealed critical narration art.
+        self.assertGreater(sizes["hear_warning"]-sizes["survey_dead_city"],.28)
         self.assertGreater(sizes["inspect_reverse_clock"]-sizes["survey_dead_city"],.30)
 
     def test_every_reframe_keeps_required_people_and_story_props_visible(self):
@@ -91,6 +93,7 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
                 (866, 995, "primary_radio"),
             ),
             "hear_warning": (
+                (202, 760, "mara_left_character_edge"),
                 (292, 875, "mara"),
                 (931, 746, "final_city_light"),
             ),
