@@ -37,6 +37,9 @@ class FloorboardRevealTests(unittest.TestCase):
         self.assertFalse(b["verified_semantics"])
         self.assertEqual(start.getpixel((370, 1100)), WOOD)
         self.assertEqual(end.getpixel((370, 1100)), VOID)
+        # The upright flap must remain above the hole, not slide out of frame.
+        self.assertEqual(end.getpixel((370, 940)), WOOD)
+        self.assertNotEqual(start.getpixel((370, 940)), WOOD)
         self.assertEqual(floorboard_panel(0), OPENING)
         self.assertEqual(floorboard_panel(1), LIFTED_BOARD)
         changed = ImageChops.difference(
@@ -48,6 +51,24 @@ class FloorboardRevealTests(unittest.TestCase):
         for region in ((0, 0, 1080, 480), (0, 1400, 1080, 1920)):
             self.assertIsNone(ImageChops.difference(
                 start.crop(region), end.crop(region)).getbbox())
+
+    def test_upright_hatch_is_inside_actual_story_camera_crop(self):
+        from astra_v2.human_story_composition import stage_crop_box
+        from astra_v2.human_action_choreography import action_state
+        for p in (.65, .88, .97):
+            with self.subTest(progress=p):
+                # The flap is visible even after actual stage camera reframing,
+                # not just on an uncropped internal drawing canvas.
+                box = stage_crop_box("trace_cable", p * 12, 12)
+                self.assertLess(box[0], 370)
+                self.assertGreater(box[2], 370)
+                self.assertLess(box[1], 940)
+                self.assertGreater(box[3], 940)
+                frac = floorboard_reveal_fraction(
+                    action_state("trace_cable", p * 12, 12).event)
+                self.assertGreater(frac, .1)
+        self.assertEqual(LIFTED_BOARD[0], OPENING[0])
+        self.assertEqual(LIFTED_BOARD[1], OPENING[1])
 
     def test_opening_is_finite_gradual_and_deterministic(self):
         fractions = [floorboard_reveal_fraction(x / 100) for x in range(101)]
