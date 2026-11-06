@@ -617,7 +617,13 @@ def draw_human_scene(image, shot, t):
         path=((751,1039),(718,1158),(540,1185),(373,1108))
         shown=max(1,round(1+2*state.event))
         _line(d,path[:shown+1],GOLD,10)
-        _radio(d,342,1109,t,glow=False,portable=True)
+        # The narration discovers a SECOND receiver only after following
+        # the cable beneath the floor. It must not already be on screen at
+        # the start of the beat (observed in decoded Episode 1 MP4 frames).
+        # Use the existing choreography's continuous event clock rather than
+        # story-independent wall time; the device appears in the reveal phase.
+        if state.event >= .25:
+            _radio(d,342,1109,t,glow=False,portable=True)
         performer(d,605,873,t,reaching=True)
     elif action == "hear_warning":
         _door(d,0.32+0.08*math.sin(t))
