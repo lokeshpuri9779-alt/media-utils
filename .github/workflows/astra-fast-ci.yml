@@ -82,6 +82,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_creative_skill_upgrade.py' -v
           python -m unittest discover -s tests -p 'test_creative_preflight_report.py' -v
           python -m unittest discover -s tests -p 'test_story_visual_review_packet.py' -v
+          python -m unittest discover -s tests -p 'test_fiction_episode_review_packet.py' -v
           python -m unittest discover -s tests -p 'test_review_timeline.py' -v
           python -m unittest discover -s tests -p 'test_mp4_motion_evidence.py' -v
           python -m unittest discover -s tests -p 'test_annotated_object_motion.py' -v
