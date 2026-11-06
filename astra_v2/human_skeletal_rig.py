@@ -74,7 +74,8 @@ class RigPose:
 
 
 def solve_mara_pose(t, *, reaching=False, running=False, carrying=False,
-                    gesture="consider", action_progress=None):
+                    gesture="consider", action_progress=None,
+                    right_hand_target=None):
     """Per-frame named action rig; all coordinates are character-local.
 
     Walk/run cycles use opposing strides. In nonrunning stories, posture
@@ -109,6 +110,20 @@ def solve_mara_pose(t, *, reaching=False, running=False, carrying=False,
     if running:
         lh=(-146,51-stride*.40)
         rh=(137,55+stride*.40)
+    # An explicitly storyboarded 2D wrist target overrides only the
+    # original protagonist's right hand, leaving all other poses unchanged.
+    # A target outside the actual arm's length must reject instead of
+    # silently stretching a disconnected hand into a narrated prop.
+    if right_hand_target is not None:
+        if (running or carrying or not isinstance(right_hand_target,(tuple,list))
+                or len(right_hand_target)!=2 or any(
+                    type(v) not in (int,float) or not math.isfinite(v)
+                    for v in right_hand_target)):
+            raise CreativeReject("Invalid authored right-wrist contact target")
+        rh=(float(right_hand_target[0]),float(right_hand_target[1]))
+        distance=math.dist(SHOULDER_R,rh)
+        if not abs(UPPER_ARM-FOREARM)+1 <= distance <= UPPER_ARM+FOREARM-.5:
+            raise CreativeReject("Authored right-wrist target beyond physical arm reach")
     la=(-55-stride,340-lift)
     ra=(56+stride,340-(25 if running else 2)*max(0.0,-math.sin(t*9.2)))
     return RigPose(

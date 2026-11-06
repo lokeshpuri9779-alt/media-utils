@@ -253,7 +253,8 @@ def _draw_mara_face(draw, x, y, t, *, emotion="curious", gaze=0,
 
 def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
           carrying=False, emotion="curious", gaze=0, gesture="consider",
-          lean=0.0, expression_strength=1.0, head_yaw=0.0):
+          lean=0.0, expression_strength=1.0, head_yaw=0.0,
+          right_hand_target=None):
     """Persistent character with two-joint limbs and authored facial acting."""
     if not math.isfinite(t):
         raise CreativeReject("Actor animation time must be finite")
@@ -271,6 +272,23 @@ def _mara(draw, x, y, t, *, reaching=False, alarm=False, running=False,
         bounce=int(15*math.sin(t*11))
     x+=round(pose.torso_offset*.45)
     y+=bounce
+    if right_hand_target is not None:
+        # The target is an exact STORY-STAGE pixel, not a loose illustration
+        # anchor. Account for the puppet's existing gait and torso sway before
+        # solving its elbow and painting the wrist at the cable marker.
+        if (not isinstance(right_hand_target,(tuple,list))
+                or len(right_hand_target)!=2 or any(
+                    type(v) not in (int,float) or not math.isfinite(v)
+                    for v in right_hand_target)):
+            raise CreativeReject("Invalid authored absolute wrist target")
+        # The painted shoulder and final exported wrist are based on
+        # shoulder_x, which includes authored acting-cue lean; using x alone
+        # introduced a 7-17px hand-to-cable separation in real render tests.
+        local=(float(right_hand_target[0])-(x+round(lean)),
+               float(right_hand_target[1])-y)
+        pose=solve_mara_pose(t,reaching=reaching,running=running,
+                             carrying=carrying,gesture=gesture,
+                             right_hand_target=local)
     # Forward-kinematic painted thigh/shin segments follow the real two-bone
     # knee solution. Opposed ankle strides distinguish walking/running from
     # a stationary upper-body wiggle.
@@ -656,7 +674,7 @@ def draw_human_scene(image, shot, t):
         # Give the authored act of tracing a physically connected cable its
         # own visible path and moving inspection cue. The underfloor segment
         # is still concealed until the existing narrated hatch reveal.
-        draw_floor_cable_trace(d,state.attention,state.event)
+        cable=draw_floor_cable_trace(d,state.attention,state.event)
         # The narration discovers a SECOND receiver only after following
         # the cable beneath the floor. It must not already be on screen at
         # the start of the beat (observed in decoded Episode 1 MP4 frames).
@@ -664,7 +682,17 @@ def draw_human_scene(image, shot, t):
         # story-independent wall time; the device appears in the reveal phase.
         if state.event >= .25:
             _radio(d,342,1109,t,glow=False,portable=True)
-        performer(d,605,873,t,reaching=True)
+        # The original standing reach was visibly disconnected from the
+        # floor wire. Position Mara in a low inspection stance and solve
+        # her exact two-bone elbow/wrist to the moving cable contact marker.
+        # The route is confined to this Episode 1 action, not other stories.
+        actor=performer(d,round(600-140*state.attention),1020,t,
+                        reaching=True,right_hand_target=cable["marker"])
+        # A small copper contact ring stays visible around the real wrist
+        # after the actor is composited over the cable; it is not a caption.
+        hx,hy=actor["right_hand"]
+        d.arc((hx-23,hy-23,hx+23,hy+23),24,155,fill=(247,203,111),width=5)
+        d.arc((hx-23,hy-23,hx+23,hy+23),206,334,fill=(247,203,111),width=5)
     elif action == "hear_warning":
         _door(d,0.32+0.08*math.sin(t))
         _radio(d,748,1065,t,glow=True,portable=True)
