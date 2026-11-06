@@ -612,6 +612,10 @@ def draw_human_scene(image, shot, t):
         performer(d,365+int(18*math.sin(t*.5)),885,t,reaching=True)
     elif action == "trace_cable":
         _radio(d,757,945,t)
+        # Establish a physical floorboard hatch and progressively expose the
+        # lower room. The second receiver appears only after this reveal.
+        from astra_v2.human_floorboard_reveal import draw_floorboard_hatch
+        draw_floorboard_hatch(d,state.event)
         # Distinct floor cable connecting radios, read as a traceable object.
         # Light travels along the cable; the discovery is not present at frame one.
         path=((751,1039),(718,1158),(540,1185),(373,1108))
