@@ -23,6 +23,8 @@ on:
       - 'tests/test_expressive_mara_performance.py'
       - 'astra_v2/human_cinematic_camera.py'
       - 'studio_renderer.py'
+      - 'astra_v2/fiction_episode_review_packet.py'
+      - 'tests/test_fiction_episode_review_packet.py'
       - 'tests/test_human_cinematic_staging.py'
       - 'astra_v2/unified_story_engine.py'
       - 'astra_v2/omniroute_local.py'
@@ -184,6 +186,19 @@ jobs:
           },indent=2))
           print('ASTRA_FICTION_EPISODE_VERIFIED='+str(root/'render-verification.json'))
           PY
+      - name: Bind encoded episode to manual visual review packet
+        run: |
+          # Evidence packaging only. This does not sign semantic decisions.
+          RECEIPT="$(find runtime-artifacts/fiction-episode/receipts -maxdepth 1 -type f -name '*.json' -print -quit)"
+          test -n "$RECEIPT"
+          python -m astra_v2.fiction_episode_review_packet \
+            --story runtime-artifacts/fiction-episode/story.json \
+            --report runtime-artifacts/fiction-episode/studio-report.json \
+            --receipt "$RECEIPT" \
+            --video runtime-artifacts/fiction-episode/episode-01.mp4 \
+            --sheet runtime-artifacts/fiction-episode/decoded-video-contact-sheet.jpg \
+            --frames-dir runtime-artifacts/fiction-episode \
+            --output runtime-artifacts/fiction-episode/visual-review-packet.json
       - name: Preserve full fiction episode, samples and receipts
         if: always()
         uses: actions/upload-artifact@v4
