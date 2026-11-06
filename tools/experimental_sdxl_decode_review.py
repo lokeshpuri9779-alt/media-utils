@@ -102,9 +102,9 @@ def validate_source():
     return array
 
 
-def download_one(item):
+def download_one(item, *, root=None):
     model, revision, remote, local, expected_size, expected_hash = item
-    location = ROOT / local
+    location = (ROOT if root is None else root) / local
     location.parent.mkdir(parents=True, exist_ok=True)
     temporary = location.with_name(location.name + '.tmp')
     digest = hashlib.sha256()
