@@ -2,22 +2,29 @@
 import hashlib
 import json
 from pathlib import Path
+from io import BytesIO
 import tempfile
 import unittest
+
+from PIL import Image
 
 from astra_v2.fiction_episode_review_packet import create_episode_packet
 
 
 def fixture(root):
+    actions = ("discover_radio", "trace_cable", "hear_warning", "flee_door")
     story = {"content_id": "episode-1", "title": "The Radio Mystery",
              "genre": "fiction", "kind": "microfiction",
              "story_beats": [
                  {"speech": f"Mara finds clue {i} in the abandoned observatory.",
                   "visual": "signal", "story_beat": "reveal",
+                  "story_human_actor": "mara", "story_human_action": actions[i-1],
                   "headline": f"Beat {i}"} for i in range(1, 5)]}
     scenes = [{"start": i * 2., "duration": 2.,
                "visual": "signal", "story_environment": "observatory",
-               "story_human_action": "discover_radio"} for i in range(4)]
+               "story_action": ("idle", "idle", "open", "pick")[i],
+               "story_human_actor": "mara",
+               "story_human_action": actions[i]} for i in range(4)]
     video = root / "episode.mp4"
     sheet = root / "sheet.jpg"
     video.write_bytes(b"test-encoded-mp4-bytes")
@@ -25,11 +32,15 @@ def fixture(root):
     receipt = {"content_id": "episode-1", "shot_count": 4,
                "shots": [{"status": "composited"} for _ in range(4)],
                "video_sha256": hashlib.sha256(video.read_bytes()).hexdigest()}
+    # Tests must use REAL portrait PNGs, not renamed arbitrary byte strings.
+    out = BytesIO()
+    Image.new("RGB", (1080, 1920), (12, 42, 76)).save(out, format="PNG")
+    png = out.getvalue()
     for i in range(1, 5):
         for name in (f"decoded-beat-{i:02d}.png",
                      f"temporal-beat-{i:02d}-early.png",
                      f"temporal-beat-{i:02d}-late.png"):
-            (root / name).write_bytes(f"decoded-{name}".encode())
+            (root / name).write_bytes(png)
     return story, {"genre": "fiction", "scenes": scenes}, receipt, video, sheet
 
 
@@ -55,6 +66,20 @@ class FictionEpisodeReviewPacketTests(unittest.TestCase):
         self.assertEqual(packet["source_mp4_sha256"], self.receipt["video_sha256"])
         self.assertEqual(packet["sample_times_seconds"], [1., 3., 5., 7.])
         self.assertEqual(len(index["scenes"]), 4)
+        self.assertEqual([r["authored_human_action"] for r in packet["beats"]],
+                         ["discover_radio", "trace_cable", "hear_warning", "flee_door"])
+        self.assertEqual([r["planned_human_action"] for r in packet["beats"]],
+                         ["discover_radio", "trace_cable", "hear_warning", "flee_door"])
+        self.assertEqual([r["planned_action"] for r in packet["beats"]],
+                         ["idle", "idle", "open", "pick"])
+        self.assertTrue(all(r["human_action_metadata_status"] ==
+                            "matched_in_metadata" for r in packet["beats"]))
+        self.assertTrue(all(r["visual_prompt_provenance"] ==
+                            "fallback_visual_label" for r in packet["beats"]))
+        self.assertEqual(index["scenes"][1]["authored_human_action"], "trace_cable")
+        self.assertEqual(index["scenes"][1]["generic_studio_action"], "idle")
+        self.assertEqual(index["scenes"][1]["human_action_metadata_status"],
+                         "matched_in_metadata")
         self.assertEqual(index["video_sha256"], self.receipt["video_sha256"])
         self.assertTrue(index["independent_full_video_review_required"])
         self.assertFalse(index["publication_approval"])
@@ -90,6 +115,31 @@ class FictionEpisodeReviewPacketTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "missing_actual_decoded_frame"):
             self.create()
         self.assertFalse((self.root / "review-frame-index.json").exists())
+
+    def test_corrupt_or_renamed_non_png_frame_is_rejected(self):
+        frame = self.root / "temporal-beat-03-late.png"
+        frame.write_bytes(b"not a real decoded png")
+        with self.assertRaisesRegex(ValueError, "invalid_actual_decoded_png"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+
+    def test_wrong_dimensions_are_not_accepted_as_video_frames(self):
+        frame = self.root / "temporal-beat-01-early.png"
+        Image.new("RGB", (320, 480), "green").save(frame)
+        with self.assertRaisesRegex(ValueError, "invalid_actual_decoded_png"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+
+    def test_metadata_disagreement_is_visible_not_auto_resolved(self):
+        self.report["scenes"][1]["story_human_action"] = "idle"
+        self.create()
+        packet = json.loads(self.dest.read_text())
+        mismatch = packet["beats"][1]
+        self.assertEqual(mismatch["authored_human_action"], "trace_cable")
+        self.assertEqual(mismatch["planned_human_action"], "idle")
+        self.assertEqual(mismatch["human_action_metadata_status"], "mismatch")
+        self.assertEqual(mismatch["narrated_action_visible"], "not_verified")
+        self.assertFalse(packet["publication_approval"])
 
     def test_preexisting_packet_is_never_overwritten(self):
         self.dest.write_text("DO NOT REPLACE")
