@@ -66,6 +66,36 @@ class StoryVisualReviewPacketTests(unittest.TestCase):
             self.assertEqual(beat["narrated_action_visible"], "not_verified")
             self.assertEqual(beat["character_visible"], "not_verified")
 
+    def test_human_action_context_is_not_confused_with_generic_studio_motion(self):
+        story = original_story()
+        story["story_beats"][0]["story_human_actor"] = "mara"
+        story["story_beats"][0]["story_human_action"] = "trace_cable"
+        plan = [
+            {"story_action": "idle", "story_human_actor": "mara",
+             "story_human_action": "trace_cable"},
+            {"story_action": "pick", "story_human_action": "pick_key"},
+        ]
+        source = snapshot(story, plan)
+        rows = source["beats"]
+        self.assertEqual(rows[0]["planned_action"], "idle")
+        self.assertEqual(rows[0]["authored_human_action"], "trace_cable")
+        self.assertEqual(rows[0]["planned_human_action"], "trace_cable")
+        self.assertEqual(rows[0]["human_action_metadata_status"], "matched_in_metadata")
+        self.assertEqual(rows[0]["visual_prompt_provenance"], "authored_visual_prompt")
+        self.assertEqual(rows[1]["human_action_metadata_status"], "not_declared")
+        plan[0]["story_human_action"] = "idle"
+        mismatch = snapshot(story, plan)
+        self.assertEqual(mismatch["beats"][0]["human_action_metadata_status"], "mismatch")
+        del plan[0]["story_human_action"]
+        missing = snapshot(story, plan)
+        self.assertEqual(missing["beats"][0]["human_action_metadata_status"], "missing_in_plan")
+        receipt, manifest = evidence(missing)
+        packet = build_packet(missing, receipt, manifest)
+        self.assertEqual(packet["beats"][0]["human_action_metadata_status"], "missing_in_plan")
+        self.assertEqual(packet["semantic_quality"], "not_verified")
+        self.assertFalse(packet["publication_approval"])
+        self.assertFalse(packet["publication_triggered"])
+
     def test_four_beats_align_to_actual_narration_timestamps_without_semantic_approval(self):
         story = original_story()
         story["story_beats"] += [
