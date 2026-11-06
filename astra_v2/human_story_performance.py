@@ -157,12 +157,15 @@ def _radio(draw, x, y, t, *, glow=True, portable=False):
     return (x-w//2, y-h//2, x+w//2, y+h//2)
 
 
-def _door(draw, open_amount):
+def _door(draw, open_amount, *, with_stairs=False):
     """A physical door changing its opening, not a decorative portal glyph."""
     draw.polygon(((660,606),(947,606),(1007,1200),(619,1200)),
                  fill=(23, 32, 49), outline=(197, 156, 118), width=15)
     draw.polygon(((697,640),(920,638),(950,1155),(655,1155)),
                  fill=(13, 17, 35))
+    if with_stairs:
+        from astra_v2.human_pilot_causal_visuals import draw_escape_stairs
+        draw_escape_stairs(draw)
     travel=int(160*open_amount)
     draw.polygon(((682,655),(902-travel,680),(916-travel,1127),(672,1150)),
                  fill=(95, 72, 98), outline=(211, 187, 166), width=9)
@@ -630,19 +633,21 @@ def draw_human_scene(image, shot, t):
             _radio(d,342,1109,t,glow=False,portable=True)
         performer(d,605,873,t,reaching=True)
     elif action == "hear_warning":
+        from astra_v2.human_pilot_causal_visuals import (
+            draw_blackout_skyline, draw_power_disconnect)
         _door(d,0.32+0.08*math.sin(t))
+        # The city is a large, distinct exterior-view panel. Lights disappear
+        # only AFTER Mara has separated the physical power cable. The radio's
+        # moving receiver bars remain active as in the narrated warning.
+        draw_blackout_skyline(d,state.event)
         _radio(d,748,1065,t,glow=True,portable=True)
-        # City blackout as an on-screen event, not a static caption.
-        for j in range(5):
-            cx=688+j*57
-            d.rectangle((cx,710,cx+31,812), fill=(27,36,57))
-            if state.event < (j+1)/5:
-                d.rectangle((cx+7,736,cx+21,755),fill=GOLD)
+        draw_power_disconnect(d,state.attention)
         performer(d,350,872,t,reaching=True,alarm=True)
     elif action == "flee_door":
         openness=max(.08,.76-state.progress*.63)
-        _door(d,openness)
-        actor=performer(d,420-round(140*state.attention),881,t,
+        _door(d,openness,with_stairs=True)
+        # Move TOWARD the stairs/door on the right, not away to the left.
+        actor=performer(d,420+round(140*state.attention),881,t,
                         running=True,carrying=True,alarm=True)
         # Receiver and gripping fingers follow the *same* IK wrist coordinates,
         # even when Mara moves left, changes stride or the camera reframes.
