@@ -70,10 +70,9 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
         "sample_count": 4,
         "sample_times_seconds": times,
     }
-    # Reuse the existing fail-closed, reviewer-facing packet format.
-    result = write_packet(source, receipt, contact_manifest, output_path,
-                          contact_sheet_path=sheet_path)
-
+    # Verify every existing sampled frame BEFORE writing a packet: otherwise
+    # a missing sample could leave a partial review handoff.
+    frame_rows = None
     if frames_dir is not None:
         root = Path(frames_dir)
         frame_rows = []
@@ -98,6 +97,11 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                 "narrated_action_visible": "not_verified",
                 "character_and_prop_fidelity": "not_verified",
             })
+    # Reuse the existing fail-closed reviewer packet format only after all
+    # requested evidence files have been checked. It never grants approval.
+    result = write_packet(source, receipt, contact_manifest, output_path,
+                          contact_sheet_path=sheet_path)
+    if frame_rows is not None:
         evidence = {
             "kind": "encoded_video_manual_scene_evidence_index",
             "video_sha256": media_hash,
