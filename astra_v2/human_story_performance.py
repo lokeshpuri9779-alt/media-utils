@@ -439,7 +439,7 @@ def _city_power(draw, t):
 # The old x=688..947 skyline was cropped to one window in the late reaction
 # close-up. This original city silhouette stays in the camera's common field.
 BLACKOUT_TOWERS = tuple(
-    (500 + i * 37, 714 + (i % 3) * 17, 530 + i * 37, 836)
+    (535 + i * 37, 714 + (i % 3) * 17, 565 + i * 37, 836)
     for i in range(5)
 )
 
