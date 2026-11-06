@@ -20,9 +20,10 @@ MAX_DECODED_PNG_BYTES = 15_000_000
 def _decoded_frame_sha256(path):
     """Accept real 1080x1920 decoded PNGs, never arbitrary renamed files."""
     image = Path(path)
-    if (not image.is_file() or image.is_symlink()
-            or not 0 < image.stat().st_size <= MAX_DECODED_PNG_BYTES):
-        raise ValueError("missing_or_oversized_actual_decoded_frame")
+    if not image.is_file() or image.is_symlink():
+        raise ValueError("missing_actual_decoded_frame")
+    if not 0 < image.stat().st_size <= MAX_DECODED_PNG_BYTES:
+        raise ValueError("oversized_actual_decoded_frame")
     try:
         with Image.open(image) as frame:
             if frame.format != "PNG" or frame.size != (1080, 1920):
