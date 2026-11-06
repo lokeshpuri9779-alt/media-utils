@@ -3,7 +3,7 @@
   "day": "2026-11-06",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-11-06T02:58:25.410574+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -9841,16 +9841,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "V4iPF-RSU38": {
-      "content_id": "rayvan-gemini-c744af270c95633974e0",
+    },
+    "rayvan-gemini-c744af270c95633974e0": {
+      "video_id": "V4iPF-RSU38",
+      "confirmed_at": "2026-11-06T03:03:47.600717+00:00",
       "title": "Ollie Otter and the Seaweed Symphony Shell",
-      "day": "2026-11-06",
-      "uploaded_at": "2026-11-06T02:58:27.956617+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-06T02:58:27.956617+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "d756566581139b033cb7a00ff9717026df7bd145548d7e1d7042cbf8ac9382a2",
       "story_beats": [
@@ -9898,31 +9896,31 @@
       "central_conflict": "The festival's traditional brass horn is missing right before the celebration, leaving the gathering completely silent.",
       "decisive_choice": "Ollie stops searching the crowd and instead tests a large ribbed seashell against the ocean breeze.",
       "resolution": "The seashell captures the coastal wind and sounds a resonant note that fills the cove, saving the anniversary celebration.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-06T02:50:20.439619+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-06T03:03:47.088741+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-06T02:58:28.425566+00:00",
+    "at": "2026-11-06T03:09:58.316571+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "job_status_before_persist": "failure",
+    "dependencies_step": "failure",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-05T16:53:31.016940+00:00",
   "reserved": {
@@ -20452,10 +20450,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-06T02:58:28.425524+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-06T03:09:58.316514+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -20463,9 +20461,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-06T02:58:28.425559+00:00",
+    "at": "2026-11-06T03:09:58.316564+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -20477,342 +20475,23 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-06T02:58:28.424793+00:00",
+    "at": "2026-11-06T03:09:58.315999+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "skipped",
+    "job_status_before_persist": "failure",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-06T02:58:28.425329+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 20,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 90,
-        "total": 177
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 177,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 142,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 142,
-        "remaining": 20
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 8,
-        "background_review_gaps": [
-          {
-            "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully.",
-                    "visual": "robot",
-                    "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-816e1ed91213034f5759",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Attention all pets, the annual soccer championship begins today on the community lawn, and our team needs a miracle.",
-                    "visual": "signal",
-                    "visual_prompt": "A bright yellow signal flag planted on a green neighborhood lawn, with Buster the energetic golden dog holding a red ball in his mouth and Cleo the sleek grey c"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 1
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Cleo intercepts the rolling ball with a clever paw flick and passes it swiftly to Buster for the final run.",
-                    "visual": "door",
-                    "visual_prompt": "Cleo the grey cat tapping a white ball with her paw near a wooden park gate, sending the ball rolling forward toward Buster the golden dog who is waiting alertl"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "With one mighty kick from Buster and Cleo guarding the flank, our furry duo scores the winning goal.",
-                    "visual": "ship",
-                    "visual_prompt": "Buster the golden dog and Cleo the sleek grey cat standing triumphantly next to a silver trophy shaped like a ship on the community lawn, both animals smiling h"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-551dabdebc1422e64035",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Look inside this rusty mechanism. The inner wheel is stuck fast, causing the sudden midnight bell strike.",
-                    "visual": "robot",
-                    "visual_prompt": "Orion the owl protagonist standing on a metal storage crate inside the station porch, holding a heavy iron wrench near a rusted mechanical gear clock box mounte"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
-                    "visual": "ship",
-                    "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowf"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
-                    "visual": "ship",
-                    "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
-                    "visual": "robot",
-                    "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
-                    "visual": "door",
-                    "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "If I quickly wedge this sturdy wooden box beneath the right wheel, the cart will stop sliding.",
-                    "visual": "ship",
-                    "visual_prompt": "Felix the ferret in his green waistcoat crouches beside the wooden produce cart on the cobblestone hill, firmly placing a small wooden box under the rolling whe"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "We must steer carefully past the bakery wall where the ground is flat and safe from trouble.",
-                    "visual": "door",
-                    "visual_prompt": "Felix the ferret wearing a green waistcoat pulls the stable wooden produce cart away from the steep hill and into a flat, shaded alley next to a wooden bakery d"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Every single marrow is safe and sound, ready for the morning vegetable stall display!",
-                    "visual": "signal",
-                    "visual_prompt": "Felix the ferret stands proudly beside his perfectly parked wooden produce cart filled with undamaged giant marrows outside the wooden market stall, holding a b"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-23e65e65720310a75bd8",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Now push the copper key firmly into the warm shackle before the biting winter wind freezes everything solid again.",
-                    "visual": "door",
-                    "visual_prompt": "Clover the white rabbit holding a shiny copper key and inserting it into the thawed padlock on the wooden gate while Bramble the red fox steadies the heavy latc"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-8e83701d224681001c03",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "If I place this sturdy wooden box directly beneath the stone wall, I can safely climb up to reach the hidden ledge.",
-                    "visual": "signal",
-                    "visual_prompt": "Barnaby the brown rabbit pushes a small wooden box across cobblestone ground toward a weathered stone wall under a bright midday sky."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Stretching just a little bit further with my paws will allow me to grasp the shiny iron key hanging on the peg.",
-                    "visual": "robot",
-                    "visual_prompt": "Barnaby the brown rabbit stands upright on top of the wooden box next to the stone wall, stretching his front paws upward toward a key resting on a stone ledge."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          }
-        ],
-        "considered": 9,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-11-06T03:09:58.316483+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }

@@ -8770,6 +8770,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-c744af270c95633974e0",
+      "video_id": "V4iPF-RSU38",
+      "confirmed_at": "2026-11-06T03:03:47.600717+00:00",
+      "title": "Ollie Otter and the Seaweed Symphony Shell",
+      "plot_fingerprint": "d756566581139b033cb7a00ff9717026df7bd145548d7e1d7042cbf8ac9382a2",
+      "story_beats": [
+        {
+          "headline": "The Silent Shore",
+          "speech": "Oh dear, the grand celebration clock strikes noon, but our missing horn leaves the coastline completely silent today.",
+          "visual": "signal",
+          "label": "Missing Horn",
+          "story_beat": "reveal",
+          "visual_prompt": "A brown otter protagonist with wet fur and a round friendly face, wearing a tiny blue scarf, stands on a sandy beach holding an empty wooden box next to a large stone clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sandy Search",
+          "speech": "We searched every tide pool along the rocky cove, yet no trace of the brass instrument appears anywhere near.",
+          "visual": "forest",
+          "label": "Tide Pool Search",
+          "story_beat": "build",
+          "visual_prompt": "The brown otter protagonist with a tiny blue scarf stands near a cluster of green coastal plants by a shallow tide pool, holding a small brass key in one paw while examining the sand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Coastal Discovery",
+          "speech": "Wait, this fluted shell resting upon the wet pebbles might catch the strong ocean breeze and make music.",
+          "visual": "door",
+          "label": "Shell Discovery",
+          "story_beat": "mechanism",
+          "visual_prompt": "The brown otter protagonist wearing a tiny blue scarf kneels on the damp shoreline, holding a large spiral seashell in both paws with an eager expression, facing an old wooden dock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Seaside Celebration",
+          "speech": "Blow gently through the spiral chamber now, let the coastal winds carry our joyful music across the bay.",
+          "visual": "signal",
+          "label": "Resonant Melody",
+          "story_beat": "payoff",
+          "visual_prompt": "The brown otter protagonist wearing a tiny blue scarf stands triumphantly on a smooth coastal rock, holding up a large spiral seashell that glows softly in the bright midday sun.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "The festival's traditional brass horn is missing right before the celebration, leaving the gathering completely silent.",
+      "decisive_choice": "Ollie stops searching the crowd and instead tests a large ribbed seashell against the ocean breeze.",
+      "resolution": "The seashell captures the coastal wind and sounds a resonant note that fills the cove, saving the anniversary celebration."
     }
   ]
 }
