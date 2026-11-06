@@ -141,6 +141,14 @@ class FictionEpisodeReviewPacketTests(unittest.TestCase):
         self.assertEqual(mismatch["narrated_action_visible"], "not_verified")
         self.assertFalse(packet["publication_approval"])
 
+    def test_preexisting_frame_index_cannot_leave_partial_new_packet(self):
+        index = self.root / "review-frame-index.json"
+        index.write_text("DO NOT REPLACE")
+        with self.assertRaisesRegex(ValueError, "frame_index_already_exists"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+        self.assertEqual(index.read_text(), "DO NOT REPLACE")
+
     def test_preexisting_packet_is_never_overwritten(self):
         self.dest.write_text("DO NOT REPLACE")
         with self.assertRaisesRegex(ValueError, "output_already_exists"):
