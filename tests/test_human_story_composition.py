@@ -81,6 +81,48 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
         self.assertGreaterEqual(photograph[2],905)
         self.assertLessEqual(photograph[1],603)
 
+    def test_pilot_camera_retains_story_critical_props_after_stage_reframing(self):
+        # Observed decoded Episode 1: late camera crops removed visual evidence
+        # of a second radio, most streetlights, and a slamming door. Test the
+        # REAL stage compositor, not merely director metadata or pixel motion.
+        critical = {
+            "trace_cable": (
+                (255, 1095, "second_radio_reveal"),
+                (866, 995, "primary_radio"),
+            ),
+            "hear_warning": (
+                (292, 875, "mara"),
+                (931, 746, "final_city_light"),
+            ),
+            "flee_door": (
+                (285, 875, "escaping_mara"),
+                (993, 1113, "far_closing_door"),
+            ),
+        }
+        # Verify actual rendered-stage inclusion at all four narrative
+        # quarters, including the late reveal which failed in the video.
+        for action,points in critical.items():
+            with self.subTest(action=action):
+                for progress in (.08, .32, .60, .88, 1.0):
+                    crop = stage_crop_box(action, progress*12, 12)
+                    for x,y,label in points:
+                        with self.subTest(phase=progress, feature=label):
+                            self.assertLessEqual(crop[0], x)
+                            self.assertGreaterEqual(crop[2], x + 6)
+                            self.assertLessEqual(crop[1], y)
+                            self.assertGreaterEqual(crop[3], y + 6)
+                            # A single bright physical region must survive
+                            # through the same crop and rescale applied by
+                            # Studio, not merely remain in the source image.
+                            image = Image.new("RGB", FRAME, (0,0,0))
+                            ImageDraw.Draw(image).rectangle(
+                                (x,y,x+6,y+6), fill=(252,246,61))
+                            actual = compose_story_stage(
+                                image, action, progress*12, 12)
+                            stage_only = actual.crop(STAGE)
+                            self.assertIsNotNone(stage_only.getbbox(),
+                                f"Stage compositor cropped {label} at {progress}")
+
     def test_no_single_frame_jumps_in_30fps_stage_camera_or_head(self):
         for action in DIRECTED_SHOTS:
             for frame in range(359):
