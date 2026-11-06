@@ -21,7 +21,7 @@ STAGE_SIZE=(1080,890)
 DIRECTED_SHOTS={
     "discover_radio": ("portrait",1.31,1.44,518,868),
     "trace_cable": ("object",1.30,1.48,626,975),
-    "hear_warning": ("portrait",1.39,1.55,374,854),
+    "hear_warning": ("portrait",1.30,1.40,374,854),
     "flee_door": ("tracking",1.16,1.32,492,914),
     "guard_knocking_door": ("tracking",1.18,1.34,615,883),
     "inspect_generator_clue": ("object",1.28,1.49,613,938),
@@ -46,7 +46,7 @@ CRITICAL_HORIZONTAL_SPANS={
     # lights and the closing door at later narration times. Preserve the
     # entire on-screen narrative prop span as well as the performer.
     "trace_cable": (245,919),     # discovered receiver at x~252; primary at x~870
-    "hear_warning": (255,950),    # Mara plus five city streetlight panels
+    "hear_warning": (180,950),    # Entire Mara silhouette plus city blackout
     "flee_door": (190,1007),      # Mara plus physical far edge of door
     "guard_knocking_door": (275,938),
     "inspect_generator_clue": (282,973),
