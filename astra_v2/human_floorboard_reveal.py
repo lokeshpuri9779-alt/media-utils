@@ -7,12 +7,12 @@ semantic fidelity without an independent complete-MP4 review.
 from __future__ import annotations
 
 import math
-from PIL import ImageDraw
+from PIL import Image, ImageDraw
 from astra_errors import CreativeReject
 
 
 # The boarded trapdoor sits beside the visible cable end and the authored
-# second radio (center 342, 1109). Keep all geometry in the middle scene stage.
+# second radio (center 342, 1138). Keep all geometry in the middle scene stage.
 OPENING = ((238, 1078), (468, 1078), (500, 1190), (217, 1190))
 # Rotate around the FAR edge of the cavity. The original leftward-open
 # panel left the camera crop in the decoded MP4 despite passing pixel tests.
@@ -148,3 +148,45 @@ def draw_floor_cable_trace(draw, attention, event):
         draw.line(CONCEALED_CABLE, fill=(249, 190, 92), width=9, joint="curve")
     return {"marker": marker, "underfloor_connection_visible": revealed,
             "visual_semantics_verified": False}
+
+
+# Capture only the small below-floor space while adding the second receiver.
+# Restoring the original pixels, then masking the hatch opening, prevents the
+# radio's antenna and case from floating over the raised panel. The same
+# existing _radio call is used; no new asset/engine is introduced.
+HIDDEN_RADIO_CAPTURE = (210, 960, 515, 1210)
+
+
+def draw_radio_inside_hatch(image, draw, event, radio_draw, t):
+    """Clip Episode 1's second radio behind its *moving* floorboard panel.
+
+    Source-frame CPU 2D occlusion, not a claim that a reviewer can identify
+    an underground room in the resulting full encoded video.
+    """
+    fraction = floorboard_reveal_fraction(event)
+    if (not isinstance(image, Image.Image) or image.mode != "RGB"
+            or image.size != (1080, 1920)
+            or not isinstance(draw, ImageDraw.ImageDraw)
+            or not callable(radio_draw)
+            or type(t) not in (int, float) or not math.isfinite(t)
+            or t < 0):
+        raise CreativeReject("Invalid reviewed hidden-radio drawing surface")
+    l, top, r, bottom = HIDDEN_RADIO_CAPTURE
+    before = image.crop((l, top, r, bottom))
+    # The existing receiver, original proportions and original radio timing.
+    radio_draw(draw, 342, 1138, t, glow=False, portable=True)
+    painted = image.crop((l, top, r, bottom))
+    image.paste(before, (l, top))
+
+    mask = Image.new("L", (r-l, bottom-top), 0)
+    masker = ImageDraw.Draw(mask)
+    masker.polygon([(x-l, y-top) for x, y in OPENING], fill=255)
+    # The hinged panel is a *foreground occluder*, including while half
+    # lifted: no instant pop in front of a still-closed floorboard.
+    masker.polygon([(x-l, y-top) for x, y in floorboard_panel(event)],
+                   fill=0)
+    image.paste(painted, (l, top), mask)
+    return {"hatch_open_fraction": fraction,
+            "masked_behind_moving_panel": True,
+            "semantic_quality": "not_verified",
+            "publication_approval": False}

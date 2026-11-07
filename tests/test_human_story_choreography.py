@@ -84,10 +84,10 @@ class HumanStoryChoreographyTests(unittest.TestCase):
             self.assertIn((757, 945), radios)
             seen.append(radios)
         self.assertEqual([len(radios) for radios in seen], [1, 1, 2, 2])
-        self.assertNotIn((342, 1109), seen[0])
-        self.assertNotIn((342, 1109), seen[1])
-        self.assertIn((342, 1109), seen[2])
-        self.assertIn((342, 1109), seen[3])
+        self.assertNotIn((342, 1138), seen[0])
+        self.assertNotIn((342, 1138), seen[1])
+        self.assertIn((342, 1138), seen[2])
+        self.assertIn((342, 1138), seen[3])
 
     def test_pilot_city_blackout_is_visible_through_actual_stage_camera(self):
         # The pre-fix source skyline had towers near x=688..947. Studio's

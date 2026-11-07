@@ -689,7 +689,10 @@ def draw_human_scene(image, shot, t):
         # Use the existing choreography's continuous event clock rather than
         # story-independent wall time; the device appears in the reveal phase.
         if state.event >= .25:
-            _radio(d,342,1109,t,glow=False,portable=True)
+            # Render *behind* the lifted board: prior MP4 samples showed
+            # this radio painted over the hatch, as if on the same floor.
+            from astra_v2.human_floorboard_reveal import draw_radio_inside_hatch
+            draw_radio_inside_hatch(image,d,state.event,_radio,t)
         # The original standing reach was visibly disconnected from the
         # floor wire. Position Mara in a low inspection stance and solve
         # her exact two-bone elbow/wrist to the moving cable contact marker.
