@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-07",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-11-07T08:54:24.827577+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-11-07T10:46:19.186089+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -10401,16 +10401,14 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "RaP_2-wtBCU": {
-      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+    },
+    "rayvan-gemini-0dfbdb43e1b06a92e4d5": {
+      "video_id": "RaP_2-wtBCU",
+      "confirmed_at": "2026-11-07T10:45:32.491545+00:00",
       "title": "Finneas and the Flying Fig Fiasco",
-      "day": "2026-11-07",
-      "uploaded_at": "2026-11-07T08:54:26.224976+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-07T08:54:26.224976+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad",
       "story_beats": [
@@ -10455,16 +10453,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "jDiwq3jtq4A": {
+      "content_id": "rayvan-gemini-621ee8453d5f7f1a225f",
+      "title": "Pippa the Pangolin and Orlo the Owl's Midnight Promise",
+      "day": "2026-11-07",
+      "uploaded_at": "2026-11-07T10:46:20.415036+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3dbcde162d1ef0ef754d18bd225fa92cdd5703ebfbcc18a9a06ee976f0886d8e",
+      "story_beats": [
+        {
+          "headline": "The Glowing Temptation",
+          "speech": "That flickering orchard lantern shines so brightly in the darkness, tempting me to take it closer.",
+          "visual": "forest",
+          "label": "Orchard Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Pippa the pangolin with scaly brown armor and a long tapered tail stands inside a dark woodland forest at night, staring longingly at a glowing brass lantern resting on a mossy stone wall, while Orlo the owl perched on a high tree branch watches closely.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitation",
+          "speech": "I promised Orlo I would never move the lantern alone before the midnight signal.",
+          "visual": "signal",
+          "label": "Stretched Paws",
+          "story_beat": "build",
+          "visual_prompt": "Pippa the pangolin stands on the mossy stone wall inside the nighttime woodland forest, holding her empty paws outward in a defensive gesture away from the glowing brass lantern to show she is resisting the temptation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Deliberate Choice",
+          "speech": "I choose to keep my word and leave the lantern untouched for our shared journey.",
+          "visual": "door",
+          "label": "Stepping Back",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pippa the pangolin physically steps backward off the mossy stone wall inside the nighttime woodland forest, leaving the glowing brass lantern completely undisturbed while looking upward toward her partner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mutual Success",
+          "speech": "Your steady signal proves our bond is stronger than any fleeting curiosity in the night.",
+          "visual": "signal",
+          "label": "Shared Signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Pippa the pangolin stands firmly beside the undisturbed brass lantern in the nighttime woodland forest, raising one paw in a clear signaling gesture while Orlo the owl swoops down with outstretched wings to land safely beside her.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-07T08:53:27.189782+00:00",
+  "last_preflight_at": "2026-11-07T10:45:32.089952+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-07T08:54:26.596734+00:00",
+    "at": "2026-11-07T10:46:20.742356+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -10481,7 +10534,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-06T22:26:01.929899+00:00",
+  "last_feedback_attempt_at": "2026-11-07T10:46:07.268390+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -21539,10 +21592,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-621ee8453d5f7f1a225f": {
+      "at": "2026-11-07T10:46:19.186071+00:00",
+      "title": "Pippa the Pangolin and Orlo the Owl's Midnight Promise",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3dbcde162d1ef0ef754d18bd225fa92cdd5703ebfbcc18a9a06ee976f0886d8e",
+      "story_beats": [
+        {
+          "headline": "The Glowing Temptation",
+          "speech": "That flickering orchard lantern shines so brightly in the darkness, tempting me to take it closer.",
+          "visual": "forest",
+          "label": "Orchard Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Pippa the pangolin with scaly brown armor and a long tapered tail stands inside a dark woodland forest at night, staring longingly at a glowing brass lantern resting on a mossy stone wall, while Orlo the owl perched on a high tree branch watches closely.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitation",
+          "speech": "I promised Orlo I would never move the lantern alone before the midnight signal.",
+          "visual": "signal",
+          "label": "Stretched Paws",
+          "story_beat": "build",
+          "visual_prompt": "Pippa the pangolin stands on the mossy stone wall inside the nighttime woodland forest, holding her empty paws outward in a defensive gesture away from the glowing brass lantern to show she is resisting the temptation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Deliberate Choice",
+          "speech": "I choose to keep my word and leave the lantern untouched for our shared journey.",
+          "visual": "door",
+          "label": "Stepping Back",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pippa the pangolin physically steps backward off the mossy stone wall inside the nighttime woodland forest, leaving the glowing brass lantern completely undisturbed while looking upward toward her partner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mutual Success",
+          "speech": "Your steady signal proves our bond is stronger than any fleeting curiosity in the night.",
+          "visual": "signal",
+          "label": "Shared Signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Pippa the pangolin stands firmly beside the undisturbed brass lantern in the nighttime woodland forest, raising one paw in a clear signaling gesture while Orlo the owl swoops down with outstretched wings to land safely beside her.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-07T08:54:26.596655+00:00",
+    "at": "2026-11-07T10:46:20.742275+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -21553,21 +21657,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-07T08:54:26.596720+00:00",
+    "at": "2026-11-07T10:46:20.742341+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-07T08:53:57.256705+00:00",
+    "at": "2026-11-07T10:46:07.017778+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
-    "video_url": "https://www.youtube.com/watch?v=RaP_2-wtBCU",
+    "content_id": "rayvan-gemini-621ee8453d5f7f1a225f",
+    "video_url": "https://www.youtube.com/watch?v=jDiwq3jtq4A",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-07T08:54:26.595748+00:00",
+    "at": "2026-11-07T10:46:20.741369+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -21579,7 +21683,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-07T08:54:26.596564+00:00",
+    "at": "2026-11-07T10:46:20.742188+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",

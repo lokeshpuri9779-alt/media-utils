@@ -9278,6 +9278,55 @@
       "video_id": "nfTYRzwTmmg",
       "confirmed_at": "2026-11-07T08:53:27.598320+00:00",
       "title": "Why jacob duffy Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+      "video_id": "RaP_2-wtBCU",
+      "confirmed_at": "2026-11-07T10:45:32.491545+00:00",
+      "title": "Finneas and the Flying Fig Fiasco",
+      "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad",
+      "story_beats": [
+        {
+          "headline": "The Runaway Cart",
+          "speech": "Oh no, that heavy wooden cart is rolling down the hill toward the fruit stalls with alarming speed!",
+          "visual": "signal",
+          "label": "Market Panic",
+          "story_beat": "reveal",
+          "visual_prompt": "Finneas the ferret stands wide-eyed on a cobblestone street, watching a wooden figcart roll downhill, holding a heavy iron wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Desperate Chase",
+          "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
+          "visual": "ship",
+          "label": "Swift Pursuit",
+          "story_beat": "build",
+          "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Intervention",
+          "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
+          "visual": "robot",
+          "label": "Wrench Jam",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Safe Market",
+          "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
+          "visual": "door",
+          "label": "Market Saved",
+          "story_beat": "payoff",
+          "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
