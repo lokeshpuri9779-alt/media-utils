@@ -1,40 +1,36 @@
 {
-  "observed_at": "2026-11-07T05:57:51.663135+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-07T12:58:01.912526+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
+    {
+      "index": 2,
+      "reason": "insufficient_visual_diversity"
+    },
     {
       "index": 7,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 18,
+      "index": 11,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 19,
-      "reason": "invalid_story_structure"
+      "index": 14,
+      "reason": "insufficient_visual_diversity"
+    },
+    {
+      "index": 16,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 17,
-  "review_deferred": 0,
-  "approved": 3,
+  "reviewed": 0,
+  "review_deferred": 12,
+  "approved": 0,
   "review_issues": [
-    "Fails originality checks regarding recurring character pairings, settings, and causal mechanisms.",
-    "The candidate story 'Felix the Cat and the Courtyard Parcel Puzzle' closely repeats premises, characters, settings, and causal mechanisms from recently published works in the comparison history, specifically matching titles involving Felix the cat and courtyard box exchanges/returns such as 'Felix the Cat and the Courtyard Box Return' and 'Barnaby the Cat and the Courtyard Box Exchange'.",
-    "The candidate story features characters 'Buster the dog' and 'Pip the mouse' sharing a ball, which directly matches the recently published premise and character pairing in the comparison history item 'Buster the Dog and Pip the Mouse and the Shared Ball'.",
-    "The candidate story features characters (Jasper the Otter and Felix the Cat) and a central premise involving sharing a lantern that closely duplicates the recently published comparison history item 'Jasper the Otter and Barnaby the Cat Share the Lantern'.",
-    "The causal mechanism involving woodland animals resolving minor technical tool disputes follows a repetitive template found in low-quality automated content generation.",
-    "The content features metadata typical of programmatic generation (content_id, plot_fingerprint, strict beat durations) rather than a genuinely organic editorial work.",
-    "The premise, character naming conventions (Pip the Mouse/Squirrel/etc. and Barnaby the Cat/Rabbit/Ferret), and story structure closely mirror multiple recently published titles in the comparison history such as 'Barnaby the Cat and Sammy the Squirrel's Bramble Clue', 'Finn the Fox and Barnaby the Rabbit and the Woodland Folio', and 'Pip the Mouse and Clover the Rabbit's Midnight Library Promise', indicating a repetitive template pattern.",
-    "The premise, characters (Barnaby the Rabbit, Pip the Mouse), and theme closely replicate recently published titles in the comparison history, such as 'Finn the Fox and Barnaby the Rabbit and the Woodland Folio' and 'Pip the Mouse and Clover the Rabbit's Midnight Library Promise'.",
-    "The premise, characters (Felix the Ferret, Pip the Marten), and causal mechanisms closely mirror recently published entries in the comparison history, such as 'Felix the Ferret and Pip the Marten's Market Stall Key', making it unoriginal.",
-    "The premise, characters (Lyra the Lynx and a stoat named Bran/Bramen), and focus on a disputed compass closely mirror recently published works in the comparison history, specifically 'Bramble the Stoat and Lyra the Lynx and the Compass Mistake'.",
-    "The story premise, characters (Finn the fox and Barnaby the rabbit), and setting closely mimic the formatting, naming conventions, and tropes of recently published AI-generated titles in the comparison history, such as 'Finn the Fox and Barnaby the Rabbit and the Woodland Folio'.",
-    "The story premises, character (Orion the Owl), and setting closely mirror recently published works in the comparison history, specifically 'Orion the Owl and the Midnight Observatory Misreading' and 'Orion the Owl and the Stargazing Clock'.",
-    "The story relies on an extremely formulaic naming convention ('Character A and Character B's [Noun] [Noun]') and narrative structure that closely mirrors recently published spammy templates and programmatic content farms in the comparison history.",
-    "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "review_deferred:rate_limited",
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -90,24 +86,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 12,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 12
     },
     "renderer_status_counts": {
-      "incompatible": 4,
-      "structurally_eligible": 13
+      "incompatible": 2,
+      "structurally_eligible": 10
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 4,
-      "none": 13
+      "cast_mismatch": 2,
+      "none": 10
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 16,
+      "all_shots_recognized": 11,
       "partially_recognized": 1
     },
-    "scene_taxonomy_recognized_shots": 67,
-    "scene_taxonomy_unresolved_shots": 1,
+    "scene_taxonomy_recognized_shots": 46,
+    "scene_taxonomy_unresolved_shots": 2,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
