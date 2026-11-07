@@ -9327,6 +9327,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-621ee8453d5f7f1a225f",
+      "video_id": "jDiwq3jtq4A",
+      "confirmed_at": "2026-11-07T15:24:26.138645+00:00",
+      "title": "Pippa the Pangolin and Orlo the Owl's Midnight Promise",
+      "plot_fingerprint": "3dbcde162d1ef0ef754d18bd225fa92cdd5703ebfbcc18a9a06ee976f0886d8e",
+      "story_beats": [
+        {
+          "headline": "The Glowing Temptation",
+          "speech": "That flickering orchard lantern shines so brightly in the darkness, tempting me to take it closer.",
+          "visual": "forest",
+          "label": "Orchard Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Pippa the pangolin with scaly brown armor and a long tapered tail stands inside a dark woodland forest at night, staring longingly at a glowing brass lantern resting on a mossy stone wall, while Orlo the owl perched on a high tree branch watches closely.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitation",
+          "speech": "I promised Orlo I would never move the lantern alone before the midnight signal.",
+          "visual": "signal",
+          "label": "Stretched Paws",
+          "story_beat": "build",
+          "visual_prompt": "Pippa the pangolin stands on the mossy stone wall inside the nighttime woodland forest, holding her empty paws outward in a defensive gesture away from the glowing brass lantern to show she is resisting the temptation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Deliberate Choice",
+          "speech": "I choose to keep my word and leave the lantern untouched for our shared journey.",
+          "visual": "door",
+          "label": "Stepping Back",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pippa the pangolin physically steps backward off the mossy stone wall inside the nighttime woodland forest, leaving the glowing brass lantern completely undisturbed while looking upward toward her partner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mutual Success",
+          "speech": "Your steady signal proves our bond is stronger than any fleeting curiosity in the night.",
+          "visual": "signal",
+          "label": "Shared Signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Pippa the pangolin stands firmly beside the undisturbed brass lantern in the nighttime woodland forest, raising one paw in a clear signaling gesture while Orlo the owl swoops down with outstretched wings to land safely beside her.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
