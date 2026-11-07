@@ -180,10 +180,10 @@ def draw_radio_inside_hatch(image, draw, event, radio_draw, t):
 
     mask = Image.new("L", (r-l, bottom-top), 0)
     masker = ImageDraw.Draw(mask)
-    masker.polygon(((x-l, y-top) for x, y in OPENING), fill=255)
+    masker.polygon([(x-l, y-top) for x, y in OPENING], fill=255)
     # The hinged panel is a *foreground occluder*, including while half
     # lifted: no instant pop in front of a still-closed floorboard.
-    masker.polygon(((x-l, y-top) for x, y in floorboard_panel(event)),
+    masker.polygon([(x-l, y-top) for x, y in floorboard_panel(event)],
                    fill=0)
     image.paste(painted, (l, top), mask)
     return {"hatch_open_fraction": fraction,
