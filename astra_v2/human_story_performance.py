@@ -722,15 +722,17 @@ def draw_human_scene(image, shot, t):
                         alarm=True)
         draw_wrist_grip_on_plug(d,actor["right_hand"],unplug)
     elif action == "flee_door":
-        from astra_v2.human_staircase_escape import escape_door_open_fraction
+        from astra_v2.human_staircase_escape import (
+            escape_door_open_fraction, escape_run_fraction,
+        )
         openness=escape_door_open_fraction(state.progress)
         _door(d,openness,with_stairs=True)
-        # Existing pilot ran AWAY from the staircase (negative X), although
-        # narration explicitly says Mara runs FOR the stairs. Move toward the
-        # doorway with the same continuous story-attention clock. The door
-        # remains open until her approach and then closes during the aftermath.
-        actor=performer(d,420+round(186*state.attention),881,t,
-                        running=True,carrying=True,alarm=True)
+        # Source narration says "ran for the stairs" and the door "slammed
+        # shut behind her" near the first third of the beat. The actor must
+        # approach the right-hand threshold BEFORE that door closes, not walk
+        # toward it long after the audio describes the slam.
+        actor=performer(d,420+round(220*escape_run_fraction(state.progress)),
+                        881,t,running=True,carrying=True,alarm=True)
         # Receiver and gripping fingers follow the *same* IK wrist coordinates,
         # even when Mara moves left, changes stride or the camera reframes.
         from astra_v2.human_prop_interaction import draw_radio_in_hand
