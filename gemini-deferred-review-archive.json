@@ -6051,6 +6051,87 @@
         },
         "plot_fingerprint": "e7c79ecb1e6f6a1575e6de80b87e6e932de0c01937423d3394a5639cfb40c446"
       }
+    },
+    {
+      "source_sha256": "8ade03ab5ee5137f21f74d1bbbeb57c95d10ccae825b08529e4d36e75db00de3",
+      "content_id": "rayvan-gemini-474c2b8b73c54e558d98",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:provider_unavailable",
+      "source_run_id": "42417504265",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-474c2b8b73c54e558d98",
+        "title": "Bramen the Stoat and Lyra the Lynx's Woodland Trail Marker",
+        "hook": "Disputed Trail Directions",
+        "question": "How do Bramen the stoat and Lyra the lynx resolve a disputed trail map discovery?",
+        "answer": "They compare their physical trail notes side-by-side to verify the true path.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Disputed Trail Directions",
+            "speech": "My compass points east toward the deep valley, so we must turn right here immediately.",
+            "visual": "forest",
+            "label": "Compass Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Bramen the stoat stands in a sunlit forest clearing holding a shiny brass compass in his small paws while Lyra the lynx watches from a mossy log.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Comparing Path Notes",
+            "speech": "Let us place your brass compass directly beside my carved boundary stone markings to check the magnetic pull.",
+            "visual": "signal",
+            "label": "Map Alignment",
+            "story_beat": "build",
+            "visual_prompt": "Bramen the stoat rests the brass compass on a flat tree stump in the forest while Lyra the lynx points her paw toward the engraved stone marker.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Testing the Alignment",
+            "speech": "The needle clearly settles toward the northern ridge rather than the eastern ravine.",
+            "visual": "door",
+            "label": "Stone Verification",
+            "story_beat": "mechanism",
+            "visual_prompt": "Lyra the lynx leans over the tree stump in the forest inspecting the brass compass needle while Bramen the stoat holds a small wooden map.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Unified Journey",
+            "speech": "You were right all along; now we can walk the northern trail together without any confusion.",
+            "visual": "forest",
+            "label": "Shared Path",
+            "story_beat": "payoff",
+            "visual_prompt": "Bramen the stoat and Lyra the lynx walk side by side along a clear forest path carrying the brass compass safely between them.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Bramen the stoat and Lyra the lynx each claim their separate compass direction is the correct way through the dense forest.",
+        "decisive_choice": "Bramen places his brass compass on the flat tree stump next to Lyra's sketched map to test which needle alignment matches the carved boundary stones.",
+        "resolution": "Lyra identifies the correct carved stone symbol, and both animals agree on the unified path forward.",
+        "visual_bible": {
+          "style": "Charming storybook animal illustration with warm lighting and detailed woodland textures.",
+          "characters": {
+            "Bramen": "A nimble stoat with sleek brown-and-cream fur, bright alert eyes, and wearing a tiny leather utility vest.",
+            "Lyra": "A graceful lynx with thick tawny-grey fur, tufted ears, gentle amber eyes, and soft padded paws."
+          },
+          "locations": {
+            "Forest Clearing": "A lush, green woodland featuring ancient oak trees, soft mossy ground, and scattered flat tree stumps under dappled sunlight."
+          },
+          "objects": {
+            "compass": "A polished brass pocket compass with a hinged glass cover and a vibrant glowing needle pointing north."
+          }
+        },
+        "plot_fingerprint": "c0518d8212147018bcccf3fd1ca5865cfef997179fa5c2ac8e1e36be1bb84988"
+      }
     }
   ]
 }
