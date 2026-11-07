@@ -17,13 +17,29 @@ STAIR_TREADS = tuple(
     for i in range(5)
 )
 
-def escape_door_open_fraction(progress):
-    """Keep stairs exposed during escape; swing the heavy door shut near end."""
+def _stage_fraction(progress):
     if type(progress) not in (int, float) or not math.isfinite(progress) or not 0 <= progress <= 1:
         raise CreativeReject("Invalid authored staircase escape progress")
-    t=max(0., min(1., (progress-.66)/.30))
-    eased=t*t*(3.-2.*t)
-    return .76*(1.-eased)
+    return float(progress)
+
+
+def _ease(progress):
+    p=max(0.,min(1.,progress))
+    return p*p*(3.-2.*p)
+
+
+def escape_run_fraction(progress):
+    """Reach the stairwell before the narrated door slams behind Mara."""
+    return _ease((_stage_fraction(progress)-.03)/.27)
+
+
+def escape_door_open_fraction(progress):
+    """Stairs open during the run, door closes when the slam is narrated.
+
+    Episode 1's encoded captions mention the heavy door around 34% of this
+    shot, NOT at the very end; a closing effect at .70 was off by seconds.
+    """
+    return .76*(1.-_ease((_stage_fraction(progress)-.19)/.17))
 
 def draw_staircase_beyond_door(draw):
     """Five narrowing perspective treads through the observatory doorway."""
