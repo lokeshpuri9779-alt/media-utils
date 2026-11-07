@@ -104,7 +104,9 @@ class StaircaseEscapeTests(unittest.TestCase):
                 sources.append(result)
         self.assertGreater(positions[-1]-positions[0],120,
                            "Mara must actually approach staircase on the right")
-        self.assertLess(max(abs(b-a) for a,b in zip(positions,positions[1:])),170)
+        # These sparse samples are seconds apart; do not mistake travel
+        # between shots for a one-frame discontinuity. The dedicated 30 FPS
+        # test below checks actual frame-to-frame position continuity.
         self.assertIsNotNone(ImageChops.difference(
             sources[0].crop((530,600,985,1310)),
             sources[-1].crop((530,600,985,1310))).getbbox())
