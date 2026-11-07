@@ -9,6 +9,9 @@ import unittest
 from PIL import Image
 
 from astra_v2.fiction_episode_review_packet import create_episode_packet
+from astra_v2.episode_action_checkpoints import (
+    PILOT_ID, episode_action_checkpoints,
+)
 
 
 def fixture(root):
@@ -94,6 +97,69 @@ class FictionEpisodeReviewPacketTests(unittest.TestCase):
         self.assertEqual(index["scenes"][0]["actual_decoded_frames"]["midpoint"]["sha256"],
                          hashlib.sha256((self.root / "decoded-beat-01.png").read_bytes()).hexdigest())
 
+    def _prepare_pilot_checkpoint_pngs(self):
+        self.story["content_id"] = PILOT_ID
+        self.receipt["content_id"] = PILOT_ID
+        checkpoints = episode_action_checkpoints(
+            self.story, self.report["scenes"])
+        for item in checkpoints:
+            Image.new("RGB",(1080,1920),(20,46,71)).save(
+                self.root / item["filename"])
+        return checkpoints
+
+    def test_pilot_narration_checkpoints_are_real_unsigned_encoded_frame_evidence(self):
+        checkpoints = self._prepare_pilot_checkpoint_pngs()
+        self.assertEqual([c["checkpoint"] for c in checkpoints],
+                         ["plug-detached","first-blackout",
+                          "stair-approach","door-slam"])
+        self.assertEqual([c["sample_time_seconds"] for c in checkpoints],
+                         [4.46,4.56,6.4,6.68])
+        self.create()
+        index = json.loads((self.root/"review-frame-index.json").read_text())
+        self.assertEqual([len(s["narration_action_checkpoints"])
+                          for s in index["scenes"]], [0,0,2,2])
+        for row in index["scenes"]:
+            for point in row["narration_action_checkpoints"]:
+                self.assertEqual(
+                    point["sha256"],
+                    hashlib.sha256((self.root/point["filename"]).read_bytes()).hexdigest())
+                self.assertEqual(point["narrated_action_visible"],"not_verified")
+                self.assertLess(point["sample_time_seconds"],
+                                self.report["scenes"][row["beat"]-1]["start"] +
+                                self.report["scenes"][row["beat"]-1]["duration"])
+        self.assertEqual(index["semantic_quality"],"not_verified")
+        self.assertTrue(index["independent_full_video_review_required"])
+        self.assertFalse(index["publication_approval"])
+        self.assertFalse(index["publication_triggered"])
+
+    def test_missing_or_corrupted_action_frame_fails_before_creating_packet(self):
+        samples=self._prepare_pilot_checkpoint_pngs()
+        missing=self.root/samples[-1]["filename"]
+        missing.unlink()
+        with self.assertRaisesRegex(ValueError,"missing_actual_decoded_frame"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+        self.assertFalse((self.root/"review-frame-index.json").exists())
+        missing.write_bytes(b"not decoded")
+        with self.assertRaisesRegex(ValueError,"invalid_actual_decoded_png"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+
+    def test_pilot_identity_mismatch_rejects_action_checkpoint_inference(self):
+        self._prepare_pilot_checkpoint_pngs()
+        self.report["scenes"][3]["story_human_action"]="other_action"
+        with self.assertRaisesRegex(ValueError,"pilot_action_checkpoint_story_mismatch"):
+            self.create()
+        self.assertFalse(self.dest.exists())
+
+    def test_other_stories_do_not_inherit_episode_one_action_checkpoints(self):
+        self.assertEqual(episode_action_checkpoints(
+            self.story,self.report["scenes"]), [])
+        self.create()
+        index=json.loads((self.root/"review-frame-index.json").read_text())
+        self.assertTrue(all(not row["narration_action_checkpoints"]
+                            for row in index["scenes"]))
+
     def test_video_tampering_fails_closed(self):
         self.video.write_bytes(b"tampered-encoded-mp4")
         with self.assertRaisesRegex(ValueError, "encoded_video_hash_mismatch"):
@@ -163,6 +229,9 @@ class FictionEpisodeReviewPacketTests(unittest.TestCase):
         preserve = flow.index("      - name: Preserve full fiction episode, samples and receipts")
         self.assertLess(decode, packet)
         self.assertLess(packet, preserve)
+        decode_block=flow[decode:packet]
+        self.assertIn("episode_action_checkpoints",decode_block)
+        self.assertIn("checkpoint['sample_time_seconds']",decode_block)
         block = flow[packet:preserve]
         self.assertIn("python -m astra_v2.fiction_episode_review_packet", block)
         self.assertIn("visual-review-packet.json", block)
