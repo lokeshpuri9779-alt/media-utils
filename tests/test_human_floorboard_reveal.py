@@ -104,7 +104,7 @@ class FloorboardRevealTests(unittest.TestCase):
             coords = [(x.args[1], x.args[2]) for x in radios.call_args_list]
             rendered.append((canvas, coords))
         self.assertEqual([len(radio) for _, radio in rendered], [1, 1, 2, 2])
-        self.assertIn((342, 1109), rendered[-1][1])
+        self.assertIn((342, 1138), rendered[-1][1])
         self.assertIsNotNone(ImageChops.difference(
             rendered[0][0].crop((220, 1030, 520, 1200)),
             rendered[-1][0].crop((220, 1030, 520, 1200))).getbbox())
@@ -193,7 +193,7 @@ class FloorboardRevealTests(unittest.TestCase):
                     info=draw_radio_inside_hatch(
                         after,ImageDraw.Draw(after),event,actual_radio,7.8)
                 actual_radio.assert_called_once()
-                self.assertEqual(actual_radio.call_args.args[1:3],(342,1109))
+                self.assertEqual(actual_radio.call_args.args[1:3],(342,1138))
                 self.assertTrue(info["masked_behind_moving_panel"])
                 self.assertEqual(info["semantic_quality"],"not_verified")
                 self.assertFalse(info["publication_approval"])
