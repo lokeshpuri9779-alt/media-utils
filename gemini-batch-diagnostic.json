@@ -1,36 +1,56 @@
 {
-  "observed_at": "2026-11-07T12:58:01.912526+00:00",
-  "generated": 12,
+  "observed_at": "2026-11-07T21:51:16.756758+00:00",
+  "generated": 11,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 2,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 7,
+      "index": 1,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 11,
-      "reason": "invalid_story_structure"
+      "index": 3,
+      "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 14,
+      "index": 4,
       "reason": "insufficient_visual_diversity"
+    },
+    {
+      "index": 5,
+      "reason": "insufficient_beat_narration"
+    },
+    {
+      "index": 15,
+      "reason": "invalid_story_structure"
     },
     {
       "index": 16,
-      "reason": "provider_http_429"
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 17,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 18,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 19,
+      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 0,
-  "review_deferred": 12,
-  "approved": 0,
+  "reviewed": 10,
+  "review_deferred": 1,
+  "approved": 4,
   "review_issues": [
-    "review_deferred:rate_limited",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "The candidate story 'Felix the Cat and the Courtyard Box Correction' is part of an auto-generated template farm targeting search trends ('RAYVAN') with repetitive naming conventions and thematic elements very similar to previously published titles in the comparison history such as 'Barnaby the Cat and the Courtyard Box Exchange'.",
+    "The candidate story title 'Barnaby the Dog and Pip the Mouse and the Shared Ball' is an exact duplicate of a recently published premise provided in the comparison history ('Buster the Dog and Pip the Mouse and the Shared Ball' uses nearly identical character configurations and identical plotting, and the character pair directly overlaps with existing catalog patterns).",
+    "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -86,24 +106,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 12,
+    "generated": 11,
     "script_status_counts": {
-      "no_simple_flags": 12
+      "no_simple_flags": 11
     },
     "renderer_status_counts": {
-      "incompatible": 2,
-      "structurally_eligible": 10
+      "incompatible": 4,
+      "structurally_eligible": 7
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 2,
-      "none": 10
+      "cast_mismatch": 4,
+      "none": 7
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 11,
-      "partially_recognized": 1
+      "all_shots_recognized": 9,
+      "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 46,
-    "scene_taxonomy_unresolved_shots": 2,
+    "scene_taxonomy_recognized_shots": 41,
+    "scene_taxonomy_unresolved_shots": 3,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
