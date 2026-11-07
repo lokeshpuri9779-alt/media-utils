@@ -44,7 +44,9 @@ CRITICAL_HORIZONTAL_SPANS={
     "discover_radio": (275,880),
     "trace_cable": (490,919),
     "hear_warning": (260,450),
-    "flee_door": (190,510),
+    # Include right-hand carried radio and the visible staircase; earlier
+    # x<=901 late crop cut off the receiver as Mara approached the threshold.
+    "flee_door": (190,950),
     "guard_knocking_door": (275,938),
     "inspect_generator_clue": (282,973),
     "inspect_future_photograph": (237,905),
