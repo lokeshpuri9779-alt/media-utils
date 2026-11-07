@@ -9,6 +9,8 @@ on:
       - 'astra_v2/human_floorboard_reveal.py'
       - 'tests/test_human_floorboard_reveal.py'
       - 'astra_v2/human_cable_disconnect.py'
+      - 'astra_v2/human_staircase_escape.py'
+      - 'tests/test_pilot_staircase_escape.py'
       - 'tests/test_human_cable_disconnect.py'
       - 'astra_v2/human_story_composition.py'
       - 'tests/test_human_story_composition.py'
@@ -72,6 +74,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_human_floorboard_reveal.py' -v
           python -m unittest discover -s tests -p 'test_pilot_cable_hand_contact.py' -v
           python -m unittest discover -s tests -p 'test_human_cable_disconnect.py' -v
+          python -m unittest discover -s tests -p 'test_pilot_staircase_escape.py' -v
           python -m unittest discover -s tests -p 'test_expressive_mara_performance.py' -v
           python -m unittest discover -s tests -p 'test_human_story_choreography.py' -v
           python -m unittest discover -s tests -p 'test_human_stage_depth.py' -v

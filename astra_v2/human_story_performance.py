@@ -157,14 +157,22 @@ def _radio(draw, x, y, t, *, glow=True, portable=False):
     return (x-w//2, y-h//2, x+w//2, y+h//2)
 
 
-def _door(draw, open_amount):
-    """A physical door changing its opening, not a decorative portal glyph."""
+def _door(draw, open_amount, *, with_stairs=False):
+    """A physical hinged door, optionally revealing authored stairs behind it."""
     draw.polygon(((660,606),(947,606),(1007,1200),(619,1200)),
                  fill=(23, 32, 49), outline=(197, 156, 118), width=15)
     draw.polygon(((697,640),(920,638),(950,1155),(655,1155)),
                  fill=(13, 17, 35))
+    if with_stairs:
+        from astra_v2.human_staircase_escape import draw_staircase_beyond_door
+        draw_staircase_beyond_door(draw)
     travel=int(160*open_amount)
-    draw.polygon(((682,655),(902-travel,680),(916-travel,1127),(672,1150)),
+    # Only the pilot escape needs a shut door with no residual gap. Retain the
+    # established geometry for all 15 other reviewed actions.
+    right_top=944 if with_stairs else 902
+    right_bottom=958 if with_stairs else 916
+    draw.polygon(((682,655),(right_top-travel,680),
+                  (right_bottom-travel,1127),(672,1150)),
                  fill=(95, 72, 98), outline=(211, 187, 166), width=9)
     draw.ellipse((853-travel,895,872-travel,916), fill=GOLD)
     # Escape glow stays within the stage, separate from title/captions.
@@ -714,10 +722,17 @@ def draw_human_scene(image, shot, t):
                         alarm=True)
         draw_wrist_grip_on_plug(d,actor["right_hand"],unplug)
     elif action == "flee_door":
-        openness=max(.08,.76-state.progress*.63)
-        _door(d,openness)
-        actor=performer(d,420-round(140*state.attention),881,t,
-                        running=True,carrying=True,alarm=True)
+        from astra_v2.human_staircase_escape import (
+            escape_door_open_fraction, escape_run_fraction,
+        )
+        openness=escape_door_open_fraction(state.progress)
+        _door(d,openness,with_stairs=True)
+        # Source narration says "ran for the stairs" and the door "slammed
+        # shut behind her" near the first third of the beat. The actor must
+        # approach the right-hand threshold BEFORE that door closes, not walk
+        # toward it long after the audio describes the slam.
+        actor=performer(d,420+round(220*escape_run_fraction(state.progress)),
+                        881,t,running=True,carrying=True,alarm=True)
         # Receiver and gripping fingers follow the *same* IK wrist coordinates,
         # even when Mara moves left, changes stride or the camera reframes.
         from astra_v2.human_prop_interaction import draw_radio_in_hand
