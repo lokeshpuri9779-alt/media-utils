@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-07",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-11-07T08:07:32.486760+00:00",
+  "attempts": 7,
+  "confirmed_today": 6,
+  "last_attempt_at": "2026-11-07T08:54:24.827577+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -10389,29 +10389,82 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "nfTYRzwTmmg": {
-      "content_id": "trend-brief-2026-11-07-am",
+    },
+    "trend-brief-2026-11-07-am": {
+      "video_id": "nfTYRzwTmmg",
+      "confirmed_at": "2026-11-07T08:53:27.598320+00:00",
       "title": "Why jacob duffy Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-07",
-      "uploaded_at": "2026-11-07T08:07:33.924537+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-07T08:07:33.924537+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "RaP_2-wtBCU": {
+      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+      "title": "Finneas and the Flying Fig Fiasco",
+      "day": "2026-11-07",
+      "uploaded_at": "2026-11-07T08:54:26.224976+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad",
+      "story_beats": [
+        {
+          "headline": "The Runaway Cart",
+          "speech": "Oh no, that heavy wooden cart is rolling down the hill toward the fruit stalls with alarming speed!",
+          "visual": "signal",
+          "label": "Market Panic",
+          "story_beat": "reveal",
+          "visual_prompt": "Finneas the ferret stands wide-eyed on a cobblestone street, watching a wooden figcart roll downhill, holding a heavy iron wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Desperate Chase",
+          "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
+          "visual": "ship",
+          "label": "Swift Pursuit",
+          "story_beat": "build",
+          "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Intervention",
+          "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
+          "visual": "robot",
+          "label": "Wrench Jam",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Safe Market",
+          "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
+          "visual": "door",
+          "label": "Market Saved",
+          "story_beat": "payoff",
+          "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-07T08:06:26.030059+00:00",
+  "last_preflight_at": "2026-11-07T08:53:27.189782+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-07T08:07:36.941038+00:00",
+    "at": "2026-11-07T08:54:26.596734+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -21435,10 +21488,61 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-0dfbdb43e1b06a92e4d5": {
+      "at": "2026-11-07T08:54:24.827534+00:00",
+      "title": "Finneas and the Flying Fig Fiasco",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad",
+      "story_beats": [
+        {
+          "headline": "The Runaway Cart",
+          "speech": "Oh no, that heavy wooden cart is rolling down the hill toward the fruit stalls with alarming speed!",
+          "visual": "signal",
+          "label": "Market Panic",
+          "story_beat": "reveal",
+          "visual_prompt": "Finneas the ferret stands wide-eyed on a cobblestone street, watching a wooden figcart roll downhill, holding a heavy iron wrench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Desperate Chase",
+          "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
+          "visual": "ship",
+          "label": "Swift Pursuit",
+          "story_beat": "build",
+          "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Intervention",
+          "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
+          "visual": "robot",
+          "label": "Wrench Jam",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Safe Market",
+          "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
+          "visual": "door",
+          "label": "Market Saved",
+          "story_beat": "payoff",
+          "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-07T08:07:36.941002+00:00",
+    "at": "2026-11-07T08:54:26.596655+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -21449,21 +21553,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-07T08:07:36.941032+00:00",
+    "at": "2026-11-07T08:54:26.596720+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-07T08:07:00.870531+00:00",
+    "at": "2026-11-07T08:53:57.256705+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-11-07-am",
-    "video_url": "https://www.youtube.com/watch?v=nfTYRzwTmmg",
+    "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
+    "video_url": "https://www.youtube.com/watch?v=RaP_2-wtBCU",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-07T08:07:36.940455+00:00",
+    "at": "2026-11-07T08:54:26.595748+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -21475,7 +21579,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-07T08:07:36.940949+00:00",
+    "at": "2026-11-07T08:54:26.596564+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
