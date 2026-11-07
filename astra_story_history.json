@@ -9428,6 +9428,55 @@
       "central_conflict": "Dust and grime obscure the large observatory telescope lens just as the rare comet passes overhead.",
       "decisive_choice": "Orion wipes the heavy glass with a cleansing cloth and turns the brass focus wheel.",
       "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet."
+    },
+    {
+      "content_id": "rayvan-gemini-9b346828f0d04494340b",
+      "video_id": "xDo2iCkN0aM",
+      "confirmed_at": "2026-11-07T18:28:27.097054+00:00",
+      "title": "Sammy the Squirrel and Barnaby the Rabbit's Garden Clue",
+      "plot_fingerprint": "bbd4e67b731e82d668b673a74411b8526ac206b611350daf9e2c62a9cfff20f9",
+      "story_beats": [
+        {
+          "headline": "Conflicting Clues",
+          "speech": "Look at this garden signal pointing east, while our glowing flower petal indicates the western ridge path instead.",
+          "visual": "signal",
+          "label": "Garden Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a sunny green garden setting, Sammy the squirrel with bushy gray-brown fur and Barnaby the rabbit with soft white fur stand together. Sammy holds a bright yellow flower while pointing at a weathered wooden signal post showing a conflicting direction.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Observations",
+          "speech": "We must check every sign carefully before making our move, so let us place our clues side by side.",
+          "visual": "forest",
+          "label": "Garden Patch",
+          "story_beat": "build",
+          "visual_prompt": "In the lush green garden near a flower bed, Barnaby the rabbit carefully examines a planted flower while Sammy the squirrel holds a small brass key near the soil to inspect the surrounding dirt paths.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing Alignment",
+          "speech": "Hold the yellow flower directly against the wooden post so we can verify where the actual harvest trail leads.",
+          "visual": "door",
+          "label": "Wooden Post",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the open garden clearing, Sammy the squirrel holds the yellow flower right against the weathered wooden signal post to compare angles, while Barnaby the rabbit watches closely with an attentive expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unified Harvest",
+          "speech": "The petal alignment matches the true garden path perfectly, proving our morning route is clear and safe.",
+          "visual": "signal",
+          "label": "Harvest Path",
+          "story_beat": "payoff",
+          "visual_prompt": "In the bright garden setting, Sammy the squirrel and Barnaby the rabbit stand side by side smiling near the corrected wooden signal post, holding a shared basket filled with fresh vegetables.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
