@@ -30,6 +30,7 @@ on:
       - 'astra_v2/human_cinematic_camera.py'
       - 'studio_renderer.py'
       - 'astra_v2/fiction_episode_review_packet.py'
+      - 'astra_v2/episode_action_checkpoints.py'
       - 'tests/test_fiction_episode_review_packet.py'
       - 'tests/test_human_cinematic_staging.py'
       - 'astra_v2/unified_story_engine.py'
@@ -172,6 +173,20 @@ jobs:
                   'late_cue':action_state(action,.86*duration,duration).cue,
                   'changed_pixels':changed})
           (root/'temporal-story-evidence.json').write_text(json.dumps(temporal_evidence,indent=2))
+          # Only unsigned manual-review proof: actual encoded frames at the
+          # action checkpoints 10%/50%/86% sampling misses.
+          from astra_v2.episode_action_checkpoints import episode_action_checkpoints
+          story=json.loads((root/'story.json').read_text())
+          for checkpoint in episode_action_checkpoints(story,report['scenes']):
+              at=checkpoint['sample_time_seconds']
+              output=root/checkpoint['filename']
+              subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y',
+                              '-ss',f'{at:.6f}','-i',str(video),
+                              '-frames:v','1',str(output)],
+                             check=True,timeout=45)
+              with Image.open(output) as image:
+                  assert image.format=='PNG' and image.size==(1080,1920)
+                  image.verify()
           thumbs=[]
           for index,scene in enumerate(report['scenes'],1):
               at=float(scene['start'])+float(scene['duration'])*.5
