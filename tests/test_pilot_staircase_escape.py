@@ -11,6 +11,7 @@ from astra_errors import CreativeReject
 from astra_v2.human_action_choreography import action_state
 from astra_v2.human_staircase_escape import (
     STAIR_TREADS, draw_staircase_beyond_door, escape_door_open_fraction,
+    escape_run_fraction,
 )
 from astra_v2.human_story_performance import _door, _mara, draw_human_scene
 from astra_v2.human_story_composition import stage_crop_box
@@ -49,8 +50,12 @@ class StaircaseEscapeTests(unittest.TestCase):
         draw_steps.assert_called_once()
         self.assertNotEqual(early.getpixel((865,900)),BASE)
         self.assertEqual(escape_door_open_fraction(.05),.76)
-        self.assertEqual(escape_door_open_fraction(.65),.76)
+        self.assertEqual(escape_door_open_fraction(.14),.76)
+        self.assertLess(escape_door_open_fraction(.34),.05)
+        self.assertEqual(escape_door_open_fraction(.36),0.)
         self.assertEqual(escape_door_open_fraction(.96),0.)
+        self.assertEqual(escape_run_fraction(.03),0.)
+        self.assertGreaterEqual(escape_run_fraction(.32),.99)
 
     def test_stairs_appear_behind_door_and_door_shuts_in_last_phase(self):
         first=Image.new("RGB",(1080,1920),BASE)
@@ -104,6 +109,22 @@ class StaircaseEscapeTests(unittest.TestCase):
             sources[0].crop((530,600,985,1310)),
             sources[-1].crop((530,600,985,1310))).getbbox())
 
+    def test_approach_precedes_narrated_door_slam_not_last_caption(self):
+        # In the actual Episode 1 MP4 the 'door slammed shut' caption arrives
+        # at roughly 34% of shot 4, whereas the final 60% concerns the voice.
+        self.assertGreaterEqual(escape_run_fraction(.31),.99)
+        self.assertLess(escape_door_open_fraction(.34),.05)
+        self.assertGreater(escape_door_open_fraction(.12),.7)
+        shot=escape_beat()
+        sample=Image.new("RGB",(1080,1920),BASE)
+        with patch("astra_v2.human_story_performance._mara",
+                   wraps=_mara) as actor:
+            draw_human_scene(sample,shot,12*.34)
+        self.assertGreaterEqual(actor.call_args.args[1],630)
+        # The carried radio's extreme right edge remains in the camera crop.
+        box=stage_crop_box("flee_door",12*.96,12)
+        self.assertGreaterEqual(box[2],950)
+
     def test_door_motion_and_actor_path_are_smooth_at_30fps(self):
         prior_open=None
         prior_position=None
@@ -111,7 +132,7 @@ class StaircaseEscapeTests(unittest.TestCase):
             p=i/360
             state=action_state("flee_door",p*12,12)
             door=escape_door_open_fraction(p)
-            x=420+round(186*state.attention)+round(35*state.movement)
+            x=420+round(220*escape_run_fraction(p))+round(35*state.movement)
             if prior_open is not None:
                 self.assertLessEqual(abs(door-prior_open),.02)
                 self.assertLessEqual(abs(x-prior_position),8)
