@@ -9125,6 +9125,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-796f0a5efc13f02bbd12",
+      "video_id": "_Z6Y4KFRbTQ",
+      "confirmed_at": "2026-11-07T02:13:21.401323+00:00",
+      "title": "Felix the Ferret and Pip the Marten's Market Stall Key",
+      "plot_fingerprint": "eea0f56003c7634235bcecaa56294e825cd4b58b74ed680551fe43b3984ea4e5",
+      "story_beats": [
+        {
+          "headline": "The Withheld Key",
+          "speech": "You cannot open the register today, Pip. The responsibility is too heavy for us right now, and I must keep the key.",
+          "visual": "door",
+          "label": "Market Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the Ferret holding an iron key near a wooden market stall door, looking stern while Pip the Marten watches with a confused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inspecting the Hidden Ledger",
+          "speech": "Look closely at these pages. I kept this debt hidden so you would not worry about our failing harvest profits.",
+          "visual": "forest",
+          "label": "The Ledger Page",
+          "story_beat": "build",
+          "visual_prompt": "Felix the Ferret showing an open book on a tree stump table to Pip the Marten in a sunlit forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Burden",
+          "speech": "Take this key and my savings pouch. We will face the market ledger together instead of hiding from the deficit.",
+          "visual": "signal",
+          "label": "The Handover",
+          "story_beat": "mechanism",
+          "visual_prompt": "Felix the Ferret extending the iron key toward Pip the Marten, who reaches out with both paws in a sunlit outdoor market setting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Partnership",
+          "speech": "With both of us working the stall, the debts are paid and our market is finally secure.",
+          "visual": "door",
+          "label": "Stall Opening",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the Ferret and Pip the Marten standing side by side smiling near the open market stall door, holding the key together.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
