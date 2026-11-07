@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-07",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-11-07T02:14:12.066960+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-11-07T03:18:39.054882+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -10283,16 +10283,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "jjOJ0w0EBHA": {
-      "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
+    },
+    "rayvan-gemini-ba7f54be338a56b14f82": {
+      "video_id": "jjOJ0w0EBHA",
+      "confirmed_at": "2026-11-07T03:17:45.181835+00:00",
       "title": "Felix the Ferret and the Overstuffed Produce Cart",
-      "day": "2026-11-07",
-      "uploaded_at": "2026-11-07T02:14:13.892024+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-07T02:14:13.892024+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "a97d588c555f772f28c793b381953f0bdc1b41fbed37be06c402a6446317ab4b",
       "story_beats": [
@@ -10337,16 +10335,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "S_r30cj9pQk": {
+      "content_id": "rayvan-gemini-07e0a205227d5608b70d",
+      "title": "Bramble the Pangolin and Barnaby the Owl and the Moonlit Signal",
+      "day": "2026-11-07",
+      "uploaded_at": "2026-11-07T03:18:41.347491+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3aabbc0970cb284d7709d1a7f1928e4d4d4c18e6b3f85c3602e446f9d1d35591",
+      "story_beats": [
+        {
+          "headline": "The Misunderstood Flashes",
+          "speech": "Why does the high signal pulse so sharply against the dark trees tonight?",
+          "visual": "signal",
+          "label": "forest clearing signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a dense nocturnal forest, Bramble the pangolin stands on damp moss holding a lit lantern, looking up with a confused expression at distant blinking lights in the upper canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Discovery",
+          "speech": "Perhaps if I hold my lantern closer to the roots, the light will show my true peaceful intent.",
+          "visual": "forest",
+          "label": "mossy woodland floor",
+          "story_beat": "build",
+          "visual_prompt": "In the same dense nocturnal forest, Bramble the pangolin places his lit lantern beside a smooth stone on the forest floor, carefully adjusting the metal latch to steady the glowing flame.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Corrective Pulse",
+          "speech": "I must match your rhythm now so we can share this path without fear or confusion.",
+          "visual": "door",
+          "label": "hollow tree entrance",
+          "story_beat": "mechanism",
+          "visual_prompt": "In a quiet forest glen beside a hollow tree entrance, Barnaby the owl perches on a low branch holding a brass compass, tilting his head downward as he watches Bramble below adjust the lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harmonious Patrol",
+          "speech": "Our lights now shine as one steady guide through the quiet woods for everyone.",
+          "visual": "signal",
+          "label": "canopy signal exchange",
+          "story_beat": "payoff",
+          "visual_prompt": "In the moonlit forest, Bramble the pangolin stands holding his lantern high while Barnaby the owl spreads his wings on a branch above, both animals exchanging a synchronized, bright light signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-07T02:13:20.982707+00:00",
+  "last_preflight_at": "2026-11-07T03:17:44.722648+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-07T02:14:14.244699+00:00",
+    "at": "2026-11-07T03:18:41.656009+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -21309,10 +21362,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-07e0a205227d5608b70d": {
+      "at": "2026-11-07T03:18:39.054862+00:00",
+      "title": "Bramble the Pangolin and Barnaby the Owl and the Moonlit Signal",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "3aabbc0970cb284d7709d1a7f1928e4d4d4c18e6b3f85c3602e446f9d1d35591",
+      "story_beats": [
+        {
+          "headline": "The Misunderstood Flashes",
+          "speech": "Why does the high signal pulse so sharply against the dark trees tonight?",
+          "visual": "signal",
+          "label": "forest clearing signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a dense nocturnal forest, Bramble the pangolin stands on damp moss holding a lit lantern, looking up with a confused expression at distant blinking lights in the upper canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Discovery",
+          "speech": "Perhaps if I hold my lantern closer to the roots, the light will show my true peaceful intent.",
+          "visual": "forest",
+          "label": "mossy woodland floor",
+          "story_beat": "build",
+          "visual_prompt": "In the same dense nocturnal forest, Bramble the pangolin places his lit lantern beside a smooth stone on the forest floor, carefully adjusting the metal latch to steady the glowing flame.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Corrective Pulse",
+          "speech": "I must match your rhythm now so we can share this path without fear or confusion.",
+          "visual": "door",
+          "label": "hollow tree entrance",
+          "story_beat": "mechanism",
+          "visual_prompt": "In a quiet forest glen beside a hollow tree entrance, Barnaby the owl perches on a low branch holding a brass compass, tilting his head downward as he watches Bramble below adjust the lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harmonious Patrol",
+          "speech": "Our lights now shine as one steady guide through the quiet woods for everyone.",
+          "visual": "signal",
+          "label": "canopy signal exchange",
+          "story_beat": "payoff",
+          "visual_prompt": "In the moonlit forest, Bramble the pangolin stands holding his lantern high while Barnaby the owl spreads his wings on a branch above, both animals exchanging a synchronized, bright light signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-07T02:14:14.244621+00:00",
+    "at": "2026-11-07T03:18:41.655949+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -21323,21 +21427,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-07T02:14:14.244685+00:00",
+    "at": "2026-11-07T03:18:41.655999+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-07T02:13:50.956954+00:00",
+    "at": "2026-11-07T03:18:21.924804+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
-    "video_url": "https://www.youtube.com/watch?v=jjOJ0w0EBHA",
+    "content_id": "rayvan-gemini-07e0a205227d5608b70d",
+    "video_url": "https://www.youtube.com/watch?v=S_r30cj9pQk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-07T02:14:14.243713+00:00",
+    "at": "2026-11-07T03:18:41.655141+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -21349,7 +21453,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-07T02:14:14.244524+00:00",
+    "at": "2026-11-07T03:18:41.655863+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",

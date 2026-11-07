@@ -9174,6 +9174,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-ba7f54be338a56b14f82",
+      "video_id": "jjOJ0w0EBHA",
+      "confirmed_at": "2026-11-07T03:17:45.181835+00:00",
+      "title": "Felix the Ferret and the Overstuffed Produce Cart",
+      "plot_fingerprint": "a97d588c555f772f28c793b381953f0bdc1b41fbed37be06c402a6446317ab4b",
+      "story_beats": [
+        {
+          "headline": "The Wobbling Cart",
+          "speech": "Oh dear me, this hill is far too steep for such a terribly heavy load of vegetables!",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the ferret wearing a green waistcoat stands in a sunlit cobblestone market lane, holding a wooden box while looking terrified at a tilting produce cart packed with giant marrows.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Wedge Solution",
+          "speech": "If I quickly wedge this sturdy wooden box beneath the right wheel, the cart will stop sliding.",
+          "visual": "ship",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Felix the ferret in his green waistcoat crouches beside the wooden produce cart on the cobblestone hill, firmly placing a small wooden box under the rolling wheel.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Alley Reroute",
+          "speech": "We must steer carefully past the bakery wall where the ground is flat and safe from trouble.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Felix the ferret wearing a green waistcoat pulls the stable wooden produce cart away from the steep hill and into a flat, shaded alley next to a wooden bakery door.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Market Success",
+          "speech": "Every single marrow is safe and sound, ready for the morning vegetable stall display!",
+          "visual": "signal",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the ferret stands proudly beside his perfectly parked wooden produce cart filled with undamaged giant marrows outside the wooden market stall, holding a bright brass bell.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
