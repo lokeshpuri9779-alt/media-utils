@@ -13,6 +13,7 @@ from pathlib import Path
 from PIL import Image
 
 from astra_v2.story_visual_review_packet import snapshot, write_packet
+from astra_v2.episode_action_checkpoints import episode_action_checkpoints
 
 MAX_DECODED_PNG_BYTES = 15_000_000
 
@@ -83,6 +84,10 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                 or not abs(midpoint - (start + duration / 2)) <= .001):
             raise ValueError("invalid_narration_sample_alignment")
 
+    # Authored manual checkpoints include the actual time of the Episode 1
+    # unplug/blackout and stair/door events, which midpoint and 10%/86%
+    # samples miss. This is not a visual recognition or auto-approval gate.
+    checkpoints = episode_action_checkpoints(story, scenes)
     contact_manifest = {
         "source_mp4_sha256": media_hash,
         "contact_sheet_sha256": _hash(sheet_path),
@@ -108,6 +113,16 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                     "filename": filename,
                     "sha256": _decoded_frame_sha256(file),
                 }
+            # Insist on real, correctly decoded PNG evidence at the exact
+            # authored narration checkpoint times before writing any packet.
+            # The check is for file integrity, NOT action recognition.
+            action_samples = []
+            for spec in checkpoints:
+                if spec["beat"] == i:
+                    action_samples.append({
+                        **spec, "sha256": _decoded_frame_sha256(
+                            root / spec["filename"]),
+                    })
             # This compares storyboard and Studio METADATA, not any pixels.
             # Keep the generic motion label separate from the authored human
             # choreography so reviewers do not mistake "idle" for the script.
@@ -120,6 +135,7 @@ def create_episode_packet(story, report, receipt, *, video_path, sheet_path,
                 "planned_human_action": action_context["planned_human_action"],
                 "human_action_metadata_status": action_context["human_action_metadata_status"],
                 "actual_decoded_frames": images,
+                "narration_action_checkpoints": action_samples,
                 "narrated_action_visible": "not_verified",
                 "character_and_prop_fidelity": "not_verified",
             })
