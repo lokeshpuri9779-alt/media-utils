@@ -11,6 +11,7 @@ from astra_errors import CreativeReject
 from astra_v2.human_floorboard_reveal import (
     OPENING, LIFTED_BOARD, WOOD, VOID, EXPOSED_CABLE, CONCEALED_CABLE,
     draw_floorboard_hatch, draw_floor_cable_trace, _cable_progress_point,
+    draw_radio_inside_hatch, HIDDEN_RADIO_CAPTURE,
     floorboard_panel, floorboard_reveal_fraction,
 )
 from astra_v2.human_story_performance import draw_human_scene
@@ -177,6 +178,77 @@ class FloorboardRevealTests(unittest.TestCase):
                     draw_floor_cable_trace(img, 0, invalid)
         with self.assertRaises(CreativeReject):
             draw_floor_cable_trace(None, .5, .5)
+
+    def test_hidden_radio_is_clipped_behind_hatch_not_on_top_of_panel(self):
+        from astra_v2.human_story_performance import _radio
+        self.assertEqual(HIDDEN_RADIO_CAPTURE, (210,960,515,1210))
+        for event in (.25, .50, 1.0):
+            with self.subTest(event=event):
+                before=Image.new("RGB",(1080,1920),(23,35,50))
+                draw=ImageDraw.Draw(before)
+                draw_floorboard_hatch(draw,event)
+                after=before.copy()
+                with patch("astra_v2.human_story_performance._radio",
+                           wraps=_radio) as actual_radio:
+                    info=draw_radio_inside_hatch(
+                        after,ImageDraw.Draw(after),event,actual_radio,7.8)
+                actual_radio.assert_called_once()
+                self.assertEqual(actual_radio.call_args.args[1:3],(342,1109))
+                self.assertTrue(info["masked_behind_moving_panel"])
+                self.assertEqual(info["semantic_quality"],"not_verified")
+                self.assertFalse(info["publication_approval"])
+                diff=ImageChops.difference(after,before)
+                # No antenna, receiver case, or decorative pixel leaks from
+                # the lower room onto the upright panel or main stage.
+                for forbidden in ((0,0,1080,1077),
+                                  (0,1211,1080,1920),
+                                  (0,1078,210,1210),
+                                  (515,1078,1080,1210)):
+                    self.assertIsNone(diff.crop(forbidden).getbbox(),
+                                      (event,forbidden))
+                self.assertIsNotNone(diff.crop((240,1080,480,1190)).getbbox())
+                if event == .25:
+                    # The not-yet-lifted panel still occludes the receiver.
+                    self.assertEqual(after.getpixel((342,1100)),
+                                     before.getpixel((342,1100)))
+                if event == 1.0:
+                    self.assertNotEqual(after.getpixel((342,1100)),
+                                        before.getpixel((342,1100)))
+
+    def test_actual_post_camera_hatch_reveal_changes_when_radio_is_inside(self):
+        from astra_v2.human_cinematic_camera import apply_human_camera
+        shot=trace_shot()
+        t=12*.88
+        base=Image.new("RGB",(1080,1920),(23,35,50))
+        clipped=base.copy()
+        with patch("astra_v2.human_floorboard_reveal.draw_radio_inside_hatch",
+                   wraps=draw_radio_inside_hatch) as hidden:
+            draw_human_scene(clipped,shot,t)
+        hidden.assert_called_once()
+        with patch("astra_v2.human_floorboard_reveal.draw_radio_inside_hatch",
+                   return_value=None):
+            draw_human_scene(base,shot,t)
+        a=apply_human_camera(clipped,shot,t)
+        b=apply_human_camera(base,shot,t)
+        self.assertIsNotNone(ImageChops.difference(
+            a.crop((0,480,1080,1370)),b.crop((0,480,1080,1370))).getbbox())
+        for box in ((0,0,1080,480),(0,1400,1080,1920)):
+            self.assertIsNone(ImageChops.difference(
+                a.crop(box),b.crop(box)).getbbox())
+
+    def test_hidden_radio_rejects_invalid_surface_and_story_time(self):
+        from astra_v2.human_story_performance import _radio
+        frame=Image.new("RGB",(1080,1920),(23,35,50))
+        draw=ImageDraw.Draw(frame)
+        for bad in (-.1,1.1,float("nan"),float("inf"),None,True):
+            with self.subTest(bad=bad),self.assertRaises(CreativeReject):
+                draw_radio_inside_hatch(frame,draw,bad,_radio,1.)
+        with self.assertRaises(CreativeReject):
+            draw_radio_inside_hatch(None,draw,.5,_radio,1.)
+        with self.assertRaises(CreativeReject):
+            draw_radio_inside_hatch(frame,draw,.5,_radio,float("nan"))
+        with self.assertRaises(CreativeReject):
+            draw_radio_inside_hatch(frame,draw,.5,None,1.)
 
     def test_invalid_image_surface_rejected_without_silent_fallback(self):
         with self.assertRaises(CreativeReject):
