@@ -865,15 +865,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
-      "story_sha256": "660ae6cb607885e24f82b08eea3be513bb2c05d7a2d06aff1532ffd24995dee5",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original, coherent, and clear.; No copyright or trademark infringements detected.; Content is safe, family-friendly, and complies with YouTube guidelines.; Does not duplicate recent publication premises or characters.",
-      "reviewed_at": "2026-11-02T19:13:08.517118+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-23e65e65720310a75bd8",
       "story_sha256": "e5b1d588263a9f8bbe268c54c64e5d19cd3f794cb4f9cf085657b37e52863f16",
       "decision": "approve",
@@ -898,15 +889,6 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original and maintains strong causal coherence throughout the narrative beats.; There are no copyright or trademark violations, and the content is safe and suitable for all audiences.; It meets all YouTube policy guidelines and does not duplicate the premises or mechanisms of the provided comparison history.",
       "reviewed_at": "2026-11-04T12:40:54.788014+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-83a3632b24a89173d967",
-      "story_sha256": "139ae4fe6d359f44b8ccd8213d8d1bd3389220acf6b5d9b05276303b176b7728",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence.; There are no copyright or trademark violations.; The content is safe, appropriate for all audiences, and presents no YouTube policy risks.; Although it features an owl character similar to previous entries (e.g., Orion the Owl and the Silent Comet Ring), the premise, central conflict involving telescope lens dust, and specific decisive choices are distinct from the provided comparison history.",
-      "reviewed_at": "2026-11-04T12:40:58.018519+00:00",
       "review_model": "gemini-3.5-flash-lite"
     },
     {
@@ -964,15 +946,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-621ee8453d5f7f1a225f",
-      "story_sha256": "e7cb72bf35695b77e1a93137d4b69e25db1d370e5e8fc81213ab915a9bd76598",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and maintains strong causal coherence.; There are no copyright, trademark, or safety concerns.; The content is suitable for all audiences and complies with YouTube policies.; Characters and premises do not duplicate the provided comparison history.",
-      "reviewed_at": "2026-11-07T05:57:26.807768+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-77f03cf6fabcdc33b84e",
       "story_sha256": "301de1c6cdc283cec428316d78d338655e982b4fe418663c213ef15895159bb1",
       "decision": "approve",
@@ -982,12 +955,39 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-9b346828f0d04494340b",
-      "story_sha256": "7b2928b4b64b55ca0aab8146a50ed1d3e20417a1d706835dd5d758380d64b823",
+      "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+      "story_sha256": "c79539390510bf53467ca62b363cd242ff1b43835cfe0ff893dd34ff305d93a8",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original and does not duplicate recent publication premises, characters, or endings.; Causal coherence is clear, with a direct link between the characters' decisive action and the resolution.; The content is safe, appropriate for all audiences, and presents no YouTube policy risks.",
-      "reviewed_at": "2026-11-07T05:57:36.057986+00:00",
+      "review_notes": "The story is original and does not duplicate any recently published premises in the provided comparison history.; Causal coherence is maintained through a clear conflict, decisive choice, and logical resolution.; Content is safe, appropriate for general audiences, and carries no copyright or YouTube policy risks.",
+      "reviewed_at": "2026-11-07T21:50:45.506456+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-aedbe5902935f4994197",
+      "story_sha256": "1cb6868be5f1d79c8a60aba2902a9a6774c80eb585ab26a4f2f6a6686ba8ed92",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and features clear character motivations and plot progression.; It avoids repeating the specific premises, characters, settings, or resolutions of the provided comparison history while maintaining appropriate genre conventions.; There are no copyright, trademark, safety, or policy violations present in the text.",
+      "reviewed_at": "2026-11-07T21:50:46.580655+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-34cb202c4eb8fbcf82b3",
+      "story_sha256": "cd12a0b7873c302c2c2d16e6f3907044d19c8cfe45f9e42b3c2abec2236a2a55",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is coherent, original, and free of copyright infringements.; It does not duplicate any specific plot structures or endings from the provided comparison history.; The content is safe, suitable for all audiences, and adheres to YouTube policies.",
+      "reviewed_at": "2026-11-07T21:50:48.692271+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-ecec9a92e43935bd3302",
+      "story_sha256": "e4c0612db895f487f14fbdb7808b4adf17401344849878d4a53b01d2205b3c4d",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is completely original and does not duplicate any premises, characters, or causal mechanisms from the provided comparison history.; Causal coherence is strong, featuring a clear progression from the conflicting moisture signs to testing with a flower stem and resolving the issue.; The content is safe, appropriate for all audiences, and adheres to YouTube policy standards with no misleading or harmful elements.",
+      "reviewed_at": "2026-11-07T21:50:51.282458+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

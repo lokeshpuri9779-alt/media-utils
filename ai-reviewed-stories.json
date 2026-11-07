@@ -7193,80 +7193,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-0dfbdb43e1b06a92e4d5",
-      "title": "Finneas and the Flying Fig Fiasco",
-      "hook": "The Runaway Cart",
-      "question": "How did Finneas stop the runaway figcart from smashing the town square?",
-      "answer": "Finneas wedged his heavy iron wrench into the wheel spokes to halt the cart safely.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Runaway Cart",
-          "speech": "Oh no, that heavy wooden cart is rolling down the hill toward the fruit stalls with alarming speed!",
-          "visual": "signal",
-          "label": "Market Panic",
-          "story_beat": "reveal",
-          "visual_prompt": "Finneas the ferret stands wide-eyed on a cobblestone street, watching a wooden figcart roll downhill, holding a heavy iron wrench.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Desperate Chase",
-          "speech": "I must sprint past the market stalls right now and catch up to the speeding cart before it crashes.",
-          "visual": "ship",
-          "label": "Swift Pursuit",
-          "story_beat": "build",
-          "visual_prompt": "Finneas the ferret sprints frantically along the cobblestone lane chasing the rolling figcart, gripping his iron wrench tightly.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Intervention",
-          "speech": "Take this wrench and jam into the spokes right now to halt this rolling disaster once and for all.",
-          "visual": "robot",
-          "label": "Wrench Jam",
-          "story_beat": "mechanism",
-          "visual_prompt": "Finneas the ferret thrusts his heavy iron wrench into the spinning wooden wheel spokes of the runaway figcart on the sloping lane.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "A Safe Market",
-          "speech": "The cart is safely stopped right against the stone curb, and every single market stall is totally safe.",
-          "visual": "door",
-          "label": "Market Saved",
-          "story_beat": "payoff",
-          "visual_prompt": "Finneas the ferret stands proudly beside the halted figcart, leaning on his iron wrench with a relieved expression in the quiet town square.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A rogue wooden figcart rolls down the steep cobblestone lane toward the central market.",
-      "decisive_choice": "Finneas wedges his heavy iron wrench directly into the spinning wheel spokes.",
-      "resolution": "The cart stops instantly before reaching the market, saving the fruit stalls from ruin.",
-      "visual_bible": {
-        "style": "Bright, colorful marketplace comedy illustration with crisp outlines and clean family-friendly textures.",
-        "characters": {
-          "Finneas": "A slender ferret with warm golden-brown fur, a cream-colored bib chest, wearing a small blue canvas vest and holding a heavy iron wrench."
-        },
-        "locations": {
-          "Market Lane": "A sunlit medieval cobblestone alleyway lined with rustic wooden market stalls and terracotta tile roofs."
-        },
-        "objects": {
-          "wrench": "A solid, heavy iron wrench with a dull metallic sheen and standard open-end jaw.",
-          "figcart": "A small two-wheeled wooden handcart filled with oversized purple figs and rustic wooden side rails."
-        }
-      },
-      "plot_fingerprint": "4e7e1b1e5d07f4803036cbc054eddc0b806397f00a0de33f2e641681e16546ad"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-23e65e65720310a75bd8",
       "title": "Bramble Ridge and the Frost-Locked Timber Gate",
       "hook": "The Frozen Obstacle",
@@ -7486,81 +7412,6 @@
         }
       },
       "plot_fingerprint": "0ea4fde6ac25d927f0b1ec640aada8242cf769c7da9d4e7c84459c46bf368b56"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-83a3632b24a89173d967",
-      "title": "Orion the Owl and the Starlight Observatory Lens",
-      "hook": "Obscuring Dust",
-      "question": "How can Orion restore the clouded observatory telescope before the rare comet eclipse begins?",
-      "answer": "Orion cleans the antique objective lens with a soft cloth and aligns the brass gear.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Obscuring Dust",
-          "speech": "Oh no, the observatory lens is clouded over with thick dust right before the grand comet arrives tonight.",
-          "visual": "signal",
-          "label": "Lens Fogged",
-          "story_beat": "reveal",
-          "visual_prompt": "An observant brown owl standing inside a stone tower observatory, looking worriedly at a massive dusty telescope lens illuminated by a glowing star map signal on the wall.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Polishing the Glass",
-          "speech": "I must clean this glass surface immediately so we do not miss the stellar alignment in the night sky.",
-          "visual": "robot",
-          "label": "Wiping Grime",
-          "story_beat": "build",
-          "visual_prompt": "Orion the owl holding a small cloth in his beak while carefully wiping the heavy brass telescope barrel inside the moonlit observatory.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Turning the Gear",
-          "speech": "Now I need to adjust the brass focus ring to bring the distant constellation into sharp clear focus.",
-          "visual": "ship",
-          "label": "Adjusting Focus",
-          "story_beat": "mechanism",
-          "visual_prompt": "Orion the owl standing on a wooden stool, turning a heavy brass dial on the side of the observatory telescope pointing toward a starry sky portal.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Stellar Payoff",
-          "speech": "Look at that brilliant comet arc across the night sky, perfectly framed through our freshly cleaned observatory lens!",
-          "visual": "planet",
-          "label": "Clear Comet View",
-          "story_beat": "payoff",
-          "visual_prompt": "Orion the owl smiling happily atop his wooden perch inside the cozy observatory, gazing through the pristine telescope at a vibrant glowing planet and comet.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Dust and grime obscure the large observatory telescope lens just as the rare comet passes overhead.",
-      "decisive_choice": "Orion wipes the heavy glass with a cleansing cloth and turns the brass focus wheel.",
-      "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet.",
-      "visual_bible": {
-        "style": "Warm whimsical storybook illustration with rich night blues, amber golds, and soft glowing starlight.",
-        "characters": {
-          "Orion": "A wise brown owl with soft feathered plumage, amber-yellow eyes, wearing a tiny midnight-blue scholar cap."
-        },
-        "locations": {
-          "Observatory": "A round stone tower room filled with ancient star charts, wooden bookshelves, and a massive brass telescope."
-        },
-        "objects": {
-          "telescope": "A polished brass and iron telescope with a large glass objective lens and intricate focus gears.",
-          "stool": "A short sturdy wooden stool used by the owl to reach the upper telescope controls.",
-          "map": "A rolled parchment star chart glowing softly with faint golden ink."
-        }
-      },
-      "plot_fingerprint": "0b787452e95a799f89de14ee645f711d0ea26dddeea7044e3604254f4138c85e"
     },
     {
       "genre": "fiction",
@@ -8020,80 +7871,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-621ee8453d5f7f1a225f",
-      "title": "Pippa the Pangolin and Orlo the Owl's Midnight Promise",
-      "hook": "The Glowing Temptation",
-      "question": "Will Pippa honor her solemn nocturnal promise or succumb to the temptation of the unattended orchard lantern?",
-      "answer": "Pippa chooses to uphold her promise by refusing the unattended lantern, allowing Orlo to safely complete their synchronized moonlight navigation ritual.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Glowing Temptation",
-          "speech": "That flickering orchard lantern shines so brightly in the darkness, tempting me to take it closer.",
-          "visual": "forest",
-          "label": "Orchard Lantern",
-          "story_beat": "reveal",
-          "visual_prompt": "Pippa the pangolin with scaly brown armor and a long tapered tail stands inside a dark woodland forest at night, staring longingly at a glowing brass lantern resting on a mossy stone wall, while Orlo the owl perched on a high tree branch watches closely.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hesitation",
-          "speech": "I promised Orlo I would never move the lantern alone before the midnight signal.",
-          "visual": "signal",
-          "label": "Stretched Paws",
-          "story_beat": "build",
-          "visual_prompt": "Pippa the pangolin stands on the mossy stone wall inside the nighttime woodland forest, holding her empty paws outward in a defensive gesture away from the glowing brass lantern to show she is resisting the temptation.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Deliberate Choice",
-          "speech": "I choose to keep my word and leave the lantern untouched for our shared journey.",
-          "visual": "door",
-          "label": "Stepping Back",
-          "story_beat": "mechanism",
-          "visual_prompt": "Pippa the pangolin physically steps backward off the mossy stone wall inside the nighttime woodland forest, leaving the glowing brass lantern completely undisturbed while looking upward toward her partner.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Mutual Success",
-          "speech": "Your steady signal proves our bond is stronger than any fleeting curiosity in the night.",
-          "visual": "signal",
-          "label": "Shared Signal",
-          "story_beat": "payoff",
-          "visual_prompt": "Pippa the pangolin stands firmly beside the undisturbed brass lantern in the nighttime woodland forest, raising one paw in a clear signaling gesture while Orlo the owl swoops down with outstretched wings to land safely beside her.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Pippa the pangolin promised Orlo the owl never to touch the flickering orchard lantern left unattended on the mossy stone wall, but the glowing light tempts her curiosity.",
-      "decisive_choice": "Pippa steps back from the mossy stone wall and holds out her empty paws toward Orlo instead of reaching for the lantern.",
-      "resolution": "Orlo sights Pippa's clear signal in the moonlight, confirming mutual trust and allowing their nocturnal cooperation ritual to succeed.",
-      "visual_bible": {
-        "style": "Cinematic stop-motion puppet animation with detailed tactile textures, warm dramatic moonlight, and rich natural forest colors.",
-        "characters": {
-          "Pippa": "A small pangolin with layered amber-brown scales, large curious dark eyes, short sturdy legs, and a long flexible tail.",
-          "Orlo": "A barn owl with pale white and golden-brown speckled feathers, large round amber eyes, and soft feathered wings."
-        },
-        "locations": {
-          "forest": "A misty, enchanted nighttime woodland forest featuring ancient moss-covered stone walls, fern-draped ground, and towering dark pines under a glowing moon."
-        },
-        "objects": {
-          "lantern": "A classic brass lantern with intricate metal framing and a warm, steady glowing candle flame inside."
-        }
-      },
-      "plot_fingerprint": "3dbcde162d1ef0ef754d18bd225fa92cdd5703ebfbcc18a9a06ee976f0886d8e"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-77f03cf6fabcdc33b84e",
       "title": "Tansy the Tapir and the Midday Meadow Shade",
       "hook": "The Hidden Sprout",
@@ -8167,11 +7944,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-9b346828f0d04494340b",
-      "title": "Sammy the Squirrel and Barnaby the Rabbit's Garden Clue",
-      "hook": "Conflicting Clues",
-      "question": "Which garden clue reveals the true path of the morning harvest?",
-      "answer": "Comparing the dew-kissed flower and the tilted garden signal confirms the correct harvest row.",
+      "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+      "title": "Silas the Stoat and Fennec the Fox\u2019s Winter Book Rule",
+      "hook": "The Cabin Standoff",
+      "question": "How can two rivals fairly share a single book in a cold cabin?",
+      "answer": "By alternating pages based on the falling snow, they ensure both enjoy the story equally.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8179,65 +7956,286 @@
       ],
       "story_beats": [
         {
-          "headline": "Conflicting Clues",
-          "speech": "Look at this garden signal pointing east, while our glowing flower petal indicates the western ridge path instead.",
-          "visual": "signal",
-          "label": "Garden Signal",
-          "story_beat": "reveal",
-          "visual_prompt": "In a sunny green garden setting, Sammy the squirrel with bushy gray-brown fur and Barnaby the rabbit with soft white fur stand together. Sammy holds a bright yellow flower while pointing at a weathered wooden signal post showing a conflicting direction.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Gathering Observations",
-          "speech": "We must check every sign carefully before making our move, so let us place our clues side by side.",
-          "visual": "forest",
-          "label": "Garden Patch",
-          "story_beat": "build",
-          "visual_prompt": "In the lush green garden near a flower bed, Barnaby the rabbit carefully examines a planted flower while Sammy the squirrel holds a small brass key near the soil to inspect the surrounding dirt paths.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Testing Alignment",
-          "speech": "Hold the yellow flower directly against the wooden post so we can verify where the actual harvest trail leads.",
+          "headline": "The Cabin Standoff",
+          "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts.",
           "visual": "door",
-          "label": "Wooden Post",
-          "story_beat": "mechanism",
-          "visual_prompt": "In the open garden clearing, Sammy the squirrel holds the yellow flower right against the weathered wooden signal post to compare angles, while Barnaby the rabbit watches closely with an attentive expression.",
+          "label": "The Cabin Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the corners of an old book.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Unified Harvest",
-          "speech": "The petal alignment matches the true garden path perfectly, proving our morning route is clear and safe.",
+          "headline": "A Fair Proposal",
+          "speech": "Fennec suggests they track the falling snowflakes outside to determine whose turn it is to read the next page.",
+          "visual": "forest",
+          "label": "Cabin Window",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fennec the fox points a paw toward the window revealing a snowy forest, while Silas the stoat sits on a chair listening intently, the book resting on the table between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reading Cycle",
+          "speech": "Silas reads his page as the snow continues to fall, waiting for his partner to take the book when requested.",
           "visual": "signal",
-          "label": "Harvest Path",
+          "label": "Snowy Cabin Interior",
+          "story_beat": "build",
+          "visual_prompt": "Silas the stoat holds the open book and reads with a focused expression, while Fennec the fox sits patiently nearby in the cozy wooden cabin, watching the snow outside the window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Completion",
+          "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm.",
+          "visual": "door",
+          "label": "Final Cabin View",
           "story_beat": "payoff",
-          "visual_prompt": "In the bright garden setting, Sammy the squirrel and Barnaby the rabbit stand side by side smiling near the corrected wooden signal post, holding a shared basket filled with fresh vegetables.",
+          "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden door settles.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Sammy the squirrel and Barnaby the rabbit find conflicting directional clues near the vegetable patch, threatening to misdirect their morning harvest.",
-      "decisive_choice": "Sammy holds the yellow flower next to the weathered wooden signal post to check the true alignment instead of guessing blindly.",
-      "resolution": "The side-by-side comparison reveals the authentic garden trail, allowing both animals to complete the harvest without error.",
+      "central_conflict": "Silas the Stoat and Fennec the Fox both want to read the only book available in the cabin.",
+      "decisive_choice": "They agree to alternate reading one page for every snowfall interval they observe outside.",
+      "resolution": "Both animals complete the book peacefully without further fighting over the text.",
       "visual_bible": {
-        "style": "Bright, charming animated illustration with warm cinematic lighting and rich natural textures.",
+        "style": "Warm, atmospheric storybook illustration with soft lighting and detailed fur textures.",
         "characters": {
-          "Sammy the Squirrel": "An energetic squirrel with bushy gray-brown fur, a twitchy tail, bright dark eyes, and a curious expression.",
-          "Barnaby the Rabbit": "A calm, thoughtful rabbit with soft white fur, long floppy ears, and a gentle demeanor."
+          "Silas": "A small, lithe white stoat with black-tipped ears and a curious expression.",
+          "Fennec": "A slender orange fox with large ears and a bushy tail, wearing a calm look."
         },
         "locations": {
-          "Garden": "A vibrant, sunlit vegetable garden featuring rich soil rows, blooming flowers, and rustic wooden fences."
+          "Cabin": "A cozy, rustic wooden room with rough-hewn walls and a small viewing window."
         },
         "objects": {
-          "flower": "A bright yellow garden flower with fresh green leaves and a delicate stem.",
-          "signal": "A rustic weathered wooden signpost with an arrow indicator carved into the grain.",
-          "key": "A small, tarnished brass key with a simple rectangular handle."
+          "book": "A weathered, thick hardcover volume with a worn brown leather spine and gold lettering."
         }
       },
-      "plot_fingerprint": "bbd4e67b731e82d668b673a74411b8526ac206b611350daf9e2c62a9cfff20f9"
+      "plot_fingerprint": "8a6412ed07b87bbf5c53823b115b9d073b11c245eeb9535fc738c465907055a7"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-aedbe5902935f4994197",
+      "title": "Bramble the Pangolin and Barnaby the Owl's Moonlit Pathway",
+      "hook": "The Hidden Glow",
+      "question": "Why did Bramble hoard the glowing lantern inside the dark forest?",
+      "answer": "Bramble concealed the lantern to shield Barnaby from dazzling predators while guiding them safely through the shadows.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Hidden Glow",
+          "speech": "Why would Bramble keep the glowing lantern tucked away behind the stone in this dark forest?",
+          "visual": "forest",
+          "label": "forest path",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the pangolin stands on a dark forest path holding a glowing lantern behind a large mossy rock, casting faint light while Barnaby the owl watches from an overhead branch with a questioning expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Approach",
+          "speech": "Barnaby glides closer down the misty trail to inspect the strange hiding spot instead of fleeing.",
+          "visual": "signal",
+          "label": "lantern signal",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the owl lands on the dark forest path next to Bramble the pangolin, pointing his wing toward the lantern while Bramble holds it low near the ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protective Truth",
+          "speech": "Bramble gently tilts the lantern downward to reveal a sharp-eyed predator lurking quietly in the upper branches.",
+          "visual": "door",
+          "label": "canopy opening",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble the pangolin points upward with one claw toward the dark forest canopy, showing Barnaby the owl a shadowy shape hidden above while holding the lantern steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Journey",
+          "speech": "Together they walk side by side down the moonlit trail, fully trusting each other beneath the night sky.",
+          "visual": "signal",
+          "label": "path signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the pangolin and Barnaby the owl walk together along the dark forest path, carrying the glowing lantern between them as safe light guides their journey forward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Bramble hides the only lantern behind a large rock, causing Barnaby to question his friend's selfish intentions in the dark forest.",
+      "decisive_choice": "Barnaby flies low to investigate Bramble's actions instead of flying away alone.",
+      "resolution": "Barnaby discovers Bramble was protecting him from a lurking predator, restoring complete trust between the two friends.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion animation puppet style with rich textures and dramatic moonlight lighting",
+        "characters": {
+          "Bramble": "A small armored pangolin with dusty brown scales, gentle amber eyes, and a curled tail.",
+          "Barnaby": "A wise snowy owl with soft white and gray plumage, bright yellow eyes, and feathered wings."
+        },
+        "locations": {
+          "forest": "A dense, mystical woodland path surrounded by ancient trees, mossy boulders, and soft glowing ferns under a starry night sky."
+        },
+        "objects": {
+          "lantern": "A small brass lantern with glowing amber glass panels emitting a warm light."
+        }
+      },
+      "plot_fingerprint": "63c73b23cbf641ab9025ae536107bd9b462112c9d36583a6e018be81a51ca07c"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-34cb202c4eb8fbcf82b3",
+      "title": "Finn the Fox and Barnaby the Rabbit's Woodland Clue",
+      "hook": "The Torn Pages Discovered",
+      "question": "Why did Finn falsely accuse Barnaby of ruining the pages of their favorite woodland study guide?",
+      "answer": "Finn discovered muddy paw prints near the torn botanical volume, but realized too late that the prints matched his own wet boots.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Torn Pages Discovered",
+          "speech": "Look at these torn pages in our book! Did you ruin our study guide, Barnaby?",
+          "visual": "forest",
+          "label": "Forest Clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "In a lush green forest clearing, Finn the Fox stands pointing angrily at an open book with torn pages resting on a tree stump, while Barnaby the Rabbit sits opposite him looking startled and holding a single blue flower.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Examining the Footprints",
+          "speech": "I did not touch the book, Finn. Look at the muddy boot prints on the ground near the stump.",
+          "visual": "signal",
+          "label": "Muddy Trail",
+          "story_beat": "build",
+          "visual_prompt": "In the same lush green forest clearing, Barnaby the Rabbit points down toward a trail of muddy boot prints on the soil beside the tree stump, while Finn the Fox looks down at his own feet with a surprised expression, holding a closed book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sincere Apology",
+          "speech": "These muddy boot prints match my own boots! I am truly sorry for blaming you unfairly, my friend.",
+          "visual": "forest",
+          "label": "Clearing Apology",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush green forest clearing, Finn the Fox holds up his muddy boot beside the tracks on the ground, bowing his head in remorse toward Barnaby the Rabbit, who gently holds out a white flower in forgiveness.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reading Together Again",
+          "speech": "Let us tape the pages back together and read our botanical guide side by side under the trees.",
+          "visual": "door",
+          "label": "Cozy Den Entrance",
+          "story_beat": "payoff",
+          "visual_prompt": "Outside a cozy wooden den entrance nestled within the lush green forest, Finn the Fox and Barnaby the Rabbit sit peacefully together on a mossy log, both holding the repaired book open between them while a bright yellow flower rests on the ground nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn blames Barnaby for tearing the book pages until physical evidence proves Finn made the error himself.",
+      "decisive_choice": "Finn compares his wet boot prints directly against the smudges on the ground and openly apologizes to Barnaby.",
+      "resolution": "Barnaby accepts the apology and shares the book, restoring total friendship and mutual understanding.",
+      "visual_bible": {
+        "style": "Charming, warm storybook illustration style with soft lighting, rich natural textures, and gentle expressive animal characters.",
+        "characters": {
+          "Finn the Fox": "A clever red fox with bright orange fur, a white-tipped tail, a small dark nose, wearing a forest-green vest and muddy brown boots.",
+          "Barnaby the Rabbit": "A gentle white rabbit with long floppy ears, soft pink inner ears, twitching whiskers, and a light blue waistcoat."
+        },
+        "locations": {
+          "Forest Clearing": "A sunlit woodland clearing surrounded by tall green ferns, ancient oak trees, and soft mossy ground."
+        },
+        "objects": {
+          "book": "A thick, old-fashioned hardcover book with faded green binding and cream-colored parchment pages.",
+          "flower": "A vibrant wild blossom with delicate petals on a slender green stem.",
+          "box": "A compact wooden storage box with a brass latch."
+        }
+      },
+      "plot_fingerprint": "6189452844d217c30ad61a12c59b4461227bb6f9ad02d2b1be6e01fc0c48159d"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-ecec9a92e43935bd3302",
+      "title": "Toby the Tapir and the Two-Flower Meadow Shift",
+      "hook": "The Confusing Petals",
+      "question": "Which flower patch needs immediate watering before the midday sun peaks?",
+      "answer": "Toby tests both soil samples with a wet flower stem to find the true dry patch.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Confusing Petals",
+          "speech": "These two flower patches look entirely different today, leaving me completely unsure which one needs my careful watering attention first.",
+          "visual": "forest",
+          "label": "forest clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "Toby the tapir stands in a lush forest clearing, looking down with a curious expression at two distinct flower patches with differing petal conditions, holding nothing in his paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Stem Experiment",
+          "speech": "I must gently press a fresh flower stem into each patch of earth to test the hidden moisture levels safely.",
+          "visual": "signal",
+          "label": "soil test signal",
+          "story_beat": "build",
+          "visual_prompt": "Toby the tapir kneels in the forest clearing, carefully pressing a single flower stem into the dark soil of the left patch to compare its dampness.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Discovery",
+          "speech": "This soil feels completely dry around the stem base, proving this exact flower bed requires immediate water.",
+          "visual": "door",
+          "label": "gateway plot",
+          "story_beat": "mechanism",
+          "visual_prompt": "Toby the tapir sits upright in the forest clearing, examining the dry flower stem he just pulled from the earth with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Blooming Result",
+          "speech": "Adding water right here brings both flower patches back to vibrant life, proving my careful test worked wonderfully.",
+          "visual": "forest",
+          "label": "restored meadow",
+          "story_beat": "payoff",
+          "visual_prompt": "Toby the tapir smiles happily in the vibrant forest clearing, holding a single blooming flower near the newly watered and flourishing garden beds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Toby the tapir notices two adjacent flower patches showing conflicting moisture signs, making it unclear which one needs watering.",
+      "decisive_choice": "Toby tests both soil samples with a flower stem to find the true dry patch.",
+      "resolution": "Toby correctly identifies the thirsty flowers, waters them just in time, and restores the vibrant meadow.",
+      "visual_bible": {
+        "style": "A warm, charming storybook illustration style with soft lighting and rich natural colors.",
+        "characters": {
+          "Toby": "A gentle gray tapir with soft rounded features, large kind eyes, and a short flexible snout."
+        },
+        "locations": {
+          "forest clearing": "A sunlit meadow opening surrounded by tall green trees, soft mossy ground, and colorful wildflowers."
+        },
+        "objects": {
+          "flower": "A bright red blossom with a sturdy green stem and delicate petals."
+        }
+      },
+      "plot_fingerprint": "892c75524f206ea8f3e3ca7e729d10223d58c189147e6178b05c2a44019a2555"
     }
   ]
 }
