@@ -12,7 +12,7 @@ from astra_errors import CreativeReject
 
 
 # The boarded trapdoor sits beside the visible cable end and the authored
-# second radio (center 342, 1109). Keep all geometry in the middle scene stage.
+# second radio (center 342, 1138). Keep all geometry in the middle scene stage.
 OPENING = ((238, 1078), (468, 1078), (500, 1190), (217, 1190))
 # Rotate around the FAR edge of the cavity. The original leftward-open
 # panel left the camera crop in the decoded MP4 despite passing pixel tests.
@@ -174,7 +174,7 @@ def draw_radio_inside_hatch(image, draw, event, radio_draw, t):
     l, top, r, bottom = HIDDEN_RADIO_CAPTURE
     before = image.crop((l, top, r, bottom))
     # The existing receiver, original proportions and original radio timing.
-    radio_draw(draw, 342, 1109, t, glow=False, portable=True)
+    radio_draw(draw, 342, 1138, t, glow=False, portable=True)
     painted = image.crop((l, top, r, bottom))
     image.paste(before, (l, top))
 
