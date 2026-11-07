@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-07",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
-  "confirmed_today": 8,
-  "last_attempt_at": "2026-11-07T15:35:24.396080+00:00",
+  "attempts": 10,
+  "confirmed_today": 9,
+  "last_attempt_at": "2026-11-07T16:57:55.854752+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -10507,16 +10507,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "X4OjHiYMDu8": {
-      "content_id": "rayvan-gemini-83a3632b24a89173d967",
+    },
+    "rayvan-gemini-83a3632b24a89173d967": {
+      "video_id": "X4OjHiYMDu8",
+      "confirmed_at": "2026-11-07T16:57:03.483403+00:00",
       "title": "Orion the Owl and the Starlight Observatory Lens",
-      "day": "2026-11-07",
-      "uploaded_at": "2026-11-07T15:35:26.483983+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-07T15:35:26.483983+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "0b787452e95a799f89de14ee645f711d0ea26dddeea7044e3604254f4138c85e",
       "story_beats": [
@@ -10564,16 +10562,71 @@
       "central_conflict": "Dust and grime obscure the large observatory telescope lens just as the rare comet passes overhead.",
       "decisive_choice": "Orion wipes the heavy glass with a cleansing cloth and turns the brass focus wheel.",
       "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "xDo2iCkN0aM": {
+      "content_id": "rayvan-gemini-9b346828f0d04494340b",
+      "title": "Sammy the Squirrel and Barnaby the Rabbit's Garden Clue",
+      "day": "2026-11-07",
+      "uploaded_at": "2026-11-07T16:57:57.302968+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "bbd4e67b731e82d668b673a74411b8526ac206b611350daf9e2c62a9cfff20f9",
+      "story_beats": [
+        {
+          "headline": "Conflicting Clues",
+          "speech": "Look at this garden signal pointing east, while our glowing flower petal indicates the western ridge path instead.",
+          "visual": "signal",
+          "label": "Garden Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a sunny green garden setting, Sammy the squirrel with bushy gray-brown fur and Barnaby the rabbit with soft white fur stand together. Sammy holds a bright yellow flower while pointing at a weathered wooden signal post showing a conflicting direction.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Observations",
+          "speech": "We must check every sign carefully before making our move, so let us place our clues side by side.",
+          "visual": "forest",
+          "label": "Garden Patch",
+          "story_beat": "build",
+          "visual_prompt": "In the lush green garden near a flower bed, Barnaby the rabbit carefully examines a planted flower while Sammy the squirrel holds a small brass key near the soil to inspect the surrounding dirt paths.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing Alignment",
+          "speech": "Hold the yellow flower directly against the wooden post so we can verify where the actual harvest trail leads.",
+          "visual": "door",
+          "label": "Wooden Post",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the open garden clearing, Sammy the squirrel holds the yellow flower right against the weathered wooden signal post to compare angles, while Barnaby the rabbit watches closely with an attentive expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unified Harvest",
+          "speech": "The petal alignment matches the true garden path perfectly, proving our morning route is clear and safe.",
+          "visual": "signal",
+          "label": "Harvest Path",
+          "story_beat": "payoff",
+          "visual_prompt": "In the bright garden setting, Sammy the squirrel and Barnaby the rabbit stand side by side smiling near the corrected wooden signal post, holding a shared basket filled with fresh vegetables.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-07T15:24:25.726520+00:00",
+  "last_preflight_at": "2026-11-07T16:57:03.024007+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-07T15:35:26.918802+00:00",
+    "at": "2026-11-07T16:57:57.630567+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -21753,10 +21806,61 @@
       "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9b346828f0d04494340b": {
+      "at": "2026-11-07T16:57:55.854735+00:00",
+      "title": "Sammy the Squirrel and Barnaby the Rabbit's Garden Clue",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "bbd4e67b731e82d668b673a74411b8526ac206b611350daf9e2c62a9cfff20f9",
+      "story_beats": [
+        {
+          "headline": "Conflicting Clues",
+          "speech": "Look at this garden signal pointing east, while our glowing flower petal indicates the western ridge path instead.",
+          "visual": "signal",
+          "label": "Garden Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a sunny green garden setting, Sammy the squirrel with bushy gray-brown fur and Barnaby the rabbit with soft white fur stand together. Sammy holds a bright yellow flower while pointing at a weathered wooden signal post showing a conflicting direction.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Observations",
+          "speech": "We must check every sign carefully before making our move, so let us place our clues side by side.",
+          "visual": "forest",
+          "label": "Garden Patch",
+          "story_beat": "build",
+          "visual_prompt": "In the lush green garden near a flower bed, Barnaby the rabbit carefully examines a planted flower while Sammy the squirrel holds a small brass key near the soil to inspect the surrounding dirt paths.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing Alignment",
+          "speech": "Hold the yellow flower directly against the wooden post so we can verify where the actual harvest trail leads.",
+          "visual": "door",
+          "label": "Wooden Post",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the open garden clearing, Sammy the squirrel holds the yellow flower right against the weathered wooden signal post to compare angles, while Barnaby the rabbit watches closely with an attentive expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Unified Harvest",
+          "speech": "The petal alignment matches the true garden path perfectly, proving our morning route is clear and safe.",
+          "visual": "signal",
+          "label": "Harvest Path",
+          "story_beat": "payoff",
+          "visual_prompt": "In the bright garden setting, Sammy the squirrel and Barnaby the rabbit stand side by side smiling near the corrected wooden signal post, holding a shared basket filled with fresh vegetables.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-07T15:35:26.918743+00:00",
+    "at": "2026-11-07T16:57:57.630508+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -21767,21 +21871,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-07T15:35:26.918793+00:00",
+    "at": "2026-11-07T16:57:57.630557+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-07T15:25:04.645669+00:00",
+    "at": "2026-11-07T16:57:43.952670+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-83a3632b24a89173d967",
-    "video_url": "https://www.youtube.com/watch?v=X4OjHiYMDu8",
+    "content_id": "rayvan-gemini-9b346828f0d04494340b",
+    "video_url": "https://www.youtube.com/watch?v=xDo2iCkN0aM",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-07T15:35:26.917766+00:00",
+    "at": "2026-11-07T16:57:57.629734+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -21793,242 +21897,11 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-07T15:35:26.918469+00:00",
-    "collection_status": "collected",
+    "at": "2026-11-07T16:57:57.630428+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 14,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 90,
-        "total": 171
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 171,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 136,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 136,
-        "remaining": 14
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 6,
-        "background_review_gaps": [
-          {
-            "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully.",
-                    "visual": "robot",
-                    "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-816e1ed91213034f5759",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Attention all pets, the annual soccer championship begins today on the community lawn, and our team needs a miracle.",
-                    "visual": "signal",
-                    "visual_prompt": "A bright yellow signal flag planted on a green neighborhood lawn, with Buster the energetic golden dog holding a red ball in his mouth and Cleo the sleek grey c"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 1
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Cleo intercepts the rolling ball with a clever paw flick and passes it swiftly to Buster for the final run.",
-                    "visual": "door",
-                    "visual_prompt": "Cleo the grey cat tapping a white ball with her paw near a wooden park gate, sending the ball rolling forward toward Buster the golden dog who is waiting alertl"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "With one mighty kick from Buster and Cleo guarding the flank, our furry duo scores the winning goal.",
-                    "visual": "ship",
-                    "visual_prompt": "Buster the golden dog and Cleo the sleek grey cat standing triumphantly next to a silver trophy shaped like a ship on the community lawn, both animals smiling h"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
-                    "visual": "ship",
-                    "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowf"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-23e65e65720310a75bd8",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Now push the copper key firmly into the warm shackle before the biting winter wind freezes everything solid again.",
-                    "visual": "door",
-                    "visual_prompt": "Clover the white rabbit holding a shiny copper key and inserting it into the thawed padlock on the wooden gate while Bramble the red fox steadies the heavy latc"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-98421acb2d4775f6ea85",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "I must act quickly to find a sturdy wooden box that is heavy enough to hold the rolling sieve in place.",
-                    "visual": "door",
-                    "visual_prompt": "Silas the squirrel stands near a mossy tree root, gripping a small wooden box tightly with both paws while looking up the slope."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          },
-          {
-            "content_id": "rayvan-gemini-4d872eadbf95456a610f",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "Oh no, the fierce wind has knocked down our wooden navigation markers across the dusty grassland plains completely.",
-                    "visual": "signal",
-                    "visual_prompt": "Pippin the pangolin stands on dry cracked earth holding a brass compass, looking sadly at a fallen wooden sign post in a sun-scorched grassland under a bright y"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 1
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "I must use this brass compass to find our exact bearing before the midday heat slows our journey down.",
-                    "visual": "robot",
-                    "visual_prompt": "Close-up of Pippin the pangolin kneeling in dry grass, carefully holding an open brass compass with his paws, examining the spinning needle with a focused expre"
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "With steady paw strength, I will lift this heavy marker back into its upright socket in the hard earth.",
-                    "visual": "door",
-                    "visual_prompt": "Pippin the pangolin pushes his scaled back against a heavy wooden post lying in the dust, straining to lift it upright on the arid grassland."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          }
-        ],
-        "considered": 7,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "selection_source": "preload_artifact",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }

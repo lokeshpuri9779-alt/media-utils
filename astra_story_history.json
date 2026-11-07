@@ -9376,6 +9376,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-83a3632b24a89173d967",
+      "video_id": "X4OjHiYMDu8",
+      "confirmed_at": "2026-11-07T16:57:03.483403+00:00",
+      "title": "Orion the Owl and the Starlight Observatory Lens",
+      "plot_fingerprint": "0b787452e95a799f89de14ee645f711d0ea26dddeea7044e3604254f4138c85e",
+      "story_beats": [
+        {
+          "headline": "Obscuring Dust",
+          "speech": "Oh no, the observatory lens is clouded over with thick dust right before the grand comet arrives tonight.",
+          "visual": "signal",
+          "label": "Lens Fogged",
+          "story_beat": "reveal",
+          "visual_prompt": "An observant brown owl standing inside a stone tower observatory, looking worriedly at a massive dusty telescope lens illuminated by a glowing star map signal on the wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Polishing the Glass",
+          "speech": "I must clean this glass surface immediately so we do not miss the stellar alignment in the night sky.",
+          "visual": "robot",
+          "label": "Wiping Grime",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl holding a small cloth in his beak while carefully wiping the heavy brass telescope barrel inside the moonlit observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Turning the Gear",
+          "speech": "Now I need to adjust the brass focus ring to bring the distant constellation into sharp clear focus.",
+          "visual": "ship",
+          "label": "Adjusting Focus",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl standing on a wooden stool, turning a heavy brass dial on the side of the observatory telescope pointing toward a starry sky portal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Stellar Payoff",
+          "speech": "Look at that brilliant comet arc across the night sky, perfectly framed through our freshly cleaned observatory lens!",
+          "visual": "planet",
+          "label": "Clear Comet View",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl smiling happily atop his wooden perch inside the cozy observatory, gazing through the pristine telescope at a vibrant glowing planet and comet.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Dust and grime obscure the large observatory telescope lens just as the rare comet passes overhead.",
+      "decisive_choice": "Orion wipes the heavy glass with a cleansing cloth and turns the brass focus wheel.",
+      "resolution": "The lens sparkles clearly under the moonlight, allowing Orion to map the full trajectory of the passing comet."
     }
   ]
 }
