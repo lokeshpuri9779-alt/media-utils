@@ -9223,6 +9223,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-07e0a205227d5608b70d",
+      "video_id": "S_r30cj9pQk",
+      "confirmed_at": "2026-11-07T08:06:26.373515+00:00",
+      "title": "Bramble the Pangolin and Barnaby the Owl and the Moonlit Signal",
+      "plot_fingerprint": "3aabbc0970cb284d7709d1a7f1928e4d4d4c18e6b3f85c3602e446f9d1d35591",
+      "story_beats": [
+        {
+          "headline": "The Misunderstood Flashes",
+          "speech": "Why does the high signal pulse so sharply against the dark trees tonight?",
+          "visual": "signal",
+          "label": "forest clearing signal",
+          "story_beat": "reveal",
+          "visual_prompt": "In a dense nocturnal forest, Bramble the pangolin stands on damp moss holding a lit lantern, looking up with a confused expression at distant blinking lights in the upper canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Discovery",
+          "speech": "Perhaps if I hold my lantern closer to the roots, the light will show my true peaceful intent.",
+          "visual": "forest",
+          "label": "mossy woodland floor",
+          "story_beat": "build",
+          "visual_prompt": "In the same dense nocturnal forest, Bramble the pangolin places his lit lantern beside a smooth stone on the forest floor, carefully adjusting the metal latch to steady the glowing flame.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Corrective Pulse",
+          "speech": "I must match your rhythm now so we can share this path without fear or confusion.",
+          "visual": "door",
+          "label": "hollow tree entrance",
+          "story_beat": "mechanism",
+          "visual_prompt": "In a quiet forest glen beside a hollow tree entrance, Barnaby the owl perches on a low branch holding a brass compass, tilting his head downward as he watches Bramble below adjust the lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harmonious Patrol",
+          "speech": "Our lights now shine as one steady guide through the quiet woods for everyone.",
+          "visual": "signal",
+          "label": "canopy signal exchange",
+          "story_beat": "payoff",
+          "visual_prompt": "In the moonlit forest, Bramble the pangolin stands holding his lantern high while Barnaby the owl spreads his wings on a branch above, both animals exchanging a synchronized, bright light signal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
