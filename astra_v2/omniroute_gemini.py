@@ -7,6 +7,7 @@ import urllib.error
 import urllib.request
 
 from astra_v2.openai_creative import VISUALS, ROLES
+from astra_v2.visual_artifact_library import SCENES
 
 
 def enabled():
@@ -70,18 +71,18 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         raise ValueError("Invalid Gemini model")
     # Rotate concrete creative constraints so consecutive requests do not collapse onto one motif.
     domains = (
-        "mountain rescue with a human protagonist",
-        "underwater ecological mystery with animal characters",
-        "inventor comedy in a busy market",
-        "historical village friendship and a difficult choice",
-        "forest survival adventure involving cooperation",
-        "railway station mystery with an unexpected helper",
-        "robot caretaker facing an ethical dilemma",
-        "seaside festival with a practical engineering challenge",
-        "desert expedition with a surprising natural discovery",
-        "community sports rivalry resolved through ingenuity",
-        "arctic research expedition and a rescue decision",
-        "spacecraft maintenance adventure with a crew disagreement",
+        "forest friendship mystery with fox and owl protagonists",
+        "underwater reef mystery with whale and crab protagonists",
+        "market-day puzzle with squirrel and mouse protagonists",
+        "village friendship dilemma with rabbit and fox protagonists",
+        "forest survival adventure involving otter cooperation",
+        "railway station mystery with mouse and owl protagonists",
+        "garden caretaker dilemma with beaver and duck protagonists",
+        "seaside festival rivalry with crab and heron protagonists",
+        "desert expedition with fox and owl protagonists",
+        "community sports rivalry with dog and cat protagonists",
+        "arctic shelter-sharing dilemma with penguin and fox protagonists",
+        "observatory mystery with owl and squirrel protagonists",
     )
     renderer_aware = os.getenv("ASTRA_GEMINI_RENDERER_AWARE_WRITING", "0") == "1"
     if renderer_aware:
@@ -100,29 +101,38 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Required distinct creative domain: " + chosen_domain + ". "
         "Do not use glassmakers, glassblowers, stained glass, kilns, "
         "glass workshops, or the title pattern The Glassmaker of. "
-        "Write one genuinely original, coherent, family-safe short with "
-        "distinct characters, environments, emotional stakes, decisions and consequences. "
-        "Vary genres and premises; avoid repeating cosmic archives, simulations or "
-        "corrupted-code revelations. Use four cinematic story beats with causal "
-        "progression and a meaningful ending. "
+        "Write one genuinely original, coherent, family-safe animal story with "
+        "distinct motivations, emotional stakes, decisions and consequences. "
+        "All protagonists and acting characters must be supported animals; do not "
+        "include humans, children, human professions, humanoids, robots or clothing. "
+        "Supported animal subjects: " + ", ".join(sorted(VISUALS)) + ". "
+        "Avoid complex machinery, bridge or cable repairs, large-gap jumps, "
+        "rescue rigging, and simultaneous multi-prop actions. Keep each beat's "
+        "physical action simple enough for the current animal puppet renderer. "
+        "Use four cinematic story beats with causal progression and a meaningful ending. "
         "Return only JSON keys title, question, answer, visual_bible, beats, "
         "central_conflict, decisive_choice, resolution. "
         "Describe the concrete causal conflict, decisive choice and resulting "
         "outcome as short factual phrases; avoid generic themes. "
-        "visual_bible must contain style (string), characters, locations and objects         "
-        "(objects mapping stable names to detailed appearance strings). Define faces,         "
-        "clothing, colours, proportions, setting layout and important prop designs once.         "
-        "Each beat must include visual_prompt describing the exact action, expression,         "
-        "location, participating characters, object condition and who holds each prop.         "
-        "Each beat must also have "
-        "headline, speech, visual, label, story_beat. Speech 12-24 words in every beat (at least 48 words total); use at least three distinct visual types across the four beats; "
-        "visual one of planet, robot, signal, ship, forest, door; story_beat one "
-        "of reveal, build, mechanism, twist, payoff. "
+        "visual_bible must contain style, animal characters, locations and objects. "
+        "Character descriptions must name a supported animal species and describe "
+        "natural animal appearance; do not add clothes, human roles or human anatomy. "
+        "Each beat must include visual_prompt describing the exact simple animal "
+        "action, expression, location and any single small prop. Each beat must "
+        "also include story_environment, chosen exactly from: "
+        + ", ".join(SCENES) + ". "
+        "The environment must match the actual location in visual_prompt. "
+        "Each beat must also have headline, speech, visual, label, story_beat. "
+        "Speech 12-24 words in every beat (at least 48 words total). "
+        "visual must be one of the supported animal subjects and must match the "
+        "animal explicitly named in visual_prompt. Keep at least one protagonist "
+        "visual tag consistent across two or more beats; never change tags merely "
+        "to satisfy variety. story_beat one of reveal, build, mechanism, twist, payoff. "
         "Use story_beat reveal for beat one and payoff for beat four; "
         "beats two and three must be build, mechanism or twist. "
         "Title 8-75 characters. "
-        "Avoid recycled plots, copyrighted characters and recycled repair "
-        "mechanisms, even if the names, animal species or props are changed. "
+        "Avoid recycled plots, copyrighted characters and recycled causal "
+        "mechanisms, even if the species or props are changed. "
         "Before writing, invent a fresh causal mechanism different from "
         "these recent accepted, pending or batch-candidate narratives: "
         + json.dumps(recent_story_exclusions(prior_stories), ensure_ascii=False)
@@ -166,10 +176,12 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     beat_schema = {"type": "object", "properties": {
         "headline": {"type": "string"}, "speech": {"type": "string"},
         "visual": {"type": "string", "enum": sorted(VISUALS)},
+        "story_environment": {"type": "string", "enum": sorted(SCENES)},
         "label": {"type": "string"},
         "story_beat": {"type": "string", "enum": sorted(ROLES)},
         "visual_prompt": {"type": "string"}},
-        "required": ["headline", "speech", "visual", "label", "story_beat", "visual_prompt"]}
+        "required": ["headline", "speech", "visual", "story_environment",
+                     "label", "story_beat", "visual_prompt"]}
     response_schema = {"type": "object", "properties": {
         "title": {"type": "string"}, "question": {"type": "string"},
         "answer": {"type": "string"},
@@ -246,7 +258,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     # Normalize only unambiguous spelling/case variants; never invent beats.
     for beat in beats:
         if isinstance(beat, dict):
-            for field, allowed in (("visual", VISUALS), ("story_beat", ROLES)):
+            for field, allowed in (("visual", VISUALS), ("story_beat", ROLES),
+                                   ("story_environment", SCENES)):
                 raw = beat.get(field)
                 if isinstance(raw, str):
                     normalized = raw.strip().lower().replace("-", "_").replace(" ", "_")
@@ -260,8 +273,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         for key in ("headline", "speech", "label"):
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
                 raise ValueError("Invalid beat text")
-        if beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES:
-            raise ValueError("Invalid beat visual or narrative role")
+        if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
+                or beat.get("story_environment") not in SCENES
+                or not isinstance(beat.get("visual_prompt"), str)):
+            raise ValueError("Invalid beat subject, environment, or narrative role")
     for key in ("question", "answer"):
         if not isinstance(data.get(key), str) or not 8 <= len(data[key]) <= 400:
             raise ValueError("Invalid story summary")
