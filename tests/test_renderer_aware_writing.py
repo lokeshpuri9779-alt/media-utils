@@ -100,6 +100,7 @@ class RendererAwareWritingTests(unittest.TestCase):
         prompt = aware["prompt"]
         self.assertIn("Keep the same protagonist tag across the beats", prompt)
         self.assertIn("Do not invent variety by changing labels", prompt)
+        self.assertIn("at least THREE genuinely different shots", prompt)
         self.assertIn("story_environment value from the Studio", prompt)
         self.assertNotIn("at least THREE DISTINCT visual labels", prompt)
         self.assertNotIn("at least THREE DISTINCT visual labels",
