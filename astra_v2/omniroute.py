@@ -30,9 +30,9 @@ PROMPT = (
     "animal action in that environment. Speech 12-24 words per beat. "
     "story_beat one of reveal, build, mechanism, twist, payoff; beat one reveal, "
     "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
-    "Avoid copyrighted characters and prior titles: "
+    "Avoid copyrighted characters. "
 )
-PROMPT += background_scene_authoring_guidance()
+PROMPT += background_scene_authoring_guidance() + " Prior titles to avoid: "
 
 
 
