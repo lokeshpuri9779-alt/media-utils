@@ -86,10 +86,11 @@ def background_scene_authoring_guidance():
         "When the authentic scene matches a listed environment, name it "
         "consistently across the relevant beats. Do NOT mislabel grassland "
         "as desert, a wooden indoor cabin as forest, or a marketplace/courtyard "
-        "as city just to force a background match. If the original story "
-        "requires an unlisted environment, describe it accurately for "
-        "independent scene-artwork review; never pretend that a listed "
-        "background depicts it. The taxonomy does not verify the artwork, "
+        "as city just to force a background match. If a premise requires "
+        "an unlisted environment, invent a different premise that truthfully "
+        "fits one of the listed scenes; never pretend a listed background "
+        "depicts it. The taxonomy does not verify the artwork; independent "
+        "scene-artwork review is still required. "
         "the cast, the action, or the ability to publish a video."
     )
 
