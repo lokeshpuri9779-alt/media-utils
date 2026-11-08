@@ -216,9 +216,10 @@ def worker():
         'decode_seconds': decode_seconds, 'worker_elapsed_seconds': time.monotonic() - started})
 
 
-def run_bounded_worker(out, module, timed_stage):
+def run_bounded_worker(out, module, timed_stage, *, slow_review=False):
     """Supervise an isolated review worker under the run-76 CPU memory limits."""
     import psutil
+    inference_limit, overall_limit = (2400, 2700) if slow_review else (900, 1200)
     started = time.monotonic()
     peaks = {}
     load_started = operation_started = None
@@ -242,7 +243,7 @@ def run_bounded_worker(out, module, timed_stage):
             reason = limit_reason(rss, available_memory(), now - started,
                 now - load_started if current == 'load' and load_started is not None else None,
                 now - operation_started if operation_started is not None else None,
-                inference_limit=900, overall_limit=1200)
+                inference_limit=inference_limit, overall_limit=overall_limit)
             if reason:
                 os.killpg(process.pid, signal.SIGKILL)
                 break
