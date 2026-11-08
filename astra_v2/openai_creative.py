@@ -56,7 +56,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "Every visual_prompt must show one simple, filmable animal action in that environment. "
         "Avoid complex machinery, bridge/cable repairs, large-gap jumps, and simultaneous multi-prop actions. "
         "story_beat must be one of: reveal, build, mechanism, twist, payoff. "
-        "Speech: 10-24 words per beat. Title under 75 characters. "
+        "Speech: 12-24 words per beat. Title under 75 characters. "
         "Exclude these titles: " + json.dumps(sorted(excluded_titles)[:60]) +
         ". Exclude these content IDs: " + json.dumps(sorted(excluded_ids)[:60])
     )
@@ -106,6 +106,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
     if len(set(visual_tags)) > 2 or not any(
             visual_tags.count(tag) >= 2 for tag in set(visual_tags)):
         raise ValueError("Story must retain one or two animal protagonists across beats")
+    from astra_v2.omniroute import validate_beat_quality
+    validate_beat_quality(beats, "OpenAI")
     for key in ("question", "answer"):
         if not isinstance(data.get(key), str) or not 8 <= len(data[key]) <= 400:
             raise ValueError("Invalid story summary")
