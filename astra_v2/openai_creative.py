@@ -55,7 +55,9 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "change tags just for variety. story_environment must be exactly one of: "
         + ", ".join(SCENES) + ". The exact story_environment token must appear in "
         "visual_prompt, and each visual_prompt must describe one simple visible "
-        "animal action in that setting. "
+        "animal action in that setting. Across four beats, create at least three "
+        "genuinely different shots through action, composition, location, or a "
+        "supported prop; do not create variety by changing animal tags. "
         "story_beat must be one of: reveal, build, mechanism, twist, payoff. "
         "Speech: 12-24 words per beat. Title under 75 characters. "
         "Exclude these titles: " + json.dumps(sorted(excluded_titles)[:60]) +
