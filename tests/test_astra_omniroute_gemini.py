@@ -161,7 +161,7 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertEqual(set(beat["story_environment"]["enum"]), set(SCENES))
         self.assertIn("story_environment", schema["properties"]["beats"]["items"]["required"])
         self.assertIn("visual_bible", schema["required"])
-        self.assertIn("animal protagonists", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("supported animals", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
 
     def test_gemini_normalizes_only_known_beat_labels(self):
