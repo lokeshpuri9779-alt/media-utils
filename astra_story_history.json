@@ -9737,6 +9737,55 @@
       "video_id": "C9p4PgPDtzc",
       "confirmed_at": "2026-11-08T16:02:11.447354+00:00",
       "title": "Why lottery sambad Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-eef518fd28a97360430f",
+      "video_id": "fEehqB9Euws",
+      "confirmed_at": "2026-11-08T18:37:17.837149+00:00",
+      "title": "Lyra and Bram's Forest Compass Rivalry",
+      "plot_fingerprint": "5fb8f4ad62024ec43e5ea2ebef3d082a5f627996d5e537aa5a87f656e7171d71",
+      "story_beats": [
+        {
+          "headline": "The Hidden Path",
+          "speech": "Lyra holds the brass compass high under the pine branches, spotting the hidden trail before Bram arrives.",
+          "visual": "forest",
+          "label": "forest trail",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra the lynx holding a brass compass in a dense green forest, standing on a mossy path, looking focused and determined, afternoon lighting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fog Trap",
+          "speech": "Bram slips near the misty edge of the ravine, clutching his compass tightly as heavy white vapor surrounds him.",
+          "visual": "signal",
+          "label": "ravine edge",
+          "story_beat": "build",
+          "visual_prompt": "Bram the stoat standing near a rocky ravine edge in a mountain environment, surrounded by rising white fog, looking worried while holding a small compass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Turning Point",
+          "speech": "Lyra sees Bram struggling from above and drops her compass into the moss, grabbing her thick climbing rope instead.",
+          "visual": "door",
+          "label": "stone threshold",
+          "story_beat": "mechanism",
+          "visual_prompt": "Lyra the lynx standing on a rocky mountain ledge next to a stone archway threshold, dropping her compass to the ground and picking up a coiled rope.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Shared Journey",
+          "speech": "Both friends walk side by side along the forest path, leaving the compass behind as the sun breaks through.",
+          "visual": "forest",
+          "label": "sunlit grove",
+          "story_beat": "payoff",
+          "visual_prompt": "Lyra the lynx and Bram the stoat walking together down a sunlit forest path, smiling at each other with no props in their hands, warm golden hour lighting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

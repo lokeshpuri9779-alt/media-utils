@@ -2,27 +2,6 @@
   "schema_version": 1,
   "events": [
     {
-      "at": "2026-10-23T20:41:31.868734+00:00",
-      "stage": "quality",
-      "element": "creative_director",
-      "outcome": "pass",
-      "evidence": {
-        "scores": {
-          "hook": 94.0,
-          "retention": 92.0,
-          "visual": 98.0,
-          "pacing": 100.0,
-          "audio": 98.54,
-          "captions": 98.99,
-          "novelty": 100.0,
-          "coherence": 92.0,
-          "technical": 100.0
-        }
-      },
-      "proposed_action": "",
-      "candidate_id": "rayvan-gemini-3465a8a18ad909696bee"
-    },
-    {
       "at": "2026-10-23T20:41:31.876497+00:00",
       "stage": "render",
       "element": "studio_render",
@@ -8536,6 +8515,17 @@
       },
       "proposed_action": "",
       "candidate_id": "rayvan-gemini-34cb202c4eb8fbcf82b3"
+    },
+    {
+      "at": "2026-11-08T18:38:56.487500+00:00",
+      "stage": "quality",
+      "element": "candidate_selection",
+      "outcome": "fail",
+      "evidence": {
+        "reason": "no_approved_original_story_available"
+      },
+      "proposed_action": "Diagnose story supply and creative gate failures",
+      "candidate_id": ""
     }
   ],
   "stage_counts": {
@@ -8644,8 +8634,8 @@
       "regressed": 0
     },
     "quality": {
-      "pass": 176,
-      "fail": 248,
+      "pass": 175,
+      "fail": 249,
       "skip": 0,
       "unknown": 0,
       "improved": 0,
