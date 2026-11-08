@@ -82,7 +82,7 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("independent scene-artwork review", prompt)
         self.assertIn("story_environment",
                       request["schema"]["properties"]["beats"]["items"]["required"])
-        self.assertNotIn("background TAXONOMY", capture_prompt(False)[0]["prompt"])
+        self.assertIn("background TAXONOMY", capture_prompt(False)[0]["prompt"])
 
     def test_default_prompt_unchanged_when_not_opted_in(self):
         captured = capture_prompt(False)
