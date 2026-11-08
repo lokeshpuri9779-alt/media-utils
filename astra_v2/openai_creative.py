@@ -13,8 +13,7 @@ from astra_v2.visual_artifact_library import SCENES
 
 # These are the animal subjects the current Studio character renderer supports.
 # A visual tag identifies the depicted actor, not an arbitrary scene symbol.
-VISUALS = {"fox", "rabbit", "cat", "dog", "owl", "mouse", "otter",
-           "squirrel", "beaver", "mole", "penguin", "heron"}
+VISUALS = {"fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel"}
 ROLES = {"reveal", "build", "mechanism", "twist", "payoff"}
 
 
