@@ -72,7 +72,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     # Rotate concrete creative constraints so consecutive requests do not collapse onto one motif.
     domains = (
         "forest friendship mystery with fox and owl protagonists",
-        "underwater reef mystery with whale and crab protagonists",
+        "coastal harbor mystery with otter and fox protagonists",
         "market-day puzzle with squirrel and mouse protagonists",
         "village friendship dilemma with rabbit and fox protagonists",
         "forest survival adventure involving otter cooperation",
