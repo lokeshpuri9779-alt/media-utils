@@ -2,6 +2,8 @@
 
 This module never authorizes publication or changes production_ready.
 """
+import re
+
 from astra_v2.causal_premise_review import causal_premise_match
 from astra_v2.story_planning import planning_issues
 from astra_v2.shorts_novelty import is_near_duplicate
@@ -73,6 +75,48 @@ def is_semantic_near_duplicate(story, history=(), threshold=0.72):
     """Detect high-overlap plot narration; conservative and deterministic."""
     return semantic_duplicate_match(story, history, threshold) is not None
 
+_VISUAL_STOP_WORDS = {
+    "a", "an", "the", "and", "or", "but", "to", "of", "in", "on", "at",
+    "for", "with", "by", "from", "as", "is", "are", "was", "were", "be",
+    "this", "that", "it", "its", "their", "his", "her", "while", "before",
+    "after", "beside", "near", "through", "along", "over", "under", "into",
+    "onto", "again", "then", "there", "here", "one", "small", "large",
+    "quiet", "clear", "warm", "soft", "bright", "old", "new",
+}
+_ANIMAL_VISUAL_TAGS = {
+    "fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel",
+}
+
+
+def visual_prompt_variety_count(beats):
+    """Count genuinely different shot descriptions, not different animal tags.
+
+    Older proposals without visual_prompt retain the legacy visual-label
+    fallback. New renderer-aware proposals are compared by shot content.
+    """
+    if beats and all(isinstance(beat, dict)
+                     and isinstance(beat.get("visual_prompt"), str)
+                     and beat["visual_prompt"].strip() for beat in beats):
+        signatures = []
+        for beat in beats:
+            tokens = set(re.findall(r"[a-z0-9]+", beat["visual_prompt"].casefold()))
+            tokens -= _VISUAL_STOP_WORDS | _ANIMAL_VISUAL_TAGS
+            if not tokens:
+                continue
+            duplicate_shot = False
+            for previous in signatures:
+                union = tokens | previous
+                similarity = len(tokens & previous) / len(union) if union else 1.0
+                if similarity >= 0.82:
+                    duplicate_shot = True
+                    break
+            if not duplicate_shot:
+                signatures.append(tokens)
+        return len(signatures)
+    return len({str(beat.get("visual") or "") for beat in beats
+                if isinstance(beat, dict)})
+
+
 def editorial_issues(story, history=(), novelty_index=None, semantic_previous=None, semantic_index=None,
                      semantic_evidence=None, semantic_evidence_computed=False):
     issues = list(planning_issues(story))
@@ -80,7 +124,7 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
     if len(narration.split()) < 45:
         issues.append("insufficient_narrative_detail")
-    if len({str(b.get("visual") or "") for b in beats if isinstance(b, dict)}) < 3:
+    if visual_prompt_variety_count(beats) < 3:
         issues.append("insufficient_visual_variety")
     duplicate = (novelty_index.is_near_duplicate(story) if novelty_index is not None
                  else is_near_duplicate(story, history))
