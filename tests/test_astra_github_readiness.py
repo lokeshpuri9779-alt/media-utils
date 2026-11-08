@@ -86,6 +86,7 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("import av", preload)
         self.assertIn("media.decode(video=0)", preload)
         self.assertIn("media.decode(audio=0)", preload)
+        self.assertIn("test_astra_pyav_media_inspection.py", preload)
         self.assertNotIn("apt-get", preload)
         self.assertNotRegex(preload, r"(?m)^\s*ffprobe(?:\s|$)")
         self.assertNotIn('["ffprobe"', preload)
