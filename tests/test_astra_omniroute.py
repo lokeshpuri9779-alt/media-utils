@@ -28,7 +28,7 @@ class OmniRouteTests(unittest.TestCase):
         omniroute.validate_beat_quality(beats)
         unique = []
         for beat, visual, original in zip(
-                beats, ("fox", "owl", "duck", "rabbit"),
+                beats, ("fox", "owl", "dog", "rabbit"),
                 ("fox", "fox", "owl", "fox")):
             unique.append({**beat, "visual": visual,
                            "visual_prompt": beat["visual_prompt"].replace(original, visual)})
