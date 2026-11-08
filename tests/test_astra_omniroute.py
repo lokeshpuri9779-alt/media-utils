@@ -19,7 +19,7 @@ class OmniRouteTests(unittest.TestCase):
              "visual": "fox", "visual_prompt": "The fox follows a feather trail through the forest clearing.",
              "story_environment": "forest"},
             {"speech": "An owl notices the feather caught safely inside a low hanging branch.",
-             "visual": "owl", "visual_prompt": "An owl looks at a blue feather caught in a low branch.",
+             "visual": "owl", "visual_prompt": "An owl looks at a blue feather caught in a low branch in the forest.",
              "story_environment": "forest"},
             {"speech": "The fox returns the feather to its nest before the evening rain arrives.",
              "visual": "fox", "visual_prompt": "A fox places the blue feather beside a nest in the forest.",
