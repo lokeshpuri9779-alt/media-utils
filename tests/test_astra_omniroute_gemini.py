@@ -256,7 +256,10 @@ class GeminiRouteTests(unittest.TestCase):
                         {x["title"].casefold() for x in prior}, prior_stories=prior)
         domains = [p.split("Required distinct creative domain: ", 1)[1].split(". ", 1)[0]
                    for p in prompts]
+        from astra_v2.visual_artifact_library import SCENES
         self.assertEqual(len(set(domains)), 12, domains)
+        self.assertTrue(all(any(scene in domain.split() for scene in SCENES)
+                            for domain in domains))
         self.assertTrue(all("recent accepted, pending or batch-candidate" in p
                             for p in prompts))
 
