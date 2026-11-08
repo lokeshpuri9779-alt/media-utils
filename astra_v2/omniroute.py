@@ -24,7 +24,8 @@ PROMPT = (
     "same animal explicitly shown in visual_prompt. Keep at least one main "
     "protagonist visual tag consistent across two or more beats; do not change "
     "tags merely for variety. story_environment must be exactly one of: "
-    + ", ".join(SCENES) + ". Every visual_prompt describes one simple visible "
+    + ", ".join(SCENES) + ". The exact story_environment token must appear "
+    "in visual_prompt. Every visual_prompt describes one simple visible "
     "animal action in that environment. Speech 12-24 words per beat. "
     "story_beat one of reveal, build, mechanism, twist, payoff; beat one reveal, "
     "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
@@ -51,8 +52,11 @@ def validate_beat_quality(beats, provider="OmniRoute"):
             raise ValueError(provider + " requires a concrete visual_prompt")
         if not visual_subject_matches(visual, prompt):
             raise ValueError(provider + " visual tag does not match the depicted animal")
-        if beat.get("story_environment") not in SCENES:
+        environment = beat.get("story_environment")
+        if environment not in SCENES:
             raise ValueError(provider + " requires a supported story_environment")
+        if not re.search(r"\\b" + re.escape(environment) + r"\\b", prompt, re.I):
+            raise ValueError(provider + " story_environment must appear in visual_prompt")
         visual_tags.append(visual)
     if len(set(visual_tags)) > 2:
         raise ValueError(provider + " must use at most two animal protagonist species")
