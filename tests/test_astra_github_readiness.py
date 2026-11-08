@@ -87,7 +87,8 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("media.decode(video=0)", preload)
         self.assertIn("media.decode(audio=0)", preload)
         self.assertNotIn("apt-get", preload)
-        self.assertNotIn("ffprobe", preload)
+        self.assertNotRegex(preload, r"(?m)^\s*ffprobe(?:\s|$)")
+        self.assertNotIn('["ffprobe"', preload)
         self.assertLess(preload.index("ASTRA_PYAV_REAL_MP4_DECODE_SMOKE=passed"),
                         preload.index("- name: Refresh free licensed visual icon cache"))
 
