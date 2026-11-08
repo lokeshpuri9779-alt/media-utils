@@ -9532,6 +9532,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-34cb202c4eb8fbcf82b3",
+      "video_id": "zWPc7RGy0Dg",
+      "confirmed_at": "2026-11-08T06:50:21.560054+00:00",
+      "title": "Finn the Fox and Barnaby the Rabbit's Woodland Clue",
+      "plot_fingerprint": "6189452844d217c30ad61a12c59b4461227bb6f9ad02d2b1be6e01fc0c48159d",
+      "story_beats": [
+        {
+          "headline": "The Torn Pages Discovered",
+          "speech": "Look at these torn pages in our book! Did you ruin our study guide, Barnaby?",
+          "visual": "forest",
+          "label": "Forest Clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "In a lush green forest clearing, Finn the Fox stands pointing angrily at an open book with torn pages resting on a tree stump, while Barnaby the Rabbit sits opposite him looking startled and holding a single blue flower.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Examining the Footprints",
+          "speech": "I did not touch the book, Finn. Look at the muddy boot prints on the ground near the stump.",
+          "visual": "signal",
+          "label": "Muddy Trail",
+          "story_beat": "build",
+          "visual_prompt": "In the same lush green forest clearing, Barnaby the Rabbit points down toward a trail of muddy boot prints on the soil beside the tree stump, while Finn the Fox looks down at his own feet with a surprised expression, holding a closed book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sincere Apology",
+          "speech": "These muddy boot prints match my own boots! I am truly sorry for blaming you unfairly, my friend.",
+          "visual": "forest",
+          "label": "Clearing Apology",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the lush green forest clearing, Finn the Fox holds up his muddy boot beside the tracks on the ground, bowing his head in remorse toward Barnaby the Rabbit, who gently holds out a white flower in forgiveness.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reading Together Again",
+          "speech": "Let us tape the pages back together and read our botanical guide side by side under the trees.",
+          "visual": "door",
+          "label": "Cozy Den Entrance",
+          "story_beat": "payoff",
+          "visual_prompt": "Outside a cozy wooden den entrance nestled within the lush green forest, Finn the Fox and Barnaby the Rabbit sit peacefully together on a mossy log, both holding the repaired book open between them while a bright yellow flower rests on the ground nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn blames Barnaby for tearing the book pages until physical evidence proves Finn made the error himself.",
+      "decisive_choice": "Finn compares his wet boot prints directly against the smudges on the ground and openly apologizes to Barnaby.",
+      "resolution": "Barnaby accepts the apology and shares the book, restoring total friendship and mutual understanding."
     }
   ]
 }
