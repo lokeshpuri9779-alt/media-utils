@@ -35,6 +35,9 @@ class OmniRouteTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "story_environment"):
             omniroute.validate_beat_quality([{**beat, "story_environment": "unknown"}
                 if index == 0 else beat for index, beat in enumerate(beats)])
+        with self.assertRaisesRegex(ValueError, "must appear in visual_prompt"):
+            omniroute.validate_beat_quality([{**beat, "story_environment": "city"}
+                if index == 0 else beat for index, beat in enumerate(beats)])
         with self.assertRaisesRegex(ValueError, "12 words"):
             omniroute.validate_beat_quality([{**beat, "speech": "Too short narration."}
                 if index == 0 else beat for index, beat in enumerate(beats)])
