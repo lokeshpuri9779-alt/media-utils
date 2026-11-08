@@ -9584,6 +9584,55 @@
       "central_conflict": "Finn blames Barnaby for tearing the book pages until physical evidence proves Finn made the error himself.",
       "decisive_choice": "Finn compares his wet boot prints directly against the smudges on the ground and openly apologizes to Barnaby.",
       "resolution": "Barnaby accepts the apology and shares the book, restoring total friendship and mutual understanding."
+    },
+    {
+      "content_id": "rayvan-gemini-ecec9a92e43935bd3302",
+      "video_id": "O_BQXYw_3Ug",
+      "confirmed_at": "2026-11-08T08:23:42.595127+00:00",
+      "title": "Toby the Tapir and the Two-Flower Meadow Shift",
+      "plot_fingerprint": "892c75524f206ea8f3e3ca7e729d10223d58c189147e6178b05c2a44019a2555",
+      "story_beats": [
+        {
+          "headline": "The Confusing Petals",
+          "speech": "These two flower patches look entirely different today, leaving me completely unsure which one needs my careful watering attention first.",
+          "visual": "forest",
+          "label": "forest clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "Toby the tapir stands in a lush forest clearing, looking down with a curious expression at two distinct flower patches with differing petal conditions, holding nothing in his paws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Stem Experiment",
+          "speech": "I must gently press a fresh flower stem into each patch of earth to test the hidden moisture levels safely.",
+          "visual": "signal",
+          "label": "soil test signal",
+          "story_beat": "build",
+          "visual_prompt": "Toby the tapir kneels in the forest clearing, carefully pressing a single flower stem into the dark soil of the left patch to compare its dampness.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Discovery",
+          "speech": "This soil feels completely dry around the stem base, proving this exact flower bed requires immediate water.",
+          "visual": "door",
+          "label": "gateway plot",
+          "story_beat": "mechanism",
+          "visual_prompt": "Toby the tapir sits upright in the forest clearing, examining the dry flower stem he just pulled from the earth with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Blooming Result",
+          "speech": "Adding water right here brings both flower patches back to vibrant life, proving my careful test worked wonderfully.",
+          "visual": "forest",
+          "label": "restored meadow",
+          "story_beat": "payoff",
+          "visual_prompt": "Toby the tapir smiles happily in the vibrant forest clearing, holding a single blooming flower near the newly watered and flourishing garden beds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
