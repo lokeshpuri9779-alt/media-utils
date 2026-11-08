@@ -43,7 +43,10 @@ class RendererAwareWritingTests(unittest.TestCase):
         from astra_v2.pillow_duo_scene import ACTORS, PROPS
         self.assertLessEqual(set(SUPPORTED_ANIMALS), set(ACTORS))
         self.assertLessEqual(set(SUPPORTED_PROPS), set(PROPS))
+        from astra_v2.visual_artifact_library import SCENES
         self.assertEqual(len(RENDERER_AWARE_DOMAINS), 12)
+        self.assertTrue(all(any(scene in domain.split() for scene in SCENES)
+                            for domain in RENDERER_AWARE_DOMAINS))
         self.assertFalse(any("human protagonist" in d for d in RENDERER_AWARE_DOMAINS))
         self.assertFalse(any("robot caretaker" in d for d in RENDERER_AWARE_DOMAINS))
 
