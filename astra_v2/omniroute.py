@@ -12,8 +12,9 @@ from astra_v2.visual_artifact_library import SCENES
 
 PROMPT = (
     "Write one genuinely original, coherent, family-safe short story using "
-    "animal protagonists supported by ASTRA Studio. Vary species, settings, "
-    "motivations, conflict types, emotional stakes and endings; avoid humans, "
+    "exactly one or two recurring animal protagonist species supported by ASTRA Studio; "
+    "no third animal species, even in the background. Vary settings, motivations, "
+    "conflict types, emotional stakes and endings; avoid humans, "
     "humanoids, robots, clothing, complex machinery, bridge/cable repairs, "
     "large-gap jumps and simultaneous multi-prop actions. Ground each story "
     "in a concrete choice and consequence. Use four cinematic story beats. "
@@ -53,6 +54,8 @@ def validate_beat_quality(beats, provider="OmniRoute"):
         if beat.get("story_environment") not in SCENES:
             raise ValueError(provider + " requires a supported story_environment")
         visual_tags.append(visual)
+    if len(set(visual_tags)) > 2:
+        raise ValueError(provider + " must use at most two animal protagonist species")
     if not any(count >= 2 for count in Counter(visual_tags).values()):
         raise ValueError(provider + " must preserve a protagonist visual across beats")
 
