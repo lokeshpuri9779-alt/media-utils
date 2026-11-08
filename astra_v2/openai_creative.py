@@ -52,6 +52,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "The visual tag must name the same animal explicitly shown in visual_prompt. "
         "Keep at least one protagonist visual tag consistent across two or more beats; never vary it just for variety. "
         "story_environment must be exactly one of: " + ", ".join(SCENES) + ". "
+        "The exact story_environment token must also appear in visual_prompt. "
         "Every visual_prompt must show one simple, filmable animal action in that environment. "
         "Avoid complex machinery, bridge/cable repairs, large-gap jumps, and simultaneous multi-prop actions. "
         "story_beat must be one of: reveal, build, mechanism, twist, payoff. "
@@ -95,6 +96,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
                 raise ValueError("Invalid beat text")
         if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
                 or beat.get("story_environment") not in SCENES
+                or not re.search(r"\\b" + re.escape(str(beat.get("story_environment") or "")) + r"\\b",
+                                 str(beat.get("visual_prompt") or ""), re.I)
                 or not visual_subject_matches(beat.get("visual"), beat.get("visual_prompt"))):
             raise ValueError("Invalid beat subject, environment, or narrative role")
         if not isinstance(beat.get("visual_prompt"), str) or len(beat["visual_prompt"]) < 20:
