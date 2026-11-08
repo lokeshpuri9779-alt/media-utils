@@ -101,7 +101,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Required distinct creative domain: " + chosen_domain + ". "
         "Do not use glassmakers, glassblowers, stained glass, kilns, "
         "glass workshops, or the title pattern The Glassmaker of. "
-        "Write one genuinely original, coherent, family-safe animal story with "
+        "Write one genuinely original, coherent, family-safe short with animal protagonists supported by ASTRA Studio. "
         "distinct motivations, emotional stakes, decisions and consequences. "
         "All protagonists and acting characters must be supported animals; do not "
         "include humans, children, human professions, humanoids, robots or clothing. "
