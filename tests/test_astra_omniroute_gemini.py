@@ -164,6 +164,7 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("supported animals", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("no third species", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("at least three genuinely different shots", requests[0]["contents"][0]["parts"][0]["text"])
 
     def test_valid_scene_aware_story_returns_environment_and_subject_tags(self):
         import io
