@@ -162,6 +162,7 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("story_environment", schema["properties"]["beats"]["items"]["required"])
         self.assertIn("visual_bible", schema["required"])
         self.assertIn("supported animals", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("no third species", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
 
     def test_gemini_normalizes_only_known_beat_labels(self):
