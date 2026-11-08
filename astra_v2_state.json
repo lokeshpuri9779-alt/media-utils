@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-08",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
-  "confirmed_today": 0,
-  "last_attempt_at": "2026-11-07T22:59:34.203935+00:00",
+  "attempts": 2,
+  "confirmed_today": 1,
+  "last_attempt_at": "2026-11-08T00:31:29.696386+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -10616,29 +10616,82 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "BCS4Fnu6yk4": {
-      "content_id": "trend-brief-2026-11-07-pm",
+    },
+    "trend-brief-2026-11-07-pm": {
+      "video_id": "BCS4Fnu6yk4",
+      "confirmed_at": "2026-11-08T00:30:35.567087+00:00",
       "title": "Why fortnite power hour pirate token Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-08",
-      "uploaded_at": "2026-11-07T22:59:36.229564+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-07T22:59:36.229564+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "a31KOpNHLPQ": {
+      "content_id": "rayvan-gemini-aedbe5902935f4994197",
+      "title": "Bramble the Pangolin and Barnaby the Owl's Moonlit Pathway",
+      "day": "2026-11-08",
+      "uploaded_at": "2026-11-08T00:31:31.946184+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "63c73b23cbf641ab9025ae536107bd9b462112c9d36583a6e018be81a51ca07c",
+      "story_beats": [
+        {
+          "headline": "The Hidden Glow",
+          "speech": "Why would Bramble keep the glowing lantern tucked away behind the stone in this dark forest?",
+          "visual": "forest",
+          "label": "forest path",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the pangolin stands on a dark forest path holding a glowing lantern behind a large mossy rock, casting faint light while Barnaby the owl watches from an overhead branch with a questioning expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Approach",
+          "speech": "Barnaby glides closer down the misty trail to inspect the strange hiding spot instead of fleeing.",
+          "visual": "signal",
+          "label": "lantern signal",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the owl lands on the dark forest path next to Bramble the pangolin, pointing his wing toward the lantern while Bramble holds it low near the ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protective Truth",
+          "speech": "Bramble gently tilts the lantern downward to reveal a sharp-eyed predator lurking quietly in the upper branches.",
+          "visual": "door",
+          "label": "canopy opening",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble the pangolin points upward with one claw toward the dark forest canopy, showing Barnaby the owl a shadowy shape hidden above while holding the lantern steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Journey",
+          "speech": "Together they walk side by side down the moonlit trail, fully trusting each other beneath the night sky.",
+          "visual": "signal",
+          "label": "path signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the pangolin and Barnaby the owl walk together along the dark forest path, carrying the glowing lantern between them as safe light guides their journey forward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-07T22:58:19.035151+00:00",
+  "last_preflight_at": "2026-11-08T00:30:35.142766+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-07T22:59:41.672901+00:00",
+    "at": "2026-11-08T00:31:32.244115+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -21879,10 +21932,61 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-aedbe5902935f4994197": {
+      "at": "2026-11-08T00:31:29.696365+00:00",
+      "title": "Bramble the Pangolin and Barnaby the Owl's Moonlit Pathway",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "63c73b23cbf641ab9025ae536107bd9b462112c9d36583a6e018be81a51ca07c",
+      "story_beats": [
+        {
+          "headline": "The Hidden Glow",
+          "speech": "Why would Bramble keep the glowing lantern tucked away behind the stone in this dark forest?",
+          "visual": "forest",
+          "label": "forest path",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the pangolin stands on a dark forest path holding a glowing lantern behind a large mossy rock, casting faint light while Barnaby the owl watches from an overhead branch with a questioning expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hesitant Approach",
+          "speech": "Barnaby glides closer down the misty trail to inspect the strange hiding spot instead of fleeing.",
+          "visual": "signal",
+          "label": "lantern signal",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the owl lands on the dark forest path next to Bramble the pangolin, pointing his wing toward the lantern while Bramble holds it low near the ground.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Protective Truth",
+          "speech": "Bramble gently tilts the lantern downward to reveal a sharp-eyed predator lurking quietly in the upper branches.",
+          "visual": "door",
+          "label": "canopy opening",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramble the pangolin points upward with one claw toward the dark forest canopy, showing Barnaby the owl a shadowy shape hidden above while holding the lantern steady.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Journey",
+          "speech": "Together they walk side by side down the moonlit trail, fully trusting each other beneath the night sky.",
+          "visual": "signal",
+          "label": "path signal",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the pangolin and Barnaby the owl walk together along the dark forest path, carrying the glowing lantern between them as safe light guides their journey forward.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-07T22:59:41.672845+00:00",
+    "at": "2026-11-08T00:31:32.244055+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -21893,21 +21997,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-07T22:59:41.672891+00:00",
+    "at": "2026-11-08T00:31:32.244104+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-07T22:59:02.899828+00:00",
+    "at": "2026-11-08T00:31:09.890920+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-11-07-pm",
-    "video_url": "https://www.youtube.com/watch?v=BCS4Fnu6yk4",
+    "content_id": "rayvan-gemini-aedbe5902935f4994197",
+    "video_url": "https://www.youtube.com/watch?v=a31KOpNHLPQ",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-07T22:59:41.672127+00:00",
+    "at": "2026-11-08T00:31:32.243334+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -21919,7 +22023,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-07T22:59:41.672766+00:00",
+    "at": "2026-11-08T00:31:32.243983+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
