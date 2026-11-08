@@ -96,7 +96,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
                 raise ValueError("Invalid beat text")
         if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
                 or beat.get("story_environment") not in SCENES
-                or not re.search(r"\\b" + re.escape(str(beat.get("story_environment") or "")) + r"\\b",
+                or not re.search(r"\b" + re.escape(str(beat.get("story_environment") or "")) + r"\b",
                                  str(beat.get("visual_prompt") or ""), re.I)
                 or not visual_subject_matches(beat.get("visual"), beat.get("visual_prompt"))):
             raise ValueError("Invalid beat subject, environment, or narrative role")
