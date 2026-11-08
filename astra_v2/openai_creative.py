@@ -102,6 +102,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
             raise ValueError("Invalid beat subject, environment, or narrative role")
         if not isinstance(beat.get("visual_prompt"), str) or len(beat["visual_prompt"]) < 20:
             raise ValueError("Invalid beat visual prompt")
+    visual_tags = [beat["visual"] for beat in beats]
+    if len(set(visual_tags)) > 2 or not any(
+            visual_tags.count(tag) >= 2 for tag in set(visual_tags)):
+        raise ValueError("Story must retain one or two animal protagonists across beats")
     for key in ("question", "answer"):
         if not isinstance(data.get(key), str) or not 8 <= len(data[key]) <= 400:
             raise ValueError("Invalid story summary")
