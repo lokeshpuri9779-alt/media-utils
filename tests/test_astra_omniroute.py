@@ -21,10 +21,14 @@ class OmniRouteTests(unittest.TestCase):
              "story_environment": "forest"},
         ]
         omniroute.validate_beat_quality(beats)
+        unique = []
+        for beat, visual, original in zip(
+                beats, ("fox", "owl", "duck", "rabbit"),
+                ("fox", "fox", "owl", "fox")):
+            unique.append({**beat, "visual": visual,
+                           "visual_prompt": beat["visual_prompt"].replace(original, visual)})
         with self.assertRaisesRegex(ValueError, "preserve a protagonist"):
-            omniroute.validate_beat_quality([{**beat, "visual": visual,
-                "visual_prompt": beat["visual_prompt"].replace("fox", visual)}
-                for beat, visual in zip(beats, ("fox", "owl", "duck", "rabbit"))])
+            omniroute.validate_beat_quality(unique)
         with self.assertRaisesRegex(ValueError, "does not match"):
             omniroute.validate_beat_quality([{**beat, "visual": "owl"}
                 if index == 0 else beat for index, beat in enumerate(beats)])
