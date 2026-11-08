@@ -18,7 +18,7 @@ def payload(speech):
     return {"status": "completed", "output": [{"content": [{"type": "output_text",
         "text": json.dumps({"title": "The Clockwork Moon's Secret",
                             "question": "What happened to the moon's missing light tonight?",
-                            "answer": "A little fox follows a bell and helps an owl find the moonlight again.",
+                            "answer": "The tiny robots restored the moon's missing light.",
                             "beats": [{"headline": f"Chapter {i} begins", "speech": speech[i],
                                        "visual": visuals[i], "visual_prompt": prompts[i],
                                        "story_environment": "forest",
@@ -49,10 +49,10 @@ class ModelRuntimeGateTests(unittest.TestCase):
             return openai_creative.generate(set(), set(), [])
 
     def test_rejects_thin_but_structurally_valid_model_story(self):
-        lines = ["A little fox finds the moon's lost light today beside the quiet forest stream.",
-                 "The fox repairs its damaged lantern before dawn arrives along the forest path.",
-                 "A hidden bell rings and the owl notices the moonlight returning above the forest.",
-                 "Everyone celebrates when the moon shines brightly over the forest at last again."]
+        lines = ["A little robot finds the moon's lost light today beside the quiet forest stream.",
+                 "The robot repairs its damaged lamp before dawn arrives along the forest path.",
+                 "A hidden switch opens and the light returns above the forest at last again.",
+                 "Everyone celebrates when the moon shines brightly over the forest at last tonight."]
         with self.assertRaisesRegex(ValueError, "editorial"):
             self.run_story(lines)
 
