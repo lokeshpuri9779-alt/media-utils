@@ -47,8 +47,8 @@ class DirectedSceneContractTests(unittest.TestCase):
             "speech": "The figure waits quietly beside the forest stream.",
             "visual_prompt": "A figure with bright eyes and soft cheeks stands beside a forest stream.",
         }
-        self.assertEqual(validate_story_shot(shot),
-                         "embodied_character_not_supported_by_directed_icons")
+        with self.assertRaises(CreativeReject):
+            validate_story_shot(shot)
 
     def test_animal_eye_and_cheek_details_are_not_human_actor_evidence(self):
         shot = {
