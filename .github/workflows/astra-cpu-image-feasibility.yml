@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       confirm_cpu_benchmark:
-        description: 'BENCHMARK normally. Manual SDXL tokens: BENCHMARK_SLOW_REVIEW, BENCHMARK_DECODE_REVIEW, BENCHMARK_TEXT_REVIEW, BENCHMARK_FIRST_PREDICTION, BENCHMARK_REFERENCE_IMAGE.'
+        description: 'BENCHMARK normally. Manual SDXL tokens: BENCHMARK_SLOW_REVIEW, BENCHMARK_DECODE_REVIEW, BENCHMARK_TEXT_REVIEW, BENCHMARK_FIRST_PREDICTION, BENCHMARK_REFERENCE_IMAGE, BENCHMARK_DENOISER_REVIEW.'
         required: true
         type: string
       sdxl_one_image:
@@ -49,6 +49,52 @@ on:
 permissions:
   contents: read
 jobs:
+  sdxl-denoiser-review:
+    if: inputs.confirm_cpu_benchmark == 'BENCHMARK_DENOISER_REVIEW' && !inputs.sdxl_one_image && !inputs.sdxl_load && !inputs.sdxl_preflight && !inputs.prompt_diagnostic && !inputs.backend_parity && !inputs.object_diagnostic && !inputs.square_diagnostic && !inputs.comparison
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      actions: read
+    env:
+      ASTRA_OMNI_IMAGE_ALLOW_PAID: '0'
+      HF_HUB_DISABLE_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned CPU reference denoiser runtime
+        timeout-minutes: 15
+        run: |
+          python -m pip install torch==2.14.1 torchvision==0.29.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install pillow==11.3.0 diffusers==0.39.0 transformers==4.57.6 numpy==2.4.6 huggingface_hub==0.36.2 psutil==7.0.0
+      - name: Check CPU review guardrails
+        run: python -m unittest discover -s tests -p 'test_experimental_sdxl*.py' -v
+      - name: Restore verified run-78 conditioning
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-sdxl-text-review-42192924660
+          run-id: 42192924660
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: artifacts/experimental-openvino/sdxl-text-source/
+      - name: Restore verified run-79 prediction
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-sdxl-first-prediction-42232753910
+          run-id: 42232753910
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: artifacts/experimental-openvino/sdxl-prediction-source/
+      - name: Compare the reference FP32 first-step denoiser predictions
+        run: python -m tools.experimental_sdxl_denoiser_review
+      - name: Retain unapproved denoiser comparison evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-sdxl-denoiser-review-${{ github.run_id }}
+          path: artifacts/experimental-openvino/sdxl-denoiser-review/
+          if-no-files-found: error
+          retention-days: 7
   sdxl-reference-image:
     if: inputs.confirm_cpu_benchmark == 'BENCHMARK_REFERENCE_IMAGE' && !inputs.sdxl_one_image && !inputs.sdxl_load && !inputs.sdxl_preflight && !inputs.prompt_diagnostic && !inputs.backend_parity && !inputs.object_diagnostic && !inputs.square_diagnostic && !inputs.comparison
     runs-on: ubuntu-24.04
