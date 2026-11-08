@@ -1,14 +1,14 @@
 {
-  "observed_at": "2026-11-08T05:59:54.434504+00:00",
-  "generated": 13,
+  "observed_at": "2026-11-08T13:22:08.289747+00:00",
+  "generated": 9,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 4,
-      "reason": "invalid_story_structure"
+      "index": 0,
+      "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 5,
+      "index": 4,
       "reason": "invalid_story_structure"
     },
     {
@@ -16,31 +16,28 @@
       "reason": "invalid_story_structure"
     },
     {
-      "index": 15,
-      "reason": "invalid_story_structure"
+      "index": 12,
+      "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 16,
-      "reason": "invalid_story_structure"
+      "index": 13,
+      "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 17,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 18,
-      "reason": "invalid_story_structure"
+      "index": 14,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 4,
-  "review_deferred": 9,
+  "reviewed": 9,
+  "review_deferred": 0,
   "approved": 2,
   "review_issues": [
+    "The candidate story features characters 'Buster the Dog' and 'Pip the Mouse' and a premise involving a shared ball that strongly replicates and overlaps with the recently published comparison history item 'Buster the Dog and Pip the Mouse and the Shared Ball'.",
+    "The narrative structure and causal mechanism closely parallel formulaic templates found in the comparison dataset, lacking sufficient originality in character interaction and plot development.",
+    "The story premise, characters (Milo the Mouse and Barnaby the Rabbit), and setting heavily mirror existing published titles in the comparison history such as 'Pip the Mouse and Clover the Rabbit's Midnight Library Promise' and various other combinatorial animal-and-item stories by the same publisher.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "review_deferred:provider_unavailable",
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -96,25 +93,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 13,
+    "generated": 9,
     "script_status_counts": {
-      "no_simple_flags": 13
+      "no_simple_flags": 9
     },
     "renderer_status_counts": {
-      "incompatible": 7,
-      "structurally_eligible": 6
+      "incompatible": 5,
+      "structurally_eligible": 4
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 4,
-      "invalid_visual_shot": 1,
-      "none": 6,
-      "unsupported_human_actor": 2
+      "cast_mismatch": 5,
+      "none": 4
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 13
+      "all_shots_recognized": 8,
+      "partially_recognized": 1
     },
-    "scene_taxonomy_recognized_shots": 52,
-    "scene_taxonomy_unresolved_shots": 0,
+    "scene_taxonomy_recognized_shots": 35,
+    "scene_taxonomy_unresolved_shots": 1,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
