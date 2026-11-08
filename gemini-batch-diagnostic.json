@@ -1,23 +1,19 @@
 {
-  "observed_at": "2026-11-07T21:51:16.756758+00:00",
-  "generated": 11,
+  "observed_at": "2026-11-08T05:59:54.434504+00:00",
+  "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 4,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 3,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 4,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
       "index": 5,
-      "reason": "insufficient_beat_narration"
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 9,
+      "reason": "invalid_story_structure"
     },
     {
       "index": 15,
@@ -34,20 +30,14 @@
     {
       "index": 18,
       "reason": "invalid_story_structure"
-    },
-    {
-      "index": 19,
-      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 10,
-  "review_deferred": 1,
-  "approved": 4,
+  "reviewed": 4,
+  "review_deferred": 9,
+  "approved": 2,
   "review_issues": [
-    "The candidate story 'Felix the Cat and the Courtyard Box Correction' is part of an auto-generated template farm targeting search trends ('RAYVAN') with repetitive naming conventions and thematic elements very similar to previously published titles in the comparison history such as 'Barnaby the Cat and the Courtyard Box Exchange'.",
-    "The candidate story title 'Barnaby the Dog and Pip the Mouse and the Shared Ball' is an exact duplicate of a recently published premise provided in the comparison history ('Buster the Dog and Pip the Mouse and the Shared Ball' uses nearly identical character configurations and identical plotting, and the character pair directly overlaps with existing catalog patterns).",
-    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "review_deferred:provider_unavailable",
     "review_failed:HTTP_503",
     "review_provider:provider_unavailable"
@@ -106,24 +96,25 @@
     ]
   },
   "creative_preflight": {
-    "generated": 11,
+    "generated": 13,
     "script_status_counts": {
-      "no_simple_flags": 11
+      "no_simple_flags": 13
     },
     "renderer_status_counts": {
-      "incompatible": 4,
-      "structurally_eligible": 7
+      "incompatible": 7,
+      "structurally_eligible": 6
     },
     "renderer_reason_counts": {
       "cast_mismatch": 4,
-      "none": 7
+      "invalid_visual_shot": 1,
+      "none": 6,
+      "unsupported_human_actor": 2
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 9,
-      "partially_recognized": 2
+      "all_shots_recognized": 13
     },
-    "scene_taxonomy_recognized_shots": 41,
-    "scene_taxonomy_unresolved_shots": 3,
+    "scene_taxonomy_recognized_shots": 52,
+    "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
