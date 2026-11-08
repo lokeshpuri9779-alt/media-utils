@@ -72,6 +72,7 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("marketplace/courtyard", guidance)
         self.assertIn("independent scene-artwork review", guidance)
         self.assertIn("does not verify the artwork", guidance)
+        self.assertIn("invent a different premise", guidance)
 
     def test_gemini_prompt_grounded_in_shot_setting_only_when_opted_in(self):
         request = capture_prompt(True)[0]
