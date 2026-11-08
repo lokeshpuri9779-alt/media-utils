@@ -27,7 +27,7 @@ class OmniRouteTests(unittest.TestCase):
                 ("fox", "fox", "owl", "fox")):
             unique.append({**beat, "visual": visual,
                            "visual_prompt": beat["visual_prompt"].replace(original, visual)})
-        with self.assertRaisesRegex(ValueError, "preserve a protagonist"):
+        with self.assertRaisesRegex(ValueError, "at most two animal"):
             omniroute.validate_beat_quality(unique)
         with self.assertRaisesRegex(ValueError, "does not match"):
             omniroute.validate_beat_quality([{**beat, "visual": "owl"}
