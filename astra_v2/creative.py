@@ -15,20 +15,44 @@ class CreativeSkip(Exception):
 
 
 def inspect_video(path, fmt="short"):
+    """Inspect and decode the real MP4 with pinned PyAV; no system ffprobe needed."""
     if not path.is_file() or path.stat().st_size < 30_000:
         raise CreativeSkip("missing_or_tiny_video")
-    proc = subprocess.run(
-        ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)],
-        capture_output=True, text=True, timeout=35, check=False,
-    )
-    if proc.returncode:
-        raise CreativeSkip("ffprobe_decode_failed")
-    data = json.loads(proc.stdout)
-    video = next((x for x in data.get("streams", []) if x.get("codec_type") == "video"), {})
-    audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
-    width, height = int(video.get("width") or 0), int(video.get("height") or 0)
-    seconds = float((data.get("format") or {}).get("duration") or 0)
-    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (seconds > 0 and width >= 360 and height >= 640 and height > width and bool(audio))
+    import av
+
+    try:
+        with av.open(str(path), mode="r") as media:
+            video_stream = next(iter(media.streams.video), None)
+            audio_stream = next(iter(media.streams.audio), None)
+            if video_stream is None or audio_stream is None:
+                raise CreativeSkip("video_or_audio_stream_missing")
+            width = int(video_stream.width or 0)
+            height = int(video_stream.height or 0)
+            if media.duration is not None:
+                seconds = float(media.duration / av.time_base)
+            else:
+                durations = [
+                    float(stream.duration * stream.time_base)
+                    for stream in media.streams
+                    if stream.duration is not None and stream.time_base is not None
+                ]
+                seconds = max(durations, default=0.0)
+
+            # Decode at least one frame from each stream. Container metadata
+            # alone can pass even when the encoded media payload is damaged.
+            first_video = next(media.decode(video=0), None)
+            media.seek(0)
+            first_audio = next(media.decode(audio=0), None)
+            if first_video is None or first_audio is None:
+                raise CreativeSkip("video_or_audio_decode_failed")
+            if int(getattr(first_audio, "samples", 0) or 0) <= 0:
+                raise CreativeSkip("audio_decode_empty")
+    except CreativeSkip:
+        raise
+    except Exception as exc:
+        raise CreativeSkip("media_probe_or_decode_failed") from exc
+
+    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height) if fmt == "long" else (seconds > 0 and width >= 360 and height >= 640 and height > width)
     if not good:
         raise CreativeSkip("video_audio_orientation_or_duration_failed")
     return {"seconds": round(seconds, 2), "size": path.stat().st_size,
