@@ -60,6 +60,18 @@ def validate_beat_quality(beats, provider="OmniRoute"):
         visual_tags.append(visual)
     if len(set(visual_tags)) > 2:
         raise ValueError(provider + " must use at most two animal protagonist species")
+    from astra_v2.story_visuals import SUBJECTS
+    subject_patterns = dict(SUBJECTS)
+    story_text = " ".join(
+        str(beat.get(key) or "") for beat in beats
+        for key in ("speech", "visual_prompt")
+    )
+    mentioned_animals = {
+        species for species in VISUALS
+        if re.search(subject_patterns[species], story_text, re.I)
+    }
+    if len(mentioned_animals) > 2 or not mentioned_animals.issubset(set(visual_tags)):
+        raise ValueError(provider + " contains an untagged or third animal species")
     if not any(count >= 2 for count in Counter(visual_tags).values()):
         raise ValueError(provider + " must preserve a protagonist visual across beats")
 
