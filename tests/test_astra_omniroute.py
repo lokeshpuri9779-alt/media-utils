@@ -32,6 +32,10 @@ class OmniRouteTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "does not match"):
             omniroute.validate_beat_quality([{**beat, "visual": "owl"}
                 if index == 0 else beat for index, beat in enumerate(beats)])
+        third_species = [{**beat, "speech": beat["speech"] + " A rabbit watches nearby."}
+                         if index == 0 else beat for index, beat in enumerate(beats)]
+        with self.assertRaisesRegex(ValueError, "third animal species"):
+            omniroute.validate_beat_quality(third_species)
         with self.assertRaisesRegex(ValueError, "story_environment"):
             omniroute.validate_beat_quality([{**beat, "story_environment": "unknown"}
                 if index == 0 else beat for index, beat in enumerate(beats)])
