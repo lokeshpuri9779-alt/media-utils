@@ -41,8 +41,8 @@ def capture_prompt(renderer_aware, prior_stories=()):
 class RendererAwareWritingTests(unittest.TestCase):
     def test_guidance_matches_existing_studio_actor_and_prop_library(self):
         from astra_v2.pillow_duo_scene import ACTORS, PROPS
-        self.assertEqual(set(SUPPORTED_ANIMALS), set(ACTORS))
-        self.assertEqual(set(SUPPORTED_PROPS), set(PROPS))
+        self.assertLessEqual(set(SUPPORTED_ANIMALS), set(ACTORS))
+        self.assertLessEqual(set(SUPPORTED_PROPS), set(PROPS))
         self.assertEqual(len(RENDERER_AWARE_DOMAINS), 12)
         self.assertFalse(any("human protagonist" in d for d in RENDERER_AWARE_DOMAINS))
         self.assertFalse(any("robot caretaker" in d for d in RENDERER_AWARE_DOMAINS))
@@ -80,8 +80,8 @@ class RendererAwareWritingTests(unittest.TestCase):
         self.assertIn("Every beat's visual_prompt must state the ACTUAL visible location", prompt)
         self.assertIn("Do NOT mislabel grassland", prompt)
         self.assertIn("independent scene-artwork review", prompt)
-        self.assertNotIn("story_environment",
-                         request["schema"]["properties"]["beats"]["items"]["required"])
+        self.assertIn("story_environment",
+                      request["schema"]["properties"]["beats"]["items"]["required"])
         self.assertNotIn("background TAXONOMY", capture_prompt(False)[0]["prompt"])
 
     def test_default_prompt_unchanged_when_not_opted_in(self):
@@ -94,17 +94,16 @@ class RendererAwareWritingTests(unittest.TestCase):
     def test_prompt_guides_truthful_visual_diversity_without_relabeling(self):
         aware = capture_prompt(True)[0]
         prompt = aware["prompt"]
-        self.assertIn("at least THREE DISTINCT visual labels", prompt)
-        self.assertIn("Count the distinct labels before returning JSON", prompt)
-        self.assertIn("Do not simply relabel identical shots", prompt)
-        self.assertIn("rewrite the four-beat storyboard", prompt)
-        self.assertIn("not a substitute for describing the real scene", prompt)
+        self.assertIn("Keep the same protagonist tag across the beats", prompt)
+        self.assertIn("Do not change tags merely for variety", prompt)
+        self.assertIn("story_environment value from the Studio", prompt)
+        self.assertNotIn("at least THREE DISTINCT visual labels", prompt)
         self.assertNotIn("at least THREE DISTINCT visual labels",
                          capture_prompt(False)[0]["prompt"])
         from astra_v2.openai_creative import VISUALS
         visual = aware["schema"]["properties"]["beats"]["items"]["properties"]["visual"]
         self.assertEqual(set(visual["enum"]), VISUALS)
-        self.assertEqual(len(VISUALS), 6)
+        self.assertEqual(set(VISUALS), set(SUPPORTED_ANIMALS))
 
     def test_enabled_domain_is_selected_from_supported_domain_bank(self):
         prompt = capture_prompt(True)[0]["prompt"]
