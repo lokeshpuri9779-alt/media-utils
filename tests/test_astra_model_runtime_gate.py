@@ -8,13 +8,8 @@ from astra_v2 import openai_creative
 
 
 def payload(speech):
-    visuals = ("fox", "fox", "owl", "fox")
-    prompts = (
-        "A fox finds the moon's lost light beside a forest stream.",
-        "A fox repairs a small lantern along the forest path before dawn.",
-        "An owl notices a bell beside the fox in the forest clearing.",
-        "A fox watches moonlight return over the forest while an owl waits.",
-    )
+    visuals = ("fox", "fox", "fox", "fox")
+    prompts = ("A fox stands beside a forest stream and looks toward the moonlight.",) * 4
     return {"status": "completed", "output": [{"content": [{"type": "output_text",
         "text": json.dumps({"title": "The Clockwork Moon's Secret",
                             "question": "What happened to the moon's missing light tonight?",
