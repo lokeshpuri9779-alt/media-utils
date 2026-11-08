@@ -186,6 +186,10 @@ jobs:
         if: env.ASTRA_ASSET_PACK_ENABLED == '1'
         run: |
           python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+          # Only after SHA-validated restoration: allow one verified inventory/decoded
+          # background per shot to be reused across frames. This root is read-only
+          # for the remainder of the job; generated art lives under art/, separately.
+          echo 'ASTRA_ASSET_PACK_IMMUTABLE=1' >> "$GITHUB_ENV"
       - name: Install rendering stack
         timeout-minutes: 18
         run: |
