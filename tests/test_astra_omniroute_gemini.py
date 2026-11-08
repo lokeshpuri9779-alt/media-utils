@@ -140,6 +140,7 @@ class GeminiRouteTests(unittest.TestCase):
     def test_gemini_request_constrains_visual_and_story_role_enums(self):
         import json
         from astra_v2.openai_creative import VISUALS, ROLES
+        from astra_v2.visual_artifact_library import SCENES
         requests = []
         def capture(request, timeout):
             requests.append(json.loads(request.data))
@@ -157,13 +158,19 @@ class GeminiRouteTests(unittest.TestCase):
         beat = schema["properties"]["beats"]["items"]["properties"]
         self.assertEqual(set(beat["visual"]["enum"]), VISUALS)
         self.assertEqual(set(beat["story_beat"]["enum"]), ROLES)
+        self.assertEqual(set(beat["story_environment"]["enum"]), set(SCENES))
+        self.assertIn("story_environment", schema["properties"]["beats"]["items"]["required"])
         self.assertIn("visual_bible", schema["required"])
+        self.assertIn("animal protagonists", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
 
     def test_gemini_normalizes_only_known_beat_labels(self):
         import io
         import json
         from astra_v2.openai_creative import VISUALS, ROLES
-        self.assertIn("forest", VISUALS)
+        from astra_v2.visual_artifact_library import SCENES
+        self.assertIn("fox", VISUALS)
+        self.assertIn("forest", SCENES)
         self.assertIn("reveal", ROLES)
         # A noncanonical label must still be rejected; normalization is not
         # permission to map arbitrary model output to a production visual.
