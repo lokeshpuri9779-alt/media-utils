@@ -93,6 +93,10 @@ jobs:
           python -m unittest discover -s tests -p 'test_pixel_track_candidates.py' -v
           python -m unittest discover -s tests -p 'test_astra_render_contact_sheet.py' -v
           python -m unittest discover -s tests -p 'test_renderer_aware_writing.py' -v
+          python -m unittest discover -s tests -p 'test_astra_omniroute.py' -v
+          python -m unittest discover -s tests -p 'test_astra_omniroute_gemini.py' -v
+          python -m unittest discover -s tests -p 'test_story_visuals.py' -v
+          python -m unittest discover -s tests -p 'test_directed_scene_contract.py' -v
           python -m unittest discover -s tests -p 'test_semantic_video_gate.py' -v
       - name: Run story and novelty safeguards
         run: |
