@@ -8,6 +8,7 @@ import urllib.request
 
 from astra_v2.openai_creative import VISUALS, ROLES
 from astra_v2.visual_artifact_library import SCENES
+from astra_v2.renderer_aware_writing import background_scene_authoring_guidance
 
 
 def enabled():
@@ -102,7 +103,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Do not use glassmakers, glassblowers, stained glass, kilns, "
         "glass workshops, or the title pattern The Glassmaker of. "
         "Write one genuinely original, coherent, family-safe short with exactly one or two recurring animal protagonist species supported by ASTRA Studio; no third species, even in the background. "
-        "distinct motivations, emotional stakes, decisions and consequences. "
+        "Vary motivations, emotional stakes, decisions and consequences. "
         "All protagonists and acting characters must be supported animals; do not "
         "include humans, children, human professions, humanoids, robots or clothing. "
         "Supported animal subjects: " + ", ".join(sorted(VISUALS)) + ". "
@@ -146,6 +147,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         )
         prompt += (writing_guidance() + recent_plot_exclusions(prior_stories)
                    + causal_diversity_guidance(rotation))
+    else:
+        prompt += background_scene_authoring_guidance()
     if premise is not None:
         if not isinstance(premise, dict) or premise.get("production_ready") is not False:
             raise ValueError("Premise must be an unapproved editorial-review candidate")
