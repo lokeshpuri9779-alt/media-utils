@@ -9,6 +9,7 @@ from collections import Counter
 
 from astra_v2.openai_creative import VISUALS, ROLES, visual_subject_matches
 from astra_v2.visual_artifact_library import SCENES
+from astra_v2.renderer_aware_writing import background_scene_authoring_guidance
 
 PROMPT = (
     "Write one genuinely original, coherent, family-safe short story using "
@@ -31,6 +32,7 @@ PROMPT = (
     "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
     "Avoid copyrighted characters and prior titles: "
 )
+PROMPT += background_scene_authoring_guidance()
 
 
 
