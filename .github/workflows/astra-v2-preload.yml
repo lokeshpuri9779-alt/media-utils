@@ -455,6 +455,9 @@ jobs:
           ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
           ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
           ASTRA_STORY_HISTORY_PATH: astra_story_history.json
+          # The pinned art pack was restored and fully verified above; cache
+          # decoded backgrounds for this render without changing QA gates.
+          ASTRA_ASSET_PACK_IMMUTABLE: '1'
         run: |
           /usr/bin/time -v -o /tmp/astra-render-memory.txt python -m astra_v2.preload_worker
       - name: Report render peak RAM
