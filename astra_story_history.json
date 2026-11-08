@@ -9786,6 +9786,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f0055a673f901c2dd250",
+      "video_id": "ruvHoeyTxtA",
+      "confirmed_at": "2026-11-08T23:54:57.009116+00:00",
+      "title": "Pip the Pangolin and Ollie the Owl's Forest Signal",
+      "plot_fingerprint": "1cad6a8f42f9d2c3d96b0bda64cfc8752576d304b8c851d0d573a3fbf8897338",
+      "story_beats": [
+        {
+          "headline": "False Alarm in the Woods",
+          "speech": "Look at those bright orange sparks flashing through the trees, Ollie! We must sound the alarm right now!",
+          "visual": "forest",
+          "label": "forest canopy",
+          "story_beat": "reveal",
+          "visual_prompt": "In a dense misty forest at night, Pip the pangolin points his claw at floating orange lights while Ollie the owl watches from a low oak branch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Checking the Pattern",
+          "speech": "Wait, Pip. Wildfire sparks flicker erratically, but these bright lights pulse in a steady, gentle rhythm together.",
+          "visual": "signal",
+          "label": "flashing signal",
+          "story_beat": "build",
+          "visual_prompt": "In the same dark forest, Pip the pangolin holds a brass lantern unlit while Ollie the owl spreads his wings to examine a glowing cluster of insect lights floating nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Discovering the Insects",
+          "speech": "Let us check the leaf litter underneath. True smoke leaves dark soot, but there is no ash on the ground.",
+          "visual": "door",
+          "label": "wooden hollow",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the forest clearing by a hollow wooden log, Pip the pangolin inspects the clean ground with a small wooden box beside him while Ollie the owl perches above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Peaceful Resolution",
+          "speech": "They are only friendly fireflies dancing in the night air. We can relax and enjoy the quiet evening.",
+          "visual": "signal",
+          "label": "glowing swarm",
+          "story_beat": "payoff",
+          "visual_prompt": "In the serene forest clearing, Pip the pangolin and Ollie the owl sit side by side on soft moss, watching a gentle swarm of golden fireflies illuminate the peaceful night.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
