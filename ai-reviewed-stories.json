@@ -8018,82 +8018,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-eef518fd28a97360430f",
-      "title": "Lyra and Bram's Forest Compass Rivalry",
-      "hook": "The Hidden Path",
-      "question": "Will Lyra choose the path of victory or save Bram from the rising fog?",
-      "answer": "Lyra sacrifices her competitive lead to guide Bram safely out of the ravine.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Hidden Path",
-          "speech": "Lyra holds the brass compass high under the pine branches, spotting the hidden trail before Bram arrives.",
-          "visual": "forest",
-          "label": "forest trail",
-          "story_beat": "reveal",
-          "visual_prompt": "Lyra the lynx holding a brass compass in a dense green forest, standing on a mossy path, looking focused and determined, afternoon lighting.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Fog Trap",
-          "speech": "Bram slips near the misty edge of the ravine, clutching his compass tightly as heavy white vapor surrounds him.",
-          "visual": "signal",
-          "label": "ravine edge",
-          "story_beat": "build",
-          "visual_prompt": "Bram the stoat standing near a rocky ravine edge in a mountain environment, surrounded by rising white fog, looking worried while holding a small compass.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Turning Point",
-          "speech": "Lyra sees Bram struggling from above and drops her compass into the moss, grabbing her thick climbing rope instead.",
-          "visual": "door",
-          "label": "stone threshold",
-          "story_beat": "mechanism",
-          "visual_prompt": "Lyra the lynx standing on a rocky mountain ledge next to a stone archway threshold, dropping her compass to the ground and picking up a coiled rope.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "A Shared Journey",
-          "speech": "Both friends walk side by side along the forest path, leaving the compass behind as the sun breaks through.",
-          "visual": "forest",
-          "label": "sunlit grove",
-          "story_beat": "payoff",
-          "visual_prompt": "Lyra the lynx and Bram the stoat walking together down a sunlit forest path, smiling at each other with no props in their hands, warm golden hour lighting.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Lyra realizes Bram is trapped in the dense ravine fog while both race for the golden compass.",
-      "decisive_choice": "Lyra drops her own compass reading and tosses her guiding rope down to rescue Bram.",
-      "resolution": "Both friends walk out of the forest together, agreeing that mutual safety matters more than winning.",
-      "visual_bible": {
-        "style": "Cinematic 3D animation style with rich textures, soft volumetric lighting, and detailed animal fur shaders.",
-        "characters": {
-          "Lyra": "An agile lynx with sleek tawny fur, dark ear tufts, bright green eyes, and a determined expression.",
-          "Bram": "A nimble stoat with glossy brown and cream fur, long whiskers, and an expressive, curious face."
-        },
-        "locations": {
-          "forest": "An enchanted woodland featuring towering pine trees, moss-covered boulders, and dappled sunlight filtering through the canopy.",
-          "mountain": "A rugged alpine setting featuring steep rocky ledges, patches of snow, and swirling mist."
-        },
-        "objects": {
-          "compass": "A gleaming pocket brass compass with an intricately etched glass face and a trembling needle.",
-          "rope": "A thick, durable hemp climbing rope coiled neatly on the ground."
-        }
-      },
-      "plot_fingerprint": "5fb8f4ad62024ec43e5ea2ebef3d082a5f627996d5e537aa5a87f656e7171d71"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
       "title": "Jasper the Stoat and Finn the Fox's Winter Cabin Tome",
       "hook": "The Sole Surviving Tome",
@@ -8175,6 +8099,156 @@
         }
       },
       "plot_fingerprint": "8d62f8de315b24a581905916096b4eb9d3efc6648127a38250f16aad03ffacfb"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-34e93d76b1816e266a96",
+      "title": "Bram the Stoat and Faelen the Fox's Shared Winter Tome",
+      "hook": "The Tense Tug",
+      "question": "Can two rivals share a single scarce winter book without tearing its pages apart in the cold cabin?",
+      "answer": "Yes, by trading half-hour reading turns, they preserve the fragile volume and find warmth in cooperation.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Tense Tug",
+          "speech": "Both animals pulled fiercely on opposite ends of the fragile winter book inside the drafty wooden cabin, risking total ruin.",
+          "visual": "forest",
+          "label": "cabin interior",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a cozy wooden cabin during a snowstorm, Bram the brown stoat and Faelen the orange fox pull in opposite directions on a single worn book resting on a wooden table, both holding angry expressions.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sudden Halt",
+          "speech": "Bram noticed a fresh tear forming near the spine and immediately froze, realizing that fighting would destroy their only guide.",
+          "visual": "door",
+          "label": "cabin doorway",
+          "story_beat": "build",
+          "visual_prompt": "Inside the wooden cabin, Bram the stoat stares down at the torn edge of the book with wide eyes while Faelen the fox glares across the table near the frosted wooden doorway.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Trade",
+          "speech": "Deciding cooperation outweighed pride, Bram pushed the book entirely across the table toward Faelen with a steady paw.",
+          "visual": "signal",
+          "label": "table surface",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the wooden cabin, Bram the stoat pushes the open book across the wooden table toward Faelen the fox, who watches with a surprised and softening expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Wisdom",
+          "speech": "Seated side by side near the glowing hearth, they read the vital pages together and weathered the freezing storm in harmony.",
+          "visual": "planet",
+          "label": "cabin hearth",
+          "story_beat": "payoff",
+          "visual_prompt": "Inside the warm wooden cabin, Bram the stoat and Faelen the fox sit closely side by side on a woven rug near a stone fireplace, reading the shared book under the glow of a lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Bram and Faelen both need the only available survival guide book in the freezing cabin to study the upcoming blizzard patterns, but gripping it simultaneously threatens to rip the spine.",
+      "decisive_choice": "Bram releases his hold on the book and slides it across the wooden table to Faelen, accepting his turn will come later.",
+      "resolution": "Faelen reads the urgent weather warning aloud, and both animals survive the winter storm safely together.",
+      "visual_bible": {
+        "style": "Cozy storybook illustration style with warm lighting, rich winter textures, and expressive animal characters.",
+        "characters": {
+          "Bram": "A compact brown stoat with sleek fur, bright curious eyes, and a determined posture.",
+          "Faelen": "A slender orange fox with thick winter fur, a bushy tail, and an alert expression."
+        },
+        "locations": {
+          "Cabin": "A rustic wooden cabin featuring timber walls, a stone hearth, a sturdy wooden table, and a frosted window overlooking a snowy forest."
+        },
+        "objects": {
+          "book": "A thick, leather-bound volume with aged parchment pages and a worn spine.",
+          "lantern": "A brass oil lantern casting a warm golden glow across the room."
+        }
+      },
+      "plot_fingerprint": "16e6dcea65f7383f10e94be266e21769391f7682310115deb0b4526d80047221"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f0055a673f901c2dd250",
+      "title": "Pip the Pangolin and Ollie the Owl's Forest Signal",
+      "hook": "False Alarm in the Woods",
+      "question": "Can Pip and Ollie distinguish a true weather hazard from harmless fireflies before panicking?",
+      "answer": "Yes, by observing the flashing pattern closely, they realize the lights are harmless insects and avoid a false evacuation.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "False Alarm in the Woods",
+          "speech": "Look at those bright orange sparks flashing through the trees, Ollie! We must sound the alarm right now!",
+          "visual": "forest",
+          "label": "forest canopy",
+          "story_beat": "reveal",
+          "visual_prompt": "In a dense misty forest at night, Pip the pangolin points his claw at floating orange lights while Ollie the owl watches from a low oak branch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Checking the Pattern",
+          "speech": "Wait, Pip. Wildfire sparks flicker erratically, but these bright lights pulse in a steady, gentle rhythm together.",
+          "visual": "signal",
+          "label": "flashing signal",
+          "story_beat": "build",
+          "visual_prompt": "In the same dark forest, Pip the pangolin holds a brass lantern unlit while Ollie the owl spreads his wings to examine a glowing cluster of insect lights floating nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Discovering the Insects",
+          "speech": "Let us check the leaf litter underneath. True smoke leaves dark soot, but there is no ash on the ground.",
+          "visual": "door",
+          "label": "wooden hollow",
+          "story_beat": "mechanism",
+          "visual_prompt": "In the forest clearing by a hollow wooden log, Pip the pangolin inspects the clean ground with a small wooden box beside him while Ollie the owl perches above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Peaceful Resolution",
+          "speech": "They are only friendly fireflies dancing in the night air. We can relax and enjoy the quiet evening.",
+          "visual": "signal",
+          "label": "glowing swarm",
+          "story_beat": "payoff",
+          "visual_prompt": "In the serene forest clearing, Pip the pangolin and Ollie the owl sit side by side on soft moss, watching a gentle swarm of golden fireflies illuminate the peaceful night.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Pip and Ollie mistake a glowing swarm of fireflies for an oncoming wildfire warning signal in the misty forest.",
+      "decisive_choice": "Pip stops to count the flash intervals while Ollie compares the steady rhythm against known ember sparks.",
+      "resolution": "Both animals recognize the friendly fireflies and peacefully resume their midnight foraging together.",
+      "visual_bible": {
+        "style": "Cinematic stop-motion puppet animation with rich textures, warm ambient lighting, and natural woodland color palettes.",
+        "characters": {
+          "Pip": "A small armored pangolin with dusty brown scales, round curious eyes, and a curled tail.",
+          "Ollie": "A wise barn owl with speckled white and brown feathers, large golden eyes, and soft feathered tufts."
+        },
+        "locations": {
+          "forest": "A lush, misty nighttime woodland featuring ancient mossy tree trunks, fern beds, and soft forest floors."
+        },
+        "objects": {
+          "lantern": "A small brass lantern with a glass pane, currently unlit and resting on the moss.",
+          "box": "A compact wooden storage box with a simple metal clasp."
+        }
+      },
+      "plot_fingerprint": "1cad6a8f42f9d2c3d96b0bda64cfc8752576d304b8c851d0d573a3fbf8897338"
     }
   ]
 }

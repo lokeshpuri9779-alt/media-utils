@@ -964,21 +964,30 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-eef518fd28a97360430f",
-      "story_sha256": "1974918a8536122b18dbd34bef76143644f3115aea1d52dd5c53de1859d9f707",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is coherent, original, and features a distinct plot and characters.; There are no trademark, copyright, or safety violations.; The causal chain is clear, with a direct link between the conflict, decisive choice, and resolution.; The story fits general audience suitability guidelines and YouTube content policies.",
-      "reviewed_at": "2026-11-08T13:21:49.257006+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
       "story_sha256": "77b47a5faa3a83a76d8be7d3724670212209ddb7ce43f5d5698f4f5d09723f4d",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is coherent, original, and follows a clear narrative arc with logical causal links.; No copyright or trademark concerns detected; characters and settings are original creations.; Content is safe, appropriate for general audiences, and adheres to safety guidelines.",
       "reviewed_at": "2026-11-08T13:21:50.190386+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-34e93d76b1816e266a96",
+      "story_sha256": "cfc1f5d9e1255f1655ec20c9f5744afc88bfcaec4cb7d0ef0b84bc1a0e85603c",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is causally coherent and clear, featuring a distinct conflict, decisive choice, and resolution.; No copyright or trademark concerns detected; characters and setting are original fictional elements.; Content is safe, suitable for general audiences, and carries no deceptive or misleading elements.; While the comparison history includes a character named Bram and stories involving shared items, the specific causal mechanism (trading half-hour reading turns for a survival guide book in a cabin) and plot fingerprint are unique and do not duplicate recently published premises.",
+      "reviewed_at": "2026-11-08T22:01:55.956941+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-f0055a673f901c2dd250",
+      "story_sha256": "64d12643f49448aa9c9dfae95ab9b3cdf51e68cbaa56408d0fe2dc7e1ece0cff",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and does not duplicate recently published premises or characters in the comparison history.; Causal coherence is maintained through logical problem-solving steps (comparing flash intervals and checking for soot).; Clarity is high and content is safe, appropriate for all audiences, and presents no YouTube policy risks.",
+      "reviewed_at": "2026-11-08T22:01:56.713757+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
