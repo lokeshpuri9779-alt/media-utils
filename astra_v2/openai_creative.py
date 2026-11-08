@@ -48,7 +48,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "copyrighted characters, real news claims, and any existing titles or ideas. "
         "Return ONLY a JSON object with title, question, answer, and beats. "
         "Each beat has headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
-        "Use only animal protagonists supported by the Studio cast; no humans, humanoids, robots, or clothing. "
+        "Use exactly one or two recurring supported animal species across all four beats; no third species, even in the background. No humans, humanoids, robots, or clothing. "
         "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". "
         "The visual tag must name the same animal explicitly shown in visual_prompt. "
         "Keep at least one protagonist visual tag consistent across two or more beats; never vary it just for variety. "
