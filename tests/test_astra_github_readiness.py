@@ -78,24 +78,17 @@ class GithubReadinessTests(unittest.TestCase):
                 self.assertIn("Pillow==11.3.0", source)
                 self.assertIn("ASTRA_ASSET_VALIDATION_IMPORT=ready", source)
 
-    def test_preload_probe_must_decode_real_mp4(self):
+    def test_preload_media_probe_uses_pinned_pyav_without_system_apt(self):
         preload = read(PRELOAD)
-        self.assertIn("ASTRA_FFPROBE_NATIVE_INSTALL=official-archive", preload)
-        self.assertIn("signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg", preload)
-        self.assertIn('Dir::Etc::sourceparts=-', preload)
-        self.assertIn('Dir::State::lists=$apt_root/lists', preload)
-        self.assertIn("APT::Update::Error-Mode=any", preload)
-        self.assertNotIn("apt-get download ffmpeg", preload)
-        self.assertIn("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed", preload)
-        self.assertIn("ffprobe -version >/dev/null 2>&1", preload)
-        self.assertIn('apt-get "${apt_options[@]}" install -y --no-install-recommends ffmpeg', preload)
-        self.assertIn("-o Acquire::Retries=1", preload)
-        self.assertIn("-o Acquire::https::Timeout=15", preload)
-        self.assertIn("timeout 240s sudo env DEBIAN_FRONTEND=noninteractive", preload)
-        self.assertIn("-o DPkg::Lock::Timeout=10", preload)
-        self.assertIn("color=c=black:s=160x288:r=2", preload)
-        self.assertIn('"codec_type") == "video"', preload)
-        self.assertLess(preload.index("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed"),
+        requirements = read("requirements.txt")
+        self.assertIn("av==19.0.2", requirements)
+        self.assertIn("ASTRA_PYAV_REAL_MP4_DECODE_SMOKE=passed", preload)
+        self.assertIn("import av", preload)
+        self.assertIn("media.decode(video=0)", preload)
+        self.assertIn("media.decode(audio=0)", preload)
+        self.assertNotIn("apt-get", preload)
+        self.assertNotIn("ffprobe", preload)
+        self.assertLess(preload.index("ASTRA_PYAV_REAL_MP4_DECODE_SMOKE=passed"),
                         preload.index("- name: Refresh free licensed visual icon cache"))
 
     def test_visual_pack_expiry_and_missing_artifacts_fail_closed(self):
