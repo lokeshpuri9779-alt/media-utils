@@ -77,11 +77,11 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "village friendship dilemma with rabbit and fox protagonists",
         "forest survival adventure involving otter cooperation",
         "railway station mystery with mouse and owl protagonists",
-        "garden caretaker dilemma with beaver and duck protagonists",
-        "seaside festival rivalry with crab and heron protagonists",
-        "desert expedition with fox and owl protagonists",
+        "garden caretaker dilemma with beaver and mole protagonists",
+        "seaside festival friendship with otter and owl protagonists",
+        "desert expedition with fox and rabbit protagonists",
         "community sports rivalry with dog and cat protagonists",
-        "arctic shelter-sharing dilemma with penguin and fox protagonists",
+        "arctic shelter-sharing dilemma with rabbit and fox protagonists",
         "observatory mystery with owl and squirrel protagonists",
     )
     renderer_aware = os.getenv("ASTRA_GEMINI_RENDERER_AWARE_WRITING", "0") == "1"
