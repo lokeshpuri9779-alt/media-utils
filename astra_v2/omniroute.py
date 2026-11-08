@@ -2,36 +2,59 @@
 import hashlib
 import json
 import os
+import re
 import urllib.error
 import urllib.request
+from collections import Counter
 
-from astra_v2.openai_creative import VISUALS, ROLES
+from astra_v2.openai_creative import VISUALS, ROLES, visual_subject_matches
+from astra_v2.visual_artifact_library import SCENES
 
 PROMPT = (
-    "Write one genuinely original, coherent, family-safe short story. Vary "
-    "protagonists, settings, motivations, conflict types, emotional stakes and "
-    "endings across generations; avoid defaulting to cosmic archives, simulations "
-    "or corrupted-code revelations. Ground each story in a concrete choice and "
-    "its consequence. Use four cinematic story beats and a meaningful ending. "
-    "Return only JSON "
-    "keys title, question, answer, beats. Each beat needs headline, speech, visual, "
-    "label, story_beat. Speech 12-24 words per beat; at least three distinct visuals. Visual one of planet, robot, signal, "
-    "ship, forest, door; story_beat one of reveal, build, mechanism, twist, payoff. "
-    "Beat one reveal, beat four payoff, middle beats build/mechanism/twist. "
-    "Title 8-75 chars. Avoid copyrighted characters and prior titles: "
+    "Write one genuinely original, coherent, family-safe short story using "
+    "animal protagonists supported by ASTRA Studio. Vary species, settings, "
+    "motivations, conflict types, emotional stakes and endings; avoid humans, "
+    "humanoids, robots, clothing, complex machinery, bridge/cable repairs, "
+    "large-gap jumps and simultaneous multi-prop actions. Ground each story "
+    "in a concrete choice and consequence. Use four cinematic story beats. "
+    "Return only JSON keys title, question, answer, beats. Each beat needs "
+    "headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
+    "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". It names the "
+    "same animal explicitly shown in visual_prompt. Keep at least one main "
+    "protagonist visual tag consistent across two or more beats; do not change "
+    "tags merely for variety. story_environment must be exactly one of: "
+    + ", ".join(SCENES) + ". Every visual_prompt describes one simple visible "
+    "animal action in that environment. Speech 12-24 words per beat. "
+    "story_beat one of reveal, build, mechanism, twist, payoff; beat one reveal, "
+    "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
+    "Avoid copyrighted characters and prior titles: "
 )
 
 
 
 def validate_beat_quality(beats, provider="OmniRoute"):
-    """Reject proposals known to fail editorial detail/visual-variety gates."""
+    """Require supported animal subjects and explicit compositor environments."""
     if not isinstance(beats, list) or len(beats) != 4:
         raise ValueError(provider + " requires exactly four beats")
-    if any(len(str(beat.get("speech") or "").split()) < 12 for beat in beats
-           if isinstance(beat, dict)) or any(not isinstance(beat, dict) for beat in beats):
+    if any(not isinstance(beat, dict) for beat in beats):
+        raise ValueError(provider + " invalid beat")
+    if any(len(str(beat.get("speech") or "").split()) < 12 for beat in beats):
         raise ValueError(provider + " narration needs at least 12 words per beat")
-    if len({str(beat.get("visual") or "") for beat in beats}) < 3:
-        raise ValueError(provider + " needs at least three distinct visual types")
+    visual_tags = []
+    for beat in beats:
+        visual = beat.get("visual")
+        prompt = beat.get("visual_prompt")
+        if visual not in VISUALS:
+            raise ValueError(provider + " visual must name a supported animal subject")
+        if not isinstance(prompt, str) or len(prompt.strip()) < 20:
+            raise ValueError(provider + " requires a concrete visual_prompt")
+        if not visual_subject_matches(visual, prompt):
+            raise ValueError(provider + " visual tag does not match the depicted animal")
+        if beat.get("story_environment") not in SCENES:
+            raise ValueError(provider + " requires a supported story_environment")
+        visual_tags.append(visual)
+    if not any(count >= 2 for count in Counter(visual_tags).values()):
+        raise ValueError(provider + " must preserve a protagonist visual across beats")
 
 
 def _enabled(name, secret):
@@ -84,8 +107,8 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
         for key in ("headline", "speech", "label"):
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
                 raise ValueError(provider + " invalid beat text")
-        if beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES:
-            raise ValueError(provider + " invalid visual or narrative role")
+        if beat.get("story_beat") not in ROLES:
+            raise ValueError(provider + " invalid narrative role")
         words = len(beat["speech"].split())
         if not 10 <= words <= 24:
             raise ValueError(provider + " narration word count invalid")
