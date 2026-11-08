@@ -81,7 +81,7 @@ class GithubReadinessTests(unittest.TestCase):
     def test_preload_media_probe_uses_pinned_pyav_without_system_apt(self):
         preload = read(PRELOAD)
         requirements = read(REQUIREMENTS)
-        self.assertIn("av==19.0.2", requirements)
+        self.assertIn("av==18.1.0", requirements)
         self.assertIn("ASTRA_PYAV_REAL_MP4_DECODE_SMOKE=passed", preload)
         self.assertIn("import av", preload)
         self.assertIn("media.decode(video=0)", preload)
