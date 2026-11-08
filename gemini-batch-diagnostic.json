@@ -1,43 +1,44 @@
 {
-  "observed_at": "2026-11-08T13:22:08.289747+00:00",
-  "generated": 9,
+  "observed_at": "2026-11-08T22:02:12.774854+00:00",
+  "generated": 8,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "insufficient_visual_diversity"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 4,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 9,
+      "index": 5,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 12,
-      "reason": "insufficient_visual_diversity"
+      "index": 6,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 7,
+      "reason": "invalid_story_structure"
     },
     {
       "index": 13,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 14,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 9,
+  "reviewed": 8,
   "review_deferred": 0,
   "approved": 2,
   "review_issues": [
-    "The candidate story features characters 'Buster the Dog' and 'Pip the Mouse' and a premise involving a shared ball that strongly replicates and overlaps with the recently published comparison history item 'Buster the Dog and Pip the Mouse and the Shared Ball'.",
-    "The narrative structure and causal mechanism closely parallel formulaic templates found in the comparison dataset, lacking sufficient originality in character interaction and plot development.",
-    "The story premise, characters (Milo the Mouse and Barnaby the Rabbit), and setting heavily mirror existing published titles in the comparison history such as 'Pip the Mouse and Clover the Rabbit's Midnight Library Promise' and various other combinatorial animal-and-item stories by the same publisher.",
+    "Fails originality review due to recycling formulaic plot beats and character dynamics from recent titles.",
+    "The candidate story features 'Orion the Owl' in an observatory setting with a telescope and a brass lantern, which heavily repeats premises, character names, and settings from recently published titles such as 'Orion the Owl and the Starlight Observatory Lens'.",
+    "The central conflict, character pairing of Sammy the Squirrel and Barnaby the Rabbit, and causal mechanisms heavily duplicate recently published premises in the comparison history such as 'Sammy the Squirrel and Barnaby the Rabbit's Garden Clue' and 'Finn the Fox and Barnaby the Rabbit's Woodland Clue'.",
+    "The story structure, character naming convention (Toby the Tapir), setting pattern, and narrative formula closely replicate multiple recently published works in the comparison history such as 'Toby the Tapir and the Two-Flower Meadow Shift', 'Orion the Owl and the Silent Platform Bell', and 'Tansy the Tapir and the Changing Meadow Blossoms'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -93,24 +94,25 @@
     ]
   },
   "creative_preflight": {
-    "generated": 9,
+    "generated": 8,
     "script_status_counts": {
-      "no_simple_flags": 9
+      "no_simple_flags": 8
     },
     "renderer_status_counts": {
-      "incompatible": 5,
-      "structurally_eligible": 4
+      "incompatible": 3,
+      "structurally_eligible": 5
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 5,
-      "none": 4
+      "cast_mismatch": 2,
+      "none": 5,
+      "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 8,
-      "partially_recognized": 1
+      "all_shots_recognized": 6,
+      "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 35,
-    "scene_taxonomy_unresolved_shots": 1,
+    "scene_taxonomy_recognized_shots": 28,
+    "scene_taxonomy_unresolved_shots": 4,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
