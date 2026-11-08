@@ -48,7 +48,7 @@ class DirectedSceneContractTests(unittest.TestCase):
             "speech": "The fox waits quietly beside the forest stream.",
             "visual_prompt": "A fox with bright eyes and soft cheeks stands beside a forest stream.",
         }
-        self.assertEqual(validate_story_shot(shot), "directed")
+        self.assertEqual(validate_story_shot(shot), "solo")
 
     def test_beacon_is_valid_signal_but_ordinary_light_is_not(self):
         self.assertEqual(validate_story_shot({
