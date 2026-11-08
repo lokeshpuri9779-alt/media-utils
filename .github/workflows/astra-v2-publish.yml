@@ -332,6 +332,10 @@ jobs:
           ASTRA_PRELOAD_ONLY: '0' # Scan only policy-approved queued media, then allow a fresh QA-gated render
           ASTRA_ASSET_PACK_ENABLED: '1'
           ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+          # The preceding restore step verifies every image. This runner's pack
+          # is unchanged during rendering; reuse decoded and verified artwork
+          # instead of reopening/revalidating thousands of files per frame.
+          ASTRA_ASSET_PACK_IMMUTABLE: '1'
           ASTRA_ASSET_PACK_AUDIT: '1'
           ASTRA_ASSET_AUDIT_DIR: runtime-health/asset-usage
           ASTRA_VISUAL_REVIEW_SHEET: '1'
