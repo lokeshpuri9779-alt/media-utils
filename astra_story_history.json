@@ -9633,6 +9633,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-0448d5f0aa11768c92ba",
+      "video_id": "pspvhDRwNsI",
+      "confirmed_at": "2026-11-08T09:13:37.219318+00:00",
+      "title": "Lyra the Lynx and Bran the Stoat's Forest Compass Reversal",
+      "plot_fingerprint": "503d32516b63cd6e042bac45bf6bcd64ac91d7b52fb48de97108432f5f5d9fb7",
+      "story_beats": [
+        {
+          "headline": "A Disputed Discovery",
+          "speech": "Lyra the Lynx and Bran the Stoat argue loudly over who truly found the brass compass resting near the fern roots.",
+          "visual": "forest",
+          "label": "forest floor",
+          "story_beat": "reveal",
+          "visual_prompt": "Lyra the Lynx and Bran the Stoat stand inside a dense woodland forest next to a large fern patch. Lyra holds a shiny brass compass in her paw with an upset expression, while Bran points angrily with a furry paw at the same object.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Findings",
+          "speech": "Bran the Stoat holds the brass compass aloft, insisting his map matches the northern bearing while Lyra shakes her head.",
+          "visual": "signal",
+          "label": "map reading",
+          "story_beat": "build",
+          "visual_prompt": "Bran the Stoat stands in the same woodland forest holding the brass compass high while looking at a parchment map in his other paw. Lyra the Lynx stands nearby with crossed arms, watching him skeptically under the green forest canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Return Journey",
+          "speech": "Realizing the mistake, Lyra the Lynx and Bran the Stoat carry the brass compass back to the original mossy stump.",
+          "visual": "door",
+          "label": "mossy stump",
+          "story_beat": "mechanism",
+          "visual_prompt": "Lyra the Lynx and Bran the Stoat walk side by side through the woodland forest carrying the brass compass together. They approach an old, hollow mossy tree stump resting on the forest floor, ready to place the compass back.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "True North Together",
+          "speech": "Resting the brass compass upon the mossy stump, Lyra the Lynx and Bran the Stoat smile as the needle settles correctly.",
+          "visual": "forest",
+          "label": "settled compass",
+          "story_beat": "payoff",
+          "visual_prompt": "Lyra the Lynx and Bran the Stoat stand happily side by side in the woodland forest. The brass compass rests peacefully on top of a mossy tree stump between them, its magnetic needle pointing steadily north under the sunlit forest canopy.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
