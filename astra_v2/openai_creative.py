@@ -9,9 +9,22 @@ import re
 import urllib.error
 import urllib.request
 from astra_v2.spending_policy import paid_openai_allowed, assert_no_paid_api
+from astra_v2.visual_artifact_library import SCENES
 
-VISUALS = {"planet", "robot", "signal", "ship", "forest", "door"}
+# These are the animal subjects the current Studio character renderer supports.
+# A visual tag identifies the depicted actor, not an arbitrary scene symbol.
+VISUALS = {"fox", "owl", "duck", "squirrel", "mouse", "mole", "otter",
+           "beaver", "penguin", "heron", "crab", "firefly", "cat", "dog",
+           "monkey", "bird", "rabbit", "whale"}
 ROLES = {"reveal", "build", "mechanism", "twist", "payoff"}
+
+
+def visual_subject_matches(visual, visual_prompt):
+    """Require the visual label's supported animal to appear in the shot prompt."""
+    from astra_v2.story_visuals import SUBJECTS
+    pattern = dict(SUBJECTS).get(visual)
+    return bool(pattern and isinstance(visual_prompt, str)
+                and re.search(pattern, visual_prompt, re.I))
 
 
 def enabled():
@@ -35,8 +48,14 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         "surprising but coherent ending. Avoid generic inspirational cliches, "
         "copyrighted characters, real news claims, and any existing titles or ideas. "
         "Return ONLY a JSON object with title, question, answer, and beats. "
-        "Each beat has headline, speech, visual, label, story_beat. "
-        "visual must be one of: planet, robot, signal, ship, forest, door. "
+        "Each beat has headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
+        "Use only animal protagonists supported by the Studio cast; no humans, humanoids, robots, or clothing. "
+        "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". "
+        "The visual tag must name the same animal explicitly shown in visual_prompt. "
+        "Keep at least one protagonist visual tag consistent across two or more beats; never vary it just for variety. "
+        "story_environment must be exactly one of: " + ", ".join(SCENES) + ". "
+        "Every visual_prompt must show one simple, filmable animal action in that environment. "
+        "Avoid complex machinery, bridge/cable repairs, large-gap jumps, and simultaneous multi-prop actions. "
         "story_beat must be one of: reveal, build, mechanism, twist, payoff. "
         "Speech: 10-24 words per beat. Title under 75 characters. "
         "Exclude these titles: " + json.dumps(sorted(excluded_titles)[:60]) +
@@ -76,8 +95,12 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         for key in ("headline", "speech", "label"):
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
                 raise ValueError("Invalid beat text")
-        if beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES:
-            raise ValueError("Invalid beat visual or narrative role")
+        if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
+                or beat.get("story_environment") not in SCENES
+                or not visual_subject_matches(beat.get("visual"), beat.get("visual_prompt"))):
+            raise ValueError("Invalid beat subject, environment, or narrative role")
+        if not isinstance(beat.get("visual_prompt"), str) or len(beat["visual_prompt"]) < 20:
+            raise ValueError("Invalid beat visual prompt")
     for key in ("question", "answer"):
         if not isinstance(data.get(key), str) or not 8 <= len(data[key]) <= 400:
             raise ValueError("Invalid story summary")
