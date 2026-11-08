@@ -77,7 +77,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "village friendship dilemma with rabbit and fox protagonists",
         "forest survival adventure involving otter cooperation",
         "railway station mystery with mouse and owl protagonists",
-        "garden caretaker dilemma with beaver and mole protagonists",
+        "garden caretaker dilemma with cat and dog protagonists",
         "seaside festival friendship with otter and owl protagonists",
         "desert expedition with fox and rabbit protagonists",
         "community sports rivalry with dog and cat protagonists",
