@@ -9682,6 +9682,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-61fb5b0360fe64e8e7ca",
+      "video_id": "9PnEfX8FfQY",
+      "confirmed_at": "2026-11-08T14:21:08.074602+00:00",
+      "title": "Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma",
+      "plot_fingerprint": "6624ce1d9dd7603e15e1fac3ee750344712e094c77d6c51290f87fe581b92c1c",
+      "story_beats": [
+        {
+          "headline": "Dispute at the Water's Edge",
+          "speech": "Oliver insists the lantern guides his late-night fishing routes, while Barnaby claims it illuminates his midnight lookout post.",
+          "visual": "forest",
+          "label": "riverbank",
+          "story_beat": "reveal",
+          "visual_prompt": "Oliver the Otter and Barnaby the Cat stand on a damp forest riverbank facing each other, arguing intensely while both grip the single brass lantern resting on a flat stone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Glow",
+          "speech": "Barnaby holds the heavy brass lantern high to check if its amber flame reaches across the entire mossy clearing.",
+          "visual": "signal",
+          "label": "clearing",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the Cat stands alone in a forest clearing holding the glowing brass lantern upward as a bright signal, while Oliver the Otter watches closely from the grass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Reflections",
+          "speech": "Oliver places the lantern down by the rushing water to see which animal guild benefits more from its golden light.",
+          "visual": "door",
+          "label": "waterway",
+          "story_beat": "mechanism",
+          "visual_prompt": "Oliver the Otter kneels by the forest waterway entrance, setting the brass lantern on a flat rock to examine its reflection, with Barnaby the Cat observing from nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Shared Watch",
+          "speech": "Both animals agree to split the evening hours equally, using the lantern to guide both fishing and night guarding.",
+          "visual": "planet",
+          "label": "riverbank",
+          "story_beat": "payoff",
+          "visual_prompt": "Oliver the Otter and Barnaby the Cat sit side by side on the forest riverbank under a starlit night sky, sharing the warm glowing brass lantern peacefully between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
