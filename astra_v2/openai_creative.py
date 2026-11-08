@@ -11,8 +11,8 @@ import urllib.request
 from astra_v2.spending_policy import paid_openai_allowed, assert_no_paid_api
 from astra_v2.visual_artifact_library import SCENES
 
-# These are the animal subjects the current Studio character renderer supports.
-# A visual tag identifies the depicted actor, not an arbitrary scene symbol.
+# The current Studio subject selector and character renderer support these
+# eight species. Visual labels identify the actor, not an arbitrary icon.
 VISUALS = {"fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel"}
 ROLES = {"reveal", "build", "mechanism", "twist", "payoff"}
 
@@ -42,19 +42,20 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
         raise ValueError("Invalid configured OpenAI model")
     prompt = (
         "Create exactly one entirely original, emotionally engaging, family-safe "
-        "vertical-video science-fiction microstory with 4 cinematic beats and a "
-        "surprising but coherent ending. Avoid generic inspirational cliches, "
-        "copyrighted characters, real news claims, and any existing titles or ideas. "
+        "short story with four cinematic beats and a surprising but coherent ending. "
+        "Use exactly one or two recurring supported animal species across all beats; "
+        "no third species, humans, humanoids, robots or clothing. Avoid generic "
+        "inspirational cliches, copyrighted characters, real news claims, and "
+        "existing titles or ideas. "
         "Return ONLY a JSON object with title, question, answer, and beats. "
-        "Each beat has headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
-        "Use exactly one or two recurring supported animal species across all four beats; no third species, even in the background. No humans, humanoids, robots, or clothing. "
-        "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". "
-        "The visual tag must name the same animal explicitly shown in visual_prompt. "
-        "Keep at least one protagonist visual tag consistent across two or more beats; never vary it just for variety. "
-        "story_environment must be exactly one of: " + ", ".join(SCENES) + ". "
-        "The exact story_environment token must also appear in visual_prompt. "
-        "Every visual_prompt must show one simple, filmable animal action in that environment. "
-        "Avoid complex machinery, bridge/cable repairs, large-gap jumps, and simultaneous multi-prop actions. "
+        "Each beat has headline, speech, visual, visual_prompt, story_environment, "
+        "label, story_beat. visual must be one of: " + ", ".join(sorted(VISUALS)) + ". "
+        "The visual tag must match the animal explicitly named in visual_prompt. "
+        "Keep one protagonist tag consistent across at least two beats; do not "
+        "change tags just for variety. story_environment must be exactly one of: "
+        + ", ".join(SCENES) + ". The exact story_environment token must appear in "
+        "visual_prompt, and each visual_prompt must describe one simple visible "
+        "animal action in that setting. "
         "story_beat must be one of: reveal, build, mechanism, twist, payoff. "
         "Speech: 12-24 words per beat. Title under 75 characters. "
         "Exclude these titles: " + json.dumps(sorted(excluded_titles)[:60]) +
@@ -96,16 +97,12 @@ def generate(excluded_ids, excluded_titles, prior_stories=()):
                 raise ValueError("Invalid beat text")
         if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
                 or beat.get("story_environment") not in SCENES
+                or not visual_subject_matches(beat.get("visual"), beat.get("visual_prompt"))
                 or not re.search(r"\b" + re.escape(str(beat.get("story_environment") or "")) + r"\b",
                                  str(beat.get("visual_prompt") or ""), re.I)
-                or not visual_subject_matches(beat.get("visual"), beat.get("visual_prompt"))):
+                or not isinstance(beat.get("visual_prompt"), str)
+                or len(beat["visual_prompt"]) < 20):
             raise ValueError("Invalid beat subject, environment, or narrative role")
-        if not isinstance(beat.get("visual_prompt"), str) or len(beat["visual_prompt"]) < 20:
-            raise ValueError("Invalid beat visual prompt")
-    visual_tags = [beat["visual"] for beat in beats]
-    if len(set(visual_tags)) > 2 or not any(
-            visual_tags.count(tag) >= 2 for tag in set(visual_tags)):
-        raise ValueError("Story must retain one or two animal protagonists across beats")
     from astra_v2.omniroute import validate_beat_quality
     validate_beat_quality(beats, "OpenAI")
     for key in ("question", "answer"):
