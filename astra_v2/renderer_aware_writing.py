@@ -24,14 +24,14 @@ RENDERER_AWARE_DOMAINS = (
     "quiet woodland clue mystery with a fox and rabbit comparing a book and a flower",
     "village friendship misunderstanding with a dog and mouse sharing one ball",
     "night observatory mistaken inference with an owl comparing a clock and a lantern",
-    "meadow conservation choice with a beaver noticing a change in two flowers",
-    "marketplace fairness decision with a squirrel and a mole exchanging a key",
+    "meadow conservation choice with a rabbit noticing a change in two flowers",
+    "marketplace fairness decision with a squirrel and a mouse exchanging a key",
     "library disagreement with a mouse and rabbit interpreting a book together",
-    "woodland trust reversal with a penguin and heron comparing a found compass",
+    "woodland trust reversal with a fox and owl comparing a found compass",
     "riverbank social dilemma with an otter and a cat deciding how to share a lantern",
     "garden misunderstanding with a squirrel and a rabbit showing conflicting clues",
-    "winter cabin ethical choice with a mole and a fox sharing a scarce book",
-    "moonlit path cooperation with a penguin and an owl exchanging a clear signal",
+    "winter cabin ethical choice with a mouse and a fox sharing a scarce book",
+    "moonlit path cooperation with a rabbit and an owl exchanging a clear signal",
 )
 
 # 13 independent narrative mechanisms, intentionally offset from the twelve
