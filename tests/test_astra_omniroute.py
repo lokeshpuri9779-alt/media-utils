@@ -9,6 +9,7 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn("background TAXONOMY", omniroute.PROMPT)
         self.assertIn("Do NOT mislabel grassland", omniroute.PROMPT)
         self.assertIn("story_environment", omniroute.PROMPT)
+        self.assertIn("three genuinely different shots", omniroute.PROMPT)
 
     def test_story_quality_requires_scene_and_subject_consistency(self):
         beats = [
