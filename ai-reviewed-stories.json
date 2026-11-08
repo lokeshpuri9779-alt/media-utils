@@ -8018,11 +8018,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-ecec9a92e43935bd3302",
-      "title": "Toby the Tapir and the Two-Flower Meadow Shift",
-      "hook": "The Confusing Petals",
-      "question": "Which flower patch needs immediate watering before the midday sun peaks?",
-      "answer": "Toby tests both soil samples with a wet flower stem to find the true dry patch.",
+      "content_id": "rayvan-gemini-eef518fd28a97360430f",
+      "title": "Lyra and Bram's Forest Compass Rivalry",
+      "hook": "The Hidden Path",
+      "question": "Will Lyra choose the path of victory or save Bram from the rising fog?",
+      "answer": "Lyra sacrifices her competitive lead to guide Bram safely out of the ravine.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8030,72 +8030,75 @@
       ],
       "story_beats": [
         {
-          "headline": "The Confusing Petals",
-          "speech": "These two flower patches look entirely different today, leaving me completely unsure which one needs my careful watering attention first.",
+          "headline": "The Hidden Path",
+          "speech": "Lyra holds the brass compass high under the pine branches, spotting the hidden trail before Bram arrives.",
           "visual": "forest",
-          "label": "forest clearing",
+          "label": "forest trail",
           "story_beat": "reveal",
-          "visual_prompt": "Toby the tapir stands in a lush forest clearing, looking down with a curious expression at two distinct flower patches with differing petal conditions, holding nothing in his paws.",
+          "visual_prompt": "Lyra the lynx holding a brass compass in a dense green forest, standing on a mossy path, looking focused and determined, afternoon lighting.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Stem Experiment",
-          "speech": "I must gently press a fresh flower stem into each patch of earth to test the hidden moisture levels safely.",
+          "headline": "The Fog Trap",
+          "speech": "Bram slips near the misty edge of the ravine, clutching his compass tightly as heavy white vapor surrounds him.",
           "visual": "signal",
-          "label": "soil test signal",
+          "label": "ravine edge",
           "story_beat": "build",
-          "visual_prompt": "Toby the tapir kneels in the forest clearing, carefully pressing a single flower stem into the dark soil of the left patch to compare its dampness.",
+          "visual_prompt": "Bram the stoat standing near a rocky ravine edge in a mountain environment, surrounded by rising white fog, looking worried while holding a small compass.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The True Discovery",
-          "speech": "This soil feels completely dry around the stem base, proving this exact flower bed requires immediate water.",
+          "headline": "The Turning Point",
+          "speech": "Lyra sees Bram struggling from above and drops her compass into the moss, grabbing her thick climbing rope instead.",
           "visual": "door",
-          "label": "gateway plot",
+          "label": "stone threshold",
           "story_beat": "mechanism",
-          "visual_prompt": "Toby the tapir sits upright in the forest clearing, examining the dry flower stem he just pulled from the earth with a focused expression.",
+          "visual_prompt": "Lyra the lynx standing on a rocky mountain ledge next to a stone archway threshold, dropping her compass to the ground and picking up a coiled rope.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Blooming Result",
-          "speech": "Adding water right here brings both flower patches back to vibrant life, proving my careful test worked wonderfully.",
+          "headline": "A Shared Journey",
+          "speech": "Both friends walk side by side along the forest path, leaving the compass behind as the sun breaks through.",
           "visual": "forest",
-          "label": "restored meadow",
+          "label": "sunlit grove",
           "story_beat": "payoff",
-          "visual_prompt": "Toby the tapir smiles happily in the vibrant forest clearing, holding a single blooming flower near the newly watered and flourishing garden beds.",
+          "visual_prompt": "Lyra the lynx and Bram the stoat walking together down a sunlit forest path, smiling at each other with no props in their hands, warm golden hour lighting.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Toby the tapir notices two adjacent flower patches showing conflicting moisture signs, making it unclear which one needs watering.",
-      "decisive_choice": "Toby tests both soil samples with a flower stem to find the true dry patch.",
-      "resolution": "Toby correctly identifies the thirsty flowers, waters them just in time, and restores the vibrant meadow.",
+      "central_conflict": "Lyra realizes Bram is trapped in the dense ravine fog while both race for the golden compass.",
+      "decisive_choice": "Lyra drops her own compass reading and tosses her guiding rope down to rescue Bram.",
+      "resolution": "Both friends walk out of the forest together, agreeing that mutual safety matters more than winning.",
       "visual_bible": {
-        "style": "A warm, charming storybook illustration style with soft lighting and rich natural colors.",
+        "style": "Cinematic 3D animation style with rich textures, soft volumetric lighting, and detailed animal fur shaders.",
         "characters": {
-          "Toby": "A gentle gray tapir with soft rounded features, large kind eyes, and a short flexible snout."
+          "Lyra": "An agile lynx with sleek tawny fur, dark ear tufts, bright green eyes, and a determined expression.",
+          "Bram": "A nimble stoat with glossy brown and cream fur, long whiskers, and an expressive, curious face."
         },
         "locations": {
-          "forest clearing": "A sunlit meadow opening surrounded by tall green trees, soft mossy ground, and colorful wildflowers."
+          "forest": "An enchanted woodland featuring towering pine trees, moss-covered boulders, and dappled sunlight filtering through the canopy.",
+          "mountain": "A rugged alpine setting featuring steep rocky ledges, patches of snow, and swirling mist."
         },
         "objects": {
-          "flower": "A bright red blossom with a sturdy green stem and delicate petals."
+          "compass": "A gleaming pocket brass compass with an intricately etched glass face and a trembling needle.",
+          "rope": "A thick, durable hemp climbing rope coiled neatly on the ground."
         }
       },
-      "plot_fingerprint": "892c75524f206ea8f3e3ca7e729d10223d58c189147e6178b05c2a44019a2555"
+      "plot_fingerprint": "5fb8f4ad62024ec43e5ea2ebef3d082a5f627996d5e537aa5a87f656e7171d71"
     },
     {
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-0448d5f0aa11768c92ba",
-      "title": "Lyra the Lynx and Bran the Stoat's Forest Compass Reversal",
-      "hook": "A Disputed Discovery",
-      "question": "How can a lynx and a stoat resolve their dispute over a found compass?",
-      "answer": "By returning the misplaced compass to its mossy stump origin.",
+      "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
+      "title": "Jasper the Stoat and Finn the Fox's Winter Cabin Tome",
+      "hook": "The Sole Surviving Tome",
+      "question": "How can two freezing rivals share one scarce survival guide without destroying its fragile pages?",
+      "answer": "By taking turns reading aloud while keeping the book away from the fireplace embers.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8103,138 +8106,75 @@
       ],
       "story_beats": [
         {
-          "headline": "A Disputed Discovery",
-          "speech": "Lyra the Lynx and Bran the Stoat argue loudly over who truly found the brass compass resting near the fern roots.",
+          "headline": "The Sole Surviving Tome",
+          "speech": "There is only one book left in this freezing cabin, and we both need its winter survival secrets.",
           "visual": "forest",
-          "label": "forest floor",
+          "label": "cabin interior",
           "story_beat": "reveal",
-          "visual_prompt": "Lyra the Lynx and Bran the Stoat stand inside a dense woodland forest next to a large fern patch. Lyra holds a shiny brass compass in her paw with an upset expression, while Bran points angrily with a furry paw at the same object.",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox stand inside a wooden snowfield cabin staring at a single book resting on a wooden table, both animals looking tense with ears pinned back.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Comparing Findings",
-          "speech": "Bran the Stoat holds the brass compass aloft, insisting his map matches the northern bearing while Lyra shakes her head.",
+          "headline": "The Tug of Pages",
+          "speech": "If you pull any harder on this binding, the whole spine will snap right down the middle.",
           "visual": "signal",
-          "label": "map reading",
+          "label": "tabletop tension",
           "story_beat": "build",
-          "visual_prompt": "Bran the Stoat stands in the same woodland forest holding the brass compass high while looking at a parchment map in his other paw. Lyra the Lynx stands nearby with crossed arms, watching him skeptically under the green forest canopy.",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox grip opposite ends of a worn book on a wooden table inside the snowfield cabin, with visible strain on their faces.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Return Journey",
-          "speech": "Realizing the mistake, Lyra the Lynx and Bran the Stoat carry the brass compass back to the original mossy stump.",
+          "headline": "The Shared Compromise",
+          "speech": "Take the left page for tonight, and I will keep watch by the door until morning comes.",
           "visual": "door",
-          "label": "mossy stump",
+          "label": "cabin threshold",
           "story_beat": "mechanism",
-          "visual_prompt": "Lyra the Lynx and Bran the Stoat walk side by side through the woodland forest carrying the brass compass together. They approach an old, hollow mossy tree stump resting on the forest floor, ready to place the compass back.",
+          "visual_prompt": "Jasper the Stoat sits near the cabin door holding a brass lantern while Finn the Fox reads the open book resting flat on the wooden table.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "True North Together",
-          "speech": "Resting the brass compass upon the mossy stump, Lyra the Lynx and Bran the Stoat smile as the needle settles correctly.",
-          "visual": "forest",
-          "label": "settled compass",
+          "headline": "Fireside Harmony",
+          "speech": "Reading together makes the long winter night pass much faster than fighting over every single page.",
+          "visual": "ship",
+          "label": "hearth side",
           "story_beat": "payoff",
-          "visual_prompt": "Lyra the Lynx and Bran the Stoat stand happily side by side in the woodland forest. The brass compass rests peacefully on top of a mossy tree stump between them, its magnetic needle pointing steadily north under the sunlit forest canopy.",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox sit peacefully side by side near a warm fireplace inside the snowfield cabin, sharing the open book resting between them.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Lyra the Lynx and Bran the Stoat claim the same found compass under opposite trees.",
-      "decisive_choice": "Lyra and Bran walk back to the mossy stump where the compass was first discovered.",
-      "resolution": "The compass points true toward a shared trail, ending the dispute with mutual trust.",
+      "central_conflict": "Jasper the Stoat and Finn the Fox both claim exclusive reading rights to the single surviving winter survival book inside the snowy cabin.",
+      "decisive_choice": "Jasper slides the shared book across the wooden table toward Finn, choosing mutual warmth over solitary comfort.",
+      "resolution": "Both animals sit side by side by the hearth, reading alternate chapters together until spring arrives.",
       "visual_bible": {
-        "style": "Bright, charming animated illustration with rich natural textures and warm cinematic lighting suitable for family audiences.",
+        "style": "Warm stop-motion felt puppet animation with tactile textures and cozy winter lighting.",
         "characters": {
-          "Lyra the Lynx": "A sleek feline with tawny spotted fur, tufted ears, short bobbed tail, and bright amber eyes, wearing a simple leather travel pouch.",
-          "Bran the Stoat": "A small, agile mustelid with warm brown summer fur, a cream-colored belly, a black-tipped tail, and bright curious eyes."
+          "Jasper the Stoat": "A sleek brown stoat with a cream-colored belly, wearing a small woolen scarf.",
+          "Finn the Fox": "A bright red-orange fox with white-tipped fur and amber eyes."
         },
         "locations": {
-          "forest": "A lush, vibrant woodland filled with tall ferns, towering green trees, dappled sunlight, and moss-covered ground."
+          "snowfield cabin": "A rustic wooden one-room cabin nestled deep in a snowy forest, featuring a glowing stone hearth and a heavy timber table."
         },
         "objects": {
-          "compass": "A polished brass pocket compass with a clear glass face and a swinging magnetic needle pointing north.",
-          "map": "An aged parchment map marked with delicate ink trails and woodland symbols."
+          "book": "A thick, leather-bound manual with gold lettering and slightly frayed corner pages.",
+          "lantern": "A tarnished brass lantern casting a warm, flickering yellow glow.",
+          "box": "A small wooden storage crate tucked beneath the reading table.",
+          "key": "An old iron key hanging from a wooden peg near the cabin door.",
+          "ball": "A tightly wound ball of spare woolen yarn sitting on the floor.",
+          "flower": "A dried winter blossom pressed inside a small clay pot.",
+          "bell": "A tiny brass desk bell resting near the cabin window.",
+          "compass": "A pocket compass with a weathered brass casing and glass cover.",
+          "shield": "A small decorative wooden shield mounted on the cabin wall.",
+          "rocket": "A carved wooden toy rocket standing on the mantelpiece.",
+          "heart": "A small hand-carved wooden heart charm on the table.",
+          "wrench": "A heavy iron tool lying on the floorboards near the hearth.",
+          "clock": "A round wall clock with wooden hands pointing toward midnight."
         }
       },
-      "plot_fingerprint": "503d32516b63cd6e042bac45bf6bcd64ac91d7b52fb48de97108432f5f5d9fb7"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-61fb5b0360fe64e8e7ca",
-      "title": "Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma",
-      "hook": "Dispute at the Water's Edge",
-      "question": "How can Oliver the Otter and Barnaby the Cat share a single lantern on the riverbank when each believes it belongs to their own nightly trade?",
-      "answer": "They alternate shifts based on the candle's colored reflections on the water, turning a turf war into a harmonious cooperative schedule.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Dispute at the Water's Edge",
-          "speech": "Oliver insists the lantern guides his late-night fishing routes, while Barnaby claims it illuminates his midnight lookout post.",
-          "visual": "forest",
-          "label": "riverbank",
-          "story_beat": "reveal",
-          "visual_prompt": "Oliver the Otter and Barnaby the Cat stand on a damp forest riverbank facing each other, arguing intensely while both grip the single brass lantern resting on a flat stone.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Testing the Glow",
-          "speech": "Barnaby holds the heavy brass lantern high to check if its amber flame reaches across the entire mossy clearing.",
-          "visual": "signal",
-          "label": "clearing",
-          "story_beat": "build",
-          "visual_prompt": "Barnaby the Cat stands alone in a forest clearing holding the glowing brass lantern upward as a bright signal, while Oliver the Otter watches closely from the grass.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Comparing Reflections",
-          "speech": "Oliver places the lantern down by the rushing water to see which animal guild benefits more from its golden light.",
-          "visual": "door",
-          "label": "waterway",
-          "story_beat": "mechanism",
-          "visual_prompt": "Oliver the Otter kneels by the forest waterway entrance, setting the brass lantern on a flat rock to examine its reflection, with Barnaby the Cat observing from nearby.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "A Shared Watch",
-          "speech": "Both animals agree to split the evening hours equally, using the lantern to guide both fishing and night guarding.",
-          "visual": "planet",
-          "label": "riverbank",
-          "story_beat": "payoff",
-          "visual_prompt": "Oliver the Otter and Barnaby the Cat sit side by side on the forest riverbank under a starlit night sky, sharing the warm glowing brass lantern peacefully between them.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Oliver the Otter and Barnaby the Cat both claim exclusive nighttime ownership of the single brass lantern found on the damp riverbank.",
-      "decisive_choice": "Oliver and Barnaby test both interpretations by placing the lantern between them to observe which water current reflects its glow best.",
-      "resolution": "The lantern illuminates a split boundary on the water, inspiring the otter and cat to share evening watches peacefully.",
-      "visual_bible": {
-        "style": "Cinematic stop-motion puppet animation with detailed felt textures, cozy lighting, and rich organic environments.",
-        "characters": {
-          "Oliver the Otter": "A sleek brown river otter with wet-look fur whiskers, wearing a small blue canvas vest.",
-          "Barnaby the Cat": "A slender ginger tabby cat with bright green eyes and a neat white collar."
-        },
-        "locations": {
-          "forest": "A lush, damp riverbank surrounded by tall dark-green ferns, mossy stones, and a gently flowing dark water current."
-        },
-        "objects": {
-          "lantern": "A polished brass lantern with a warm, flickering amber flame inside glass panes."
-        }
-      },
-      "plot_fingerprint": "6624ce1d9dd7603e15e1fac3ee750344712e094c77d6c51290f87fe581b92c1c"
+      "plot_fingerprint": "8d62f8de315b24a581905916096b4eb9d3efc6648127a38250f16aad03ffacfb"
     }
   ]
 }
