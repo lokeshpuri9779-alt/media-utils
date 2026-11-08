@@ -55,7 +55,7 @@ def validate_beat_quality(beats, provider="OmniRoute"):
         environment = beat.get("story_environment")
         if environment not in SCENES:
             raise ValueError(provider + " requires a supported story_environment")
-        if not re.search(r"\\b" + re.escape(environment) + r"\\b", prompt, re.I):
+        if not re.search(r"\b" + re.escape(environment) + r"\b", prompt, re.I):
             raise ValueError(provider + " story_environment must appear in visual_prompt")
         visual_tags.append(visual)
     if len(set(visual_tags)) > 2:
