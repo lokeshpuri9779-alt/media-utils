@@ -5,6 +5,11 @@ from astra_v2 import omniroute
 
 
 class OmniRouteTests(unittest.TestCase):
+    def test_all_story_providers_receive_real_scene_taxonomy_guidance(self):
+        self.assertIn("background TAXONOMY", omniroute.PROMPT)
+        self.assertIn("Do NOT mislabel grassland", omniroute.PROMPT)
+        self.assertIn("story_environment", omniroute.PROMPT)
+
     def test_story_quality_requires_scene_and_subject_consistency(self):
         beats = [
             {"speech": "A curious fox discovers a bright blue feather beside the old forest stream.",
