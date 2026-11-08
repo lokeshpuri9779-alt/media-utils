@@ -104,7 +104,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          # The preload restores durable state explicitly from astra-state;
+          # full main-branch history is not needed for rendering or ID safety.
+          # Keep the required code2mp4 submodule checkout, but fetch only HEAD.
+          fetch-depth: 1
           submodules: recursive
       - name: Restore published and reserved IDs
         run: |
