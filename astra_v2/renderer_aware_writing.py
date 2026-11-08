@@ -10,7 +10,6 @@ from astra_v2.visual_artifact_library import SCENES
 
 SUPPORTED_ANIMALS = (
     "fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel",
-    "beaver", "mole", "penguin", "heron",
 )
 
 SUPPORTED_PROPS = (
