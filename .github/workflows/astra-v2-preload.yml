@@ -205,75 +205,29 @@ jobs:
             timeout 360s python -m pip install --disable-pip-version-check -r requirements.txt
             echo 'ASTRA_INSTALL_MODE=pip-fallback'
           fi
-          # Avoid apt mirror stalls: imageio-ffmpeg is already pinned in
-          # requirements.txt and supplies a bundled, executable ffmpeg.
-          # ffprobe is needed for media validation, so keep it independently
-          # checked rather than assuming the bundled ffmpeg includes it.
-          if ! command -v ffmpeg >/dev/null; then
-            python - <<'PY'
-          import imageio_ffmpeg
-          from pathlib import Path
-          import os
-          binary = Path(imageio_ffmpeg.get_ffmpeg_exe())
-          assert binary.is_file() and os.access(binary, os.X_OK)
-          target = Path(os.environ["RUNNER_TEMP"]) / "ffmpeg"
-          target.symlink_to(binary)
-          with open(os.environ["GITHUB_PATH"], "a", encoding="utf-8") as out:
-              out.write(str(target.parent) + "\n")
-          print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
-          PY
-          fi
-          if ! command -v ffprobe >/dev/null 2>&1 || ! ffprobe -version >/dev/null 2>&1; then
-            # Use signed Ubuntu archives directly. The runner's Azure mirror
-            # stalled on libcodec2 in three lanes of run 40369697329.
-            # Keep these sources/lists private to this ASTRA installation.
-            # Extracting ffmpeg.deb alone cannot supply ffprobe's shared libs.
-            echo 'ASTRA_FFPROBE_NATIVE_INSTALL=official-archive'
-            apt_root="$RUNNER_TEMP/astra-apt"
-            mkdir -p "$apt_root/lists/partial"
-            chmod 755 "$apt_root" "$apt_root/lists" "$apt_root/lists/partial"
-            cat > "$apt_root/sources.list" <<'SOURCES'
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble main universe
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble-updates main universe
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://security.ubuntu.com/ubuntu noble-security main universe
-          SOURCES
-            apt_options=(
-              -o "Dir::Etc::sourcelist=$apt_root/sources.list"
-              -o "Dir::Etc::sourceparts=-"
-              -o "Dir::State::lists=$apt_root/lists"
-              -o Acquire::Retries=1
-              -o Acquire::http::Timeout=15
-              -o Acquire::https::Timeout=15
-              -o DPkg::Lock::Timeout=10
-            )
-            timeout 90s sudo apt-get "${apt_options[@]}" update -qq \
-              -o APT::Update::Error-Mode=any
-            timeout 240s sudo env DEBIAN_FRONTEND=noninteractive \
-              apt-get "${apt_options[@]}" install -y --no-install-recommends ffmpeg
-            command -v ffprobe
-            ffprobe -version >/dev/null 2>&1
-            echo 'ASTRA_FFPROBE_SOURCE=native-verified'
-          fi
-          # Reject probes that start but cannot decode an actual MP4 header.
-          # Encoder is the pinned imageio-ffmpeg binary already installed.
+          # The bundled imageio-ffmpeg binary supplies encoding. Pinned PyAV
+          # independently inspects and decodes MP4 streams, avoiding a costly
+          # system ffprobe/FFmpeg apt installation on every parallel lane.
           python - <<'PY'
-          import json
+          import av
           import subprocess
           import tempfile
           from pathlib import Path
           from imageio_ffmpeg import get_ffmpeg_exe
-          with tempfile.TemporaryDirectory(prefix="astra-ffprobe-smoke-") as tmp:
+          with tempfile.TemporaryDirectory(prefix="astra-pyav-smoke-") as tmp:
               clip = Path(tmp) / "codec-check.mp4"
               subprocess.run([get_ffmpeg_exe(), "-hide_banner", "-loglevel", "error",
-                  "-y", "-f", "lavfi", "-i", "color=c=black:s=160x288:r=2",
+                  "-y", "-f", "lavfi", "-i", "testsrc2=size=360x640:rate=10",
+                  "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=24000",
                   "-t", "1", "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                  str(clip)], check=True, timeout=30)
-              checked = subprocess.run(["ffprobe", "-v", "error", "-show_streams",
-                  "-show_format", "-of", "json", str(clip)],
-                  capture_output=True, text=True, timeout=30, check=True)
-              payload = json.loads(checked.stdout)
-              assert any(s.get("codec_type") == "video" for s in payload.get("streams", []))
-          print("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed")
+                  "-c:a", "aac", "-shortest", str(clip)],
+                  check=True, timeout=30)
+              with av.open(str(clip), mode="r") as media:
+                  assert media.streams.video and media.streams.audio
+                  assert next(media.decode(video=0), None) is not None
+                  media.seek(0)
+                  assert next(media.decode(audio=0), None) is not None
+          print("ASTRA_PYAV_REAL_MP4_DECODE_SMOKE=passed")
           PY
           python -c "import imageio_ffmpeg; print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Refresh free licensed visual icon cache
