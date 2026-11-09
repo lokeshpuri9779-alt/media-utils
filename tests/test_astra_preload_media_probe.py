@@ -25,9 +25,11 @@ class _FakeContainer:
     def __exit__(self, *_args):
         return False
 
-    def decode(self, video=0):
+    def decode(self, video=None, audio=None):
         if not self._decodable:
             return iter(())
+        if audio is not None:
+            return iter((SimpleNamespace(samples=1024),))
         return iter((SimpleNamespace(width=360, height=640),))
 
 
@@ -50,6 +52,17 @@ class PreloadMediaProbeTests(unittest.TestCase):
     def test_pyav_fallback_rejects_video_without_audio(self):
         with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError), \
              patch("av.open", return_value=_FakeContainer(has_audio=False)):
+            with self.assertRaisesRegex(CreativeSkip, "video_audio_orientation_or_duration_failed"):
+                inspect_video(self._video_file())
+
+    def test_pyav_fallback_rejects_undecodable_audio(self):
+        class BrokenAudioContainer(_FakeContainer):
+            def decode(self, video=None, audio=None):
+                if audio is not None:
+                    return iter(())
+                return super().decode(video=video, audio=audio)
+        with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError), \\
+             patch("av.open", return_value=BrokenAudioContainer()):
             with self.assertRaisesRegex(CreativeSkip, "video_audio_orientation_or_duration_failed"):
                 inspect_video(self._video_file())
 
