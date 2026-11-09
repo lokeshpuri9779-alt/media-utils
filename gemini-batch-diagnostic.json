@@ -1,12 +1,8 @@
 {
-  "observed_at": "2026-11-09T06:25:49.638643+00:00",
-  "generated": 9,
+  "observed_at": "2026-11-09T22:20:04.152008+00:00",
+  "generated": 6,
   "requested": 20,
   "generation_failures": [
-    {
-      "index": 0,
-      "reason": "invalid_story_structure"
-    },
     {
       "index": 6,
       "reason": "invalid_story_structure"
@@ -24,42 +20,38 @@
       "reason": "invalid_story_structure"
     },
     {
+      "index": 10,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 11,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 12,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 13,
+      "reason": "invalid_story_structure"
+    },
+    {
       "index": 14,
       "reason": "invalid_story_structure"
     },
     {
       "index": 15,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 16,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 17,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 18,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 19,
-      "reason": "invalid_story_structure"
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 3,
-  "review_deferred": 6,
+  "reviewed": 1,
+  "review_deferred": 5,
   "approved": 0,
   "review_issues": [
-    "The candidate story 'Buster the Dog and Pip the Mouse and the Shared Ball Promise' closely repeats the characters, premise, and central themes of a recently published work listed in the comparison history ('Buster the Dog and Pip the Mouse and the Shared Ball').",
-    "The candidate story features recurring character names (Barnaby) and closely mirrors the structural pattern and narrative tropes of recently published low-effort formulaic titles in the comparison history, such as 'Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma' and 'Barnaby the Ferret and the Market Spice Spillage'.",
-    "The plot fingerprint and repetitive formula indicate derivative template-based generation rather than a truly original creative work.",
-    "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_deferred:provider_unavailable",
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_deferred:rate_limited",
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -115,24 +107,23 @@
     ]
   },
   "creative_preflight": {
-    "generated": 9,
+    "generated": 6,
     "script_status_counts": {
-      "no_simple_flags": 9
+      "no_simple_flags": 6
     },
     "renderer_status_counts": {
-      "incompatible": 3,
-      "structurally_eligible": 6
+      "incompatible": 5,
+      "structurally_eligible": 1
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 3,
-      "none": 6
+      "cast_mismatch": 5,
+      "none": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 7,
-      "partially_recognized": 2
+      "all_shots_recognized": 6
     },
-    "scene_taxonomy_recognized_shots": 32,
-    "scene_taxonomy_unresolved_shots": 4,
+    "scene_taxonomy_recognized_shots": 24,
+    "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
