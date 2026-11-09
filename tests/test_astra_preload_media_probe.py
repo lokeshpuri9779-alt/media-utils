@@ -65,7 +65,7 @@ class PreloadMediaProbeTests(unittest.TestCase):
                 if audio is not None:
                     return iter(())
                 return super().decode(video=video, audio=audio)
-        with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError), \\
+        with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError), \
              patch("av.open", return_value=BrokenAudioContainer()):
             with self.assertRaisesRegex(CreativeSkip, "video_audio_orientation_or_duration_failed"):
                 inspect_video(self._video_file())
