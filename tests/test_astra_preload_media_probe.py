@@ -12,6 +12,7 @@ class _FakeContainer:
     duration = 2_000_000
 
     def __init__(self, *, has_audio=True, decodable=True):
+        self.audio_selectors = []
         self.streams = [
             SimpleNamespace(type="video", index=0, duration=None, time_base=None)
         ]
@@ -26,6 +27,8 @@ class _FakeContainer:
         return False
 
     def decode(self, video=None, audio=None):
+        if audio is not None:
+            self.audio_selectors.append(audio)
         if not self._decodable:
             return iter(())
         if audio is not None:
@@ -48,6 +51,7 @@ class PreloadMediaProbeTests(unittest.TestCase):
             report = inspect_video(self._video_file())
         self.assertEqual((report["width"], report["height"]), (360, 640))
         self.assertEqual(report["seconds"], 2.0)
+        self.assertEqual(container.audio_selectors, [0])
 
     def test_pyav_fallback_rejects_video_without_audio(self):
         with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError), \
