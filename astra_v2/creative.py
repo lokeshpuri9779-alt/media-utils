@@ -14,21 +14,59 @@ class CreativeSkip(Exception):
         self.selection = selection
 
 
+def _probe_video_with_pyav(path):
+    """Decode a real frame and read stream metadata without a system ffprobe."""
+    import av
+
+    try:
+        with av.open(str(path)) as container:
+            video = next((stream for stream in container.streams if stream.type == "video"), None)
+            audio = next((stream for stream in container.streams if stream.type == "audio"), None)
+            if video is None:
+                raise ValueError("video_stream_missing")
+            frame = next(container.decode(video=video.index), None)
+            if frame is None:
+                raise ValueError("video_frame_decode_failed")
+            duration = container.duration
+            if duration is None and video.duration is not None and video.time_base is not None:
+                seconds = float(video.duration * video.time_base)
+            else:
+                seconds = float(duration or 0) / av.time_base
+            return {
+                "seconds": seconds,
+                "width": int(frame.width),
+                "height": int(frame.height),
+                "has_audio": audio is not None,
+            }
+    except Exception as exc:
+        raise CreativeSkip("pyav_decode_failed") from exc
+
+
 def inspect_video(path, fmt="short"):
     if not path.is_file() or path.stat().st_size < 30_000:
         raise CreativeSkip("missing_or_tiny_video")
-    proc = subprocess.run(
-        ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)],
-        capture_output=True, text=True, timeout=35, check=False,
-    )
-    if proc.returncode:
-        raise CreativeSkip("ffprobe_decode_failed")
-    data = json.loads(proc.stdout)
-    video = next((x for x in data.get("streams", []) if x.get("codec_type") == "video"), {})
-    audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
-    width, height = int(video.get("width") or 0), int(video.get("height") or 0)
-    seconds = float((data.get("format") or {}).get("duration") or 0)
-    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and bool(audio)) if fmt == "long" else (seconds > 0 and width >= 360 and height >= 640 and height > width and bool(audio))
+    try:
+        proc = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", str(path)],
+            capture_output=True, text=True, timeout=35, check=False,
+        )
+    except FileNotFoundError:
+        # GitHub's hosted runner does not always include ffprobe. PyAV is
+        # already a pinned renderer dependency; use it as a real decode-based
+        # fallback rather than installing the full system FFmpeg package.
+        media = _probe_video_with_pyav(path)
+        width, height, seconds = media["width"], media["height"], media["seconds"]
+        has_audio = media["has_audio"]
+    else:
+        if proc.returncode:
+            raise CreativeSkip("ffprobe_decode_failed")
+        data = json.loads(proc.stdout)
+        video = next((x for x in data.get("streams", []) if x.get("codec_type") == "video"), {})
+        audio = next((x for x in data.get("streams", []) if x.get("codec_type") == "audio"), {})
+        width, height = int(video.get("width") or 0), int(video.get("height") or 0)
+        seconds = float((data.get("format") or {}).get("duration") or 0)
+        has_audio = bool(audio)
+    good = (60 <= seconds <= 3600 and width >= 640 and height >= 360 and width > height and has_audio) if fmt == "long" else (seconds > 0 and width >= 360 and height >= 640 and height > width and has_audio)
     if not good:
         raise CreativeSkip("video_audio_orientation_or_duration_failed")
     return {"seconds": round(seconds, 2), "size": path.stat().st_size,
