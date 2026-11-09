@@ -27,6 +27,10 @@ def _probe_video_with_pyav(path):
             frame = next(container.decode(video=video.index), None)
             if frame is None:
                 raise ValueError("video_frame_decode_failed")
+            audio_frame = (next(container.decode(audio=audio.index), None)
+                           if audio is not None else None)
+            has_audio = bool(audio_frame is not None
+                             and int(getattr(audio_frame, "samples", 0) or 0) > 0)
             duration = container.duration
             if duration is None and video.duration is not None and video.time_base is not None:
                 seconds = float(video.duration * video.time_base)
@@ -36,7 +40,7 @@ def _probe_video_with_pyav(path):
                 "seconds": seconds,
                 "width": int(frame.width),
                 "height": int(frame.height),
-                "has_audio": audio is not None,
+                "has_audio": has_audio,
             }
     except Exception as exc:
         raise CreativeSkip("pyav_decode_failed") from exc
