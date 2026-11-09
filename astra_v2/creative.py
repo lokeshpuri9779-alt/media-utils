@@ -27,7 +27,9 @@ def _probe_video_with_pyav(path):
             frame = next(container.decode(video=video.index), None)
             if frame is None:
                 raise ValueError("video_frame_decode_failed")
-            audio_frame = (next(container.decode(audio=audio.index), None)
+            # PyAV's audio= selector is an ordinal within audio streams,
+            # not the stream's global container index.
+            audio_frame = (next(container.decode(audio=0), None)
                            if audio is not None else None)
             has_audio = bool(audio_frame is not None
                              and int(getattr(audio_frame, "samples", 0) or 0) > 0)
