@@ -220,59 +220,31 @@ jobs:
           print("ASTRA_FFMPEG_SOURCE=imageio-ffmpeg")
           PY
           fi
-          if ! command -v ffprobe >/dev/null 2>&1 || ! ffprobe -version >/dev/null 2>&1; then
-            # Use signed Ubuntu archives directly. The runner's Azure mirror
-            # stalled on libcodec2 in three lanes of run 40369697329.
-            # Keep these sources/lists private to this ASTRA installation.
-            # Extracting ffmpeg.deb alone cannot supply ffprobe's shared libs.
-            echo 'ASTRA_FFPROBE_NATIVE_INSTALL=official-archive'
-            apt_root="$RUNNER_TEMP/astra-apt"
-            mkdir -p "$apt_root/lists/partial"
-            chmod 755 "$apt_root" "$apt_root/lists" "$apt_root/lists/partial"
-            cat > "$apt_root/sources.list" <<'SOURCES'
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble main universe
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://archive.ubuntu.com/ubuntu noble-updates main universe
-          deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://security.ubuntu.com/ubuntu noble-security main universe
-          SOURCES
-            apt_options=(
-              -o "Dir::Etc::sourcelist=$apt_root/sources.list"
-              -o "Dir::Etc::sourceparts=-"
-              -o "Dir::State::lists=$apt_root/lists"
-              -o Acquire::Retries=1
-              -o Acquire::http::Timeout=15
-              -o Acquire::https::Timeout=15
-              -o DPkg::Lock::Timeout=10
-            )
-            timeout 90s sudo apt-get "${apt_options[@]}" update -qq \
-              -o APT::Update::Error-Mode=any
-            timeout 240s sudo env DEBIAN_FRONTEND=noninteractive \
-              apt-get "${apt_options[@]}" install -y --no-install-recommends ffmpeg
-            command -v ffprobe
-            ffprobe -version >/dev/null 2>&1
-            echo 'ASTRA_FFPROBE_SOURCE=native-verified'
-          fi
-          # Reject probes that start but cannot decode an actual MP4 header.
-          # Encoder is the pinned imageio-ffmpeg binary already installed.
+          # PyAV is pinned in requirements.txt and can inspect/decode MP4
+          # directly. Avoid installing the full system FFmpeg package solely
+          # to obtain ffprobe; retain a real encoded video+audio decode smoke.
           python - <<'PY'
-          import json
           import subprocess
           import tempfile
           from pathlib import Path
+          from unittest.mock import patch
           from imageio_ffmpeg import get_ffmpeg_exe
-          with tempfile.TemporaryDirectory(prefix="astra-ffprobe-smoke-") as tmp:
+          from astra_v2.creative import inspect_video
+          with tempfile.TemporaryDirectory(prefix="astra-pyav-smoke-") as tmp:
               clip = Path(tmp) / "codec-check.mp4"
               subprocess.run([get_ffmpeg_exe(), "-hide_banner", "-loglevel", "error",
-                  "-y", "-f", "lavfi", "-i", "color=c=black:s=160x288:r=2",
-                  "-t", "1", "-c:v", "libx264", "-pix_fmt", "yuv420p",
-                  str(clip)], check=True, timeout=30)
-              checked = subprocess.run(["ffprobe", "-v", "error", "-show_streams",
-                  "-show_format", "-of", "json", str(clip)],
-                  capture_output=True, text=True, timeout=30, check=True)
-              payload = json.loads(checked.stdout)
-              assert any(s.get("codec_type") == "video" for s in payload.get("streams", []))
-          print("ASTRA_FFPROBE_REAL_MP4_SMOKE=passed")
+                  "-y", "-f", "lavfi", "-i", "testsrc2=size=360x640:rate=12",
+                  "-f", "lavfi", "-i", "sine=frequency=440:sample_rate=44100",
+                  "-t", "3", "-shortest", "-c:v", "libx264", "-pix_fmt", "yuv420p",
+                  "-c:a", "aac", str(clip)], check=True, timeout=60)
+              # Force the no-system-ffprobe path even if the hosted image adds it.
+              with patch("astra_v2.creative.subprocess.run", side_effect=FileNotFoundError):
+                  report = inspect_video(clip)
+              assert (report["width"], report["height"]) == (360, 640), report
+              assert report["seconds"] > 0 and report["size"] > 30_000, report
+          print("ASTRA_PYAV_REAL_MP4_AUDIO_SMOKE=passed")
           PY
-          python -c "import imageio_ffmpeg; print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
+          python -c "import av, imageio_ffmpeg; print('ASTRA_PYAV_VERSION=' + av.__version__); print('ASTRA_BUNDLED_FFMPEG=' + imageio_ffmpeg.get_ffmpeg_exe())"
       - name: Refresh free licensed visual icon cache
         if: matrix.lane == 0
         continue-on-error: true
@@ -297,6 +269,8 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_scene_layer_contract.py' -v
           python -m unittest discover -s tests -p 'test_story_visuals.py' -v
+      - name: Test PyAV fallback and MP4 decode gate
+        run: python -m unittest discover -s tests -p 'test_astra_preload_media_probe.py' -v
       - name: Test zero-cost policy and free story generation
         run: |
           python -m unittest discover -s tests -p 'test_openai_creative.py' -v
