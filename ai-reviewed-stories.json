@@ -8179,11 +8179,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-f0055a673f901c2dd250",
-      "title": "Pip the Pangolin and Ollie the Owl's Forest Signal",
-      "hook": "False Alarm in the Woods",
-      "question": "Can Pip and Ollie distinguish a true weather hazard from harmless fireflies before panicking?",
-      "answer": "Yes, by observing the flashing pattern closely, they realize the lights are harmless insects and avoid a false evacuation.",
+      "content_id": "rayvan-gemini-f9f35a4134d5e55b0dc8",
+      "title": "Pip the Mouse and Barnaby the Rabbit's Library Bookmark",
+      "hook": "Disputed Chapter",
+      "question": "Which chapter in the ancient botanical book describes the winter bloom?",
+      "answer": "Chapter four, verified by comparing the illuminated margin notes against actual seed specimens.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8191,64 +8191,214 @@
       ],
       "story_beats": [
         {
-          "headline": "False Alarm in the Woods",
-          "speech": "Look at those bright orange sparks flashing through the trees, Ollie! We must sound the alarm right now!",
-          "visual": "forest",
-          "label": "forest canopy",
-          "story_beat": "reveal",
-          "visual_prompt": "In a dense misty forest at night, Pip the pangolin points his claw at floating orange lights while Ollie the owl watches from a low oak branch.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Checking the Pattern",
-          "speech": "Wait, Pip. Wildfire sparks flicker erratically, but these bright lights pulse in a steady, gentle rhythm together.",
-          "visual": "signal",
-          "label": "flashing signal",
-          "story_beat": "build",
-          "visual_prompt": "In the same dark forest, Pip the pangolin holds a brass lantern unlit while Ollie the owl spreads his wings to examine a glowing cluster of insect lights floating nearby.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Discovering the Insects",
-          "speech": "Let us check the leaf litter underneath. True smoke leaves dark soot, but there is no ash on the ground.",
+          "headline": "Disputed Chapter",
+          "speech": "Pip insists the winter bloom chapter starts on page forty, while Barnaby argues it begins much later.",
           "visual": "door",
-          "label": "wooden hollow",
-          "story_beat": "mechanism",
-          "visual_prompt": "In the forest clearing by a hollow wooden log, Pip the pangolin inspects the clean ground with a small wooden box beside him while Ollie the owl perches above.",
+          "label": "library archives",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse and Barnaby the rabbit stand inside the library archives next to a tall wooden door, both staring down at a heavy open book resting on a wooden table, Pip pointing a tiny paw at page forty with an earnest expression.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Peaceful Resolution",
-          "speech": "They are only friendly fireflies dancing in the night air. We can relax and enjoy the quiet evening.",
+          "headline": "Gathering Clues",
+          "speech": "Barnaby brings a small velvet box containing dried petals to check the pigment matches the printed margin illustrations.",
+          "visual": "forest",
+          "label": "botanical specimens",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the rabbit stands in the library archives holding a small wooden box of dried botanical specimens next to the open book, while Pip the mouse looks closely at the margin illustrations with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Experiment",
+          "speech": "Pip places a single seed packet directly onto the page corner to test the ink coloration under the warm reading light.",
           "visual": "signal",
-          "label": "glowing swarm",
+          "label": "ink verification",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse holds a small seed packet over the open book in the library archives, comparing its color against the printed ink, while Barnaby the rabbit watches attentively with a supportive expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Understanding",
+          "speech": "Both friends smile as they realize the chapter was correctly located in section two all along.",
+          "visual": "planet",
+          "label": "resolved reading",
           "story_beat": "payoff",
-          "visual_prompt": "In the serene forest clearing, Pip the pangolin and Ollie the owl sit side by side on soft moss, watching a gentle swarm of golden fireflies illuminate the peaceful night.",
+          "visual_prompt": "Pip the mouse and Barnaby the rabbit sit side by side in the library archives smiling happily together, turning the pages of the open book while holding a small book marker between them.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Pip and Ollie mistake a glowing swarm of fireflies for an oncoming wildfire warning signal in the misty forest.",
-      "decisive_choice": "Pip stops to count the flash intervals while Ollie compares the steady rhythm against known ember sparks.",
-      "resolution": "Both animals recognize the friendly fireflies and peacefully resume their midnight foraging together.",
+      "central_conflict": "Pip and Barnaby disagree on whether the botanical book's winter bloom chapter is located in section two or section three.",
+      "decisive_choice": "Pip places a physical seed specimen directly onto the open page to test the parchment's ink hue.",
+      "resolution": "Both friends confirm the correct chapter together, restoring complete harmony to their reading routine.",
       "visual_bible": {
-        "style": "Cinematic stop-motion puppet animation with rich textures, warm ambient lighting, and natural woodland color palettes.",
+        "style": "Warm, detailed storybook illustration style with soft lighting and rich wooden textures.",
         "characters": {
-          "Pip": "A small armored pangolin with dusty brown scales, round curious eyes, and a curled tail.",
-          "Ollie": "A wise barn owl with speckled white and brown feathers, large golden eyes, and soft feathered tufts."
+          "Pip": "A tiny brown mouse with neat whiskers, wearing a small green waistcoat.",
+          "Barnaby": "A gentle cream-colored rabbit with long ears and a cozy knitted brown scarf."
         },
         "locations": {
-          "forest": "A lush, misty nighttime woodland featuring ancient mossy tree trunks, fern beds, and soft forest floors."
+          "library archives": "A quiet, wood-paneled room lined with tall bookshelves, a reading table, and soft amber lighting."
         },
         "objects": {
-          "lantern": "A small brass lantern with a glass pane, currently unlit and resting on the moss.",
-          "box": "A compact wooden storage box with a simple metal clasp."
+          "book": "A thick, leather-bound volume with yellowed parchment pages and gold foil lettering.",
+          "box": "A small polished mahogany box with a brass clasp containing dried petals.",
+          "marker": "A crimson silk ribbon used as a bookmark."
         }
       },
-      "plot_fingerprint": "1cad6a8f42f9d2c3d96b0bda64cfc8752576d304b8c851d0d573a3fbf8897338"
+      "plot_fingerprint": "bf231e9ba437b055935d77f40159b69cf56d06ed53c553cd29293459d7a8f40f"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-47176e676e36eb63e95c",
+      "title": "Jasper the Stoat and Finn the Fox's Cabin Tome",
+      "hook": "The Cabin Standoff",
+      "question": "How can two animals share a single scarce winter book without tearing its delicate paper bindings?",
+      "answer": "By taking turns holding the shared book while sitting by the hearth, ensuring both can read peacefully.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Cabin Standoff",
+          "speech": "Jasper and Finn argue fiercely over the heavy leather tome resting between them on the cold wooden cabin table.",
+          "visual": "forest",
+          "label": "cabin interior with wooden table",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside the cozy wooden cabin, Jasper the stoat and Finn the fox glare at each other across a rough wooden table where a heavy leather-bound book rests. Jasper stands on his hind legs holding a small brass bell while Finn sits opposite with folded paws inside the warm cabin.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Measuring the Pages",
+          "speech": "Jasper points an accusing paw at the bookmark ribbon, insisting his reading schedule takes priority through the snowy night.",
+          "visual": "door",
+          "label": "doorway view of snowy forest",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the stoat points his paw at the open pages of the shared book on the cabin table while looking toward the frosted wooden cabin door. Finn the fox watches attentively from the wooden chair with his tail curled neatly around his feet.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Split Decision",
+          "speech": "Finn places a carved wooden block onto the desk surface, demonstrating how both readers can share the illumination.",
+          "visual": "signal",
+          "label": "tabletop with book and block marker",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox uses his paw to place a small wooden block directly onto the center of the open book on the cabin table. Jasper the stoat leans forward with a curious expression, watching the block mark the dividing line between their reading sections.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Harmonious Reading",
+          "speech": "Sitting side by side near the warm hearth, the stoat and the fox turn each page together in peaceful silence.",
+          "visual": "planet",
+          "label": "hearth fire glow on wooden floor",
+          "story_beat": "payoff",
+          "visual_prompt": "Jasper the stoat and Finn the fox sit side by side on the wooden cabin floor near a glowing stone fireplace. Both animals share the open book resting peacefully on their knees as warm amber firelight illuminates the cabin interior.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Jasper the stoat and Finn the fox both claim the right to keep the single scarce winter book on their respective sides of the cabin desk.",
+      "decisive_choice": "Jasper slides the shared book to the center of the wooden table and places a smooth wooden block beside it to measure equal reading time.",
+      "resolution": "Both animals agree to alternate page-turning duties using the wooden block marker, turning winter isolation into shared companionship.",
+      "visual_bible": {
+        "style": "Cozy storybook illustration with warm lighting, detailed wooden textures, and soft painterly shading suitable for a family audience.",
+        "characters": {
+          "Jasper the stoat": "A small, agile stoat with sleek brown-and-white winter fur, bright curious black eyes, and an alert posture.",
+          "Finn the fox": "A medium-sized red fox with thick russet fur, a bushy white-tipped tail, attentive pointed ears, and a calm demeanor."
+        },
+        "locations": {
+          "cabin": "A rustic winter cabin interior featuring rough-hewn timber walls, a warm stone hearth, a sturdy wooden table, and a frosted wooden entrance door."
+        },
+        "objects": {
+          "book": "A thick, vintage leather-bound book with cream-colored parchment pages and a worn fabric spine marker.",
+          "block": "A small, smooth carved wooden block used as a measuring and dividing marker on the tabletop.",
+          "bell": "A small polished brass handbell with a curved handle."
+        }
+      },
+      "plot_fingerprint": "2a2f4e06e471e1ba9c88854e067638741fc0b62f89c901429501c0c1c4aa4d1d"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-f5625c32daf517f7f08a",
+      "title": "Felix the Cat and the Courtyard Box Exchange",
+      "hook": "The Mistaken Delivery",
+      "question": "Why did Felix the cat rush back to the sunny flagstone courtyard with a wrongly delivered package?",
+      "answer": "Felix discovered the heavy parcel belonged to his neighbor after checking the wax seal, prompting an immediate and honest return.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Felix gasped when he noticed the delivery stamp was meant for the gray tabby next door, not his own porch.",
+          "visual": "door",
+          "label": "front_doorstep",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the cat stands on a weathered wooden doorstep in a sunny village courtyard, holding a small wrapped brown box with both paws, looking surprised at the shipping label.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inspecting the Label",
+          "speech": "He carefully checked the handwritten numbers on the parcel under the bright courtyard sun to verify his initial mistake.",
+          "visual": "signal",
+          "label": "courtyard_sunlight",
+          "story_beat": "build",
+          "visual_prompt": "Felix the cat sits on a gray flagstone courtyard in the village, holding the brown box up close to inspect the inked address label in the warm daylight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Pavement",
+          "speech": "Determined to make things right, the honest cat walked across the open stone plaza to return the misdelivered parcel promptly.",
+          "visual": "forest",
+          "label": "open_plaza",
+          "story_beat": "mechanism",
+          "visual_prompt": "Felix the cat walks purposefully across a leafy village courtyard surrounded by low stone walls, carrying the brown box securely in his arms.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Return",
+          "speech": "Felix handed the package to his neighbor with a friendly smile, proving that courtyard honesty is always the best policy.",
+          "visual": "door",
+          "label": "neighbor_doorstep",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the cat stands by a wooden garden door in the village courtyard, happily handing the brown box over to a friendly fellow cat neighbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Felix the cat receives a tightly wrapped delivery box meant for his neighbor, mistaking the handwritten street number for his own residence.",
+      "decisive_choice": "Felix inspects the ink-stamped delivery label closely under the daylight, confirms the correct house number, and decides to carry the unopened box back across the courtyard.",
+      "resolution": "Felix hands the package directly to its rightful owner in the cobblestone courtyard, establishing total trust and neighborhood honesty.",
+      "visual_bible": {
+        "style": "A warm, charming children's book illustration style with soft lighting, rich natural textures, and clear, expressive character acting.",
+        "characters": {
+          "Felix": "A sleek black-and-white tuxedo cat with bright green eyes, wearing a tiny red collar."
+        },
+        "locations": {
+          "village_courtyard": "A sunlit cobblestone courtyard featuring weathered wooden doorways, climbing ivy, and low stone planters."
+        },
+        "objects": {
+          "box": "A neat square cardboard package tied securely with natural jute twine and stamped with a red wax seal."
+        }
+      },
+      "plot_fingerprint": "7aac76050d6af2444e81e6c091a87508382074e80caadfbaedfa724db2b2f5bc"
     }
   ]
 }
