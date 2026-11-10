@@ -1,20 +1,8 @@
 {
-  "observed_at": "2026-11-09T22:20:04.152008+00:00",
-  "generated": 6,
+  "observed_at": "2026-11-10T07:16:41.226615+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
-    {
-      "index": 6,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 7,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 8,
-      "reason": "invalid_story_structure"
-    },
     {
       "index": 9,
       "reason": "invalid_story_structure"
@@ -28,30 +16,31 @@
       "reason": "invalid_story_structure"
     },
     {
-      "index": 12,
+      "index": 16,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 13,
+      "index": 17,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 14,
+      "index": 19,
       "reason": "invalid_story_structure"
-    },
-    {
-      "index": 15,
-      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 1,
-  "review_deferred": 5,
-  "approved": 0,
+  "reviewed": 11,
+  "review_deferred": 3,
+  "approved": 3,
   "review_issues": [
+    "The candidate story 'Oliver the Otter and Barnaby the Cat's Riverbank Lantern Race' shares a nearly identical premise, character combination (Oliver the otter and Barnaby the cat), setting (riverbank), and central motif (lantern dilemma) with a recently published example in the comparison history ('Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma').",
+    "The candidate story features 'Toby the Tapir' and a meadow flower shift, which heavily mirrors recently published premises such as 'Toby the Tapir and the Two-Flower Meadow Shift' and follows a repetitive structural and character naming convention seen in the comparison history.",
+    "The premise, character (Orion the Owl), setting (observatory), and conflict structure heavily overlap with recently published titles in the comparison history, such as 'Orion the Owl and the Silent Platform Bell' and 'Orion the Owl and the Starlight Observatory Lens'.",
+    "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_deferred:rate_limited",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -107,23 +96,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 6,
+    "generated": 14,
     "script_status_counts": {
-      "no_simple_flags": 6
+      "no_simple_flags": 14
     },
     "renderer_status_counts": {
-      "incompatible": 5,
-      "structurally_eligible": 1
+      "incompatible": 6,
+      "structurally_eligible": 8
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 5,
-      "none": 1
+      "cast_mismatch": 6,
+      "none": 8
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 6
+      "all_shots_recognized": 12,
+      "partially_recognized": 2
     },
-    "scene_taxonomy_recognized_shots": 24,
-    "scene_taxonomy_unresolved_shots": 0,
+    "scene_taxonomy_recognized_shots": 52,
+    "scene_taxonomy_unresolved_shots": 4,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
