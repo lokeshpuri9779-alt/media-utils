@@ -1,11 +1,15 @@
 {
-  "observed_at": "2026-11-10T07:16:41.226615+00:00",
-  "generated": 14,
+  "observed_at": "2026-11-10T19:45:34.098290+00:00",
+  "generated": 10,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 9,
-      "reason": "invalid_story_structure"
+      "index": 6,
+      "reason": "insufficient_visual_diversity"
+    },
+    {
+      "index": 7,
+      "reason": "insufficient_visual_diversity"
     },
     {
       "index": 10,
@@ -16,31 +20,43 @@
       "reason": "invalid_story_structure"
     },
     {
+      "index": 12,
+      "reason": "insufficient_beat_narration"
+    },
+    {
+      "index": 13,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 14,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 15,
+      "reason": "invalid_story_structure"
+    },
+    {
       "index": 16,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 17,
-      "reason": "invalid_story_structure"
-    },
-    {
       "index": 19,
-      "reason": "invalid_story_structure"
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 11,
-  "review_deferred": 3,
-  "approved": 3,
+  "reviewed": 10,
+  "review_deferred": 0,
+  "approved": 1,
   "review_issues": [
-    "The candidate story 'Oliver the Otter and Barnaby the Cat's Riverbank Lantern Race' shares a nearly identical premise, character combination (Oliver the otter and Barnaby the cat), setting (riverbank), and central motif (lantern dilemma) with a recently published example in the comparison history ('Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma').",
-    "The candidate story features 'Toby the Tapir' and a meadow flower shift, which heavily mirrors recently published premises such as 'Toby the Tapir and the Two-Flower Meadow Shift' and follows a repetitive structural and character naming convention seen in the comparison history.",
-    "The premise, character (Orion the Owl), setting (observatory), and conflict structure heavily overlap with recently published titles in the comparison history, such as 'Orion the Owl and the Silent Platform Bell' and 'Orion the Owl and the Starlight Observatory Lens'.",
+    "The candidate story 'Lyra the Lynx and Bran the Stoat's Deep Forest Compass Navigation' closely repeats the premise, characters (Lyra the Lynx and Bran the Stoat), and setting of the recently published comparison history item 'Lyra the Lynx and Bran the Stoat's Forest Compass Reversal'.",
+    "The candidate story features Pip the Mouse and Barnaby the Rabbit inspecting a book and resolving a textual dispute, which closely duplicates the premise, character pairing, and setting of the recently published item 'Pip the Mouse and Barnaby the Rabbit's Library Bookmark'.",
+    "The candidate story features characters 'Buster the Dog and Pip the Mouse' and a premise involving a shared ball ('Buster the Dog and Pip the Mouse and the Shared Ball'), which heavily overlaps with recently published premises and characters in the comparison history.",
+    "The candidate story features characters ('Oscar the otter and Barnaby the cat') and a premise ('riverbank cavern lantern dilemma') that directly overlap and repeat recently published premises and character combinations from the comparison history ('Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma').",
+    "The character names, animal pairings, and thematic elements are heavily recycled from automated low-quality content patterns designed to spam YouTube.",
+    "The premise, characters (Pippin the Pangolin and Orlo the Owl), and plot structure closely parallel recently published works in the comparison history, such as 'Pip the Pangolin and Ollie the Owl's Forest Signal' and 'Pippa the Pangolin and Orlo the Owl's Midnight Promise'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "review_deferred:provider_unavailable",
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -79,6 +95,7 @@
       "models/gemini-3.8-flash-lite-tts",
       "models/gemini-3.8-flash-tts",
       "models/gemini-4-argon",
+      "models/gemini-4-carbon",
       "models/gemini-flash-latest",
       "models/gemini-flash-lite-latest",
       "models/gemini-nano-banana-2.1",
@@ -96,24 +113,24 @@
     ]
   },
   "creative_preflight": {
-    "generated": 14,
+    "generated": 10,
     "script_status_counts": {
-      "no_simple_flags": 14
+      "no_simple_flags": 10
     },
     "renderer_status_counts": {
-      "incompatible": 6,
-      "structurally_eligible": 8
+      "incompatible": 4,
+      "structurally_eligible": 6
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 6,
-      "none": 8
+      "cast_mismatch": 3,
+      "none": 6,
+      "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 12,
-      "partially_recognized": 2
+      "all_shots_recognized": 10
     },
-    "scene_taxonomy_recognized_shots": 52,
-    "scene_taxonomy_unresolved_shots": 4,
+    "scene_taxonomy_recognized_shots": 40,
+    "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
