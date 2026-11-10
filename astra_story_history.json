@@ -9847,6 +9847,55 @@
       "video_id": "lcA8dvzq4Jw",
       "confirmed_at": "2026-11-10T13:00:20.295890+00:00",
       "title": "Why sam darnold Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-f9f35a4134d5e55b0dc8",
+      "video_id": "i7a9_HQz1CU",
+      "confirmed_at": "2026-11-10T19:31:06.012257+00:00",
+      "title": "Pip the Mouse and Barnaby the Rabbit's Library Bookmark",
+      "plot_fingerprint": "bf231e9ba437b055935d77f40159b69cf56d06ed53c553cd29293459d7a8f40f",
+      "story_beats": [
+        {
+          "headline": "Disputed Chapter",
+          "speech": "Pip insists the winter bloom chapter starts on page forty, while Barnaby argues it begins much later.",
+          "visual": "door",
+          "label": "library archives",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse and Barnaby the rabbit stand inside the library archives next to a tall wooden door, both staring down at a heavy open book resting on a wooden table, Pip pointing a tiny paw at page forty with an earnest expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Clues",
+          "speech": "Barnaby brings a small velvet box containing dried petals to check the pigment matches the printed margin illustrations.",
+          "visual": "forest",
+          "label": "botanical specimens",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the rabbit stands in the library archives holding a small wooden box of dried botanical specimens next to the open book, while Pip the mouse looks closely at the margin illustrations with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Safe Experiment",
+          "speech": "Pip places a single seed packet directly onto the page corner to test the ink coloration under the warm reading light.",
+          "visual": "signal",
+          "label": "ink verification",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse holds a small seed packet over the open book in the library archives, comparing its color against the printed ink, while Barnaby the rabbit watches attentively with a supportive expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Understanding",
+          "speech": "Both friends smile as they realize the chapter was correctly located in section two all along.",
+          "visual": "planet",
+          "label": "resolved reading",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse and Barnaby the rabbit sit side by side in the library archives smiling happily together, turning the pages of the open book while holding a small book marker between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
