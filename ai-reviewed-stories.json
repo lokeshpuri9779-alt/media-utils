@@ -8179,82 +8179,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-f9f35a4134d5e55b0dc8",
-      "title": "Pip the Mouse and Barnaby the Rabbit's Library Bookmark",
-      "hook": "Disputed Chapter",
-      "question": "Which chapter in the ancient botanical book describes the winter bloom?",
-      "answer": "Chapter four, verified by comparing the illuminated margin notes against actual seed specimens.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Disputed Chapter",
-          "speech": "Pip insists the winter bloom chapter starts on page forty, while Barnaby argues it begins much later.",
-          "visual": "door",
-          "label": "library archives",
-          "story_beat": "reveal",
-          "visual_prompt": "Pip the mouse and Barnaby the rabbit stand inside the library archives next to a tall wooden door, both staring down at a heavy open book resting on a wooden table, Pip pointing a tiny paw at page forty with an earnest expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Gathering Clues",
-          "speech": "Barnaby brings a small velvet box containing dried petals to check the pigment matches the printed margin illustrations.",
-          "visual": "forest",
-          "label": "botanical specimens",
-          "story_beat": "build",
-          "visual_prompt": "Barnaby the rabbit stands in the library archives holding a small wooden box of dried botanical specimens next to the open book, while Pip the mouse looks closely at the margin illustrations with a focused expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Safe Experiment",
-          "speech": "Pip places a single seed packet directly onto the page corner to test the ink coloration under the warm reading light.",
-          "visual": "signal",
-          "label": "ink verification",
-          "story_beat": "mechanism",
-          "visual_prompt": "Pip the mouse holds a small seed packet over the open book in the library archives, comparing its color against the printed ink, while Barnaby the rabbit watches attentively with a supportive expression.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Shared Understanding",
-          "speech": "Both friends smile as they realize the chapter was correctly located in section two all along.",
-          "visual": "planet",
-          "label": "resolved reading",
-          "story_beat": "payoff",
-          "visual_prompt": "Pip the mouse and Barnaby the rabbit sit side by side in the library archives smiling happily together, turning the pages of the open book while holding a small book marker between them.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Pip and Barnaby disagree on whether the botanical book's winter bloom chapter is located in section two or section three.",
-      "decisive_choice": "Pip places a physical seed specimen directly onto the open page to test the parchment's ink hue.",
-      "resolution": "Both friends confirm the correct chapter together, restoring complete harmony to their reading routine.",
-      "visual_bible": {
-        "style": "Warm, detailed storybook illustration style with soft lighting and rich wooden textures.",
-        "characters": {
-          "Pip": "A tiny brown mouse with neat whiskers, wearing a small green waistcoat.",
-          "Barnaby": "A gentle cream-colored rabbit with long ears and a cozy knitted brown scarf."
-        },
-        "locations": {
-          "library archives": "A quiet, wood-paneled room lined with tall bookshelves, a reading table, and soft amber lighting."
-        },
-        "objects": {
-          "book": "A thick, leather-bound volume with yellowed parchment pages and gold foil lettering.",
-          "box": "A small polished mahogany box with a brass clasp containing dried petals.",
-          "marker": "A crimson silk ribbon used as a bookmark."
-        }
-      },
-      "plot_fingerprint": "bf231e9ba437b055935d77f40159b69cf56d06ed53c553cd29293459d7a8f40f"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-47176e676e36eb63e95c",
       "title": "Jasper the Stoat and Finn the Fox's Cabin Tome",
       "hook": "The Cabin Standoff",
@@ -8331,11 +8255,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-f5625c32daf517f7f08a",
-      "title": "Felix the Cat and the Courtyard Box Exchange",
-      "hook": "The Mistaken Delivery",
-      "question": "Why did Felix the cat rush back to the sunny flagstone courtyard with a wrongly delivered package?",
-      "answer": "Felix discovered the heavy parcel belonged to his neighbor after checking the wax seal, prompting an immediate and honest return.",
+      "content_id": "rayvan-gemini-cce185a1f98abf1f3f77",
+      "title": "Toby the Tapir and the Meadow Flower Shift",
+      "hook": "The Unexpected Petal Shift",
+      "question": "Why did Toby the tapir notice a sudden color shift in the meadow flowers?",
+      "answer": "Toby realized that the morning shade caused the petals to fold, and he adjusted his daily path to protect them.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8343,62 +8267,64 @@
       ],
       "story_beats": [
         {
-          "headline": "The Mistaken Delivery",
-          "speech": "Felix gasped when he noticed the delivery stamp was meant for the gray tabby next door, not his own porch.",
-          "visual": "door",
-          "label": "front_doorstep",
-          "story_beat": "reveal",
-          "visual_prompt": "Felix the cat stands on a weathered wooden doorstep in a sunny village courtyard, holding a small wrapped brown box with both paws, looking surprised at the shipping label.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Inspecting the Label",
-          "speech": "He carefully checked the handwritten numbers on the parcel under the bright courtyard sun to verify his initial mistake.",
-          "visual": "signal",
-          "label": "courtyard_sunlight",
-          "story_beat": "build",
-          "visual_prompt": "Felix the cat sits on a gray flagstone courtyard in the village, holding the brown box up close to inspect the inked address label in the warm daylight.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Crossing the Pavement",
-          "speech": "Determined to make things right, the honest cat walked across the open stone plaza to return the misdelivered parcel promptly.",
+          "headline": "The Unexpected Petal Shift",
+          "speech": "Look closely at these two flowers, because one has turned a deep violet while the other remains bright yellow.",
           "visual": "forest",
-          "label": "open_plaza",
-          "story_beat": "mechanism",
-          "visual_prompt": "Felix the cat walks purposefully across a leafy village courtyard surrounded by low stone walls, carrying the brown box securely in his arms.",
+          "label": "forest clearing",
+          "story_beat": "reveal",
+          "visual_prompt": "Toby the tapir stands in a sunlit forest clearing looking down in surprise at two distinct meadow flowers, one yellow and one violet, holding a flower prop in his front paw.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Honest Return",
-          "speech": "Felix handed the package to his neighbor with a friendly smile, proving that courtyard honesty is always the best policy.",
+          "headline": "Investigating the Shadow",
+          "speech": "Could a hidden forest blight be creeping through the soil and changing the colors of our beloved meadow petals?",
+          "visual": "signal",
+          "label": "meadow edge",
+          "story_beat": "build",
+          "visual_prompt": "Toby the tapir inspects the soil near the two flowers in the forest clearing, holding a compass prop to check the directional shade.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Finding the True Cause",
+          "speech": "Wait, the low branches of the old oak tree are casting a moving shadow that alters how the morning light hits the petals.",
           "visual": "door",
-          "label": "neighbor_doorstep",
+          "label": "tree canopy",
+          "story_beat": "mechanism",
+          "visual_prompt": "Toby the tapir reaches up toward a low oak branch above the meadow flowers in the forest clearing, holding a wrench prop to gently move a twig.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring Balanced Sunlight",
+          "speech": "By clearing these fallen branches away, both flowers receive equal morning light and return to their true vibrant colors.",
+          "visual": "forest",
+          "label": "bright clearing",
           "story_beat": "payoff",
-          "visual_prompt": "Felix the cat stands by a wooden garden door in the village courtyard, happily handing the brown box over to a friendly fellow cat neighbor.",
+          "visual_prompt": "Toby the tapir smiles happily beside the two meadow flowers in the forest clearing as golden morning sunlight bathes both blossoms evenly.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Felix the cat receives a tightly wrapped delivery box meant for his neighbor, mistaking the handwritten street number for his own residence.",
-      "decisive_choice": "Felix inspects the ink-stamped delivery label closely under the daylight, confirms the correct house number, and decides to carry the unopened box back across the courtyard.",
-      "resolution": "Felix hands the package directly to its rightful owner in the cobblestone courtyard, establishing total trust and neighborhood honesty.",
+      "central_conflict": "Toby the tapir notices a sudden unnatural color change between two adjacent meadow flowers and wrongly suspects a lingering forest blight.",
+      "decisive_choice": "Toby carefully inspects the soil moisture and sunlight angle himself instead of blaming the neighboring thicket.",
+      "resolution": "Toby discovers the natural shadow of the oak tree is causing the petal shift, and he happily clears away fallen twigs to let the morning sun reach both flowers.",
       "visual_bible": {
-        "style": "A warm, charming children's book illustration style with soft lighting, rich natural textures, and clear, expressive character acting.",
+        "style": "Cinematic 3D animation style with soft lighting, vibrant natural colors, and detailed tactile textures.",
         "characters": {
-          "Felix": "A sleek black-and-white tuxedo cat with bright green eyes, wearing a tiny red collar."
+          "Toby": "A gentle grey tapir with a soft snout, friendly round eyes, and short plush fur, standing on all fours."
         },
         "locations": {
-          "village_courtyard": "A sunlit cobblestone courtyard featuring weathered wooden doorways, climbing ivy, and low stone planters."
+          "forest clearing": "A lush, green meadow surrounded by tall ancient trees with soft mossy ground and dappled sunlight."
         },
         "objects": {
-          "box": "A neat square cardboard package tied securely with natural jute twine and stamped with a red wax seal."
+          "flower": "A pair of vibrant meadow flowers with soft petals, one bright yellow and one deep violet.",
+          "compass": "A small polished brass pocket compass with a clear glass face.",
+          "wrench": "A compact silvery metal utility wrench with a clean matte finish."
         }
       },
-      "plot_fingerprint": "7aac76050d6af2444e81e6c091a87508382074e80caadfbaedfa724db2b2f5bc"
+      "plot_fingerprint": "bd6f0ccae250da1ab74fd8930c2a45f18ac3696bebcda2139c5ebf9fd68dd416"
     }
   ]
 }
