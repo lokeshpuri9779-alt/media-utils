@@ -9896,6 +9896,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-f5625c32daf517f7f08a",
+      "video_id": "EB_OmqZNmWg",
+      "confirmed_at": "2026-11-10T20:25:45.257954+00:00",
+      "title": "Felix the Cat and the Courtyard Box Exchange",
+      "plot_fingerprint": "7aac76050d6af2444e81e6c091a87508382074e80caadfbaedfa724db2b2f5bc",
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Felix gasped when he noticed the delivery stamp was meant for the gray tabby next door, not his own porch.",
+          "visual": "door",
+          "label": "front_doorstep",
+          "story_beat": "reveal",
+          "visual_prompt": "Felix the cat stands on a weathered wooden doorstep in a sunny village courtyard, holding a small wrapped brown box with both paws, looking surprised at the shipping label.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inspecting the Label",
+          "speech": "He carefully checked the handwritten numbers on the parcel under the bright courtyard sun to verify his initial mistake.",
+          "visual": "signal",
+          "label": "courtyard_sunlight",
+          "story_beat": "build",
+          "visual_prompt": "Felix the cat sits on a gray flagstone courtyard in the village, holding the brown box up close to inspect the inked address label in the warm daylight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Pavement",
+          "speech": "Determined to make things right, the honest cat walked across the open stone plaza to return the misdelivered parcel promptly.",
+          "visual": "forest",
+          "label": "open_plaza",
+          "story_beat": "mechanism",
+          "visual_prompt": "Felix the cat walks purposefully across a leafy village courtyard surrounded by low stone walls, carrying the brown box securely in his arms.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Return",
+          "speech": "Felix handed the package to his neighbor with a friendly smile, proving that courtyard honesty is always the best policy.",
+          "visual": "door",
+          "label": "neighbor_doorstep",
+          "story_beat": "payoff",
+          "visual_prompt": "Felix the cat stands by a wooden garden door in the village courtyard, happily handing the brown box over to a friendly fellow cat neighbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
