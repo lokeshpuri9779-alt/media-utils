@@ -8255,11 +8255,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-cce185a1f98abf1f3f77",
-      "title": "Toby the Tapir and the Meadow Flower Shift",
-      "hook": "The Unexpected Petal Shift",
-      "question": "Why did Toby the tapir notice a sudden color shift in the meadow flowers?",
-      "answer": "Toby realized that the morning shade caused the petals to fold, and he adjusted his daily path to protect them.",
+      "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+      "title": "Ollie the Otter and Felix the Cat's Riverbank Lantern Sharing",
+      "hook": "The Disputed Lantern",
+      "question": "How can Ollie the otter and Felix the cat fairly share one single lantern on the riverbank without arguing over who keeps it?",
+      "answer": "Ollie and Felix agree to place the lantern on a central flat stone midway between their dens, rotating its position each evening so both enjoy equal illumination.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8267,64 +8267,63 @@
       ],
       "story_beats": [
         {
-          "headline": "The Unexpected Petal Shift",
-          "speech": "Look closely at these two flowers, because one has turned a deep violet while the other remains bright yellow.",
+          "headline": "The Disputed Lantern",
+          "speech": "We cannot both keep this single brass lantern inside our separate riverbank dens every single night.",
           "visual": "forest",
-          "label": "forest clearing",
+          "label": "riverbank forest clearing",
           "story_beat": "reveal",
-          "visual_prompt": "Toby the tapir stands in a sunlit forest clearing looking down in surprise at two distinct meadow flowers, one yellow and one violet, holding a flower prop in his front paw.",
+          "visual_prompt": "Ollie the otter and Felix the cat stand facing each other in a lush riverbank forest clearing next to the water, arguing while Ollie holds a brass lantern in his paws.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Investigating the Shadow",
-          "speech": "Could a hidden forest blight be creeping through the soil and changing the colors of our beloved meadow petals?",
+          "headline": "The Stubborn Tug",
+          "speech": "I found this lantern washed ashore near my favorite fishing pool, so it should stay on my side.",
           "visual": "signal",
-          "label": "meadow edge",
+          "label": "lantern glow signal",
           "story_beat": "build",
-          "visual_prompt": "Toby the tapir inspects the soil near the two flowers in the forest clearing, holding a compass prop to check the directional shade.",
+          "visual_prompt": "Ollie the otter pulls the brass lantern toward his muddy riverbank den while Felix the cat tugs it back toward his dry stone ledge, casting a flickering yellow signal light across the water.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Finding the True Cause",
-          "speech": "Wait, the low branches of the old oak tree are casting a moving shadow that alters how the morning light hits the petals.",
+          "headline": "The Fair Compromise",
+          "speech": "Instead of fighting, let us place the lantern on this central milestone where it benefits us equally.",
           "visual": "door",
-          "label": "tree canopy",
+          "label": "neutral milestone marker",
           "story_beat": "mechanism",
-          "visual_prompt": "Toby the tapir reaches up toward a low oak branch above the meadow flowers in the forest clearing, holding a wrench prop to gently move a twig.",
+          "visual_prompt": "Felix the cat steps back thoughtfully while Ollie the otter sets the brass lantern down atop a flat neutral milestone situated equidistant between their respective riverbank homes.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Restoring Balanced Sunlight",
-          "speech": "By clearing these fallen branches away, both flowers receive equal morning light and return to their true vibrant colors.",
+          "headline": "Shared Illumination",
+          "speech": "This central spot works perfectly for both of us, lighting our evening paths without any further argument.",
           "visual": "forest",
-          "label": "bright clearing",
+          "label": "illuminated riverbank path",
           "story_beat": "payoff",
-          "visual_prompt": "Toby the tapir smiles happily beside the two meadow flowers in the forest clearing as golden morning sunlight bathes both blossoms evenly.",
+          "visual_prompt": "Ollie the otter and Felix the cat sit peacefully side by side along the riverbank forest path, both enjoying the warm, steady glow of the brass lantern resting on the central stone between them.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Toby the tapir notices a sudden unnatural color change between two adjacent meadow flowers and wrongly suspects a lingering forest blight.",
-      "decisive_choice": "Toby carefully inspects the soil moisture and sunlight angle himself instead of blaming the neighboring thicket.",
-      "resolution": "Toby discovers the natural shadow of the oak tree is causing the petal shift, and he happily clears away fallen twigs to let the morning sun reach both flowers.",
+      "central_conflict": "Ollie the otter wants to keep the shared brass lantern inside his muddy riverbank burrow while Felix the cat insists on placing it permanently near his dry stone ledge.",
+      "decisive_choice": "Ollie suggests and carries out placing the lantern precisely on a neutral flat milestone halfway between their respective homes.",
+      "resolution": "The central placement provides balanced light for both animals to safely navigate the riverbank at night, ending their dispute permanently.",
       "visual_bible": {
-        "style": "Cinematic 3D animation style with soft lighting, vibrant natural colors, and detailed tactile textures.",
+        "style": "Warm and charming 3D animated animal storybook style with rich woodland textures, soft natural lighting, and expressive character acting.",
         "characters": {
-          "Toby": "A gentle grey tapir with a soft snout, friendly round eyes, and short plush fur, standing on all fours."
+          "Ollie the otter": "A sleek brown otter with white whiskers, wearing a small blue cotton scarf around his neck, standing on two feet with agile paws.",
+          "Felix the cat": "A sleek ginger tabby cat with bright green eyes and neat white paws, standing upright with a calm and clever expression."
         },
         "locations": {
-          "forest clearing": "A lush, green meadow surrounded by tall ancient trees with soft mossy ground and dappled sunlight."
+          "riverbank": "A lush, detailed riverbank environment featuring soft green grass, smooth grey stones, tall reeds, and a gentle flowing river under twilight."
         },
         "objects": {
-          "flower": "A pair of vibrant meadow flowers with soft petals, one bright yellow and one deep violet.",
-          "compass": "A small polished brass pocket compass with a clear glass face.",
-          "wrench": "A compact silvery metal utility wrench with a clean matte finish."
+          "lantern": "A polished brass lantern with a sturdy wire handle and clear glass panels containing a warm glowing flame."
         }
       },
-      "plot_fingerprint": "bd6f0ccae250da1ab74fd8930c2a45f18ac3696bebcda2139c5ebf9fd68dd416"
+      "plot_fingerprint": "791902ca2a3c1aa52d41639d48f4a3627626b345519ac224f7eaad435fd35266"
     }
   ]
 }
