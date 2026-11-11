@@ -1,30 +1,14 @@
 {
-  "observed_at": "2026-11-11T06:13:34.535531+00:00",
-  "generated": 13,
+  "observed_at": "2026-11-11T14:24:35.920366+00:00",
+  "generated": 17,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 1,
+      "index": 10,
       "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 3,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 5,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 7,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 12,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 13,
+      "index": 14,
       "reason": "invalid_story_structure"
     },
     {
@@ -32,19 +16,16 @@
       "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 13,
-  "review_deferred": 0,
-  "approved": 1,
+  "reviewed": 2,
+  "review_deferred": 15,
+  "approved": 0,
   "review_issues": [
-    "It repeats similar causal mechanisms involving forest compass discrepancies and natural orientation tests, violating originality guidelines.",
-    "The candidate story closely replicates the characters (Lyra the Lynx and Bran the Stoat) and premise of a recently published work listed in the comparison history ('Lyra the Lynx and Bran the Stoat's Forest Compass Reversal').",
-    "The candidate story features characters 'Bramle the pangolin' and 'Barnaby the owl' in a narrative about a glowing forest signal, which heavily duplicates recently published premises, character combinations, and titles in the comparison history such as 'Bramble the Pangolin and Barnaby the Owl and the Moonlit Signal', 'Bramble the Pangolin and Barnaby the Owl's Moonlit Pathway', and 'Pip the Pangolin and Ollie the Owl's Forest Signal'.",
-    "The premise, characters (Buster the dog and Pip the mouse), and setting closely mimic the recently published title 'Buster the Dog and Pip the Mouse and the Shared Ball', indicating a high risk of repetition and lack of originality.",
-    "The story premise, characters (Finn the fox and Barnaby the rabbit), and causal conflict heavily overlap with recently published works in the comparison history, specifically 'Finn the Fox and Barnaby the Rabbit's Woodland Clue'.",
+    "The candidate story repeats the premise, characters (Lyra the Lynx and Bram the Stoat), and setting elements of recently published works such as 'Lyra the Lynx and Bran the Stoat's Forest Compass Reversal' and 'Lyra and Bram's Forest Compass Rivalry'.",
+    "The premise, characters (Pip the mouse and Barnaby the rabbit), and setting closely mirror the recently published example 'Pip the Mouse and Barnaby the Rabbit's Library Bookmark', representing a repetitive formulaic variation within the same animal pairing and library setting.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -101,25 +82,25 @@
     ]
   },
   "creative_preflight": {
-    "generated": 13,
+    "generated": 17,
     "script_status_counts": {
-      "no_simple_flags": 13
+      "no_simple_flags": 17
     },
     "renderer_status_counts": {
       "incompatible": 8,
-      "structurally_eligible": 5
+      "structurally_eligible": 9
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 7,
-      "none": 5,
-      "unsupported_human_actor": 1
+      "cast_mismatch": 6,
+      "none": 9,
+      "unsupported_human_actor": 2
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 10,
+      "all_shots_recognized": 14,
       "partially_recognized": 3
     },
-    "scene_taxonomy_recognized_shots": 45,
-    "scene_taxonomy_unresolved_shots": 7,
+    "scene_taxonomy_recognized_shots": 63,
+    "scene_taxonomy_unresolved_shots": 5,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
