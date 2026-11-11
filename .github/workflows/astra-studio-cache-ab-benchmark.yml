@@ -1,0 +1,148 @@
+name: ASTRA Studio Cache A/B Benchmark (Review Only)
+
+# Only this file's PR changes or an explicit manual dispatch can run the bench.
+# Never schedules, publishes, approves art, or touches the production publisher.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-studio-cache-ab-benchmark.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: astra-studio-cache-ab-review
+  cancel-in-progress: true
+
+jobs:
+  verified-pack-cache-ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      ASTRA_ASSET_PACK_ENABLED: '1'
+      ASTRA_ASSET_PACK_AUDIT: '1'
+      ASTRA_ASSET_PACK_ROOT: runtime-artifacts/verified-pack
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free Studio dependencies and FFmpeg
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Retrieve pinned visual pack without producer or publisher permissions
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/download
+      - name: Verify all original art before using immutable cache
+        run: |
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+      - name: Preload voice dependencies before both measurements
+        run: |
+          python - <<'PY'
+          from studio_renderer import ensure_voice_assets
+          ensure_voice_assets()
+          print("Voice assets are ready; neither timed render must download a model.")
+          PY
+      - name: Render cache ON first (coldest measurement, review preview only)
+        shell: bash
+        run: |
+          mkdir -p runtime-artifacts/cache-ab/cached/receipts
+          /usr/bin/time -f '{"wall_seconds":%e,"max_rss_kb":%M}' -o runtime-artifacts/cache-ab/cached/time.json \
+            env ASTRA_ASSET_PACK_IMMUTABLE=1 \
+                ASTRA_ASSET_AUDIT_DIR=runtime-artifacts/cache-ab/cached/receipts \
+                python studio_renderer.py --preview runtime-artifacts/cache-ab/cached/studio.mp4 \
+            > runtime-artifacts/cache-ab/cached/render.log 2>&1
+      - name: Render cache OFF second (same pack and story, review preview only)
+        shell: bash
+        run: |
+          mkdir -p runtime-artifacts/cache-ab/uncached/receipts
+          /usr/bin/time -f '{"wall_seconds":%e,"max_rss_kb":%M}' -o runtime-artifacts/cache-ab/uncached/time.json \
+            env ASTRA_ASSET_PACK_IMMUTABLE=0 \
+                ASTRA_ASSET_AUDIT_DIR=runtime-artifacts/cache-ab/uncached/receipts \
+                python studio_renderer.py --preview runtime-artifacts/cache-ab/uncached/studio.mp4 \
+            > runtime-artifacts/cache-ab/uncached/render.log 2>&1
+      - name: Compare decoded frames, asset receipts, MP4 properties, and time
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import subprocess
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageDraw
+          base = Path('runtime-artifacts/cache-ab')
+          results = {}
+          for mode in ('cached', 'uncached'):
+              folder = base / mode
+              video = folder / 'studio.mp4'
+              assert video.is_file() and video.stat().st_size > 10000, f'{mode}: video missing'
+              probe = json.loads(subprocess.check_output([
+                  'ffprobe','-v','error','-show_entries',
+                  'format=duration:stream=codec_type,codec_name,width,height,r_frame_rate',
+                  '-of','json',str(video)], text=True))
+              streams = probe['streams']
+              vs = [s for s in streams if s['codec_type']=='video']
+              aud = [s for s in streams if s['codec_type']=='audio']
+              assert len(vs)==1 and vs[0]['codec_name']=='h264', f'{mode}: expected H264'
+              assert (vs[0]['width'],vs[0]['height'],vs[0]['r_frame_rate'])==(1080,1920,'30/1'), f'{mode}: wrong video format'
+              assert any(s['codec_name']=='aac' for s in aud), f'{mode}: no AAC'
+              receipts = list((folder/'receipts').glob('*.json'))
+              assert len(receipts)==1, f'{mode}: expected one receipt, found {len(receipts)}'
+              receipt = json.loads(receipts[0].read_text())
+              assert receipt['video_sha256']==hashlib.sha256(video.read_bytes()).hexdigest(), f'{mode}: receipt hash mismatch'
+              assert receipt['asset_coverage_status']=='full', f'{mode}: incomplete asset coverage'
+              assert receipt['composited_shots']==receipt['shot_count']>0, f'{mode}: not all shots composited'
+              assert all(s['asset'] and s['pixel_changed'] for s in receipt['shots']), f'{mode}: missing visual proof'
+              duration = float(probe['format']['duration'])
+              assert duration > 0
+              frames = subprocess.check_output([
+                  'ffmpeg','-v','error','-i',str(video),'-map','0:v:0',
+                  '-f','framemd5','-'], text=True)
+              digest = hashlib.sha256(('\n'.join(
+                  line for line in frames.splitlines() if line and not line.startswith('#')
+              )).encode()).hexdigest()
+              results[mode] = {'time':json.loads((folder/'time.json').read_text()),
+                               'duration_seconds':duration,'fps':vs[0]['r_frame_rate'],
+                               'width':vs[0]['width'],'height':vs[0]['height'],
+                               'frame_digest':digest,'shot_count':receipt['shot_count'],
+                               'assets':[s['asset'] for s in receipt['shots']]}
+              # Real decoded frames for separate human semantic/visual review.
+              picks=[]
+              for i, fraction in enumerate((0.05,0.35,0.65,0.9)):
+                  target=folder/f'frame-{i+1}.png'
+                  subprocess.run(['ffmpeg','-v','error','-y','-ss',str(duration*fraction),
+                                  '-i',str(video),'-frames:v','1',str(target)],check=True)
+                  with Image.open(target) as img:
+                      picks.append(ImageOps.contain(img.convert('RGB'),(270,480)))
+              sheet=Image.new('RGB',(1080,480),'#0f1117')
+              for i,img in enumerate(picks): sheet.paste(img,(270*i,0))
+              sheet.save(folder/'contact-sheet.jpg',quality=88)
+          a,b=results['cached'],results['uncached']
+          assert a['shot_count']==b['shot_count'], 'Different story shot counts'
+          assert a['assets']==b['assets'], 'Asset selection changed: human review required'
+          assert abs(a['duration_seconds']-b['duration_seconds']) < (1/30+0.001), 'Video duration changed'
+          assert a['frame_digest']==b['frame_digest'], 'Decoded video frames differ: human review required'
+          results['comparison']={'same_decoded_frames':True,
+              'same_assets':True,
+              'speedup_uncached_over_cached':round(b['time']['wall_seconds']/a['time']['wall_seconds'],3),
+              'time_saved_seconds':round(b['time']['wall_seconds']-a['time']['wall_seconds'],2),
+              'production_ready':False,'publishing_authorized':False,
+              'note':'An identical video and lower wall time do not prove creative or semantic quality.'}
+          (base/'comparison.json').write_text(json.dumps(results,indent=2))
+          print(json.dumps(results['comparison'],indent=2))
+          PY
+      - name: Archive A/B evidence only (never upload to YouTube)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-studio-cache-ab-evidence
+          path: runtime-artifacts/cache-ab/
+          if-no-files-found: warn
+          retention-days: 7

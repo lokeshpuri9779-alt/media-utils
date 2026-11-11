@@ -19,7 +19,7 @@ def _verified_inventory(root):
     return report, manifest
 
 
-def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
+def _select_assets_uncached(root, *, kind, tags=(), style=None, min_size=128, limit=5,
                   allow_attribution=False, video_format=None):
     root=Path(root).resolve()
     # Only cache an explicitly immutable, previously restored asset pack.
@@ -69,6 +69,41 @@ def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
              "sha256":verified[entry["id"]]["sha256"],
              "license":entry["license"],"source":entry["source"],
              "artist":entry["artist"]} for score,_,entry in ranked[:max(0,limit)]]
+
+
+@lru_cache(maxsize=64)
+def _immutable_selection_cache(root, kind, tags, style, min_size, limit,
+                               allow_attribution, video_format):
+    """Reuse verified background/foreground rankings across shots in one job.
+
+    The caller must have verified the restored pack and promised not to mutate it.
+    Only small candidate metadata is cached; no approval or source is synthesized.
+    """
+    return tuple(_select_assets_uncached(
+        root, kind=kind, tags=tags, style=style, min_size=min_size,
+        limit=limit, allow_attribution=allow_attribution,
+        video_format=video_format,
+    ))
+
+
+def select_assets(root, *, kind, tags=(), style=None, min_size=128, limit=5,
+                  allow_attribution=False, video_format=None):
+    """Select verified art; skip repeat PNG metadata opens only for pinned packs."""
+    root = Path(root).resolve()
+    if (os.getenv("ASTRA_ASSET_PACK_ENABLED") == "1"
+            and os.getenv("ASTRA_ASSET_PACK_IMMUTABLE") == "1"):
+        rows = _immutable_selection_cache(
+            root, kind, tuple(tags), style, min_size, limit,
+            allow_attribution, video_format,
+        )
+        # Never expose mutable objects stored inside the cache to a caller.
+        return [dict(row) for row in rows]
+    # Mutable packs MUST still validate the manifest and image bytes each time.
+    return _select_assets_uncached(
+        root, kind=kind, tags=tags, style=style, min_size=min_size,
+        limit=limit, allow_attribution=allow_attribution,
+        video_format=video_format,
+    )
 
 
 def select_or_request_generation(root, *, kind, tags=(), video_format=None,
