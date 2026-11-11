@@ -242,30 +242,46 @@ class YoutubeTests(unittest.TestCase):
 
 
 class QualityTests(unittest.TestCase):
+    def _fake_av(self, *, include_audio=True):
+        video_stream = SimpleNamespace(width=1920, height=1080,
+                                       duration=None, time_base=None)
+        audio_streams = [SimpleNamespace()] if include_audio else []
+        decoded_video = SimpleNamespace(width=1920, height=1080)
+        decoded_audio = SimpleNamespace(samples=1024)
+        class FakeContainer:
+            streams = SimpleNamespace(video=[video_stream], audio=audio_streams)
+            duration = 240 * 1_000_000
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                return False
+            def decode(self, *, video=None, audio=None):
+                if video is not None:
+                    return iter([decoded_video])
+                if audio is not None and include_audio:
+                    return iter([decoded_audio])
+                return iter([])
+            def seek(self, offset):
+                return None
+        fake_av = SimpleNamespace(time_base=1_000_000,
+                                  open=lambda *args, **kwargs: FakeContainer())
+        return fake_av
+
     def test_requires_audio(self):
         with tempfile.TemporaryDirectory() as directory:
             video = Path(directory) / "short.mp4"
             video.write_bytes(b"0" * 35000)
-            result = Mock(returncode=0, stdout=json.dumps({
-                "streams": [{"codec_type": "video", "width": 1080, "height": 1920}],
-                "format": {"duration": "28"},
-            }))
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
-                with self.assertRaises(CreativeSkip):
+            with patch.dict("sys.modules", {"av": self._fake_av(include_audio=False)}):
+                with self.assertRaisesRegex(CreativeSkip, "video_or_audio_stream_missing"):
                     inspect_video(video)
 
     def test_longform_landscape_audio_is_valid(self):
         with tempfile.TemporaryDirectory() as directory:
             video = Path(directory) / "long.mp4"
             video.write_bytes(b"0" * 35000)
-            result = Mock(returncode=0, stdout=json.dumps({
-                "streams": [{"codec_type": "video", "width": 1920, "height": 1080},
-                            {"codec_type": "audio"}],
-                "format": {"duration": "240"},
-            }))
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
+            with patch.dict("sys.modules", {"av": self._fake_av()}):
                 self.assertEqual(inspect_video(video, fmt="long")["seconds"], 240.0)
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
+            with patch.dict("sys.modules", {"av": self._fake_av()}):
                 with self.assertRaises(CreativeSkip):
                     inspect_video(video, fmt="short")
 
