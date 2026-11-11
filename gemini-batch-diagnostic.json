@@ -1,62 +1,50 @@
 {
-  "observed_at": "2026-11-10T19:45:34.098290+00:00",
-  "generated": 10,
+  "observed_at": "2026-11-11T06:13:34.535531+00:00",
+  "generated": 13,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 6,
+      "index": 1,
       "reason": "insufficient_visual_diversity"
     },
     {
-      "index": 7,
-      "reason": "insufficient_visual_diversity"
-    },
-    {
-      "index": 10,
+      "index": 3,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 11,
+      "index": 5,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 7,
       "reason": "invalid_story_structure"
     },
     {
       "index": 12,
-      "reason": "insufficient_beat_narration"
+      "reason": "insufficient_visual_diversity"
     },
     {
       "index": 13,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 14,
-      "reason": "invalid_story_structure"
-    },
-    {
       "index": 15,
       "reason": "invalid_story_structure"
-    },
-    {
-      "index": 16,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 19,
-      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 10,
+  "reviewed": 13,
   "review_deferred": 0,
   "approved": 1,
   "review_issues": [
-    "The candidate story 'Lyra the Lynx and Bran the Stoat's Deep Forest Compass Navigation' closely repeats the premise, characters (Lyra the Lynx and Bran the Stoat), and setting of the recently published comparison history item 'Lyra the Lynx and Bran the Stoat's Forest Compass Reversal'.",
-    "The candidate story features Pip the Mouse and Barnaby the Rabbit inspecting a book and resolving a textual dispute, which closely duplicates the premise, character pairing, and setting of the recently published item 'Pip the Mouse and Barnaby the Rabbit's Library Bookmark'.",
-    "The candidate story features characters 'Buster the Dog and Pip the Mouse' and a premise involving a shared ball ('Buster the Dog and Pip the Mouse and the Shared Ball'), which heavily overlaps with recently published premises and characters in the comparison history.",
-    "The candidate story features characters ('Oscar the otter and Barnaby the cat') and a premise ('riverbank cavern lantern dilemma') that directly overlap and repeat recently published premises and character combinations from the comparison history ('Oliver the Otter and Barnaby the Cat's Riverbank Lantern Dilemma').",
-    "The character names, animal pairings, and thematic elements are heavily recycled from automated low-quality content patterns designed to spam YouTube.",
-    "The premise, characters (Pippin the Pangolin and Orlo the Owl), and plot structure closely parallel recently published works in the comparison history, such as 'Pip the Pangolin and Ollie the Owl's Forest Signal' and 'Pippa the Pangolin and Orlo the Owl's Midnight Promise'.",
+    "It repeats similar causal mechanisms involving forest compass discrepancies and natural orientation tests, violating originality guidelines.",
+    "The candidate story closely replicates the characters (Lyra the Lynx and Bran the Stoat) and premise of a recently published work listed in the comparison history ('Lyra the Lynx and Bran the Stoat's Forest Compass Reversal').",
+    "The candidate story features characters 'Bramle the pangolin' and 'Barnaby the owl' in a narrative about a glowing forest signal, which heavily duplicates recently published premises, character combinations, and titles in the comparison history such as 'Bramble the Pangolin and Barnaby the Owl and the Moonlit Signal', 'Bramble the Pangolin and Barnaby the Owl's Moonlit Pathway', and 'Pip the Pangolin and Ollie the Owl's Forest Signal'.",
+    "The premise, characters (Buster the dog and Pip the mouse), and setting closely mimic the recently published title 'Buster the Dog and Pip the Mouse and the Shared Ball', indicating a high risk of repetition and lack of originality.",
+    "The story premise, characters (Finn the fox and Barnaby the rabbit), and causal conflict heavily overlap with recently published works in the comparison history, specifically 'Finn the Fox and Barnaby the Rabbit's Woodland Clue'.",
     "ai_editorial_rejection",
     "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: embodied_character_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -113,24 +101,25 @@
     ]
   },
   "creative_preflight": {
-    "generated": 10,
+    "generated": 13,
     "script_status_counts": {
-      "no_simple_flags": 10
+      "no_simple_flags": 13
     },
     "renderer_status_counts": {
-      "incompatible": 4,
-      "structurally_eligible": 6
+      "incompatible": 8,
+      "structurally_eligible": 5
     },
     "renderer_reason_counts": {
-      "cast_mismatch": 3,
-      "none": 6,
+      "cast_mismatch": 7,
+      "none": 5,
       "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 10
+      "all_shots_recognized": 10,
+      "partially_recognized": 3
     },
-    "scene_taxonomy_recognized_shots": 40,
-    "scene_taxonomy_unresolved_shots": 0,
+    "scene_taxonomy_recognized_shots": 45,
+    "scene_taxonomy_unresolved_shots": 7,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
     "publication_triggered": false
