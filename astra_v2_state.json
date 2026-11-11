@@ -3,7 +3,7 @@
   "day": "2026-11-11",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-11-11T08:44:53.063648+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -11200,44 +11200,42 @@
       "decisive_choice": "Toby carefully inspects the soil moisture and sunlight angle himself instead of blaming the neighboring thicket.",
       "resolution": "Toby discovers the natural shadow of the oak tree is causing the petal shift, and he happily clears away fallen twigs to let the morning sun reach both flowers.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "2SlDM76F5SY": {
-      "content_id": "trend-brief-2026-11-11-am",
+    },
+    "trend-brief-2026-11-11-am": {
+      "video_id": "2SlDM76F5SY",
+      "confirmed_at": "2026-11-11T12:43:33.052831+00:00",
       "title": "Why sydney thunder vs perth scorchers women match scorecard Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-11",
-      "uploaded_at": "2026-11-11T08:44:55.602427+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-11T08:44:55.602427+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
-      "renderer": "studio-7.3.1"
+      "genre": "current"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-11T08:43:55.319913+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-11T12:43:32.607461+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-11T08:45:00.419620+00:00",
+    "at": "2026-11-11T12:44:05.009140+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
+    "job_status_before_persist": "failure",
     "dependencies_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "cover_tests": "",
     "motion_tests": "success",
     "animal_tests": "success",
     "cover_package_tests": "success",
     "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "policy_tests": "failure",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-11T00:16:24.286585+00:00",
   "reserved": {
@@ -23022,10 +23020,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-11T08:45:00.419562+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-11T12:44:05.009075+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -23033,9 +23031,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-11T08:45:00.419610+00:00",
+    "at": "2026-11-11T12:44:05.009129+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -23047,22 +23045,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-11T08:45:00.418799+00:00",
+    "at": "2026-11-11T12:44:05.008374+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "skipped",
+    "job_status_before_persist": "failure",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-11T08:45:00.419479+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
-    "publish_step": "success",
-    "selection_source": "preload_artifact",
+    "at": "2026-11-11T12:44:05.009038+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
