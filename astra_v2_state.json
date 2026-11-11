@@ -11215,12 +11215,12 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-11T12:43:32.607461+00:00",
+  "last_outcome": "ready",
+  "last_preflight_at": "2026-11-11T12:45:22.791857+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-11T12:44:05.009140+00:00",
+    "at": "2026-11-11T12:45:55.197530+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -23020,8 +23020,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-11T12:44:05.009075+00:00",
-    "publication_outcome": "published",
+    "at": "2026-11-11T12:45:55.197445+00:00",
+    "publication_outcome": "ready",
     "publication_reason": "ready",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -23031,9 +23031,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-11T12:44:05.009129+00:00",
+    "at": "2026-11-11T12:45:55.197516+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "ready",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -23045,19 +23045,19 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-11T12:44:05.008374+00:00",
+    "at": "2026-11-11T12:45:55.196594+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "failure",
-    "outcome": "published",
+    "outcome": "ready",
     "reason": "ready",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-11T12:44:05.009038+00:00",
+    "at": "2026-11-11T12:45:55.197396+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "selection_source": "no_render",
