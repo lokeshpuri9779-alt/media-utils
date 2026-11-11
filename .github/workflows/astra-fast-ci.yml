@@ -69,6 +69,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_preserve_reviewed_manifest.py' -v
           python -m unittest discover -s tests -p 'test_asset_library.py' -v
           python -m unittest discover -s tests -p 'test_illustrated_story_compositor.py' -v
+          python -m unittest discover -s tests -p 'test_astra_verified_pack_cache_workflow.py' -v
       - name: Compile story modules
         run: python -m compileall -q astra_v2
       - name: Run adaptive warehouse contract tests

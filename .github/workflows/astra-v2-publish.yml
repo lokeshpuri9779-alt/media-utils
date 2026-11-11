@@ -307,7 +307,11 @@ jobs:
 
       - name: Validate production asset pack
         if: steps.preflight.outputs.render_due == 'true'
-        run: python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+        run: |
+          python -m tools.astra_restore_visual_pack runtime-artifacts/download/astra-visual-pack.zip runtime-artifacts/verified-pack --expected 3200
+          # Enable per-process decoded-art/inventory reuse only after verification.
+          # No cached decision grants editorial, artwork or upload approval.
+          echo 'ASTRA_ASSET_PACK_IMMUTABLE=1' >> "$GITHUB_ENV"
 
       - name: Generate, validate, publish, and verify
         id: publish_video
