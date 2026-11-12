@@ -5136,6 +5136,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-9b49bb011595e106d957",
+      "story_sha256": "5af237307c234304e65a5248c2808f2d80f49e75dea315ce7367069f1d154905",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-9b49bb011595e106d957",
+        "story_sha256": "5af237307c234304e65a5248c2808f2d80f49e75dea315ce7367069f1d154905",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not replicate the specific premises, characters, or settings found in the provided list of recent publications.; The narrative demonstrates clear causal coherence, moving logically from the conflict of heat exhaustion to the resolution through a specific cooperative action.; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story structure is well-defined and adheres to standard storytelling conventions without infringing on existing intellectual property.",
+        "reviewed_at": "2026-11-12T18:49:26.532754+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
