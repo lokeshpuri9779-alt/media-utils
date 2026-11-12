@@ -140,6 +140,7 @@ class GeminiRouteTests(unittest.TestCase):
     def test_gemini_request_constrains_visual_and_story_role_enums(self):
         import json
         from astra_v2.openai_creative import VISUALS, ROLES
+        from astra_v2.visual_artifact_library import SCENES
         requests = []
         def capture(request, timeout):
             requests.append(json.loads(request.data))
@@ -157,13 +158,78 @@ class GeminiRouteTests(unittest.TestCase):
         beat = schema["properties"]["beats"]["items"]["properties"]
         self.assertEqual(set(beat["visual"]["enum"]), VISUALS)
         self.assertEqual(set(beat["story_beat"]["enum"]), ROLES)
+        self.assertEqual(set(beat["story_environment"]["enum"]), set(SCENES))
+        self.assertIn("story_environment", schema["properties"]["beats"]["items"]["required"])
         self.assertIn("visual_bible", schema["required"])
+        self.assertIn("supported animals", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("no third species", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("at least three genuinely different shots", requests[0]["contents"][0]["parts"][0]["text"])
+
+    def test_valid_scene_aware_story_returns_environment_and_subject_tags(self):
+        import io
+        import json
+        data = {
+            "title": "The Fox and the Listening Bell",
+            "question": "Will the fox trust the bell's sound or its own rushed guess?",
+            "answer": "The fox listens twice, finds the marked trail, and helps the owl return safely.",
+            "central_conflict": "The fox mistakes a shortcut for a safe route after hearing the bell from the wrong direction.",
+            "decisive_choice": "The fox stops, listens twice, and follows the bell's clear pattern rather than the first sound.",
+            "resolution": "The fox and owl return together by the marked forest trail and share the bell as a guide.",
+            "visual_bible": {
+                "style": "Warm, clear, family-friendly illustrated animal adventure.",
+                "characters": {
+                    "Pip": "A fox with rust-orange fur and a white chest.",
+                    "Oren": "An owl with warm brown feathers and round eyes.",
+                },
+                "locations": {"Forest": "A quiet forest with a stream and a marked trail."},
+                "objects": {"Bell": "A small brass bell with a simple loop."},
+            },
+            "beats": [
+                {"headline": "A bell in the clearing", "speech": "A fox notices the small bell and chooses to follow its quiet ring instead of rushing ahead.",
+                 "visual": "fox", "visual_prompt": "A fox trots through a forest clearing and spots a small brass bell under a fern.",
+                 "story_environment": "forest", "label": "The first sound", "story_beat": "reveal"},
+                {"headline": "A careful pause", "speech": "The fox waits at the forest stream, listening again before crossing the narrow path.",
+                 "visual": "fox", "visual_prompt": "A fox waits beside a forest stream and listens to a small brass bell in the breeze.",
+                 "story_environment": "forest", "label": "Listening twice", "story_beat": "build"},
+                {"headline": "The owl explains", "speech": "An owl explains that the bell marks a safe turn, not a shortcut through the reeds.",
+                 "visual": "owl", "visual_prompt": "An owl watches a fox beside a forest path as the small brass bell rings softly.",
+                 "story_environment": "forest", "label": "A safer route", "story_beat": "mechanism"},
+                {"headline": "The marked trail", "speech": "The fox rings the bell once and guides the owl back along the clear forest trail.",
+                 "visual": "fox", "visual_prompt": "A fox returns the brass bell to a forest marker while an owl watches from a branch.",
+                 "story_environment": "forest", "label": "A shared guide", "story_beat": "payoff"},
+            ],
+        }
+        response = {"candidates": [{
+            "finishReason": "STOP",
+            "content": {"parts": [{"text": json.dumps(data)}]},
+        }]}
+        def fake_urlopen(request, timeout):
+            return io.BytesIO(json.dumps(response).encode())
+        with patch.dict(os.environ, {
+            "GEMINI_API_KEY": "test", "ASTRA_GEMINI_ENABLED": "1",
+        }, clear=True), patch.object(
+            omniroute_gemini.urllib.request, "urlopen", side_effect=fake_urlopen
+        ), patch("astra_v2.story_planning.planning_issues", return_value=[]), patch(
+            "astra_v2.story_editorial.editorial_issues", return_value=[]
+        ), patch("astra_v2.shorts_novelty.is_near_duplicate", return_value=False), patch(
+            "astra_v2.story_forge.plot_fingerprint", return_value="test-fingerprint"
+        ):
+            story = omniroute_gemini.generate(set(), set(), prior_stories=[])
+        self.assertEqual(len(story["story_beats"]), 4)
+        self.assertTrue(all(beat["story_environment"] == "forest"
+                            for beat in story["story_beats"]))
+        self.assertEqual([beat["visual"] for beat in story["story_beats"]],
+                         ["fox", "fox", "owl", "fox"])
+        self.assertEqual(story["plot_fingerprint"], "test-fingerprint")
 
     def test_gemini_normalizes_only_known_beat_labels(self):
         import io
         import json
         from astra_v2.openai_creative import VISUALS, ROLES
-        self.assertIn("forest", VISUALS)
+        from astra_v2.visual_artifact_library import SCENES
+        self.assertIn("fox", VISUALS)
+        self.assertIn("forest", SCENES)
         self.assertIn("reveal", ROLES)
         # A noncanonical label must still be rejected; normalization is not
         # permission to map arbitrary model output to a production visual.
@@ -248,7 +314,10 @@ class GeminiRouteTests(unittest.TestCase):
                         {x["title"].casefold() for x in prior}, prior_stories=prior)
         domains = [p.split("Required distinct creative domain: ", 1)[1].split(". ", 1)[0]
                    for p in prompts]
+        from astra_v2.visual_artifact_library import SCENES
         self.assertEqual(len(set(domains)), 12, domains)
+        self.assertTrue(all(any(scene in domain.split() for scene in SCENES)
+                            for domain in domains))
         self.assertTrue(all("recent accepted, pending or batch-candidate" in p
                             for p in prompts))
 

@@ -10,29 +10,28 @@ from astra_v2.visual_artifact_library import SCENES
 
 SUPPORTED_ANIMALS = (
     "fox", "rabbit", "cat", "dog", "owl", "mouse", "otter", "squirrel",
-    "tapir", "pangolin", "stoat", "lynx", "ferret", "marten",
 )
 
 SUPPORTED_PROPS = (
     "box", "book", "ball", "flower", "lantern", "key", "bell",
-    "compass", "shield", "rocket", "heart", "wrench", "clock",
+    "compass", "shield", "heart", "clock",
 )
 
 # Genre diversity without requesting the unsupported human/robot protagonists
 # responsible for most failures in the 2026-11-02 production diagnostic.
 RENDERER_AWARE_DOMAINS = (
-    "courtyard honesty dilemma with a cat returning a wrongly exchanged box",
-    "quiet woodland clue mystery with a fox and rabbit comparing a book and a flower",
-    "village friendship misunderstanding with a dog and mouse and one shared ball",
+    "village honesty dilemma with a cat returning a wrongly exchanged box",
+    "forest clue mystery with a fox and rabbit comparing a book and a flower",
+    "village friendship misunderstanding with a dog and mouse sharing one ball",
     "night observatory mistaken inference with an owl comparing a clock and a lantern",
-    "meadow conservation choice with a tapir noticing a change in two flowers",
-    "marketplace fairness decision with a ferret and a marten exchanging a key",
+    "garden conservation choice with a rabbit noticing a change in two flowers",
+    "railway fairness decision with a squirrel and a mouse exchanging a key",
     "library disagreement with a mouse and rabbit interpreting a book together",
-    "woodland trust reversal with a lynx and stoat comparing a found compass",
-    "riverbank social dilemma with an otter and a cat deciding how to share a lantern",
+    "forest trust reversal with a fox and owl comparing a found compass",
+    "island social dilemma with an otter and a cat deciding how to share a lantern",
     "garden misunderstanding with a squirrel and a rabbit showing conflicting clues",
-    "winter cabin ethical choice with a stoat and a fox sharing a scarce book",
-    "moonlit path cooperation with a pangolin and an owl exchanging a clear signal",
+    "snowfield ethical choice with a mouse and a fox sharing a scarce book",
+    "lighthouse cooperation with a rabbit and an owl exchanging a clear signal",
 )
 
 # 13 independent narrative mechanisms, intentionally offset from the twelve
@@ -87,10 +86,11 @@ def background_scene_authoring_guidance():
         "When the authentic scene matches a listed environment, name it "
         "consistently across the relevant beats. Do NOT mislabel grassland "
         "as desert, a wooden indoor cabin as forest, or a marketplace/courtyard "
-        "as city just to force a background match. If the original story "
-        "requires an unlisted environment, describe it accurately for "
-        "independent scene-artwork review; never pretend that a listed "
-        "background depicts it. The taxonomy does not verify the artwork, "
+        "as city just to force a background match. If a premise requires "
+        "an unlisted environment, invent a different premise that truthfully "
+        "fits one of the listed scenes; never pretend a listed background "
+        "depicts it. The taxonomy does not verify the artwork; independent "
+        "scene-artwork review is still required. "
         "the cast, the action, or the ability to publish a video."
     )
 
@@ -104,10 +104,9 @@ def writing_guidance():
         + ", ".join(SUPPORTED_ANIMALS) + ". Keep the species explicitly named "
         "in the title, narration, visual prompts, and character descriptions "
         "as appropriate, without adding an unrepresentable third protagonist. "
-        "Do not create human protagonists, human helpers, robots acting as "
-        "characters, badgers, unsupported animal species, or clothed human "
-        "figures unless independently verified scene artwork exists; this "
-        "generation path cannot assume such artwork. "
+        "Do not create human protagonists, human helpers, robot characters, "
+        "badgers, unsupported animal species, or clothed human figures. "
+        "This generation path cannot assume unreviewed scene artwork exists. "
         "The currently reusable simple props are: "
         + ", ".join(SUPPORTED_PROPS) + ". Use only props the renderer can "
         "represent consistently. A simple wrench prop does NOT depict "
@@ -130,15 +129,18 @@ def writing_guidance():
         "human bodies. A visual icon alone is NOT evidence that a depicted "
         "interaction happened. The visual_prompt must describe a scene "
         "the existing animal acting/prop library could plausibly depict. "
-        "For beats[].visual, choose one of the six permitted VISUAL TYPES "
-        "(planet, robot, signal, ship, forest, door) per beat. Across all "
-        "four beats, use at least THREE DISTINCT visual labels that match "
-        "different, genuinely depicted elements or actions in visual_prompt. "
-        "This field is not a substitute for describing the real scene "
-        "location. Count the distinct labels before returning JSON. "
-        "Do not simply relabel identical shots, insert unsupported objects, "
-        "or invent scene changes to meet the count; rewrite the four-beat "
-        "storyboard if it cannot honestly show three distinct visual types. "
+        "For beats[].visual, choose the supported animal species tag that "
+        "matches the primary animal explicitly named first in visual_prompt. "
+        "Keep the same protagonist tag across the beats where that animal acts; "
+        "change tags only when a different supported animal is genuinely the "
+        "main visible actor. Do not invent variety by changing labels. "
+        "Each visual_prompt must start by naming its primary animal species "
+        "and describe one simple visible action in the exact story_environment. "
+        "Every beat must include a story_environment value from the Studio "
+        "scene taxonomy; this explicit field is the compositor's setting input. "
+        "Across four beats, create at least THREE genuinely different shots by "
+        "varying visible action, composition, location, or a supported prop; "
+        "do not create variety by changing animal tags. "
         "Keep a distinct, genuinely original causal mechanism, meaningful "
         "decision and consequence; don't recycle a misplaced-item or "
         "broken-lantern premise merely to satisfy this constraint. "

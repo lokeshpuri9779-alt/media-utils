@@ -65,6 +65,15 @@ def select_subject(story, shot):
         if directed_characters:
             return directed_characters[0]
         return directed_matches[0][1]
+    # A validated species tag is authoritative when it is explicitly present
+    # in the visual prompt. This keeps the renderer's actor aligned with the
+    # generation contract even if narration mentions a different animal first.
+    tagged_subject = str(shot.get("visual") or "").strip().lower()
+    subject_patterns = dict(SUBJECTS)
+    if (tagged_subject in characters and
+            re.search(subject_patterns.get(tagged_subject, r"(?!)"),
+                      str(shot.get("visual_prompt") or ""), re.I)):
+        return tagged_subject
     local_characters = [name for _, name in local_matches if name in characters]
     if local_characters:
         return local_characters[0]

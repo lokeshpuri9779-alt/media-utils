@@ -75,10 +75,13 @@ _MECHANICAL_CHARACTER = re.compile(r"\b(?:robot|android|automaton|drone|machine)
 # an AI story omitted its visual_bible. Generic forest/door/signal icons cannot
 # portray a clothed character performing an action.
 _FIGURE_VISUAL_CUE = re.compile(
-    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|cheek|eyes?|wrist|parka|jackets?|apron|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
+    r"\b(?:hair|tunic|vest|shirt|trousers|cloak|coat|boots|goggles|wrist|parka|jackets?|apron|canteen|flask|hammer|trowel|ice\s+axe)\b", re.I)
 _FIGURE_ACTION = re.compile(
     r"\b(?:pointing|kneeling|standing|stands?|holding|holds?|smiling|"
     r"walking|wearing|wears?|tipping|pouring|running|gripping|striking|climbing|sitting|swinging)\b", re.I)
+_FACE_VISUAL_CUE = re.compile(r"\b(?:eyes?|cheeks?)\b", re.I)
+_SUPPORTED_ANIMAL_CUE = re.compile(
+    r"\b(?:fox|rabbit|cat|dog|owl|mouse|otter|squirrel)\b", re.I)
 
 
 def named_human_characters(visual_bible):
@@ -117,8 +120,10 @@ def directed_scene_issue(shot):
     if _HUMAN.search(text + " " + str(shot.get("story_title") or "")):
         return "human_actor_not_supported_by_directed_icons"
     visual_prompt = str(shot.get("visual_prompt") or "")
-    if (_FIGURE_VISUAL_CUE.search(visual_prompt)
-            and _FIGURE_ACTION.search(visual_prompt)):
+    if (_FIGURE_ACTION.search(visual_prompt) and (
+            _FIGURE_VISUAL_CUE.search(visual_prompt)
+            or (_FACE_VISUAL_CUE.search(visual_prompt)
+                and not _SUPPORTED_ANIMAL_CUE.search(visual_prompt)))):
         return "embodied_character_not_supported_by_directed_icons"
     if _MECHANICAL_RIG.search(text) and _MECHANICAL_OPERATION.search(text):
         return "unsupported_mechanical_rig_action_requires_scene_art"

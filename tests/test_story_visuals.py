@@ -21,6 +21,15 @@ class StoryVisualTests(unittest.TestCase):
         self.assertEqual(select_subject({"title": "The Museum of Tomorrows"},
                                         {"speech": "A cat appeared at the museum."}), "cat")
 
+    def test_validated_visual_tag_wins_when_another_animal_is_named_first(self):
+        story = {"title": "The Fox and Owl"}
+        shot = {
+            "visual": "fox",
+            "speech": "The owl watches as the fox approaches the old forest gate.",
+            "visual_prompt": "A fox walks toward the forest gate while an owl watches from a branch.",
+        }
+        self.assertEqual(select_subject(story, shot), "fox")
+
     def test_ocean_does_not_draw_whale(self):
         ocean = Image.new("RGB", (1080, 1920), (8, 11, 28))
         whale = Image.new("RGB", (1080, 1920), (8, 11, 28))

@@ -8,11 +8,15 @@ from astra_v2 import openai_creative
 
 
 def payload(speech):
+    visuals = ("fox", "fox", "fox", "fox")
+    prompts = ("A fox stands beside a forest stream and looks toward the moonlight.",) * 4
     return {"status": "completed", "output": [{"content": [{"type": "output_text",
-        "text": json.dumps({"title": "The Clockwork Moon's Secret", "question": "What happened to the moon?",
+        "text": json.dumps({"title": "The Clockwork Moon's Secret",
+                            "question": "What happened to the moon's missing light tonight?",
                             "answer": "The tiny robots restored the moon's missing light.",
                             "beats": [{"headline": f"Chapter {i} begins", "speech": speech[i],
-                                       "visual": ("planet", "robot", "signal", "ship")[i],
+                                       "visual": visuals[i], "visual_prompt": prompts[i],
+                                       "story_environment": "forest",
                                        "label": f"Scene {i}", "story_beat": ("reveal", "build", "twist", "payoff")[i]}
                                       for i in range(4)]})}]}]}
 
@@ -40,10 +44,10 @@ class ModelRuntimeGateTests(unittest.TestCase):
             return openai_creative.generate(set(), set(), [])
 
     def test_rejects_thin_but_structurally_valid_model_story(self):
-        lines = ["A little robot finds the moon's lost light today.",
-                 "The robot repairs its damaged lamp before dawn arrives.",
-                 "A hidden switch opens and the light returns again.",
-                 "Everyone celebrates when the moon shines brightly at last."]
+        lines = ["A little robot finds the moon's lost light today beside the quiet forest stream.",
+                 "The robot repairs its damaged lamp before dawn arrives along the forest path.",
+                 "A hidden switch opens and the light returns above the forest at last again.",
+                 "Everyone celebrates when the moon shines brightly over the forest at last tonight."]
         with self.assertRaisesRegex(ValueError, "editorial"):
             self.run_story(lines)
 

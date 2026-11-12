@@ -48,6 +48,32 @@ class StoryEditorialTests(unittest.TestCase):
         from astra_v2.story_editorial import is_semantic_near_duplicate
         self.assertTrue(is_semantic_near_duplicate(second, [first]))
 
+    def test_same_animal_tag_can_have_three_distinct_visual_shots(self):
+        from astra_v2.story_editorial import visual_prompt_variety_count
+        story = {"story_beats": [
+            {"visual": "fox", "speech": "A fox finds a bell beside the forest stream before the evening rain arrives.",
+             "visual_prompt": "A fox finds a brass bell beside a forest stream."},
+            {"visual": "fox", "speech": "The fox follows the sound along a narrow forest trail toward the old marker.",
+             "visual_prompt": "A fox follows the ringing bell along a winding forest trail."},
+            {"visual": "fox", "speech": "The fox pauses beneath a branch and listens before choosing the safer route.",
+             "visual_prompt": "A fox listens beneath a high forest branch as leaves move overhead."},
+            {"visual": "fox", "speech": "The fox returns the bell to its marker and guides the others home safely.",
+             "visual_prompt": "A fox places the bell beside a wooden marker in a forest clearing."},
+        ]}
+        self.assertEqual(visual_prompt_variety_count(story["story_beats"]), 4)
+        self.assertNotIn("insufficient_visual_variety", editorial_issues(story))
+
+    def test_identical_shots_fail_visual_variety_even_with_valid_animal_tags(self):
+        from astra_v2.story_editorial import visual_prompt_variety_count
+        prompt = "A fox stands beside a forest stream and looks toward the moonlight."
+        story = {"story_beats": [
+            {"visual": "fox", "speech": "A fox watches the quiet forest stream while the evening light fades away.",
+             "visual_prompt": prompt}
+            for _ in range(4)
+        ]}
+        self.assertEqual(visual_prompt_variety_count(story["story_beats"]), 1)
+        self.assertIn("insufficient_visual_variety", editorial_issues(story))
+
     def test_distinct_story_text_is_not_automatically_duplicate(self):
         first = proposal(21)
         second = proposal(88)

@@ -42,6 +42,22 @@ class DirectedSceneContractTests(unittest.TestCase):
             self.assertEqual(validate_story_shot(shot), "directed")
         self.assertEqual(validate_story_shot({"speech": "The owl grabbed the lantern."}), "solo")
 
+    def test_ambiguous_eyed_figure_still_requires_scene_art(self):
+        shot = {
+            "speech": "The figure waits quietly beside the forest stream.",
+            "visual_prompt": "A figure with bright eyes and soft cheeks stands beside a forest stream.",
+        }
+        with self.assertRaises(CreativeReject):
+            validate_story_shot(shot)
+
+    def test_animal_eye_and_cheek_details_are_not_human_actor_evidence(self):
+        shot = {
+            "visual": "fox",
+            "speech": "The fox waits quietly beside the forest stream.",
+            "visual_prompt": "A fox with bright eyes and soft cheeks stands beside a forest stream.",
+        }
+        self.assertEqual(validate_story_shot(shot), "solo")
+
     def test_beacon_is_valid_signal_but_ordinary_light_is_not(self):
         self.assertEqual(validate_story_shot({
             "visual": "signal",
