@@ -242,15 +242,42 @@ class YoutubeTests(unittest.TestCase):
 
 
 class QualityTests(unittest.TestCase):
+    @staticmethod
+    def _fake_media(width, height, seconds, has_audio=True):
+        import av
+
+        class FakeMedia:
+            def __init__(self):
+                self.streams = SimpleNamespace(
+                    video=[SimpleNamespace(width=width, height=height)],
+                    audio=[SimpleNamespace()] if has_audio else [],
+                )
+                self.duration = int(seconds * av.time_base)
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, exc_type, exc, traceback):
+                return False
+
+            def seek(self, offset):
+                return None
+
+            def decode(self, video=None, audio=None):
+                if video == 0:
+                    return iter([SimpleNamespace(width=width, height=height)])
+                if audio == 0 and has_audio:
+                    return iter([SimpleNamespace(samples=1024)])
+                return iter([])
+
+        return FakeMedia()
+
     def test_requires_audio(self):
         with tempfile.TemporaryDirectory() as directory:
             video = Path(directory) / "short.mp4"
             video.write_bytes(b"0" * 35000)
-            result = Mock(returncode=0, stdout=json.dumps({
-                "streams": [{"codec_type": "video", "width": 1080, "height": 1920}],
-                "format": {"duration": "28"},
-            }))
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
+            media = self._fake_media(1080, 1920, 28, has_audio=False)
+            with patch("av.open", return_value=media):
                 with self.assertRaises(CreativeSkip):
                     inspect_video(video)
 
@@ -258,17 +285,12 @@ class QualityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             video = Path(directory) / "long.mp4"
             video.write_bytes(b"0" * 35000)
-            result = Mock(returncode=0, stdout=json.dumps({
-                "streams": [{"codec_type": "video", "width": 1920, "height": 1080},
-                            {"codec_type": "audio"}],
-                "format": {"duration": "240"},
-            }))
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
+            media = self._fake_media(1920, 1080, 240, has_audio=True)
+            with patch("av.open", return_value=media):
                 self.assertEqual(inspect_video(video, fmt="long")["seconds"], 240.0)
-            with patch("astra_v2.creative.subprocess.run", return_value=result):
+            with patch("av.open", return_value=media):
                 with self.assertRaises(CreativeSkip):
                     inspect_video(video, fmt="short")
-
 
 
 class WatchdogTests(unittest.TestCase):
