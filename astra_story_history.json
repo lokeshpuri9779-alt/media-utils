@@ -10173,6 +10173,62 @@
       "central_conflict": "A persistent metallic chime echoes through the observatory dome, disrupting the quiet night calculations.",
       "decisive_choice": "Orion chooses to investigate the telescope base ring rather than ignore the unusual ringing.",
       "resolution": "Orion tightens the loose screw with a tiny wooden peg, restoring absolute silence to the observatory."
+    },
+    {
+      "content_id": "rayvan-gemini-b9d076e6d695a56c48fe",
+      "video_id": "IhhAC-XfGYo",
+      "confirmed_at": "2026-11-13T00:59:01.337296+00:00",
+      "title": "Orion the Otter and Silas the Fox's Harbor Tide Secret",
+      "plot_fingerprint": "15fff1c57abfb05d94a6760ac92cf4351d3c56bd0802ef6b301ae48b38b4b7e7",
+      "story_beats": [
+        {
+          "headline": "Mysterious Harbor Bell Tolls",
+          "speech": "Listen closely to that heavy iron bell ringing across the silent harbor while the water remains completely still.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "An otter with sleek brown fur looks up with wide curious eyes next to a wooden piling in a harbor during evening.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Locating the Jammed Lever",
+          "speech": "We must inspect the wooden tide gate mechanism because something heavy is pressing against the rusted iron handle.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "Second Clue",
+          "story_beat": "build",
+          "visual_prompt": "A red fox with sharp alert ears points a paw at a wooden mechanism on a wooden dock in a harbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Diving Beneath the Dock",
+          "speech": "I will slip beneath the surface right now to find out exactly what is snagging the submerged wooden lever.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Action Taken",
+          "story_beat": "mechanism",
+          "visual_prompt": "An otter with wet brown fur swims downward past a wooden beam in clear water inside a harbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clearing the Tangled Rope",
+          "speech": "The thick hemp rope is finally free from the wooden slat, stopping the false alarm for good.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Final Solution",
+          "story_beat": "payoff",
+          "visual_prompt": "An otter with dry brown fur holds a short piece of hemp rope near a wooden pier in a harbor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stray mooring rope jams the harbor tide gate, triggering an alarming bell toll in the dead of calm night.",
+      "decisive_choice": "Orion dives into the cold water to untangle the wedged rope rather than waiting for morning harbor patrols.",
+      "resolution": "The harbor bell falls silent, restoring peaceful quiet across the docks."
     }
   ]
 }

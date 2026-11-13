@@ -5194,6 +5194,19 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-c86f3a44f9a88e8a5aef",
+      "story_sha256": "e20fb5aa0004e323b56566b6eb90d048f08c67933c66bf4d9333330b410850bc",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "Biological inaccuracy: Otters are carnivorous mammals that eat fish, crustaceans, and amphibians; they do not gather or eat acorns, which makes the premise confusing and misleading for the target audience.",
+        "The story lacks sufficient originality, as it follows a repetitive 'problem-solving with a tool' structure common in recent AI-generated children's content.",
+        "The title 'Forest Canopy Acorn Hoard' is contradictory, as otters are river-dwelling animals and do not live in forest canopies."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
