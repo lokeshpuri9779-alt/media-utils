@@ -10341,6 +10341,62 @@
       "central_conflict": "A sudden tropical breeze blows the unfinished silk festival banner into a high palm frond just before sunset.",
       "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
       "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy."
+    },
+    {
+      "content_id": "rayvan-gemini-b1f85b87d5a011267f62",
+      "video_id": "z1O6dE4SOIk",
+      "confirmed_at": "2026-11-13T20:51:58.627163+00:00",
+      "title": "Orion the Owl and Sammy the Squirrel's Observatory Drift",
+      "plot_fingerprint": "78540c742875331dfb9e910dafa03e73449f56fb7807518b3240948c8be487c6",
+      "story_beats": [
+        {
+          "headline": "The Midnight Drift",
+          "speech": "Look closely at the celestial map, Sammy. The northern constellation is sliding entirely off the copper dial.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Initial Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl perched inside an observatory peering at a drifting star chart under moonlight with a small brass spyglass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Locating the Obstruction",
+          "speech": "Something is wedged tightly beneath the main gear mechanism. We need to inspect the lower track right now.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Gear Inspection",
+          "story_beat": "build",
+          "visual_prompt": "A squirrel sniffing near the base of the large observatory telescope where a stray pinecone is jammed in the gear.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Careful Extraction",
+          "speech": "Hold the brass lever steady while I nudge this pinecone free from the heavy teeth of the track.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Removing the Pinecone",
+          "story_beat": "mechanism",
+          "visual_prompt": "A squirrel carefully pushing a stray pinecone out of the observatory gear ring with a small wooden twig.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Steady Skies",
+          "speech": "The gear spins smoothly again, and the star chart points true toward the northern horizon once more.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Successful Alignment",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl resting happily inside an observatory beside a perfectly aligned star chart on a polished wooden table.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stray pinecone jams the observatory brass gear ring, causing the star chart to drift continuously.",
+      "decisive_choice": "Sammy squeezes beneath the heavy brass ring to extract the wedged pinecone instead of turning the gear harder.",
+      "resolution": "The star chart locks steadily into place, allowing Orion to read the midnight constellations without interruption."
     }
   ]
 }

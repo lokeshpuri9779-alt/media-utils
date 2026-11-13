@@ -3,7 +3,7 @@
   "day": "2026-11-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 1,
-  "confirmed_today": 0,
+  "confirmed_today": 1,
   "last_attempt_at": "2026-11-13T20:50:06.010931+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -11580,16 +11580,14 @@
       "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
       "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "z1O6dE4SOIk": {
-      "content_id": "rayvan-gemini-b1f85b87d5a011267f62",
+    },
+    "rayvan-gemini-b1f85b87d5a011267f62": {
+      "video_id": "z1O6dE4SOIk",
+      "confirmed_at": "2026-11-13T20:51:58.627163+00:00",
       "title": "Orion the Owl and Sammy the Squirrel's Observatory Drift",
-      "day": "2026-11-14",
-      "uploaded_at": "2026-11-13T20:50:08.052989+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-13T20:50:08.052989+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "78540c742875331dfb9e910dafa03e73449f56fb7807518b3240948c8be487c6",
       "story_beats": [
@@ -11641,31 +11639,31 @@
       "central_conflict": "A stray pinecone jams the observatory brass gear ring, causing the star chart to drift continuously.",
       "decisive_choice": "Sammy squeezes beneath the heavy brass ring to extract the wedged pinecone instead of turning the gear harder.",
       "resolution": "The star chart locks steadily into place, allowing Orion to read the midnight constellations without interruption.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-13T20:35:43.586469+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-13T20:51:58.176742+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-13T20:50:08.574783+00:00",
+    "at": "2026-11-13T20:51:58.719658+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-13T13:24:14.542960+00:00",
   "reserved": {
@@ -23862,10 +23860,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-13T20:50:08.574673+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-13T20:51:58.719593+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -23873,9 +23871,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-13T20:50:08.574767+00:00",
+    "at": "2026-11-13T20:51:58.719647+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -23887,50 +23885,23 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-13T20:50:08.573671+00:00",
-    "preflight_due": "true",
+    "at": "2026-11-13T20:51:58.718859+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-13T20:50:08.574464+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 175,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 140,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 140,
-        "remaining": 18
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-11-13T20:51:58.719551+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
