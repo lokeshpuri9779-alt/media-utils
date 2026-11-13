@@ -11585,11 +11585,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-13T20:03:04.886136+00:00",
+  "last_preflight_at": "2026-11-13T20:06:26.304868+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-13T20:04:53.704185+00:00",
+    "at": "2026-11-13T20:08:03.496823+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -23743,7 +23743,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-13T20:04:53.704103+00:00",
+    "at": "2026-11-13T20:08:03.496739+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -23754,19 +23754,19 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-13T20:04:53.704170+00:00",
+    "at": "2026-11-13T20:08:03.496808+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-13T20:03:35.456874+00:00",
+    "at": "2026-11-13T20:07:03.602181+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
     "video_url": "",
     "story_selection": {
-      "considered": 140,
+      "considered": 139,
       "not_ready": 64,
       "policy_rejected": {
         "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
@@ -23783,7 +23783,7 @@
       "duration_rejected": 0,
       "render_qa_rejected": 0,
       "render_exception": {
-        "CreativeReject": 2
+        "CreativeReject": 1
       },
       "background_preflight_rejected": 16,
       "background_review_gaps": [
@@ -24312,12 +24312,12 @@
       ],
       "approved": 0,
       "exhausted": true,
-      "rejection_total": 140,
+      "rejection_total": 139,
       "next_action": "review_missing_story_scene_backgrounds"
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-13T20:04:53.702800+00:00",
+    "at": "2026-11-13T20:08:03.495301+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -24329,24 +24329,33 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-13T20:04:53.703662+00:00",
+    "at": "2026-11-13T20:08:03.496303+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
     "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 17,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 90,
+        "total": 174
+      },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 175,
+        "before": 174,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 140,
+        "remaining": 139,
         "title": 1,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 140,
-        "remaining": 18
+        "pool": 139,
+        "remaining": 17
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
@@ -24876,7 +24885,7 @@
             "shot_count": 4
           }
         ],
-        "considered": 140,
+        "considered": 139,
         "duration_rejected": 0,
         "not_ready": 64,
         "policy_rejected": {
@@ -24891,7 +24900,7 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
         },
         "render_exception": {
-          "CreativeReject": 2
+          "CreativeReject": 1
         },
         "render_qa_rejected": 0
       }
