@@ -10285,6 +10285,62 @@
       "central_conflict": "A frozen acorn jams the midnight railway signal lever during heavy frost.",
       "decisive_choice": "Pip crawls inside the iron joint to push out the acorn rather than pulling the lever harder.",
       "resolution": "The signal lever moves freely again, allowing the midnight train to pass safely."
+    },
+    {
+      "content_id": "rayvan-gemini-a02abcbd61f4a77fa0bd",
+      "video_id": "J5XAhj1DiSk",
+      "confirmed_at": "2026-11-13T08:58:54.568675+00:00",
+      "title": "Orion the Owl and Oona the Otter's Island Festival Banner",
+      "plot_fingerprint": "67166e35529bfb750194c08cc9b87cfd6b7a9957ae697877c5dca593745bfe81",
+      "story_beats": [
+        {
+          "headline": "Banner Unfurled",
+          "speech": "We must weave the bright shell patterns onto the festival silk before the sun sets over the ocean.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Beginning",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl sitting calmly on a sandy island beach holding a small wooden sewing needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breezy Mishap",
+          "speech": "Hold tight to the hem because this sudden tropical gust is lifting the fabric right off the mat.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Middle",
+          "story_beat": "build",
+          "visual_prompt": "Oona the otter looking up with wide eyes on the island beach as colorful silk flies into a palm tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Trunk Climb",
+          "speech": "I will scramble up the sloping wood to pull the snagged silk free from the sharp palm leaves.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Climax",
+          "story_beat": "mechanism",
+          "visual_prompt": "Oona the otter reaching upward against a tall palm tree on the tropical island to grab tangled silk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Festival Ready",
+          "speech": "Our banner hangs proudly between the shore posts now that we worked together to save the celebration.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Ending",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl perched happily on a low wooden post on the island with the fully strung festival banner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden tropical breeze blows the unfinished silk festival banner into a high palm frond just before sunset.",
+      "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
+      "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy."
     }
   ]
 }

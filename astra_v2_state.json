@@ -3,7 +3,7 @@
   "day": "2026-11-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-11-13T07:59:28.154943+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -11520,16 +11520,14 @@
       "decisive_choice": "Pip crawls inside the iron joint to push out the acorn rather than pulling the lever harder.",
       "resolution": "The signal lever moves freely again, allowing the midnight train to pass safely.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "J5XAhj1DiSk": {
-      "content_id": "rayvan-gemini-a02abcbd61f4a77fa0bd",
+    },
+    "rayvan-gemini-a02abcbd61f4a77fa0bd": {
+      "video_id": "J5XAhj1DiSk",
+      "confirmed_at": "2026-11-13T08:58:54.568675+00:00",
       "title": "Orion the Owl and Oona the Otter's Island Festival Banner",
-      "day": "2026-11-13",
-      "uploaded_at": "2026-11-13T07:59:30.327824+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-13T07:59:30.327824+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "67166e35529bfb750194c08cc9b87cfd6b7a9957ae697877c5dca593745bfe81",
       "story_beats": [
@@ -11581,16 +11579,17 @@
       "central_conflict": "A sudden tropical breeze blows the unfinished silk festival banner into a high palm frond just before sunset.",
       "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
       "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-13T07:46:05.341721+00:00",
+  "last_preflight_at": "2026-11-13T08:58:54.219169+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-13T07:59:30.800462+00:00",
+    "at": "2026-11-13T09:00:17.890944+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -23744,10 +23743,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-13T07:59:30.800379+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-13T09:00:17.890900+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -23755,61 +23754,1154 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-13T07:59:30.800448+00:00",
+    "at": "2026-11-13T09:00:17.890936+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-13T07:46:38.363026+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-gemini-a02abcbd61f4a77fa0bd",
-    "video_url": "https://www.youtube.com/watch?v=J5XAhj1DiSk",
-    "story_selection": {}
+    "at": "2026-11-13T08:59:37.748420+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 139,
+      "not_ready": 64,
+      "policy_rejected": {
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {
+        "CreativeReject": 1
+      },
+      "background_preflight_rejected": 16,
+      "background_review_gaps": [
+        {
+          "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth.",
+                  "visual": "robot",
+                  "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-816e1ed91213034f5759",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 1,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "A bright yellow signal flag planted on a green neighborhood lawn, with Buster the energetic golden dog holding a red ball in his mouth and Cleo the sleek grey c",
+                  "visual": "signal",
+                  "speech": "Attention all pets, the annual soccer championship begins today on the community lawn, and our team needs a miracle."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Cleo the grey cat tapping a white ball with her paw near a wooden park gate, sending the ball rolling forward toward Buster the golden dog who is waiting alertl",
+                  "visual": "door",
+                  "speech": "Cleo intercepts the rolling ball with a clever paw flick and passes it swiftly to Buster for the final run."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 4,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Buster the golden dog and Cleo the sleek grey cat standing triumphantly next to a silver trophy shaped like a ship on the community lawn, both animals smiling h",
+                  "visual": "ship",
+                  "speech": "With one mighty kick from Buster and Cleo guarding the flank, our furry duo scores the winning goal."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 4,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowf",
+                  "visual": "ship",
+                  "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-23e65e65720310a75bd8",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Clover the white rabbit holding a shiny copper key and inserting it into the thawed padlock on the wooden gate while Bramble the red fox steadies the heavy latc",
+                  "visual": "door",
+                  "speech": "Now push the copper key firmly into the warm shackle before the biting winter wind freezes everything solid again."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-98421acb2d4775f6ea85",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Silas the squirrel stands near a mossy tree root, gripping a small wooden box tightly with both paws while looking up the slope.",
+                  "visual": "door",
+                  "speech": "I must act quickly to find a sturdy wooden box that is heavy enough to hold the rolling sieve in place."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-4d872eadbf95456a610f",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 1,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Pippin the pangolin stands on dry cracked earth holding a brass compass, looking sadly at a fallen wooden sign post in a sun-scorched grassland under a bright y",
+                  "visual": "signal",
+                  "speech": "Oh no, the fierce wind has knocked down our wooden navigation markers across the dusty grassland plains completely."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Close-up of Pippin the pangolin kneeling in dry grass, carefully holding an open brass compass with his paws, examining the spinning needle with a focused expre",
+                  "visual": "robot",
+                  "speech": "I must use this brass compass to find our exact bearing before the midday heat slows our journey down."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Pippin the pangolin pushes his scaled back against a heavy wooden post lying in the dust, straining to lift it upright on the arid grassland.",
+                  "visual": "door",
+                  "speech": "With steady paw strength, I will lift this heavy marker back into its upright socket in the hard earth."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, il",
+                  "visual": "door",
+                  "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-30c5db2a54bfb295801d",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Pip the pangolin holds the gleaming brass bell high to catch a beam of light, while Orion the owl holds a glowing lantern nearby on an elevated stone ledge.",
+                  "visual": "door",
+                  "speech": "I must angle this brass bell precisely to bounce your lantern light across the deep gorge."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-61b884322ce6d9d8476f",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Vesper the Fox gripping the cover of a small book in her jaws while backing quickly toward a dark wooden cabin door embedded in a snowy drift.",
+                  "visual": "door",
+                  "speech": "I will snatch the book away into my deep burrow so I alone can memorize every warmth recipe."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Bramen the Stoat carefully sliding a handful of red berries across a flat tree stump toward Vesper the Fox, while the open book rests in the center under a glow",
+                  "visual": "signal",
+                  "speech": "Instead of fighting over frozen pages, let us place the book flat on this stump and share our berries."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 4,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Bramen the Stoat and Vesper the Fox sitting side by side on a cozy wooden bench inside a warm cabin, peacefully reading the open book together while a lantern g",
+                  "visual": "ship",
+                  "speech": "Together we have mastered the winter recipes, keeping our paws warm and our spirits bright through the frost."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-b6efc6bc020bfcad9930",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Inside the snowy winter cabin, Jasper the Fox holds the book near the open stone hearth while Bramen the Stoat steps forward with an open box to catch stray emb",
+                  "visual": "door",
+                  "speech": "If we burn just one chapter, the room will grow warm quickly, but we will lose the final ending of the tale forever."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Inside the snowy winter cabin, Bramen the Stoat and Jasper the Fox sit across from each other at the wooden table, pushing the book safely to the center while a",
+                  "visual": "signal",
+                  "speech": "Let us place the book flat on the center table so we can read every word together without losing a single page."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-77f03cf6fabcdc33b84e",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Tansy the gray tapir uses her strong flexible snout to physically push and scatter the heavy golden leaves away from the pale clover sprouts in the meadow clear",
+                  "visual": "door",
+                  "speech": "No, I must sweep these heavy leaves away right now so the little clover sprouts can finally drink the sunlight."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 1,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the co",
+                  "visual": "door",
+                  "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 4,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden doo",
+                  "visual": "door",
+                  "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Jasper the Stoat sits near the cabin door holding a brass lantern while Finn the Fox reads the open book resting flat on the wooden table.",
+                  "visual": "door",
+                  "speech": "Take the left page for tonight, and I will keep watch by the door until morning comes."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-34e93d76b1816e266a96",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Inside the wooden cabin, Bram the stoat stares down at the torn edge of the book with wide eyes while Faelen the fox glares across the table near the frosted wo",
+                  "visual": "door",
+                  "speech": "Bram noticed a fresh tear forming near the spine and immediately froze, realizing that fighting would destroy their only guide."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Inside the wooden cabin, Bram the stoat pushes the open book across the wooden table toward Faelen the fox, who watches with a surprised and softening expressio",
+                  "visual": "signal",
+                  "speech": "Deciding cooperation outweighed pride, Bram pushed the book entirely across the table toward Faelen with a steady paw."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-47176e676e36eb63e95c",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Jasper the stoat points his paw at the open pages of the shared book on the cabin table while looking toward the frosted wooden cabin door. Finn the fox watches",
+                  "visual": "door",
+                  "speech": "Jasper points an accusing paw at the bookmark ribbon, insisting his reading schedule takes priority through the snowy night."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Finn the fox uses his paw to place a small wooden block directly onto the center of the open book on the cabin table. Jasper the stoat leans forward with a curi",
+                  "visual": "signal",
+                  "speech": "Finn places a carved wooden block onto the desk surface, demonstrating how both readers can share the illumination."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Ollie the otter pulls the brass lantern toward his muddy riverbank den while Felix the cat tugs it back toward his dry stone ledge, casting a flickering yellow ",
+                  "visual": "signal",
+                  "speech": "I found this lantern washed ashore near my favorite fishing pool, so it should stay on my side."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Felix the cat steps back thoughtfully while Ollie the otter sets the brass lantern down atop a flat neutral milestone situated equidistant between their respect",
+                  "visual": "door",
+                  "speech": "Instead of fighting, let us place the lantern on this central milestone where it benefits us equally."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        }
+      ],
+      "approved": 0,
+      "exhausted": true,
+      "rejection_total": 139,
+      "next_action": "review_missing_story_scene_backgrounds"
+    }
   },
   "last_workflow_result": {
-    "at": "2026-11-13T07:59:30.799327+00:00",
+    "at": "2026-11-13T09:00:17.890105+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-13T07:59:30.800146+00:00",
+    "at": "2026-11-13T09:00:17.890632+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
     "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 17,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 90,
+        "total": 174
+      },
       "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 175,
+        "before": 174,
         "fingerprint": 0,
         "id": 34,
         "near_duplicate": 0,
         "plot_key": 0,
-        "remaining": 140,
+        "remaining": 139,
         "title": 1,
         "unplanned_original": 0
       },
       "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 140,
-        "remaining": 18
+        "pool": 139,
+        "remaining": 17
       },
       "ASTRA_STORY_SELECTION": {
         "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
+        "approved": 0,
+        "background_preflight_rejected": 16,
+        "background_review_gaps": [
+          {
+            "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully.",
+                    "visual": "robot",
+                    "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-816e1ed91213034f5759",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Attention all pets, the annual soccer championship begins today on the community lawn, and our team needs a miracle.",
+                    "visual": "signal",
+                    "visual_prompt": "A bright yellow signal flag planted on a green neighborhood lawn, with Buster the energetic golden dog holding a red ball in his mouth and Cleo the sleek grey c"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 1
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Cleo intercepts the rolling ball with a clever paw flick and passes it swiftly to Buster for the final run.",
+                    "visual": "door",
+                    "visual_prompt": "Cleo the grey cat tapping a white ball with her paw near a wooden park gate, sending the ball rolling forward toward Buster the golden dog who is waiting alertl"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "With one mighty kick from Buster and Cleo guarding the flank, our furry duo scores the winning goal.",
+                    "visual": "ship",
+                    "visual_prompt": "Buster the golden dog and Cleo the sleek grey cat standing triumphantly next to a silver trophy shaped like a ship on the community lawn, both animals smiling h"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
+                    "visual": "ship",
+                    "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowf"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-23e65e65720310a75bd8",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Now push the copper key firmly into the warm shackle before the biting winter wind freezes everything solid again.",
+                    "visual": "door",
+                    "visual_prompt": "Clover the white rabbit holding a shiny copper key and inserting it into the thawed padlock on the wooden gate while Bramble the red fox steadies the heavy latc"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-98421acb2d4775f6ea85",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I must act quickly to find a sturdy wooden box that is heavy enough to hold the rolling sieve in place.",
+                    "visual": "door",
+                    "visual_prompt": "Silas the squirrel stands near a mossy tree root, gripping a small wooden box tightly with both paws while looking up the slope."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-4d872eadbf95456a610f",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Oh no, the fierce wind has knocked down our wooden navigation markers across the dusty grassland plains completely.",
+                    "visual": "signal",
+                    "visual_prompt": "Pippin the pangolin stands on dry cracked earth holding a brass compass, looking sadly at a fallen wooden sign post in a sun-scorched grassland under a bright y"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 1
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I must use this brass compass to find our exact bearing before the midday heat slows our journey down.",
+                    "visual": "robot",
+                    "visual_prompt": "Close-up of Pippin the pangolin kneeling in dry grass, carefully holding an open brass compass with his paws, examining the spinning needle with a focused expre"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "With steady paw strength, I will lift this heavy marker back into its upright socket in the hard earth.",
+                    "visual": "door",
+                    "visual_prompt": "Pippin the pangolin pushes his scaled back against a heavy wooden post lying in the dust, straining to lift it upright on the arid grassland."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow.",
+                    "visual": "door",
+                    "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, il"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-30c5db2a54bfb295801d",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I must angle this brass bell precisely to bounce your lantern light across the deep gorge.",
+                    "visual": "door",
+                    "visual_prompt": "Pip the pangolin holds the gleaming brass bell high to catch a beam of light, while Orion the owl holds a glowing lantern nearby on an elevated stone ledge."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-61b884322ce6d9d8476f",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I will snatch the book away into my deep burrow so I alone can memorize every warmth recipe.",
+                    "visual": "door",
+                    "visual_prompt": "Vesper the Fox gripping the cover of a small book in her jaws while backing quickly toward a dark wooden cabin door embedded in a snowy drift."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Instead of fighting over frozen pages, let us place the book flat on this stump and share our berries.",
+                    "visual": "signal",
+                    "visual_prompt": "Bramen the Stoat carefully sliding a handful of red berries across a flat tree stump toward Vesper the Fox, while the open book rests in the center under a glow"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Together we have mastered the winter recipes, keeping our paws warm and our spirits bright through the frost.",
+                    "visual": "ship",
+                    "visual_prompt": "Bramen the Stoat and Vesper the Fox sitting side by side on a cozy wooden bench inside a warm cabin, peacefully reading the open book together while a lantern g"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-b6efc6bc020bfcad9930",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "If we burn just one chapter, the room will grow warm quickly, but we will lose the final ending of the tale forever.",
+                    "visual": "door",
+                    "visual_prompt": "Inside the snowy winter cabin, Jasper the Fox holds the book near the open stone hearth while Bramen the Stoat steps forward with an open box to catch stray emb"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Let us place the book flat on the center table so we can read every word together without losing a single page.",
+                    "visual": "signal",
+                    "visual_prompt": "Inside the snowy winter cabin, Bramen the Stoat and Jasper the Fox sit across from each other at the wooden table, pushing the book safely to the center while a"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-77f03cf6fabcdc33b84e",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "No, I must sweep these heavy leaves away right now so the little clover sprouts can finally drink the sunlight.",
+                    "visual": "door",
+                    "visual_prompt": "Tansy the gray tapir uses her strong flexible snout to physically push and scatter the heavy golden leaves away from the pale clover sprouts in the meadow clear"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts.",
+                    "visual": "door",
+                    "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the co"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 1
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm.",
+                    "visual": "door",
+                    "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden doo"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Take the left page for tonight, and I will keep watch by the door until morning comes.",
+                    "visual": "door",
+                    "visual_prompt": "Jasper the Stoat sits near the cabin door holding a brass lantern while Finn the Fox reads the open book resting flat on the wooden table."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-34e93d76b1816e266a96",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Bram noticed a fresh tear forming near the spine and immediately froze, realizing that fighting would destroy their only guide.",
+                    "visual": "door",
+                    "visual_prompt": "Inside the wooden cabin, Bram the stoat stares down at the torn edge of the book with wide eyes while Faelen the fox glares across the table near the frosted wo"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Deciding cooperation outweighed pride, Bram pushed the book entirely across the table toward Faelen with a steady paw.",
+                    "visual": "signal",
+                    "visual_prompt": "Inside the wooden cabin, Bram the stoat pushes the open book across the wooden table toward Faelen the fox, who watches with a surprised and softening expressio"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-47176e676e36eb63e95c",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Jasper points an accusing paw at the bookmark ribbon, insisting his reading schedule takes priority through the snowy night.",
+                    "visual": "door",
+                    "visual_prompt": "Jasper the stoat points his paw at the open pages of the shared book on the cabin table while looking toward the frosted wooden cabin door. Finn the fox watches"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Finn places a carved wooden block onto the desk surface, demonstrating how both readers can share the illumination.",
+                    "visual": "signal",
+                    "visual_prompt": "Finn the fox uses his paw to place a small wooden block directly onto the center of the open book on the cabin table. Jasper the stoat leans forward with a curi"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I found this lantern washed ashore near my favorite fishing pool, so it should stay on my side.",
+                    "visual": "signal",
+                    "visual_prompt": "Ollie the otter pulls the brass lantern toward his muddy riverbank den while Felix the cat tugs it back toward his dry stone ledge, casting a flickering yellow "
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Instead of fighting, let us place the lantern on this central milestone where it benefits us equally.",
+                    "visual": "door",
+                    "visual_prompt": "Felix the cat steps back thoughtfully while Ollie the otter sets the brass lantern down atop a flat neutral milestone situated equidistant between their respect"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          }
+        ],
+        "considered": 139,
         "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
+        },
+        "render_exception": {
+          "CreativeReject": 1
+        },
         "render_qa_rejected": 0
       }
     },
