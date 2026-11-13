@@ -10,6 +10,7 @@ import urllib.error
 import urllib.request
 from astra_v2.spending_policy import paid_openai_allowed, assert_no_paid_api
 from astra_v2.visual_artifact_library import SCENES
+from astra_v2.story_subject_taxonomy import SUBJECTS
 
 # The current Studio subject selector and character renderer support these
 # eight species. Visual labels identify the actor, not an arbitrary icon.
@@ -19,7 +20,6 @@ ROLES = {"reveal", "build", "mechanism", "twist", "payoff"}
 
 def visual_subject_matches(visual, visual_prompt):
     """Require the visual label's supported animal to appear in the shot prompt."""
-    from astra_v2.story_visuals import SUBJECTS
     pattern = dict(SUBJECTS).get(visual)
     return bool(pattern and isinstance(visual_prompt, str)
                 and re.search(pattern, visual_prompt, re.I))

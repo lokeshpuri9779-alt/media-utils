@@ -5,6 +5,14 @@ from astra_v2 import omniroute
 
 
 class OmniRouteTests(unittest.TestCase):
+    def test_subject_validation_does_not_import_pillow_or_renderer(self):
+        import sys
+        from astra_v2.openai_creative import visual_subject_matches
+        with patch.dict(sys.modules, {"PIL": None}):
+            self.assertTrue(visual_subject_matches(
+                "fox", "A fox walks beside a forest stream."
+            ))
+
     def test_all_story_providers_receive_real_scene_taxonomy_guidance(self):
         self.assertIn("background TAXONOMY", omniroute.PROMPT)
         self.assertIn("Do NOT mislabel grassland", omniroute.PROMPT)

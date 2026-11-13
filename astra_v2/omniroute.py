@@ -10,6 +10,7 @@ from collections import Counter
 from astra_v2.openai_creative import VISUALS, ROLES, visual_subject_matches
 from astra_v2.visual_artifact_library import SCENES
 from astra_v2.renderer_aware_writing import background_scene_authoring_guidance
+from astra_v2.story_subject_taxonomy import SUBJECTS
 
 PROMPT = (
     "Write one genuinely original, coherent, family-safe short story using "
@@ -65,7 +66,6 @@ def validate_beat_quality(beats, provider="OmniRoute"):
         visual_tags.append(visual)
     if len(set(visual_tags)) > 2:
         raise ValueError(provider + " must use at most two animal protagonist species")
-    from astra_v2.story_visuals import SUBJECTS
     subject_patterns = dict(SUBJECTS)
     story_text = " ".join(
         str(beat.get(key) or "") for beat in beats
