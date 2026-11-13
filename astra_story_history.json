@@ -10117,6 +10117,62 @@
       "central_conflict": "Intense midday sun threatens to dehydrate Finn and Rupert midway across the harsh desert ridge.",
       "decisive_choice": "Finn chooses to share his damp shade leaf instead of running ahead alone.",
       "resolution": "Both animals successfully endure the heat and reach the cool canyon shade together."
+    },
+    {
+      "content_id": "rayvan-gemini-f094f23d0810cd5d6b77",
+      "video_id": "rVxKedNo20w",
+      "confirmed_at": "2026-11-12T23:54:57.515675+00:00",
+      "title": "Orion the Owl and Sammy the Squirrel's Observatory Echo",
+      "plot_fingerprint": "6464efe007712311c2d2fab1c903049f230f633c57d624111daf831260bd1d83",
+      "story_beats": [
+        {
+          "headline": "The Midnight Chime",
+          "speech": "Listen closely, my friend, to that strange metal ringing echoing through the silent observatory tonight.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl perched inside an observatory, turning its head sharply toward a brass instrument while holding a small wooden peg.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Source",
+          "speech": "Look right here near the mounting bracket where a tiny loose screw vibrates against the main brass ring.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Second Clue",
+          "story_beat": "build",
+          "visual_prompt": "A squirrel standing inside an observatory, pointing a tiny paw at a vibrating brass screw on the telescope base.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Steady Turn",
+          "speech": "Let us wedge this wooden peg firmly into the gap to stop the irritating vibration once and for all.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "A squirrel carefully pushing a wooden peg into a small crevice of the telescope base inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Silent Stars",
+          "speech": "The metallic noise has vanished entirely, leaving only the quiet hum of the night sky above us.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Conclusion",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl sitting contentedly inside an observatory, looking calmly up through the grand dome window at the stars.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A persistent metallic chime echoes through the observatory dome, disrupting the quiet night calculations.",
+      "decisive_choice": "Orion chooses to investigate the telescope base ring rather than ignore the unusual ringing.",
+      "resolution": "Orion tightens the loose screw with a tiny wooden peg, restoring absolute silence to the observatory."
     }
   ]
 }
