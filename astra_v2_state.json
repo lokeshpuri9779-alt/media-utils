@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-13",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-11-13T05:36:57.122411+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-11-13T07:59:28.154943+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -11460,16 +11460,14 @@
       "decisive_choice": "Orion dives into the cold water to untangle the wedged rope rather than waiting for morning harbor patrols.",
       "resolution": "The harbor bell falls silent, restoring peaceful quiet across the docks.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "JyYr_FHVt5I": {
-      "content_id": "rayvan-gemini-c0ce5d42e81a8c4382e5",
+    },
+    "rayvan-gemini-c0ce5d42e81a8c4382e5": {
+      "video_id": "JyYr_FHVt5I",
+      "confirmed_at": "2026-11-13T07:46:05.809189+00:00",
       "title": "Pip the Mouse and Barnaby the Owl's Railway Signal Mystery",
-      "day": "2026-11-13",
-      "uploaded_at": "2026-11-13T05:36:58.763744+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-13T05:36:58.763744+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "6809b52bb7fc2f60929e3f5d14a83e19477671df2d6e2ebcd67ad51ea34660a8",
       "story_beats": [
@@ -11521,16 +11519,78 @@
       "central_conflict": "A frozen acorn jams the midnight railway signal lever during heavy frost.",
       "decisive_choice": "Pip crawls inside the iron joint to push out the acorn rather than pulling the lever harder.",
       "resolution": "The signal lever moves freely again, allowing the midnight train to pass safely.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "J5XAhj1DiSk": {
+      "content_id": "rayvan-gemini-a02abcbd61f4a77fa0bd",
+      "title": "Orion the Owl and Oona the Otter's Island Festival Banner",
+      "day": "2026-11-13",
+      "uploaded_at": "2026-11-13T07:59:30.327824+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "67166e35529bfb750194c08cc9b87cfd6b7a9957ae697877c5dca593745bfe81",
+      "story_beats": [
+        {
+          "headline": "Banner Unfurled",
+          "speech": "We must weave the bright shell patterns onto the festival silk before the sun sets over the ocean.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Beginning",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl sitting calmly on a sandy island beach holding a small wooden sewing needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breezy Mishap",
+          "speech": "Hold tight to the hem because this sudden tropical gust is lifting the fabric right off the mat.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Middle",
+          "story_beat": "build",
+          "visual_prompt": "Oona the otter looking up with wide eyes on the island beach as colorful silk flies into a palm tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Trunk Climb",
+          "speech": "I will scramble up the sloping wood to pull the snagged silk free from the sharp palm leaves.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Climax",
+          "story_beat": "mechanism",
+          "visual_prompt": "Oona the otter reaching upward against a tall palm tree on the tropical island to grab tangled silk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Festival Ready",
+          "speech": "Our banner hangs proudly between the shore posts now that we worked together to save the celebration.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Ending",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl perched happily on a low wooden post on the island with the fully strung festival banner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden tropical breeze blows the unfinished silk festival banner into a high palm frond just before sunset.",
+      "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
+      "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-13T05:29:43.836044+00:00",
+  "last_preflight_at": "2026-11-13T07:46:05.341721+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-13T05:36:59.238291+00:00",
+    "at": "2026-11-13T07:59:30.800462+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -23623,10 +23683,68 @@
       "resolution": "The signal lever moves freely again, allowing the midnight train to pass safely.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-a02abcbd61f4a77fa0bd": {
+      "at": "2026-11-13T07:59:28.154922+00:00",
+      "title": "Orion the Owl and Oona the Otter's Island Festival Banner",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "67166e35529bfb750194c08cc9b87cfd6b7a9957ae697877c5dca593745bfe81",
+      "story_beats": [
+        {
+          "headline": "Banner Unfurled",
+          "speech": "We must weave the bright shell patterns onto the festival silk before the sun sets over the ocean.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Beginning",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl sitting calmly on a sandy island beach holding a small wooden sewing needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Breezy Mishap",
+          "speech": "Hold tight to the hem because this sudden tropical gust is lifting the fabric right off the mat.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Middle",
+          "story_beat": "build",
+          "visual_prompt": "Oona the otter looking up with wide eyes on the island beach as colorful silk flies into a palm tree.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Trunk Climb",
+          "speech": "I will scramble up the sloping wood to pull the snagged silk free from the sharp palm leaves.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Climax",
+          "story_beat": "mechanism",
+          "visual_prompt": "Oona the otter reaching upward against a tall palm tree on the tropical island to grab tangled silk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Festival Ready",
+          "speech": "Our banner hangs proudly between the shore posts now that we worked together to save the celebration.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Ending",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl perched happily on a low wooden post on the island with the fully strung festival banner.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden tropical breeze blows the unfinished silk festival banner into a high palm frond just before sunset.",
+      "decisive_choice": "Oona climbs the slender trunk to retrieve the tangled silk while Orion holds the anchor basket steady.",
+      "resolution": "The banner is successfully secured between the pillars, allowing the island festival to proceed with joy.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-13T05:36:59.238249+00:00",
+    "at": "2026-11-13T07:59:30.800379+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -23637,21 +23755,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-13T05:36:59.238284+00:00",
+    "at": "2026-11-13T07:59:30.800448+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-13T05:30:14.217489+00:00",
+    "at": "2026-11-13T07:46:38.363026+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-c0ce5d42e81a8c4382e5",
-    "video_url": "https://www.youtube.com/watch?v=JyYr_FHVt5I",
+    "content_id": "rayvan-gemini-a02abcbd61f4a77fa0bd",
+    "video_url": "https://www.youtube.com/watch?v=J5XAhj1DiSk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-13T05:36:59.237579+00:00",
+    "at": "2026-11-13T07:59:30.799327+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -23663,7 +23781,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-13T05:36:59.238113+00:00",
+    "at": "2026-11-13T07:59:30.800146+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",

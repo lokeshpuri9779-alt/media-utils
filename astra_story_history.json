@@ -10229,6 +10229,62 @@
       "central_conflict": "A stray mooring rope jams the harbor tide gate, triggering an alarming bell toll in the dead of calm night.",
       "decisive_choice": "Orion dives into the cold water to untangle the wedged rope rather than waiting for morning harbor patrols.",
       "resolution": "The harbor bell falls silent, restoring peaceful quiet across the docks."
+    },
+    {
+      "content_id": "rayvan-gemini-c0ce5d42e81a8c4382e5",
+      "video_id": "JyYr_FHVt5I",
+      "confirmed_at": "2026-11-13T07:46:05.809189+00:00",
+      "title": "Pip the Mouse and Barnaby the Owl's Railway Signal Mystery",
+      "plot_fingerprint": "6809b52bb7fc2f60929e3f5d14a83e19477671df2d6e2ebcd67ad51ea34660a8",
+      "story_beats": [
+        {
+          "headline": "The Jammed Iron Lever",
+          "speech": "Pip peers up at the heavy iron lever refusing to budge inside the cold railway station.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "A tiny brown mouse peers up with a curious expression at a heavy iron lever inside a cold railway station.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Obstruction",
+          "speech": "Barnaby points his wing toward a tiny dark shape wedged tight inside the metal pivot joint.",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "A large wise owl points a wing toward a tiny dark shape wedged inside the metal pivot joint of a railway station.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Careful Push",
+          "speech": "Pip squeezes directly into the frozen mechanism to shove the stubborn blockage clear of the track.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "A tiny brown mouse squeezes directly into the frozen mechanism to shove the stubborn blockage clear inside a railway station.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Track",
+          "speech": "Barnaby watches the iron handle snap back into place as smooth movement returns to the line.",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "A large wise owl watches an iron handle snap back into place with a satisfied expression inside a railway station.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A frozen acorn jams the midnight railway signal lever during heavy frost.",
+      "decisive_choice": "Pip crawls inside the iron joint to push out the acorn rather than pulling the lever harder.",
+      "resolution": "The signal lever moves freely again, allowing the midnight train to pass safely."
     }
   ]
 }
