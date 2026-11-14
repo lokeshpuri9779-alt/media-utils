@@ -991,30 +991,30 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-5cb29f751b85c7f9cc63",
-      "story_sha256": "c57634cf5dd817e99918161fb8907facdd12dfcd5f2a42e4f71834420f46d593",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is coherent, original, and adheres to safe, family-friendly content guidelines.; The characters (Finn and Rupert) and setting follow a familiar style, but the plot and causal mechanism are distinct and do not duplicate the provided comparison history.; No copyright, trademark, or YouTube policy risks were identified.",
-      "reviewed_at": "2026-11-14T17:59:30.313624+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
-      "content_id": "rayvan-gemini-01d9b291161aeb2de390",
-      "story_sha256": "a996a1445b1236310a943cd9bdabdec16ae2a9131d3fe75eff64dbf08c44944b",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is completely original and features a unique character pairing (Buster the dog and Pip the mouse) and a distinct conflict over a shared ball in a village setting.; There is clear causal coherence: the conflict (dispute over exclusive possession of the ball), the decisive choice (Pip tests a gentle roll to share), and the resolution (both play and share together) logically connect.; The content is entirely safe, family-friendly, and poses no copyright, trademark, or YouTube policy risks.; The structure adheres strictly to the required narrative beats and JSON formatting guidelines.",
-      "reviewed_at": "2026-11-14T17:59:31.486312+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
       "story_sha256": "1ae9d560eaa877aa8db1ce03ca0295d8dcb11c0ced3e34663c822bd32f1bd263",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original, coherent, and clear.; It maintains causal logic and appropriate resolution.; There are no trademark, safety, policy, or audience suitability issues.",
       "reviewed_at": "2026-11-14T17:59:32.213233+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-e5d35ecebbc3bf69c95c",
+      "story_sha256": "6c8bcd60830d5dc35ab9169133d812360b74666173df6c558a98abab7979410a",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from conflict to resolution.; Characters, settings, and conflicts are distinct from the provided comparison history.; Content is safe, appropriate for general audiences, and adheres to standard platform policies.",
+      "reviewed_at": "2026-11-14T22:22:15.098462+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
+      "story_sha256": "7726b4dfe26d74c33aac9573f7bc6b37c2fa4d6408c2b2a47c170affa31b3f10",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story maintains good causal coherence and clarity throughout its narrative beats.; While sharing characters and settings with previously reviewed snowfield stories, the specific conflict regarding a torn and hidden page is distinct enough to avoid being a direct repeat.; There are no copyright, trademark, safety, or policy violations present.; The content is suitable for general audiences.",
+      "reviewed_at": "2026-11-14T22:22:18.175120+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
