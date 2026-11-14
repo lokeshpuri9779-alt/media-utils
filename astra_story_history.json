@@ -10568,6 +10568,62 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-c10f7ca6e4ecac188355",
+      "video_id": "5iVIbzfumOE",
+      "confirmed_at": "2026-11-14T16:00:09.953134+00:00",
+      "title": "Finn and Rupert's Frostbound Shelter Truce",
+      "plot_fingerprint": "0efee48f62ae8c3f56ae7bb45365628ea5728bda1eead8fcf3ee82c1a438e43d",
+      "story_beats": [
+        {
+          "headline": "Blizzard Approach",
+          "speech": "A fierce snowfield blizzard howling across the open drifts leaves us nowhere else to hide from the freezing wind tonight.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Arrival",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox shivering with wide eyes inside a freezing snowfield alcove during a howling whiteout storm holding a single frozen twig.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cautious Stare",
+          "speech": "We cannot both stretch out in this tight snowfield space unless we agree to a strict boundary right now.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Tension",
+          "story_beat": "build",
+          "visual_prompt": "Rupert the rabbit sitting upright with twitching ears inside the cramped snowfield alcove staring cautiously across at the fox.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Ice Partition",
+          "speech": "Let us slide this flat frozen crust right down the middle so our sleeping quarters stay fair and warm.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Division",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox pushing a flat slab of ice along the floor of the snowfield alcove to create a neat center divider.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Peaceful Rest",
+          "speech": "With our sheltered boundary firmly in place, we can finally close our eyes and weather the storm together.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Harmonious Rest",
+          "story_beat": "payoff",
+          "visual_prompt": "Rupert the rabbit sleeping peacefully with closed eyes on his designated side of the snowfield alcove next to the ice slab.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A sudden howling blizzard forces Finn the fox and Rupert the rabbit to crowd into the exact same tiny snowfield alcove.",
+      "decisive_choice": "Finn chooses to partition the snowy floor with a flat slab of ice instead of driving Rupert out into the storm.",
+      "resolution": "Both animals rest peacefully on their respective sides of the partition, surviving the freezing night in safety."
     }
   ]
 }
