@@ -10624,6 +10624,62 @@
       "central_conflict": "A sudden howling blizzard forces Finn the fox and Rupert the rabbit to crowd into the exact same tiny snowfield alcove.",
       "decisive_choice": "Finn chooses to partition the snowy floor with a flat slab of ice instead of driving Rupert out into the storm.",
       "resolution": "Both animals rest peacefully on their respective sides of the partition, surviving the freezing night in safety."
+    },
+    {
+      "content_id": "rayvan-gemini-8387c5e06ff3af33fe0a",
+      "video_id": "yqTWGbn5nOo",
+      "confirmed_at": "2026-11-14T18:55:50.310987+00:00",
+      "title": "Jasper and Rowan's Harbor Buoy Secret",
+      "plot_fingerprint": "fa2988ea91f9ec61ae6d072868cd095fe4210aa160997318c391a4d713ecb4aa",
+      "story_beats": [
+        {
+          "headline": "Midnight Alarm in the Docks",
+          "speech": "Jasper the otter listens intently as the heavy brass bell on the harbor buoy rings out unexpectedly in the dark water.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the otter with sleek brown fur peers intently toward the wooden harbor dock where a small brass bell swings.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tracing the Anchor Chain",
+          "speech": "Rowan the fox trots along the wooden pier planks, spotting a tangled clump of dark green kelp wedged against the iron anchor chain.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "Hidden Obstruction",
+          "story_beat": "build",
+          "visual_prompt": "Rowan the red fox with a bushy tail stands on the wooden harbor pier looking down at a tangled clump of green kelp.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Underwater Dive",
+          "speech": "Jasper slips quietly into the cold harbor water, using clever paws to loosen the thick knotted weed from the submerged metal links.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Direct Action",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jasper the otter swims through the dark harbor water, using nimble paws to pull tangled green kelp away from an iron chain.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restoring Peaceful Tides",
+          "speech": "Rowan pulls the final drifting strand ashore while Jasper rests on the calm surface as the bell stays quiet.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "Calm Waters",
+          "story_beat": "payoff",
+          "visual_prompt": "Rowan the red fox sits happily on the wooden harbor dock, gripping a stray piece of green kelp in soft jaws.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A thick tangle of drifting kelp wraps tightly around the underwater anchor chain of the warning buoy, causing it to strike the brass bell erratically in the harbor.",
+      "decisive_choice": "Jasper decides to dive beneath the dark tide to untangle the wedged kelp rather than waiting for morning light.",
+      "resolution": "The brass bell falls completely silent, restoring peaceful quiet across the harbor waters for the night."
     }
   ]
 }
