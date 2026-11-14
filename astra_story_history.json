@@ -10453,6 +10453,62 @@
       "central_conflict": "A stray copper gear ring jams the town plaza clock tower dial teeth, forcing the hands to spin backward.",
       "decisive_choice": "Pip crawls directly beneath the heavy bronze marker to lift the wedged copper gear instead of pulling the hands.",
       "resolution": "The clock hands resume correct forward movement, restoring peaceful timekeeping across the plaza."
+    },
+    {
+      "content_id": "rayvan-gemini-9e92cbecb6720f582ae1",
+      "video_id": "F08sEOYmMwY",
+      "confirmed_at": "2026-11-14T08:24:49.855325+00:00",
+      "title": "Pip and Finn's Snowfield Tome",
+      "plot_fingerprint": "3eca3b6288d3371d859ce76f57d37838611a000d4f9e59896977455e4063f1d6",
+      "story_beats": [
+        {
+          "headline": "Discovering the Tome",
+          "speech": "Pip and Finn found the rare old book resting in the deep snowfield, each wanting to keep it entirely for themselves.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse stands upright in the snowfield, looking intently at the single open book resting on the white snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Shortcut",
+          "speech": "Finn the fox thought about grabbing the entire book and running across the snowfield to keep it hidden in a burrow.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Temptation",
+          "story_beat": "build",
+          "visual_prompt": "Finn the fox stands in the cold snowfield, gazing hungrily down at the book with an eager expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Lantern",
+          "speech": "Pip stepped forward with a warm glowing lantern, gently inviting Finn to read together instead of fighting over the pages.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Choice",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse holds a small lit lantern in the snowfield, sitting beside the book while looking calmly at Finn.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Quiet Pages Together",
+          "speech": "Sitting side by side on the quiet snowfield, Pip and Finn turned each delicate page together under the gentle lantern light.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Finn the fox sits peacefully in the snowfield next to the book, gently resting a paw near the pages while the lantern glows.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A solitary scarce book lies in the snowfield, and both Pip the mouse and Finn the fox want to claim it entirely for themselves.",
+      "decisive_choice": "Pip decides to propose a shared reading schedule by the lantern instead of wrestling Finn for the book.",
+      "resolution": "Both animals peacefully share the book page by page under the soft lantern light on the snowfield."
     }
   ]
 }
