@@ -10397,6 +10397,62 @@
       "central_conflict": "A stray pinecone jams the observatory brass gear ring, causing the star chart to drift continuously.",
       "decisive_choice": "Sammy squeezes beneath the heavy brass ring to extract the wedged pinecone instead of turning the gear harder.",
       "resolution": "The star chart locks steadily into place, allowing Orion to read the midnight constellations without interruption."
+    },
+    {
+      "content_id": "rayvan-gemini-a63eacd16711e1aaf4e5",
+      "video_id": "bscZvEsVzEA",
+      "confirmed_at": "2026-11-14T01:02:12.984097+00:00",
+      "title": "Sammy the Squirrel and Pip the Mouse's City Clock Tangle",
+      "plot_fingerprint": "218ea48bdcf93e0dcc53ff94ca83765742e8972ca99b7d2d7364d8a620c986d8",
+      "story_beats": [
+        {
+          "headline": "The Backward Spin",
+          "speech": "Why are the plaza clock hands suddenly turning backward right in the middle of our morning market walk?",
+          "visual": "mouse",
+          "story_environment": "city",
+          "label": "Beat One",
+          "story_beat": "reveal",
+          "visual_prompt": "A small brown mouse standing in a sunny city plaza with wide eyes, looking up at a towering stone clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Jam",
+          "speech": "Look closely between the rotating bronze teeth; a stray copper gear ring is wedged tightly against the main axle.",
+          "visual": "squirrel",
+          "story_environment": "city",
+          "label": "Beat Two",
+          "story_beat": "build",
+          "visual_prompt": "A bushy-tailed squirrel perched on a high city stone ledge, peering intently at a jammed metal gear.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Precise Lift",
+          "speech": "I will crawl under the heavy bronze marker to lift the wedged copper ring rather than forcing the dial.",
+          "visual": "mouse",
+          "story_environment": "city",
+          "label": "Beat Three",
+          "story_beat": "mechanism",
+          "visual_prompt": "A small brown mouse squeezing behind the city clock face, using two paws to push upward on a stuck gear ring.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Forward Tick",
+          "speech": "The bronze gears click smoothly forward once again, bringing perfect time back to our bustling home plaza.",
+          "visual": "squirrel",
+          "story_environment": "city",
+          "label": "Beat Four",
+          "story_beat": "payoff",
+          "visual_prompt": "A bushy-tailed squirrel cheering happily on a city stone ledge as the plaza clock hands point correctly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A stray copper gear ring jams the town plaza clock tower dial teeth, forcing the hands to spin backward.",
+      "decisive_choice": "Pip crawls directly beneath the heavy bronze marker to lift the wedged copper gear instead of pulling the hands.",
+      "resolution": "The clock hands resume correct forward movement, restoring peaceful timekeeping across the plaza."
     }
   ]
 }
