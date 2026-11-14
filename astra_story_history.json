@@ -10736,6 +10736,62 @@
       "central_conflict": "Finn the fox and Rupert the rabbit find an old book and a blooming flower in the forest, but they disagree on whether the flower matches the pressed illustration inside.",
       "decisive_choice": "Finn chooses to place the blooming flower directly beside the open book page under direct sunlight to compare their shapes honestly.",
       "resolution": "The exact petal shape matches perfectly, confirming the true location of the hidden forest spring and satisfying their curiosity."
+    },
+    {
+      "content_id": "rayvan-gemini-86c212e433a6f3dfd345",
+      "video_id": "9IXsClYckz4",
+      "confirmed_at": "2026-11-14T20:46:46.943745+00:00",
+      "title": "Oona and Orion's Island Festival Lantern Drift",
+      "plot_fingerprint": "a990ed89a8f34dd3d77702e68a143fdd80a6e27d25e384eb26ec5f7bed7acf98",
+      "story_beats": [
+        {
+          "headline": "The Festival Drift",
+          "speech": "Look, Orion, the ceremonial festival lantern has slipped from the wooden raft and is floating toward the open sea!",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An otter named Oona stands on an island beach looking shocked at a glowing paper lantern drifting on the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Guiding Light",
+          "speech": "Hold steady, Oona! I will hold this tall bamboo torch high on the shore so you can see the lantern in the dusk.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "An owl named Orion holds a small wooden torch aloft on an island shore, illuminating the dark shoreline.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tidelpool Dive",
+          "speech": "I am diving into the shallow tide pool right now to grab the ribbon before the current pulls it further out!",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "An otter named Oona swims through shallow island waters with a determined expression, reaching for a floating paper lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Restored Raft",
+          "speech": "We saved the lantern just in time, and now the entire island festival can begin with bright lights and cheerful songs.",
+          "visual": "owl",
+          "story_environment": "island",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl named Orion perches happily on a wooden raft on an island shore beside a securely tied paper lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A rogue wave knocks the central decorative paper lantern off the ceremonial wooden raft during the island festival preparation.",
+      "decisive_choice": "Oona decides to dive immediately into the shallow tide pool to catch the floating lantern before it drifts past the coral reef.",
+      "resolution": "The decorative paper lantern is successfully returned to the ceremonial raft, allowing the island festival to begin in glowing harmony."
     }
   ]
 }

@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-11-14T19:34:09.150559+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-11-14T20:47:38.505770+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12009,16 +12009,14 @@
       "decisive_choice": "Finn chooses to place the blooming flower directly beside the open book page under direct sunlight to compare their shapes honestly.",
       "resolution": "The exact petal shape matches perfectly, confirming the true location of the hidden forest spring and satisfying their curiosity.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "9IXsClYckz4": {
-      "content_id": "rayvan-gemini-86c212e433a6f3dfd345",
+    },
+    "rayvan-gemini-86c212e433a6f3dfd345": {
+      "video_id": "9IXsClYckz4",
+      "confirmed_at": "2026-11-14T20:46:46.943745+00:00",
       "title": "Oona and Orion's Island Festival Lantern Drift",
-      "day": "2026-11-15",
-      "uploaded_at": "2026-11-14T19:34:10.683978+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-14T19:34:10.683978+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "a990ed89a8f34dd3d77702e68a143fdd80a6e27d25e384eb26ec5f7bed7acf98",
       "story_beats": [
@@ -12070,16 +12068,75 @@
       "central_conflict": "A rogue wave knocks the central decorative paper lantern off the ceremonial wooden raft during the island festival preparation.",
       "decisive_choice": "Oona decides to dive immediately into the shallow tide pool to catch the floating lantern before it drifts past the coral reef.",
       "resolution": "The decorative paper lantern is successfully returned to the ceremonial raft, allowing the island festival to begin in glowing harmony.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "5IUcyE6V6vI": {
+      "content_id": "rayvan-gemini-01d9b291161aeb2de390",
+      "title": "Buster and Pip's Village Ball Dispute",
+      "day": "2026-11-15",
+      "uploaded_at": "2026-11-14T20:47:40.309642+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "f24a8b7c11395da4fccfca9c781966f42fdbb719867aa729fe8b3cd02939cddc",
+      "story_beats": [
+        {
+          "headline": "Dispute Over the Ball",
+          "speech": "Buster growls softly over the red ball, while Pip insists they share it fairly in the sunny village.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Reveal Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "A brown dog named Buster standing in the village square with a red ball between his paws, looking protective.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Competing Interpretations",
+          "speech": "Buster believes holding the ball firmly is best, whereas Pip argues that rolling it brings more fun.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Build Argument",
+          "story_beat": "build",
+          "visual_prompt": "A tiny grey mouse named Pip sitting beside the red ball in the village square, gesturing with one paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Shared Roll",
+          "speech": "Pip nudges the red ball forward to test if a gentle roll satisfies both players in the open village.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Mechanism Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse pushing the red ball across the village dirt path with its nose.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Joyful Resolution",
+          "speech": "Buster wags his tail as the ball rolls back and forth, proving that sharing brings mutual delight.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Payoff Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Buster the dog joyfully watching the red ball roll toward him in the village square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-14T19:25:42.894825+00:00",
+  "last_preflight_at": "2026-11-14T20:46:46.539601+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-14T19:34:11.064427+00:00",
+    "at": "2026-11-14T20:47:40.632088+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -24701,10 +24758,65 @@
       "resolution": "The decorative paper lantern is successfully returned to the ceremonial raft, allowing the island festival to begin in glowing harmony.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-01d9b291161aeb2de390": {
+      "at": "2026-11-14T20:47:38.505744+00:00",
+      "title": "Buster and Pip's Village Ball Dispute",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "f24a8b7c11395da4fccfca9c781966f42fdbb719867aa729fe8b3cd02939cddc",
+      "story_beats": [
+        {
+          "headline": "Dispute Over the Ball",
+          "speech": "Buster growls softly over the red ball, while Pip insists they share it fairly in the sunny village.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Reveal Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "A brown dog named Buster standing in the village square with a red ball between his paws, looking protective.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Competing Interpretations",
+          "speech": "Buster believes holding the ball firmly is best, whereas Pip argues that rolling it brings more fun.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Build Argument",
+          "story_beat": "build",
+          "visual_prompt": "A tiny grey mouse named Pip sitting beside the red ball in the village square, gesturing with one paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Shared Roll",
+          "speech": "Pip nudges the red ball forward to test if a gentle roll satisfies both players in the open village.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Mechanism Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse pushing the red ball across the village dirt path with its nose.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Joyful Resolution",
+          "speech": "Buster wags his tail as the ball rolls back and forth, proving that sharing brings mutual delight.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Payoff Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Buster the dog joyfully watching the red ball roll toward him in the village square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-14T19:34:11.064386+00:00",
+    "at": "2026-11-14T20:47:40.632029+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -24715,21 +24827,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-14T19:34:11.064421+00:00",
+    "at": "2026-11-14T20:47:40.632078+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-14T19:26:17.888899+00:00",
+    "at": "2026-11-14T20:47:28.864034+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-86c212e433a6f3dfd345",
-    "video_url": "https://www.youtube.com/watch?v=9IXsClYckz4",
+    "content_id": "rayvan-gemini-01d9b291161aeb2de390",
+    "video_url": "https://www.youtube.com/watch?v=5IUcyE6V6vI",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-14T19:34:11.063703+00:00",
+    "at": "2026-11-14T20:47:40.631184+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -24741,47 +24853,11 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-14T19:34:11.064258+00:00",
-    "collection_status": "collected",
+    "at": "2026-11-14T20:47:40.631953+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 19,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 90,
-        "total": 176
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 177,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 142,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 142,
-        "remaining": 20
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "selection_source": "preload_artifact",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
