@@ -68,7 +68,7 @@ jobs:
           from astra_v2.story_factory_text_review_guard import refresh_decision
           refresh, reason = refresh_decision("../state/story_factory_text_review_queue.json")
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
-              output.write("refresh=" + ("true" if refresh else "false") + "\\n")
+              output.write("refresh=" + ("true" if refresh else "false") + "\n")
           print("ASTRA_TEXT_REVIEW_QUEUE=" + reason)
           PY
       - name: Generate review-only candidates
@@ -122,16 +122,16 @@ jobs:
           if [ "$ASTRA_GEMINI_ENABLED" != "1" ]; then echo "Gemini not configured; skipping rewrite"; exit 0; fi
           if [ "${{ steps.cohort_guard.outputs.hold }}" = "true" ]; then
             echo "ASTRA_TEXT_ONLY_REVIEW=preserving_existing_visual_cohort"
-            python -m astra_v2.story_factory_rewrite_queue \\
-              --packet ../state/story_factory_editorial_packet.json \\
-              --output ../state/story_factory_text_review_queue.json \\
+            python -m astra_v2.story_factory_rewrite_queue \
+              --packet ../state/story_factory_editorial_packet.json \
+              --output ../state/story_factory_text_review_queue.json \
               --limit 3
           else
-            python -m astra_v2.story_factory_rewrite_queue \\
-              --packet ../state/story_factory_editorial_packet.json \\
-              --output ../state/story_factory_rewrite_queue.json \\
-              --limit 3 --reuse-pending \\
-              --archive-dir ../state/story_factory_review_archive \\
+            python -m astra_v2.story_factory_rewrite_queue \
+              --packet ../state/story_factory_editorial_packet.json \
+              --output ../state/story_factory_rewrite_queue.json \
+              --limit 3 --reuse-pending \
+              --archive-dir ../state/story_factory_review_archive \
               --image-manifest ../state/story_factory_image_manifest.json
           fi
       # Keep the prior manifest available for stale-queue archival above.
