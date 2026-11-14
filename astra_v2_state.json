@@ -11705,11 +11705,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-14T01:02:12.428529+00:00",
+  "last_preflight_at": "2026-11-14T02:03:45.877718+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-14T01:03:48.052960+00:00",
+    "at": "2026-11-14T02:05:14.264670+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -11726,7 +11726,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-13T13:24:14.542960+00:00",
+  "last_feedback_attempt_at": "2026-11-14T02:04:33.909453+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -23979,7 +23979,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-14T01:03:48.052894+00:00",
+    "at": "2026-11-14T02:05:14.264625+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -23990,13 +23990,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-14T01:03:48.052952+00:00",
+    "at": "2026-11-14T02:05:14.264662+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-14T01:03:03.391219+00:00",
+    "at": "2026-11-14T02:04:33.690187+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -24553,7 +24553,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-14T01:03:48.052119+00:00",
+    "at": "2026-11-14T02:05:14.263818+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -24565,7 +24565,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-14T01:03:48.052626+00:00",
+    "at": "2026-11-14T02:05:14.264335+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
