@@ -10792,6 +10792,59 @@
       "central_conflict": "A rogue wave knocks the central decorative paper lantern off the ceremonial wooden raft during the island festival preparation.",
       "decisive_choice": "Oona decides to dive immediately into the shallow tide pool to catch the floating lantern before it drifts past the coral reef.",
       "resolution": "The decorative paper lantern is successfully returned to the ceremonial raft, allowing the island festival to begin in glowing harmony."
+    },
+    {
+      "content_id": "rayvan-gemini-01d9b291161aeb2de390",
+      "video_id": "5IUcyE6V6vI",
+      "confirmed_at": "2026-11-14T23:16:05.838064+00:00",
+      "title": "Buster and Pip's Village Ball Dispute",
+      "plot_fingerprint": "f24a8b7c11395da4fccfca9c781966f42fdbb719867aa729fe8b3cd02939cddc",
+      "story_beats": [
+        {
+          "headline": "Dispute Over the Ball",
+          "speech": "Buster growls softly over the red ball, while Pip insists they share it fairly in the sunny village.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Reveal Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "A brown dog named Buster standing in the village square with a red ball between his paws, looking protective.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Competing Interpretations",
+          "speech": "Buster believes holding the ball firmly is best, whereas Pip argues that rolling it brings more fun.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Build Argument",
+          "story_beat": "build",
+          "visual_prompt": "A tiny grey mouse named Pip sitting beside the red ball in the village square, gesturing with one paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Shared Roll",
+          "speech": "Pip nudges the red ball forward to test if a gentle roll satisfies both players in the open village.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Mechanism Test",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse pushing the red ball across the village dirt path with its nose.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Joyful Resolution",
+          "speech": "Buster wags his tail as the ball rolls back and forth, proving that sharing brings mutual delight.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Payoff Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Buster the dog joyfully watching the red ball roll toward him in the village square.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
