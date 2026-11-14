@@ -1,25 +1,27 @@
 {
-  "observed_at": "2026-11-14T06:19:17.966999+00:00",
-  "generated": 11,
+  "observed_at": "2026-11-14T17:59:57.479254+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 5,
-      "reason": "validation_error_unclassified"
-    },
-    {
-      "index": 12,
+      "index": 14,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 3,
-  "review_deferred": 8,
-  "approved": 2,
+  "reviewed": 9,
+  "review_deferred": 5,
+  "approved": 3,
   "review_issues": [
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "review_deferred:rate_limited",
-    "review_failed:HTTP_429",
-    "review_provider:rate_limited"
+    "The premise, characters (Finn the fox and Orion), and setting closely mimic recently published template stories in the comparison history such as 'Lyra and Bram's Forest Compass Rivalry' and various other Finn-and-animal woodland moral dilemmas.",
+    "The story premise, character combination of Pip the mouse and Rupert the rabbit, and central conflict heavily replicate the previously published 'Finn the Fox and Rupert the Rabbit's Forest Clue Mystery' and similar template-driven narrative structures found in the comparison history.",
+    "The story premise, character pair (Barnaby and Pip), and causal structure strongly replicate previously published content patterns in the comparison history such as 'Pip the Mouse and Barnaby the Rabbit's Library Bookmark' and 'Pip the Mouse and Barnaby the Owl's Railway Signal Mystery'.",
+    "The story premise, characters, setting, and causal mechanism of an animal character investigating an unnatural color change or shift in garden/meadow flowers and discovering it to be a reflection or shadow rather than a blight is nearly identical to the recently published 'Toby the Tapir and the Meadow Flower Shift'",
+    "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art",
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -77,22 +79,23 @@
     ]
   },
   "creative_preflight": {
-    "generated": 11,
+    "generated": 14,
     "script_status_counts": {
-      "no_simple_flags": 11
+      "no_simple_flags": 14
     },
     "renderer_status_counts": {
       "incompatible": 2,
-      "structurally_eligible": 9
+      "structurally_eligible": 12
     },
     "renderer_reason_counts": {
-      "none": 9,
-      "unsupported_human_actor": 2
+      "missing_verified_artwork": 1,
+      "none": 12,
+      "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 11
+      "all_shots_recognized": 14
     },
-    "scene_taxonomy_recognized_shots": 44,
+    "scene_taxonomy_recognized_shots": 56,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
