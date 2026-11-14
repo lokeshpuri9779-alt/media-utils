@@ -10680,6 +10680,62 @@
       "central_conflict": "A thick tangle of drifting kelp wraps tightly around the underwater anchor chain of the warning buoy, causing it to strike the brass bell erratically in the harbor.",
       "decisive_choice": "Jasper decides to dive beneath the dark tide to untangle the wedged kelp rather than waiting for morning light.",
       "resolution": "The brass bell falls completely silent, restoring peaceful quiet across the harbor waters for the night."
+    },
+    {
+      "content_id": "rayvan-gemini-5cb29f751b85c7f9cc63",
+      "video_id": "6hp4lJkF4y8",
+      "confirmed_at": "2026-11-14T19:25:43.310041+00:00",
+      "title": "Finn the Fox and Rupert the Rabbit's Forest Clue Mystery",
+      "plot_fingerprint": "399a8434e54b09efd2fdf041c977a1f6c153052d8df742a60beb9caa7f049c0f",
+      "story_beats": [
+        {
+          "headline": "Discovering the Ancient Tome",
+          "speech": "Look closely at this strange paper page, Rupert. The drawn petal shape inside our forest book looks remarkably familiar.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox stands in the forest holding an open book with a drawn flower page.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing the Blossom",
+          "speech": "Wait, let us check this living blossom right beside the page. The curve of the petals tells a different story.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Second Clue",
+          "story_beat": "build",
+          "visual_prompt": "Rupert the rabbit sits in the forest holding a fresh flower next to an open book on the moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Aligning in the Sunlight",
+          "speech": "Let us bring both items directly into the bright patch of sunlight to see the true colors together without doubt.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Direct Comparison",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox holds a flower above the open book in a sunny forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Solving the Puzzle",
+          "speech": "The petal edges match the drawing line for line. Our forest mystery is solved at last.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Successful Match",
+          "story_beat": "payoff",
+          "visual_prompt": "Rupert the rabbit looks happily at the matched flower and book in the forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn the fox and Rupert the rabbit find an old book and a blooming flower in the forest, but they disagree on whether the flower matches the pressed illustration inside.",
+      "decisive_choice": "Finn chooses to place the blooming flower directly beside the open book page under direct sunlight to compare their shapes honestly.",
+      "resolution": "The exact petal shape matches perfectly, confirming the true location of the hidden forest spring and satisfying their curiosity."
     }
   ]
 }
