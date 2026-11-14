@@ -8255,11 +8255,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-9e92cbecb6720f582ae1",
-      "title": "Pip and Finn's Snowfield Tome",
-      "hook": "Discovering the Tome",
-      "question": "How can a mouse and a fox share a single scarce winter book on the snowfield without destroying it?",
-      "answer": "Pip and Finn alternate reading chapters by the lantern glow, preserving the book for both.",
+      "content_id": "rayvan-gemini-5cb29f751b85c7f9cc63",
+      "title": "Finn the Fox and Rupert the Rabbit's Forest Clue Mystery",
+      "hook": "Discovering the Ancient Tome",
+      "question": "How can a fox and a rabbit solve a forest mystery using only a book and a flower?",
+      "answer": "By comparing the pressed petal inside the book to the blooming flower in the clearing, they find the true path.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8267,78 +8267,78 @@
       ],
       "story_beats": [
         {
-          "headline": "Discovering the Tome",
-          "speech": "Pip and Finn found the rare old book resting in the deep snowfield, each wanting to keep it entirely for themselves.",
-          "visual": "mouse",
-          "story_environment": "snowfield",
-          "label": "Discovery",
+          "headline": "Discovering the Ancient Tome",
+          "speech": "Look closely at this strange paper page, Rupert. The drawn petal shape inside our forest book looks remarkably familiar.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "First Clue",
           "story_beat": "reveal",
-          "visual_prompt": "Pip the mouse stands upright in the snowfield, looking intently at the single open book resting on the white snow.",
+          "visual_prompt": "Finn the fox stands in the forest holding an open book with a drawn flower page.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Tempting Shortcut",
-          "speech": "Finn the fox thought about grabbing the entire book and running across the snowfield to keep it hidden in a burrow.",
-          "visual": "fox",
-          "story_environment": "snowfield",
-          "label": "Temptation",
+          "headline": "Comparing the Blossom",
+          "speech": "Wait, let us check this living blossom right beside the page. The curve of the petals tells a different story.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Second Clue",
           "story_beat": "build",
-          "visual_prompt": "Finn the fox stands in the cold snowfield, gazing hungrily down at the book with an eager expression.",
+          "visual_prompt": "Rupert the rabbit sits in the forest holding a fresh flower next to an open book on the moss.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Shared Lantern",
-          "speech": "Pip stepped forward with a warm glowing lantern, gently inviting Finn to read together instead of fighting over the pages.",
-          "visual": "mouse",
-          "story_environment": "snowfield",
-          "label": "Choice",
-          "story_beat": "mechanism",
-          "visual_prompt": "Pip the mouse holds a small lit lantern in the snowfield, sitting beside the book while looking calmly at Finn.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Quiet Pages Together",
-          "speech": "Sitting side by side on the quiet snowfield, Pip and Finn turned each delicate page together under the gentle lantern light.",
+          "headline": "Aligning in the Sunlight",
+          "speech": "Let us bring both items directly into the bright patch of sunlight to see the true colors together without doubt.",
           "visual": "fox",
-          "story_environment": "snowfield",
-          "label": "Resolution",
+          "story_environment": "forest",
+          "label": "Direct Comparison",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox holds a flower above the open book in a sunny forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Solving the Puzzle",
+          "speech": "The petal edges match the drawing line for line. Our forest mystery is solved at last.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Successful Match",
           "story_beat": "payoff",
-          "visual_prompt": "Finn the fox sits peacefully in the snowfield next to the book, gently resting a paw near the pages while the lantern glows.",
+          "visual_prompt": "Rupert the rabbit looks happily at the matched flower and book in the forest clearing.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A solitary scarce book lies in the snowfield, and both Pip the mouse and Finn the fox want to claim it entirely for themselves.",
-      "decisive_choice": "Pip decides to propose a shared reading schedule by the lantern instead of wrestling Finn for the book.",
-      "resolution": "Both animals peacefully share the book page by page under the soft lantern light on the snowfield.",
+      "central_conflict": "Finn the fox and Rupert the rabbit find an old book and a blooming flower in the forest, but they disagree on whether the flower matches the pressed illustration inside.",
+      "decisive_choice": "Finn chooses to place the blooming flower directly beside the open book page under direct sunlight to compare their shapes honestly.",
+      "resolution": "The exact petal shape matches perfectly, confirming the true location of the hidden forest spring and satisfying their curiosity.",
       "visual_bible": {
-        "style": "Clean digital storybook illustration with soft cinematic lighting and warm character expressions.",
+        "style": "Charming and gentle storybook illustration style with warm natural lighting and soft textures.",
         "characters": {
-          "Pip": "A small brown mouse with soft fur, bright alert eyes, and no clothing.",
-          "Finn": "A sleek red fox with a bushy tail, white chest fur, and no clothing."
+          "fox": "Finn is a small red fox with a white-tipped tail and natural alert posture.",
+          "rabbit": "Rupert is a brown rabbit with long ears and soft natural fur."
         },
         "locations": {
-          "snowfield": "A vast, open expanse of powdery white snow under a twilight winter sky."
+          "forest": "A lush green woodland filled with tall trees, soft mossy ground, and dappled sunlight."
         },
         "objects": {
-          "book": "An ancient leather-bound book with blank yellowish parchment pages.",
-          "lantern": "A small brass lantern emitting a warm yellow glow."
+          "book": "An old hardcover book with yellowed pages and ribbon markers.",
+          "flower": "A vibrant yellow blossom with delicate petals and a green stem."
         }
       },
-      "plot_fingerprint": "3eca3b6288d3371d859ce76f57d37838611a000d4f9e59896977455e4063f1d6"
+      "plot_fingerprint": "399a8434e54b09efd2fdf041c977a1f6c153052d8df742a60beb9caa7f049c0f"
     },
     {
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-c260e1a48de4b43d5148",
-      "title": "Orion and Pip's Coastal Beacon Partnership",
-      "hook": "The Dual Arrival",
-      "question": "How do an owl and a rabbit coordinate a nighttime signal across the harbor?",
-      "answer": "By taking turns holding and placing the lantern on the stone sill.",
+      "content_id": "rayvan-gemini-01d9b291161aeb2de390",
+      "title": "Buster and Pip's Village Ball Dispute",
+      "hook": "Dispute Over the Ball",
+      "question": "How do Buster the dog and Pip the mouse resolve their conflicting ideas over who should hold the shared red ball?",
+      "answer": "Pip tests a rolling test across the grass, proving both can play simultaneously.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8346,67 +8346,145 @@
       ],
       "story_beats": [
         {
-          "headline": "The Dual Arrival",
-          "speech": "Orion the owl and Pip the rabbit both reach the tall lighthouse gallery, each hoping to operate the signal alone tonight.",
-          "visual": "owl",
-          "story_environment": "lighthouse",
-          "label": "Arrival Reveal",
+          "headline": "Dispute Over the Ball",
+          "speech": "Buster growls softly over the red ball, while Pip insists they share it fairly in the sunny village.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Reveal Dispute",
           "story_beat": "reveal",
-          "visual_prompt": "An owl stands inside the stone lighthouse chamber, looking at a single brass lantern next to a rabbit.",
+          "visual_prompt": "A brown dog named Buster standing in the village square with a red ball between his paws, looking protective.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Rival Standoff",
-          "speech": "Neither animal wants to yield the station, yet waiting in silence solves nothing while the dark harbor approaches quickly.",
-          "visual": "rabbit",
-          "story_environment": "lighthouse",
-          "label": "Tension Build",
+          "headline": "Competing Interpretations",
+          "speech": "Buster believes holding the ball firmly is best, whereas Pip argues that rolling it brings more fun.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Build Argument",
           "story_beat": "build",
-          "visual_prompt": "A rabbit stands firmly beside the lighthouse lantern on the stone sill, ears perked in cautious hesitation.",
+          "visual_prompt": "A tiny grey mouse named Pip sitting beside the red ball in the village square, gesturing with one paw.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Cooperative Shift",
-          "speech": "Orion chooses to lift the lantern and hand it carefully to Pip so they can alternate flashing the coastal beam.",
-          "visual": "owl",
-          "story_environment": "lighthouse",
-          "label": "Shared Mechanism",
+          "headline": "Testing the Shared Roll",
+          "speech": "Pip nudges the red ball forward to test if a gentle roll satisfies both players in the open village.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Mechanism Test",
           "story_beat": "mechanism",
-          "visual_prompt": "An owl gently pushes the small lantern across the stone ledge toward a rabbit inside the lighthouse.",
+          "visual_prompt": "Pip the mouse pushing the red ball across the village dirt path with its nose.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Unified Beacon",
-          "speech": "Working in perfect rhythm, the owl and the rabbit flash the bright lantern outward to guide the night sky and sea.",
-          "visual": "rabbit",
-          "story_environment": "lighthouse",
-          "label": "Payoff Beam",
+          "headline": "Joyful Resolution",
+          "speech": "Buster wags his tail as the ball rolls back and forth, proving that sharing brings mutual delight.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Payoff Resolution",
           "story_beat": "payoff",
-          "visual_prompt": "A rabbit holds the glowing lantern high on the lighthouse observation deck while the owl watches proudly.",
+          "visual_prompt": "Buster the dog joyfully watching the red ball roll toward him in the village square.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Orion and Pip arrive at the lighthouse tower at the exact same moment, both hoping to earn the annual night-watch honor by flashing the single available lantern.",
-      "decisive_choice": "Orion decides to share the lantern duties with Pip rather than competing for exclusive control of the signal.",
-      "resolution": "Both animals successfully flash the lantern together, guiding passing travelers safely through the harbor night.",
+      "central_conflict": "Buster the dog and Pip the mouse each want exclusive possession of the shared ball in the village square.",
+      "decisive_choice": "Pip decides to roll the red ball gently across the village path to test if they can share it without tugging.",
+      "resolution": "Both animals happily chase and share the ball together, restoring harmony in the village.",
       "visual_bible": {
-        "style": "Charming, high-contrast storybook illustration with clean character silhouettes and warm lighting.",
+        "style": "A warm, family-friendly illustrated storybook style with soft lighting and natural textures.",
         "characters": {
-          "owl": "Orion is a natural horned owl with soft brown and cream feathers, bright amber eyes, and feathered talons.",
-          "rabbit": "Pip is a natural wild rabbit with sleek gray fur, long attentive ears, and soft white paws."
+          "dog": "Buster is a friendly brown dog with floppy ears and a wagging tail.",
+          "mouse": "Pip is a tiny grey mouse with bright whiskers and quick paws."
         },
         "locations": {
-          "lighthouse": "A weathered stone lighthouse tower featuring an arched observation window and a smooth stone sill."
+          "village": "A peaceful rural village with dirt paths and rustic wooden fences."
         },
         "objects": {
-          "lantern": "A small polished brass lantern enclosing a bright steady flame."
+          "ball": "A bright red bouncing ball of standard toy size."
         }
       },
-      "plot_fingerprint": "f81c9a9e29cb6e786aaf146a4e58714cd59c740c6d8c459e230723c7c235c13c"
+      "plot_fingerprint": "f24a8b7c11395da4fccfca9c781966f42fdbb719867aa729fe8b3cd02939cddc"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
+      "title": "Orion's Midnight Misjudgment",
+      "hook": "The Observatory Night",
+      "question": "Why did Orion the owl mistake the ticking clock for a moving star?",
+      "answer": "Orion compared the rhythmic ticking of the brass clock to the steady cadence of the lantern light on the observatory wall.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Observatory Night",
+          "speech": "Orion stares intently through the tall observatory windows, wondering if the tiny mechanical pulse belongs to a distant traveling star.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Look",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands atop an observatory desk inside a quiet observatory, staring with wide eyes at a brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lantern Comparison",
+          "speech": "Holding a glowing lantern close to the wooden table, Orion measures the steady ticking rhythm against the warm flame.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Close Study",
+          "story_beat": "build",
+          "visual_prompt": "An owl holds a glowing lantern right next to a small ticking clock on a desk inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Close Inspection",
+          "speech": "Leaning forward with curious feathers ruffled, Orion watches the spinning hands reflect the bright lantern illumination.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Detailed Check",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl leans close to examine the face of a brass clock illuminated by a nearby lantern inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Discovery",
+          "speech": "Recognizing the mechanical gears inside, Orion steps back calmly as the lantern light reveals the genuine nature of the desk clock.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Final Clarity",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl stands back peacefully beside a glowing lantern and a resting clock on a wooden desk inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl mistakes a ticking desk clock for a celestial navigation marker on the observatory desk.",
+      "decisive_choice": "Orion decides to set the brass lantern directly beside the ticking clock to test if their glowing reflections match.",
+      "resolution": "The bright lantern glow clearly reveals the moving hands and spinning gears of the clock, ending Orion's mistaken inference.",
+      "visual_bible": {
+        "style": "clean cinematic digital illustration with rich atmospheric lighting and detailed animal textures",
+        "characters": {
+          "owl": "Orion is a natural horned owl with soft brown and cream feathers, bright amber eyes, and natural plumage without clothing."
+        },
+        "locations": {
+          "observatory": "A dusty stone observatory filled with star charts, arched windows, and wooden desks."
+        },
+        "objects": {
+          "clock": "A small round brass desk clock with visible moving hands.",
+          "lantern": "A classic metal lantern casting a warm yellow glow."
+        }
+      },
+      "plot_fingerprint": "fa113cf332d15f95ca34fdb2ae68043782d49e4918924403581bedfb7e868e55"
     }
   ]
 }
