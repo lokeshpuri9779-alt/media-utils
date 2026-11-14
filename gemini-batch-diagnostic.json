@@ -1,24 +1,20 @@
 {
-  "observed_at": "2026-11-14T17:59:57.479254+00:00",
-  "generated": 14,
+  "observed_at": "2026-11-14T22:22:45.845099+00:00",
+  "generated": 9,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 14,
+      "index": 9,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 9,
-  "review_deferred": 5,
-  "approved": 3,
+  "reviewed": 3,
+  "review_deferred": 6,
+  "approved": 2,
   "review_issues": [
-    "The premise, characters (Finn the fox and Orion), and setting closely mimic recently published template stories in the comparison history such as 'Lyra and Bram's Forest Compass Rivalry' and various other Finn-and-animal woodland moral dilemmas.",
-    "The story premise, character combination of Pip the mouse and Rupert the rabbit, and central conflict heavily replicate the previously published 'Finn the Fox and Rupert the Rabbit's Forest Clue Mystery' and similar template-driven narrative structures found in the comparison history.",
-    "The story premise, character pair (Barnaby and Pip), and causal structure strongly replicate previously published content patterns in the comparison history such as 'Pip the Mouse and Barnaby the Rabbit's Library Bookmark' and 'Pip the Mouse and Barnaby the Owl's Railway Signal Mystery'.",
-    "The story premise, characters, setting, and causal mechanism of an animal character investigating an unnatural color change or shift in garden/meadow flowers and discovering it to be a reflection or shadow rather than a blight is nearly identical to the recently published 'Toby the Tapir and the Meadow Flower Shift'",
+    "Fails the originality check regarding repetitive character combinations and premise formulas within the provided comparison history.",
+    "The story premise, character pair (Sammy the squirrel and Rupert the rabbit), and conflict structure heavily mirror recently published items in the comparison history (e.g., Finn the Fox and Rupert the Rabbit's Forest Clue Mystery, and various other stories featuring Sammy and Rupert solving misunderstandings over environmental markers).",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
-    "publication_renderer_incompatible: shot 4: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art",
     "review_deferred:provider_unavailable",
     "review_failed:HTTP_503",
     "review_provider:provider_unavailable"
@@ -79,23 +75,20 @@
     ]
   },
   "creative_preflight": {
-    "generated": 14,
+    "generated": 9,
     "script_status_counts": {
-      "no_simple_flags": 14
+      "no_simple_flags": 9
     },
     "renderer_status_counts": {
-      "incompatible": 2,
-      "structurally_eligible": 12
+      "structurally_eligible": 9
     },
     "renderer_reason_counts": {
-      "missing_verified_artwork": 1,
-      "none": 12,
-      "unsupported_human_actor": 1
+      "none": 9
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 14
+      "all_shots_recognized": 9
     },
-    "scene_taxonomy_recognized_shots": 56,
+    "scene_taxonomy_recognized_shots": 36,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
