@@ -6891,80 +6891,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-7fd619ff5f61b3aceb48",
-      "title": "Aurelius the Owl and the Frost-Locked Telescope",
-      "hook": "The Frozen Lens",
-      "question": "Will Aurelius the owl clear the frozen observatory lens before the rare lunar eclipse passes?",
-      "answer": "Aurelius uses a brass lantern to gently thaw the ice, capturing the eclipse just in time.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Frozen Lens",
-          "speech": "My observatory telescope is sealed behind a wall of solid winter frost, hiding the sky tonight.",
-          "visual": "signal",
-          "label": "The Discovery",
-          "story_beat": "reveal",
-          "visual_prompt": "Aurelius the brown-feathered owl with large amber eyes stands inside an ancient stone observatory, looking out through a thick frost-covered glass panel while holding a lit brass lantern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Gathering Heat",
-          "speech": "I must bring this glowing brass lantern up the narrow spiral steps to melt the stubborn barrier.",
-          "visual": "door",
-          "label": "The Ascent",
-          "story_beat": "build",
-          "visual_prompt": "Aurelius the owl climbs a stone staircase inside the observatory tower, carefully carrying a heavy brass lantern in one claw while wearing a tiny woolen scarf.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Applying the Warmth",
-          "speech": "Holding the lantern close to the cold metal frame allows the ice to crack and slowly slide away.",
-          "visual": "ship",
-          "label": "The Thaw",
-          "story_beat": "mechanism",
-          "visual_prompt": "Aurelius the owl stands on the snowy observatory roof at night, pressing a warm brass lantern against the base of the massive frosted brass telescope tube to melt the ice.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Clear Horizon",
-          "speech": "The magnificent lunar eclipse finally shines brightly through the clear glass for all to witness.",
-          "visual": "planet",
-          "label": "The Eclipse",
-          "story_beat": "payoff",
-          "visual_prompt": "Aurelius the owl sits proudly on the observatory windowsill under a starry night sky, gazing up as a glowing blue lunar eclipse illuminates the open dome.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Thick frost coats the high observatory telescope lens, blocking the impending rare lunar eclipse.",
-      "decisive_choice": "Aurelius chooses to carry a hot brass lantern directly onto the icy dome roof rather than wait for morning warmth.",
-      "resolution": "The lens clears completely, allowing Aurelius to record the brilliant lunar eclipse through the clear night sky.",
-      "visual_bible": {
-        "style": "Warmed storybook illustration with textured brushstrokes, rich night-sky blues, and warm golden lantern light.",
-        "characters": {
-          "Aurelius": "A wise brown-feathered owl with large expressive amber eyes, speckled beige chest feathers, and a cozy red woolen scarf around his neck."
-        },
-        "locations": {
-          "Observatory": "An ancient stone tower with a rotating copper dome, spiraling staircases, and tall arched windows overlooking a snowy pine forest."
-        },
-        "objects": {
-          "lantern": "A polished brass lantern with glass panes casting a warm yellow glow.",
-          "telescope": "A large brass-mounted reflector telescope with intricate focus gears and an adjustable metal housing."
-        }
-      },
-      "plot_fingerprint": "8ce2bc0a14bbb0b98bd7018fb493d8911eb0d88c71192cf8a44b9cb023378bf2"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
       "title": "Bram's Snowy Rescue and the Pine Ridge Beacon",
       "hook": "The Missing Kit Discovered",
@@ -8324,6 +8250,163 @@
         }
       },
       "plot_fingerprint": "791902ca2a3c1aa52d41639d48f4a3627626b345519ac224f7eaad435fd35266"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-9e92cbecb6720f582ae1",
+      "title": "Pip and Finn's Snowfield Tome",
+      "hook": "Discovering the Tome",
+      "question": "How can a mouse and a fox share a single scarce winter book on the snowfield without destroying it?",
+      "answer": "Pip and Finn alternate reading chapters by the lantern glow, preserving the book for both.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Discovering the Tome",
+          "speech": "Pip and Finn found the rare old book resting in the deep snowfield, each wanting to keep it entirely for themselves.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse stands upright in the snowfield, looking intently at the single open book resting on the white snow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Shortcut",
+          "speech": "Finn the fox thought about grabbing the entire book and running across the snowfield to keep it hidden in a burrow.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Temptation",
+          "story_beat": "build",
+          "visual_prompt": "Finn the fox stands in the cold snowfield, gazing hungrily down at the book with an eager expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Lantern",
+          "speech": "Pip stepped forward with a warm glowing lantern, gently inviting Finn to read together instead of fighting over the pages.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Choice",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse holds a small lit lantern in the snowfield, sitting beside the book while looking calmly at Finn.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Quiet Pages Together",
+          "speech": "Sitting side by side on the quiet snowfield, Pip and Finn turned each delicate page together under the gentle lantern light.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Finn the fox sits peacefully in the snowfield next to the book, gently resting a paw near the pages while the lantern glows.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A solitary scarce book lies in the snowfield, and both Pip the mouse and Finn the fox want to claim it entirely for themselves.",
+      "decisive_choice": "Pip decides to propose a shared reading schedule by the lantern instead of wrestling Finn for the book.",
+      "resolution": "Both animals peacefully share the book page by page under the soft lantern light on the snowfield.",
+      "visual_bible": {
+        "style": "Clean digital storybook illustration with soft cinematic lighting and warm character expressions.",
+        "characters": {
+          "Pip": "A small brown mouse with soft fur, bright alert eyes, and no clothing.",
+          "Finn": "A sleek red fox with a bushy tail, white chest fur, and no clothing."
+        },
+        "locations": {
+          "snowfield": "A vast, open expanse of powdery white snow under a twilight winter sky."
+        },
+        "objects": {
+          "book": "An ancient leather-bound book with blank yellowish parchment pages.",
+          "lantern": "A small brass lantern emitting a warm yellow glow."
+        }
+      },
+      "plot_fingerprint": "3eca3b6288d3371d859ce76f57d37838611a000d4f9e59896977455e4063f1d6"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-c260e1a48de4b43d5148",
+      "title": "Orion and Pip's Coastal Beacon Partnership",
+      "hook": "The Dual Arrival",
+      "question": "How do an owl and a rabbit coordinate a nighttime signal across the harbor?",
+      "answer": "By taking turns holding and placing the lantern on the stone sill.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Dual Arrival",
+          "speech": "Orion the owl and Pip the rabbit both reach the tall lighthouse gallery, each hoping to operate the signal alone tonight.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Arrival Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the stone lighthouse chamber, looking at a single brass lantern next to a rabbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rival Standoff",
+          "speech": "Neither animal wants to yield the station, yet waiting in silence solves nothing while the dark harbor approaches quickly.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Tension Build",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit stands firmly beside the lighthouse lantern on the stone sill, ears perked in cautious hesitation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cooperative Shift",
+          "speech": "Orion chooses to lift the lantern and hand it carefully to Pip so they can alternate flashing the coastal beam.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Shared Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl gently pushes the small lantern across the stone ledge toward a rabbit inside the lighthouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unified Beacon",
+          "speech": "Working in perfect rhythm, the owl and the rabbit flash the bright lantern outward to guide the night sky and sea.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Payoff Beam",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit holds the glowing lantern high on the lighthouse observation deck while the owl watches proudly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion and Pip arrive at the lighthouse tower at the exact same moment, both hoping to earn the annual night-watch honor by flashing the single available lantern.",
+      "decisive_choice": "Orion decides to share the lantern duties with Pip rather than competing for exclusive control of the signal.",
+      "resolution": "Both animals successfully flash the lantern together, guiding passing travelers safely through the harbor night.",
+      "visual_bible": {
+        "style": "Charming, high-contrast storybook illustration with clean character silhouettes and warm lighting.",
+        "characters": {
+          "owl": "Orion is a natural horned owl with soft brown and cream feathers, bright amber eyes, and feathered talons.",
+          "rabbit": "Pip is a natural wild rabbit with sleek gray fur, long attentive ears, and soft white paws."
+        },
+        "locations": {
+          "lighthouse": "A weathered stone lighthouse tower featuring an arched observation window and a smooth stone sill."
+        },
+        "objects": {
+          "lantern": "A small polished brass lantern enclosing a bright steady flame."
+        }
+      },
+      "plot_fingerprint": "f81c9a9e29cb6e786aaf146a4e58714cd59c740c6d8c459e230723c7c235c13c"
     }
   ]
 }

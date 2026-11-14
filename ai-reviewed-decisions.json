@@ -829,15 +829,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-7fd619ff5f61b3aceb48",
-      "story_sha256": "58dd6d465d18c8b578193c547419f42cde85c0055c1db4707ccaf587ab8daf83",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is causally coherent and clear, following a logical progression from conflict to resolution.; No copyright or trademark violations detected; the characters and settings are original.; Content is safe, family-friendly, and fully appropriate for the intended audience.; The premise, characters, and plot points do not substantially overlap with the comparison history items.; Meets all structural and safety requirements for publishing.",
-      "reviewed_at": "2026-11-02T18:43:37.092858+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
       "story_sha256": "33ad0e1488f9f6defa97d7c2406665136a0344f42acaa270b2b13c6ae11bb8d4",
       "decision": "approve",
@@ -997,6 +988,24 @@
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
       "review_notes": "The story is original and does not closely match the premises, characters, or causal mechanisms of the provided comparison history.; The causal chain is coherent, clear, and logically follows the setup, conflict, decision, and resolution.; There are no copyright, trademark, safety, or YouTube policy concerns present in the text.",
       "reviewed_at": "2026-11-11T06:13:16.794035+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-9e92cbecb6720f582ae1",
+      "story_sha256": "554c5849e8c3a61a7becfba16307e6356d2d0bd324548b87da9ef7847de04996",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is original and maintains strong causal coherence from discovery to peaceful resolution.; It does not duplicate characters, settings, or plots from the provided comparison history.; Content is safe, suitable for all audiences, and presents no copyright or policy risks.",
+      "reviewed_at": "2026-11-14T06:18:54.494783+00:00",
+      "review_model": "gemini-3.5-flash-lite"
+    },
+    {
+      "content_id": "rayvan-gemini-c260e1a48de4b43d5148",
+      "story_sha256": "6c75652a54fd2bb1d0c18b1330c975fdf820d3c8c2400da186339b9e69df13b8",
+      "decision": "approve",
+      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
+      "review_notes": "The story is completely original and does not duplicate any previously published premises, character combinations, or causal conflicts in the comparison history.; Causal coherence is maintained: the conflict of two animals wanting to use a single lantern is logically resolved by sharing duties and taking turns.; There are no copyright or trademark violations, unsafe/misleading content, or YouTube policy risks present in the text.",
+      "reviewed_at": "2026-11-14T06:18:56.598236+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]
