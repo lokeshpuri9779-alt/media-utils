@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-14",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-11-14T08:25:50.969416+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-11-14T09:33:12.278455+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -11760,29 +11760,86 @@
       "decisive_choice": "Pip decides to propose a shared reading schedule by the lantern instead of wrestling Finn for the book.",
       "resolution": "Both animals peacefully share the book page by page under the soft lantern light on the snowfield.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "KgcJeMUD_vE": {
-      "content_id": "trend-brief-2026-11-14-am",
+    },
+    "trend-brief-2026-11-14-am": {
+      "video_id": "KgcJeMUD_vE",
+      "confirmed_at": "2026-11-14T09:32:34.615846+00:00",
       "title": "Why mumbai vs hyderabad mushtaq ali trophy Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-14",
-      "uploaded_at": "2026-11-14T08:25:52.804998+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-14T08:25:52.804998+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "a6AxCvqRGO4": {
+      "content_id": "rayvan-gemini-c260e1a48de4b43d5148",
+      "title": "Orion and Pip's Coastal Beacon Partnership",
+      "day": "2026-11-14",
+      "uploaded_at": "2026-11-14T09:33:14.311400+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "f81c9a9e29cb6e786aaf146a4e58714cd59c740c6d8c459e230723c7c235c13c",
+      "story_beats": [
+        {
+          "headline": "The Dual Arrival",
+          "speech": "Orion the owl and Pip the rabbit both reach the tall lighthouse gallery, each hoping to operate the signal alone tonight.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Arrival Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the stone lighthouse chamber, looking at a single brass lantern next to a rabbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rival Standoff",
+          "speech": "Neither animal wants to yield the station, yet waiting in silence solves nothing while the dark harbor approaches quickly.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Tension Build",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit stands firmly beside the lighthouse lantern on the stone sill, ears perked in cautious hesitation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cooperative Shift",
+          "speech": "Orion chooses to lift the lantern and hand it carefully to Pip so they can alternate flashing the coastal beam.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Shared Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl gently pushes the small lantern across the stone ledge toward a rabbit inside the lighthouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unified Beacon",
+          "speech": "Working in perfect rhythm, the owl and the rabbit flash the bright lantern outward to guide the night sky and sea.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Payoff Beam",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit holds the glowing lantern high on the lighthouse observation deck while the owl watches proudly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-14T08:24:49.533321+00:00",
+  "last_preflight_at": "2026-11-14T09:32:34.211698+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-14T08:25:58.736457+00:00",
+    "at": "2026-11-14T09:33:14.639392+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -24117,10 +24174,65 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-c260e1a48de4b43d5148": {
+      "at": "2026-11-14T09:33:12.278432+00:00",
+      "title": "Orion and Pip's Coastal Beacon Partnership",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "f81c9a9e29cb6e786aaf146a4e58714cd59c740c6d8c459e230723c7c235c13c",
+      "story_beats": [
+        {
+          "headline": "The Dual Arrival",
+          "speech": "Orion the owl and Pip the rabbit both reach the tall lighthouse gallery, each hoping to operate the signal alone tonight.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Arrival Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the stone lighthouse chamber, looking at a single brass lantern next to a rabbit.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Rival Standoff",
+          "speech": "Neither animal wants to yield the station, yet waiting in silence solves nothing while the dark harbor approaches quickly.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Tension Build",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit stands firmly beside the lighthouse lantern on the stone sill, ears perked in cautious hesitation.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Cooperative Shift",
+          "speech": "Orion chooses to lift the lantern and hand it carefully to Pip so they can alternate flashing the coastal beam.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Shared Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl gently pushes the small lantern across the stone ledge toward a rabbit inside the lighthouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Unified Beacon",
+          "speech": "Working in perfect rhythm, the owl and the rabbit flash the bright lantern outward to guide the night sky and sea.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Payoff Beam",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit holds the glowing lantern high on the lighthouse observation deck while the owl watches proudly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-14T08:25:58.736416+00:00",
+    "at": "2026-11-14T09:33:14.639339+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -24131,21 +24243,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-14T08:25:58.736450+00:00",
+    "at": "2026-11-14T09:33:14.639383+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-14T08:25:39.140893+00:00",
+    "at": "2026-11-14T09:33:05.073234+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-11-14-am",
-    "video_url": "https://www.youtube.com/watch?v=KgcJeMUD_vE",
+    "content_id": "rayvan-gemini-c260e1a48de4b43d5148",
+    "video_url": "https://www.youtube.com/watch?v=a6AxCvqRGO4",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-14T08:25:58.735812+00:00",
+    "at": "2026-11-14T09:33:14.638555+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -24157,7 +24269,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-14T08:25:58.736348+00:00",
+    "at": "2026-11-14T09:33:14.639267+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
