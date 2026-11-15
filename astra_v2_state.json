@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-11-14T23:25:58.846337+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-11-15T01:10:02.621806+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12126,16 +12126,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "ntaie31PIbM": {
-      "content_id": "rayvan-gemini-fed2ba6c0ad7db7ff66d",
+    },
+    "rayvan-gemini-fed2ba6c0ad7db7ff66d": {
+      "video_id": "ntaie31PIbM",
+      "confirmed_at": "2026-11-15T01:09:07.826656+00:00",
       "title": "Milo and Fenn's Harbor Shell Mystery",
-      "day": "2026-11-15",
-      "uploaded_at": "2026-11-14T23:26:00.559451+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-14T23:26:00.559451+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "184894d840007d11e15dbd89a04f9417c21bf8ef38a4cfc4bf86fa2201a9c4bd",
       "story_beats": [
@@ -12187,16 +12185,75 @@
       "central_conflict": "A floating wooden packing crate spins in the harbor current, pressing its loose hinged lid against a glowing mother-of-pearl shell and making an irritating metallic scratching noise.",
       "decisive_choice": "Milo the otter decides to paddle beneath the floating crate to wedge a smooth round pebble under the loose hinge instead of waiting for the tide to push it ashore.",
       "resolution": "The scratching noise stops completely, restoring serene quiet across the morning harbor waves.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "pO8tXRXbBAc": {
+      "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
+      "title": "Pip and Finn's Snowfield Bookmark Secret",
+      "day": "2026-11-15",
+      "uploaded_at": "2026-11-15T01:10:04.085272+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "efe8f1556eb760c50ebe55c4ddddc5645ddaee7f2837f60f82509a594bcbdd36",
+      "story_beats": [
+        {
+          "headline": "A Torn Page Hidden",
+          "speech": "Pip the mouse accidentally tears a page in their only book and quickly hides the loose scrap deep beneath the snowfield drift.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Accident",
+          "story_beat": "reveal",
+          "visual_prompt": "mouse pushing a torn book page under the deep white snow in the open snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Missing Fragment Discovered",
+          "speech": "Finn the fox notices the missing page in the open book and questions Pip about the strange gap in the story.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Discovery",
+          "story_beat": "build",
+          "visual_prompt": "fox standing beside an open book resting on the snowfield, looking intently at the mouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Overcoming fear, Pip unearths the hidden torn page from the drift and places it beside the book for Finn to inspect.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Confession",
+          "story_beat": "twist",
+          "visual_prompt": "mouse pulling the torn paper page out of the snowfield beside the open book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Repairing the Shared Volume",
+          "speech": "Finn smiles warmly at the honesty, and both animals place a flower beside the mended pages to celebrate their renewed trust.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "fox and mouse sitting together next to a repaired book and a small flower in the snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-14T23:16:05.413897+00:00",
+  "last_preflight_at": "2026-11-15T01:09:07.465441+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-14T23:26:01.016739+00:00",
+    "at": "2026-11-15T01:10:04.437783+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -24931,10 +24988,65 @@
       "resolution": "The scratching noise stops completely, restoring serene quiet across the morning harbor waves.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-2a53e4dc92f728a5f250": {
+      "at": "2026-11-15T01:10:02.621783+00:00",
+      "title": "Pip and Finn's Snowfield Bookmark Secret",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "efe8f1556eb760c50ebe55c4ddddc5645ddaee7f2837f60f82509a594bcbdd36",
+      "story_beats": [
+        {
+          "headline": "A Torn Page Hidden",
+          "speech": "Pip the mouse accidentally tears a page in their only book and quickly hides the loose scrap deep beneath the snowfield drift.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Accident",
+          "story_beat": "reveal",
+          "visual_prompt": "mouse pushing a torn book page under the deep white snow in the open snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Missing Fragment Discovered",
+          "speech": "Finn the fox notices the missing page in the open book and questions Pip about the strange gap in the story.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Discovery",
+          "story_beat": "build",
+          "visual_prompt": "fox standing beside an open book resting on the snowfield, looking intently at the mouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Overcoming fear, Pip unearths the hidden torn page from the drift and places it beside the book for Finn to inspect.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Confession",
+          "story_beat": "twist",
+          "visual_prompt": "mouse pulling the torn paper page out of the snowfield beside the open book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Repairing the Shared Volume",
+          "speech": "Finn smiles warmly at the honesty, and both animals place a flower beside the mended pages to celebrate their renewed trust.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "fox and mouse sitting together next to a repaired book and a small flower in the snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-14T23:26:01.016684+00:00",
+    "at": "2026-11-15T01:10:04.437737+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -24945,21 +25057,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-14T23:26:01.016730+00:00",
+    "at": "2026-11-15T01:10:04.437776+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-14T23:16:43.553006+00:00",
+    "at": "2026-11-15T01:09:54.670195+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-fed2ba6c0ad7db7ff66d",
-    "video_url": "https://www.youtube.com/watch?v=ntaie31PIbM",
+    "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
+    "video_url": "https://www.youtube.com/watch?v=pO8tXRXbBAc",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-14T23:26:01.015775+00:00",
+    "at": "2026-11-15T01:10:04.437186+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -24971,47 +25083,11 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-14T23:26:01.016514+00:00",
-    "collection_status": "collected",
+    "at": "2026-11-15T01:10:04.437677+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 20,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 90,
-        "total": 177
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 178,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 143,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 143,
-        "remaining": 21
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "selection_source": "preload_artifact",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }

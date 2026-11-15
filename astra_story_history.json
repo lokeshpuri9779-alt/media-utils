@@ -10845,6 +10845,62 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-fed2ba6c0ad7db7ff66d",
+      "video_id": "ntaie31PIbM",
+      "confirmed_at": "2026-11-15T01:09:07.826656+00:00",
+      "title": "Milo and Fenn's Harbor Shell Mystery",
+      "plot_fingerprint": "184894d840007d11e15dbd89a04f9417c21bf8ef38a4cfc4bf86fa2201a9c4bd",
+      "story_beats": [
+        {
+          "headline": "The Mysterious Harbor Scratch",
+          "speech": "Listen closely to that strange rhythmic tapping echoing off the wooden piers right now, Fenn.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Initial Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Milo the otter with sleek brown fur and whiskers stands alert on a wooden dock in the harbor environment, pointing a paw toward a floating wooden crate in the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Tracking the Drifting Crate",
+          "speech": "The wooden crate is spinning slowly against the old stone pylons, making that metallic scratching louder every second.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Following the Source",
+          "story_beat": "build",
+          "visual_prompt": "Milo the otter with sleek brown fur crouches low near the water edge in the harbor environment, watching a floating wooden crate bob gently against the stone wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Securing the Loose Hinge",
+          "speech": "I will dive under the crate right now and wedge this smooth round pebble to silence the loose lid.",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "Action Taken",
+          "story_beat": "mechanism",
+          "visual_prompt": "Milo the otter with sleek brown fur swims in the water in the harbor environment, holding a small round grey pebble near a floating wooden crate.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Quiet Waters Restored",
+          "speech": "Look at that, Fenn. The scratching has stopped completely, and the harbor is peacefully quiet once again.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "Successful Outcome",
+          "story_beat": "payoff",
+          "visual_prompt": "Fenn the fox with bright orange fur and a bushy tail sits calmly on the wooden pier in the harbor environment, looking down at the still water where a floating wooden crate drifts quietly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A floating wooden packing crate spins in the harbor current, pressing its loose hinged lid against a glowing mother-of-pearl shell and making an irritating metallic scratching noise.",
+      "decisive_choice": "Milo the otter decides to paddle beneath the floating crate to wedge a smooth round pebble under the loose hinge instead of waiting for the tide to push it ashore.",
+      "resolution": "The scratching noise stops completely, restoring serene quiet across the morning harbor waves."
     }
   ]
 }
