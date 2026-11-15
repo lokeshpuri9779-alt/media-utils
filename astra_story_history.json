@@ -10901,6 +10901,59 @@
       "central_conflict": "A floating wooden packing crate spins in the harbor current, pressing its loose hinged lid against a glowing mother-of-pearl shell and making an irritating metallic scratching noise.",
       "decisive_choice": "Milo the otter decides to paddle beneath the floating crate to wedge a smooth round pebble under the loose hinge instead of waiting for the tide to push it ashore.",
       "resolution": "The scratching noise stops completely, restoring serene quiet across the morning harbor waves."
+    },
+    {
+      "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
+      "video_id": "pO8tXRXbBAc",
+      "confirmed_at": "2026-11-15T02:49:38.585916+00:00",
+      "title": "Pip and Finn's Snowfield Bookmark Secret",
+      "plot_fingerprint": "efe8f1556eb760c50ebe55c4ddddc5645ddaee7f2837f60f82509a594bcbdd36",
+      "story_beats": [
+        {
+          "headline": "A Torn Page Hidden",
+          "speech": "Pip the mouse accidentally tears a page in their only book and quickly hides the loose scrap deep beneath the snowfield drift.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Accident",
+          "story_beat": "reveal",
+          "visual_prompt": "mouse pushing a torn book page under the deep white snow in the open snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Missing Fragment Discovered",
+          "speech": "Finn the fox notices the missing page in the open book and questions Pip about the strange gap in the story.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Discovery",
+          "story_beat": "build",
+          "visual_prompt": "fox standing beside an open book resting on the snowfield, looking intently at the mouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Confession",
+          "speech": "Overcoming fear, Pip unearths the hidden torn page from the drift and places it beside the book for Finn to inspect.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "Confession",
+          "story_beat": "twist",
+          "visual_prompt": "mouse pulling the torn paper page out of the snowfield beside the open book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Repairing the Shared Volume",
+          "speech": "Finn smiles warmly at the honesty, and both animals place a flower beside the mended pages to celebrate their renewed trust.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "fox and mouse sitting together next to a repaired book and a small flower in the snowfield.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

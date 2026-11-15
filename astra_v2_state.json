@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
-  "confirmed_today": 4,
-  "last_attempt_at": "2026-11-15T01:10:02.621806+00:00",
+  "attempts": 6,
+  "confirmed_today": 5,
+  "last_attempt_at": "2026-11-15T02:50:24.791354+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12186,16 +12186,14 @@
       "decisive_choice": "Milo the otter decides to paddle beneath the floating crate to wedge a smooth round pebble under the loose hinge instead of waiting for the tide to push it ashore.",
       "resolution": "The scratching noise stops completely, restoring serene quiet across the morning harbor waves.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "pO8tXRXbBAc": {
-      "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
+    },
+    "rayvan-gemini-2a53e4dc92f728a5f250": {
+      "video_id": "pO8tXRXbBAc",
+      "confirmed_at": "2026-11-15T02:49:38.585916+00:00",
       "title": "Pip and Finn's Snowfield Bookmark Secret",
-      "day": "2026-11-15",
-      "uploaded_at": "2026-11-15T01:10:04.085272+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-15T01:10:04.085272+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "efe8f1556eb760c50ebe55c4ddddc5645ddaee7f2837f60f82509a594bcbdd36",
       "story_beats": [
@@ -12244,16 +12242,75 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "fJU3yi-RrPU": {
+      "content_id": "rayvan-gemini-e5d35ecebbc3bf69c95c",
+      "title": "Jasper and Pip's Island Lantern Share",
+      "day": "2026-11-15",
+      "uploaded_at": "2026-11-15T02:50:26.389368+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "05228b9a5eae091d4aeed4189dab94d470edee4c24138a76609d21e020cea013",
+      "story_beats": [
+        {
+          "headline": "Accusation on the Shore",
+          "speech": "You took the brass lantern closer to your den, Pip, leaving my side of the dark island in shadows all night long.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Initial Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the cat sits on the sand of the island holding a small brass lantern, looking surprised while Jasper the otter points a paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Footprint Evidence",
+          "speech": "Wait, look at these wet paw marks trailing from the waterline straight to the brass lantern instead of coming from your bedding.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Evidence Check",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter kneels down on the island sand, examining wet footprint trails leading toward a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sincere Apology",
+          "speech": "I am truly sorry for blaming you, Pip; the rising tide moved our brass lantern all by itself while we were asleep.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "The Apology",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter bows its head in front of Pip the cat on the island beach beside a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Let us place this brass lantern right on the flat boundary rock so both of us can enjoy its warm glow tonight.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Equitable Sharing",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the cat and Jasper the otter sit side by side on the island shore sharing a glowing brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-15T01:09:07.465441+00:00",
+  "last_preflight_at": "2026-11-15T02:49:38.253688+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-15T01:10:04.437783+00:00",
+    "at": "2026-11-15T02:50:26.745217+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -12270,7 +12327,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-14T14:28:54.392304+00:00",
+  "last_feedback_attempt_at": "2026-11-15T02:50:16.851697+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -25043,10 +25100,65 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-e5d35ecebbc3bf69c95c": {
+      "at": "2026-11-15T02:50:24.791335+00:00",
+      "title": "Jasper and Pip's Island Lantern Share",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "05228b9a5eae091d4aeed4189dab94d470edee4c24138a76609d21e020cea013",
+      "story_beats": [
+        {
+          "headline": "Accusation on the Shore",
+          "speech": "You took the brass lantern closer to your den, Pip, leaving my side of the dark island in shadows all night long.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Initial Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the cat sits on the sand of the island holding a small brass lantern, looking surprised while Jasper the otter points a paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Footprint Evidence",
+          "speech": "Wait, look at these wet paw marks trailing from the waterline straight to the brass lantern instead of coming from your bedding.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Evidence Check",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter kneels down on the island sand, examining wet footprint trails leading toward a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sincere Apology",
+          "speech": "I am truly sorry for blaming you, Pip; the rising tide moved our brass lantern all by itself while we were asleep.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "The Apology",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter bows its head in front of Pip the cat on the island beach beside a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Let us place this brass lantern right on the flat boundary rock so both of us can enjoy its warm glow tonight.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Equitable Sharing",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the cat and Jasper the otter sit side by side on the island shore sharing a glowing brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-15T01:10:04.437737+00:00",
+    "at": "2026-11-15T02:50:26.745138+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -25057,21 +25169,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-15T01:10:04.437776+00:00",
+    "at": "2026-11-15T02:50:26.745203+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-15T01:09:54.670195+00:00",
+    "at": "2026-11-15T02:50:16.605385+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
-    "video_url": "https://www.youtube.com/watch?v=pO8tXRXbBAc",
+    "content_id": "rayvan-gemini-e5d35ecebbc3bf69c95c",
+    "video_url": "https://www.youtube.com/watch?v=fJU3yi-RrPU",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-15T01:10:04.437186+00:00",
+    "at": "2026-11-15T02:50:26.744203+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -25083,7 +25195,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-15T01:10:04.437677+00:00",
+    "at": "2026-11-15T02:50:26.745038+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
