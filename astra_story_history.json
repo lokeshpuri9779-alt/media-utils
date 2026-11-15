@@ -10954,6 +10954,59 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-e5d35ecebbc3bf69c95c",
+      "video_id": "fJU3yi-RrPU",
+      "confirmed_at": "2026-11-15T07:41:32.333141+00:00",
+      "title": "Jasper and Pip's Island Lantern Share",
+      "plot_fingerprint": "05228b9a5eae091d4aeed4189dab94d470edee4c24138a76609d21e020cea013",
+      "story_beats": [
+        {
+          "headline": "Accusation on the Shore",
+          "speech": "You took the brass lantern closer to your den, Pip, leaving my side of the dark island in shadows all night long.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Initial Dispute",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the cat sits on the sand of the island holding a small brass lantern, looking surprised while Jasper the otter points a paw.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Footprint Evidence",
+          "speech": "Wait, look at these wet paw marks trailing from the waterline straight to the brass lantern instead of coming from your bedding.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "Evidence Check",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the otter kneels down on the island sand, examining wet footprint trails leading toward a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Sincere Apology",
+          "speech": "I am truly sorry for blaming you, Pip; the rising tide moved our brass lantern all by itself while we were asleep.",
+          "visual": "otter",
+          "story_environment": "island",
+          "label": "The Apology",
+          "story_beat": "twist",
+          "visual_prompt": "Jasper the otter bows its head in front of Pip the cat on the island beach beside a small brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Let us place this brass lantern right on the flat boundary rock so both of us can enjoy its warm glow tonight.",
+          "visual": "cat",
+          "story_environment": "island",
+          "label": "Equitable Sharing",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the cat and Jasper the otter sit side by side on the island shore sharing a glowing brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
