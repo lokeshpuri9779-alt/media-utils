@@ -11066,6 +11066,62 @@
       "video_id": "-5py-I5i3bg",
       "confirmed_at": "2026-11-15T10:00:11.309091+00:00",
       "title": "Why bangladesh vs south africa Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-32ef031becbedf825d77",
+      "video_id": "WZTFUMG-hfA",
+      "confirmed_at": "2026-11-15T15:30:22.074569+00:00",
+      "title": "Sammy and Pip's City Pavement Mosaic Jam",
+      "plot_fingerprint": "beb0ac5be288df345b418245ebf92c4cbc888b1f1fb5ff117b8325e8eb699b86",
+      "story_beats": [
+        {
+          "headline": "The Blocked Pavement Pattern",
+          "speech": "Look closely at the shifted stone mosaic, Pip. The entire city courtyard pattern is completely locked and blocked by this single tilted flagstone.",
+          "visual": "mouse",
+          "story_environment": "city",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse stands in the city stone courtyard with a worried expression, pointing a tiny paw at a tilted mosaic flagstone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Copper Token",
+          "speech": "A shiny copper token is stuck tight beneath the heavy stone edge. We need to reach it before the evening shadows lengthen across the square.",
+          "visual": "mouse",
+          "story_environment": "city",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse kneels beside the city stone courtyard pavement, peering closely into the dark gap beneath the tilted mosaic flagstone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lever Mechanism",
+          "speech": "Hold this small wooden twig firmly right against the stone base, Sammy, while I brace my paws against the rough pavement surface.",
+          "visual": "squirrel",
+          "story_environment": "city",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Sammy the squirrel squeezes into the city stone courtyard gap, using a small wooden twig to push firmly against the wedged mosaic flagstone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Mosaic Payoff",
+          "speech": "The copper token rolled right out into the sunlight. The paving stones fit together perfectly now across the entire city square.",
+          "visual": "squirrel",
+          "story_environment": "city",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Sammy the squirrel sits proudly in the city stone courtyard next to the restored mosaic pavement, holding a bright copper token.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A loose paving stone jams the central city courtyard mosaic pattern, trapping a polished copper token underneath.",
+      "decisive_choice": "Sammy decides to crawl beneath the heavy raised flagstone to push the wedged token free instead of running away.",
+      "resolution": "The copper token pops free into the open air, allowing the paving stone to settle flat into the complete mosaic design."
     }
   ]
 }
