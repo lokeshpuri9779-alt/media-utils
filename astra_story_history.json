@@ -11122,6 +11122,62 @@
       "central_conflict": "A loose paving stone jams the central city courtyard mosaic pattern, trapping a polished copper token underneath.",
       "decisive_choice": "Sammy decides to crawl beneath the heavy raised flagstone to push the wedged token free instead of running away.",
       "resolution": "The copper token pops free into the open air, allowing the paving stone to settle flat into the complete mosaic design."
+    },
+    {
+      "content_id": "rayvan-gemini-7fb62ccda9b46f055bcd",
+      "video_id": "MwkwAJlwguk",
+      "confirmed_at": "2026-11-15T20:33:50.512390+00:00",
+      "title": "Pip the Mouse and Barnaby the Owl's Railway Platform Riddle",
+      "plot_fingerprint": "d077baebac517f0d09727c0d25caeb35cfb41cf35a8629852328c9decdafefb3",
+      "story_beats": [
+        {
+          "headline": "The Blocked Gate",
+          "speech": "Look closely at the brass slot here, Barnaby. Something thick is wedged tightly inside the railway mechanism.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the mouse sniffing a damp paper ticket stuck inside a brass gate slot on a dusty railway platform.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Jam",
+          "speech": "That swollen paper ticket is completely blocking the spring-loaded railway barrier from sliding open for travelers.",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "Second Clue",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the owl tilting his head to inspect the jammed ticket slot on a wooden railway platform bench.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Squeeze",
+          "speech": "I will crawl directly into the tight metal opening and push the soggy ticket outward with my paws.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Action Taken",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the mouse squeezing inside the narrow brass ticket slot on a busy railway platform wall.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Open Path",
+          "speech": "The ticket is free at last, and the platform gate glides open effortlessly for everyone!",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "Final Solution",
+          "story_beat": "payoff",
+          "visual_prompt": "Barnaby the owl watching the sliding railway gate open freely on a clean railway platform floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A damp paper ticket jams tightly inside the brass railway station gate slot, preventing passengers from exiting the railway platform.",
+      "decisive_choice": "Pip the mouse decides to squeeze inside the narrow brass ticket slot to push the wedged paper ticket outward.",
+      "resolution": "The damp ticket pops free into the open air, allowing the spring gate to slide open smoothly."
     }
   ]
 }
