@@ -5443,6 +5443,19 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-f2817a8f54b7051aa2c1",
+      "story_sha256": "517d2509b7186e0887f6b7cf52564e2484b30c4fb9f92ef086f9deb14c536249",
+      "approved": false,
+      "issues": [
+        "ai_editorial_rejection",
+        "The story premise, setting, and thematic elements (railway, midnight, animal protagonists, mechanical obstruction) are highly derivative of the provided list of recent publications, specifically 'The Badger and the Midnight Railway Mystery'.",
+        "The narrative structure and causal mechanism are overly simplistic and lack the depth required for a unique, original story.",
+        "The story relies on a repetitive 'animal solves mechanical problem at a railway' trope that has been exhausted by the provided publication history."
+      ],
+      "record": null,
+      "causal_repeat_evidence": null
     }
   ]
 }
