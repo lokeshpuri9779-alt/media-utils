@@ -11007,6 +11007,59 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
+      "video_id": "sbPTTyRgCpc",
+      "confirmed_at": "2026-11-15T08:43:58.826065+00:00",
+      "title": "Orion's Midnight Misjudgment",
+      "plot_fingerprint": "fa113cf332d15f95ca34fdb2ae68043782d49e4918924403581bedfb7e868e55",
+      "story_beats": [
+        {
+          "headline": "The Observatory Night",
+          "speech": "Orion stares intently through the tall observatory windows, wondering if the tiny mechanical pulse belongs to a distant traveling star.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Look",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands atop an observatory desk inside a quiet observatory, staring with wide eyes at a brass clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lantern Comparison",
+          "speech": "Holding a glowing lantern close to the wooden table, Orion measures the steady ticking rhythm against the warm flame.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Close Study",
+          "story_beat": "build",
+          "visual_prompt": "An owl holds a glowing lantern right next to a small ticking clock on a desk inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Close Inspection",
+          "speech": "Leaning forward with curious feathers ruffled, Orion watches the spinning hands reflect the bright lantern illumination.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Detailed Check",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl leans close to examine the face of a brass clock illuminated by a nearby lantern inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Discovery",
+          "speech": "Recognizing the mechanical gears inside, Orion steps back calmly as the lantern light reveals the genuine nature of the desk clock.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Final Clarity",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl stands back peacefully beside a glowing lantern and a resting clock on a wooden desk inside an observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }

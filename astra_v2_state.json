@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-15",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
-  "last_attempt_at": "2026-11-15T07:42:15.159334+00:00",
+  "attempts": 8,
+  "confirmed_today": 7,
+  "last_attempt_at": "2026-11-15T08:44:51.764963+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12300,16 +12300,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "sbPTTyRgCpc": {
-      "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
+    },
+    "rayvan-gemini-8032b1fef80d4c028f16": {
+      "video_id": "sbPTTyRgCpc",
+      "confirmed_at": "2026-11-15T08:43:58.826065+00:00",
       "title": "Orion's Midnight Misjudgment",
-      "day": "2026-11-15",
-      "uploaded_at": "2026-11-15T07:42:16.784022+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-15T07:42:16.784022+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "fa113cf332d15f95ca34fdb2ae68043782d49e4918924403581bedfb7e868e55",
       "story_beats": [
@@ -12358,16 +12356,30 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "-5py-I5i3bg": {
+      "content_id": "trend-brief-2026-11-15-am",
+      "title": "Why bangladesh vs south africa Is Getting Attention Now | RAYVAN",
+      "day": "2026-11-15",
+      "uploaded_at": "2026-11-15T08:44:53.466438+00:00",
+      "genre": "current",
+      "format": "long",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-15T07:41:28.424412+00:00",
+  "last_preflight_at": "2026-11-15T08:43:58.480556+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-15T07:42:17.159157+00:00",
+    "at": "2026-11-15T08:44:55.549973+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -25267,10 +25279,20 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "trend-brief-2026-11-15-am": {
+      "at": "2026-11-15T08:44:51.764941+00:00",
+      "title": "Why bangladesh vs south africa Is Getting Attention Now | RAYVAN",
+      "format": "long",
+      "plot_key": "",
+      "plot_fingerprint": "",
+      "story_beats": [],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-15T07:42:17.159099+00:00",
+    "at": "2026-11-15T08:44:55.549932+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -25281,21 +25303,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-15T07:42:17.159146+00:00",
+    "at": "2026-11-15T08:44:55.549967+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-15T07:42:08.302799+00:00",
+    "at": "2026-11-15T08:44:44.459057+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
-    "video_url": "https://www.youtube.com/watch?v=sbPTTyRgCpc",
+    "content_id": "trend-brief-2026-11-15-am",
+    "video_url": "https://www.youtube.com/watch?v=-5py-I5i3bg",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-15T07:42:17.158343+00:00",
+    "at": "2026-11-15T08:44:55.549347+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -25307,7 +25329,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-15T07:42:17.159018+00:00",
+    "at": "2026-11-15T08:44:55.549872+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
