@@ -155,6 +155,30 @@ class RewriteQueueTests(unittest.TestCase):
             self.assertFalse(result["rewrites"][0]["story"]["production_ready"])
             self.assertEqual(result["rewrites"][0]["story"]["content_id"], "replacement")
 
+    def test_each_rewrite_receives_prior_successful_drafts_from_same_batch(self):
+        p = packet()
+        second = copy.deepcopy(p["candidates"][0])
+        second.update(candidate_id="c2", source_sha256="b" * 64)
+        p["candidates"].append(second)
+        observed_prior_lengths = []
+
+        def generate(excluded_ids, excluded_titles, prior_stories, premise):
+            observed_prior_lengths.append(len(prior_stories))
+            self.assertEqual(len(prior_stories), len(observed_prior_lengths) - 1)
+            return {
+                "content_id": "story-" + premise["candidate_id"],
+                "title": "Distinct story " + premise["candidate_id"],
+                "production_ready": True,
+            }
+
+        result = rewrite_packet(p, generator=generate)
+        self.assertEqual(observed_prior_lengths, [0, 1])
+        self.assertEqual(result["selected_for_rewrite"], 2)
+        self.assertEqual(result["approved_count"], 0)
+        self.assertTrue(all(row["approved"] is False for row in result["rewrites"]))
+        self.assertTrue(all(row["story"]["production_ready"] is False
+                            for row in result["rewrites"]))
+
     def test_rewrite_is_not_approved_or_production_ready(self):
         result = rewrite_packet(packet(), generator=lambda *a, **k: {"content_id": "new-1", "title": "New story", "production_ready": True})
         self.assertEqual(result["approved_count"], 0)
