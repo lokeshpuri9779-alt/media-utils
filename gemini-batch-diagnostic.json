@@ -1,18 +1,21 @@
 {
-  "observed_at": "2026-11-15T06:26:20.986533+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-15T18:49:59.506218+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 17,
+      "index": 11,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 15,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 1,
-  "review_deferred": 16,
+  "reviewed": 0,
+  "review_deferred": 14,
   "approved": 0,
   "review_issues": [
-    "publication_renderer_incompatible: shot 2: Directed scene requires verified scene artwork: unsupported_mechanical_rig_action_requires_scene_art",
     "review_deferred:rate_limited",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
@@ -73,22 +76,22 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 14,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 14
     },
     "renderer_status_counts": {
-      "incompatible": 1,
-      "structurally_eligible": 16
+      "incompatible": 2,
+      "structurally_eligible": 12
     },
     "renderer_reason_counts": {
-      "missing_verified_artwork": 1,
-      "none": 16
+      "none": 12,
+      "unsupported_human_actor": 2
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 17
+      "all_shots_recognized": 14
     },
-    "scene_taxonomy_recognized_shots": 68,
+    "scene_taxonomy_recognized_shots": 56,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
