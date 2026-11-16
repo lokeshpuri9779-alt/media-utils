@@ -8255,11 +8255,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-8032b1fef80d4c028f16",
-      "title": "Orion's Midnight Misjudgment",
-      "hook": "The Observatory Night",
-      "question": "Why did Orion the owl mistake the ticking clock for a moving star?",
-      "answer": "Orion compared the rhythmic ticking of the brass clock to the steady cadence of the lantern light on the observatory wall.",
+      "content_id": "rayvan-gemini-bde0f3db6187225bbc1d",
+      "title": "Barnaby and Pip's Coastal Beacon Signal Exchange",
+      "hook": "The Ambiguous Flash",
+      "question": "How can a misunderstood signal across the water be corrected?",
+      "answer": "By adjusting the pattern of the lantern to establish a clear and understood response.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8267,224 +8267,300 @@
       ],
       "story_beats": [
         {
-          "headline": "The Observatory Night",
-          "speech": "Orion stares intently through the tall observatory windows, wondering if the tiny mechanical pulse belongs to a distant traveling star.",
+          "headline": "The Ambiguous Flash",
+          "speech": "The glowing lantern sends out a hesitant double blink from the tall lighthouse window, confusing the watcher.",
           "visual": "owl",
-          "story_environment": "observatory",
-          "label": "First Look",
+          "story_environment": "lighthouse",
+          "label": "Initial Signal",
           "story_beat": "reveal",
-          "visual_prompt": "An owl stands atop an observatory desk inside a quiet observatory, staring with wide eyes at a brass clock.",
+          "visual_prompt": "An owl stands inside the lighthouse tower, staring out through the round window with a questioning expression beside a single lantern.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Lantern Comparison",
-          "speech": "Holding a glowing lantern close to the wooden table, Orion measures the steady ticking rhythm against the warm flame.",
-          "visual": "owl",
-          "story_environment": "observatory",
-          "label": "Close Study",
+          "headline": "The Observant Observer",
+          "speech": "From across the stone ledge, the rabbit peers into the darkness, tilting its long ears at the puzzling light.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Watching",
           "story_beat": "build",
-          "visual_prompt": "An owl holds a glowing lantern right next to a small ticking clock on a desk inside an observatory.",
+          "visual_prompt": "A rabbit sits on the stone balcony of the lighthouse, looking intently outward with an uncertain expression.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Close Inspection",
-          "speech": "Leaning forward with curious feathers ruffled, Orion watches the spinning hands reflect the bright lantern illumination.",
+          "headline": "The Adjusted Rhythm",
+          "speech": "Barnaby shifts the lantern deliberately into a steady, rhythmic pulsing glow to clear up all uncertainty.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Correction",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl uses its wing to adjust a lantern inside the lighthouse, creating a bright and steady beam.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Answer",
+          "speech": "The responding flash shines brightly back from the distant shore, confirming that the message is understood at last.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Confirmation",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit on the lighthouse balcony smiles happily while watching a bright responding light in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A flashing beacon signal is misinterpreted by the watcher across the water, causing confusion instead of guidance.",
+      "decisive_choice": "Barnaby decides to change the lantern flash rhythm deliberately rather than repeating the confusing sequence.",
+      "resolution": "The clear new signal is immediately acknowledged by a answering flash, restoring perfect communication.",
+      "visual_bible": {
+        "style": "Clean animated animal illustration style with warm lighting and clear focal points.",
+        "characters": {
+          "owl": "A wise brown owl with expressive eyes and natural feathered wings.",
+          "rabbit": "A soft grey rabbit with long attentive ears and a gentle expression."
+        },
+        "locations": {
+          "lighthouse": "A rustic coastal lighthouse stone tower overlooking the dark sea."
+        },
+        "objects": {
+          "lantern": "A small brass oil lantern casting a warm golden glow."
+        }
+      },
+      "plot_fingerprint": "c1ffcf24e03b42518ff8fd80e293051c717605d0c60219b664b2bc4097feb59e"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-16bc20f9322c2d9c4227",
+      "title": "Felix the Cat and the Village Exchange Error",
+      "hook": "The Mistaken Delivery",
+      "question": "What happens when Felix accidentally accepts the wrong delivery box on the village square pavement?",
+      "answer": "Felix tracks down the rightful owner to return the swapped item, fully restoring absolute honesty to the village.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Felix discovered the heavy wooden box was completely wrong after returning home from the busy village square.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Mistake Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "A cat standing on the cobblestone pavement in a sunlit village holding a closed wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Secret",
+          "speech": "Instead of speaking up immediately, Felix kept the strange box hidden behind the wooden fence while worrying about the mistake.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Concealment",
+          "story_beat": "build",
+          "visual_prompt": "A cat hiding beside a weathered wooden fence in a quiet village alleyway with a small box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Choice",
+          "speech": "Guilt finally convinced Felix to lift the box and carry it back across the open village path to fix the error.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Decision",
+          "story_beat": "twist",
+          "visual_prompt": "A cat walking purposefully across the open cobblestone path in a village carrying a closed box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Trust",
+          "speech": "Felix handed the correct box back to its grateful owner on the sunny village square, proving complete honesty.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "A cat sitting happily on the sunlit cobblestone pavement in a village beside a returned box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Felix the cat accidentally picks up a wrongly exchanged box on the village square pavement, hiding his brief moment of careless confusion from his neighbors.",
+      "decisive_choice": "Felix decides to walk openly back to the village square to hand over the mismatched box to its true owner rather than keeping the secret.",
+      "resolution": "The correct box is handed back without delay, restoring complete trust and honesty across the sunny village square.",
+      "visual_bible": {
+        "style": "Bright storybook 3D animation with warm lighting and detailed natural textures.",
+        "characters": {
+          "cat": "A sleek ginger cat with bright green eyes and soft orange fur."
+        },
+        "locations": {
+          "village": "A charming rustic village featuring cobblestone paths, weathered wooden fences, and sunlit stone walls."
+        },
+        "objects": {
+          "box": "A small square wooden storage box with a simple metal clasp."
+        }
+      },
+      "plot_fingerprint": "45633c8fa3047be868d19e8f6eaa022512028a36e19c8bce044d89c44677887f"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-1daed03ed2696db408e6",
+      "title": "Finn and Orion's Compass Needle Mystery",
+      "hook": "Finding the Found Compass",
+      "question": "Does the flickering shadow across the forest clearing prove the ancient brass compass points toward a shifting trail?",
+      "answer": "A second close-up observation disproves the initial warning, revealing the needle is simply resting steady upon undisturbed moss.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "Finding the Found Compass",
+          "speech": "Look closely at the brass casing, Orion. The trembling needle seems to warn us of a sudden hidden path hazard.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Reveal Beat",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox stands inside the quiet forest, looking down at a small brass compass resting on a tree stump with a worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shadows Interfere",
+          "speech": "The flickering branches overhead cast dancing shadows across the dial, making the compass needle look like it is spinning out of control.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Build Beat",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl sits on a low forest branch above the stump, peering down intently at the compass while dark leaves cast moving shadows over the glass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Direct Sunlight Inspection",
+          "speech": "Let us step closer and check the dial directly under the bright sunlight before we decide to turn back in alarm.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Mechanism Beat",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox leans forward in the forest, nudging the brass compass slightly into a patch of bright unfiltered sunlight to test the needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Truth",
+          "speech": "The needle is completely steady after all. Our initial alarm was simply a trick of the moving woodland shadows.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Payoff Beat",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl lands gracefully beside the forest stump, gazing down at the perfectly still compass needle with a calm and relieved expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn the fox and Orion the owl find an ancient brass compass lying upon a mossy stump, and the shifting shadows make the needle appear to spin wildly, causing a false alarm about a trail hazard.",
+      "decisive_choice": "Finn decides to step closer to inspect the compass face directly under the steady midday sun instead of fleeing blindly from the perceived danger.",
+      "resolution": "Finn clearly observes that the compass needle is entirely motionless and secure, proving the trail ahead is completely safe and peaceful.",
+      "visual_bible": {
+        "style": "Warm, naturalistic storybook illustration style with soft cinematic lighting and painterly textures.",
+        "characters": {
+          "fox": "Finn is a bright red fox with a bushy tail, white chest fur, and expressive amber eyes.",
+          "owl": "Orion is a wise brown-and-white barn owl with large, attentive dark eyes and soft feathered wings."
+        },
+        "locations": {
+          "forest": "A serene, sun-dappled woodland filled with ancient trees, soft mossy ground, and scattered fallen leaves."
+        },
+        "objects": {
+          "compass": "An antique pocket compass crafted from polished brass with a clear glass face and a delicate pointing needle."
+        }
+      },
+      "plot_fingerprint": "e16cb042d9038c7265f646a8e26cd1310ee88e039014cdb618910f570242898b"
+    },
+    {
+      "genre": "fiction",
+      "kind": "authored_causal_story",
+      "production_ready": true,
+      "content_id": "rayvan-gemini-32aa2189a83b9407e41a",
+      "title": "Orion's Clockwork Lantern Dial Mistake",
+      "hook": "The Midnight Tick",
+      "question": "Why does Orion the owl mistake a ticking clock for a glowing lantern in the observatory?",
+      "answer": "Orion mistakes the brass clock face for a signal lantern because the bright pendulum swing mimics a swaying flame in the dim observatory.",
+      "source": "",
+      "keywords": [
+        "original fiction",
+        "short story"
+      ],
+      "story_beats": [
+        {
+          "headline": "The Midnight Tick",
+          "speech": "An unfamiliar rhythmic ticking echoes across the silent observatory floor while midnight shadows stretch long and cold.",
           "visual": "owl",
           "story_environment": "observatory",
-          "label": "Detailed Check",
+          "label": "First Observation",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the observatory, blinking in surprise at a brass clock placed near the telescope stand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Glowing Misjudgment",
+          "speech": "The bright polished brass surface glints under the moonlight, tricking the watchful bird into expecting a guiding flame.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Second Guess",
+          "story_beat": "build",
+          "visual_prompt": "An owl tilts its head in the observatory, staring intently at a brass clock while feathers ripple in the cool draft.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Closer Inspection",
+          "speech": "Stepping closer to the mysterious sound reveals the swinging brass pendulum and the absence of any warm fire.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Decisive Step",
           "story_beat": "mechanism",
-          "visual_prompt": "An owl leans close to examine the face of a brass clock illuminated by a nearby lantern inside an observatory.",
+          "visual_prompt": "An owl perches near a brass clock on a wooden desk inside the observatory, peering directly at the glass face.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
           "headline": "The True Discovery",
-          "speech": "Recognizing the mechanical gears inside, Orion steps back calmly as the lantern light reveals the genuine nature of the desk clock.",
+          "speech": "Understanding the gentle mechanical movement at last, the wise bird rests quietly as the steady ticking continues.",
           "visual": "owl",
           "story_environment": "observatory",
           "label": "Final Clarity",
           "story_beat": "payoff",
-          "visual_prompt": "An owl stands back peacefully beside a glowing lantern and a resting clock on a wooden desk inside an observatory.",
+          "visual_prompt": "An owl rests peacefully inside the observatory with a brass clock resting steadily beside its talons under the starlight.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "Orion the owl mistakes a ticking desk clock for a celestial navigation marker on the observatory desk.",
-      "decisive_choice": "Orion decides to set the brass lantern directly beside the ticking clock to test if their glowing reflections match.",
-      "resolution": "The bright lantern glow clearly reveals the moving hands and spinning gears of the clock, ending Orion's mistaken inference.",
+      "central_conflict": "Orion the owl mistakes the steady metallic ticking of a brass clock for a signaling lantern during a quiet night watch in the observatory.",
+      "decisive_choice": "Orion decides to flutter closer to examine the ticking clock face directly instead of flying away from the rhythmic sound.",
+      "resolution": "Orion clearly observes the swinging pendulum mechanism inside the clock, realizes it is not a lantern, and calmly adjusts his night watch duties.",
       "visual_bible": {
-        "style": "clean cinematic digital illustration with rich atmospheric lighting and detailed animal textures",
+        "style": "Clean digital storybook illustration with warm cinematic lighting and clear textures",
         "characters": {
-          "owl": "Orion is a natural horned owl with soft brown and cream feathers, bright amber eyes, and natural plumage without clothing."
+          "owl": "A wise brown owl with large yellow eyes and detailed feather patterns"
         },
         "locations": {
-          "observatory": "A dusty stone observatory filled with star charts, arched windows, and wooden desks."
+          "observatory": "A stone tower room filled with brass instruments, star charts, and arched windows"
         },
         "objects": {
-          "clock": "A small round brass desk clock with visible moving hands.",
-          "lantern": "A classic metal lantern casting a warm yellow glow."
+          "clock": "A round polished brass desk clock with visible hands and a pendulum",
+          "lantern": "A traditional metal lantern with a glass pane"
         }
       },
-      "plot_fingerprint": "fa113cf332d15f95ca34fdb2ae68043782d49e4918924403581bedfb7e868e55"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-e5d35ecebbc3bf69c95c",
-      "title": "Jasper and Pip's Island Lantern Share",
-      "hook": "Accusation on the Shore",
-      "question": "How can Jasper the otter and Pip the cat fairly share a single brass lantern on the shore?",
-      "answer": "They agree to set the lantern on a smooth rock midway between their resting spots.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "Accusation on the Shore",
-          "speech": "You took the brass lantern closer to your den, Pip, leaving my side of the dark island in shadows all night long.",
-          "visual": "cat",
-          "story_environment": "island",
-          "label": "Initial Dispute",
-          "story_beat": "reveal",
-          "visual_prompt": "Pip the cat sits on the sand of the island holding a small brass lantern, looking surprised while Jasper the otter points a paw.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Footprint Evidence",
-          "speech": "Wait, look at these wet paw marks trailing from the waterline straight to the brass lantern instead of coming from your bedding.",
-          "visual": "otter",
-          "story_environment": "island",
-          "label": "Evidence Check",
-          "story_beat": "build",
-          "visual_prompt": "Jasper the otter kneels down on the island sand, examining wet footprint trails leading toward a small brass lantern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Sincere Apology",
-          "speech": "I am truly sorry for blaming you, Pip; the rising tide moved our brass lantern all by itself while we were asleep.",
-          "visual": "otter",
-          "story_environment": "island",
-          "label": "The Apology",
-          "story_beat": "twist",
-          "visual_prompt": "Jasper the otter bows its head in front of Pip the cat on the island beach beside a small brass lantern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Shared Illumination",
-          "speech": "Let us place this brass lantern right on the flat boundary rock so both of us can enjoy its warm glow tonight.",
-          "visual": "cat",
-          "story_environment": "island",
-          "label": "Equitable Sharing",
-          "story_beat": "payoff",
-          "visual_prompt": "Pip the cat and Jasper the otter sit side by side on the island shore sharing a glowing brass lantern.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Jasper the otter accuses Pip the cat of hoarding the single brass lantern on the island shore, when in truth the tide simply shifted it out of reach.",
-      "decisive_choice": "Jasper decides to inspect the sand footprints closely rather than arguing further with Pip.",
-      "resolution": "Jasper apologizes for the false blame, and both animals place the brass lantern evenly between them.",
-      "visual_bible": {
-        "style": "Warm digital illustration with soft lighting and clear puppet silhouettes.",
-        "characters": {
-          "otter": "Jasper the otter is a sleek brown otter with natural fur and expressive eyes.",
-          "cat": "Pip the cat is a nimble ginger cat with pointed ears and soft fur."
-        },
-        "locations": {
-          "island": "A tranquil sandy island shore featuring smooth boundary rocks and gentle tide ripples."
-        },
-        "objects": {
-          "lantern": "A small polished brass lantern that casts a warm golden light."
-        }
-      },
-      "plot_fingerprint": "05228b9a5eae091d4aeed4189dab94d470edee4c24138a76609d21e020cea013"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
-      "content_id": "rayvan-gemini-2a53e4dc92f728a5f250",
-      "title": "Pip and Finn's Snowfield Bookmark Secret",
-      "hook": "A Torn Page Hidden",
-      "question": "Can a mouse and a fox share a single book in the snowfield without hiding torn pages?",
-      "answer": "Yes, by confessing the accidental damage and repairing the book together.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "A Torn Page Hidden",
-          "speech": "Pip the mouse accidentally tears a page in their only book and quickly hides the loose scrap deep beneath the snowfield drift.",
-          "visual": "mouse",
-          "story_environment": "snowfield",
-          "label": "Accident",
-          "story_beat": "reveal",
-          "visual_prompt": "mouse pushing a torn book page under the deep white snow in the open snowfield.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Missing Fragment Discovered",
-          "speech": "Finn the fox notices the missing page in the open book and questions Pip about the strange gap in the story.",
-          "visual": "fox",
-          "story_environment": "snowfield",
-          "label": "Discovery",
-          "story_beat": "build",
-          "visual_prompt": "fox standing beside an open book resting on the snowfield, looking intently at the mouse.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Honest Confession",
-          "speech": "Overcoming fear, Pip unearths the hidden torn page from the drift and places it beside the book for Finn to inspect.",
-          "visual": "mouse",
-          "story_environment": "snowfield",
-          "label": "Confession",
-          "story_beat": "twist",
-          "visual_prompt": "mouse pulling the torn paper page out of the snowfield beside the open book.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Repairing the Shared Volume",
-          "speech": "Finn smiles warmly at the honesty, and both animals place a flower beside the mended pages to celebrate their renewed trust.",
-          "visual": "fox",
-          "story_environment": "snowfield",
-          "label": "Resolution",
-          "story_beat": "payoff",
-          "visual_prompt": "fox and mouse sitting together next to a repaired book and a small flower in the snowfield.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "Pip the mouse accidentally tears a page in the scarce shared book on the snowfield and hides the loose scrap under the snow.",
-      "decisive_choice": "Pip decides to dig up the hidden torn page and show it to Finn the fox rather than keeping the secret.",
-      "resolution": "Finn accepts the honesty, and both animals use a small wooden box and flower petals to mend the torn page together on the snowfield.",
-      "visual_bible": {
-        "style": "A charming and gentle animated storybook style with soft lighting and clear animal shapes.",
-        "characters": {
-          "mouse": "A small brown mouse with large round ears and a long tail, appearing entirely natural.",
-          "fox": "A slender red fox with a white-tipped tail and alert triangular ears, appearing entirely natural."
-        },
-        "locations": {
-          "snowfield": "A vast, open expanse of powdery white snow under a clear blue winter sky."
-        },
-        "objects": {
-          "book": "An old hardcover book with weathered parchment pages.",
-          "flower": "A single bright blue blossom plucked from a hardy winter stem."
-        }
-      },
-      "plot_fingerprint": "efe8f1556eb760c50ebe55c4ddddc5645ddaee7f2837f60f82509a594bcbdd36"
+      "plot_fingerprint": "4b5c7f02914fbf94eaf92f26bd4d99ec2068e5963d12c7219ce08b66e9c9b251"
     }
   ]
 }
