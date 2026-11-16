@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-11-16T08:54:00.716338+00:00",
+  "attempts": 7,
+  "confirmed_today": 6,
+  "last_attempt_at": "2026-11-16T18:24:33.514341+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12723,29 +12723,86 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "nyeLcq8abiQ": {
-      "content_id": "trend-brief-2026-11-16-am",
+    },
+    "trend-brief-2026-11-16-am": {
+      "video_id": "nyeLcq8abiQ",
+      "confirmed_at": "2026-11-16T18:23:41.289409+00:00",
       "title": "Why hang seng index Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-16",
-      "uploaded_at": "2026-11-16T08:54:02.538053+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-16T08:54:02.538053+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
+      "genre": "current"
+    }
+  },
+  "pending": {
+    "-uTgKDS8Kvg": {
+      "content_id": "rayvan-gemini-1daed03ed2696db408e6",
+      "title": "Finn and Orion's Compass Needle Mystery",
+      "day": "2026-11-16",
+      "uploaded_at": "2026-11-16T18:24:34.884693+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e16cb042d9038c7265f646a8e26cd1310ee88e039014cdb618910f570242898b",
+      "story_beats": [
+        {
+          "headline": "Finding the Found Compass",
+          "speech": "Look closely at the brass casing, Orion. The trembling needle seems to warn us of a sudden hidden path hazard.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Reveal Beat",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox stands inside the quiet forest, looking down at a small brass compass resting on a tree stump with a worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shadows Interfere",
+          "speech": "The flickering branches overhead cast dancing shadows across the dial, making the compass needle look like it is spinning out of control.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Build Beat",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl sits on a low forest branch above the stump, peering down intently at the compass while dark leaves cast moving shadows over the glass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Direct Sunlight Inspection",
+          "speech": "Let us step closer and check the dial directly under the bright sunlight before we decide to turn back in alarm.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Mechanism Beat",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox leans forward in the forest, nudging the brass compass slightly into a patch of bright unfiltered sunlight to test the needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Truth",
+          "speech": "The needle is completely steady after all. Our initial alarm was simply a trick of the moving woodland shadows.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Payoff Beat",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl lands gracefully beside the forest stump, gazing down at the perfectly still compass needle with a calm and relieved expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-16T08:52:47.483925+00:00",
+  "last_preflight_at": "2026-11-16T18:23:40.922745+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-16T08:54:05.565670+00:00",
+    "at": "2026-11-16T18:24:35.148404+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -26007,10 +26064,65 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-1daed03ed2696db408e6": {
+      "at": "2026-11-16T18:24:33.514322+00:00",
+      "title": "Finn and Orion's Compass Needle Mystery",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e16cb042d9038c7265f646a8e26cd1310ee88e039014cdb618910f570242898b",
+      "story_beats": [
+        {
+          "headline": "Finding the Found Compass",
+          "speech": "Look closely at the brass casing, Orion. The trembling needle seems to warn us of a sudden hidden path hazard.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Reveal Beat",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox stands inside the quiet forest, looking down at a small brass compass resting on a tree stump with a worried expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shadows Interfere",
+          "speech": "The flickering branches overhead cast dancing shadows across the dial, making the compass needle look like it is spinning out of control.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Build Beat",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl sits on a low forest branch above the stump, peering down intently at the compass while dark leaves cast moving shadows over the glass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Direct Sunlight Inspection",
+          "speech": "Let us step closer and check the dial directly under the bright sunlight before we decide to turn back in alarm.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Mechanism Beat",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox leans forward in the forest, nudging the brass compass slightly into a patch of bright unfiltered sunlight to test the needle.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Peaceful Truth",
+          "speech": "The needle is completely steady after all. Our initial alarm was simply a trick of the moving woodland shadows.",
+          "visual": "owl",
+          "story_environment": "forest",
+          "label": "Payoff Beat",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl lands gracefully beside the forest stump, gazing down at the perfectly still compass needle with a calm and relieved expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-16T08:54:05.565627+00:00",
+    "at": "2026-11-16T18:24:35.148349+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -26021,21 +26133,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-16T08:54:05.565662+00:00",
+    "at": "2026-11-16T18:24:35.148395+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-16T08:53:50.460934+00:00",
+    "at": "2026-11-16T18:24:25.807581+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-11-16-am",
-    "video_url": "https://www.youtube.com/watch?v=nyeLcq8abiQ",
+    "content_id": "rayvan-gemini-1daed03ed2696db408e6",
+    "video_url": "https://www.youtube.com/watch?v=-uTgKDS8Kvg",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-16T08:54:05.565014+00:00",
+    "at": "2026-11-16T18:24:35.147527+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -26047,7 +26159,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-16T08:54:05.565570+00:00",
+    "at": "2026-11-16T18:24:35.148269+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
