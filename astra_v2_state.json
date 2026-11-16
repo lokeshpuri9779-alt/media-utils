@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
-  "confirmed_today": 3,
-  "last_attempt_at": "2026-11-16T07:56:30.121022+00:00",
+  "attempts": 5,
+  "confirmed_today": 4,
+  "last_attempt_at": "2026-11-16T08:22:29.143017+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12609,16 +12609,14 @@
       "decisive_choice": "Sammy the squirrel decides to squeeze inside the narrow brass lens casing to push out the wedged moss spore instead of unscrewing the heavy frame.",
       "resolution": "The glowing spore pops free into the open air, allowing the giant telescope to project a crystal-clear map of the night sky.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "6oYu8EyZCz8": {
-      "content_id": "rayvan-gemini-16bc20f9322c2d9c4227",
+    },
+    "rayvan-gemini-16bc20f9322c2d9c4227": {
+      "video_id": "6oYu8EyZCz8",
+      "confirmed_at": "2026-11-16T08:21:25.297106+00:00",
       "title": "Felix the Cat and the Village Exchange Error",
-      "day": "2026-11-16",
-      "uploaded_at": "2026-11-16T07:56:31.915931+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-16T07:56:31.915931+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "45633c8fa3047be868d19e8f6eaa022512028a36e19c8bce044d89c44677887f",
       "story_beats": [
@@ -12667,16 +12665,75 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "EAxmsrH_oK8": {
+      "content_id": "rayvan-gemini-bde0f3db6187225bbc1d",
+      "title": "Barnaby and Pip's Coastal Beacon Signal Exchange",
+      "day": "2026-11-16",
+      "uploaded_at": "2026-11-16T08:22:31.890055+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c1ffcf24e03b42518ff8fd80e293051c717605d0c60219b664b2bc4097feb59e",
+      "story_beats": [
+        {
+          "headline": "The Ambiguous Flash",
+          "speech": "The glowing lantern sends out a hesitant double blink from the tall lighthouse window, confusing the watcher.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Initial Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the lighthouse tower, staring out through the round window with a questioning expression beside a single lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Observant Observer",
+          "speech": "From across the stone ledge, the rabbit peers into the darkness, tilting its long ears at the puzzling light.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Watching",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit sits on the stone balcony of the lighthouse, looking intently outward with an uncertain expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Adjusted Rhythm",
+          "speech": "Barnaby shifts the lantern deliberately into a steady, rhythmic pulsing glow to clear up all uncertainty.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Correction",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl uses its wing to adjust a lantern inside the lighthouse, creating a bright and steady beam.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Answer",
+          "speech": "The responding flash shines brightly back from the distant shore, confirming that the message is understood at last.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Confirmation",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit on the lighthouse balcony smiles happily while watching a bright responding light in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-16T07:55:41.215196+00:00",
+  "last_preflight_at": "2026-11-16T08:21:24.863850+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-16T07:56:32.223557+00:00",
+    "at": "2026-11-16T08:22:32.219052+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -25873,10 +25930,65 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-bde0f3db6187225bbc1d": {
+      "at": "2026-11-16T08:22:29.142995+00:00",
+      "title": "Barnaby and Pip's Coastal Beacon Signal Exchange",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "c1ffcf24e03b42518ff8fd80e293051c717605d0c60219b664b2bc4097feb59e",
+      "story_beats": [
+        {
+          "headline": "The Ambiguous Flash",
+          "speech": "The glowing lantern sends out a hesitant double blink from the tall lighthouse window, confusing the watcher.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Initial Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the lighthouse tower, staring out through the round window with a questioning expression beside a single lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Observant Observer",
+          "speech": "From across the stone ledge, the rabbit peers into the darkness, tilting its long ears at the puzzling light.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Watching",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit sits on the stone balcony of the lighthouse, looking intently outward with an uncertain expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Adjusted Rhythm",
+          "speech": "Barnaby shifts the lantern deliberately into a steady, rhythmic pulsing glow to clear up all uncertainty.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Correction",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl uses its wing to adjust a lantern inside the lighthouse, creating a bright and steady beam.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Answer",
+          "speech": "The responding flash shines brightly back from the distant shore, confirming that the message is understood at last.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Confirmation",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit on the lighthouse balcony smiles happily while watching a bright responding light in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-16T07:56:32.223515+00:00",
+    "at": "2026-11-16T08:22:32.218991+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -25887,21 +25999,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-16T07:56:32.223550+00:00",
+    "at": "2026-11-16T08:22:32.219042+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-16T07:56:22.480911+00:00",
+    "at": "2026-11-16T08:22:17.936861+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-16bc20f9322c2d9c4227",
-    "video_url": "https://www.youtube.com/watch?v=6oYu8EyZCz8",
+    "content_id": "rayvan-gemini-bde0f3db6187225bbc1d",
+    "video_url": "https://www.youtube.com/watch?v=EAxmsrH_oK8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-16T07:56:32.222918+00:00",
+    "at": "2026-11-16T08:22:32.218038+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -25913,7 +26025,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-16T07:56:32.223453+00:00",
+    "at": "2026-11-16T08:22:32.218902+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
