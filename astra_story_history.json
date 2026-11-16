@@ -11234,6 +11234,62 @@
       "central_conflict": "A heavy coconut drops onto the center of the festival decorative branch, snapping it right in half during the island festival preparations.",
       "decisive_choice": "Oona decides to hold the fractured branch ends together manually instead of abandoning the festival decoration.",
       "resolution": "The decorative ribbon is securely tied across the sturdy bamboo pole, allowing the island festival to proceed with joy."
+    },
+    {
+      "content_id": "rayvan-gemini-9a8b43eee61689705134",
+      "video_id": "u35SAK8cYiE",
+      "confirmed_at": "2026-11-16T07:55:41.558380+00:00",
+      "title": "Orion the Owl and Sammy the Squirrel's Observatory Lens Mystery",
+      "plot_fingerprint": "63da37242629609f466511a53aec81e8bbb9529cd632f3de812a602f1266c506",
+      "story_beats": [
+        {
+          "headline": "The Green Glare",
+          "speech": "Look up at the ceiling! The starlight is smeared with a strange glowing green smudge tonight.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "A brown horned owl with large golden eyes gazes upward with a puzzled expression inside the grand observatory while a single brass star chart rests on a round oak table.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Spore",
+          "speech": "I see a tiny green patch trapped right inside the edge of the primary glass lens housing.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "A fluffy grey squirrel with a bushy tail points a tiny paw toward a glowing green speck inside the brass lens casing inside the observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Careful Push",
+          "speech": "I will squeeze past the brass rim to nudge the wedged spore free without scratching the delicate surface.",
+          "visual": "squirrel",
+          "story_environment": "observatory",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "A fluffy grey squirrel with a bushy tail squeezes carefully beside the metal lens ring inside the observatory, holding a small wooden twig.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Starlight Restored",
+          "speech": "The green hue is entirely gone, and the constellations shine with absolute clarity across the dome.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "A brown horned owl with large golden eyes blinks happily beneath a sharp beam of bright white starlight shining through the dome inside the observatory.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A glowing moss spore is wedged deep inside the primary brass lens housing, distorting the projected starlight across the observatory ceiling.",
+      "decisive_choice": "Sammy the squirrel decides to squeeze inside the narrow brass lens casing to push out the wedged moss spore instead of unscrewing the heavy frame.",
+      "resolution": "The glowing spore pops free into the open air, allowing the giant telescope to project a crystal-clear map of the night sky."
     }
   ]
 }

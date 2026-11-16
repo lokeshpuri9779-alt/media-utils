@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-16",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 3,
-  "confirmed_today": 2,
-  "last_attempt_at": "2026-11-16T01:37:41.939435+00:00",
+  "attempts": 4,
+  "confirmed_today": 3,
+  "last_attempt_at": "2026-11-16T07:56:30.121022+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12549,16 +12549,14 @@
       "decisive_choice": "Oona decides to hold the fractured branch ends together manually instead of abandoning the festival decoration.",
       "resolution": "The decorative ribbon is securely tied across the sturdy bamboo pole, allowing the island festival to proceed with joy.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "u35SAK8cYiE": {
-      "content_id": "rayvan-gemini-9a8b43eee61689705134",
+    },
+    "rayvan-gemini-9a8b43eee61689705134": {
+      "video_id": "u35SAK8cYiE",
+      "confirmed_at": "2026-11-16T07:55:41.558380+00:00",
       "title": "Orion the Owl and Sammy the Squirrel's Observatory Lens Mystery",
-      "day": "2026-11-16",
-      "uploaded_at": "2026-11-16T01:37:43.409102+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-16T01:37:43.409102+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "63da37242629609f466511a53aec81e8bbb9529cd632f3de812a602f1266c506",
       "story_beats": [
@@ -12610,16 +12608,75 @@
       "central_conflict": "A glowing moss spore is wedged deep inside the primary brass lens housing, distorting the projected starlight across the observatory ceiling.",
       "decisive_choice": "Sammy the squirrel decides to squeeze inside the narrow brass lens casing to push out the wedged moss spore instead of unscrewing the heavy frame.",
       "resolution": "The glowing spore pops free into the open air, allowing the giant telescope to project a crystal-clear map of the night sky.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "6oYu8EyZCz8": {
+      "content_id": "rayvan-gemini-16bc20f9322c2d9c4227",
+      "title": "Felix the Cat and the Village Exchange Error",
+      "day": "2026-11-16",
+      "uploaded_at": "2026-11-16T07:56:31.915931+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "45633c8fa3047be868d19e8f6eaa022512028a36e19c8bce044d89c44677887f",
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Felix discovered the heavy wooden box was completely wrong after returning home from the busy village square.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Mistake Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "A cat standing on the cobblestone pavement in a sunlit village holding a closed wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Secret",
+          "speech": "Instead of speaking up immediately, Felix kept the strange box hidden behind the wooden fence while worrying about the mistake.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Concealment",
+          "story_beat": "build",
+          "visual_prompt": "A cat hiding beside a weathered wooden fence in a quiet village alleyway with a small box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Choice",
+          "speech": "Guilt finally convinced Felix to lift the box and carry it back across the open village path to fix the error.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Decision",
+          "story_beat": "twist",
+          "visual_prompt": "A cat walking purposefully across the open cobblestone path in a village carrying a closed box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Trust",
+          "speech": "Felix handed the correct box back to its grateful owner on the sunny village square, proving complete honesty.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "A cat sitting happily on the sunlit cobblestone pavement in a village beside a returned box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-16T01:24:39.034221+00:00",
+  "last_preflight_at": "2026-11-16T07:55:41.215196+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-16T01:37:43.922640+00:00",
+    "at": "2026-11-16T07:56:32.223557+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -12636,7 +12693,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-15T15:31:04.271400+00:00",
+  "last_feedback_attempt_at": "2026-11-16T07:56:22.708447+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -25761,10 +25818,65 @@
       "resolution": "The glowing spore pops free into the open air, allowing the giant telescope to project a crystal-clear map of the night sky.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-16bc20f9322c2d9c4227": {
+      "at": "2026-11-16T07:56:30.121004+00:00",
+      "title": "Felix the Cat and the Village Exchange Error",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "45633c8fa3047be868d19e8f6eaa022512028a36e19c8bce044d89c44677887f",
+      "story_beats": [
+        {
+          "headline": "The Mistaken Delivery",
+          "speech": "Felix discovered the heavy wooden box was completely wrong after returning home from the busy village square.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Mistake Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "A cat standing on the cobblestone pavement in a sunlit village holding a closed wooden box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Secret",
+          "speech": "Instead of speaking up immediately, Felix kept the strange box hidden behind the wooden fence while worrying about the mistake.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Concealment",
+          "story_beat": "build",
+          "visual_prompt": "A cat hiding beside a weathered wooden fence in a quiet village alleyway with a small box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Honest Choice",
+          "speech": "Guilt finally convinced Felix to lift the box and carry it back across the open village path to fix the error.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Decision",
+          "story_beat": "twist",
+          "visual_prompt": "A cat walking purposefully across the open cobblestone path in a village carrying a closed box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Restored Trust",
+          "speech": "Felix handed the correct box back to its grateful owner on the sunny village square, proving complete honesty.",
+          "visual": "cat",
+          "story_environment": "village",
+          "label": "Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "A cat sitting happily on the sunlit cobblestone pavement in a village beside a returned box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-16T01:37:43.922558+00:00",
+    "at": "2026-11-16T07:56:32.223515+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -25775,21 +25887,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-16T01:37:43.922626+00:00",
+    "at": "2026-11-16T07:56:32.223550+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-16T01:25:12.854652+00:00",
+    "at": "2026-11-16T07:56:22.480911+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-9a8b43eee61689705134",
-    "video_url": "https://www.youtube.com/watch?v=u35SAK8cYiE",
+    "content_id": "rayvan-gemini-16bc20f9322c2d9c4227",
+    "video_url": "https://www.youtube.com/watch?v=6oYu8EyZCz8",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-16T01:37:43.921563+00:00",
+    "at": "2026-11-16T07:56:32.222918+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -25801,47 +25913,11 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-16T01:37:43.922327+00:00",
-    "collection_status": "collected",
+    "at": "2026-11-16T07:56:32.223453+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 18,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 89,
-        "total": 174
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 175,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 140,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 140,
-        "remaining": 18
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "selection_source": "preload_artifact",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
