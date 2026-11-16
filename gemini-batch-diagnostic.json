@@ -1,36 +1,42 @@
 {
-  "observed_at": "2026-11-16T06:25:28.092466+00:00",
-  "generated": 17,
+  "observed_at": "2026-11-16T22:02:10.336832+00:00",
+  "generated": 14,
   "requested": 20,
   "generation_failures": [
     {
+      "index": 2,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 3,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 4,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 5,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 16,
+      "reason": "invalid_story_structure"
+    },
+    {
       "index": 17,
-      "reason": "provider_http_429"
+      "reason": "invalid_story_structure"
     }
   ],
-  "reviewed": 17,
-  "review_deferred": 0,
-  "approved": 4,
+  "reviewed": 4,
+  "review_deferred": 10,
+  "approved": 3,
   "review_issues": [
-    "The candidate story 'Buster and Pip's Village Courtyard Ball Journey' repeats the character pairing (Buster and Pip) and premise style found in the recently published example 'Buster and Pip's Village Ball Dispute', lacking sufficient originality in character combinations and conflict tropes relative to the comparison history.",
-    "The candidate story 'Buster and Pip's Village Path Dispute' repeats the exact character pairing (Buster and Pip), setting (village square), and core premise pattern of interpersonal dispute resolution through compromise found in the recently published comparison history (e.g., 'Buster and Pip's Village Ball Dispute', 'Sammy and Pip's City Pavement Mosaic Jam').",
-    "The candidate story 'Rupert and Pip's Garden Petal Match' closely mimics the premise, characters (Rupert the rabbit), causal mechanism, and resolution style of the recently published comparison history story 'Finn the Fox and Rupert the Rabbit's Forest Clue Mystery', which also centers on comparing flowers to open pages/sunlight to verify matching natural patterns.",
-    "The candidate story features Sammy the squirrel and Pip the mouse disputing over a railway item (a brass key), which closely mirrors the established characters and setting of recently published stories such as 'Pip the Mouse and Barnaby the Owl's Railway Signal Mystery' and 'Sammy and Pip's City Pavement Mosaic Jam'.",
-    "The candidate story repeats the exact characters (Finn the fox and Rupert the rabbit), setting (forest), and central premise/mechanic of comparing a flower to a book page in the forest as seen in the recent publication 'Finn the Fox and Rupert the Rabbit's Forest Clue Mystery'.",
-    "The candidate story repeats the exact same characters (Finn the fox and Pip the mouse), setting (snowfield), and core premise (discovering a single scarce book in the snow) as the recently published comparison history item 'Pip and Finn's Snowfield Tome'.",
-    "The causal conflict of a misunderstanding or jam solved by a calm, investigative action by the second animal follows the exact formulaic template of multiple recent AI-generated stories in the dataset.",
-    "The causal conflict, characters, and railway environment share excessive overlap with existing titles in the comparison history, violating the originality requirement.",
-    "The causal mechanism and narrative structure follow the exact pattern of minor mechanical misunderstandings or jams in the same recurring setting with the same protagonist.",
-    "The narrative heavily replicates the structural framework, character dynamic, moral dilemma, and resolution style of previously published titles in the comparison history involving Finn the fox (such as 'Finn and Rupert's Forest Clue Mystery' and 'Finn and Rupert's Frostbound Shelter Truce').",
-    "The premise lacks distinct originality in conflict structure and narrative pacing, closely mirroring previously generated batch content from the same source identifier.",
-    "The story premise, characters (Orion the owl), and setting (observatory) closely duplicate multiple recently published stories in the comparison history involving Orion the owl in an observatory.",
-    "The story premise, conflict, characters, and resolution heavily overlap with the recently published work 'Felix the Cat and the Village Exchange Error', repeating the exact theme of a cat dealing with a wrongly exchanged box in a village square and resolving it through honest return.",
-    "The story relies heavily on a repetitive template and formulaic causal mechanism seen extensively in recent publication examples involving minor character disputes and collaborative resolution (e.g., Pip and Finn's book disputes, Finn and Rupert's flower comparisons).",
-    "The story relies on an extremely repetitive formula and premise (two woodland animals investigating a minor disturbance/clue with a misunderstanding resolved by examining an object in sunlight) that matches multiple recently published examples in the comparison history, specifically following the exact template of animal pairing + trivial mystery + sunlight/direct examination resolution (e.g., Finn and Rupert's Forest Clue Mystery, Orion and Pip's Coastal Beacon Partnership, etc.).",
-    "The story structure, character naming conventions (Orion the owl paired with another animal), setting (coastal lighthouse/beacon), and plot mechanics closely mimic a repetitive series of previously published works in the provided comparison history (e.g., 'Orion and Pip's Coastal Beacon Partnership', 'Barnaby and Pip's Coastal Beacon Signal Exchange').",
-    "The story uses the exact same formulaic template ('Finn the [animal] accidentally [minor mishap] and hides it... decides to [honest choice]... resolution involving peaceful cooperation') found across multiple recent automated generation samples in the dataset.",
+    "The candidate story 'Felix the Cat and the Village Exchange Box' closely mirrors the structure, causal mechanism, and premise of previously published stories in the dataset such as 'Felix the Cat and the Village Exchange Error', representing a repeated template pattern in characters, conflict, and resolution.",
     "ai_editorial_rejection",
-    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons"
+    "review_deferred:provider_unavailable",
+    "review_failed:HTTP_503",
+    "review_provider:provider_unavailable"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -88,22 +94,23 @@
     ]
   },
   "creative_preflight": {
-    "generated": 17,
+    "generated": 14,
     "script_status_counts": {
-      "no_simple_flags": 17
+      "no_simple_flags": 14
     },
     "renderer_status_counts": {
-      "incompatible": 1,
-      "structurally_eligible": 16
+      "incompatible": 2,
+      "structurally_eligible": 12
     },
     "renderer_reason_counts": {
-      "none": 16,
+      "missing_verified_artwork": 1,
+      "none": 12,
       "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 17
+      "all_shots_recognized": 14
     },
-    "scene_taxonomy_recognized_shots": 68,
+    "scene_taxonomy_recognized_shots": 56,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
