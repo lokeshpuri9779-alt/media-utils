@@ -11343,6 +11343,59 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-bde0f3db6187225bbc1d",
+      "video_id": "EAxmsrH_oK8",
+      "confirmed_at": "2026-11-16T08:52:47.825992+00:00",
+      "title": "Barnaby and Pip's Coastal Beacon Signal Exchange",
+      "plot_fingerprint": "c1ffcf24e03b42518ff8fd80e293051c717605d0c60219b664b2bc4097feb59e",
+      "story_beats": [
+        {
+          "headline": "The Ambiguous Flash",
+          "speech": "The glowing lantern sends out a hesitant double blink from the tall lighthouse window, confusing the watcher.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Initial Signal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the lighthouse tower, staring out through the round window with a questioning expression beside a single lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Observant Observer",
+          "speech": "From across the stone ledge, the rabbit peers into the darkness, tilting its long ears at the puzzling light.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Watching",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit sits on the stone balcony of the lighthouse, looking intently outward with an uncertain expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Adjusted Rhythm",
+          "speech": "Barnaby shifts the lantern deliberately into a steady, rhythmic pulsing glow to clear up all uncertainty.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Correction",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl uses its wing to adjust a lantern inside the lighthouse, creating a bright and steady beam.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Answer",
+          "speech": "The responding flash shines brightly back from the distant shore, confirming that the message is understood at last.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Confirmation",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit on the lighthouse balcony smiles happily while watching a bright responding light in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
