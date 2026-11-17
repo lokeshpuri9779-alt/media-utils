@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
-  "confirmed_today": 0,
-  "last_attempt_at": "2026-11-17T19:37:09.064541+00:00",
+  "attempts": 2,
+  "confirmed_today": 1,
+  "last_attempt_at": "2026-11-17T20:01:36.299040+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -12981,16 +12981,14 @@
       "decisive_choice": "Orion the owl decides to insert a sturdy twig into the spinning spoke to hold the iron gear steady while Pip the mouse climbs inside.",
       "resolution": "The acorn pops free from the meshed teeth, allowing the mechanical railway station board to rotate smoothly back to the correct schedule.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "5b-iZDZ8uaM": {
-      "content_id": "rayvan-gemini-b48f8ba3d034ed199159",
+    },
+    "rayvan-gemini-b48f8ba3d034ed199159": {
+      "video_id": "5b-iZDZ8uaM",
+      "confirmed_at": "2026-11-17T19:44:48.696365+00:00",
       "title": "Olio and Orla's Island Festival Fruit Basket Dilemma",
-      "day": "2026-11-18",
-      "uploaded_at": "2026-11-17T19:37:10.396383+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-17T19:37:10.396383+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "4ed28890a2659499846b82ad14311066afed984d3b1b2ed8e649ffd91b9d557e",
       "story_beats": [
@@ -13042,16 +13040,78 @@
       "central_conflict": "A giant ripe papaya rolls to the edge of the ceremonial table, threatening to fall into the shallow island festival tide pool.",
       "decisive_choice": "Orla the owl decides to glide down to press her wing against the tumbling fruit to stop its momentum on the island platform.",
       "resolution": "The giant fruit stops safely at the table center, allowing the island festival to proceed with joyful sharing.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "PsZHcbi3sTo": {
+      "content_id": "rayvan-gemini-8bbf9b420c33dfee3a1b",
+      "title": "Finn and Rupert's Snowfield Burrow Partition",
+      "day": "2026-11-18",
+      "uploaded_at": "2026-11-17T20:01:38.291333+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a2012a536d4bd632bd9ebcfe3f50da1dae6f5a974d80531e77110666fed929b5",
+      "story_beats": [
+        {
+          "headline": "The Blocked Alcove",
+          "speech": "There is simply no room left to stretch our legs inside this tiny snowfield shelter with all these provisions piled up.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Initial Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An orange fox with a bushy tail stands inside a freezing snowfield alcove, staring at a cluttered heap of pinecones blocking the floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clearing the Floor",
+          "speech": "Let us push these heavy roots toward the northern wall so we each have a clear path to our sleeping spots.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Action Plan",
+          "story_beat": "build",
+          "visual_prompt": "A white rabbit with long ears uses its hind paws to nudge edible roots aside inside a bright snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Stacking the Supplies",
+          "speech": "I will balance the remaining pinecones tightly along this high ice shelf so the ground stays completely open for resting.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Creative Solution",
+          "story_beat": "mechanism",
+          "visual_prompt": "An orange fox uses its snout to arrange pinecones on an elevated ice ledge inside a cold snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Rest",
+          "speech": "Our shelter is perfectly divided now, proving that cooperation brings warmth and peace to the coldest snowfield nights.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Harmonious Ending",
+          "story_beat": "payoff",
+          "visual_prompt": "A white rabbit and an orange fox rest peacefully side by side on a clean, divided floor within a quiet snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A pile of frozen pinecones and roots spills over the center of the narrow snowfield shelter floor, blocking both animals from lying down comfortably.",
+      "decisive_choice": "Rupert the rabbit decides to use his strong hind paws to sweep the loose roots into a neat corner while Finn the fox tucks the pinecones into an upper ice ledge.",
+      "resolution": "The shelter floor is neatly divided and cleared, allowing both animals to rest safely side by side through the freezing snowfield night.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-17T19:26:24.121504+00:00",
+  "last_preflight_at": "2026-11-17T19:44:48.118297+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-17T19:37:10.812829+00:00",
+    "at": "2026-11-17T20:01:39.062034+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -26607,10 +26667,68 @@
       "resolution": "The giant fruit stops safely at the table center, allowing the island festival to proceed with joyful sharing.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-8bbf9b420c33dfee3a1b": {
+      "at": "2026-11-17T20:01:36.299018+00:00",
+      "title": "Finn and Rupert's Snowfield Burrow Partition",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "a2012a536d4bd632bd9ebcfe3f50da1dae6f5a974d80531e77110666fed929b5",
+      "story_beats": [
+        {
+          "headline": "The Blocked Alcove",
+          "speech": "There is simply no room left to stretch our legs inside this tiny snowfield shelter with all these provisions piled up.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Initial Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "An orange fox with a bushy tail stands inside a freezing snowfield alcove, staring at a cluttered heap of pinecones blocking the floor.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Clearing the Floor",
+          "speech": "Let us push these heavy roots toward the northern wall so we each have a clear path to our sleeping spots.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Action Plan",
+          "story_beat": "build",
+          "visual_prompt": "A white rabbit with long ears uses its hind paws to nudge edible roots aside inside a bright snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Stacking the Supplies",
+          "speech": "I will balance the remaining pinecones tightly along this high ice shelf so the ground stays completely open for resting.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "Creative Solution",
+          "story_beat": "mechanism",
+          "visual_prompt": "An orange fox uses its snout to arrange pinecones on an elevated ice ledge inside a cold snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Rest",
+          "speech": "Our shelter is perfectly divided now, proving that cooperation brings warmth and peace to the coldest snowfield nights.",
+          "visual": "rabbit",
+          "story_environment": "snowfield",
+          "label": "Harmonious Ending",
+          "story_beat": "payoff",
+          "visual_prompt": "A white rabbit and an orange fox rest peacefully side by side on a clean, divided floor within a quiet snowfield shelter.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A pile of frozen pinecones and roots spills over the center of the narrow snowfield shelter floor, blocking both animals from lying down comfortably.",
+      "decisive_choice": "Rupert the rabbit decides to use his strong hind paws to sweep the loose roots into a neat corner while Finn the fox tucks the pinecones into an upper ice ledge.",
+      "resolution": "The shelter floor is neatly divided and cleared, allowing both animals to rest safely side by side through the freezing snowfield night.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-17T19:37:10.812788+00:00",
+    "at": "2026-11-17T20:01:39.061942+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -26621,21 +26739,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-17T19:37:10.812822+00:00",
+    "at": "2026-11-17T20:01:39.062018+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-17T19:27:38.072556+00:00",
+    "at": "2026-11-17T19:45:38.447460+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-b48f8ba3d034ed199159",
-    "video_url": "https://www.youtube.com/watch?v=5b-iZDZ8uaM",
+    "content_id": "rayvan-gemini-8bbf9b420c33dfee3a1b",
+    "video_url": "https://www.youtube.com/watch?v=PsZHcbi3sTo",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-17T19:37:10.812114+00:00",
+    "at": "2026-11-17T20:01:39.060806+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -26647,7 +26765,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-17T19:37:10.812654+00:00",
+    "at": "2026-11-17T20:01:39.061695+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
