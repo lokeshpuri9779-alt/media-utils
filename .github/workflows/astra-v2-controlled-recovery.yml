@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
       - name: Guarded recovery dispatch
         env:
           GH_TOKEN: ${{ github.token }}
@@ -23,6 +24,7 @@ jobs:
         run: |
           python - <<'PY'
           import base64, json, os, subprocess
+          from astra_v2.github_contents import decode_json_contents_file
           from datetime import datetime, timezone
           now = datetime.now(timezone.utc)
           repo = os.environ["REPO"]
@@ -42,7 +44,10 @@ jobs:
           if any(minutes(r["created_at"]) < 60 for r in runs):
               skip("recent_publisher_run")
           state_file = api("contents/astra_v2_state.json?ref=astra-state")
-          state = json.loads(base64.b64decode(state_file["content"]).decode())
+          try:
+              state = decode_json_contents_file(state_file, api)
+          except (KeyError, ValueError, UnicodeDecodeError, subprocess.CalledProcessError) as exc:
+              skip("journal_unavailable:"+type(exc).__name__)
           if state.get("version") != 2: skip("invalid_journal")
           if state.get("pending"): skip("pending_upload_requires_reconciliation")
           if state.get("blocked_until") and minutes(state["blocked_until"]) < 0:

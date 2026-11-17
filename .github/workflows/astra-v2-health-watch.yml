@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
       - name: Check publisher heartbeat and state
         env:
           GH_TOKEN: ${{ github.token }}
@@ -23,6 +24,7 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           import json, os, subprocess, sys
+          from astra_v2.github_contents import decode_json_contents_file
           from datetime import datetime, timezone
 
           repo = os.environ["REPO"]
@@ -76,7 +78,7 @@ jobs:
           import base64
           try:
               state_file = api("contents/astra_v2_state.json?ref=astra-state")
-              state = json.loads(base64.b64decode(state_file["content"]).decode("utf-8"))
+              state = decode_json_contents_file(state_file, api)
           except (KeyError, ValueError, UnicodeDecodeError, subprocess.CalledProcessError) as exc:
               print(f"ASTRA_HEALTH=FAIL:journal_unavailable:{type(exc).__name__}")
               sys.exit(1)
