@@ -125,7 +125,9 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
     from astra_v2.omniroute import generate
     generator = generator or generate
     results = []
-    prior = tuple(prior)
+    # Keep accepted drafts in the in-batch history so each later rewrite is
+    # checked against earlier drafts, not just the pre-batch history.
+    prior = list(prior)
     excluded_ids = {story["content_id"] for story in prior
                     if isinstance(story, dict) and isinstance(story.get("content_id"), str)}
     excluded_titles = {story["title"].casefold().strip() for story in prior
@@ -152,6 +154,7 @@ def rewrite_packet(packet, prior=(), limit=3, generator=None):
                             "status": "awaiting_independent_editorial_approval",
                             "story": {**story, "production_ready": False},
                             "approved": False})
+            prior.append(story)
         except (ValueError, RuntimeError, KeyError, TypeError) as exc:
             results.append({"candidate_id": premise["candidate_id"],
                             "source_sha256": premise["source_sha256"],
