@@ -1,42 +1,20 @@
 {
-  "observed_at": "2026-11-16T22:02:10.336832+00:00",
-  "generated": 14,
+  "observed_at": "2026-11-17T07:52:39.490627+00:00",
+  "generated": 12,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 2,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 3,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 4,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 5,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 16,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 17,
-      "reason": "invalid_story_structure"
+      "index": 12,
+      "reason": "provider_http_429"
     }
   ],
-  "reviewed": 4,
-  "review_deferred": 10,
-  "approved": 3,
+  "reviewed": 0,
+  "review_deferred": 12,
+  "approved": 0,
   "review_issues": [
-    "The candidate story 'Felix the Cat and the Village Exchange Box' closely mirrors the structure, causal mechanism, and premise of previously published stories in the dataset such as 'Felix the Cat and the Village Exchange Error', representing a repeated template pattern in characters, conflict, and resolution.",
-    "ai_editorial_rejection",
-    "review_deferred:provider_unavailable",
-    "review_failed:HTTP_503",
-    "review_provider:provider_unavailable"
+    "review_deferred:rate_limited",
+    "review_failed:HTTP_429",
+    "review_provider:rate_limited"
   ],
   "approval_pair_present": true,
   "model_access": {
@@ -94,23 +72,23 @@
     ]
   },
   "creative_preflight": {
-    "generated": 14,
+    "generated": 12,
     "script_status_counts": {
-      "no_simple_flags": 14
+      "no_simple_flags": 12
     },
     "renderer_status_counts": {
-      "incompatible": 2,
-      "structurally_eligible": 12
+      "incompatible": 3,
+      "structurally_eligible": 9
     },
     "renderer_reason_counts": {
       "missing_verified_artwork": 1,
-      "none": 12,
-      "unsupported_human_actor": 1
+      "none": 9,
+      "unsupported_human_actor": 2
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 14
+      "all_shots_recognized": 12
     },
-    "scene_taxonomy_recognized_shots": 56,
+    "scene_taxonomy_recognized_shots": 48,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
