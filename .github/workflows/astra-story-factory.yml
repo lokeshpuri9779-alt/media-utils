@@ -197,8 +197,11 @@ jobs:
               result = json.loads(p.read_text())
               assets = result.get("assets", [])
               held = os.environ.get("ASTRA_COHORT_HELD") == "true"
-              generated = 0 if held else sum(a.get("status") == "review_only" for a in assets)
-              cached = sum(a.get("status") in ("review_only", "cached_review_only") for a in assets) if held else sum(a.get("status") == "cached_review_only" for a in assets)
+              # The preproducer already labels cache hits and new provider
+              # results separately. Holding the cohort prevents rotation; it
+              # does not suppress resumed generation or provider calls.
+              generated = sum(a.get("status") == "review_only" for a in assets)
+              cached = sum(a.get("status") == "cached_review_only" for a in assets)
               failures = sum(a.get("status") == "generation_failed" for a in assets)
               adapted = sum(a.get("adaptation") == "square_to_portrait_review_padding_v1"
                             and a.get("status") in ("review_only", "cached_review_only") for a in assets)
@@ -219,8 +222,9 @@ jobs:
               print("ASTRA_IMAGE_DIMENSIONS=" + json.dumps({"verified": len(dimensions),
                     "portrait": portrait, "sizes": dimensions[:10]}, sort_keys=True))
               print("ASTRA_IMAGE_RESULT=" + json.dumps({
-                  "status": "held_for_review" if held else result.get("status"),
-                  "provider_calls": 0 if held else result.get("provider_calls", 0),
+                  "status": result.get("status"),
+                  "cohort_held": held,
+                  "provider_calls": result.get("provider_calls", 0),
                   "new_images": generated,
                   "cached_images": cached,
                   "square_review_padded": adapted,
