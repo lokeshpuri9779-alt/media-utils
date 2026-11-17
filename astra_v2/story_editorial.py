@@ -147,7 +147,6 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
         issues.append("human_or_model_editorial_review_required")
     return sorted(set(issues))
 
-
 def triage(stories, history=(), use_semantic_index=False):
     """Partition for review only; no proposal can be promoted here."""
     if use_semantic_index:
@@ -201,6 +200,7 @@ def triage(stories, history=(), use_semantic_index=False):
         else:
             review.append(item)
         seen.append(story)
+        causal_index.add(story)
         novelty_index.add(story)
         if semantic_index is not None:
             semantic_index.add(story)
