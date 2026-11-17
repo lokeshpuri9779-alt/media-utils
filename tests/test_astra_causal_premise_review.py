@@ -1,6 +1,6 @@
 import unittest
 
-from astra_v2.causal_premise_review import causal_premise_match
+from astra_v2.causal_premise_review import CausalPremiseIndex, causal_premise_match
 from astra_v2.story_editorial import triage
 
 
@@ -22,6 +22,21 @@ class CausalPremiseReviewTests(unittest.TestCase):
         self.assertEqual(match["matched_content_id"], "first")
         self.assertTrue(match["review_required"])
         self.assertFalse(match["publication_approved"])
+
+    def test_index_matches_reference_and_preserves_first_match(self):
+        first = story("first")
+        second = story("second")
+        index = CausalPremiseIndex([first, second])
+        match = index.match(story("candidate"))
+        self.assertEqual(match["matched_content_id"], "first")
+        self.assertEqual(match, causal_premise_match(story("candidate"), [first, second]))
+
+    def test_index_updates_incrementally_and_ignores_incomplete_arcs(self):
+        index = CausalPremiseIndex()
+        index.add({"content_id": "incomplete", "central_conflict": "winter grain shortage"})
+        self.assertIsNone(index.match(story("candidate")))
+        index.add(story("first"))
+        self.assertEqual(index.match(story("candidate"))["matched_content_id"], "first")
 
     def test_different_resolution_not_flagged(self):
         self.assertIsNone(causal_premise_match(
