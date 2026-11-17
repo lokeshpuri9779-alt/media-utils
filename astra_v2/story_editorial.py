@@ -140,7 +140,8 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
         issues.append("narrative_duplicate")
     # Explicitly matching complete causal arcs require a new editorial revision.
     # Missing annotations never become guessed evidence.
-    if (causal_index.match(story) if causal_index is not None\n            else causal_premise_match(story, history)) is not None:
+    if (causal_index.match(story) if causal_index is not None
+            else causal_premise_match(story, history)) is not None:
         issues.append("repeated_causal_premise")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
@@ -154,7 +155,8 @@ def triage(stories, history=(), use_semantic_index=False):
     review = []
     rejected = []
     seen = list(history)
-    novelty_index = NoveltyIndex(seen)\n    causal_index = CausalPremiseIndex(seen)
+    novelty_index = NoveltyIndex(seen)
+    causal_index = CausalPremiseIndex(seen)
     # Indexed mode owns its feature cache; avoid building a second full copy.
     semantic_previous = (None if use_semantic_index else
                          [(prior, _semantic_features(prior)) for prior in seen
