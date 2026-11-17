@@ -11455,6 +11455,62 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-3844f5bc7acf6bbf69cf",
+      "video_id": "Wi7iaLjffFk",
+      "confirmed_at": "2026-11-17T02:08:07.400717+00:00",
+      "title": "Finn and Rupert's Woodland Leaf Slip",
+      "plot_fingerprint": "e0eb66549f8b256a6a6996692347b6b7831a5e80804496ad0cb6ac1dfb3387ec",
+      "story_beats": [
+        {
+          "headline": "A Hidden Mistake",
+          "speech": "Finn stared at the torn edge of the shared nature journal, quickly tucking the loose paper beneath a heavy stone in the quiet forest.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Torn Page",
+          "story_beat": "reveal",
+          "visual_prompt": "Fox in the forest hides a torn book page beneath a stone.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Missing Leaf",
+          "speech": "Rupert the rabbit held a fresh forest flower, wondering why a vital page seemed completely missing from their daily record.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Curious Query",
+          "story_beat": "build",
+          "visual_prompt": "Rabbit in the forest holds a small flower while looking at the incomplete book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Confession",
+          "speech": "Feeling the weight of his secret, Finn lifted the stone in the forest and brought the torn paper out into the open daylight.",
+          "visual": "fox",
+          "story_environment": "forest",
+          "label": "Truth Revealed",
+          "story_beat": "twist",
+          "visual_prompt": "Fox in the forest lifts the stone to reveal the hidden book page.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Mending Together",
+          "speech": "Side by side in the forest, the two friends pressed the book page flat with a fresh flower resting gently on the cover.",
+          "visual": "rabbit",
+          "story_environment": "forest",
+          "label": "Restored Bond",
+          "story_beat": "payoff",
+          "visual_prompt": "Rabbit in the forest places a flower next to the newly repaired book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Finn the fox accidentally tears a page in their shared nature journal and hides the loose paper under a rock.",
+      "decisive_choice": "Finn decides to lift the rock, show the torn page to Rupert the rabbit, and use plant resin to mend it together.",
+      "resolution": "The journal page is smoothly repaired, proving that honesty restores their shared woodland bond."
     }
   ]
 }
