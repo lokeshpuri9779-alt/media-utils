@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from astra_v2.autonomous_story_proposals import proposal
-from astra_v2.story_supply_review import assess
+from astra_v2.story_supply_review import assess\nfrom astra_v2.causal_premise_review import CausalPremiseIndex
 
 
 class SupplyReviewTests(unittest.TestCase):
@@ -57,6 +57,17 @@ class SupplyReviewTests(unittest.TestCase):
             self.assertEqual(
                 [entry["editorial_issues"] for entry in result["proposals"]], expected)
             self.assertEqual(result["approved_for_production"], 0)
+
+    def test_causal_index_preserves_first_historical_match(self):
+        from astra_v2.autonomous_story_proposals import proposal
+        from astra_v2.causal_premise_review import causal_premise_match
+        first = {"content_id": "first", "central_conflict": "blocked bridge",
+                 "decisive_choice": "share supplies", "resolution": "bridge repaired"}
+        second = dict(first, content_id="second")
+        candidate = dict(first, content_id="candidate")
+        index = CausalPremiseIndex([first, second])
+        self.assertEqual(index.match(candidate), causal_premise_match(candidate, [first, second]))
+        self.assertEqual(index.match(candidate)["matched_content_id"], "first")
 
     def test_published_fingerprint_is_flagged(self):
         with tempfile.TemporaryDirectory() as root:
