@@ -90,6 +90,28 @@ class SupplyReviewTests(unittest.TestCase):
         self.assertFalse(repeated[0]["publication_blocked"] is False and
                          repeated[0].get("publication_approved", False))
 
+    def test_supply_audit_indexes_causal_arcs_across_same_batch(self):
+        with tempfile.TemporaryDirectory() as root:
+            first = proposal(0)
+            second = proposal(1)
+            arc = {
+                "central_conflict": "blocked bridge isolates the village",
+                "decisive_choice": "share limited repair supplies",
+                "resolution": "neighbors rebuild the bridge together",
+            }
+            first.update(arc)
+            second.update(arc)
+            second["content_id"] = "same-batch-causal-repeat"
+            ledger = Path(root) / "ledger.json"
+            ledger.write_text(json.dumps({"proposals": [first, second]}))
+            result = assess(ledger, Path(root) / "missing-publisher.json",
+                            Path(root) / "missing-stories.json")
+            repeated = next(item for item in result["proposals"]
+                            if item["content_id"] == "same-batch-causal-repeat")
+            self.assertIn("repeated_causal_premise", repeated["editorial_issues"])
+            self.assertFalse(repeated["eligible_for_automatic_publishing"])
+            self.assertEqual(result["approved_for_production"], 0)
+
     def test_published_fingerprint_is_flagged(self):
         with tempfile.TemporaryDirectory() as root:
             candidate = proposal(0)
