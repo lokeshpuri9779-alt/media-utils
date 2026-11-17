@@ -11511,6 +11511,59 @@
       "central_conflict": "Finn the fox accidentally tears a page in their shared nature journal and hides the loose paper under a rock.",
       "decisive_choice": "Finn decides to lift the rock, show the torn page to Rupert the rabbit, and use plant resin to mend it together.",
       "resolution": "The journal page is smoothly repaired, proving that honesty restores their shared woodland bond."
+    },
+    {
+      "content_id": "rayvan-gemini-6dc87a7c49382b31163f",
+      "video_id": "K-3v8EIZNoM",
+      "confirmed_at": "2026-11-17T02:10:21.789598+00:00",
+      "title": "Buster and Pip's Village Ball Mystery",
+      "plot_fingerprint": "d45d7c4f9c1ed650a0491efd36ae7d464571219f4a3839f47fdc42ece4614fc6",
+      "story_beats": [
+        {
+          "headline": "A Curious Disagreement",
+          "speech": "Buster and Pip gaze down at the round red ball resting beside the quiet village pond, wondering if it will float.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Dog in the village looking at a small red ball on the grassy bank near the water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Comparing Clues",
+          "speech": "Pip points tiny paws toward the smooth rubber texture while Buster tilts his head, noting how light the object feels.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Mouse in the village standing beside the small red ball on the grass.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Water Test",
+          "speech": "Buster lowers his snout and gently nudges the round ball into the shallow village pond water to check its weight.",
+          "visual": "dog",
+          "story_environment": "village",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Dog in the village gently pushing the small red ball into the pond water.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Clear Answer",
+          "speech": "The red ball bobs happily on the ripples as both friends smile, confirming their test was entirely successful.",
+          "visual": "mouse",
+          "story_environment": "village",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Mouse in the village watching the small red ball float on the pond water surface.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
