@@ -5572,6 +5572,22 @@
       ],
       "record": null,
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-ded8b5fa29aab919ff67",
+      "story_sha256": "5a1f0f6000cd0081050e0a4939a72779a7a9c3e5394519a69782fbe60d5dc73d",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-ded8b5fa29aab919ff67",
+        "story_sha256": "5a1f0f6000cd0081050e0a4939a72779a7a9c3e5394519a69782fbe60d5dc73d",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not repeat the premises, characters, or settings of the provided list of recent publications.; The causal chain is clear and logical: an acorn jams a gear, the characters intervene, and the mechanism is restored.; The content is safe, suitable for all audiences, and adheres to YouTube's community guidelines.; There are no copyright or trademark concerns identified in the narrative.",
+        "reviewed_at": "2026-11-17T10:43:29.360456+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
