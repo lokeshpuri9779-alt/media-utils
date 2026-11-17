@@ -23,7 +23,7 @@ class RewriteQueueTests(unittest.TestCase):
                     ".github/workflows/astra-story-factory.yml").read_text(encoding="utf-8")
         rewrite = workflow.index("- name: Rewrite a bounded editorial shortlist with existing Gemini")
         clear = workflow.index("- name: Clear previous image manifest for fresh-run accounting")
-        image = workflow.index("- name: Preproduce review-only images via configured free OmniRoute provider")
+        image = workflow.index("- name: Resume or preproduce review-only images via configured free OmniRoute provider")
         self.assertLess(rewrite, clear, "Do not delete the manifest before archival")
         self.assertLess(clear, image, "New image accounting must start from a clean manifest")
         self.assertIn("--image-manifest ../state/story_factory_image_manifest.json",
