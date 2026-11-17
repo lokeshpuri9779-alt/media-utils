@@ -6,6 +6,7 @@ from pathlib import Path
 from astra_v2.autonomous_story_proposals import proposal
 from astra_v2.story_supply_review import assess
 from astra_v2.causal_premise_review import CausalPremiseIndex
+from astra_v2.story_editorial import triage
 
 
 class SupplyReviewTests(unittest.TestCase):
@@ -69,6 +70,25 @@ class SupplyReviewTests(unittest.TestCase):
         index = CausalPremiseIndex([first, second])
         self.assertEqual(index.match(candidate), causal_premise_match(candidate, [first, second]))
         self.assertEqual(index.match(candidate)["matched_content_id"], "first")
+
+    def test_triage_indexes_causal_arcs_across_same_batch(self):
+        first = proposal(0)
+        second = proposal(1)
+        arc = {
+            "central_conflict": "blocked bridge isolates the village",
+            "decisive_choice": "share limited repair supplies",
+            "resolution": "neighbors rebuild the bridge together",
+        }
+        first.update(arc)
+        second.update(arc)
+        second["content_id"] = "same-batch-causal-repeat"
+        result = triage([first, second], use_semantic_index=True)
+        repeated = [item for item in result["needs_work"]
+                    if item["content_id"] == "same-batch-causal-repeat"]
+        self.assertEqual(len(repeated), 1)
+        self.assertIn("repeated_causal_premise", repeated[0]["issues"])
+        self.assertFalse(repeated[0]["publication_blocked"] is False and
+                         repeated[0].get("publication_approved", False))
 
     def test_published_fingerprint_is_flagged(self):
         with tempfile.TemporaryDirectory() as root:
