@@ -96,21 +96,23 @@ class GeminiDeferredArchiveTests(unittest.TestCase):
         self.assertFalse(current["eligible_for_automatic_publishing"])
 
     def test_drop_count_is_cumulative_and_legacy_archives_start_at_zero(self):
-        p, audit = batch([candidate(i) for i in range(105)],
-                         [["review_deferred:timeout"]] * 105)
-        first, added = build_archive(p, audit)
-        self.assertEqual(added, 105)
-        self.assertEqual(first["dropped_total"], 5)
-        self.assertEqual(first["entries"][0]["content_id"], "story-5")
+        current = None
+        for offset, count in ((0, 50), (50, 50), (100, 5)):
+            p, audit = batch([candidate(i) for i in range(offset, offset + count)],
+                             [["review_deferred:timeout"]] * count)
+            current, added = build_archive(p, audit, current)
+            self.assertEqual(added, count)
+        self.assertEqual(current["dropped_total"], 5)
+        self.assertEqual(current["entries"][0]["content_id"], "story-5")
 
         second_batch, second_audit = batch([candidate(i) for i in range(105, 110)],
                                            [["review_deferred:timeout"]] * 5)
-        second, added = build_archive(second_batch, second_audit, first)
+        second, added = build_archive(second_batch, second_audit, current)
         self.assertEqual(added, 5)
         self.assertEqual(second["dropped_total"], 10)
         self.assertEqual(len(second["entries"]), MAX_ENTRIES)
 
-        legacy = dict(first)
+        legacy = dict(current)
         legacy.pop("dropped_total")
         continued, _ = build_archive(second_batch, second_audit, legacy)
         self.assertEqual(continued["dropped_total"], 5)
