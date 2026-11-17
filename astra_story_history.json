@@ -11570,6 +11570,62 @@
       "video_id": "Ptxp_jp_FCU",
       "confirmed_at": "2026-11-17T10:33:00.556222+00:00",
       "title": "Why singapore vs brazil Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-ded8b5fa29aab919ff67",
+      "video_id": "-4qx2bFygAA",
+      "confirmed_at": "2026-11-17T19:26:24.581579+00:00",
+      "title": "Pip and Orion's Railway Station Schedule Mystery",
+      "plot_fingerprint": "68720925874a220efd90ad443f4250aabfe1ea09e3e40e7ff3cccd9639ce039e",
+      "story_beats": [
+        {
+          "headline": "The Frozen Schedule",
+          "speech": "Look closely at the railway station board because all the rotating letters are stuck on completely wrong words.",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "First Clue",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands on a wooden railway platform looking puzzled at a large brass destination board with stuck letter tiles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Hidden Obstruction",
+          "speech": "Pip peers behind the heavy metal casing of the railway station mechanism and spots the wedged brown acorn right away.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Second Clue",
+          "story_beat": "build",
+          "visual_prompt": "Pip the mouse sits on the railway platform metal beam, peering closely behind the exposed mechanical gears of the railway station board.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Gear Jam",
+          "speech": "Orion holds the iron lever steady with his wing so the spinning metal teeth stop turning inside the railway station wall.",
+          "visual": "owl",
+          "story_environment": "railway",
+          "label": "Action Taken",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl uses his wing to hold an iron lever steady against the spinning metal teeth inside the railway station display housing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Signal",
+          "speech": "With the acorn finally removed, the entire railway station board clicks happily back into its correct chronological sequence.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Successful Outcome",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the mouse stands triumphantly on the railway platform beam as the railway station board displays the correct departure times.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A fallen oak acorn jams the heavy brass gear train behind the railway station destination board, halting all passenger updates.",
+      "decisive_choice": "Orion the owl decides to insert a sturdy twig into the spinning spoke to hold the iron gear steady while Pip the mouse climbs inside.",
+      "resolution": "The acorn pops free from the meshed teeth, allowing the mechanical railway station board to rotate smoothly back to the correct schedule."
     }
   ]
 }

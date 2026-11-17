@@ -5588,6 +5588,22 @@
         "review_model": "gemini-3.1-flash-lite"
       },
       "causal_repeat_evidence": null
+    },
+    {
+      "content_id": "rayvan-gemini-b48f8ba3d034ed199159",
+      "story_sha256": "197be7c2f44c445130a6fcb832c843a9ce16c0c1c02156aed5970b4d44a39ab7",
+      "approved": true,
+      "issues": [],
+      "record": {
+        "content_id": "rayvan-gemini-b48f8ba3d034ed199159",
+        "story_sha256": "197be7c2f44c445130a6fcb832c843a9ce16c0c1c02156aed5970b4d44a39ab7",
+        "decision": "approve",
+        "reviewer": "Independent Gemini editorial reviewer: gemini-3.1-flash-lite",
+        "review_notes": "The story is original and does not repeat the premises, characters, or settings found in the provided list of recent publications.; The narrative demonstrates clear causal coherence, moving logically from the conflict (rolling fruit) to the resolution (sharing via palm leaf).; The content is suitable for a general audience and contains no unsafe, misleading, or policy-violating material.; The story is well-structured and fits the requested format for an authored causal story.",
+        "reviewed_at": "2026-11-17T19:28:53.061192+00:00",
+        "review_model": "gemini-3.1-flash-lite"
+      },
+      "causal_repeat_evidence": null
     }
   ]
 }
