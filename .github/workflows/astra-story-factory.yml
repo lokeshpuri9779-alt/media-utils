@@ -47,8 +47,9 @@ jobs:
         run: |
           python -m astra_v2.story_factory_inventory --inventory ../state/preproduced_video_inventory.json --root ../state --publisher-state ../state/astra_v2_state.json --target 7
       # Do not rotate a cohort with already-generated, unapproved scene artwork.
-      # Preserve the queue and manifest for independent visual review without
-      # making additional free-provider calls or advancing the story cursor.
+      # Preserve its queue and manifest, but resume missing scenes from the
+      # persistent request cache in later runs so a small free-tier budget can
+      # complete the cohort incrementally.
       - name: Hold existing review-only artwork cohort
         id: cohort_guard
         if: steps.inventory.outputs.replenish == 'true'
@@ -140,8 +141,8 @@ jobs:
         if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
         working-directory: state
         run: rm -f story_factory_image_manifest.json
-      - name: Preproduce review-only images via configured free OmniRoute provider
-        if: steps.inventory.outputs.replenish == 'true' && steps.cohort_guard.outputs.hold != 'true'
+      - name: Resume or preproduce review-only images via configured free OmniRoute provider
+        if: steps.inventory.outputs.replenish == 'true'
         working-directory: code
         env:
           ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
