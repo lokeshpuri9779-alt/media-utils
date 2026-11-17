@@ -4,7 +4,7 @@ This module never authorizes publication or changes production_ready.
 """
 import re
 
-from astra_v2.causal_premise_review import causal_premise_match
+from astra_v2.causal_premise_review import CausalPremiseIndex, causal_premise_match
 from astra_v2.story_planning import planning_issues
 from astra_v2.shorts_novelty import is_near_duplicate
 from astra_v2.publication_quality import publication_rejection
@@ -118,7 +118,7 @@ def visual_prompt_variety_count(beats):
 
 
 def editorial_issues(story, history=(), novelty_index=None, semantic_previous=None, semantic_index=None,
-                     semantic_evidence=None, semantic_evidence_computed=False):
+                     semantic_evidence=None, semantic_evidence_computed=False, causal_index=None):
     issues = list(planning_issues(story))
     beats = story.get("story_beats") or []
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
@@ -140,7 +140,7 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
         issues.append("narrative_duplicate")
     # Explicitly matching complete causal arcs require a new editorial revision.
     # Missing annotations never become guessed evidence.
-    if causal_premise_match(story, history) is not None:
+    if (causal_index.match(story) if causal_index is not None\n            else causal_premise_match(story, history)) is not None:
         issues.append("repeated_causal_premise")
     if story.get("kind") == "unreviewed_causal_draft":
         issues.append("human_or_model_editorial_review_required")
@@ -154,7 +154,7 @@ def triage(stories, history=(), use_semantic_index=False):
     review = []
     rejected = []
     seen = list(history)
-    novelty_index = NoveltyIndex(seen)
+    novelty_index = NoveltyIndex(seen)\n    causal_index = CausalPremiseIndex(seen)
     # Indexed mode owns its feature cache; avoid building a second full copy.
     semantic_previous = (None if use_semantic_index else
                          [(prior, _semantic_features(prior)) for prior in seen
@@ -168,7 +168,7 @@ def triage(stories, history=(), use_semantic_index=False):
                                   semantic_previous=semantic_previous,
                                   semantic_index=semantic_index,
                                   semantic_evidence=semantic_evidence,
-                                  semantic_evidence_computed=True)
+                                  semantic_evidence_computed=True, causal_index=causal_index)
         item = {"content_id": story.get("content_id"), "title": story.get("title"),
                 "issues": issues,
                 "publication_blocked": bool(publication_rejection(story))}
@@ -182,7 +182,7 @@ def triage(stories, history=(), use_semantic_index=False):
             item["novelty_evidence"] = semantic_evidence
         # Independent editorial triage only: explicit causal repetition needs
         # review, but this advisory signal cannot approve or publish a story.
-        causal_evidence = causal_premise_match(story, seen)
+        causal_evidence = causal_index.match(story)
         if causal_evidence is not None:
             item["causal_repeat_review"] = causal_evidence
         # Requiring a human/model editorial decision is a workflow state,
