@@ -1,19 +1,40 @@
 {
-  "observed_at": "2026-11-18T07:25:34.438409+00:00",
-  "generated": 16,
+  "observed_at": "2026-11-18T20:30:36.112400+00:00",
+  "generated": 6,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 16,
+      "index": 5,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 6,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 7,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 8,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 9,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 11,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 1,
-  "review_deferred": 15,
-  "approved": 0,
+  "reviewed": 5,
+  "review_deferred": 1,
+  "approved": 3,
   "review_issues": [
-    "The story relies on an identical structural template, character naming conventions, and conflict-resolution mechanism ('Buster and Pip', village setting, a physical object causing a minor spatial dispute resolved by a gentle adjustment) heavily repeated across multiple prior entries in the comparison history, such as 'Buster and Pip's Village Ball Dispute' and 'Sammy and Pip's City Pavement Mosaic Jam'.",
+    "The candidate story 'Finn and Rupert's Forest Clue Mystery' heavily repeats the character pairing (Finn the fox and Rupert the rabbit), setting (woodland/forest), conflict structure (conflicting clues or items requiring collaborative problem-solving), and thematic resolution seen in recent comparison stories such as 'Finn and Rupert's Woodland Leaf Slip' and 'The Snowfield Tome Riddle'. Additionally, the premise closely mimics the structural pattern of previously published titles by the same network/author, resulting in insufficient originality.",
     "ai_editorial_rejection",
+    "publication_renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
     "review_deferred:rate_limited",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
@@ -74,20 +95,22 @@
     ]
   },
   "creative_preflight": {
-    "generated": 16,
+    "generated": 6,
     "script_status_counts": {
-      "no_simple_flags": 16
+      "no_simple_flags": 6
     },
     "renderer_status_counts": {
-      "structurally_eligible": 16
+      "incompatible": 1,
+      "structurally_eligible": 5
     },
     "renderer_reason_counts": {
-      "none": 16
+      "none": 5,
+      "unsupported_human_actor": 1
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 16
+      "all_shots_recognized": 6
     },
-    "scene_taxonomy_recognized_shots": 64,
+    "scene_taxonomy_recognized_shots": 24,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
