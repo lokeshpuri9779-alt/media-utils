@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-11-18T10:44:32.427671+00:00",
+  "attempts": 7,
+  "confirmed_today": 6,
+  "last_attempt_at": "2026-11-18T18:21:33.687551+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -13281,16 +13281,14 @@
       "decisive_choice": "Opal the otter decides to dive through the shallow surf to reach the snagged anchor line while Orion watches.",
       "resolution": "The decorative banner hangs straight across the sandy island square, allowing the festival to begin happily.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "cNRJLfPUPVA": {
-      "content_id": "rayvan-gemini-4ef4aa5e515149658402",
+    },
+    "rayvan-gemini-4ef4aa5e515149658402": {
+      "video_id": "cNRJLfPUPVA",
+      "confirmed_at": "2026-11-18T18:13:31.982841+00:00",
       "title": "Orion the Owl and Sammy the Squirrel's Star Chart Blur",
-      "day": "2026-11-18",
-      "uploaded_at": "2026-11-18T10:44:33.942799+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-18T10:44:33.942799+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "34d425b759461ef2e851e0ba4de2cd844def6253b95920c92237157dedbfdf5e",
       "story_beats": [
@@ -13342,16 +13340,78 @@
       "central_conflict": "A dried chestnut shell jams the brass altitude tracking cogs, blurring the ceiling starlight projection.",
       "decisive_choice": "Sammy the squirrel decides to squeeze into the narrow gear housing to nudge the wedged shell loose.",
       "resolution": "The cogs spin freely once more, projecting a sharp, crystal-clear star map across the observatory ceiling.",
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "EVxKi8DwCaA": {
+      "content_id": "rayvan-gemini-542d7117f4f220b08524",
+      "title": "Finn and Ollie's Tidal Shell Mystery",
+      "day": "2026-11-18",
+      "uploaded_at": "2026-11-18T18:21:35.022933+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "79d5f0a6dbe4f9aa155a778c865647dbd264491125dc1f28b27d55d079abf18e",
+      "story_beats": [
+        {
+          "headline": "The Silent Morning Bell",
+          "speech": "Why is the harbor bell so silent this morning when the tide is already rolling in so strongly?",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "The Silent Bell",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox with sleek reddish fur and a white-tipped tail stands alert on the weathered wooden planks of the harbor, staring up with wide amber eyes at the silent bronze bell hanging above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Discovering the Obstruction",
+          "speech": "Look closely inside the bronze rim. A spiky purple sea urchin is wedged right where the metal clapper swings!",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "The Urchin Jam",
+          "story_beat": "build",
+          "visual_prompt": "Ollie the otter with dense brown fur and whiskers points a small paw upward inside the open bronze harbor bell, revealing a prickly purple sea urchin stuck tightly against the iron hinge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Prying the Shell Loose",
+          "speech": "Hold the bronze rim steady, Ollie, while I use this dry driftwood stick to nudge the spiky shell outward.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "The Gentle Push",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox with focused expression uses a slender driftwood stick to press carefully against the purple sea urchin wedged inside the bronze harbor bell.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Ringing Tone",
+          "speech": "The urchin popped right out into the shallow water, and now the bronze bell rings clear and bright again!",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "The Bell Rings",
+          "story_beat": "payoff",
+          "visual_prompt": "Ollie the otter with cheerful eyes watches the bronze harbor bell swing freely and strike loudly on the wooden harbor dock as white foam laps below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A purple sea urchin jams the bronze harbor bell clapper, silencing the morning warning signal.",
+      "decisive_choice": "Finn the fox decides to gently nudge the spiky urchin free with a dry driftwood stick while Ollie the otter steadies the hanging bronze rim.",
+      "resolution": "The bronze clapper swings freely once more, ringing clearly across the harbor waters to welcome the incoming tide.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-18T10:34:12.197655+00:00",
+  "last_preflight_at": "2026-11-18T18:13:31.529402+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-18T10:44:34.418482+00:00",
+    "at": "2026-11-18T18:21:35.480108+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -27197,10 +27257,68 @@
       "resolution": "The cogs spin freely once more, projecting a sharp, crystal-clear star map across the observatory ceiling.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-542d7117f4f220b08524": {
+      "at": "2026-11-18T18:21:33.687528+00:00",
+      "title": "Finn and Ollie's Tidal Shell Mystery",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "79d5f0a6dbe4f9aa155a778c865647dbd264491125dc1f28b27d55d079abf18e",
+      "story_beats": [
+        {
+          "headline": "The Silent Morning Bell",
+          "speech": "Why is the harbor bell so silent this morning when the tide is already rolling in so strongly?",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "The Silent Bell",
+          "story_beat": "reveal",
+          "visual_prompt": "Finn the fox with sleek reddish fur and a white-tipped tail stands alert on the weathered wooden planks of the harbor, staring up with wide amber eyes at the silent bronze bell hanging above.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Discovering the Obstruction",
+          "speech": "Look closely inside the bronze rim. A spiky purple sea urchin is wedged right where the metal clapper swings!",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "The Urchin Jam",
+          "story_beat": "build",
+          "visual_prompt": "Ollie the otter with dense brown fur and whiskers points a small paw upward inside the open bronze harbor bell, revealing a prickly purple sea urchin stuck tightly against the iron hinge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Prying the Shell Loose",
+          "speech": "Hold the bronze rim steady, Ollie, while I use this dry driftwood stick to nudge the spiky shell outward.",
+          "visual": "fox",
+          "story_environment": "harbor",
+          "label": "The Gentle Push",
+          "story_beat": "mechanism",
+          "visual_prompt": "Finn the fox with focused expression uses a slender driftwood stick to press carefully against the purple sea urchin wedged inside the bronze harbor bell.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clear Ringing Tone",
+          "speech": "The urchin popped right out into the shallow water, and now the bronze bell rings clear and bright again!",
+          "visual": "otter",
+          "story_environment": "harbor",
+          "label": "The Bell Rings",
+          "story_beat": "payoff",
+          "visual_prompt": "Ollie the otter with cheerful eyes watches the bronze harbor bell swing freely and strike loudly on the wooden harbor dock as white foam laps below.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A purple sea urchin jams the bronze harbor bell clapper, silencing the morning warning signal.",
+      "decisive_choice": "Finn the fox decides to gently nudge the spiky urchin free with a dry driftwood stick while Ollie the otter steadies the hanging bronze rim.",
+      "resolution": "The bronze clapper swings freely once more, ringing clearly across the harbor waters to welcome the incoming tide.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-18T10:44:34.418430+00:00",
+    "at": "2026-11-18T18:21:35.480064+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -27211,21 +27329,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-18T10:44:34.418474+00:00",
+    "at": "2026-11-18T18:21:35.480100+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-18T10:34:51.968621+00:00",
+    "at": "2026-11-18T18:14:06.328082+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-4ef4aa5e515149658402",
-    "video_url": "https://www.youtube.com/watch?v=cNRJLfPUPVA",
+    "content_id": "rayvan-gemini-542d7117f4f220b08524",
+    "video_url": "https://www.youtube.com/watch?v=EVxKi8DwCaA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-18T10:44:34.417579+00:00",
+    "at": "2026-11-18T18:21:35.479298+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -27237,7 +27355,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-18T10:44:34.418279+00:00",
+    "at": "2026-11-18T18:21:35.479949+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
