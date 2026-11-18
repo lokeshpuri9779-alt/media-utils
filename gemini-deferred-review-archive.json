@@ -5,1231 +5,6 @@
   "eligible_for_automatic_publishing": false,
   "entries": [
     {
-      "source_sha256": "89eaef63bea3cc277fd784f49fb956e62dc865b68accaa2c32e7393ff0372c5e",
-      "content_id": "rayvan-gemini-96cb6d8b12cf88aadee6",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:rate_limited",
-      "source_run_id": "42710717580",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-96cb6d8b12cf88aadee6",
-        "title": "Lyra the Lynx and Bran the Stoat's Forest Shortcut Reversal",
-        "hook": "The Tempting Ridge",
-        "question": "Can Lyra and Bran balance speed and safety using the compass?",
-        "answer": "Yes, by abandoning the risky shortcut and choosing the marked forest trail together.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Tempting Ridge",
-            "speech": "Look at this shining brass compass! If we scramble straight up the steep rocky ridge, we will reach the valley peak in half the time.",
-            "visual": "forest",
-            "label": "The Rocky Ridge",
-            "story_beat": "reveal",
-            "visual_prompt": "An outdoor forest setting featuring a steep rocky ridge under daylight. Lyra the lynx with amber-flecked golden fur, tufted ears, and a green wool scarf stands on the slope holding a gleaming brass compass. Bran the stoat with sleek brown-and-white fur and a fitted blue vest watches anxiously from below.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Crumbling Path",
-            "speech": "Wait, Lyra! The loose stones are sliding away beneath your paws. This shortcut is too unstable for us to cross safely right now.",
-            "visual": "signal",
-            "label": "The Unstable Slope",
-            "story_beat": "build",
-            "visual_prompt": "An outdoor forest setting featuring a steep rocky ridge under daylight. Small pebbles tumble down the slope. Lyra the lynx stumbles slightly while holding the brass compass in one paw, looking down with a concerned expression. Bran the stoat points urgently toward the falling debris.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Compass Alignment",
-            "speech": "You are right, Bran. The needle spins wildly here, and the ground is giving way. We must check the map and find a secure route.",
-            "visual": "door",
-            "label": "The Safe Trail Junction",
-            "story_beat": "mechanism",
-            "visual_prompt": "An outdoor forest setting featuring a flat mossy trail junction under daylight. Lyra the lynx carefully places the brass compass down onto a flat tree stump. Bran the stoat steps close, pressing his paw beside the compass to align the pointer toward the sheltered valley path.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Valley Journey",
-            "speech": "Walking the sheltered valley path together takes a little longer, but our compass points true and every step is completely secure.",
-            "visual": "forest",
-            "label": "The Sheltered Valley",
-            "story_beat": "payoff",
-            "visual_prompt": "An outdoor forest setting featuring a calm, green valley trail under daylight. Lyra the lynx and Bran the stoat walk side by side along the peaceful path, holding the brass compass securely between them with relaxed and happy expressions.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Lyra the lynx insists on taking a steep, unmapped ridge shortcut using the shared compass, while Bran the stoat warns that the rocky terrain is dangerously unstable.",
-        "decisive_choice": "Lyra lowers the compass back onto the level mossy ground and agrees to follow Bran along the secure valley path.",
-        "resolution": "Both animals safely reach the destination without incident, proving that patient navigation surpasses reckless speed.",
-        "visual_bible": {
-          "style": "Clean 3D animated puppet style with warm lighting, detailed fur textures, and natural woodland colors.",
-          "characters": {
-            "Lyra the lynx": "A graceful lynx with amber-flecked golden fur, prominent ear tufts, bright green eyes, wearing a cozy green wool scarf.",
-            "Bran the stoat": "A nimble stoat with sleek brown-and-white winter fur, dark curious eyes, wearing a fitted blue fabric vest."
-          },
-          "locations": {
-            "forest": "A lush, vibrant woodland featuring tall pine trees, soft mossy ground, scattered grey rocks, and dappled sunlight filtering through the canopy."
-          },
-          "objects": {
-            "compass": "A polished brass pocket compass with a hinged lid, a clear glass face, and a glowing needle that points steadily northward."
-          }
-        },
-        "plot_fingerprint": "f21a73a1ff35b7590c4eefed48fbfc233fed04a594ab31432895abfc77d99ec0"
-      }
-    },
-    {
-      "source_sha256": "d26f1a9fafb0c83b78907a06549eb4096653005c106d714ae37665e5bf2e26b6",
-      "content_id": "rayvan-gemini-cdd2b1ae911dbcb86a01",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:rate_limited",
-      "source_run_id": "42710717580",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-cdd2b1ae911dbcb86a01",
-        "title": "Milo the Otter and Felix the Cat's Riverbank Twilight Race",
-        "hook": "The Leading Dash",
-        "question": "Can Milo choose friendship over winning the twilight race when he discovers his rival Felix is trapped?",
-        "answer": "Milo pauses his final dash to help Felix free his tangled tail, learning that true victory lies in kindness.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Leading Dash",
-            "speech": "I am racing ahead to claim the bright lantern first before the evening fog fully rolls across the damp riverbank.",
-            "visual": "forest",
-            "label": "riverbank path",
-            "story_beat": "reveal",
-            "visual_prompt": "Milo the brown otter wearing a blue scarf stands on a lush green riverbank forest path holding a glowing brass lantern with a determined expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Struggle",
-            "speech": "Felix the ginger cat struggles helplessly beneath a fallen log, calling out loudly for urgent assistance in the darkening woods.",
-            "visual": "signal",
-            "label": "trapped cat",
-            "story_beat": "build",
-            "visual_prompt": "Felix the orange tabby cat wearing a red vest is trapped under a mossy wooden log in the forest, pawing upward and calling for help.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Choice to Assist",
-            "speech": "Milo pauses his triumphant sprint, sets down his lantern, and rushes back to lift the heavy obstacle off his rival.",
-            "visual": "door",
-            "label": "helping hand",
-            "story_beat": "mechanism",
-            "visual_prompt": "Milo the brown otter sets the brass lantern down on the soil and pushes firmly against a heavy wooden branch to free Felix in the forest.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "A Shared Journey",
-            "speech": "Walking together beneath the soft evening glow, they realize companionship is far more rewarding than any solo triumph.",
-            "visual": "forest",
-            "label": "shared lantern",
-            "story_beat": "payoff",
-            "visual_prompt": "Milo the otter and Felix the cat walk happily side by side along the riverbank forest trail, jointly carrying the glowing lantern between them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Milo the otter races ahead toward the finish line with the glowing lantern while Felix the cat becomes stuck under a fallen log.",
-        "decisive_choice": "Milo drops the lantern on the mossy ground and turns back to lift the heavy wooden branch off Felix.",
-        "resolution": "Both animals walk side by side along the riverbank sharing the warm light of the lantern as equals.",
-        "visual_bible": {
-          "style": "Warm and vibrant storybook illustration style with soft cinematic lighting and rich natural textures.",
-          "characters": {
-            "Milo": "A cheerful brown otter with sleek fur, bright curious eyes, and a cozy blue knitted scarf.",
-            "Felix": "An agile orange tabby cat with expressive green eyes, white paws, and a neat red fabric vest."
-          },
-          "locations": {
-            "riverbank": "A lush, damp riverbank forest featuring tall green ferns, smooth mossy rocks, and winding dirt paths under a twilight sky."
-          },
-          "objects": {
-            "lantern": "A polished brass lantern with glass panes casting a warm golden glow onto the surrounding grass.",
-            "log": "A thick, moss-covered fallen tree branch resting heavily across the ground."
-          }
-        },
-        "plot_fingerprint": "39ae7dc67840c54581f892e6e3ac17033f4da362eb55f83615cf86df0fae9d5d"
-      }
-    },
-    {
-      "source_sha256": "522f76522ff9e08b005ac376e950e668af5af60b7c5844b9146a6ba3e6ae8610",
-      "content_id": "rayvan-gemini-294cb165ec720de3c42b",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "42773850078",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-294cb165ec720de3c42b",
-        "title": "Buster the Dog and Pip the Mouse's Village Square Ball Misunderstanding",
-        "hook": "The Hidden Ball",
-        "question": "Why did Buster hide the shared ball beneath the village bench?",
-        "answer": "Buster hid the red rubber ball to protect it from a stray tumbleweed before Pip could spot the hazard.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Hidden Ball",
-            "speech": "Buster rolled the red rubber ball beneath the heavy wooden bench and turned away without explaining his sudden secrecy to Pip.",
-            "visual": "forest",
-            "label": "hidden ball",
-            "story_beat": "reveal",
-            "visual_prompt": "In the sunny village square, Buster the brown dog with floppy ears and a blue collar uses his nose to nudge the red rubber ball under a rustic wooden bench. Pip the tiny grey mouse with big round ears stands nearby on the cobblestone path, looking confused and holding a small flower with a disappointed expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Suspicious Discovery",
-            "speech": "Pip peered into the shadows of the bench, suspecting Buster wanted to keep the bouncing toy entirely to himself today.",
-            "visual": "signal",
-            "label": "suspicious mouse",
-            "story_beat": "build",
-            "visual_prompt": "In the sunny village square, Pip the grey mouse crouches low on the cobblestones, peering intently into the dark space beneath the rustic wooden bench where the red rubber ball rests. Buster the brown dog sits a few feet away with a gentle, patient expression, holding a small wooden block in his paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Protective Truth",
-            "speech": "Crawling closer, Pip noticed a sharp thorn-covered branch blocking the open path and realized Buster acted to keep them both safe.",
-            "visual": "door",
-            "label": "protective barrier",
-            "story_beat": "mechanism",
-            "visual_prompt": "In the sunny village square, Pip the grey mouse crawls partway under the rustic wooden bench, touching the red rubber ball with one paw. Just outside the bench opening, a sharp thorny branch lies on the cobblestones. Buster the brown dog peeks down from above with an encouraging look.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shared Play Restored",
-            "speech": "Smiling together, the loyal dog and grateful mouse rolled the red toy back into the open sunlight for another joyful game.",
-            "visual": "planet",
-            "label": "joyful reunion",
-            "story_beat": "payoff",
-            "visual_prompt": "In the sunny village square, Buster the brown dog and Pip the grey mouse stand side by side on the clean cobblestone path, both holding onto the red rubber ball together with happy expressions. The rustic wooden bench and thorny branch are visible in the background under clear daylight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Buster the dog takes the shared ball and hides it under the village bench, causing Pip the mouse to suspect Buster is selfishly keeping it away from their games.",
-        "decisive_choice": "Pip crawls beneath the dusty village bench to retrieve the ball and discovers it safely wedged behind a protective wooden block away from the rolling tumbleweed.",
-        "resolution": "Pip understands Buster's protective intention, and both friends happily resume playing with the ball together in the open square.",
-        "visual_bible": {
-          "style": "Bright, charming, family-friendly 3D animated puppet aesthetic with warm lighting, detailed textures, and vibrant natural colors.",
-          "characters": {
-            "Buster": "A cheerful brown dog with floppy ears, a glossy coat, soft muzzle markings, and a simple blue fabric collar.",
-            "Pip": "A tiny, nimble grey mouse with large round ears, bright black bead eyes, and a delicate twitching pink nose."
-          },
-          "locations": {
-            "village square": "A quaint, sunlit outdoor gathering space featuring textured grey cobblestone ground, a rustic weathered wooden bench, and small surrounding patches of green grass."
-          },
-          "objects": {
-            "ball": "A bright red rubber ball with a smooth matte finish and a distinct bouncy texture.",
-            "flower": "A small vibrant yellow flower with slender green stem leaves.",
-            "block": "A plain rectangular wooden block with smooth sanded edges.",
-            "branch": "A small weathered brown branch with tiny harmless thorns along its side."
-          }
-        },
-        "plot_fingerprint": "112929a221abf042ea395b486e8d6045f5d4613db07f2e1498dde63c7ed00f84"
-      }
-    },
-    {
-      "source_sha256": "713d1a3000900378aa5eff0d6149a317ac409db0db19c25c3b5b339d80f26832",
-      "content_id": "rayvan-gemini-8c390601f42c18cb01a5",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "42773850078",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-8c390601f42c18cb01a5",
-        "title": "Orion the Owl and the Midnight Observatory Misunderstanding",
-        "hook": "The Midnight Observatory Discovery",
-        "question": "Does the brass clock or the glowing lantern truly mark the arrival of the night sky summit?",
-        "answer": "Comparing the ticking brass clock directly against the steady flame of the lantern reveals the correct cosmic time.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Midnight Observatory Discovery",
-            "speech": "Orion the owl examines the dusty brass clock on the observatory desk, wondering if it controls the midnight stars.",
-            "visual": "door",
-            "label": "observatory door",
-            "story_beat": "reveal",
-            "visual_prompt": "Orion the horned owl with amber eyes and gray feathers stands inside the stone observatory holding a ticking brass clock near the heavy wooden door.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Comparing Timepieces",
-            "speech": "Holding the brass clock tightly, Orion carries it across the creaking wooden floorboards to check against the glowing lantern.",
-            "visual": "signal",
-            "label": "observatory lantern",
-            "story_beat": "build",
-            "visual_prompt": "Orion the horned owl stands inside the stone observatory holding the polished brass clock in his left claw, stepping toward a glowing brass lantern resting on a wooden table.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Testing the Beams",
-            "speech": "Orion sets the brass clock down beside the steady lantern flame to measure the exact movement of light.",
-            "visual": "planet",
-            "label": "observatory desk",
-            "story_beat": "mechanism",
-            "visual_prompt": "Orion the horned owl leans over the wooden desk inside the stone observatory, placing the brass clock flat beside the burning lantern to compare their glowing faces.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Starry Resolution",
-            "speech": "Understanding the true purpose of both items, Orion places the brass clock back on the shelf and tends the lantern.",
-            "visual": "forest",
-            "label": "observatory window",
-            "story_beat": "payoff",
-            "visual_prompt": "Orion the horned owl sits contentedly on a wooden perch inside the stone observatory, looking out the glass window toward the starry night forest while the lantern glows beside the resting brass clock.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Orion the owl mistakes the ticking brass clock for the celestial timing beacon, clashing with his duty to keep the lantern lit at the observatory.",
-        "decisive_choice": "Orion brings the brass clock to the observatory desk and places it side-by-side with the lantern to inspect their glowing dials.",
-        "resolution": "Orion realizes the clock measures hours while the lantern illuminates the star charts, restoring perfect observatory order.",
-        "visual_bible": {
-          "style": "Cinematic 3D animation style with warm lighting and detailed textures.",
-          "characters": {
-            "Orion": "A wise horned owl with fluffy gray-brown feathers, bright amber eyes, and alert ear tufts."
-          },
-          "locations": {
-            "observatory": "A cozy stone tower room filled with star charts, wooden desks, and a large arched viewing window."
-          },
-          "objects": {
-            "clock": "A small polished brass wind-up table clock with visible Roman numerals on its white face.",
-            "lantern": "An antique brass oil lantern with a glass chimney casting a warm, steady golden glow."
-          }
-        },
-        "plot_fingerprint": "6407dd3193a9457a799ca76092c12b7d7b095d9f59e401ec695716eb9845110a"
-      }
-    },
-    {
-      "source_sha256": "4ee9b0c388d9cb0cd2334e728359f9f77a5746cb0311249101f1e50b5da0c027",
-      "content_id": "rayvan-gemini-3957ca5e2296459aa857",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "42773850078",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-3957ca5e2296459aa857",
-        "title": "Toby the Tapir and the Meadow Petal Mystery",
-        "hook": "The Accusation",
-        "question": "Why did Toby the tapir falsely accuse his neighbor of changing the meadow flowers?",
-        "answer": "Toby realized morning dew caused the petal color shift, not his friend, leading to a heartfelt apology.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Accusation",
-            "speech": "You dyed these meadow petals overnight to ruin our shared garden display, did you not?",
-            "visual": "forest",
-            "label": "Forest Clearing",
-            "story_beat": "reveal",
-            "visual_prompt": "Toby the tapir stands in a lush green forest clearing pointing angrily at two blooming flowers, holding a small flower prop in his paw with an accusatory expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Investigation",
-            "speech": "Let us inspect the soil around these stems to see if any artificial coloring was used.",
-            "visual": "signal",
-            "label": "Soil Inspection Point",
-            "story_beat": "build",
-            "visual_prompt": "Toby the tapir kneels down in the lush green forest clearing, examining the damp soil near the flower roots with a focused expression while holding a small magnifying flower prop.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Discovery",
-            "speech": "My own muddy footprints match the smudges here, proving moisture caused the bright color shift.",
-            "visual": "door",
-            "label": "Flower Gate Area",
-            "story_beat": "twist",
-            "visual_prompt": "Toby the tapir stands in the lush green forest clearing looking down at his muddy footprints on the ground beside the two flowers, showing a surprised and regretful facial expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Apology",
-            "speech": "I am truly sorry for my quick temper; the morning dew simply awakened the natural colors.",
-            "visual": "forest",
-            "label": "Restored Meadow",
-            "story_beat": "payoff",
-            "visual_prompt": "Toby the tapir stands peacefully in the lush green forest clearing next to his friend, both holding flowers together with happy and relieved expressions in the bright daylight.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Toby the tapir blames his neighbor for dyeing the meadow flowers, until physical evidence proves natural dew caused the shift.",
-        "decisive_choice": "Toby compares his damp muddy footprints directly against the clean soil near the flowers and offers a sincere apology.",
-        "resolution": "Both animals happily tend to the vibrant meadow together, having cleared up the misunderstanding.",
-        "visual_bible": {
-          "style": "Friendly storybook illustration with warm lighting and soft textures.",
-          "characters": {
-            "Toby": "A gentle gray tapir with soft rounded ears, a friendly snout, and wearing a simple teal vest."
-          },
-          "locations": {
-            "forest": "A lush, sunlit meadow surrounded by tall green trees and soft grassy ground."
-          },
-          "objects": {
-            "flower": "A vibrant red and yellow blossom with sturdy green stem and broad petals."
-          }
-        },
-        "plot_fingerprint": "276b6ffaa26599eaa08d9652f331485b6a3dba66f6de26a9626fdcb11ff08790"
-      }
-    },
-    {
-      "source_sha256": "874abd4bc38ebbd708f24c593dd0dd3b0f789ce66dbc6b26078c675b27ff3204",
-      "content_id": "rayvan-gemini-6fd5e9c5b4810abae5a9",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-6fd5e9c5b4810abae5a9",
-        "title": "Milo the Otter and Felix the Cat's Riverbank Lantern Share",
-        "hook": "The Evening Tug of War",
-        "question": "How can Milo the otter and Felix the cat share the glowing lantern during the evening riverbank gathering without leaving anyone in the dark?",
-        "answer": "They place the lantern on a flat wooden dock between their resting spots so its warm light reaches both of them equally.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Evening Tug of War",
-            "speech": "Milo and Felix tug back and forth on the heavy brass lantern handle, refusing to let the warm glow rest.",
-            "visual": "forest",
-            "label": "riverbank dock",
-            "story_beat": "reveal",
-            "visual_prompt": "An outdoor forest riverbank setting at dusk. Milo the brown fur otter and Felix the orange tabby cat are standing on a wooden dock, both pulling in opposite directions on a single brass lantern prop. Milo holds the left side with a determined expression, and Felix holds the right side with paws firmly planted.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Diminished Glow",
-            "speech": "Because the lantern is pulled tightly against the far post, Felix sits in deep shadow while Milo gets all the light.",
-            "visual": "signal",
-            "label": "lantern post",
-            "story_beat": "build",
-            "visual_prompt": "An outdoor forest riverbank setting at dusk. Felix the orange tabby cat sits hunched in the heavy shadow near a wooden lantern post, looking disgruntled. Milo the brown fur otter stands further away near the center, holding the brass lantern prop high while casting a bright glow only on his own paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Compromise Placement",
-            "speech": "Milo lowers the lantern onto the exact center plank of the dock so the soft light shines evenly across both sides.",
-            "visual": "door",
-            "label": "central dock plank",
-            "story_beat": "mechanism",
-            "visual_prompt": "An outdoor forest riverbank setting at dusk. Milo the brown fur otter leans forward to set the brass lantern prop onto the central wooden plank of the dock. Felix the orange tabby cat watches closely with a curious expression, sitting nearby on the same wooden dock surface.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shared Evening Warmth",
-            "speech": "Sitting side by side on the riverbank dock, both friends enjoy the bright lantern light together without any further argument.",
-            "visual": "forest",
-            "label": "shared riverbank",
-            "story_beat": "payoff",
-            "visual_prompt": "An outdoor forest riverbank setting at night. Milo the brown fur otter and Felix the orange tabby cat sit side by side on the wooden dock, peacefully resting. The brass lantern prop sits glowing brightly between them on the central plank, casting warm light on both animals' faces.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Milo and Felix both pull the brass lantern toward their respective sides of the riverbank dock, causing the light to swing out of reach.",
-        "decisive_choice": "Milo suggests centering the lantern on the middle plank and sharing the glowing warmth together.",
-        "resolution": "Felix agrees to the shared placement, and both friends enjoy the glowing lantern light side by side.",
-        "visual_bible": {
-          "style": "Charming illustrated animal animation style with warm evening lighting, rich natural textures, and clear silhouette poses.",
-          "characters": {
-            "Milo the otter": "A sleek brown fur otter with bright curious eyes and a playful expression, wearing no clothing.",
-            "Felix the cat": "A neat orange tabby cat with white paws, pointed ears, and an expressive whiskers face, wearing no clothing."
-          },
-          "locations": {
-            "riverbank dock": "A rustic wooden dock made of weathered brown planks extending gently over a calm river surrounded by forest foliage at dusk."
-          },
-          "objects": {
-            "lantern": "A classic brass lantern with a sturdy wire handle and warm glowing amber glass panes."
-          }
-        },
-        "plot_fingerprint": "2a46f49510a5661e92683a6b6c19d98958a6084999f736377ba42118b291ce81"
-      }
-    },
-    {
-      "source_sha256": "fa6f5b5872d8be5d234f75bace8ba9d3ca864f9490471c6c3a801b3cd0ef88c0",
-      "content_id": "rayvan-gemini-55e4cd6497881c82c3d5",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-55e4cd6497881c82c3d5",
-        "title": "Suki the Squirrel and Rusty the Rabbit's Garden Rivalry",
-        "hook": "The Flower Dispute",
-        "question": "Will Suki prioritize hoarding the lone garden flower or helping Rusty when he gets his paw trapped?",
-        "answer": "Suki realizes her greed puts Rusty in danger and chooses to share the garden resources to free him.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Flower Dispute",
-            "speech": "I found this bloom first, so it belongs in my winter stash, not your messy rabbit burrow, you greedy little garden thief.",
-            "visual": "forest",
-            "label": "Garden flower stand",
-            "story_beat": "reveal",
-            "visual_prompt": "A squirrel holding a bright flower stands in a leafy garden, glaring at a rabbit who wants the same flower.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Trapped Paw",
-            "speech": "Oh no, my paw is stuck fast in this heavy wooden gate latch while I tried to reach for the prize myself.",
-            "visual": "door",
-            "label": "Garden gate latch",
-            "story_beat": "build",
-            "visual_prompt": "A rabbit with a paw caught in a wooden gate latch in a garden, looking distressed while the squirrel watches nearby.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Critical Choice",
-            "speech": "Should I keep this flower to survive the frost, or use it to help my rival who is clearly in deep trouble?",
-            "visual": "signal",
-            "label": "Decision moment",
-            "story_beat": "mechanism",
-            "visual_prompt": "The squirrel holds the flower near the gate latch, looking conflicted while standing in the garden near the trapped rabbit.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shared Relief",
-            "speech": "Take my hand instead of the flower, for friendship is far warmer than any bloom could ever be during this cold night.",
-            "visual": "forest",
-            "label": "Garden friendship",
-            "story_beat": "payoff",
-            "visual_prompt": "The squirrel and rabbit sit together in the garden, having discarded the flower, looking happy and safe as the frost settles.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Suki and Rusty struggle over who gets the last blooming flower before an approaching frost.",
-        "decisive_choice": "Suki chooses to use her flower to pry open the garden gate latch holding Rusty's paw.",
-        "resolution": "Suki frees Rusty and they share the warmth of their burrow together, abandoning the lonely flower.",
-        "visual_bible": {
-          "style": "Cinematic 3D animation with soft lighting and detailed fur textures in a naturalistic garden environment.",
-          "characters": {
-            "Suki": "A small brown squirrel with a bushy tail and curious brown eyes.",
-            "Rusty": "A fluffy tan rabbit with long ears and a white patch on his nose."
-          },
-          "locations": {
-            "Garden": "A lush outdoor space with tall grass, wooden fences, and patches of late-blooming flowers."
-          },
-          "objects": {
-            "Flower": "A vibrant, oversized yellow blossom with a thick green stem.",
-            "Gate Latch": "A simple, rustic wooden latch mechanism on a small garden gate."
-          }
-        },
-        "plot_fingerprint": "7339c76c08225acd391a754eed630e92894de3001ba6686df801c92594e3d626"
-      }
-    },
-    {
-      "source_sha256": "50d63f0c58398cade4c06224751c11be75806017140d6e37edd3d3048705a66b",
-      "content_id": "rayvan-gemini-48b4cfa763b2ff054961",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-48b4cfa763b2ff054961",
-        "title": "Orson the Fox and Pip the Stoat's Cabin Tome",
-        "hook": "The Cabin Claim",
-        "question": "How do Orson and Pip resolve their dispute over the single remaining winter book?",
-        "answer": "They discover a shared reading routine that brings warmth to both of them.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Cabin Claim",
-            "speech": "This winter book is mine for the evening because I found it first upon the wooden table.",
-            "visual": "forest",
-            "label": "Cabin Interior",
-            "story_beat": "reveal",
-            "visual_prompt": "Inside a rustic winter cabin, Orson the orange fox with a cream-colored muzzle and Pip the brown stoat with a white underbelly both grip opposite ends of a thick book on a wooden table, with snow falling visible outside the frosted window.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Tug of Pages",
-            "speech": "We cannot both hold the binding at once without tearing the delicate ancient paper apart.",
-            "visual": "door",
-            "label": "Cabin Doorway",
-            "story_beat": "build",
-            "visual_prompt": "Inside the rustic winter cabin near a closed wooden door, Orson the orange fox and Pip the brown stoat pull firmly on the book, their expressions determined, while an unlit lantern sits nearby on a wooden stool.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Shared Proposal",
-            "speech": "Let us take turns reading aloud by the fire so we both enjoy the tales tonight.",
-            "visual": "signal",
-            "label": "Hearth Fire",
-            "story_beat": "mechanism",
-            "visual_prompt": "Inside the rustic winter cabin, Pip the brown stoat points a paw toward the glowing hearth fire while holding a small brass bell, and Orson the orange fox listens attentively with open paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Winter Harmony",
-            "speech": "Reading together turns the long snowy night into a wonderful journey for both of us.",
-            "visual": "forest",
-            "label": "Cabin Hearth",
-            "story_beat": "payoff",
-            "visual_prompt": "Inside the rustic winter cabin by the glowing hearth fire, Orson the orange fox and Pip the brown stoat sit side by side on a woven rug, peacefully reading the open book together.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Orson the fox and Pip the stoat both claim exclusive reading rights to the single surviving folklore book in the snowy cabin.",
-        "decisive_choice": "Pip proposes alternating chapters by the hearth fire instead of tugging the heavy book back and forth.",
-        "resolution": "Orson agrees to the reading schedule, and both animals peacefully enjoy the stories together through the winter night.",
-        "visual_bible": {
-          "style": "Cozy storybook illustration with warm lighting and detailed fur textures",
-          "characters": {
-            "Orson": "An orange fox with a fluffy white-tipped tail, wearing a small woolen scarf",
-            "Pip": "A nimble brown stoat with sleek fur and bright curious eyes"
-          },
-          "locations": {
-            "cabin": "A cozy rustic winter cabin with wooden walls, a stone hearth, and a frosted window"
-          },
-          "objects": {
-            "book": "A thick leather-bound folklore book with golden lettering on the spine",
-            "bell": "A small polished brass hand bell resting on a wooden stool",
-            "lantern": "An unlit brass cabin lantern sitting near the doorway"
-          }
-        },
-        "plot_fingerprint": "5fb24a7789feff0e06294ee03ca592bc26c6c98a37504ab77a71f7ff1ffb00cc"
-      }
-    },
-    {
-      "source_sha256": "23c1758ba7bddf721ed76540f732e422e950f9608403775e60c287ddd3254f1f",
-      "content_id": "rayvan-gemini-e913b3f8089882a4f751",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-e913b3f8089882a4f751",
-        "title": "Pippin the Pangolin and Orla the Owl's Nighttime Navigation",
-        "hook": "The Mismatched Signal",
-        "question": "How can Pippin and Orla coordinate their travel along the dark forest path when their signals get mixed up?",
-        "answer": "Pippin rolls a polished stone bell to match Orla's hooting rhythm, creating a unified duet that guides them safely through the shadowy trees.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Mismatched Signal",
-            "speech": "Pippin tapped the small brass bell while Orla hooted from above, but their differing rhythms echoed through the dark woods.",
-            "visual": "signal",
-            "label": "forest path signal exchange",
-            "story_beat": "reveal",
-            "visual_prompt": "In the dense forest at night, Pippin the pangolin holds a brass bell in his paws while Orla the owl perches above on a low branch, both looking slightly confused as their independent sounds echo into the trees.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Listening Closely",
-            "speech": "Orla stopped calling immediately, cocking her feathery head to catch the exact tempo of Pippin's gentle bell ringing.",
-            "visual": "forest",
-            "label": "forest canopy observation",
-            "story_beat": "build",
-            "visual_prompt": "In the dense forest at night, Orla the owl perches attentively on a pine branch with her head tilted, listening downward while Pippin the pangolin holds the brass bell still in his paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Testing the Tempo",
-            "speech": "Pippin rang the brass bell three times in a steady pulse, waiting for the owl to respond with matching calls.",
-            "visual": "door",
-            "label": "clearing tree opening",
-            "story_beat": "mechanism",
-            "visual_prompt": "In the dense forest at night, Pippin the pangolin holds the brass bell with both paws, ringing it once with a focused expression near a wide tree opening, while Orla the owl watches closely from above.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Harmonious Journey",
-            "speech": "Together they chimed and hooted in perfect harmony, lighting up the winding dirt trail with their synchronized signals.",
-            "visual": "signal",
-            "label": "synchronized woodland guidance",
-            "story_beat": "payoff",
-            "visual_prompt": "In the dense forest at night, Pippin the pangolin walks along the dirt path holding the brass bell while Orla the owl glides just ahead above him, both moving forward in complete coordination.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Pippin and Orla misunderstand each other's navigation signals because the bell rings out of sync with the owl's hoots.",
-        "decisive_choice": "Orla pauses her calls to listen closely to Pippin's steady ringing tempo and matches her hooting directly to it.",
-        "resolution": "Pippin and Orla synchronize their sounds perfectly, illuminating the correct forest trail together under the moonlight.",
-        "visual_bible": {
-          "style": "Warm storybook illustration style with soft moonlight, deep indigo shadows, and rich natural textures.",
-          "characters": {
-            "Pippin": "A small, round pangolin with smooth golden-brown scaled armor, bright curious black eyes, and short nimble paws.",
-            "Orla": "A wise barn owl with soft white and pale grey speckled feathers, large golden eyes, and gentle expressive facial disk."
-          },
-          "locations": {
-            "forest": "A quiet, peaceful woodland path at night surrounded by tall pine trees, soft mossy ground, and dappled moonlight filtering through leaves."
-          },
-          "objects": {
-            "bell": "A small, shiny brass hand-bell with a clear ringing tone and a polished wooden handle."
-          }
-        },
-        "plot_fingerprint": "e8d513a98be9ce55b9bd91d7b91e85a81b90f963fda5d78d3e44a2cf966c5167"
-      }
-    },
-    {
-      "source_sha256": "6336631dce497e11839852efc1e8c9cecddf0ad2300e359da4a1bedfb664f540",
-      "content_id": "rayvan-gemini-3b3efe3c8979c32f69eb",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-3b3efe3c8979c32f69eb",
-        "title": "Felix the Cat and the Courtyard Parcel Swop",
-        "hook": "The Mysterious Box",
-        "question": "Will the honest cat return the mismatched parcel despite the temptation to keep its contents?",
-        "answer": "Yes, Felix returns the misplaced box to its rightful owner and earns an honest trade.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Mysterious Box",
-            "speech": "Oh look, a heavy delivery box has appeared right on my courtyard stones today, and inside is a gleaming silver key.",
-            "visual": "signal",
-            "label": "courtyard discovery",
-            "story_beat": "reveal",
-            "visual_prompt": "Felix the cat with sleek black fur and a green vest stands in a sunlit cobblestone courtyard next to a wooden box holding a shiny silver key in his paw, looking surprised.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Tempting Key",
-            "speech": "This silver key fits my locked storage chest perfectly, but taking it would mean keeping what does not belong to me.",
-            "visual": "door",
-            "label": "storage doorway",
-            "story_beat": "build",
-            "visual_prompt": "Felix the cat stands beside a rustic wooden doorway in the village courtyard holding the silver key against a locked wooden box with a worried expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Honest Walk",
-            "speech": "I must carry this heavy box across the cobblestone courtyard right back to the neighbor's doorstep where it belongs.",
-            "visual": "forest",
-            "label": "courtyard path",
-            "story_beat": "mechanism",
-            "visual_prompt": "Felix the cat walks purposefully across the open cobblestone courtyard path holding the heavy wooden box in both paws while green vines climb the stone walls.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Rightful Trade",
-            "speech": "Thank you for your honesty, Felix; here is your own lost compass delivered to the courtyard by mistake.",
-            "visual": "signal",
-            "label": "compass trade",
-            "story_beat": "payoff",
-            "visual_prompt": "Felix the cat smiles cheerfully in the village courtyard while receiving a small brass compass prop from an open box traded by a friendly neighbor.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Felix the cat discovers a misplaced delivery box left on his courtyard cobblestones containing a rare silver key that could unlock his own locked storage chest.",
-        "decisive_choice": "Felix chooses to carry the heavy box back across the courtyard to the neighbor's doorstep instead of keeping the key.",
-        "resolution": "The neighbor gratefully swaps the wrongly delivered box for Felix's actual package, which contains his own lost compass.",
-        "visual_bible": {
-          "style": "Bright storybook illustration with clean outlines and warm cinematic lighting.",
-          "characters": {
-            "Felix": "An agile black cat with emerald green eyes, wearing a tidy red vest and holding items securely in his paws."
-          },
-          "locations": {
-            "courtyard": "A sunlit cobblestone village courtyard framed by aged stone walls, climbing green vines, and rustic wooden doorways."
-          },
-          "objects": {
-            "box": "A compact wooden parcel box tied with a thin twine string.",
-            "key": "A polished silver key with a decorative ornate handle.",
-            "compass": "A round brass pocket compass with a clear glass face."
-          }
-        },
-        "plot_fingerprint": "3e89c8c5bdf12dafe169947f33c3da0bafd191cf42903ea324f5c351fad1674a"
-      }
-    },
-    {
-      "source_sha256": "6a5594ddb5d01c2d15f3a06fab1c8ded4eec7c3aae1b914405622cd172c466bc",
-      "content_id": "rayvan-gemini-053772088efd168e1399",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-053772088efd168e1399",
-        "title": "Orson the Fox and Barnaby the Rabbit's Woodland Clue",
-        "hook": "The Ominous Silhouette",
-        "question": "Does the marked trail signal a genuine hidden danger or a harmless fallen branch?",
-        "answer": "A second careful observation disproves the initial warning, revealing the path is completely safe.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Ominous Silhouette",
-            "speech": "Look at that terrifying dark shape stretching across our favorite trail. It must be a dangerous monster waiting to pounce.",
-            "visual": "forest",
-            "label": "Shadow Warning",
-            "story_beat": "reveal",
-            "visual_prompt": "In a dense woodland forest, Orson the reddish-brown fox stands with wide frightened eyes pointing a paw at a dark shadow on the dirt path. Barnaby the grey rabbit looks on calmly beside him holding nothing.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hesitant Approach",
-            "speech": "Wait a moment before we run away. Let us inspect the ground closer to see if the threat is truly real.",
-            "visual": "signal",
-            "label": "Trail Inspection",
-            "story_beat": "build",
-            "visual_prompt": "In the same woodland forest, Barnaby the grey rabbit steps forward carefully while holding a small compass, pointing it toward the mysterious shadow on the ground to test its direction.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Surprising Discovery",
-            "speech": "See this little flower casting the shadow? It was just a trick of the afternoon sun shining through the petals.",
-            "visual": "forest",
-            "label": "Flower Reveal",
-            "story_beat": "mechanism",
-            "visual_prompt": "In the same woodland forest, Barnaby the grey rabbit kneels down and holds up a bright yellow flower, showing Orson the fox that the scary shape came entirely from the plant.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Peaceful Continuation",
-            "speech": "That is such a relief. Let us carry our flower and book down the clear path together without any worries.",
-            "visual": "door",
-            "label": "Clear Trail",
-            "story_beat": "payoff",
-            "visual_prompt": "In the same woodland forest clearing, Orson the fox and Barnaby the rabbit walk side by side down the open trail. Barnaby holds the yellow flower in one paw and a small book tucked under his arm.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Orson the fox spots a strange shadow pattern on the trail resembling a hazard sign and panics, while Barnaby the rabbit pauses to investigate the actual physical source.",
-        "decisive_choice": "Barnaby walks up to the shadow and lifts the stray flower blocking the light, demonstrating that it is only a harmless plant silhouette.",
-        "resolution": "Orson and Barnaby laugh off the false alarm and continue their peaceful walk through the forest trail.",
-        "visual_bible": {
-          "style": "Charming, vibrant storybook illustration style with soft lighting and detailed natural textures.",
-          "characters": {
-            "Orson": "A clever red fox with bright orange fur, a bushy white-tipped tail, wearing a green scarf.",
-            "Barnaby": "A gentle grey rabbit with long floppy ears, wearing a cozy blue vest and white collar."
-          },
-          "locations": {
-            "forest": "A sunlit woodland forest featuring tall ancient trees, mossy ground, and scattered wildflowers."
-          },
-          "objects": {
-            "flower": "A vibrant yellow woodland flower with broad petals on a sturdy green stem.",
-            "book": "A compact hardcover storybook with a faded brown leather cover and gold lettering.",
-            "compass": "A pocket-sized brass navigation compass with a clearly visible white dial and glass cover."
-          }
-        },
-        "plot_fingerprint": "9008a53018a47617e9a8f1d1c4702e8487566c7c241bffcc28703fdfa5c4aec1"
-      }
-    },
-    {
-      "source_sha256": "0718cdc78065ea89a5f31105f6cba78b80335f26f462e2051b4df6caad166ed0",
-      "content_id": "rayvan-gemini-7047fc7c73e12692859b",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-7047fc7c73e12692859b",
-        "title": "Buster the Dog and Pip the Mouse's Village Square Ball Rule",
-        "hook": "The Simultaneous Grab",
-        "question": "How do Buster the dog and Pip the mouse share their single bouncing ball in the busy village square without bumping into each other?",
-        "answer": "They establish an alternating roll-and-fetch schedule so both friends get equal playtime.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Simultaneous Grab",
-            "speech": "Buster the dog and Pip the mouse reach for the bouncing ball simultaneously, blocking each other.",
-            "visual": "signal",
-            "label": "dispute",
-            "story_beat": "reveal",
-            "visual_prompt": "A sunny village square with gray cobblestones and timber houses. Buster the golden retriever dog and Pip the tiny brown mouse are both reaching forward with their paws toward a red ball on the ground, creating a standoff. Buster is holding his breath with an eager expression, while Pip stands firmly beside the ball holding a tiny paw up.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Deadlock Standoff",
-            "speech": "Neither animal will let go of the ball, causing frustration in the middle of the village square.",
-            "visual": "door",
-            "label": "impasse",
-            "story_beat": "build",
-            "visual_prompt": "The village square near a wooden tavern door. Buster the golden retriever dog and Pip the tiny brown mouse are glaring at opposite sides of the red ball, neither yielding. Buster's tail is still, and Pip's whiskers are twitching in annoyance.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Fair Rule Proposed",
-            "speech": "Buster decides to wait patiently and let Pip roll the ball first to share the fun.",
-            "visual": "forest",
-            "label": "sharing",
-            "story_beat": "mechanism",
-            "visual_prompt": "A village square bordered by a shaded edge of green trees. Buster the golden retriever dog sits back on his haunches with a friendly smile, watching as Pip the tiny brown mouse happily pushes the red ball forward with its front paws.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Joyful Playtime",
-            "speech": "Playing by turns brings them endless joy and keeps their wonderful friendship strong every single afternoon.",
-            "visual": "ship",
-            "label": "harmony",
-            "story_beat": "payoff",
-            "visual_prompt": "A wide sunny village square with a decorative wooden cart in the background. Buster the golden retriever dog is playfully tapping the red ball back toward Pip the tiny brown mouse, who is scampering forward with a cheerful expression under the bright afternoon sun.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Buster the dog and Pip the mouse both try to grab the single bouncing ball at the exact same moment on the village cobblestones, causing a deadlock where neither can play.",
-        "decisive_choice": "Buster gently holds his paw back and waits for Pip to roll the ball across the square first, establishing a turn-taking rule.",
-        "resolution": "Buster and Pip happily take turns rolling and chasing the ball across the village square, enjoying playtime together.",
-        "visual_bible": {
-          "style": "Charming and vibrant animated storybook illustration with warm lighting and clear character silhouettes.",
-          "characters": {
-            "Buster": "A friendly golden retriever dog with floppy ears, a wagging tail, and a kind facial expression.",
-            "Pip": "A small brown mouse with large round ears, bright black eyes, and delicate whiskers."
-          },
-          "locations": {
-            "village": "A quaint village square paved with gray cobblestones, surrounded by rustic timber-framed houses and green foliage."
-          },
-          "objects": {
-            "ball": "A bright red rubber bouncy ball roughly the size of an apple."
-          }
-        },
-        "plot_fingerprint": "d9b466d787f2bab2c173c1eb1124b1e2c3d901f099ca5b72d7951ef1b9b1f950"
-      }
-    },
-    {
-      "source_sha256": "140a5451d1e099a0eebc7733582a7e7f0e0a6bc206f31c20537a370e3f7c65b3",
-      "content_id": "rayvan-gemini-8b92bad28fd09dc13a2b",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-8b92bad28fd09dc13a2b",
-        "title": "Orion the Owl and the Observatory Clock Mistake",
-        "hook": "The Shadowy Intruder",
-        "question": "Why did Orion the owl guard the lantern so fiercely against the ticking brass clock?",
-        "answer": "Orion mistook the ticking clock's steady shadow for a rival creature encroaching on his high observatory platform.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Shadowy Intruder",
-            "speech": "Who dares disturb the quiet starry hours with such a relentless ticking sound upon my stone floor?",
-            "visual": "signal",
-            "label": "Observatory Platform",
-            "story_beat": "reveal",
-            "visual_prompt": "Inside a stone observatory, Orion the brown-feathered owl stands with wide eyes on a wooden table, staring intently at a ticking brass clock casting a long shadow next to a glowing lantern held securely in his talon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shielding the Glow",
-            "speech": "I must hide our bright lantern flame so this stranger cannot find its way across the wooden planks.",
-            "visual": "door",
-            "label": "Observatory Platform",
-            "story_beat": "build",
-            "visual_prompt": "Inside a stone observatory, Orion the brown-feathered owl wraps his feathered wing protectively around a glowing lantern on a wooden table, deliberately blocking its light from reaching the ticking brass clock nearby.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Ticking Truth",
-            "speech": "Wait, the strange heartbeat does not move or breathe at all. It is only metal gears turning in place.",
-            "visual": "robot",
-            "label": "Observatory Platform",
-            "story_beat": "mechanism",
-            "visual_prompt": "Inside a stone observatory, Orion the brown-feathered owl leans closer with a curious head tilt toward the ticking brass clock on a wooden table, while holding a glowing lantern safely in his other talon.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shared Nighttime Calm",
-            "speech": "There is room enough for both light and time to keep watch together through the peaceful midnight sky.",
-            "visual": "signal",
-            "label": "Observatory Platform",
-            "story_beat": "payoff",
-            "visual_prompt": "Inside a stone observatory, Orion the brown-feathered owl stands calmly side by side with the ticking brass clock on a wooden table, both illuminated warmly by the glowing lantern resting between them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Orion the owl mistakes the shadow and ticking rhythm of a brass clock for a mysterious rival bird inside the observatory.",
-        "decisive_choice": "Orion spreads his wings to block the brass lantern's warm glow from illuminating the perceived rival, sacrificing his own comforting light source to protect his perch.",
-        "resolution": "Orion realizes the shadow belongs to a harmless clock, and he shares the lantern's glow peacefully beside it.",
-        "visual_bible": {
-          "style": "Cinematic warm-toned 3D animation with rich nocturnal lighting and detailed textures",
-          "characters": {
-            "Orion": "A wise brown-feathered owl with bright golden eyes, expressive feather tufts on his head, and soft patterned plumage."
-          },
-          "locations": {
-            "Observatory Platform": "A round stone observatory tower interior featuring dark stone brick walls, a sturdy wooden table, and a large arched window showing a starry night sky."
-          },
-          "objects": {
-            "clock": "A polished brass mechanical wind-up clock with twin bells on top and visible ticking internal gears.",
-            "lantern": "An antique brass oil lantern with a glass pane casing emitting a warm, flickering golden light."
-          }
-        },
-        "plot_fingerprint": "0b2d2d86849b7c23b90e4f770e5a8fc1624834eb8b4745f312ef8acfdd3e4cbc"
-      }
-    },
-    {
-      "source_sha256": "0c6761127e39c2471bb50c84eb202b43f3c9185aca33fd8629b9379a4889a6a0",
-      "content_id": "rayvan-gemini-696d6a73f5849bc7768b",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-696d6a73f5849bc7768b",
-        "title": "Toby the Tapir and the Meadow Flower Promise",
-        "hook": "The Solemn Oath",
-        "question": "Can Toby honor his promise to guard the rare meadow blooms instead of eating the sweet nearby berries?",
-        "answer": "Toby chooses to stay by the flowers, fulfilling his solemn promise.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Solemn Oath",
-            "speech": "I promised to protect these fragile meadow flowers until sunset, no matter what sweet treats might tempt me nearby.",
-            "visual": "forest",
-            "label": "meadow clearing",
-            "story_beat": "reveal",
-            "visual_prompt": "Toby the tapir standing proudly in a sunlit forest meadow, staring closely at two delicate blooming flowers while holding a single flower in his paw.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Sweet Temptation",
-            "speech": "Those ripe berries look so delicious, but my promise means I must stay right here and guard this spot.",
-            "visual": "signal",
-            "label": "berry patch",
-            "story_beat": "build",
-            "visual_prompt": "Toby the tapir looking longingly toward a vibrant patch of sweet berries at the edge of the forest meadow, holding a flower gently against his chest.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Turning Point",
-            "speech": "I will ignore the delicious berries and remain steadfast to protect the peaceful meadow blooms from any harm.",
-            "visual": "door",
-            "label": "flower boundary",
-            "story_beat": "mechanism",
-            "visual_prompt": "Toby the tapir firmly planting his feet between the glowing flower stems and the berry patch in the sunlit forest meadow, holding his flower shield steady.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Promised Reward",
-            "speech": "Keeping my word was worth every moment, and now these beautiful flowers can bloom safely through the afternoon.",
-            "visual": "forest",
-            "label": "protected meadow",
-            "story_beat": "payoff",
-            "visual_prompt": "Toby the tapir sitting happily beside the fully intact meadow flowers in the sunlit forest clearing, holding up a winning flower prop.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Toby the tapir's promise to guard the delicate meadow flowers conflicts with his strong temptation to wander off and eat nearby sweet berries.",
-        "decisive_choice": "Toby turns his back on the berry patch and settles down firmly beside the flower stems to keep watch.",
-        "resolution": "Toby successfully preserves the meadow blooms and enjoys a shared snack with his forest friends later.",
-        "visual_bible": {
-          "style": "Soft storybook illustration with warm pastel colors and gentle lighting",
-          "characters": {
-            "Toby": "A friendly brown tapir with a short flexible snout, round dark eyes, wearing a simple woven green vest."
-          },
-          "locations": {
-            "forest": "A lush, sun-dappled woodland meadow filled with soft green grass, tall trees, and patches of wildflowers."
-          },
-          "objects": {
-            "flower": "A vibrant red and yellow wildflower with long green stems and delicate petals.",
-            "shield": "A small wooden carved disc used as a symbolic protective token."
-          }
-        },
-        "plot_fingerprint": "706677ad27504d2ca4301039d25b02a2454bd945c590f4d8f5b42076aeb21781"
-      }
-    },
-    {
-      "source_sha256": "c259cd81a34928620a7edce77fc4b1aaf1b2e402c3502eea657ebb528611b87d",
-      "content_id": "rayvan-gemini-dfeb60fcb177cee30de0",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-dfeb60fcb177cee30de0",
-        "title": "Finn the Ferret and Pip the Marten's Market Stall Key",
-        "hook": "False Accusation at the Stall",
-        "question": "How do Finn and Pip resolve their marketplace fairness dispute over the brass key?",
-        "answer": "They inspect the ledger and establish a fair sharing schedule.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "False Accusation at the Stall",
-            "speech": "You took the brass key right off my hook, Pip, leaving our market stall completely locked up tight!",
-            "visual": "door",
-            "label": "marketplace_gate",
-            "story_beat": "reveal",
-            "visual_prompt": "In a sunlit outdoor village marketplace, Finn the ferret stands on his hind legs wearing a brown leather vest, pointing an angry paw at Pip the marten who wears a dark green tunic. Finn holds an empty brass hook near a wooden stall door, accusing Pip.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Hidden Evidence",
-            "speech": "Look closer beneath the counter, Finn! The brass key just rolled away into this dusty corner by itself.",
-            "visual": "signal",
-            "label": "market_counter",
-            "story_beat": "build",
-            "visual_prompt": "In the village marketplace, Pip the marten kneels down beside a wooden shop counter, pointing a paw at a shiny brass key resting on the cobblestones. Finn the ferret leans down beside Pip with a surprised expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Apology and Agreement",
-            "speech": "I am truly sorry for blaming you without checking, Pip. Let us set a fair schedule for opening the stall.",
-            "visual": "forest",
-            "label": "market_square",
-            "story_beat": "mechanism",
-            "visual_prompt": "In the village marketplace near a shaded forest edge, Finn the ferret holds out the brass key toward Pip the marten as a gesture of apology. Pip smiles warmly and places a small wooden ledger on the counter between them.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "Shared Success",
-            "speech": "Working together with our new schedule makes opening the market stall smooth and fair for both of us.",
-            "visual": "ship",
-            "label": "market_stall",
-            "story_beat": "payoff",
-            "visual_prompt": "In the bustling village marketplace beside a wooden trade booth resembling a ship counter, Finn the ferret and Pip the marten stand side by side happily holding the brass key together above the open ledger.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Finn the ferret falsely accuses Pip the marten of hoarding the market stall key, while physical evidence shows it simply rolled behind the counter.",
-        "decisive_choice": "Finn apologizes to Pip after discovering the key behind the counter and proposes a transparent shared timetable.",
-        "resolution": "Finn and Pip successfully manage the marketplace stall together using their new fair-access schedule.",
-        "visual_bible": {
-          "style": "Bright, charming storybook illustration style with rich textures and warm lighting.",
-          "characters": {
-            "Finn": "A slender ferret with soft tan and brown fur, wearing a fitted brown leather vest and alert, expressive dark eyes.",
-            "Pip": "A sleek marten with rich dark brown fur and a cream-colored chest patch, wearing a neat dark green tunic."
-          },
-          "locations": {
-            "Marketplace": "A bustling village marketplace featuring wooden stalls, cobblestone ground, and warm sunlight filtering through nearby trees."
-          },
-          "objects": {
-            "key": "A polished brass key with an ornate bow and a simple rectangular blade.",
-            "ledger": "A small bound book with leather covers and cream-colored paper pages."
-          }
-        },
-        "plot_fingerprint": "e5de7e236fdc0e22de1d96188ee9b3c773ce1c47d264faabc8bc8fc99b22d5bc"
-      }
-    },
-    {
       "source_sha256": "323dcbb5e71fd12364b0d9174af9892c70fa0f1139056003226d3a6938efd2e2",
       "content_id": "rayvan-gemini-6ddc5684771940af52dc",
       "review_status": "deferred_unreviewed",
@@ -8460,6 +7235,1289 @@
           }
         },
         "plot_fingerprint": "6f17c68bef2359434545ab77412d9b7ef599f01414846475d4570e8f6ea72cc3"
+      }
+    },
+    {
+      "source_sha256": "bd0e4fce13ed3d84a34f13193d7e0d518c042b990c7b7f04cbb63f5888f9fead",
+      "content_id": "rayvan-gemini-8827d12a3e5bcd8895b8",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-8827d12a3e5bcd8895b8",
+        "title": "Orion and Sammy's Night Observatory Inference",
+        "hook": "The Shadow on the Wall",
+        "question": "Why does Orion the owl mistake a ticking clock for a moving lantern?",
+        "answer": "Orion mistakes the rhythmic ticking shadow of a brass clock for a shifting lantern light until Sammy the squirrel points out the true source.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Shadow on the Wall",
+            "speech": "An unexpected gleam dances across the stone wall inside the quiet observatory, making Orion stare in deep wonder.",
+            "visual": "owl",
+            "story_environment": "observatory",
+            "label": "Shadow Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "An owl stands inside the observatory, staring wide-eyed at a moving shadow cast upon the wall by a nearby lantern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Ticking Mystery",
+            "speech": "Orion listens closely to the steady rhythmic clicking sound echoing softly beside the grand brass telescope.",
+            "visual": "owl",
+            "story_environment": "observatory",
+            "label": "Listening Closely",
+            "story_beat": "build",
+            "visual_prompt": "An owl tilts its head inquisitively next to a shiny brass clock resting on a wooden desk inside the observatory.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Squirrel's Discovery",
+            "speech": "Sammy bounds across the floorboards and nudges the ticking clock to show Orion the true source of the light.",
+            "visual": "squirrel",
+            "story_environment": "observatory",
+            "label": "Clarifying Truth",
+            "story_beat": "twist",
+            "visual_prompt": "A squirrel scurries across the floor inside the observatory, gently touching the side of a small mechanical clock.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "A Calm Night Restored",
+            "speech": "Both friends relax together under the starry night sky as the gentle clock ticks peacefully through the quiet hours.",
+            "visual": "owl",
+            "story_environment": "observatory",
+            "label": "Peaceful Accord",
+            "story_beat": "payoff",
+            "visual_prompt": "An owl sits peacefully beside a small clock inside the observatory while looking out the high dome window.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Orion the owl notices an unfamiliar rhythm of light near the telescope base and wrongly assumes an intruder is shining a lantern.",
+        "decisive_choice": "Orion decides to halt his anxious warning hoots and invite Sammy the squirrel to inspect the brass clock mechanism together.",
+        "resolution": "Sammy taps the wooden desk, revealing the harmless clock pendulum, which eases Orion's worries and restores their calm nighttime observation.",
+        "visual_bible": {
+          "style": "Warm digital storybook illustration with soft lighting and cozy textures.",
+          "characters": {
+            "owl": "A wise brown owl with large amber eyes and soft feathered wings.",
+            "squirrel": "A nimble brown squirrel with a bushy tail and bright curious eyes."
+          },
+          "locations": {
+            "observatory": "A round stone tower room filled with star charts, wooden desks, and a large brass telescope pointing toward the ceiling."
+          },
+          "objects": {
+            "clock": "A small circular brass table clock with a swinging pendulum.",
+            "lantern": "An antique metal lantern with a warm glowing glass pane."
+          }
+        },
+        "plot_fingerprint": "8106941d73de0e963a98bf1defdd38725b188ed83e959081d99bf165d4989b07"
+      }
+    },
+    {
+      "source_sha256": "e3cc0f565a79d6872cbd46addd56ec7c6db58ce85b28ee7a5ffca37863b60844",
+      "content_id": "rayvan-gemini-8880aa3090c58a8fd8e4",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-8880aa3090c58a8fd8e4",
+        "title": "Barnaby and the Wilted Bloom Mystery",
+        "hook": "The Mystery of the Wilted Petals",
+        "question": "Why are the garden flowers drooping differently despite getting identical water?",
+        "answer": "A patch of dense garden leaves was blocking morning sunlight from reaching only one flower.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Mystery of the Wilted Petals",
+            "speech": "Look closely at this garden flower. Why is it drooping while its neighbor stays bright and upright?",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "A rabbit in a lush garden sniffing a drooping flower on the soil ground.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Comparing Soil and Moisture",
+            "speech": "Both stems share the exact same damp earth and morning dew, so moisture cannot be the hidden issue here.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Build",
+            "story_beat": "build",
+            "visual_prompt": "A rabbit in a lush garden touching two distinct garden flowers with its nose to check moisture.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Discovering the Leaf Shadow",
+            "speech": "A thick arrangement of leaves is casting a deep shadow over just one single stem throughout the entire morning.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "A rabbit in a lush garden peering closely at an overarching garden leaf shading the flower.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Restoring the Sunlight",
+            "speech": "Moving the leaves lets golden sunlight touch the petals, causing the flower to lift upward happily once again.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "A rabbit in a lush garden gently nudging a green garden leaf away from a healthy flower.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Barnaby the rabbit notices one garden flower is wilting while the adjacent flower stands tall in the exact same soil.",
+        "decisive_choice": "Barnaby decides to gently nudge the overlapping garden leaves aside to test if sunlight exposure revives the drooping stem.",
+        "resolution": "The shaded flower perks up under the warm sun, solving the mystery and teaching Barnaby about garden light.",
+        "visual_bible": {
+          "style": "Charming, soft storybook 3D animation with warm natural lighting and detailed textures.",
+          "characters": {
+            "rabbit": "Barnaby is a soft brown rabbit with long twitching ears, a fluffy white tail, and expressive gentle eyes."
+          },
+          "locations": {
+            "garden": "A vibrant green garden filled with rich soil, blooming plants, large shade leaves, and morning dew drops."
+          },
+          "objects": {
+            "flower": "A delicate garden flower with soft petals atop a green stem."
+          }
+        },
+        "plot_fingerprint": "96485c79e2c1af339fdf19d6f20ef0f7b10348eb4f34c730efb03a6aaa01d73e"
+      }
+    },
+    {
+      "source_sha256": "048ead42ff72cda93649f5238cfa28bc8cc36bde7c6947cf66326089b082ed59",
+      "content_id": "rayvan-gemini-cd78f9bb823f1f893433",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-cd78f9bb823f1f893433",
+        "title": "Sammy and Pip's Railway Track Switch Dilemma",
+        "hook": "The Impatient Shortcut",
+        "question": "How do Sammy the squirrel and Pip the mouse resolve the blocked railway switch?",
+        "answer": "They swap the key to open the alternative track lever, ensuring safe passage for both rail cars.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Impatient Shortcut",
+            "speech": "Sammy hurried down the iron rail shortcut, eager to reach the switch before Pip arrived at the station.",
+            "visual": "squirrel",
+            "story_environment": "railway",
+            "label": "The Shortcut Start",
+            "story_beat": "reveal",
+            "visual_prompt": "A squirrel holding a key races along a railway track in the railway environment.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Stranded Partner",
+            "speech": "Pip waited by the locked switch lever, realizing the shortcut left the opposing rail line completely unattended.",
+            "visual": "mouse",
+            "story_environment": "railway",
+            "label": "The Waiting Switch",
+            "story_beat": "build",
+            "visual_prompt": "A mouse stands beside a heavy iron lever on the gravel bed in the railway environment.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Key Exchange",
+            "speech": "Sammy paused by the wooden sleeper, handing the brass key over to Pip to correct the hasty mistake.",
+            "visual": "squirrel",
+            "story_environment": "railway",
+            "label": "The Handover",
+            "story_beat": "mechanism",
+            "visual_prompt": "A squirrel hands a brass key to a waiting mouse on a wooden railway tie in the railway environment.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Fair Junction",
+            "speech": "Pip turned the key in the iron lock, swinging the track guide smoothly to let both rail cars pass.",
+            "visual": "mouse",
+            "story_environment": "railway",
+            "label": "The Safe Track",
+            "story_beat": "payoff",
+            "visual_prompt": "A mouse turns a small key in an iron track lock on the gravel bed in the railway environment.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Sammy the squirrel holds the track switch key but rushes down the steep railway rail shortcut, leaving Pip the mouse stranded near the stationary rail car.",
+        "decisive_choice": "Sammy decides to pause at the iron rail joint and hand the brass key directly to Pip so the mouse can unlock the opposing junction.",
+        "resolution": "Pip turns the key in the junction lock to align the tracks smoothly, allowing both railway cars to pass safely without colliding.",
+        "visual_bible": {
+          "style": "Clean stop-motion puppet animation with soft felt textures, warm cinematic lighting, and realistic miniature railway props.",
+          "characters": {
+            "squirrel": "A nimble red squirrel with a bushy tail, sharp alert eyes, and soft orange fur.",
+            "mouse": "A small brown field mouse with large round ears, delicate pink paws, and smooth tan fur."
+          },
+          "locations": {
+            "railway": "A sunlit miniature railway station platform with wooden ties, gravel ballast, and iron rails."
+          },
+          "objects": {
+            "key": "A small polished brass key used for unlocking railway track switches."
+          }
+        },
+        "plot_fingerprint": "083e57144fcd9e1be6f00dc9ef7e6305fce97564be51d748f535f0003d4ced7e"
+      }
+    },
+    {
+      "source_sha256": "423d7cc69455fcf6c1b04d994522d9886aa520f20450fa012d3aa178b535a4c3",
+      "content_id": "rayvan-gemini-6f29c65b8891216b5f65",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-6f29c65b8891216b5f65",
+        "title": "Pip and Clover's Library Page Debate",
+        "hook": "Differing Interpretations",
+        "question": "How do Pip the mouse and Clover the rabbit resolve their interpretation of a rare shared book?",
+        "answer": "They compare passages side by side on the reading table and realize both viewpoints complete the story's true meaning.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Differing Interpretations",
+            "speech": "Pip insists the story is about nocturnal shadows, while Clover firmly believes the text describes early morning light.",
+            "visual": "mouse",
+            "story_environment": "library",
+            "label": "Viewpoint Conflict",
+            "story_beat": "reveal",
+            "visual_prompt": "Pip the mouse stands on a wooden desk inside the library, pointing a tiny paw at an open book.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Competing Arguments",
+            "speech": "Both animals hold opposite pages of the shared book, each arguing their interpretation is the correct winning answer for the prize.",
+            "visual": "rabbit",
+            "story_environment": "library",
+            "label": "Stalemate",
+            "story_beat": "build",
+            "visual_prompt": "Clover the rabbit sits opposite Pip inside the library, paws resting firmly on the edge of the shared book.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Choosing Cooperation",
+            "speech": "Clover notices Pip's genuine distress over losing the contest and chooses to share the reading notes instead of arguing further.",
+            "visual": "rabbit",
+            "story_environment": "library",
+            "label": "Sharing Insight",
+            "story_beat": "twist",
+            "visual_prompt": "Clover the rabbit pushes a small wooden bookmark toward Pip inside the library to mark the disputed chapter.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "United Understanding",
+            "speech": "Together they read the prologue aloud, seeing that both night and morning are part of the very same adventure.",
+            "visual": "mouse",
+            "story_environment": "library",
+            "label": "Harmonious Resolution",
+            "story_beat": "payoff",
+            "visual_prompt": "Pip the mouse turns the page of the open book inside the library while Clover looks on with a happy expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Pip the mouse insists the open library book describes a nighttime journey, while Clover the rabbit argues the text portrays a morning awakening.",
+        "decisive_choice": "Clover decides to set aside the competition for the reading prize and point Pip to the introductory chapter markers.",
+        "resolution": "Both animals read the opening lines together, discovering the book covers a full cycle from night to morning and sharing the honor equally.",
+        "visual_bible": {
+          "style": "Warm children's book illustration style with soft lighting and detailed textures.",
+          "characters": {
+            "mouse": "Pip is a tiny brown mouse with neat whiskers and alert ears.",
+            "rabbit": "Clover is a soft-furred grey rabbit with long ears and gentle eyes."
+          },
+          "locations": {
+            "library": "A quiet library filled with towering wooden bookshelves and warm reading desks."
+          },
+          "objects": {
+            "book": "A large ancient hardcover book with leather binding and yellowed paper pages.",
+            "bookmark": "A slim wooden marker carved with simple leaf patterns."
+          }
+        },
+        "plot_fingerprint": "ccbb98b0819a12ea56132b62a4c27d9b7fa936201c9353e04f5692e7975a463a"
+      }
+    },
+    {
+      "source_sha256": "c8645c6090108366c0514805f44e189ee37667f3f884a45902ad5186616c0253",
+      "content_id": "rayvan-gemini-a75c355c351bd8f96423",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-a75c355c351bd8f96423",
+        "title": "Finn and Orion's Woodland Compass Direction",
+        "hook": "Discovering the Compass",
+        "question": "Which path does the compass truly indicate for our journey?",
+        "answer": "The compass needle points steadily toward the mossy northern ridge.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Discovering the Compass",
+            "speech": "Look closely at this shining brass compass resting upon the damp forest floor beneath the pine trees.",
+            "visual": "fox",
+            "story_environment": "forest",
+            "label": "First Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "Finn the fox sniffing a brass compass resting on the damp ground in the forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Direction Dispute",
+            "speech": "I believe the swinging needle points directly toward the eastern sunrise over the distant valley.",
+            "visual": "fox",
+            "story_environment": "forest",
+            "label": "Conflicting Views",
+            "story_beat": "build",
+            "visual_prompt": "Finn the fox pointing a paw toward the horizon while standing by the brass compass in the forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Overhead Inspection",
+            "speech": "Let me glide upward to examine the compass dial from above so we can verify the true alignment.",
+            "visual": "owl",
+            "story_environment": "forest",
+            "label": "Aerial Check",
+            "story_beat": "mechanism",
+            "visual_prompt": "Orion the owl perched on a low branch looking downward at the brass compass in the forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Shared Direction",
+            "speech": "The needle clearly indicates the northern ridge, so let us walk forward together along this path.",
+            "visual": "owl",
+            "story_environment": "forest",
+            "label": "Resolved Path",
+            "story_beat": "payoff",
+            "visual_prompt": "Orion the owl nodding beside the brass compass on the mossy ground in the forest.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Finn the fox and Orion the owl disagree on whether the discovered brass compass points north or east beneath the forest canopy.",
+        "decisive_choice": "Orion decides to flutter upward to inspect the compass needle from an overhead vantage point while Finn holds it steady on the moss.",
+        "resolution": "Both animals see the needle aligns with the northern path, allowing them to travel together with complete trust.",
+        "visual_bible": {
+          "style": "Cinematic stop-motion puppet animation style with warm lighting and detailed natural textures.",
+          "characters": {
+            "fox": "Finn the fox is a slender red fox with bright amber eyes and a bushy tail.",
+            "owl": "Orion the owl is a wise barn owl with soft grey feathers and round expressive eyes."
+          },
+          "locations": {
+            "forest": "A lush, green woodland floor covered in soft moss, tall pine trees, and dappled sunlight."
+          },
+          "objects": {
+            "compass": "A vintage pocket brass compass with a polished metallic casing and a delicate oscillating needle."
+          }
+        },
+        "plot_fingerprint": "d3512a6aec60af9e6b656ae41c79b97488e3a77d4e28cb077b36d3704e441ce3"
+      }
+    },
+    {
+      "source_sha256": "5acfcf5314a1bc8bd51f086d3adf2f5635b0defcdce653e66d16fcdb62d8dc10",
+      "content_id": "rayvan-gemini-2ca70a51ce627d62336e",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-2ca70a51ce627d62336e",
+        "title": "Milo and Felix's Island Lantern Position Dispute",
+        "hook": "The Midnight Debate",
+        "question": "Which side of the stone platform should hold the shared lantern during the midnight tide?",
+        "answer": "Milo tests Felix's preferred corner, discovering it casts a wider beam across the dark water.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Midnight Debate",
+            "speech": "Felix claims the western rock ledge is best, but Milo insists the eastern lagoon needs the brass lantern light more.",
+            "visual": "otter",
+            "story_environment": "island",
+            "label": "Beat One",
+            "story_beat": "reveal",
+            "visual_prompt": "An otter named Milo stands on a sandy island shore next to a brass lantern, looking upward in disagreement.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Testing the Shadow",
+            "speech": "Milo carries the brass lantern toward the rocky ledge to check if the stone wall blocks the warm beam.",
+            "visual": "otter",
+            "story_environment": "island",
+            "label": "Beat Two",
+            "story_beat": "build",
+            "visual_prompt": "An otter named Milo walks across an island stone shelf while holding a small brass lantern.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Checking the Reflection",
+            "speech": "Felix points toward the water's edge to show how the lantern light bounces across the calm tide.",
+            "visual": "cat",
+            "story_environment": "island",
+            "label": "Beat Three",
+            "story_beat": "mechanism",
+            "visual_prompt": "A cat named Felix sits on an island rock platform pointing a paw toward the water.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Shared Glow",
+            "speech": "Both animals sit quietly beside the resting lantern as its steady light illuminates the entire island shore.",
+            "visual": "otter",
+            "story_environment": "island",
+            "label": "Beat Four",
+            "story_beat": "payoff",
+            "visual_prompt": "An otter named Milo sits peacefully beside a glowing brass lantern on an island rock ledge.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Milo the otter and Felix the cat argue over whether the shared lantern should face the eastern lagoon or western rocks.",
+        "decisive_choice": "Milo decides to test Felix's preferred western rock corner to see if the glow reaches farther.",
+        "resolution": "Milo sees the light stretches across the water cleanly, and both animals agree to place the lantern on the western rocks.",
+        "visual_bible": {
+          "style": "A charming, warm storybook illustration style featuring detailed fur textures and soft natural lighting.",
+          "characters": {
+            "otter": "Milo is a sleek brown otter with expressive whiskers and bright, curious eyes.",
+            "cat": "Felix is a sleek black cat with sharp green eyes and a long, graceful tail."
+          },
+          "locations": {
+            "island": "A quiet coastal island featuring smooth sandy beaches, weathered grey rocks, and tide pools."
+          },
+          "objects": {
+            "lantern": "A polished brass lantern with a glass pane casting a warm golden glow."
+          }
+        },
+        "plot_fingerprint": "eeb38e350857a72ed5363f71793e44662f539ca099e53c280233beac57af826b"
+      }
+    },
+    {
+      "source_sha256": "ac8917f5bbb951220ca923c2a19ae1efb83e8d9e7309fe790a226ae6b3f450b0",
+      "content_id": "rayvan-gemini-89f354995b9219ebaa1e",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-89f354995b9219ebaa1e",
+        "title": "Pip and Rusty's Garden Clue Conflict",
+        "hook": "Conflicting Clues",
+        "question": "Which clue leads to the hidden garden prize?",
+        "answer": "Both clues together reveal the exact location.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Conflicting Clues",
+            "speech": "My map points toward the eastern garden wall, but your flower petal points directly west.",
+            "visual": "squirrel",
+            "story_environment": "garden",
+            "label": "Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Squirrel holding a small key in the garden near the flower bed.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Divided Search",
+            "speech": "We keep running in opposite directions because our separate clues only show half the path.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Build",
+            "story_beat": "build",
+            "visual_prompt": "Rabbit inspecting a single flower in the garden near the flower bed.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Trading the Maps",
+            "speech": "If I give you my key, we can test your flower clue on this side of the garden.",
+            "visual": "squirrel",
+            "story_environment": "garden",
+            "label": "Mechanism",
+            "story_beat": "mechanism",
+            "visual_prompt": "Squirrel placing a small key down on the soil in the garden.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Combined Discovery",
+            "speech": "The key unlocks the wooden box right between our paths, proving we needed both clues.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Payoff",
+            "story_beat": "payoff",
+            "visual_prompt": "Rabbit opening a wooden box in the garden.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Pip the squirrel and Rusty the rabbit find conflicting clues pointing to opposite sides of the garden patch.",
+        "decisive_choice": "Pip decides to share his clue map with Rusty instead of racing ahead alone.",
+        "resolution": "Both animals combine their clues to find the shared prize in the center flowerbed.",
+        "visual_bible": {
+          "style": "Charming stop-motion felt puppet style with warm natural lighting and soft textures.",
+          "characters": {
+            "squirrel": "A small brown squirrel with a fluffy tail and bright curious eyes.",
+            "rabbit": "A soft grey rabbit with long ears and a gentle, steady expression."
+          },
+          "locations": {
+            "garden": "A lush green garden filled with colorful flowers, rich soil, and wooden borders."
+          },
+          "objects": {
+            "key": "A small polished brass key used for unlocking garden boxes.",
+            "box": "A compact carved wooden box resting on the garden soil.",
+            "flower": "A bright blooming garden flower with vibrant petals."
+          }
+        },
+        "plot_fingerprint": "b674a0f2b9e869e970069c36002a1f59d8fc8b44dbb930a6762636f455bc8964"
+      }
+    },
+    {
+      "source_sha256": "72da5a4c7094dc9290734cd3c735bc206903680994952a30f01f42f890f88e72",
+      "content_id": "rayvan-gemini-126ff527c242d1204ed2",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-126ff527c242d1204ed2",
+        "title": "Pip and Finn's Frostbound Tome",
+        "hook": "The Snowfield Discovery",
+        "question": "Will the mouse and the fox share the single frozen winter book or ruin the pages in a tug-of-war?",
+        "answer": "Pip the mouse and Finn the fox decide to take turns reading alternate pages by the snowfield warmth.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Snowfield Discovery",
+            "speech": "Pip the mouse and Finn the fox both spot the solitary frozen book resting upon the open snowfield drift.",
+            "visual": "mouse",
+            "story_environment": "snowfield",
+            "label": "Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "A small brown mouse stands on the snowfield looking down at a single red book half-covered by powdery white snow.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Tug of Priority",
+            "speech": "Finn the fox tugs the leather cover toward the ice edge while Pip holds fast to the spine.",
+            "visual": "fox",
+            "story_environment": "snowfield",
+            "label": "Conflict",
+            "story_beat": "build",
+            "visual_prompt": "A ginger red fox stands on the snowfield gently tugging one corner of the red book with its snout while the mouse watches.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Bookmark Compromise",
+            "speech": "Pip taps the yellow ribbon marker to propose that they read alternating chapters instead of damaging the binding.",
+            "visual": "mouse",
+            "story_environment": "snowfield",
+            "label": "Decision",
+            "story_beat": "twist",
+            "visual_prompt": "A small brown mouse sits on the snowfield pointing a tiny paw at a yellow ribbon bookmark resting on the open red book.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Shared Winter Pages",
+            "speech": "Both animals settle comfortably into the drifts to read through the chapters side by side.",
+            "visual": "fox",
+            "story_environment": "snowfield",
+            "label": "Resolution",
+            "story_beat": "payoff",
+            "visual_prompt": "A ginger red fox and a small brown mouse rest together on the snowfield reading the open red book under the pale winter sky.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "A single preserved book lies half-buried in the snowfield, and both Pip the mouse and Finn the fox claim exclusive reading rights.",
+        "decisive_choice": "Pip decides to point out the book's bookmark ribbon, inviting Finn to inspect the numbered chapters together instead of pulling it apart.",
+        "resolution": "Both animals successfully sit side by side to read the book in alternating order under the winter sky.",
+        "visual_bible": {
+          "style": "Cinematic stop-motion puppet animation with soft winter lighting and textured natural fur details.",
+          "characters": {
+            "mouse": "A small brown mouse with soft fur, bright round eyes, and tiny delicate paws.",
+            "fox": "A slender ginger red fox with a bushy white-tipped tail and alert triangular ears."
+          },
+          "locations": {
+            "snowfield": "A vast, open landscape covered in smooth white drifts of powdery snow under a pale twilight sky."
+          },
+          "objects": {
+            "book": "A thick, old-fashioned hardcover book with a faded red cover and a bright yellow ribbon bookmark."
+          }
+        },
+        "plot_fingerprint": "bbf73850c1a095d6668d47082434e4cc03c6060dd53ada6051effd3914b4bddb"
+      }
+    },
+    {
+      "source_sha256": "4c948ba18d71301ea098d2efcfaa7a32047b6dbe3d6eda0d8ced932f675289fe",
+      "content_id": "rayvan-gemini-32eeb106fa8b961a46a4",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-32eeb106fa8b961a46a4",
+        "title": "Orion and Clover's Beacon Light Share",
+        "hook": "Overlapping Night Duty",
+        "question": "How do Orion the owl and Clover the rabbit share the single lighthouse lantern when both need its beam for their night tasks?",
+        "answer": "Orion and Clover establish an alternating signal routine, taking turns directing the lantern beam across the coast so both tasks succeed.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Overlapping Night Duty",
+            "speech": "We cannot both use the single lantern beam at the exact same moment for our tasks here tonight.",
+            "visual": "owl",
+            "story_environment": "lighthouse",
+            "label": "Beat One",
+            "story_beat": "reveal",
+            "visual_prompt": "An owl stands inside the lighthouse looking down at a single brass lantern with a worried expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Proposing the Shared Routine",
+            "speech": "What if we take turns flashing the light in steady pulses so we both get the illumination we need?",
+            "visual": "rabbit",
+            "story_environment": "lighthouse",
+            "label": "Beat Two",
+            "story_beat": "build",
+            "visual_prompt": "A rabbit sits beside the brass lantern inside the lighthouse, pointing a paw toward the window with an eager expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Testing the Timed Signals",
+            "speech": "Let us practice the alternating rhythm right now to make sure the coastal beam remains clear and steady.",
+            "visual": "owl",
+            "story_environment": "lighthouse",
+            "label": "Beat Three",
+            "story_beat": "mechanism",
+            "visual_prompt": "An owl tilts its head upward beside the lighthouse window while a brass lantern casts a bright ray outward.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Harmonious Night Signals",
+            "speech": "Our alternating signal routine works perfectly, allowing both of us to complete our night duties safely.",
+            "visual": "rabbit",
+            "story_environment": "lighthouse",
+            "label": "Beat Four",
+            "story_beat": "payoff",
+            "visual_prompt": "A rabbit stands contentedly near the glowing lighthouse window as a clear signal shines out into the dark night.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Orion the owl and Clover the rabbit both need the single lighthouse lantern to guide their separate night tasks simultaneously, casting doubt on how to share the beam.",
+        "decisive_choice": "Clover decides to propose an alternating timed signal routine instead of competing for the lantern.",
+        "resolution": "Both animals successfully share the lighthouse beam in turn, completing their coastal night duties together in harmony.",
+        "visual_bible": {
+          "style": "Charming, warm illustrated storybook style with soft lighting and clear animal anatomy.",
+          "characters": {
+            "owl": "An owl with natural brown and cream feathers, large amber eyes, and soft wings.",
+            "rabbit": "A rabbit with soft brown fur, long twitching ears, and a gentle expression."
+          },
+          "locations": {
+            "lighthouse": "A stone lighthouse interior featuring a tall arched window and a wooden floor."
+          },
+          "objects": {
+            "lantern": "A polished brass lantern casting a warm, bright beam of light."
+          }
+        },
+        "plot_fingerprint": "f01698c9553a9406f3938842d2657404ade267561281fc832afe9dc0c95f4b5b"
+      }
+    },
+    {
+      "source_sha256": "2572c60bff4907704d3aac330815ba42380638348b0594b1a0ccbd3088b48833",
+      "content_id": "rayvan-gemini-8abf70a5fca5a57e19e3",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-8abf70a5fca5a57e19e3",
+        "title": "Felix and Jasper's Village Box Exchange Error",
+        "hook": "The Mistaken Parcel",
+        "question": "Why did Felix the cat carry a wrongly exchanged wooden box back to the village square?",
+        "answer": "Felix discovered that he accidentally took Jasper's parcel instead of his own, and he returned it to the village square to restore proper trust.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Mistaken Parcel",
+            "speech": "Felix the cat stares down at the wooden box on the cobblestones, noticing the seal belongs to Jasper.",
+            "visual": "cat",
+            "story_environment": "village",
+            "label": "Mistaken Parcel",
+            "story_beat": "reveal",
+            "visual_prompt": "Felix the cat stands inside the village square with a closed wooden box resting on the cobblestone ground.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Discovering the Swap",
+            "speech": "Lifting the wooden lid reveals that the contents inside do not belong to Felix at all, creating deep worry.",
+            "visual": "cat",
+            "story_environment": "village",
+            "label": "Discovering the Swap",
+            "story_beat": "build",
+            "visual_prompt": "Felix the cat sits inside the village square looking down with a concerned expression into an open wooden box.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Carrying the Box",
+            "speech": "Felix grips the wooden box firmly between his paws, walking steadily across the quiet village square.",
+            "visual": "cat",
+            "story_environment": "village",
+            "label": "Carrying the Box",
+            "story_beat": "mechanism",
+            "visual_prompt": "Felix the cat walks forward inside the village square while holding a closed wooden box in his paws.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Restoring the Exchange",
+            "speech": "Felix gently places the wooden box down on the stone path to complete the honest return.",
+            "visual": "cat",
+            "story_environment": "village",
+            "label": "Restoring the Exchange",
+            "story_beat": "payoff",
+            "visual_prompt": "Felix the cat rests a closed wooden box on the ground inside the village square with a calm expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Felix the cat receives a swapped box in the village square and worries it contains Jasper's personal belongings.",
+        "decisive_choice": "Felix decides to walk back to the village square to hand the wrong box directly to Jasper.",
+        "resolution": "Jasper receives his correct box, and both cats share mutual respect for practicing village honesty.",
+        "visual_bible": {
+          "style": "clean storybook illustration style with warm lighting and clear animal shapes",
+          "characters": {
+            "cat": "a natural orange tabby cat with soft fur and expressive eyes"
+          },
+          "locations": {
+            "village": "an open cobblestone village square with rustic stone walls and wooden storefronts"
+          },
+          "objects": {
+            "box": "a small rectangular wooden storage box with a simple lid"
+          }
+        },
+        "plot_fingerprint": "2b1a5e08e6aca53ff4163ca61aa9f3ef0273938c48575320d1544d93178a42bb"
+      }
+    },
+    {
+      "source_sha256": "553a08985eb41e7cecd3e8f8b7021def3d44a21db1fff768d34aee18b5e4e14e",
+      "content_id": "rayvan-gemini-b3c85e8c7832ac74ad7c",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-b3c85e8c7832ac74ad7c",
+        "title": "Finn and Clover's Forest Flora Promise",
+        "hook": "The Botanical Discovery",
+        "question": "Can Finn keep his promise to deliver the untouched botanical book, or will he yield to the temptation of smelling the rare forest flower?",
+        "answer": "Finn chooses to preserve the botanical book by resting the flower safely beside it, fulfilling his promise with integrity.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Botanical Discovery",
+            "speech": "Look at this fragrant flower resting right upon the rare botanical book we promised to protect together.",
+            "visual": "fox",
+            "story_environment": "forest",
+            "label": "Introduction",
+            "story_beat": "reveal",
+            "visual_prompt": "Finn the fox stands inside the forest with wide eyes, looking down at a fragrant flower resting directly on top of an open book resting on a mossy log.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Tempting Aroma",
+            "speech": "The scent of these soft petals is so alluring, and I feel a sudden urge to nibble them right now.",
+            "visual": "fox",
+            "story_environment": "forest",
+            "label": "Temptation",
+            "story_beat": "build",
+            "visual_prompt": "Finn the fox leans close to the flower inside the forest, sniffing the fragrant petals while his paws hover near the fragile book pages.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Conscious Shift",
+            "speech": "I must remember my pledge to Clover and keep this valuable book completely safe from any harm.",
+            "visual": "fox",
+            "story_environment": "forest",
+            "label": "Choice",
+            "story_beat": "mechanism",
+            "visual_prompt": "Finn the fox pulls his head back inside the forest, carefully lifting the flower away from the book with his snout to protect the pages.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Honored Promise",
+            "speech": "By placing the flower beside the volume, we honor our trust and enjoy both nature's gifts safely.",
+            "visual": "rabbit",
+            "story_environment": "forest",
+            "label": "Conclusion",
+            "story_beat": "payoff",
+            "visual_prompt": "Clover the rabbit sits beside Finn the fox inside the forest, looking happily at the untouched book and the flower placed safely next to it on the moss.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Finn the fox is tempted to sample the fragrant petals of a rare forest flower laid across the borrowed botanical book, risking damage to a volume he promised Clover the rabbit to protect.",
+        "decisive_choice": "Finn decides to step back from the flower and place it gently beside the book cover instead of disturbing the delicate pages.",
+        "resolution": "Clover arrives to find both the book and the flower intact, rewarding Finn's honesty and keeping their shared study pledge.",
+        "visual_bible": {
+          "style": "Charming, hand-drawn children's storybook illustration with soft lighting and natural earthy tones.",
+          "characters": {
+            "fox": "Finn is a lithe red fox with a bright bushy tail, white chest fur, and alert amber eyes.",
+            "rabbit": "Clover is a gentle brown rabbit with long floppy ears, a soft white cotton tail, and bright curious eyes."
+          },
+          "locations": {
+            "forest": "A lush, sun-dappled woodland floor covered in vibrant green moss, soft ferns, and ancient tree trunks."
+          },
+          "objects": {
+            "book": "An old hardcover botanical volume with faded green binding and blank paper pages.",
+            "flower": "A vibrant yellow woodland blossom with soft, delicate petals and a rich sweet scent."
+          }
+        },
+        "plot_fingerprint": "0e32a7b2cbca80f5f5b169ea3862f80d4319d0df9c610ea0ffa0ef990ac26d33"
+      }
+    },
+    {
+      "source_sha256": "80526f88a0c8546016f71ffd52855df642f18efe204ca28cc1215aaee4d01fd4",
+      "content_id": "rayvan-gemini-c67204884fcdfb0c5280",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-c67204884fcdfb0c5280",
+        "title": "Max and Pip's Village Ball Dispute",
+        "hook": "The False Accusation",
+        "question": "Why did Max accuse Pip of hiding their shared ball in the village?",
+        "answer": "Max blamed Pip after spotting a round red apple pushed inside their shared toy box, assuming Pip traded their bouncy ball away.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The False Accusation",
+            "speech": "Max the dog stared at the round red apple inside the toy box and accused Pip of trading away their bouncy rubber ball.",
+            "visual": "dog",
+            "story_environment": "village",
+            "label": "Reveal Beat",
+            "story_beat": "reveal",
+            "visual_prompt": "dog in the village stands beside an open wooden box, glaring down at a round red apple with a stern expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Gathering Evidence",
+            "speech": "Pip the mouse rushed over to the village square to inspect the disputed toy box and clear up the sudden misunderstanding.",
+            "visual": "mouse",
+            "story_environment": "village",
+            "label": "Build Beat",
+            "story_beat": "build",
+            "visual_prompt": "mouse in the village scurries up to the open wooden box, pointing tiny paws toward the disputed contents.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Gentle Apology",
+            "speech": "Max decided to lift the apple out of the box and roll it toward Pip to ask for an explanation instead of staying angry.",
+            "visual": "dog",
+            "story_environment": "village",
+            "label": "Twist Beat",
+            "story_beat": "twist",
+            "visual_prompt": "dog in the village gently rolls a round red apple across the cobblestones toward a tiny listening mouse.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Joyful Discovery",
+            "speech": "Pip pointed out the genuine rubber ball resting safely underneath a cushion, proving the apple was just a snack.",
+            "visual": "mouse",
+            "story_environment": "village",
+            "label": "Payoff Beat",
+            "story_beat": "payoff",
+            "visual_prompt": "mouse in the village holds up a bright rubber ball beside a wooden box while a happy dog smiles nearby.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Max the dog assumes Pip the mouse secretly gave away their shared rubber ball after finding a round red apple tucked inside their wooden toy box.",
+        "decisive_choice": "Max decides to lift the apple out of the box and roll it toward Pip to ask for an explanation instead of staying angry.",
+        "resolution": "Pip points out the genuine rubber ball resting safely underneath a cushion, proving the apple was just a playful snack and restoring their friendship.",
+        "visual_bible": {
+          "style": "A warm, charming children's storybook illustration style with soft lighting and cozy painted textures.",
+          "characters": {
+            "dog": "Max is a friendly golden dog with floppy ears and a wagging tail.",
+            "mouse": "Pip is a tiny brown mouse with bright curious eyes and delicate whiskers."
+          },
+          "locations": {
+            "village": "A sunny rustic village square featuring old cobblestone streets and quaint wooden storefronts."
+          },
+          "objects": {
+            "ball": "A bright red bouncing rubber toy ball.",
+            "box": "A weathered low wooden storage box.",
+            "apple": "A round shiny red fruit used as a snack."
+          }
+        },
+        "plot_fingerprint": "7e9b6ef6822d7b1806e49581be77340dbf9764b58aad16494a55afceeb8229ef"
+      }
+    },
+    {
+      "source_sha256": "ee86ef026d00cbde38ee04f72971a8c0d98a0294109a22892ebc5f0f0ca1e50a",
+      "content_id": "rayvan-gemini-47f0a8385c45e295967f",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-47f0a8385c45e295967f",
+        "title": "Orion and Pip's Night Observatory Time Check",
+        "hook": "Observatory Starlight Confusion",
+        "question": "Why did Orion the owl adjust the brass clock instead of the brass lantern on the observatory desk?",
+        "answer": "Orion mistook the glowing lantern reflection on the brass clock face for the correct starlight hour.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Observatory Starlight Confusion",
+            "speech": "Orion looked at the glowing brass clock and wondered why the midnight star tracking alignment seemed completely incorrect tonight.",
+            "visual": "owl",
+            "story_environment": "observatory",
+            "label": "First beat",
+            "story_beat": "reveal",
+            "visual_prompt": "An owl in an observatory tilts its head at a brass clock while a glowing brass lantern rests nearby on the desk.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Mouse Companion Observation",
+            "speech": "Pip the mouse scurried across the dark observatory floor to inspect the glowing lantern light shining against the brass clock face.",
+            "visual": "mouse",
+            "story_environment": "observatory",
+            "label": "Second beat",
+            "story_beat": "build",
+            "visual_prompt": "A mouse in an observatory scurries near a brass clock while a brass lantern sits on the wooden tabletop.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Lantern Relocation Test",
+            "speech": "Orion gently lifted the brass lantern away from the desk to see if the strange bright reflection on the clock face would vanish.",
+            "visual": "owl",
+            "story_environment": "observatory",
+            "label": "Third beat",
+            "story_beat": "mechanism",
+            "visual_prompt": "An owl in an observatory holds a brass lantern carefully away from a brass clock on the wooden desk.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Accurate Time Resolution",
+            "speech": "Both animals saw the clock face clearly without the lantern glare, proving the midnight observatory schedule was completely correct.",
+            "visual": "mouse",
+            "story_environment": "observatory",
+            "label": "Fourth beat",
+            "story_beat": "payoff",
+            "visual_prompt": "A mouse in an observatory looks at a clear brass clock on the desk while a brass lantern sits safely to the side.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Orion the owl mistakes the glowing reflection of a brass lantern on a brass clock face for a misaligned star timekeeper in the night observatory.",
+        "decisive_choice": "Orion decides to move the brass lantern away from the desk to test if the strange light on the clock face disappears.",
+        "resolution": "The clock face shows the actual time clearly without the lantern glare, proving to Orion and Pip that no starlight error existed.",
+        "visual_bible": {
+          "style": "Bright storybook illustration style with clean lighting and simple character shapes.",
+          "characters": {
+            "owl": "A wise brown owl with large yellow eyes and natural feathered wings.",
+            "mouse": "A small brown mouse with rounded ears and a long tail."
+          },
+          "locations": {
+            "observatory": "A quiet round room with wooden furniture and large windows looking out at the night sky."
+          },
+          "objects": {
+            "clock": "A shiny circular brass desk clock with black hands.",
+            "lantern": "A small metal lantern with a warm glowing light inside."
+          }
+        },
+        "plot_fingerprint": "c6bdba3f8bf6b25f6e6457ce1371f61668b74c61822ffcbd6dc85c24d86dd1e0"
+      }
+    },
+    {
+      "source_sha256": "6534bd753c417f1d2a55dce7d662471c5bad6b0a419c26822e8b43ec88f12126",
+      "content_id": "rayvan-gemini-e235006608ad2bf76202",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-e235006608ad2bf76202",
+        "title": "Clover and Pip's Garden Bloom Cover Mending",
+        "hook": "The Hidden Bend",
+        "question": "Can a small rabbit confess to accidentally bending a flower stem before the friend notices?",
+        "answer": "Yes, by openly presenting the flower with a supporting leaf brace, preserving their trust.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Bend",
+            "speech": "Oh dear, my hasty paw slipped right against this delicate blue bloom while digging in the soil.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Accident Reveal",
+            "story_beat": "reveal",
+            "visual_prompt": "Rabbit stands inside the garden looking down at a bent blue flower with a worried expression.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Hesitant Approach",
+            "speech": "I should take this broken stem over to my friend right now rather than leave it buried.",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Carrying Stem",
+            "story_beat": "build",
+            "visual_prompt": "Rabbit gently holds the bent blue flower in its mouth while walking across the garden path.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Honest Confession",
+            "speech": "I am so sorry, I bent our favorite flower by accident, but can we fix it together?",
+            "visual": "rabbit",
+            "story_environment": "garden",
+            "label": "Truth Sharing",
+            "story_beat": "mechanism",
+            "visual_prompt": "Rabbit sits in the garden holding the flower toward a curious mouse next to a small wooden stick.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Restored Petals",
+            "speech": "By propping up the stem with this little wooden stick, our garden flower stands proud again.",
+            "visual": "mouse",
+            "story_environment": "garden",
+            "label": "Successful Repair",
+            "story_beat": "payoff",
+            "visual_prompt": "Mouse stands in the garden tapping a small wooden stick supporting the straightened blue flower upright.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Clover the rabbit accidentally bends the central stem of a prize blue flower while digging near the garden soil bed.",
+        "decisive_choice": "Clover decides to bring the bent flower and a small wooden prop directly to Pip instead of hiding the damaged plant.",
+        "resolution": "Pip helps Clover brace the stem using a small garden twig, fully restoring the bloom and their mutual honesty.",
+        "visual_bible": {
+          "style": "Charming storybook illustration style with warm lighting, detailed natural textures, and soft cinematic depth of field.",
+          "characters": {
+            "rabbit": "A fluffy brown rabbit with long ears, bright curious eyes, and natural fur markings.",
+            "mouse": "A small agile mouse with neat gray fur, twitching whiskers, and soft round ears."
+          },
+          "locations": {
+            "garden": "A lush, sunlit garden filled with rich dark soil, green foliage, and vibrant blooming flowers."
+          },
+          "objects": {
+            "flower": "A vibrant blue flower with delicate petals and a long green stem.",
+            "book": "A small hardcover botanical reference book with weathered paper pages.",
+            "lantern": "A brass lantern casting a soft warm glow across nearby surfaces."
+          }
+        },
+        "plot_fingerprint": "7bd2bcd7f14409eaa3e33496202d8aec34d2baca7788382d2ebe5e08c25e9831"
+      }
+    },
+    {
+      "source_sha256": "2ba450382bf3966d428a7dd29625f7432f437eeb6588b3b00552a9dab546a1c0",
+      "content_id": "rayvan-gemini-4eab68f30c0168f4718a",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44258592410",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-4eab68f30c0168f4718a",
+        "title": "Pip and Squeak's Railway Track Switch",
+        "hook": "Differing Train Routes",
+        "question": "Which incoming train route should the delivery key unlock first on the railway line?",
+        "answer": "Pip and Squeak test the track lever alignment to determine the correct incoming train order.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "Differing Train Routes",
+            "speech": "Which incoming train route should the delivery key unlock first on the railway line today?",
+            "visual": "mouse",
+            "story_environment": "railway",
+            "label": "Initial Discovery",
+            "story_beat": "reveal",
+            "visual_prompt": "A mouse standing on a railway platform holds a metal key while looking at two diverging iron tracks.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Key Exchange",
+            "speech": "Squeak decides to hand the shared key to Pip so they can jointly test the track lever alignment.",
+            "visual": "squirrel",
+            "story_environment": "railway",
+            "label": "The Handover",
+            "story_beat": "build",
+            "visual_prompt": "A squirrel carefully passes a small brass key to a mouse next to the wooden railway station bench.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Testing the Lever",
+            "speech": "They push against the heavy iron switch together to verify which route is clear of stationary cargo cars.",
+            "visual": "mouse",
+            "story_environment": "railway",
+            "label": "Joint Test",
+            "story_beat": "mechanism",
+            "visual_prompt": "A mouse pushing a rusted railway track lever with both paws near the gravel ballast.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Clear Signals",
+            "speech": "Both animals successfully align the railway switch for the correct incoming train, ensuring safe passage for all shipments.",
+            "visual": "squirrel",
+            "story_environment": "railway",
+            "label": "Successful Resolution",
+            "story_beat": "payoff",
+            "visual_prompt": "A squirrel resting happily beside the properly aligned railway points with the key resting on a wooden tie.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Pip the mouse and Squeak the squirrel hold conflicting opinions on whether the freight key should unlock the upper railway track switch or the lower branch.",
+        "decisive_choice": "Squeak decides to hand the shared key to Pip so they can jointly test the track lever alignment before making a final routing choice.",
+        "resolution": "Both animals successfully align the railway switch for the correct incoming train, ensuring safe passage for all shipments.",
+        "visual_bible": {
+          "style": "Clean vector illustration with gentle lighting and clear puppet silhouettes suitable for simple rendering.",
+          "characters": {
+            "mouse": "A small brown mouse with soft fur, large round ears, and a long slender tail.",
+            "squirrel": "A bushy-tailed grey squirrel with alert eyes and nimble paws."
+          },
+          "locations": {
+            "railway": "A quiet vintage railway station featuring wooden ties, iron tracks, and a gravel platform."
+          },
+          "objects": {
+            "key": "A small polished brass key used for operating railway track switches."
+          }
+        },
+        "plot_fingerprint": "1e88e5ea1e8d89514de61b146ff0d1c4fda1e8995b52399b54e993d55d5dee90"
       }
     }
   ]
