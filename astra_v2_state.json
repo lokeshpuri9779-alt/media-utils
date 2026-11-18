@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "day": "2026-11-18",
+  "day": "2026-11-19",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
-  "confirmed_today": 6,
+  "attempts": 0,
+  "confirmed_today": 0,
   "last_attempt_at": "2026-11-18T18:21:33.687551+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -13341,16 +13341,14 @@
       "decisive_choice": "Sammy the squirrel decides to squeeze into the narrow gear housing to nudge the wedged shell loose.",
       "resolution": "The cogs spin freely once more, projecting a sharp, crystal-clear star map across the observatory ceiling.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "EVxKi8DwCaA": {
-      "content_id": "rayvan-gemini-542d7117f4f220b08524",
+    },
+    "rayvan-gemini-542d7117f4f220b08524": {
+      "video_id": "EVxKi8DwCaA",
+      "confirmed_at": "2026-11-18T19:19:52.165664+00:00",
       "title": "Finn and Ollie's Tidal Shell Mystery",
-      "day": "2026-11-18",
-      "uploaded_at": "2026-11-18T18:21:35.022933+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-18T18:21:35.022933+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "79d5f0a6dbe4f9aa155a778c865647dbd264491125dc1f28b27d55d079abf18e",
       "story_beats": [
@@ -13402,31 +13400,31 @@
       "central_conflict": "A purple sea urchin jams the bronze harbor bell clapper, silencing the morning warning signal.",
       "decisive_choice": "Finn the fox decides to gently nudge the spiky urchin free with a dry driftwood stick while Ollie the otter steadies the hanging bronze rim.",
       "resolution": "The bronze clapper swings freely once more, ringing clearly across the harbor waters to welcome the incoming tide.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-18T18:13:31.529402+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-18T19:19:51.835696+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-18T18:21:35.480108+00:00",
+    "at": "2026-11-18T19:26:42.243756+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "job_status_before_persist": "failure",
+    "dependencies_step": "failure",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-18T10:34:52.253052+00:00",
   "reserved": {
@@ -27318,10 +27316,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-18T18:21:35.480064+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-18T19:26:42.243712+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -27329,9 +27327,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-18T18:21:35.480100+00:00",
+    "at": "2026-11-18T19:26:42.243749+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -27343,59 +27341,23 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-18T18:21:35.479298+00:00",
+    "at": "2026-11-18T19:26:42.243135+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "skipped",
+    "job_status_before_persist": "failure",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-18T18:21:35.479949+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 20,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 89,
-        "total": 176
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 177,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 142,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 142,
-        "remaining": 20
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-11-18T19:26:42.243678+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
