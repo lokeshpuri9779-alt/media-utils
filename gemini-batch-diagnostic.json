@@ -1,17 +1,19 @@
 {
-  "observed_at": "2026-11-17T20:53:37.538987+00:00",
-  "generated": 9,
+  "observed_at": "2026-11-18T07:25:34.438409+00:00",
+  "generated": 16,
   "requested": 20,
   "generation_failures": [
     {
-      "index": 9,
+      "index": 16,
       "reason": "provider_http_429"
     }
   ],
-  "reviewed": 0,
-  "review_deferred": 9,
+  "reviewed": 1,
+  "review_deferred": 15,
   "approved": 0,
   "review_issues": [
+    "The story relies on an identical structural template, character naming conventions, and conflict-resolution mechanism ('Buster and Pip', village setting, a physical object causing a minor spatial dispute resolved by a gentle adjustment) heavily repeated across multiple prior entries in the comparison history, such as 'Buster and Pip's Village Ball Dispute' and 'Sammy and Pip's City Pavement Mosaic Jam'.",
+    "ai_editorial_rejection",
     "review_deferred:rate_limited",
     "review_failed:HTTP_429",
     "review_provider:rate_limited"
@@ -72,22 +74,20 @@
     ]
   },
   "creative_preflight": {
-    "generated": 9,
+    "generated": 16,
     "script_status_counts": {
-      "no_simple_flags": 9
+      "no_simple_flags": 16
     },
     "renderer_status_counts": {
-      "incompatible": 1,
-      "structurally_eligible": 8
+      "structurally_eligible": 16
     },
     "renderer_reason_counts": {
-      "none": 8,
-      "unsupported_human_actor": 1
+      "none": 16
     },
     "scene_taxonomy_status_counts": {
-      "all_shots_recognized": 9
+      "all_shots_recognized": 16
     },
-    "scene_taxonomy_recognized_shots": 36,
+    "scene_taxonomy_recognized_shots": 64,
     "scene_taxonomy_unresolved_shots": 0,
     "scene_taxonomy_scope": "planning_only_no_verified_artwork_or_semantic_approval",
     "editorial_approval": false,
