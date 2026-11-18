@@ -5,88 +5,6 @@
   "eligible_for_automatic_publishing": false,
   "entries": [
     {
-      "source_sha256": "323dcbb5e71fd12364b0d9174af9892c70fa0f1139056003226d3a6938efd2e2",
-      "content_id": "rayvan-gemini-6ddc5684771940af52dc",
-      "review_status": "deferred_unreviewed",
-      "deferred_reason": "review_deferred:provider_unavailable",
-      "source_run_id": "43037075585",
-      "proposal": {
-        "genre": "fiction",
-        "kind": "microfiction",
-        "production_ready": true,
-        "content_id": "rayvan-gemini-6ddc5684771940af52dc",
-        "title": "Pip the Mouse and Barnaby the Rabbit's Library Argument",
-        "hook": "The Differing Views",
-        "question": "How can a mouse and a rabbit resolve a disagreement over a shared book?",
-        "answer": "By carefully taking turns interpreting the illustrations and text together.",
-        "source": "",
-        "keywords": [
-          "original fiction",
-          "short story"
-        ],
-        "story_beats": [
-          {
-            "headline": "The Differing Views",
-            "speech": "Pip insists the illustration depicts a high mountain, while Barnaby argues it is definitely a cozy underground burrow.",
-            "visual": "forest",
-            "label": "library_table",
-            "story_beat": "reveal",
-            "visual_prompt": "Pip the mouse and Barnaby the rabbit sit on wooden chairs at a large oak table inside the library, staring down at an open book with a puzzled expression.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Misunderstood Signal",
-            "speech": "Barnaby taps the corner of the heavy book sharply to signal his point, but Pip mistakes the gesture for an argument.",
-            "visual": "signal",
-            "label": "book_page",
-            "story_beat": "build",
-            "visual_prompt": "Barnaby the rabbit taps his paw firmly on the open book page inside the quiet library, while Pip the mouse pulls back defensively with wide eyes.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Clarifying Choice",
-            "speech": "Pip sets down his wooden pointer and asks Barnaby to walk through the drawing step by step to clear up the confusion.",
-            "visual": "door",
-            "label": "wooden_pointer",
-            "story_beat": "mechanism",
-            "visual_prompt": "Pip the mouse holds a small wooden pointer resting against the open book inside the library, looking up calmly toward Barnaby the rabbit.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          },
-          {
-            "headline": "The Shared Understanding",
-            "speech": "Both friends smile as they realize the artwork shows a burrow nestled right beneath a mountain, perfectly satisfying both views.",
-            "visual": "signal",
-            "label": "happy_reading",
-            "story_beat": "payoff",
-            "visual_prompt": "Pip the mouse and Barnaby the rabbit point together at the open book on the library table, both smiling warmly side by side.",
-            "sub": "AN ORIGINAL RAYVAN STORY",
-            "duration": 2.1
-          }
-        ],
-        "central_conflict": "Pip the mouse and Barnaby the rabbit strongly disagree on whether the picture in the library book shows a towering mountain peak or a cozy underground burrow.",
-        "decisive_choice": "Pip points directly to the tiny drawn details with a small wooden stick and asks Barnaby to explain his perspective on the shapes.",
-        "resolution": "Barnaby listens attentively and agrees to read alternate pages together, turning the library argument into a shared storytelling experience.",
-        "visual_bible": {
-          "style": "Warm, charming storybook illustration style with soft lighting and rich wooden textures.",
-          "characters": {
-            "Pip": "A tiny grey mouse with large round ears, wearing a tiny green waistcoat.",
-            "Barnaby": "A fluffy brown rabbit with long floppy ears, wearing a snug blue vest."
-          },
-          "locations": {
-            "library": "A cozy, sunlit wooden library filled with tall bookshelves and quiet study tables."
-          },
-          "objects": {
-            "book": "An oversized vintage hardcover book with faded leather binding and illustrated paper pages.",
-            "pointer": "A smooth, thin wooden stick used for pointing at specific details on a page."
-          }
-        },
-        "plot_fingerprint": "1109eab58d93a39645226e37e0c14dd33111550bfa0cc1c7d5bb16db01b65eea"
-      }
-    },
-    {
       "source_sha256": "26c82c17fb47c628134612da6c35885dbd65a60a81520a6b4b265321e4b40313",
       "content_id": "rayvan-gemini-db36e514166929492c25",
       "review_status": "deferred_unreviewed",
@@ -8518,6 +8436,91 @@
           }
         },
         "plot_fingerprint": "1e88e5ea1e8d89514de61b146ff0d1c4fda1e8995b52399b54e993d55d5dee90"
+      }
+    },
+    {
+      "source_sha256": "ddf29ce45553e5bc977cf585da4545d91c810381344fac92dc2d9fb6d4b23ca2",
+      "content_id": "rayvan-gemini-058e8bff57056b455e45",
+      "review_status": "deferred_unreviewed",
+      "deferred_reason": "review_deferred:rate_limited",
+      "source_run_id": "44391456479",
+      "proposal": {
+        "genre": "fiction",
+        "kind": "microfiction",
+        "production_ready": true,
+        "content_id": "rayvan-gemini-058e8bff57056b455e45",
+        "title": "Buster and Pip's Village Path Misunderstanding",
+        "hook": "The Hidden Ball Discovery",
+        "question": "Why did Buster the dog accuse Pip the mouse of hiding their shared ball in the garden soil?",
+        "answer": "Buster saw a round dirt mound over the ball and blamed Pip, until Pip uncovered the real culprit.",
+        "source": "",
+        "keywords": [
+          "original fiction",
+          "short story"
+        ],
+        "story_beats": [
+          {
+            "headline": "The Hidden Ball Discovery",
+            "speech": "Buster the dog growled softly at the dirt mound in the garden and accused Pip of hiding their favorite ball.",
+            "visual": "dog",
+            "story_environment": "garden",
+            "label": "Reveal Beat",
+            "story_beat": "reveal",
+            "visual_prompt": "A dog stands in the garden with a confused expression, staring at a small round ball half-buried under dark soil.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Accusation and Doubt",
+            "speech": "Pip the mouse stood near the garden flower petals, shaking his head and denying he ever buried their round toy.",
+            "visual": "mouse",
+            "story_environment": "garden",
+            "label": "Build Beat",
+            "story_beat": "build",
+            "visual_prompt": "A mouse sits upright in the garden next to a blooming flower, holding tiny paws up in innocence while looking at the soil mound.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "The Truth Beneath the Soil",
+            "speech": "Pip began scratching away loose dirt to reveal the natural tunnel showing how the ball simply rolled downhill.",
+            "visual": "mouse",
+            "story_environment": "garden",
+            "label": "Mechanism Beat",
+            "story_beat": "mechanism",
+            "visual_prompt": "A mouse digs carefully into the garden dirt near a small stone, uncovering a clean channel that explains the ball's movement.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          },
+          {
+            "headline": "Joyful Shared Play Restored",
+            "speech": "Buster wagged his tail in apology, and both friends happily pushed the shared ball across the sunny garden grass.",
+            "visual": "dog",
+            "story_environment": "garden",
+            "label": "Payoff Beat",
+            "story_beat": "payoff",
+            "visual_prompt": "A dog wags its tail happily in the garden, gently nudging a round ball with its nose alongside a small mouse.",
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "duration": 2.1
+          }
+        ],
+        "central_conflict": "Buster the dog finds their shared ball buried under a fresh mound of soil in the garden and blames Pip the mouse for hiding it.",
+        "decisive_choice": "Pip the mouse decides to gently dig beside the mound with tiny paws to show Buster the true path of the burrowing earth.",
+        "resolution": "Buster realizes his mistake, apologizes to Pip, and both animals happily roll the shared ball across the garden grass together.",
+        "visual_bible": {
+          "style": "A warm, bright, storybook illustration style with soft lighting and natural textures.",
+          "characters": {
+            "dog": "Buster is a friendly golden dog with floppy ears, a wagging tail, and no clothing.",
+            "mouse": "Pip is a tiny brown mouse with neat whiskers, round ears, and no clothing."
+          },
+          "locations": {
+            "garden": "A lush, sunlit garden filled with green grass, blooming flowers, and soft soil paths."
+          },
+          "objects": {
+            "ball": "A simple red round ball used for rolling games."
+          }
+        },
+        "plot_fingerprint": "3e2b1de4da13507e6f25e4b0f41b2c81d1d2568f97966016c785bb7a15f52ba7"
       }
     }
   ]
