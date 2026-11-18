@@ -3,7 +3,7 @@
   "day": "2026-11-18",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 5,
-  "confirmed_today": 4,
+  "confirmed_today": 5,
   "last_attempt_at": "2026-11-18T02:25:15.117605+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -13221,16 +13221,14 @@
       "decisive_choice": "Orson the otter decides to wedge a smooth river stone beneath the snagged log end to create a rolling pivot point.",
       "resolution": "The log swings free downstream with the rushing current, allowing the forest stream to flow smoothly again.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "ioTqp8v4JeY": {
-      "content_id": "rayvan-gemini-895d8ddc3d574be98b1a",
+    },
+    "rayvan-gemini-895d8ddc3d574be98b1a": {
+      "video_id": "ioTqp8v4JeY",
+      "confirmed_at": "2026-11-18T09:17:40.899277+00:00",
       "title": "Opal and Orion's Island Festival Banner Snag",
-      "day": "2026-11-18",
-      "uploaded_at": "2026-11-18T02:25:16.761316+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-18T02:25:16.761316+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "84baf69a8e0969e197da457866735687b414b0e5ed2cf01fd35f65a3f09f71be",
       "story_beats": [
@@ -13282,31 +13280,31 @@
       "central_conflict": "A woven festival banner catches tightly on a sharp bamboo shoot during the island festival setup.",
       "decisive_choice": "Opal the otter decides to dive through the shallow surf to reach the snagged anchor line while Orion watches.",
       "resolution": "The decorative banner hangs straight across the sandy island square, allowing the festival to begin happily.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-18T02:15:20.455885+00:00",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-18T09:17:40.469000+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-18T02:25:17.293001+00:00",
+    "at": "2026-11-18T09:24:21.056191+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
-    "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "job_status_before_persist": "failure",
+    "dependencies_step": "failure",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-17T19:27:38.334512+00:00",
   "reserved": {
@@ -27082,10 +27080,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-18T02:25:17.292939+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-18T09:24:21.056147+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "ready",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -27093,9 +27091,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-18T02:25:17.292991+00:00",
+    "at": "2026-11-18T09:24:21.056184+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -27107,59 +27105,23 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-18T02:25:17.291894+00:00",
+    "at": "2026-11-18T09:24:21.055590+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "publish_step": "skipped",
+    "job_status_before_persist": "failure",
+    "outcome": "published",
+    "reason": "ready",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-18T02:25:17.292772+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 20,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 89,
-        "total": 176
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 177,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 142,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 142,
-        "remaining": 20
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 0,
-        "background_review_gaps": [],
-        "considered": 1,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-11-18T09:24:21.056113+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
