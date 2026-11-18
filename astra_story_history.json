@@ -11794,6 +11794,62 @@
       "central_conflict": "A smooth round pebble jammed the swinging iron chain link inside the harbor fog bell tower, causing false warning tolls.",
       "decisive_choice": "Milo the otter decides to dive down through the stone foundation arch and push the jammed pebble free with his snout.",
       "resolution": "The iron chain swings cleanly once more, restoring quiet peace to the morning harbor waves."
+    },
+    {
+      "content_id": "rayvan-gemini-aa15af6aaa4f3c0e2915",
+      "video_id": "CiBSJUebC2k",
+      "confirmed_at": "2026-11-18T02:15:20.773223+00:00",
+      "title": "Ollie and Orson's Forest Stream Log Jam",
+      "plot_fingerprint": "7ddb2bed3c41801871a71f815eb88421924bcc8f658cf69231487aba0399ea45",
+      "story_beats": [
+        {
+          "headline": "Stream Blockage Discovered",
+          "speech": "Look at how the swirling water rises behind this thick mossy log right here in the quiet forest.",
+          "visual": "otter",
+          "story_environment": "forest",
+          "label": "Blockade",
+          "story_beat": "reveal",
+          "visual_prompt": "An otter with wet brown fur and whiskers stands perplexed in the forest beside a swirling stream, gazing at a heavy mossy log wedged between two damp boulders.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Searching for a Lever",
+          "speech": "We need something strong and heavy to pry this trapped wood loose from the muddy stream bed.",
+          "visual": "otter",
+          "story_environment": "forest",
+          "label": "Search",
+          "story_beat": "build",
+          "visual_prompt": "An otter with sleek brown fur paws at the muddy bank of the forest stream, rolling a smooth grey river stone close to the blocked timber.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Leveraging the Log",
+          "speech": "Push down hard on the grey stone pivot while I wedge this branch underneath the soaked bark.",
+          "visual": "otter",
+          "story_environment": "forest",
+          "label": "Leverage",
+          "story_beat": "mechanism",
+          "visual_prompt": "An otter with glistening wet brown fur pushes down with its paws against a smooth river stone wedged beneath the heavy log in the forest.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Water Flows Freely",
+          "speech": "The log has popped free into the current, and the cool water is rushing happily down the channel.",
+          "visual": "otter",
+          "story_environment": "forest",
+          "label": "Flow",
+          "story_beat": "payoff",
+          "visual_prompt": "An otter with sleek brown fur shakes water droplets from its coat in the forest, watching the clear stream flow freely past the dislodged log.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "A thick mossy log jams tightly across the narrow forest stream channel, backing up swirling water over the muddy bank.",
+      "decisive_choice": "Orson the otter decides to wedge a smooth river stone beneath the snagged log end to create a rolling pivot point.",
+      "resolution": "The log swings free downstream with the rushing current, allowing the forest stream to flow smoothly again."
     }
   ]
 }
