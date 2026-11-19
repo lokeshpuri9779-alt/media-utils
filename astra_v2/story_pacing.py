@@ -78,8 +78,7 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
     cliffhanger_beats = sum(
         1 for s in speeches[:-1]
         if re.search(
-            r'\?|\b(?:just as|only to|before [a-z]+ could|when [a-z]+|'
-            r'until [a-z]+|only then)\b',
+            r'\?|\b(?:just as|only to|before [a-z]+ could|only then)\b',
             " ".join(_words(s)[-12:])
         )
     )
