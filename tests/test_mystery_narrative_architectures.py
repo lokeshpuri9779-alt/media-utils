@@ -1,5 +1,5 @@
 import unittest
-from astra_v2.autonomous_story_proposals import NARRATIVE_ARCHITECTURES, PRESSURE_ARCS, proposal
+from astra_v2.autonomous_story_proposals import NARRATIVE_ARCHITECTURES, PLOT_ENGINES, PRESSURE_ARCS, proposal
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -19,6 +19,20 @@ class NarrativeArchitecturesTests(unittest.TestCase):
             self.assertFalse(story["production_ready"])
             self.assertEqual(publication_rejection(story), "unreviewed_causal_draft")
         self.assertEqual(seen, set(range(len(PRESSURE_ARCS))))
+
+    def test_all_plot_engines_supply_one_complete_causal_spine(self):
+        seen = set()
+        for index in range(320):
+            story = proposal(index)
+            narration = " ".join(beat["speech"] for beat in story["story_beats"])
+            for number, engine in enumerate(PLOT_ENGINES):
+                if engine[0] in narration:
+                    seen.add(number)
+                    for stage in engine:
+                        self.assertIn(stage, narration)
+            self.assertFalse(story["production_ready"])
+            self.assertEqual(publication_rejection(story), "unreviewed_causal_draft")
+        self.assertEqual(seen, set(range(len(PLOT_ENGINES))))
 
     def test_all_narrative_architectures_shape_the_four_beats(self):
         seen = set()
