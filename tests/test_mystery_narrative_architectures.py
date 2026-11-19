@@ -42,7 +42,7 @@ class NarrativeArchitecturesTests(unittest.TestCase):
             for number, emotional_turn in enumerate(EMOTIONAL_TURNS):
                 if emotional_turn in narration:
                     seen.add(number)
-                    self.assertIn("The setback changed the team's mood", narration)
+                    self.assertIn(emotional_turn, story["story_beats"][1]["speech"])
             self.assertEqual(story, proposal(index))
             self.assertFalse(story["production_ready"])
         self.assertEqual(seen, set(range(len(EMOTIONAL_TURNS))))
