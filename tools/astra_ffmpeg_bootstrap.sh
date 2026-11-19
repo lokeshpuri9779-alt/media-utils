@@ -10,17 +10,21 @@ have_video_tools() {
 
 if ! have_video_tools; then
   echo "ASTRA_CODEC_BOOTSTRAP=system_ffmpeg_missing"
-  installed=0
-  for attempt in 1 2; do
-    if timeout 120s sudo apt-get update -qq -o Acquire::Retries=2 &&
-       timeout 180s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg; then
-      installed=1
-      break
+  # Ubuntu 24.04's ffmpeg dependency set is large and hosted-runner mirror
+  # throughput varies. A short install timeout repeatedly discards progress.
+  # Use one bounded install with apt's own retry support so partial downloads
+  # can be reused; keep the hard failure if either executable is absent.
+  # The hosted runner's regional EC2 mirror was taking over ten minutes to
+  # fetch dependencies. Prefer Ubuntu's public archive endpoint when the
+  # runner exposes the regional mirror list; also cover ordinary source files.
+  for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.sources /etc/apt/sources.list.d/*.list; do
+    if [[ -f "$source" ]]; then
+      sudo sed -i 's|http://us-east-2.ec2.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' "$source"
     fi
-    echo "ASTRA_CODEC_BOOTSTRAP_RETRY=${attempt}"
   done
-  if [[ "$installed" != "1" ]]; then
-    echo "::error::Cannot install free system ffmpeg/ffprobe; refusing an unverified long-form render."
+  timeout 120s sudo apt-get update -qq -o Acquire::Retries=2
+  if ! timeout 600s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Acquire::Retries=2 ffmpeg; then
+    echo "::error::Cannot install free system ffmpeg/ffprobe; refusing an unverified render." >&2
     exit 1
   fi
 fi
