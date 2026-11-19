@@ -470,7 +470,9 @@ def make_plan(ch):
             # unknown shot locations retain the opening-story fallback.
             if not shot.get('story_environment'):
                 scene_hint = analyze_story_scene({
-                    'visual_prompt': str(shot.get('visual_prompt') or '')
+                    'visual_prompt': str(shot.get('visual_prompt') or ''),
+                    'speech': str(shot.get('speech') or ''),
+                    'headline': str(shot.get('headline') or ''),
                 })['scene']
                 shot['story_environment'] = scene_hint or story_location
             if unified_mode:
