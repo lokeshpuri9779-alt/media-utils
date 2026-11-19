@@ -445,9 +445,6 @@ def proposal(index):
     method = _pick(index, INVESTIGATION_METHODS, 47)
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
-    # A plot engine supplies a complete causal spine: problem, intervention,
-    # reveal and resolution. Keep all four clauses from the same engine.
-    engine_problem, engine_action, engine_reveal, engine_resolution = _pick(index, PLOT_ENGINES, 13)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
     # Pressure arcs add conflict and reversals to the SAME mystery. They do not
     # inject a second, unrelated plot engine into the four-beat sequence.
@@ -465,8 +462,6 @@ def proposal(index):
     story_vars = {
         "setting": setting, "actor": actor, "Actor": actor.capitalize(), "role": role,
         "mystery": mystery, "stakes": stakes, "clue": clue, "discovery": discovery,
-        "engine_problem": engine_problem, "engine_action": engine_action,
-        "engine_reveal": engine_reveal, "engine_resolution": engine_resolution,
         "arc_complication": arc_complication, "causal_opening": causal_opening,
         "causal_test": causal_test, "method": method, "obstacle": obstacle,
         "causal_reveal": causal_reveal, "arc_reversal": arc_reversal,
@@ -478,10 +473,10 @@ def proposal(index):
     twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
-        ("reveal", f"{opening} {architecture_opening}. The deeper problem was this: {engine_problem}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
-        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. To test the deeper problem, the team {engine_action}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{twist} {architecture_turn}. {engine_reveal}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
-        ("payoff", f"{payoff} {architecture_payoff}. {engine_resolution}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"{opening} {architecture_opening}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
+        ("twist", f"{twist} {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
+        ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Normalize punctuation at beat boundaries so concatenated authored clauses
     # never produce doubled full stops in narration.
