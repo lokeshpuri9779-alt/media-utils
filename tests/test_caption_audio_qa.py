@@ -36,6 +36,16 @@ class CaptionAudioQATests(unittest.TestCase):
         self.assertTrue(all(len(chunk.split())<=7 for chunk in chunks))
         self.assertTrue(all(len(chunk)<=42 for chunk in chunks))
 
+    def test_caption_chunks_avoid_stranded_function_words(self):
+        text="At dusk, the fox and rabbit discovered that the only lantern on their woodland path had gone dark."
+        chunks=segment_for_captions(text,max_words=7,max_chars=42)
+        weak={"a","an","and","but","for","in","of","on","or","the","to","with"}
+        self.assertEqual(" ".join(chunks),text)
+        self.assertTrue(all(chunk.split()[-1].lower().strip(".,!?;:") not in weak for chunk in chunks[:-1]))
+        self.assertTrue(all(chunk.split()[0].lower().strip(".,!?;:") not in {"and","but","or","so"} for chunk in chunks[1:]))
+        self.assertTrue(all(len(chunk.split())<=7 for chunk in chunks))
+        self.assertTrue(all(len(chunk)<=42 for chunk in chunks))
+
 
 if __name__=="__main__":
     unittest.main()
