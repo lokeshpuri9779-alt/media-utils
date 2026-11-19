@@ -11,6 +11,7 @@ on:
       - tests/test_editorial_oct2026.py
       - tools/editorial_oct2026_preview.py
       - tests/test_pillow_duo_story_supply.py
+      - tests/test_caption_audio_qa.py
       - tests/test_studio721_release.py
       - studio_renderer.py
       - astra_v2/directed_scene_contract.py
@@ -49,6 +50,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_crossgenre_directed_24.py' -v
           python -m unittest discover -s tests -p 'test_editorial_oct2026.py' -v
           python -m unittest discover -s tests -p 'test_pillow_duo_story_supply.py' -v
+          python -m unittest discover -s tests -p 'test_caption_audio_qa.py' -v
           python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
           python -m unittest discover -s tests -p 'test_astra_duo_setting_consistency.py' -v
       - name: Verify Studio 7.3.1 provenance and live publisher regression tests
