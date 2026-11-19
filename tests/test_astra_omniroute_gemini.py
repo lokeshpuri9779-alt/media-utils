@@ -170,6 +170,12 @@ class GeminiRouteTests(unittest.TestCase):
         prompt = requests[0]["contents"][0]["parts"][0]["text"]
         self.assertIn("brief, natural spoken line", prompt)
         self.assertIn("stable personality trait", prompt)
+        self.assertIn("one immediate want", prompt)
+        self.assertIn("one pressure-triggered flaw", prompt)
+        self.assertIn("recognizable decision-making habit", prompt)
+        self.assertIn("what they avoid saying", prompt)
+        self.assertIn("generic inspirational lines and repeated catchphrases", prompt)
+        self.assertIn("change the relationship, reveal a motive or force a choice", prompt)
         self.assertIn("distinct speech signature", prompt)
         self.assertIn("consequence of each beat must directly cause the next beat", prompt)
         self.assertIn("seed the twist clue before revealing it", prompt)
