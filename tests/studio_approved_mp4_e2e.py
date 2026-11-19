@@ -18,6 +18,10 @@ from studio_renderer import make_plan
 def main():
     story = dict(catalog()[0])
     story.setdefault("content_id", "ci-approved-artwork-smoke")
+    # This test supplies its own isolated, approved CI artwork for every scene.
+    # Do not inherit the catalog premium-media acquisition requirement: that
+    # separate provider contract is covered by dedicated premium-media tests.
+    story["premium_story"] = False
     with tempfile.TemporaryDirectory(prefix="astra-approved-studio-") as temp:
         root = Path(temp)
         art = root / "art"
