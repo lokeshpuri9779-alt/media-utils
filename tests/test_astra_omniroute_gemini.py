@@ -165,6 +165,8 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("no third species", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("at least three genuinely different shots", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("cold-opens on a specific disruption", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("24-38 words in every beat", requests[0]["contents"][0]["parts"][0]["text"])
 
     def test_valid_scene_aware_story_returns_environment_and_subject_tags(self):
         import io
