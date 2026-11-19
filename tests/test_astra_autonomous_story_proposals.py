@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from pathlib import Path
-from astra_v2.autonomous_story_proposals import (replenish, proposal, MYSTERIES, CAUSAL_PATHS, RESOLUTIONS)
+from astra_v2.autonomous_story_proposals import (replenish, proposal, MYSTERIES, MYSTERY_CAUSES, CAUSAL_PATHS, RESOLUTIONS)
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -77,7 +77,8 @@ class AutonomousStoryProposalTests(unittest.TestCase):
                             for item in candidates))
         self.assertTrue(all("failed" in item["story_beats"][1]["speech"].casefold()
                             for item in candidates))
-        self.assertTrue(all("original clue" in item["story_beats"][2]["speech"].casefold()
+        self.assertTrue(all(any(cause in item["story_beats"][2]["speech"]
+                                    for cause in MYSTERY_CAUSES)
                             for item in candidates))
         self.assertTrue(all(item["production_ready"] is False for item in candidates))
 
