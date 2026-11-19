@@ -478,6 +478,10 @@ def proposal(index):
         ("twist", f"{twist} {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
+    # Normalize punctuation at beat boundaries so concatenated authored clauses
+    # never produce doubled full stops in narration.
+    beats = tuple((name, speech.replace("..", "."), visual_name)
+                  for name, speech, visual_name in beats)
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
     # treating these unreviewed proposals as publishable.
