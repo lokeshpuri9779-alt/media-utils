@@ -343,6 +343,10 @@ def proposal(index):
         ("twist", f"{causal_reveal}. {plot_reveal}. {arc_turn}. This explained the original mystery. The team checked the evidence again.", setting_visual),
         ("payoff", f"With the cause understood, {actor} {resolution}. {causal_aftermath}. {plot_outcome}. {arc_aftermath}. {consequence}.", _pick(index, VISUALS, 3)),
     )
+    # Normalize punctuation at beat boundaries so concatenated authored clauses
+    # never produce doubled full stops in narration.
+    beats = tuple((name, speech.replace("..", "."), visual_name)
+                  for name, speech, visual_name in beats)
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
     # treating these unreviewed proposals as publishable.
