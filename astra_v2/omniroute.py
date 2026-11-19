@@ -142,7 +142,8 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
         if not isinstance(beat, dict):
             raise ValueError(provider + " invalid beat")
         for key in ("headline", "speech", "label"):
-            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
+            limit = 320 if key == "speech" else 220
+            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= limit:
                 raise ValueError(provider + " invalid beat text")
         if beat.get("story_beat") not in ROLES:
             raise ValueError(provider + " invalid narrative role")
