@@ -1,5 +1,7 @@
 """Provider-free ranking of archived Gemini drafts for human review.
 
+Requires the retry-ledger contract introduced in PR #1008.
+
 This diagnostic composes the existing archive validator, local triage gate and
 retry eligibility ledger. It does not call a model, consume retry attempts,
 approve a story, or feed publisher intake.
