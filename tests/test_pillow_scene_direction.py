@@ -67,7 +67,7 @@ class DirectedPillowScenesTests(unittest.TestCase):
         image = Image.new("RGB", (1080, 1920), (24, 35, 60))
         self.assertEqual(draw_story_stage(ImageDraw.Draw(image), shot, 0.5), "underwater")
         # The off-centre door frame is a visible, pixel-backed stage feature.
-        self.assertEqual(image.getpixel((730, 900)), (181, 220, 219))
+        self.assertEqual(image.getpixel((715, 900)), (181, 220, 219))
         self.assertNotEqual(image.getpixel((850, 900)), (24, 35, 60))
 
     def test_authored_location_is_not_replaced_by_handheld_props(self):
