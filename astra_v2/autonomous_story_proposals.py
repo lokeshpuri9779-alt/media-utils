@@ -496,9 +496,9 @@ def proposal(index):
     twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
-        ("reveal", f"{opening} {architecture_opening}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
-        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The setback changed the team's mood: {emotional}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{twist} {mystery_cause}. {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
+        ("reveal", f"{opening} {architecture_opening}.", visual),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. {emotional}.", "book"),
+        ("twist", f"{twist} {mystery_cause}. {architecture_turn}.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Normalize punctuation at beat boundaries so concatenated authored clauses
