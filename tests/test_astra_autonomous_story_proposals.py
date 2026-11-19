@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from pathlib import Path
-from astra_v2.autonomous_story_proposals import replenish, proposal
+from astra_v2.autonomous_story_proposals import (replenish, proposal, MYSTERIES, CAUSAL_PATHS, RESOLUTIONS)
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -72,7 +72,8 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         for unrelated in ("school science fair", "competition prize",
                           "rival rescue teams", "missing delivery"):
             self.assertTrue(all(unrelated not in speech for speech in speeches))
-        self.assertTrue(all("why " in item["story_beats"][0]["speech"]
+        self.assertTrue(all(any(mystery in item["story_beats"][0]["speech"]
+                                for mystery, _, _ in MYSTERIES)
                             for item in candidates))
         self.assertTrue(all("failed" in item["story_beats"][1]["speech"].casefold()
                             for item in candidates))
@@ -85,10 +86,10 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         beats = item["story_beats"]
         self.assertEqual([b["story_beat"] for b in beats],
                          ["reveal", "build", "twist", "payoff"])
-        self.assertIn("needed to understand why", beats[0]["speech"])
-        self.assertIn("compared", beats[1]["speech"])
-        self.assertIn("explained the original mystery", beats[2]["speech"])
-        self.assertIn("cause understood at last", beats[3]["speech"])
+        self.assertTrue(any(mystery in beats[0]["speech"] for mystery, _, _ in MYSTERIES))
+        self.assertTrue(any(test in beats[1]["speech"] for _, test, _, _ in CAUSAL_PATHS))
+        self.assertTrue(any(reveal in beats[2]["speech"] for _, _, reveal, _ in CAUSAL_PATHS))
+        self.assertTrue(any(resolution in beats[3]["speech"] for resolution in RESOLUTIONS))
         self.assertTrue(all(item["production_ready"] is False for item in [item]))
         self.assertNotIn("..", beats[3]["speech"])
 
