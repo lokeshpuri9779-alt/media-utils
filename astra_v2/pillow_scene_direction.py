@@ -15,6 +15,7 @@ GROUND_TOP = 1180
 SCENE_CUES = (
     # Handheld books, pages and curtains are objects, not locations. Never
     # change the whole set to a library just because a character holds a book.
+    ("underwater", r"\b(?:underwater|ocean|sea|seabed|reef|coral)\b"),
     ("observatory", r"\b(?:observatory|telescope|planetarium|astronomer)\b"),
     ("city", r"\b(?:city|downtown|skyscrapers?|city streets?)\b"),
     ("railway", r"\b(?:railway|railroad|train station|locomotive|rail tracks?)\b"),
@@ -98,10 +99,38 @@ def draw_story_stage(d, shot, t):
         r"\b(?:midnight|moonlight|at night|after dark)\b",
         str(shot.get("speech") or "").lower()))
     sky = (74, 109, 153) if nighttime else (96, 157, 165)
-    ground = (41, 75, 88) if setting in ("river", "harbor") else (53, 100, 91)
+    ground = ((23, 67, 91) if setting == "underwater" else
+              (41, 75, 88) if setting in ("river", "harbor") else (53, 100, 91))
     # Midground silhouettes differ by location and follow the stated setting.
-    d.ellipse((530, 555, 765, 790), fill=(132, 163, 181) if nighttime else sky)
-    if setting in ("river", "harbor"):
+    if setting != "underwater":
+        d.ellipse((530, 555, 765, 790), fill=(132, 163, 181) if nighttime else sky)
+    if setting == "underwater":
+        # A sea-floor reveal needs unmistakable underwater cues AND the
+        # authored door itself, not an observatory fallback with blue tint.
+        for i in range(5):
+            x = 100 + i * 205
+            d.polygon(((x, 500), (x + 70, 500), (x + 230, 1135),
+                       (x + 155, 1135)), fill=(49, 119, 151))
+        for i in range(18):
+            x = 85 + (i * 137) % 900
+            y = 565 + (i * 89) % 555
+            r = 5 + (i % 4) * 4
+            d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=4)
+        # Stone arch and sealed door on the seabed; placed off-centre so the
+        # two foreground actors do not hide the reveal.
+        d.rounded_rectangle((708, 655, 958, 1148), radius=34,
+                            fill=(62, 105, 126), outline=(181, 220, 219), width=16)
+        d.rounded_rectangle((746, 708, 920, 1110), radius=20,
+                            fill=(22, 57, 83), outline=(105, 192, 206), width=9)
+        d.line((832, 730, 832, 1090), fill=(127, 209, 220), width=7)
+        d.ellipse((870, 895, 895, 920), fill=(242, 207, 122))
+        for x, height in ((110, 120), (265, 180), (570, 145), (1000, 165)):
+            d.line((x, 1160, x-12, 1160-height), fill=(61, 160, 145), width=18)
+            d.line((x, 1100, x+42, 1050), fill=(72, 181, 159), width=12)
+        d.polygon(((60, 1160), (250, 1100), (450, 1165),
+                   (690, 1108), (1025, 1160), (1025, 1260), (60, 1260)),
+                  fill=(37, 91, 111))
+    elif setting in ("river", "harbor"):
         for y, fill in [(1040,(54,115,151)),(1118,(49,130,155)),(1187,(45,112,137))]:
             d.polygon([(60,y+40),(235,y+12),(460,y+42),
                        (687,y+9),(1025,y+37),(1025,y+97),(60,y+97)],fill=fill)
@@ -314,6 +343,8 @@ def draw_story_stage(d, shot, t):
                                 fill=(131,117,109))
         elif setting in ("river","harbor"):
             d.line((x-20,y,x+24,y),fill=(133,187,196),width=4)
+        elif setting == "underwater":
+            d.ellipse((x-7,y-7,x+7,y+7),outline=(154,224,236),width=3)
         elif setting=="winter":
             d.ellipse((x-9,y-9,x+12,y+10),fill=(211,229,234))
     # Foreground micro-movement is subtle and secondary to the character rig.
