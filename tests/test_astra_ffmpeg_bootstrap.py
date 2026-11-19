@@ -1,4 +1,4 @@
-"""Protect long-form free codec install from regressions."""
+""""Protect long-form free codec install from regressions."""
 import subprocess
 import unittest
 from pathlib import Path
@@ -15,7 +15,7 @@ class CodecBootstrapTests(unittest.TestCase):
         source=(ROOT/"tools/astra_ffmpeg_bootstrap.sh").read_text()
         self.assertIn("command -v ffmpeg",source)
         self.assertIn("command -v ffprobe",source)
-        self.assertIn("apt-get install -y ffmpeg",source)
+        self.assertIn("timeout 360s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends",source)
         self.assertIn("have_video_tools ||",source)
         self.assertIn("exit 1",source)
 
