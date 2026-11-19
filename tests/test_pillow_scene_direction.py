@@ -16,6 +16,7 @@ class DirectedPillowScenesTests(unittest.TestCase):
             ("The cat and dog search the old library.", "library"),
             ("The otter and squirrel follow a boat on the river.", "river"),
             ("The dog and otter reached the fishing harbor.", "harbor"),
+            ("The fox crossed the city streets beneath tall buildings.", "city"),
             ("The rabbit and dog found a flower in the garden.", "garden"),
         ]
         from PIL import ImageDraw
@@ -46,6 +47,12 @@ class DirectedPillowScenesTests(unittest.TestCase):
         from PIL import ImageDraw
         im = Image.new("RGB", (1080, 1920), (24, 35, 60))
         self.assertEqual(draw_story_stage(ImageDraw.Draw(im), shot, 0.5), "city")
+        # A genuinely different explicit location in the line still outranks
+        # a stale episode-level fallback.
+        self.assertEqual(story_setting({
+            "speech": "The fox is in a library.",
+            "story_environment": "harbor",
+        }), "library")
 
     def test_authored_location_is_not_replaced_by_handheld_props(self):
         self.assertEqual(story_setting({
