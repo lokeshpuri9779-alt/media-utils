@@ -24,6 +24,11 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn("24-38 spoken words per beat", omniroute.PROMPT)
         self.assertIn("fair but surprising", omniroute.PROMPT)
 
+    def test_prompts_require_dialogue_cliffhangers_and_grounded_sound(self):
+        self.assertIn("brief, natural spoken line", omniroute.PROMPT)
+        self.assertIn("End beats one, two and", omniroute.PROMPT)
+        self.assertIn("sound cues only when caused by visible action", omniroute.PROMPT)
+
     def test_generated_story_length_is_bounded_and_not_thin(self):
         from astra_v2.story_pacing import validate_generated_story
         beats = [{"speech": " ".join(["word"] * 25)} for _ in range(4)]
