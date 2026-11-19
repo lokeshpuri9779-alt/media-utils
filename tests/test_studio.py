@@ -9,6 +9,7 @@ from unittest.mock import patch
 import numpy as np
 import studio_renderer as studio
 import cloud_once as cloud
+from astra_v2.autonomous_story_proposals import proposal
 
 
 class StudioTests(unittest.TestCase):
@@ -86,30 +87,19 @@ class StudioTests(unittest.TestCase):
         provider.assert_not_called()
         self.assertEqual(out,items)
 
-    def test_fiction_asset_briefs_use_each_scene_not_the_episode_title(self):
-        story = {"genre": "fiction", "title": "The Same Episode Title"}
-        plan = [
-            {"director_asset": "editorial-illustration", "story_environment": "observatory",
-             "story_human_action": "discover_radio",
-             "speech": "Mara finds a blinking radio with tomorrow's date."},
-            {"director_asset": "editorial-illustration", "story_environment": "hidden room",
-             "story_human_action": "trace_cable",
-             "speech": "Mara traces a cable and finds a second radio broadcasting her voice."},
-            {"director_asset": "mechanism-diagram", "story_environment": "city street",
-             "story_human_action": "unplug_cable",
-             "speech": "The countdown continues after Mara unplugs the cable."},
-            {"director_asset": "editorial-illustration", "story_environment": "stairwell",
-             "story_human_action": "flee_door",
-             "speech": "Mara runs for the stairs as the heavy door slams shut."},
-        ]
+    def test_causal_proposal_scene_briefs_survive_the_real_studio_plan(self):
+        story = proposal(137)
+        plan = studio.make_plan(story)
         manifest = studio.asset_manifest(story, plan)
+        self.assertEqual(len(manifest), len(story["story_beats"]))
         queries = [row["query"] for row in manifest]
-        self.assertEqual(len(set(queries)), 4)
-        for query, shot in zip(queries, plan):
-            self.assertIn(shot["story_human_action"].replace("_", " "), query)
-            self.assertIn(shot["story_environment"], query)
-            self.assertNotIn("The Same Episode Title", query)
+        self.assertEqual(len(set(queries)), len(story["story_beats"]))
+        for query, beat in zip(queries, story["story_beats"]):
+            self.assertIn("Story beat: " + beat["story_beat"], query)
+            self.assertIn("Visible action:", query)
             self.assertLessEqual(len(query), 240)
+        self.assertTrue(all(row["rights_rule"] == "original-or-explicitly-authorized-only"
+                            for row in manifest))
 
     def test_premium_story_uses_verified_media_plus_explanatory_animation(self):
         premium=next(x for x in cloud.content_catalog()
