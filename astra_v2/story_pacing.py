@@ -75,7 +75,7 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
     dialogue_lines = sum(1 for s in speeches if re.search(r'["“].+?["”]', s))
     cliffhanger_beats = sum(
         1 for s in speeches[:-1]
-        if re.search(r'\\?|\\b(?:but|until|before|just as|suddenly|then|only to)\\b',
+        if re.search(r'\?|\b(?:but|until|before|just as|suddenly|then|only to)\b',
                      s.casefold())
     )
     if speeches and dialogue_lines == 0:
