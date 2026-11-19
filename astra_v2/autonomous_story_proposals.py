@@ -447,7 +447,7 @@ def proposal(index):
     consequence = _pick(index, CONSEQUENCES, 59)
     # A plot engine supplies a complete causal spine: problem, intervention,
     # reveal and resolution. Keep all four clauses from the same engine.
-    engine_problem, engine_action, engine_reveal, engine_resolution = _pick(index, PLOT_ENGINES, 67)
+    engine_problem, engine_action, engine_reveal, engine_resolution = _pick(index, PLOT_ENGINES, 13)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
     # Pressure arcs add conflict and reversals to the SAME mystery. They do not
     # inject a second, unrelated plot engine into the four-beat sequence.
