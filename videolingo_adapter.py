@@ -82,6 +82,12 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
                 "through", "under", "until", "upon", "while", "within", "without"}
     weak_start = {"and", "but", "or", "so", "the", "a", "an", "of", "to"}
     auxiliaries = {"am", "are", "be", "been", "being", "can", "could", "did", "do", "does", "had", "has", "have", "is", "may", "might", "must", "shall", "should", "was", "were", "will", "would"}
+    # Keep common phrasal verbs together (e.g. "go out", "turn off").
+    phrasal_pairs = {("go", "out"), ("go", "on"), ("turn", "off"),
+                     ("switch", "off"), ("break", "down"), ("run", "out"),
+                     ("wake", "up"), ("stand", "up"), ("sit", "down"),
+                     ("come", "back"), ("look", "up"), ("take", "off"),
+                     ("set", "up"), ("shut", "down"), ("carry", "on")}
     sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean) if x.strip()]
     chunks: list[str] = []
 
@@ -124,6 +130,8 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
                     score -= 16
                 if last in auxiliaries or (len(left) >= 2 and left[-2].lower().strip(",;:") in auxiliaries):
                     score -= 24
+                if (last, first) in phrasal_pairs:
+                    score -= 30
                 if first in weak_start:
                     score -= 5
                 # Keep short final fragments from becoming one- or two-word
