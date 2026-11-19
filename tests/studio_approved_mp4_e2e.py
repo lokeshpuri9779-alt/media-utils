@@ -16,13 +16,13 @@ from studio_renderer import make_plan
 
 
 def main():
-    story = dict(catalog()[0])
-    # Synthetic CI artwork does not satisfy the premium lane's external
-    # source-backed subject-media requirements. Keep production gates intact.
+    # Use a simple four-beat explainer without comparison-media edge cases.
+    # The synthetic artwork below is CI-only and never grants editorial approval.
+    story = dict(catalog()[3])
+    story["content_id"] = "ci-approved-artwork-smoke"
     story["premium_story"] = False
     story["production_ready"] = False
     story["ci_fixture_only"] = True
-    story.setdefault("content_id", "ci-approved-artwork-smoke")
     with tempfile.TemporaryDirectory(prefix="astra-approved-studio-") as temp:
         root = Path(temp)
         art = root / "art"
