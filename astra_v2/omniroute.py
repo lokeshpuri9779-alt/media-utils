@@ -19,7 +19,18 @@ PROMPT = (
     "conflict types, emotional stakes and endings; avoid humans, "
     "humanoids, robots, clothing, complex machinery, bridge/cable repairs, "
     "large-gap jumps and simultaneous multi-prop actions. Ground each story "
-    "in a concrete choice and consequence. Use four cinematic story beats. "
+    "in a concrete choice and consequence. Use four cinematic story beats, "
+    "but make every beat a meaningful story turn rather than a summary. "
+    "Beat one must cold-open on an immediate disruption, unanswered question "
+    "and clear stakes; no greeting or setup preamble. Beat two must show a "
+    "specific attempt, obstacle and consequence. Beat three must reveal a fair "
+    "but surprising clue or reversal that changes the viewer's understanding. "
+    "Beat four must resolve the opening question with a decisive action and "
+    "an emotional final image. Keep momentum high: short punchy sentences, "
+    "cause-and-effect, escalating consequences, vivid sensory detail and "
+    "natural dialogue where it adds tension. Every sentence must change the "
+    "situation or reveal character; no filler, repeated exposition or generic "
+    "moral. Write 24-38 spoken words per beat (96-152 total). "
     "Return only JSON keys title, question, answer, beats. Each beat needs "
     "headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
     "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". It names the "
@@ -31,7 +42,7 @@ PROMPT = (
     "animal action in that environment. Across four beats, create at least "
     "three genuinely different shots through action, composition, location or "
     "a supported prop; do not create variety by changing animal tags. "
-    "Speech 12-24 words per beat. "
+    "Speech must contain 24-38 words per beat, with 96-152 words total. "
     "story_beat one of reveal, build, mechanism, twist, payoff; beat one reveal, "
     "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
     "Avoid copyrighted characters. "
@@ -125,6 +136,8 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError(provider + " story title or beat count invalid")
     validate_beat_quality(beats, provider)
+    from astra_v2.story_pacing import validate_generated_story
+    validate_generated_story(beats, provider)
     for i, beat in enumerate(beats):
         if not isinstance(beat, dict):
             raise ValueError(provider + " invalid beat")
@@ -134,7 +147,7 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
         if beat.get("story_beat") not in ROLES:
             raise ValueError(provider + " invalid narrative role")
         words = len(beat["speech"].split())
-        if not 10 <= words <= 24:
+        if not 24 <= words <= 38:
             raise ValueError(provider + " narration word count invalid")
         if i == 0 and beat["story_beat"] != "reveal":
             raise ValueError(provider + " first beat must reveal")
