@@ -19,6 +19,20 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn("story_environment", omniroute.PROMPT)
         self.assertIn("three genuinely different shots", omniroute.PROMPT)
 
+    def test_all_provider_prompts_require_fast_suspense_and_fuller_narration(self):
+        self.assertIn("cold-open", omniroute.PROMPT)
+        self.assertIn("24-38 spoken words per beat", omniroute.PROMPT)
+        self.assertIn("fair but surprising", omniroute.PROMPT)
+
+    def test_generated_story_length_is_bounded_and_not_thin(self):
+        from astra_v2.story_pacing import validate_generated_story
+        beats = [{"speech": " ".join(["word"] * 25)} for _ in range(4)]
+        result = validate_generated_story(beats)
+        self.assertEqual(result["word_count"], 100)
+        self.assertFalse(result["approval"])
+        with self.assertRaisesRegex(ValueError, "24-38 words"):
+            validate_generated_story([{"speech": "too short"}] * 4)
+
     def test_story_quality_requires_scene_and_subject_consistency(self):
         beats = [
             {"speech": "A curious fox discovers a bright blue feather beside the old forest stream.",
