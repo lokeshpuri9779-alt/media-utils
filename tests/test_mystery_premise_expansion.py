@@ -1,9 +1,25 @@
 import unittest
-from astra_v2.autonomous_story_proposals import CAUSAL_PATHS, MYSTERIES, MYSTERY_CAUSES, proposal
+from astra_v2.autonomous_story_proposals import (CAUSAL_PATHS, MYSTERIES, MYSTERY_CAUSES, MYSTERY_SETTING_INDICES, SETTINGS, proposal)
 from astra_v2.publication_quality import publication_rejection
 
 
 class MysteryPremiseExpansionTests(unittest.TestCase):
+
+    def test_each_mystery_uses_only_a_compatible_setting(self):
+        self.assertEqual(len(MYSTERY_SETTING_INDICES), len(MYSTERIES))
+        for mystery_index, compatible in enumerate(MYSTERY_SETTING_INDICES):
+            self.assertTrue(compatible)
+            self.assertEqual(len(set(compatible)), len(compatible))
+            self.assertTrue(all(0 <= setting_index < len(SETTINGS) for setting_index in compatible))
+            for offset in range(13):
+                index = mystery_index * 13 + offset
+                setting_index = compatible[(index // 7) % len(compatible)]
+                setting = SETTINGS[setting_index][0]
+                story = proposal(index)
+                reveal = story["story_beats"][0]["speech"]
+                self.assertIn(setting, reveal)
+                self.assertIn(MYSTERIES[mystery_index][0], reveal)
+
     def test_all_mysteries_and_causal_paths_are_reachable_and_unreviewed(self):
         self.assertEqual(len(MYSTERY_CAUSES), len(MYSTERIES))
         found_mysteries = set()
