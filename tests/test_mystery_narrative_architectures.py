@@ -1,5 +1,5 @@
 import unittest
-from astra_v2.autonomous_story_proposals import NARRATIVE_ARCHITECTURES, PRESSURE_ARCS, proposal
+from astra_v2.autonomous_story_proposals import EMOTIONAL_TURNS, NARRATIVE_ARCHITECTURES, PRESSURE_ARCS, proposal
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -33,6 +33,19 @@ class NarrativeArchitecturesTests(unittest.TestCase):
                         self.assertIn(stage, narration)
             self.assertFalse(story["production_ready"])
         self.assertEqual(seen, set(range(len(NARRATIVE_ARCHITECTURES))))
+
+    def test_character_emotional_turns_are_used_without_new_mysteries(self):
+        seen = set()
+        for index in range(320):
+            story = proposal(index)
+            narration = " ".join(beat["speech"] for beat in story["story_beats"])
+            for number, emotional_turn in enumerate(EMOTIONAL_TURNS):
+                if emotional_turn in narration:
+                    seen.add(number)
+                    self.assertIn("The setback changed the team's mood", narration)
+            self.assertEqual(story, proposal(index))
+            self.assertFalse(story["production_ready"])
+        self.assertEqual(seen, set(range(len(EMOTIONAL_TURNS))))
 
 
 if __name__ == "__main__":
