@@ -1,6 +1,7 @@
 """Protect measured mystery diversity against accidental regressions.
 
-Floors are the verified post-PR304 baseline, not editorial approval targets.
+Floors retain the verified pre-change baseline; they are regression guards,
+not editorial approval targets.
 """
 import unittest
 from astra_v2.mystery_novelty_benchmark import measure_sequential_novelty, measure_sequential_rejection_reasons
