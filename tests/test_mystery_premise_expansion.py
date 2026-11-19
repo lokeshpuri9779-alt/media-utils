@@ -1,10 +1,11 @@
 import unittest
-from astra_v2.autonomous_story_proposals import CAUSAL_PATHS, MYSTERIES, proposal
+from astra_v2.autonomous_story_proposals import CAUSAL_PATHS, MYSTERIES, MYSTERY_CAUSES, proposal
 from astra_v2.publication_quality import publication_rejection
 
 
 class MysteryPremiseExpansionTests(unittest.TestCase):
     def test_all_mysteries_and_causal_paths_are_reachable_and_unreviewed(self):
+        self.assertEqual(len(MYSTERY_CAUSES), len(MYSTERIES))
         found_mysteries = set()
         found_causal_paths = set()
         for i in range(176):
@@ -16,6 +17,7 @@ class MysteryPremiseExpansionTests(unittest.TestCase):
                     found_mysteries.add(j)
                     self.assertIn(mystery, beats["reveal"])
                     self.assertIn(clue, beats["build"])
+                    self.assertIn(MYSTERY_CAUSES[j], beats["twist"])
             for j, (opening, action, reveal, aftermath) in enumerate(CAUSAL_PATHS):
                 if opening in narration:
                     found_causal_paths.add(j)
