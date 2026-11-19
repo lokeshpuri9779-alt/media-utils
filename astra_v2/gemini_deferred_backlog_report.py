@@ -88,9 +88,10 @@ def build_backlog_report(archive, history, retry_state=None, *, now,
         for category in blockers:
             totals["blocker:" + category] += 1
 
+    local_status_order = {"clear": 0, "blocked": 1, "unavailable": 2}
     ranked.sort(key=lambda row: (
         not row["retry_eligible"],
-        row["local_check_status"] != "clear",
+        local_status_order[row["local_check_status"]],
         row["blocker_category_count"],
         row["source_order"],
     ))
