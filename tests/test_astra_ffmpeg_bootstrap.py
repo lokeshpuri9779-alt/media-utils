@@ -15,7 +15,7 @@ class CodecBootstrapTests(unittest.TestCase):
         source=(ROOT/"tools/astra_ffmpeg_bootstrap.sh").read_text()
         self.assertIn("command -v ffmpeg",source)
         self.assertIn("command -v ffprobe",source)
-        self.assertIn("apt-get install -y ffmpeg",source)
+        self.assertRegex(source, r"apt-get install -y .*ffmpeg")
         self.assertIn("have_video_tools ||",source)
         self.assertIn("exit 1",source)
 
