@@ -42,6 +42,9 @@ class StoryPacingTests(unittest.TestCase):
         ]}
         result = review_pacing(story)
         self.assertEqual(result["cliffhanger_beat_count"], 0)
+        self.assertNotIn("until sunrise", " ".join(
+            beat["speech"] for beat in story["story_beats"]
+        ).casefold())
         self.assertIn("strengthen_scene_to_scene_cliffhangers", result["issues"])
 
     def test_pacing_review_flags_missing_dialogue_and_scene_hooks(self):
