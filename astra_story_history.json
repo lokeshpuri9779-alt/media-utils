@@ -12130,6 +12130,59 @@
       "central_conflict": "A single hanging hook on the central pavilion branch causes a disagreement between the otter and the owl over which festival decoration gets priority placement.",
       "decisive_choice": "Orion the owl decides to gently shift his lantern outward while Ollie the otter ties an extra vine loop to mount both lanterns side by side.",
       "resolution": "Both festival lanterns glow warmly together from the shared branch, illuminating the joyous island celebration for everyone."
+    },
+    {
+      "content_id": "rayvan-gemini-c3141300849ee1e32890",
+      "video_id": "c9izTuueZrQ",
+      "confirmed_at": "2026-11-19T07:50:57.786753+00:00",
+      "title": "The Owl and the Rabbit's Beacon Pact",
+      "plot_fingerprint": "e67883556a65cbce468a5da2bcef6dc5ac9719552cdc2338b9cbf76943614cff",
+      "story_beats": [
+        {
+          "headline": "A Cluttered Ledge",
+          "speech": "The lighthouse ledge is far too small for both of us to set our lanterns at the exact same moment today.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "Conflict Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands on a stone lighthouse balcony looking down at a rabbit trying to balance a lantern on the same narrow ledge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Falling Lantern",
+          "speech": "Oh no, my lantern tipped over because we both tried to place our lights on the ledge at the very same time.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Conflict Escalation",
+          "story_beat": "build",
+          "visual_prompt": "A rabbit watches as a lantern slides off the lighthouse ledge while the owl flutters wings in frustration nearby.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Agreement",
+          "speech": "Let us use this yellow flower as a marker; whoever holds the flower takes the ledge, and the other waits patiently.",
+          "visual": "owl",
+          "story_environment": "lighthouse",
+          "label": "The Decisive Choice",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl holds a single yellow flower in its beak and presents it to a rabbit on the lighthouse balcony to establish a turn-taking rule.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Synchronized Signals",
+          "speech": "With our new rule, the light shines steadily from the lighthouse, and we finally have enough space to work together peacefully.",
+          "visual": "rabbit",
+          "story_environment": "lighthouse",
+          "label": "Resolution of Pact",
+          "story_beat": "payoff",
+          "visual_prompt": "A rabbit carefully places its lantern on the lighthouse ledge while the owl waits nearby, both animals now signaled in harmony.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
