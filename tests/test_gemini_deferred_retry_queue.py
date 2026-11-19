@@ -82,7 +82,7 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
         archive = make_archive(1)
         queue, state = prepare_retry_batch(archive, now=200)
         digest = queue["entries"][0]["source_sha256"]
-        with self.assertRaisesRegex(ValueError, "cooldown_not_elapsed"):
+        with self.assertRaisesRegex(ValueError, "invalid_attempt_source_hashes"):
             record_attempts_after_provider_call(
                 state, [digest, digest], attempted_at=200)
         with self.assertRaisesRegex(ValueError, "unknown_retry_source_hash"):
