@@ -195,7 +195,7 @@ def draw_story_stage(d, shot, t):
         # different set from the observatory interior, not just a label.
         for i in range(7):
             x = 55 + i * 142
-            height = 300 + (seed // (i + 1)) % 310
+            height = 220 + (seed // (i + 1)) % 160
             top = 930 - height
             d.rectangle((x, top, x + 112, 1115),
                         fill=(66 + i * 3, 91 + i * 2, 119 + i * 2),
