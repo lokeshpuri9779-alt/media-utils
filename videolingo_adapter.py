@@ -76,7 +76,10 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
         raise ValueError("Caption limits are too small for readable phrases")
 
     weak_end = {"a", "an", "and", "as", "at", "but", "by", "for", "from",
-                "if", "in", "into", "of", "on", "or", "the", "to", "with"}
+                "if", "in", "into", "of", "on", "or", "the", "to", "with",
+                "after", "against", "along", "around", "before", "behind",
+                "below", "beneath", "between", "during", "near", "over",
+                "through", "under", "until", "upon", "while", "within", "without"}
     weak_start = {"and", "but", "or", "so", "the", "a", "an", "of", "to"}
     auxiliaries = {"am", "are", "be", "been", "being", "can", "could", "did", "do", "does", "had", "has", "have", "is", "may", "might", "must", "shall", "should", "was", "were", "will", "would"}
     sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean) if x.strip()]
