@@ -462,6 +462,7 @@ def proposal(index):
     stakes = _pick(index, STAKES, 19)
     discovery = _pick(index, DISCOVERIES, 23)
     resolution = _pick(index, RESOLUTIONS, 37)
+    emotional = _pick(index, EMOTIONAL_TURNS, 43)
     method = _pick(index, INVESTIGATION_METHODS, 47)
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
@@ -483,6 +484,7 @@ def proposal(index):
         "setting": setting, "actor": actor, "Actor": actor.capitalize(), "role": role,
         "mystery": mystery, "mystery_cause": mystery_cause,
         "stakes": stakes, "clue": clue, "discovery": discovery,
+        "emotional": emotional,
         "arc_complication": arc_complication, "causal_opening": causal_opening,
         "causal_test": causal_test, "method": method, "obstacle": obstacle,
         "causal_reveal": causal_reveal, "arc_reversal": arc_reversal,
@@ -495,7 +497,7 @@ def proposal(index):
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
         ("reveal", f"{opening} {architecture_opening}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
-        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The setback changed the team's mood: {emotional}. The first attempt failed, making the deadline feel even closer.", "book"),
         ("twist", f"{twist} {mystery_cause}. {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
