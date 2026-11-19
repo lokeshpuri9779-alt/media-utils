@@ -45,9 +45,12 @@ def story_advisory(story: dict) -> dict:
     except ValueError:
         return {"status": "script_too_long", "cliche_count": 0,
                 "repeated_sentence_count": 0, "approval": False}
+    from astra_v2.story_pacing import review_pacing
+    pacing = review_pacing(story, str(story.get("format") or "shorts"))
     return {"status": "review_suggested" if not findings["pass"] else "no_simple_flags",
             "cliche_count": len(findings["cliches"]),
             "repeated_sentence_count": len(findings["repeated_sentences"]),
+            "pacing": pacing,
             "approval": False}
 
 
@@ -61,7 +64,18 @@ def script_brief(topic: str, format_name: str = "shorts", preferences: dict | No
     if not isinstance(prefs, dict):
         raise TypeError("preferences must be a mapping")
     return {"topic": topic.strip(), "format": format_name,
-            "hook_seconds": 3, "style": str(prefs.get("style", "concrete and natural"))[:120],
+            "hook_seconds": 3,
+            "retention_architecture": [
+                "cold_open_with_a_specific_problem_or_unanswered_question",
+                "show_the_goal_and_what_it_costs_to_fail",
+                "introduce_a_fast_first_obstacle",
+                "escalate_with_new_information_or_a_worse_consequence",
+                "deliver_a_fair_but_surprising_reversal",
+                "pay_off_the_opening_question_and_end_on_an_emotional_button",
+            ],
+            "pacing": "short, visual beats; every beat changes the situation",
+            "content_rule": "add character choices, clues, consequences and dialogue; never pad",
+            "style": str(prefs.get("style", "concrete, vivid and natural"))[:120],
             "visual_feasibility_required": True, "editorial_approval": False}
 
 def workflow_plan(topic: str, format_name: str = "shorts") -> dict:
