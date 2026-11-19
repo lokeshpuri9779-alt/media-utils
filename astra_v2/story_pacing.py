@@ -18,8 +18,12 @@ _TENSION = {
 }
 _HOOK_CUES = ("?", "!", "until", "before", "when", "nobody", "never", "suddenly",
               "missing", "vanished", "secret", "trapped", "last", "why", "how")
-_ROLE_ARCS = ("cold_open", "goal_and_stakes", "first_obstacle", "escalation",
-              "reversal_or_reveal", "payoff_and_emotional_button")
+_ROLE_ARCS = (
+    "reveal: cold-open with a specific disruption, question and stakes",
+    "build: first obstacle, failed attempt and rising consequence",
+    "twist: fresh clue or reversal that changes what the viewer thought",
+    "payoff: decisive action, answer to the opening question and emotional button",
+)
 
 
 def _words(text):
@@ -41,18 +45,18 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
     total = sum(counts)
     first = speeches[0].casefold() if speeches else ""
     full = " ".join(speeches).casefold()
-    lower_target, upper_target = ((95, 155) if format_name == "shorts"
+    lower_target, upper_target = ((96, 152) if format_name == "shorts"
                                   else (900, 1800))
     issues = []
     if not speeches:
         issues.append("add_narration")
-    if counts and counts[0] < (12 if format_name == "shorts" else 25):
+    if counts and counts[0] < (20 if format_name == "shorts" else 25):
         issues.append("open_with_a_specific_disruption_or_question")
     if total < lower_target:
         issues.append("add_story_content_not_filler")
     if total > upper_target:
         issues.append("tighten_or_split_for_breathing_room")
-    if len(beats) < (6 if format_name == "shorts" else 10):
+    if len(beats) < (4 if format_name == "shorts" else 10):
         issues.append("expand_into_more_visual_story_turns")
     if not any(cue in first for cue in _HOOK_CUES):
         issues.append("make_the_first_line_create_an_open_loop")
@@ -82,3 +86,21 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
         "issues": issues,
         "approval": False,
     }
+
+ 
+def validate_generated_story(beats, provider="ASTRA"):
+    """Enforce a fuller but still tight four-scene short-story script."""
+    if not isinstance(beats, list) or len(beats) != 4:
+        raise ValueError(provider + " requires exactly four cinematic beats")
+    counts = [len(_words(beat.get("speech") or ""))
+              for beat in beats if isinstance(beat, dict)]
+    if len(counts) != 4:
+        raise ValueError(provider + " returned an invalid story beat")
+    if any(count < 24 or count > 38 for count in counts):
+        raise ValueError(provider + " narration must be 24-38 words per beat")
+    total = sum(counts)
+    if not 96 <= total <= 152:
+        raise ValueError(provider + " narration must total 96-152 words")
+    return {"word_count": total, "beat_word_counts": counts,
+            "estimated_seconds_at_150_wpm": round(total / 150 * 60),
+            "approval": False}
