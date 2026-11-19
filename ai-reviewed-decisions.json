@@ -1009,15 +1009,6 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-b5d45ee720bdf5cd7a05",
-      "story_sha256": "8e55d6f938c9e9f426f14cb6e807525a3b199ecb318ba425507c5910b4abb720",
-      "decision": "approve",
-      "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original, coherent, and meets all safety and policy guidelines.; It does not duplicate the exact premises, characters, settings, or resolutions of the provided comparison history.",
-      "reviewed_at": "2026-11-18T20:30:04.965663+00:00",
-      "review_model": "gemini-3.5-flash-lite"
-    },
-    {
       "content_id": "rayvan-gemini-006542d3ced82f266832",
       "story_sha256": "2cf70c952be39ef799f00a62211b30b43dd86cf263e2683a424a94306fe9af4d",
       "decision": "approve",
@@ -1027,12 +1018,12 @@
       "review_model": "gemini-3.5-flash-lite"
     },
     {
-      "content_id": "rayvan-gemini-c3141300849ee1e32890",
-      "story_sha256": "f9bd674e572311dbadc5c6ca66604778e3de3a3c61fffb1f27348654d880745a",
+      "content_id": "rayvan-gemini-113fbea6d097ad228611",
+      "story_sha256": "2899eba2a83a19afff05981f114b111f174bba97a58f45f6e3ea14e70abde72e",
       "decision": "approve",
       "reviewer": "Independent Gemini editorial reviewer: gemini-3.5-flash-lite",
-      "review_notes": "The story is original, coherent, and meets all safety, copyright, and platform standards.; The plot structure and characters are distinct from the provided comparison examples.; The content is suitable for all audiences and contains no policy risks.",
-      "reviewed_at": "2026-11-18T20:30:07.634947+00:00",
+      "review_notes": "The story is coherent, original, and features appropriate audience suitability with no safety or policy risks.; The causal mechanism and character choices are clear, logical, and distinct from the provided comparison examples.; Format strictly adheres to the requested JSON structure.",
+      "reviewed_at": "2026-11-19T07:22:24.786649+00:00",
       "review_model": "gemini-3.5-flash-lite"
     }
   ]

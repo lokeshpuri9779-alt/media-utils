@@ -8411,85 +8411,6 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-b5d45ee720bdf5cd7a05",
-      "title": "Pip and Squeak's Garden Clue Dilemma",
-      "hook": "The Conflicting Clues",
-      "question": "Why do conflicting footprint clues confuse the berry patch?",
-      "answer": "A squirrel tries to guide the rabbit toward a hidden treat while covering its own tracks with leaves.",
-      "source": "",
-      "keywords": [
-        "original fiction",
-        "short story"
-      ],
-      "story_beats": [
-        {
-          "headline": "The Conflicting Clues",
-          "speech": "Look at these strange flower petals pointing one way while paw prints lead right toward the garden wall.",
-          "visual": "rabbit",
-          "story_environment": "garden",
-          "label": "discovery",
-          "story_beat": "reveal",
-          "visual_prompt": "A rabbit looking confused next to a flower in the garden, pointing at a mysterious set of tracks.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "The Hidden Direction",
-          "speech": "I placed those fallen petals here to keep the sweet berries all to myself before my friend arrived.",
-          "visual": "squirrel",
-          "story_environment": "garden",
-          "label": "secret",
-          "story_beat": "build",
-          "visual_prompt": "A squirrel holding a flower in the garden while nervously looking back at a pile of scattered leaves.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Clearing the Path",
-          "speech": "It is much better to sweep away this confusing deception and share the journey across the sunny lawn.",
-          "visual": "squirrel",
-          "story_environment": "garden",
-          "label": "change",
-          "story_beat": "twist",
-          "visual_prompt": "A squirrel using its paws to brush away a misleading line of leaves in the garden.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        },
-        {
-          "headline": "Shared Reward",
-          "speech": "Now that every misleading sign is gone, we can both enjoy these delicious treats side by side.",
-          "visual": "rabbit",
-          "story_environment": "garden",
-          "label": "harmony",
-          "story_beat": "payoff",
-          "visual_prompt": "A rabbit smiling happily next to a fresh flower and a bright red berry in the garden.",
-          "sub": "AN ORIGINAL RAYVAN STORY",
-          "duration": 2.1
-        }
-      ],
-      "central_conflict": "A rabbit and a squirrel find contradictory flower petals and paw prints leading to two different sides of the garden.",
-      "decisive_choice": "The squirrel chooses to brush away the misleading leaf trail and share the true path with the rabbit.",
-      "resolution": "Both animals peacefully discover the ripe berry patch together without confusion.",
-      "visual_bible": {
-        "style": "Bright storybook illustration style with warm lighting and clear textures",
-        "characters": {
-          "rabbit": "A soft brown rabbit with long floppy ears and a gentle expression",
-          "squirrel": "A nimble gray squirrel with a bushy tail and bright curious eyes"
-        },
-        "locations": {
-          "garden": "A lush green backyard garden filled with blooming flowers and soft soil"
-        },
-        "objects": {
-          "flower": "A vibrant red garden blossom with large petals",
-          "berry": "A plump ripe red berry resting on green leaves"
-        }
-      },
-      "plot_fingerprint": "b91e7e7fffb31e516f468045075106e5b682bc65919e01db346fe4dd1beb6868"
-    },
-    {
-      "genre": "fiction",
-      "kind": "authored_causal_story",
-      "production_ready": true,
       "content_id": "rayvan-gemini-006542d3ced82f266832",
       "title": "The Snowfield Tome Riddle",
       "hook": "Conflicting Frost Patterns",
@@ -8568,11 +8489,11 @@
       "genre": "fiction",
       "kind": "authored_causal_story",
       "production_ready": true,
-      "content_id": "rayvan-gemini-c3141300849ee1e32890",
-      "title": "The Owl and the Rabbit's Beacon Pact",
-      "hook": "A Cluttered Ledge",
-      "question": "How can two animals establish a fair signal rotation without obstructing each other?",
-      "answer": "By agreeing to take turns placing the lantern on the ledge, they ensure the light remains visible throughout the night.",
+      "content_id": "rayvan-gemini-113fbea6d097ad228611",
+      "title": "Sammy and Pip's Railway Track Key Exchange",
+      "hook": "Evaluating the Arrival Schedule",
+      "question": "Which incoming railway carriage should receive the sole brass signal key to maintain fair dispatch order?",
+      "answer": "Exchanging the key based on punctual arrival time ensures fair and orderly railway traffic flow.",
       "source": "",
       "keywords": [
         "original fiction",
@@ -8580,68 +8501,69 @@
       ],
       "story_beats": [
         {
-          "headline": "A Cluttered Ledge",
-          "speech": "The lighthouse ledge is far too small for both of us to set our lanterns at the exact same moment today.",
-          "visual": "owl",
-          "story_environment": "lighthouse",
-          "label": "Conflict Reveal",
+          "headline": "Evaluating the Arrival Schedule",
+          "speech": "Both railway carriages arrived nearly together, leaving us with only one brass key to decide their dispatch order.",
+          "visual": "squirrel",
+          "story_environment": "railway",
+          "label": "The Railway Dilemma",
           "story_beat": "reveal",
-          "visual_prompt": "An owl stands on a stone lighthouse balcony looking down at a rabbit trying to balance a lantern on the same narrow ledge.",
+          "visual_prompt": "A squirrel stands on a wooden railway platform holding a brass key near the tracks.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "The Falling Lantern",
-          "speech": "Oh no, my lantern tipped over because we both tried to place our lights on the ledge at the very same time.",
-          "visual": "rabbit",
-          "story_environment": "lighthouse",
-          "label": "Conflict Escalation",
+          "headline": "Inspecting the Station Records",
+          "speech": "We carefully checked the station ledger to verify which carriage arrived first at the bustling railway terminal.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Checking the Log",
           "story_beat": "build",
-          "visual_prompt": "A rabbit watches as a lantern slides off the lighthouse ledge while the owl flutters wings in frustration nearby.",
+          "visual_prompt": "A mouse stands on a wooden railway platform examining a small book resting on a box.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "A Fair Agreement",
-          "speech": "Let us use this yellow flower as a marker; whoever holds the flower takes the ledge, and the other waits patiently.",
-          "visual": "owl",
-          "story_environment": "lighthouse",
-          "label": "The Decisive Choice",
+          "headline": "Passing the Dispatch Key",
+          "speech": "Sammy makes the fair decision to pass the brass key to Pip, ensuring the punctual carriage goes first.",
+          "visual": "squirrel",
+          "story_environment": "railway",
+          "label": "Sharing the Key",
           "story_beat": "mechanism",
-          "visual_prompt": "An owl holds a single yellow flower in its beak and presents it to a rabbit on the lighthouse balcony to establish a turn-taking rule.",
+          "visual_prompt": "A squirrel on a wooden railway platform carefully exchanges a brass key with a waiting mouse.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         },
         {
-          "headline": "Synchronized Signals",
-          "speech": "With our new rule, the light shines steadily from the lighthouse, and we finally have enough space to work together peacefully.",
-          "visual": "rabbit",
-          "story_environment": "lighthouse",
-          "label": "Resolution of Pact",
+          "headline": "Smooth Departure",
+          "speech": "With the correct carriage now unlocked, the railway operations run smoothly and fairly for everyone involved.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Fair Dispatch",
           "story_beat": "payoff",
-          "visual_prompt": "A rabbit carefully places its lantern on the lighthouse ledge while the owl waits nearby, both animals now signaled in harmony.",
+          "visual_prompt": "A mouse holds a brass key near the railway tracks while standing beside a stationary toy box.",
           "sub": "AN ORIGINAL RAYVAN STORY",
           "duration": 2.1
         }
       ],
-      "central_conflict": "A rabbit and an owl both need the same high lighthouse ledge to place their lantern, but they repeatedly knock each other's light over while rushing to claim the spot.",
-      "decisive_choice": "The owl suggests they use a flower as a turn marker, where the owner of the flower holds the ledge while the other rests.",
-      "resolution": "They successfully coordinate their movements, ensuring a steady, alternating signal that guides ships safely to the harbor.",
+      "central_conflict": "A single brass key rests on the railway platform table, and both incoming trains need it immediately to depart on the same single track.",
+      "decisive_choice": "Sammy the squirrel decides to hand the brass key directly to Pip the mouse to prioritize the earlier arrival.",
+      "resolution": "The correct carriage departs smoothly on schedule, establishing a fair scheduling system for both animals.",
       "visual_bible": {
-        "style": "Cinematic 3D animation with soft, natural lighting and detailed fur textures.",
+        "style": "A warm, charming storybook illustration style with detailed textures and natural lighting.",
         "characters": {
-          "owl": "A wise-looking owl with large, bright golden eyes and soft brown and white feathers.",
-          "rabbit": "A curious rabbit with long, twitching ears and thick, soft grey fur."
+          "squirrel": "A fluffy brown squirrel with a bushy tail and curious eyes.",
+          "mouse": "A small brown mouse with large rounded ears and nimble paws."
         },
         "locations": {
-          "lighthouse": "A weathered stone lighthouse balcony overlooking a dark sea with a clear, elevated stone ledge."
+          "railway": "A rustic wooden railway station platform with vintage rails and wooden accents."
         },
         "objects": {
-          "lantern": "A small, glowing metal lantern with a warm, flickering light.",
-          "flower": "A simple, bright yellow daisy with a sturdy green stem."
+          "key": "A polished brass key used for railway switches.",
+          "book": "A small bound ledger recording train arrival times.",
+          "box": "A small wooden storage crate on the platform."
         }
       },
-      "plot_fingerprint": "e67883556a65cbce468a5da2bcef6dc5ac9719552cdc2338b9cbf76943614cff"
+      "plot_fingerprint": "ea72c79ee6797f9f9c00432e9a4d8889b64af5da301161522e50c62ab1fe369c"
     }
   ]
 }
