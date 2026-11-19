@@ -33,6 +33,17 @@ class StoryPacingTests(unittest.TestCase):
         self.assertGreater(result["tension_signals"]["reversal"], 0)
         self.assertFalse(result["approval"])
 
+    def test_mid_sentence_suspense_word_does_not_fake_a_cliffhanger(self):
+        story = {"story_beats": [
+            {"speech": "The fox ran but escaped safely and reached the garden."},
+            {"speech": "The owl searched until sunrise and found an empty box."},
+            {"speech": "The key was strange but it opened the old door."},
+            {"speech": "Inside was a room full of forgotten maps."},
+        ]}
+        result = review_pacing(story)
+        self.assertEqual(result["cliffhanger_beat_count"], 0)
+        self.assertIn("strengthen_scene_to_scene_cliffhangers", result["issues"])
+
     def test_pacing_review_flags_missing_dialogue_and_scene_hooks(self):
         story = {"story_beats": [
             {"speech": "The owl found a strange key in the garden."},
