@@ -73,6 +73,15 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
     if len(set(s.casefold() for s in speeches if s)) < len([s for s in speeches if s]):
         issues.append("remove_repeated_beats")
     dialogue_lines = sum(1 for s in speeches if re.search(r'["“].+?["”]', s))
+    cliffhanger_beats = sum(
+        1 for s in speeches[:-1]
+        if re.search(r'\\?|\\b(?:but|until|before|just as|suddenly|then|only to)\\b',
+                     s.casefold())
+    )
+    if speeches and dialogue_lines == 0:
+        issues.append("add_one_short_line_of_character_dialogue")
+    if len(speeches) >= 3 and cliffhanger_beats < 2:
+        issues.append("strengthen_scene_to_scene_cliffhangers")
     return {
         "status": "needs_story_development" if issues else "pacing_signals_present",
         "format": format_name,
@@ -81,6 +90,7 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
         "beat_count": len(speeches),
         "beat_word_counts": counts,
         "dialogue_beat_count": dialogue_lines,
+        "cliffhanger_beat_count": cliffhanger_beats,
         "tension_signals": tension_counts,
         "recommended_arc": list(_ROLE_ARCS),
         "issues": issues,
