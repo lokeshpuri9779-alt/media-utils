@@ -62,7 +62,7 @@ class DirectedPillowScenesTests(unittest.TestCase):
             "story_environment": "observatory",
         }
         # The specific sea-floor reveal must beat the stale opening location.
-        self.assertEqual(analyze_story_scene(shot)["scene"], "underwater")
+        self.assertEqual(analyze_story_scene({"speech": shot["speech"]})["scene"], "underwater")
         self.assertEqual(story_setting(shot), "underwater")
         image = Image.new("RGB", (1080, 1920), (24, 35, 60))
         self.assertEqual(draw_story_stage(ImageDraw.Draw(image), shot, 0.5), "underwater")
