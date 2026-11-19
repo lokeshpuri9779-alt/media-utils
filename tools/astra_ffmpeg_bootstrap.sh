@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Free, bounded installation of both encoder and probe on GitHub Ubuntu.
+# Ubuntu's ffmpeg dependency set can exceed three minutes on a cold runner.
 # The long-form lane fails closed instead of treating pip success as codec QA.
 set -euo pipefail
 
@@ -13,7 +14,7 @@ if ! have_video_tools; then
   installed=0
   for attempt in 1 2; do
     if timeout 120s sudo apt-get update -qq -o Acquire::Retries=2 &&
-       timeout 180s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y ffmpeg; then
+       timeout 360s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Acquire::Retries=2 ffmpeg; then
       installed=1
       break
     fi
