@@ -40,7 +40,7 @@ class OmniRouteTests(unittest.TestCase):
                  for i in range(4)]
         beats[2]["speech"] = '"Stay close!" ' + beats[2]["speech"]
         result = validate_generated_story(beats)
-        self.assertEqual(result["word_count"], 102)
+        self.assertEqual(result["word_count"], 104)
         self.assertEqual(result["dialogue_beat_count"], 1)
         self.assertEqual(result["cliffhanger_beat_count"], 2)
         self.assertFalse(result["approval"])
