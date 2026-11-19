@@ -1304,7 +1304,7 @@ def asset_manifest(ch, plan):
         # acquisition manifest. Episode-level topic/title is only a fallback
         # for legacy or non-scene-directed content.
         scene_environment=' '.join(str(p.get('story_environment') or ch.get('story_environment') or '').split())
-        scene_action=' '.join(str(p.get('visual_prompt') or p.get('story_human_action') or p.get('speech') or '').split())
+        scene_action=' '.join(str(p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
         scene_parts=[x for x in (scene_environment, scene_action) if x]
         scene_brief=' | '.join(scene_parts)
         scene_query=('Original scene illustration: '+scene_brief) if scene_brief else ''
