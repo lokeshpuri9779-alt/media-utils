@@ -44,6 +44,16 @@ class StoryPacingTests(unittest.TestCase):
         self.assertEqual(result["cliffhanger_beat_count"], 0)
         self.assertIn("strengthen_scene_to_scene_cliffhangers", result["issues"])
 
+    def test_question_mark_at_scene_end_counts_as_hook(self):
+        story = {"story_beats": [
+            {"speech": "The fox heard a bell beneath the bridge. Who was ringing it?"},
+            {"speech": "The owl followed the sound into the reeds. Why did it stop?"},
+            {"speech": "A silver feather floated past the empty nest."},
+            {"speech": "The friends found the bell tied to their own lost map."},
+        ]}
+        result = review_pacing(story)
+        self.assertEqual(result["cliffhanger_beat_count"], 2)
+
     def test_pacing_review_flags_missing_dialogue_and_scene_hooks(self):
         story = {"story_beats": [
             {"speech": "The owl found a strange key in the garden."},
