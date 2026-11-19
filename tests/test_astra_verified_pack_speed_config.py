@@ -8,7 +8,7 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FLAG = "ASTRA_ASSET_PACK_IMMUTABLE: '1'"
+CACHE_EXPORT = "echo 'ASTRA_ASSET_PACK_IMMUTABLE=1' >> \"$GITHUB_ENV\""
 
 
 def step_block(workflow: str, name: str) -> str:
@@ -26,19 +26,21 @@ class VerifiedPackSpeedConfigTests(unittest.TestCase):
         validated = workflow.index("      - name: Validate production asset pack")
         rendering = workflow.index("      - name: Generate, validate, publish, and verify")
         self.assertLess(validated, rendering)
-        self.assertNotIn(FLAG, workflow[:rendering])
-        self.assertIn(FLAG, step_block(workflow, "Generate, validate, publish, and verify"))
+        restore = step_block(workflow, "Validate production asset pack")
+        self.assertNotIn(CACHE_EXPORT, workflow[:validated])
+        self.assertIn(CACHE_EXPORT, restore)
         self.assertIn("ASTRA_ASSET_PACK_AUDIT: '1'", step_block(workflow, "Generate, validate, publish, and verify"))
-        self.assertIn("python -m tools.astra_restore_visual_pack", step_block(workflow, "Validate production asset pack"))
+        self.assertIn("python -m tools.astra_restore_visual_pack", restore)
 
     def test_preload_only_caches_after_verified_restore(self):
         workflow = (ROOT / ".github/workflows/astra-v2-preload.yml").read_text()
         validated = workflow.index("      - name: Verify restored reusable visual pack")
         rendering = workflow.index("      - name: Render and approve next original video")
         self.assertLess(validated, rendering)
-        self.assertNotIn(FLAG, workflow[:rendering])
-        self.assertIn(FLAG, step_block(workflow, "Render and approve next original video"))
-        self.assertIn("python -m tools.astra_restore_visual_pack", step_block(workflow, "Verify restored reusable visual pack"))
+        restore = step_block(workflow, "Verify restored reusable visual pack")
+        self.assertNotIn(CACHE_EXPORT, workflow[:validated])
+        self.assertIn(CACHE_EXPORT, restore)
+        self.assertIn("python -m tools.astra_restore_visual_pack", restore)
 
 
 if __name__ == "__main__":
