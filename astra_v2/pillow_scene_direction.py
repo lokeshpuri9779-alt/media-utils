@@ -41,10 +41,19 @@ SCENE_CUES = (
 
 
 def story_setting(shot):
-    """Choose the explicitly narrated setting, then directed setting."""
+    """Honor the compositor's resolved scene, then infer only if unresolved.
+
+    Studio resolves per-shot locations once with the shared scene taxonomy.
+    Re-scanning the narration here with this module's smaller cue list could
+    override that result (e.g. an observatory mentioned before a city setting),
+    making the visible Pillow stage contradict the selected background asset.
+    """
+    direct = str(shot.get("story_environment") or "").lower().strip()
+    if direct in {key for key, _ in SCENE_CUES}:
+        return direct
     text = " ".join(str(shot.get(k) or "") for k in
                     ("speech", "visual_prompt", "headline")).lower()
-    return _cached_scene_setting(text,str(shot.get("story_environment") or "").lower().strip())
+    return _cached_scene_setting(text, direct)
 
 @lru_cache(maxsize=2048)
 def _cached_scene_setting(text,direct):
