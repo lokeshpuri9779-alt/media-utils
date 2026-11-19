@@ -30,6 +30,23 @@ MYSTERIES = (
     ("the lighthouse beam stopped before reaching the sea", "a jammed brass lens mechanism", "lighthouse"),
     ("fresh snow appeared inside a sealed room", "a cold draft from a forgotten tunnel", "snow"),
 )
+
+# Each mystery is paired only with settings that can physically support its
+# mechanism. Indices refer to SETTINGS above; keep one non-empty entry per mystery.
+MYSTERY_SETTING_INDICES = (
+    (0, 4, 5, 7),       # submerged warning bell: flooded/coastal/waterfront spaces
+    (0, 2, 4, 5),       # bridge lighting and shared electrical infrastructure
+    (0, 3, 5, 6),       # waterwheel, channels and pressure-fed water
+    (1, 2, 4, 7),       # signal tower, beacon and long sight lines
+    (1, 2, 4, 7),       # survey maps, archives and stone records
+    (1, 2, 3, 7),       # fixed sunlight, clockwork and architectural shadows
+    (1, 3, 6, 7),       # rooftop optics and controlled observation
+    (0, 2, 3, 5),       # river channel, sluice and surface current
+    (1, 2, 4, 7),       # museum displays, maintenance access and footprints
+    (0, 3, 5, 6),       # orchard acoustics and irrigation infrastructure
+    (0, 1, 2, 4),       # lighthouse optics and distant beacon visibility
+    (1, 3, 6, 7),       # sealed rooms, tunnels and temperature differences
+)
 # Each mystery has a concrete mechanism that explains its own anomaly and clue.
 # Keep this tuple index-aligned with MYSTERIES; generic causal paths alone cannot
 # establish that a reveal actually solves the opening puzzle.
@@ -455,8 +472,10 @@ def proposal(index):
     # Stagger small, co-prime-ish strides so all dimensions evolve early,
     # not only after thousands of candidates; the full product remains large.
     actor, role = _pick(index, ACTORS, 1)
-    setting, setting_visual = _pick(index, SETTINGS, 7)
     mystery_index = (index // 13) % len(MYSTERIES)
+    compatible_settings = MYSTERY_SETTING_INDICES[mystery_index]
+    setting_index = compatible_settings[(index // 7) % len(compatible_settings)]
+    setting, setting_visual = SETTINGS[setting_index]
     mystery, clue, visual = MYSTERIES[mystery_index]
     mystery_cause = MYSTERY_CAUSES[mystery_index]
     stakes = _pick(index, STAKES, 19)
