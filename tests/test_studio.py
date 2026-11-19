@@ -75,6 +75,23 @@ class StudioTests(unittest.TestCase):
         self.assertEqual(os.environ.get('ORT_DISABLE_TELEMETRY'),'1')
 
 
+    def test_causal_proposal_keeps_scene_narration_in_asset_manifest(self):
+        from astra_v2.autonomous_story_proposals import proposal
+
+        story = proposal(0)
+        plan = studio.make_plan(story)
+        manifest = studio.asset_manifest(story, plan)
+
+        self.assertEqual(len(manifest), len(story["story_beats"]))
+        queries = [item["query"] for item in manifest]
+        self.assertEqual(len(set(queries)), len(queries))
+        for beat, item in zip(story["story_beats"], manifest):
+            self.assertIn(beat["speech"][:28], item["query"])
+            self.assertNotIn(story["title"], item["query"])
+            self.assertLessEqual(len(item["query"]), 240)
+            self.assertEqual(item["rights_rule"], "original-or-explicitly-authorized-only")
+            self.assertTrue(item["no_fake_screenshot"])
+
     def test_procedural_assets_never_get_unrelated_external_overlays(self):
         items=[
             {'strategy':'original-procedural','status':'ready','license':'original-generated-by-astra'},
