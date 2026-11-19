@@ -30,7 +30,24 @@ MYSTERIES = (
     ("the lighthouse beam stopped before reaching the sea", "a jammed brass lens mechanism", "lighthouse"),
     ("fresh snow appeared inside a sealed room", "a cold draft from a forgotten tunnel", "snow"),
 )
-STAKES = (
+# Each mystery has a concrete mechanism that explains its own anomaly and clue.
+# Keep this tuple index-aligned with MYSTERIES; generic causal paths alone cannot
+# establish that a reveal actually solves the opening puzzle.
+MYSTERY_CAUSES = (
+    "the bell hung from a submerged warning cable, and a passing current made its hollow housing ring",
+    "a shared relay cycled through different delays, so each light followed its own wiring path",
+    "a pressure-fed pipe carried warmer reservoir water uphill through a timed release valve",
+    "the tower's rotating mirror reflected a distant beacon beyond the visible horizon",
+    "morning condensation revealed a second layer of shallow survey engravings on the stone tile",
+    "a concealed clockwork shutter redirected a fixed beam, moving its shadow against the sun",
+    "a misaligned rooftop lens scattered light across that patch of sky and washed out the faint stars",
+    "a timed sluice gate briefly reversed the surface current in the narrow channel",
+    "a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints",
+    "wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call",
+    "a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing",
+    "a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent",
+)
+\nSTAKES = (
     "before the evacuation bell sent everyone away",
     "before the last ferry left the harbor",
     "before the mountain pass closed for winter",
