@@ -497,7 +497,7 @@ def proposal(index):
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
         ("reveal", f"{opening} {architecture_opening}.", visual),
-        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. {emotional}.", "book"),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The attempt failed; {emotional}.", "book"),
         ("twist", f"{twist} {mystery_cause}. {architecture_turn}.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
