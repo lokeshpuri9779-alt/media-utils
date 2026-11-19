@@ -88,8 +88,9 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertIn("needed to understand why", beats[0]["speech"])
         self.assertIn("compared", beats[1]["speech"])
         self.assertIn("explained the original mystery", beats[2]["speech"])
-        self.assertIn("cause finally understood", beats[3]["speech"])
+        self.assertIn("cause understood at last", beats[3]["speech"])
         self.assertTrue(all(item["production_ready"] is False for item in [item]))
+        self.assertTrue(all(".." not in beat["speech"] for beat in beats))
 
     def test_legacy_generic_titles_are_backfilled_from_story_content(self):
         from astra_v2.autonomous_story_proposals import _backfill_legacy_titles
