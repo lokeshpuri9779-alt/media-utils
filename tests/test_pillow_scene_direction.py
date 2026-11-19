@@ -54,6 +54,22 @@ class DirectedPillowScenesTests(unittest.TestCase):
             "story_environment": "harbor",
         }), "library")
 
+    def test_sea_door_reveal_resolves_to_underwater_stage(self):
+        from PIL import ImageDraw
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
+        shot = {
+            "speech": "It showed a drawing of a second door beneath the sea, with tomorrow's date written underneath.",
+            "story_environment": "observatory",
+        }
+        # The specific sea-floor reveal must beat the stale opening location.
+        self.assertEqual(analyze_story_scene(shot)["scene"], "underwater")
+        self.assertEqual(story_setting(shot), "underwater")
+        image = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        self.assertEqual(draw_story_stage(ImageDraw.Draw(image), shot, 0.5), "underwater")
+        # The off-centre door frame is a visible, pixel-backed stage feature.
+        self.assertEqual(image.getpixel((730, 900)), (181, 220, 219))
+        self.assertNotEqual(image.getpixel((850, 900)), (24, 35, 60))
+
     def test_authored_location_is_not_replaced_by_handheld_props(self):
         self.assertEqual(story_setting({
             "speech":"The fox carried a book and a flower through the village.",
