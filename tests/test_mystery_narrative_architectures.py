@@ -9,6 +9,7 @@ class NarrativeArchitecturesTests(unittest.TestCase):
         for index in range(320):
             story = proposal(index)
             narration = " ".join(beat["speech"] for beat in story["story_beats"])
+            self.assertNotIn("..", narration)
             for number, (complication, reversal, payoff) in enumerate(PRESSURE_ARCS):
                 if complication in narration:
                     seen.add(number)
