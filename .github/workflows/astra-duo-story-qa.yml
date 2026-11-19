@@ -92,6 +92,24 @@ jobs:
         run: |
           python -m unittest discover -s tests -p 'test_broken_bridge_video_evidence.py' -v
           python -m tools.verify_broken_bridge_mp4 duo-preview/duo-short.mp4 --output duo-preview/broken-bridge-pixel-evidence.json
+      - name: Render explicit underwater sea-door stage proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw
+          from astra_v2.pillow_scene_direction import draw_story_stage
+          shot = {
+              'speech': "It showed a drawing of a second door beneath the sea, with tomorrow's date written underneath.",
+              'story_environment': 'observatory',
+              'story_visual_seed': 'episode-4-second-door-beneath-the-sea',
+          }
+          image = Image.new('RGB', (1080, 1920), (24, 35, 60))
+          resolved = draw_story_stage(ImageDraw.Draw(image), shot, 0.5)
+          assert resolved == 'underwater', resolved
+          Path('preview').mkdir(exist_ok=True)
+          image.save('preview/underwater-sea-door-stage.png')
+          print('ASTRA_UNDERWATER_STAGE_PREVIEW_OK', resolved)
+          PY
       - name: Render all 80 authored story beats as storyboard contact sheet
         run: python -m tools.editorial_oct2026_preview
       - uses: actions/upload-artifact@v4
@@ -101,6 +119,7 @@ jobs:
           path: |
             duo-preview/
             preview/editorial-oct2026-scenes.png
+            preview/underwater-sea-door-stage.png
             preview/editorial-oct2026-qa.json
           if-no-files-found: warn
           retention-days: 7
