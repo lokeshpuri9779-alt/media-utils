@@ -455,7 +455,9 @@ def proposal(index):
     # not only after thousands of candidates; the full product remains large.
     actor, role = _pick(index, ACTORS, 1)
     setting, setting_visual = _pick(index, SETTINGS, 7)
-    mystery, clue, visual = _pick(index, MYSTERIES, 13)
+    mystery_index = (index // 13) % len(MYSTERIES)
+    mystery, clue, visual = MYSTERIES[mystery_index]
+    mystery_cause = MYSTERY_CAUSES[mystery_index]
     stakes = _pick(index, STAKES, 19)
     discovery = _pick(index, DISCOVERIES, 23)
     resolution = _pick(index, RESOLUTIONS, 37)
@@ -478,7 +480,8 @@ def proposal(index):
     # every beat remains causally attached to the opening anomaly.
     story_vars = {
         "setting": setting, "actor": actor, "Actor": actor.capitalize(), "role": role,
-        "mystery": mystery, "stakes": stakes, "clue": clue, "discovery": discovery,
+        "mystery": mystery, "mystery_cause": mystery_cause,
+        "stakes": stakes, "clue": clue, "discovery": discovery,
         "arc_complication": arc_complication, "causal_opening": causal_opening,
         "causal_test": causal_test, "method": method, "obstacle": obstacle,
         "causal_reveal": causal_reveal, "arc_reversal": arc_reversal,
@@ -492,7 +495,7 @@ def proposal(index):
     beats = (
         ("reveal", f"{opening} {architecture_opening}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
         ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{twist} {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
+        ("twist", f"{twist} The anomaly itself had a physical cause: {mystery_cause}. {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Normalize punctuation at beat boundaries so concatenated authored clauses
