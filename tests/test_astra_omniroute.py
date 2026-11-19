@@ -33,6 +33,12 @@ class OmniRouteTests(unittest.TestCase):
     def test_prompts_require_dialogue_cliffhangers_and_grounded_sound(self):
         self.assertIn("brief, natural spoken line", omniroute.PROMPT)
         self.assertIn("stable personality trait", omniroute.PROMPT)
+        self.assertIn("one immediate want", omniroute.PROMPT)
+        self.assertIn("one pressure-triggered flaw", omniroute.PROMPT)
+        self.assertIn("recognizable decision-making habit", omniroute.PROMPT)
+        self.assertIn("what they avoid saying", omniroute.PROMPT)
+        self.assertIn("generic inspirational lines and repeated catchphrases", omniroute.PROMPT)
+        self.assertIn("change the relationship, reveal a motive or force a choice", omniroute.PROMPT)
         self.assertIn("distinct speech signature", omniroute.PROMPT)
         self.assertIn("distinguishable without dialogue tags", omniroute.PROMPT)
         self.assertIn("force a choice", omniroute.PROMPT)
