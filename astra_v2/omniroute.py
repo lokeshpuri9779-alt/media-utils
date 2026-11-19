@@ -25,6 +25,9 @@ PROMPT = (
     "and clear stakes; no greeting or setup preamble. Beat two must show a "
     "specific attempt, obstacle and consequence. Beat three must reveal a fair "
     "but surprising clue or reversal that changes the viewer's understanding. "
+    "The consequence of each beat must directly cause the next beat's action; " +
+    "seed the twist clue before revealing it, and make the final payoff use " +
+    "that established clue rather than coincidence or a new object. " +
     "Beat four must resolve the opening question with a decisive action and "
     "an emotional final image. Keep momentum high: short punchy sentences, "
     "cause-and-effect, escalating consequences and vivid sensory detail. "
