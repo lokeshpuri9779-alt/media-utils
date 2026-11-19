@@ -19,6 +19,15 @@ class CaptionAudioQATests(unittest.TestCase):
         self.assertTrue(all(len(x.split())<=7 for x in chunks))
         self.assertTrue(all(len(x)<=42 for x in chunks))
 
+    def test_caption_chunks_do_not_end_on_auxiliary_verb(self):
+        text="The radio warned every light in the city would go out before dawn."
+        chunks=segment_for_captions(text,max_words=7,max_chars=42)
+        self.assertEqual(chunks[0],"The radio warned every light")
+        self.assertEqual(chunks[1],"in the city would go out")
+        self.assertEqual(chunks[2],"before dawn.")
+        self.assertTrue(all(len(chunk.split())<=7 for chunk in chunks))
+        self.assertTrue(all(len(chunk)<=42 for chunk in chunks))
+
     def test_caption_chunks_keep_natural_clause_punctuation(self):
         text="The fox ran toward the river bridge, but the rabbit spotted a broken plank and waved a warning."
         chunks=segment_for_captions(text,max_words=7,max_chars=42)
