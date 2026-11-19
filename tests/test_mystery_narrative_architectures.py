@@ -1,5 +1,5 @@
 import unittest
-from astra_v2.autonomous_story_proposals import PRESSURE_ARCS, proposal
+from astra_v2.autonomous_story_proposals import NARRATIVE_ARCHITECTURES, PRESSURE_ARCS, proposal
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -18,6 +18,20 @@ class NarrativeArchitecturesTests(unittest.TestCase):
             self.assertFalse(story["production_ready"])
             self.assertEqual(publication_rejection(story), "unreviewed_causal_draft")
         self.assertEqual(seen, set(range(len(PRESSURE_ARCS))))
+
+    def test_all_narrative_architectures_shape_the_four_beats(self):
+        seen = set()
+        for index in range(320):
+            story = proposal(index)
+            narration = " ".join(beat["speech"] for beat in story["story_beats"])
+            self.assertEqual(len(story["story_beats"]), 4)
+            for number, architecture in enumerate(NARRATIVE_ARCHITECTURES):
+                if architecture[0] in narration:
+                    seen.add(number)
+                    for stage in architecture:
+                        self.assertIn(stage, narration)
+            self.assertFalse(story["production_ready"])
+        self.assertEqual(seen, set(range(len(NARRATIVE_ARCHITECTURES))))
 
 
 if __name__ == "__main__":
