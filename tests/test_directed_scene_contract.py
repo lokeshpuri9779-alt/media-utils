@@ -350,7 +350,7 @@ class DirectedSceneContractTests(unittest.TestCase):
                      title="The Stationmaster and the Missing Midnight Courier",
                      story_beats=[dict(headline="Discovery", visual="signal",
                                        speech="The manifest is gone from my desk.")])
-        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"}), \
+        with patch.dict(os.environ, {}, clear=True), \
              patch.object(studio_renderer, "creative_quality_gate", return_value={}), \
              patch.object(studio_renderer, "voice_plan") as voice:
             with self.assertRaisesRegex(CreativeReject, "requires verified scene artwork"):
