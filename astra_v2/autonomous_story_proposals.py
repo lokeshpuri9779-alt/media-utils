@@ -305,6 +305,42 @@ NARRATIVE_ARCHITECTURES = (
 
 # Narrative pressure variants deepen one investigation without importing a
 # second premise. Each tuple supplies a complication, reversal and payoff lens.
+STORY_OPENINGS = (
+    "At {setting}, {actor} faced one urgent puzzle: {mystery}; {stakes}.",
+    "The {role} could not ignore {mystery} in {setting}; {stakes}.",
+    "{Actor} found the same impossible sign again in {setting}: {mystery}; {stakes}.",
+    "A routine check in {setting} became urgent when {mystery}; {stakes}.",
+    "Nobody in {setting} could explain {mystery}, so {actor} began with the physical evidence; {stakes}.",
+    "Before anyone blamed a neighbor, {actor} had to explain {mystery} in {setting}; {stakes}.",
+)
+
+INVESTIGATION_FRAMES = (
+    "{Actor} set {clue} beside {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "The investigation began with {discovery}, then checked it against {clue}. {arc_complication} {causal_opening}; {causal_test}.",
+    "Rather than guess, {actor} compared {clue} with {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "{Actor} treated {discovery} as a lead, not proof, and tested it against {clue}. {arc_complication} {causal_opening}; {causal_test}.",
+    "Two pieces mattered: {clue} and {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "{Actor} mapped {clue} against {discovery} before choosing a test. {arc_complication} {causal_opening}; {causal_test}.",
+)
+
+TWIST_FRAMES = (
+    "{causal_reveal}. {arc_reversal}.",
+    "Then the evidence changed the case: {causal_reveal}. {arc_reversal}.",
+    "The failed test was the missing link. {causal_reveal}. {arc_reversal}.",
+    "One detail overturned the first theory: {causal_reveal}. {arc_reversal}.",
+    "The clue had not lied; the interpretation had. {causal_reveal}. {arc_reversal}.",
+    "When the team replayed the evidence, {causal_reveal}. {arc_reversal}.",
+)
+
+PAYOFF_FRAMES = (
+    "{Actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "With the danger understood, {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "The final test gave {actor} a choice; {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "{Actor} turned the discovery into action and {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "Instead of hiding the mistake, {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "The team left proof behind: {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+)
+
 PRESSURE_ARCS = (
     ("A second witness challenged the first account, so the team had to test both versions.",
      "The conflicting accounts described different moments, not different events.",
@@ -364,11 +400,24 @@ def proposal(index):
     # One mystery, one evidence trail, one resolution. Pressure arcs vary the
     # conflict (deadline, disputed evidence, costly shortcut, false lead) while
     # every beat remains causally attached to the opening anomaly.
+    story_vars = {
+        "setting": setting, "actor": actor, "Actor": actor.capitalize(), "role": role,
+        "mystery": mystery, "stakes": stakes, "clue": clue, "discovery": discovery,
+        "arc_complication": arc_complication, "causal_opening": causal_opening,
+        "causal_test": causal_test, "method": method, "obstacle": obstacle,
+        "causal_reveal": causal_reveal, "arc_reversal": arc_reversal,
+        "resolution": resolution, "causal_aftermath": causal_aftermath.rstrip(".!?"),
+        "arc_payoff": arc_payoff.rstrip(".!?"), "consequence": consequence.rstrip(".!?"),
+    }
+    opening = _pick(index, STORY_OPENINGS, 29).format(**story_vars)
+    investigation = _pick(index, INVESTIGATION_FRAMES, 31).format(**story_vars)
+    twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
+    payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}; {stakes}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
-        ("build", f"{actor.capitalize()} compared {clue} alongside {discovery}. {arc_complication} {causal_opening}; {causal_test}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{causal_reveal}. {arc_reversal}. The new explanation accounted for the original clue and the failed test. This explained the original mystery; the team repeated the check before acting.", setting_visual),
-        ("payoff", f"With the cause understood at last, {actor} {resolution}. {causal_aftermath.rstrip('.!?')}. {arc_payoff.rstrip('.!?')}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"{opening} The first explanation sounded convincing, but the physical clue did not fit.", visual),
+        ("build", f"{investigation} {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
+        ("twist", f"{twist} The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
+        ("payoff", f"{payoff} {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
