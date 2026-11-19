@@ -38,12 +38,12 @@ def build_backlog_report(archive, history, retry_state=None, *, now,
     if not isinstance(entries, list):
         raise ValueError("invalid_deferred_archive_entries")
 
+    # Prepare the bounded review batch once, then test eligibility per source
+    # independently so the queue's batch limit is not mistaken for cooldown.
     queue, next_state = prepare_retry_batch(
         archive, retry_state, now=now, cooldown_seconds=cooldown_seconds,
         max_attempts=max_attempts, limit=limit,
     )
-    retry_eligible = {row["source_sha256"]: row for row in queue["entries"]}
-
     ranked = []
     totals = Counter()
     for index, item in enumerate(entries):
@@ -51,7 +51,11 @@ def build_backlog_report(archive, history, retry_state=None, *, now,
         single["entries"] = [item]
         diagnostic = triage_archive(single, history, checker=checker)
         digest = item["source_sha256"]
-        is_eligible = digest in retry_eligible
+        one_queue, _ = prepare_retry_batch(
+            single, retry_state, now=now, cooldown_seconds=cooldown_seconds,
+            max_attempts=max_attempts, limit=1,
+        )
+        is_eligible = one_queue["selected_count"] == 1
         categories = diagnostic["issue_category_counts"]
         local_status = (
             "clear" if diagnostic["local_checks_clear"] == 1 else
@@ -66,10 +70,9 @@ def build_backlog_report(archive, history, retry_state=None, *, now,
             "source_run_id": item.get("source_run_id", ""),
             "deferred_reason": item["deferred_reason"],
             "retry_eligible": is_eligible,
-            "attempts_so_far": (
-                retry_eligible[digest]["attempts_so_far"] if is_eligible
-                else next((x["attempts"] for x in next_state["entries"]
-                           if x["source_sha256"] == digest), 0)
+            "attempts_so_far": next(
+                (x["attempts"] for x in next_state["entries"]
+                 if x["source_sha256"] == digest), 0
             ),
             "local_check_status": local_status,
             "blocker_categories": blockers,
@@ -97,7 +100,7 @@ def build_backlog_report(archive, history, retry_state=None, *, now,
         "status": REPORT_STATUS,
         "generated_at": now,
         "source_count": len(entries),
-        "retry_eligible_count": len(retry_eligible),
+        "retry_eligible_count": sum(row["retry_eligible"] for row in ranked),
         "local_checks_clear_count": totals["clear"],
         "locally_blocked_count": totals["blocked"],
         "local_check_unavailable_count": totals["unavailable"],
