@@ -15,9 +15,15 @@ class CodecBootstrapTests(unittest.TestCase):
         source=(ROOT/"tools/astra_ffmpeg_bootstrap.sh").read_text()
         self.assertIn("command -v ffmpeg",source)
         self.assertIn("command -v ffprobe",source)
-        self.assertIn("timeout 360s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends",source)
+        self.assertRegex(source, r"apt-get install -y .*ffmpeg")
         self.assertIn("have_video_tools ||",source)
         self.assertIn("exit 1",source)
+
+    def test_bootstrap_avoids_slow_hosted_runner_regional_mirror(self):
+        source=(ROOT/"tools/astra_ffmpeg_bootstrap.sh").read_text()
+        self.assertIn("/etc/apt/apt-mirrors.txt",source)
+        self.assertIn("archive.ubuntu.com/ubuntu",source)
+        self.assertIn("us-east-2.ec2.archive.ubuntu.com/ubuntu",source)
 
     def test_longform_uses_codec_bootstrap_after_python_packages(self):
         workflow=(ROOT/".github/workflows/astra-v2-longform.yml").read_text()
