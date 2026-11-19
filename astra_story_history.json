@@ -12242,6 +12242,59 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-006542d3ced82f266832",
+      "video_id": "0Aj25jJtICY",
+      "confirmed_at": "2026-11-19T13:59:34.100675+00:00",
+      "title": "The Snowfield Tome Riddle",
+      "plot_fingerprint": "a9d5fb8d9c9e6dcde9eefe3b7f0d72fce86149b1316ca4295663d1bac40098e7",
+      "story_beats": [
+        {
+          "headline": "Conflicting Frost Patterns",
+          "speech": "Look closely at the frost lines on the cover. They seem to point in opposite directions across the snowfield.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "A red fox stands on a cold snowfield looking down at a heavy book resting on the white drifts, tilting its head in confusion.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Checking the Second Observation",
+          "speech": "Wait, let us check the inner binding before we turn any pages. My earlier reading might have been mistaken.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "build",
+          "story_beat": "build",
+          "visual_prompt": "A tiny grey mouse stands beside the same heavy book on the snowfield, peering closely at the spine to inspect the binding.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Aligning the Crystal Arrow",
+          "speech": "Let us set the book flat on the clean snow so we can both trace the true frost arrow together safely.",
+          "visual": "fox",
+          "story_environment": "snowfield",
+          "label": "mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "A red fox uses its paw to gently slide the open book flat upon the snowfield, aligning it with a natural frost crystal.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reading Side by Side",
+          "speech": "Now the pages are clear and correct for us both to enjoy the winter stories without any further dispute.",
+          "visual": "mouse",
+          "story_environment": "snowfield",
+          "label": "payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "A tiny grey mouse sits comfortably next to the red fox on the snowfield, reading the open book together in the gentle light.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
