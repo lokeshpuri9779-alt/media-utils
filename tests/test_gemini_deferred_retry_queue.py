@@ -36,13 +36,16 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
         archive = make_archive()
         original = empty_retry_state()
         snapshot = copy.deepcopy(original)
-        queue, state = prepare_retry_batch(archive, original, now=1000)
+        queue, state = prepare_retry_batch(archive, original, now=1000,
+                                          cooldown_seconds=0)
         self.assertEqual(queue["status"], QUEUE_STATUS)
         self.assertEqual(queue["selected_count"], 3)
         self.assertEqual([row["attempts_so_far"] for row in queue["entries"]],
                          [0, 0, 0])
         self.assertEqual([row["attempts"] for row in state["entries"]],
                          [0, 0, 0])
+        self.assertEqual([row["first_seen_at"] for row in state["entries"]],
+                         [1000, 1000, 1000])
         self.assertEqual(original, snapshot)
         self.assertFalse(queue["provider_requests_enabled"])
         self.assertFalse(queue["editorial_approval"])
@@ -51,9 +54,18 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
         self.assertFalse(state["provider_requests_enabled"])
         self.assertFalse(state["publication_approval"])
 
-    def test_cooldown_and_two_attempt_ceiling_are_enforced(self):
+    def test_initial_retry_waits_six_hours_from_first_seen(self):
         archive = make_archive(1)
         queue, state = prepare_retry_batch(archive, now=1000)
+        self.assertEqual(queue["selected_count"], 0)
+        self.assertEqual(state["entries"][0]["attempts"], 0)
+        eligible, _ = prepare_retry_batch(
+            archive, state, now=1000 + DEFAULT_COOLDOWN_SECONDS)
+        self.assertEqual(eligible["selected_count"], 1)
+
+    def test_cooldown_and_two_attempt_ceiling_are_enforced(self):
+        archive = make_archive(1)
+        queue, state = prepare_retry_batch(archive, now=1000, cooldown_seconds=0)
         digest = queue["entries"][0]["source_sha256"]
 
         # This helper records a request already dispatched by a future adapter;
@@ -80,7 +92,7 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
 
     def test_attempt_recording_rejects_early_duplicate_unknown_and_over_limit(self):
         archive = make_archive(1)
-        queue, state = prepare_retry_batch(archive, now=200)
+        queue, state = prepare_retry_batch(archive, now=200, cooldown_seconds=0)
         digest = queue["entries"][0]["source_sha256"]
         with self.assertRaisesRegex(ValueError, "invalid_attempt_source_hashes"):
             record_attempts_after_provider_call(
@@ -101,7 +113,7 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
 
     def test_batch_limit_and_hard_safety_ceilings(self):
         archive = make_archive(3)
-        queue, _ = prepare_retry_batch(archive, now=10, limit=2)
+        queue, _ = prepare_retry_batch(archive, now=10, limit=2, cooldown_seconds=0)
         self.assertEqual(queue["selected_count"], 2)
         with self.assertRaisesRegex(ValueError, "limit_exceeds"):
             prepare_retry_batch(archive, now=10, limit=11)
@@ -125,7 +137,7 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
 
     def test_state_identity_and_metadata_fail_closed(self):
         archive = make_archive(1)
-        queue, state = prepare_retry_batch(archive, now=10)
+        queue, state = prepare_retry_batch(archive, now=10, cooldown_seconds=0)
         digest = queue["entries"][0]["source_sha256"]
         changed = copy.deepcopy(state)
         changed["entries"][0]["content_id"] = "wrong-id"
@@ -151,7 +163,7 @@ class GeminiDeferredRetryQueueTests(unittest.TestCase):
 
     def test_future_last_attempt_does_not_become_eligible(self):
         archive = make_archive(1)
-        queue, state = prepare_retry_batch(archive, now=100)
+        queue, state = prepare_retry_batch(archive, now=100, cooldown_seconds=0)
         digest = queue["entries"][0]["source_sha256"]
         state = record_attempts_after_provider_call(
             state, [digest], attempted_at=500)
