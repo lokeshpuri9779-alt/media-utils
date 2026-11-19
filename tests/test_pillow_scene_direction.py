@@ -34,6 +34,19 @@ class DirectedPillowScenesTests(unittest.TestCase):
                     Image.new("RGB",(rect[2]-rect[0],rect[3]-rect[1]),(24,35,60))).getbbox())
         self.assertEqual(len(set(sigs)),len(sigs))
 
+    def test_resolved_studio_environment_overrides_conflicting_narration_cues(self):
+        # Studio's shared scene resolver has already selected the city. The
+        # narration also mentions the observatory, but that earlier word must
+        # not make the Pillow foreground stage contradict the city backdrop.
+        shot = {
+            "speech": "The observatory door opened onto the abandoned city.",
+            "story_environment": "city",
+        }
+        self.assertEqual(story_setting(shot), "city")
+        from PIL import ImageDraw
+        im = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        self.assertEqual(draw_story_stage(ImageDraw.Draw(im), shot, 0.5), "city")
+
     def test_authored_location_is_not_replaced_by_handheld_props(self):
         self.assertEqual(story_setting({
             "speech":"The fox carried a book and a flower through the village.",
