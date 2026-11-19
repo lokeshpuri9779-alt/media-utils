@@ -61,40 +61,74 @@ if __name__ == "__main__":
 
 
 def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> list[str]:
-    """Small production-safe caption bridge.
+    """Split narration at readable phrase boundaries under strict display limits.
 
-    VideoLingo remains isolated upstream; this bounded bridge mirrors Astra's
-    validated segmentation contract without importing its model/API-heavy runtime.
+    Prefer punctuation and clause boundaries; avoid stranded conjunctions,
+    articles and prepositions at either edge. This is deterministic and local,
+    with no model/API dependency.
     """
     import re
+
     clean = " ".join(str(text or "").split())
     if not clean:
         return []
-    sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean) if x.strip()]
-    chunks = []
+    if max_words < 2 or max_chars < 12:
+        raise ValueError("Caption limits are too small for readable phrases")
+
+    weak_end = {"a", "an", "and", "as", "at", "but", "by", "for", "from",
+                "if", "in", "into", "of", "on", "or", "the", "to", "with"}
+    weak_start = {"and", "but", "or", "so", "the", "a", "an", "of", "to"}
+    sentences = [x.strip() for x in re.split(r"(?<=[.!?])\\s+", clean) if x.strip()]
+    chunks: list[str] = []
+
     for sentence in sentences:
         words = sentence.split()
-        buf = []
-        for word in words:
-            candidate = " ".join(buf + [word])
-            if buf and (len(buf) >= max_words or len(candidate) > max_chars):
-                # Avoid leaving a caption hanging on an auxiliary verb ("would go")
-                # or a weak function word. Move that short phrase to the next cue.
-                auxiliaries = {"am", "are", "be", "been", "being", "can", "could", "did", "do", "does", "had", "has", "have", "is", "may", "might", "must", "shall", "should", "was", "were", "will", "would"}
-                weak_endings = auxiliaries | {"a", "an", "and", "as", "at", "because", "but", "by", "for", "from", "if", "in", "into", "of", "on", "or", "the", "then", "to", "with"}
-                cut = len(buf)
-                if len(buf) >= 2 and buf[-2].lower().strip(",;:") in auxiliaries:
-                    cut = len(buf) - 2
-                elif buf[-1].lower().strip(",;:") in weak_endings and len(buf) > 1:
-                    cut = len(buf) - 1
-                if cut < 2:
-                    cut = len(buf)
-                chunks.append(" ".join(buf[:cut]))
-                buf = buf[cut:] + [word]
-            else:
-                buf.append(word)
-        if buf:
-            chunks.append(" ".join(buf))
+        while words:
+            if len(words) <= max_words and len(" ".join(words)) <= max_chars:
+                chunks.append(" ".join(words))
+                break
+
+            limit = min(max_words, len(words))
+            while limit > 1 and len(" ".join(words[:limit])) > max_chars:
+                limit -= 1
+            if limit <= 1:
+                # A single unusually long token is kept intact rather than
+                # silently corrupting narration or dropping characters.
+                chunks.append(words.pop(0))
+                continue
+
+            # Score candidate boundaries close to the display limit. A comma,
+            # semicolon or colon is a strong phrase boundary. Prefer a break
+            # before a conjunction to avoid ending on "and"/"but".
+            low = max(2, limit - 3)
+            candidates = []
+            for cut in range(low, limit + 1):
+                left, right = words[:cut], words[cut:]
+                if not right:
+                    continue
+                left_text = " ".join(left)
+                if len(left_text) > max_chars:
+                    continue
+                last = re.sub(r"[^a-z']+$", "", left[-1].lower())
+                first = re.sub(r"^[^a-z']+", "", right[0].lower())
+                score = cut * 2
+                if re.search(r"[,;:]$", left[-1]):
+                    score += 12
+                if first in {"and", "but", "or", "so", "yet"}:
+                    score += 8
+                if last in weak_end:
+                    score -= 16
+                if first in weak_start:
+                    score -= 5
+                # Keep short final fragments from becoming one- or two-word
+                # tails when a slightly earlier split yields better balance.
+                if len(right) <= 2 and cut > 2:
+                    score -= 5
+                candidates.append((score, cut))
+            cut = max(candidates)[1] if candidates else limit
+            chunks.append(" ".join(words[:cut]))
+            words = words[cut:]
+
     return chunks
 
 
