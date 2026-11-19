@@ -303,6 +303,36 @@ NARRATIVE_ARCHITECTURES = (
     ),
 )
 
+# Narrative pressure variants deepen one investigation without importing a
+# second premise. Each tuple supplies a complication, reversal and payoff lens.
+PRESSURE_ARCS = (
+    ("A second witness challenged the first account, so the team had to test both versions.",
+     "The conflicting accounts described different moments, not different events.",
+     "The team recorded the corrected timeline so the disagreement would not recur."),
+    ("A ticking deadline made the obvious shortcut tempting, but the shortcut risked the only clue.",
+     "A small reversible test exposed why the shortcut would have made the damage worse.",
+     "The team kept the safe test procedure for the next emergency."),
+    ("A convincing early clue pointed toward the wrong explanation and sent the team in the wrong direction.",
+     "The clue was genuine, but it had been interpreted without its surrounding evidence.",
+     "The team documented how the false lead was ruled out, not just the final answer."),
+    ("The first attempted fix caused a second warning, raising the stakes instead of ending the problem.",
+     "The second warning was a side effect of the attempted fix, not a new mystery.",
+     "The team added a check for that side effect before using the repair again."),
+    ("The neighbors disagreed about whether the evidence was safe to test in public.",
+     "A contained test answered the question without putting the original clue at risk.",
+     "The team shared the test results so the community could verify the decision."),
+    ("The only useful tool gave a confident result that contradicted what everyone could see.",
+     "An independent measurement revealed the tool's hidden limitation.",
+     "The team required a second method before trusting future critical readings."),
+    ("The protagonist hesitated after an earlier mistake, while the deadline kept closing in.",
+     "A reversible test made it possible to act without repeating the earlier mistake.",
+     "The protagonist showed the neighbors how to check uncertain explanations safely."),
+    ("A missing piece of evidence made the simplest explanation look certain.",
+     "The overlooked detail changed the meaning of the evidence without changing the original event.",
+     "The team preserved the full evidence trail for the next investigation."),
+)
+
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -318,30 +348,27 @@ def proposal(index):
     mystery, clue, visual = _pick(index, MYSTERIES, 13)
     stakes = _pick(index, STAKES, 19)
     discovery = _pick(index, DISCOVERIES, 23)
-    reversal = _pick(index, REVERSALS, 31)
     resolution = _pick(index, RESOLUTIONS, 37)
-    emotional = _pick(index, EMOTIONAL_TURNS, 43)
     method = _pick(index, INVESTIGATION_METHODS, 47)
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
-    plot_problem, plot_action, plot_reveal, plot_outcome = _pick(index, PLOT_ENGINES, 11)
-    arc_setup, arc_decision, arc_turn, arc_aftermath = _pick(index, NARRATIVE_ARCHITECTURES, 5)
+    # Pressure arcs add conflict and reversals to the SAME mystery. They do not
+    # inject a second, unrelated plot engine into the four-beat sequence.
+    pressure = _pick(index, PRESSURE_ARCS, 5)
+    arc_complication, arc_reversal, arc_payoff = pressure
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
-    # Keep one causal premise per candidate. Independent plot/arc templates previously
-    # introduced unrelated incidents (e.g. a bell mystery plus a science fair).
-    # The selected mystery, physical clue, test and repair now drive all four beats.
-    # The chosen plot engine and architecture remain complete causal sequences,
-    # rather than disconnected individual sentences. Preserve their full
-    # problem/action/reveal/outcome progression to maintain novelty.
+    # One mystery, one evidence trail, one resolution. Pressure arcs vary the
+    # conflict (deadline, disputed evidence, costly shortcut, false lead) while
+    # every beat remains causally attached to the opening anomaly.
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}.", visual),
-        ("build", f"{actor.capitalize()} compared {clue} with {discovery}. {causal_opening}. {causal_test}. {plot_action}. {arc_decision}. {method}, but {obstacle}.", "book"),
-        ("twist", f"{causal_reveal}. {plot_reveal}. {arc_turn}. This explained the original mystery. The team checked the evidence again.", setting_visual),
-        ("payoff", f"With the cause understood, {actor} {resolution}. {causal_aftermath}. {plot_outcome}. {arc_aftermath}. {consequence}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"As the {role} in {setting}, {actor} had to discover why {mystery}; {stakes}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
+        ("build", f"{actor.capitalize()} examined {clue} alongside {discovery}. {arc_complication}. {causal_opening}; {causal_test}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
+        ("twist", f"{causal_reveal}. {arc_reversal}. The new explanation accounted for the original clue and the failed test; the team repeated the check before acting.", setting_visual),
+        ("payoff", f"With the cause finally understood, {actor} {resolution}. {causal_aftermath}. {arc_payoff}. {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
