@@ -36,10 +36,23 @@ class OmniRouteTests(unittest.TestCase):
 
     def test_generated_story_length_is_bounded_and_not_thin(self):
         from astra_v2.story_pacing import validate_generated_story
-        beats = [{"speech": " ".join(["word"] * 25)} for _ in range(4)]
+        beats = [{"speech": " ".join(["word"] * 25) + ("?" if i < 2 else ".")}
+                 for i in range(4)]
+        beats[2]["speech"] = '"Stay close!" ' + beats[2]["speech"]
         result = validate_generated_story(beats)
         self.assertEqual(result["word_count"], 100)
+        self.assertEqual(result["dialogue_beat_count"], 1)
+        self.assertEqual(result["cliffhanger_beat_count"], 2)
         self.assertFalse(result["approval"])
+        without_dialogue = [dict(beat) for beat in beats]
+        without_dialogue[2]["speech"] = " ".join(["word"] * 25) + "."
+        with self.assertRaisesRegex(ValueError, "dialogue line"):
+            validate_generated_story(without_dialogue)
+        without_hooks = [dict(beat) for beat in beats]
+        without_hooks[0]["speech"] = " ".join(["word"] * 25) + "."
+        without_hooks[1]["speech"] = " ".join(["word"] * 25) + "."
+        with self.assertRaisesRegex(ValueError, "scene-ending hooks"):
+            validate_generated_story(without_hooks)
         with self.assertRaisesRegex(ValueError, "24-38 words"):
             validate_generated_story([{"speech": "too short"}] * 4)
 
