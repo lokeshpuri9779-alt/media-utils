@@ -23,7 +23,7 @@ class StoryPacingTests(unittest.TestCase):
             "A wet footprint appeared on the dry floor. She heard three knocks from above.",
             "The radio crackled: the missing keeper had warned them never to trust the light.",
             "But the signal was coming from the sea, not the tower. The map showed a second lamp.",
-            "Mira cut the power just before the countdown ended. The real lighthouse answered from the cliff.",
+            "Mira cut the power just before the countdown ended. The real lighthouse answered from the cliff above the dark water.",
         ]
         story = {"story_beats": [{"speech": s} for s in beats]}
         result = review_pacing(story)
