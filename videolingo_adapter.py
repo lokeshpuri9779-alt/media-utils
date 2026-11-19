@@ -78,8 +78,19 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
         for word in words:
             candidate = " ".join(buf + [word])
             if buf and (len(buf) >= max_words or len(candidate) > max_chars):
-                chunks.append(" ".join(buf))
-                buf = [word]
+                # Avoid leaving a caption hanging on an auxiliary verb ("would go")
+                # or a weak function word. Move that short phrase to the next cue.
+                auxiliaries = {"am", "are", "be", "been", "being", "can", "could", "did", "do", "does", "had", "has", "have", "is", "may", "might", "must", "shall", "should", "was", "were", "will", "would"}
+                weak_endings = auxiliaries | {"a", "an", "and", "as", "at", "because", "but", "by", "for", "from", "if", "in", "into", "of", "on", "or", "the", "then", "to", "with"}
+                cut = len(buf)
+                if len(buf) >= 2 and buf[-2].lower().strip(",;:") in auxiliaries:
+                    cut = len(buf) - 2
+                elif buf[-1].lower().strip(",;:") in weak_endings and len(buf) > 1:
+                    cut = len(buf) - 1
+                if cut < 2:
+                    cut = len(buf)
+                chunks.append(" ".join(buf[:cut]))
+                buf = buf[cut:] + [word]
             else:
                 buf.append(word)
         if buf:
