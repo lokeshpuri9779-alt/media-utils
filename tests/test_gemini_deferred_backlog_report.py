@@ -73,6 +73,24 @@ class DeferredBacklogReportTests(unittest.TestCase):
         self.assertNotIn("secret", str(report))
         self.assertNotIn("Private proposal", str(report))
 
+    def test_unavailable_checks_rank_below_known_blockers(self):
+        archive = make_archive()
+        def gate(story, history):
+            if story["content_id"] == "clear":
+                return []
+            if story["content_id"] == "blocked":
+                return ["publication_renderer_incompatible: private detail"]
+            raise RuntimeError("local checker unavailable")
+        report, _ = build_backlog_report(
+            archive, [], now=100, cooldown_seconds=0, checker=gate)
+        self.assertEqual(
+            [row["content_id"] for row in report["ranking"]],
+            ["clear", "blocked", "also-clear"],
+        )
+        self.assertEqual(report["ranking"][1]["local_check_status"], "blocked")
+        self.assertEqual(report["ranking"][2]["local_check_status"], "unavailable")
+        self.assertEqual(report["ranking"][2]["blocker_category_count"], 0)
+
     def test_hash_or_archive_metadata_tampering_fails_closed(self):
         archive = make_archive()
         changed = copy.deepcopy(archive)
