@@ -16,6 +16,7 @@ SCENE_CUES = (
     # Handheld books, pages and curtains are objects, not locations. Never
     # change the whole set to a library just because a character holds a book.
     ("observatory", r"\b(?:observatory|telescope|planetarium|astronomer)\b"),
+    ("city", r"\b(?:city|downtown|skyscrapers?|city streets?)\b"),
     ("railway", r"\b(?:railway|railroad|train station|locomotive|rail tracks?)\b"),
     ("museum", r"\b(?:museum|gallery|exhibit|exhibition)\b"),
     ("workshop", r"\b(?:workshop|factory|forge|repair shop|mechanical room)\b"),
@@ -41,10 +42,24 @@ SCENE_CUES = (
 
 
 def story_setting(shot):
-    """Choose the explicitly narrated setting, then directed setting."""
+    """Honor the compositor's resolved scene, then infer only if unresolved.
+
+    Studio resolves per-shot locations once with the shared scene taxonomy.
+    Re-scanning the narration here with this module's smaller cue list could
+    override that result (e.g. an observatory mentioned before a city setting),
+    making the visible Pillow stage contradict the selected background asset.
+    """
+    direct = str(shot.get("story_environment") or "").lower().strip()
     text = " ".join(str(shot.get(k) or "") for k in
                     ("speech", "visual_prompt", "headline")).lower()
-    return _cached_scene_setting(text,str(shot.get("story_environment") or "").lower().strip())
+    # Prefer the resolved scene when the narration itself contains that cue,
+    # even if another place is mentioned earlier. If it does not, preserve the
+    # established rule that an explicitly narrated location beats a fallback
+    # story environment (e.g. "in a library" beats a harbor opening setting).
+    direct_pattern = next((pattern for key, pattern in SCENE_CUES if key == direct), None)
+    if direct_pattern and re.search(direct_pattern, text):
+        return direct
+    return _cached_scene_setting(text, direct)
 
 @lru_cache(maxsize=2048)
 def _cached_scene_setting(text,direct):
@@ -175,6 +190,25 @@ def draw_story_stage(d, shot, t):
                     d.rectangle((x,yy,x+17,yy+70),fill=color)
         d.rounded_rectangle((455,589,624,956),radius=65,fill=(124,166,189),outline=(229,202,170),width=10)
         d.line((540,610,540,948),fill=(226,211,184),width=8)
+    elif setting == "city":
+        # Dense urban skyline and street-level windows make the city a visibly
+        # different set from the observatory interior, not just a label.
+        for i in range(7):
+            x = 55 + i * 142
+            height = 220 + (seed // (i + 1)) % 160
+            top = 930 - height
+            d.rectangle((x, top, x + 112, 1115),
+                        fill=(66 + i * 3, 91 + i * 2, 119 + i * 2),
+                        outline=(177, 193, 204), width=5)
+            for row in range(max(1, height // 95)):
+                for col in range(2):
+                    wx = x + 20 + col * 47
+                    wy = top + 35 + row * 82
+                    if wy + 30 < 1105:
+                        d.rectangle((wx, wy, wx + 23, wy + 31),
+                                    fill=(245, 202, 128))
+        d.rectangle((55, 1115, 1025, 1195), fill=(47, 58, 73))
+        d.line((540, 1115, 540, 1195), fill=(220, 211, 170), width=6)
     elif setting in ("village",):
         for i in range(4):
             x=75+i*258
