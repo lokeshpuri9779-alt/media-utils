@@ -46,7 +46,10 @@ def story_advisory(story: dict) -> dict:
         return {"status": "script_too_long", "cliche_count": 0,
                 "repeated_sentence_count": 0, "approval": False}
     from astra_v2.story_pacing import review_pacing
-    pacing = review_pacing(story, str(story.get("format") or "shorts"))
+    format_name = story.get("format")
+    if format_name not in ("shorts", "longform"):
+        format_name = "shorts"
+    pacing = review_pacing(story, format_name)
     return {"status": "review_suggested" if not findings["pass"] else "no_simple_flags",
             "cliche_count": len(findings["cliches"]),
             "repeated_sentence_count": len(findings["repeated_sentences"]),
