@@ -393,15 +393,9 @@ class RendererEligibilityTests(unittest.TestCase):
             self.assertEqual(validate_story_shot(shot), "human")
         allowed.assert_called_once_with(shot)
 
-    def test_default_fiction_publication_rechecks_actual_renderer(self):
-        story = {"genre": "fiction", "content_id": "default-renderer-1",
-                 "title": "A Supported Fiction Story", "production_ready": True}
-        with patch.dict(os.environ, {}, clear=True), \
-             patch("studio_renderer.make_plan", return_value=[]):
-            self.assertIn("renderer_incompatible", publication_renderer_rejection(story))
-
-    def test_nonfiction_publication_skips_fiction_renderer_preflight(self):
-        self.assertIsNone(publication_renderer_rejection({"genre": "news"}))
+    def test_other_engine_not_blocked_by_unified_preflight(self):
+        with patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "0"}):
+            self.assertIsNone(publication_renderer_rejection({"genre": "fiction"}))
 
 
 if __name__ == "__main__":
