@@ -33,6 +33,19 @@ class StoryPacingTests(unittest.TestCase):
         self.assertGreater(result["tension_signals"]["reversal"], 0)
         self.assertFalse(result["approval"])
 
+    def test_pacing_review_flags_missing_dialogue_and_scene_hooks(self):
+        story = {"story_beats": [
+            {"speech": "The owl found a strange key in the garden."},
+            {"speech": "The fox picked it up but the lock began to glow."},
+            {"speech": "The door opened before either friend could step away."},
+            {"speech": "They discovered a quiet room filled with lost letters."},
+        ]}
+        result = review_pacing(story)
+        self.assertIn("add_one_short_line_of_character_dialogue", result["issues"])
+        self.assertIn("strengthen_scene_to_scene_cliffhangers", result["issues"])
+        self.assertEqual(result["dialogue_beat_count"], 0)
+        self.assertFalse(result["approval"])
+
     def test_invalid_format_rejected(self):
         with self.assertRaises(ValueError):
             review_pacing({}, "reel")
