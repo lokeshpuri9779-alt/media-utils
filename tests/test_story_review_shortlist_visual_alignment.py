@@ -2,6 +2,32 @@ import json
 from astra_v2.story_review_shortlist import shortlist
 
 
+def test_mystery_subject_vocabulary_catches_more_tag_mismatches(tmp_path):
+    stories = [
+        {"content_id": "waterwheel", "title": "Waterwheel", "production_ready": False,
+         "story_beats": [{"speech": "The waterwheel turned at midnight.", "visual": "map"}]},
+        {"content_id": "map", "title": "Map", "production_ready": False,
+         "story_beats": [{"speech": "The map changed overnight.", "visual": "map"}]},
+        {"content_id": "statue", "title": "Statue", "production_ready": False,
+         "story_beats": [{"speech": "The statue moved after dark.", "visual": "telescope"}]},
+        {"content_id": "clock", "title": "Clock", "production_ready": False,
+         "story_beats": [{"speech": "The clocks stopped together.", "visual": "clock"}]},
+    ]
+    audits = [{"content_id": s["content_id"],
+               "editorial_issues": ["human_or_model_editorial_review_required"],
+               "publication_rejection": "unreviewed_causal_draft"} for s in stories]
+    ledger, review, output = [tmp_path / n for n in ("ledger2.json", "review2.json", "out2.json")]
+    ledger.write_text(json.dumps({"proposals": stories}))
+    review.write_text(json.dumps({"proposals": audits}))
+    result = shortlist(ledger, review, output)
+    assert [s["visual_alignment_flags"] for s in result["review_candidates"]] == [
+        ["scene_1_visual_cue_mismatch"], [], ["scene_1_visual_cue_mismatch"], []
+    ]
+    assert result["candidates_with_visual_alignment_flags"] == 2
+    assert result["approved_for_production"] == 0
+    assert result["publication_enabled"] is False
+
+
 def test_visual_cue_mismatch_is_review_only(tmp_path):
     stories = [
         {"content_id": "a", "title": "Bell Repair", "production_ready": False,
