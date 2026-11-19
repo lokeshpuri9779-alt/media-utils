@@ -7,10 +7,7 @@ from __future__ import annotations
 from astra_errors import CreativeReject
 
 def publication_renderer_rejection(story):
-    """Recheck queued fiction at the publication boundary when unified Studio is enabled."""
-    import os
-    if os.environ.get("ASTRA_UNIFIED_STORY_ENGINE") != "1":
-        return None
+    """Recheck queued fiction because every fiction render uses the unified scene renderer."""
     if story.get("genre") != "fiction":
         return None
     eligible, reason, _ = check_renderer_eligibility(story)
