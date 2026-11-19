@@ -189,13 +189,16 @@ def measure_sequential_rejection_reasons(sample_start=0, sample_count=200):
     }
 
 def diagnose_duplicate_pressure(sample_start=0, sample_count=200):
-    """Read-only collision attribution by accepted-story plot and architecture.
+    """Read-only collision attribution by dimensions the generator actually uses.
 
     The same conservative screens decide acceptance; diagnostics never approve
-    or write a candidate into the production ledger.
+    or write a candidate into the production ledger. Unused authored libraries
+    are deliberately excluded so reports cannot imply they shaped a proposal.
     """
     from collections import Counter
-    from astra_v2.autonomous_story_proposals import PLOT_ENGINES, NARRATIVE_ARCHITECTURES
+    from astra_v2.autonomous_story_proposals import (
+        MYSTERIES, CAUSAL_PATHS, PRESSURE_ARCS, NARRATIVE_ARCHITECTURES,
+    )
     if sample_start < 0 or not 1 <= sample_count <= 1000:
         raise ValueError("Invalid sequential window")
     novelty = NoveltyIndex([])
@@ -204,17 +207,20 @@ def diagnose_duplicate_pressure(sample_start=0, sample_count=200):
     accepted = Counter()
     for i in range(sample_start, sample_start + sample_count):
         candidate = proposal(i)
-        plot = (i // 11) % len(PLOT_ENGINES)
-        architecture = (i // 5) % len(NARRATIVE_ARCHITECTURES)
+        mystery = (i // 13) % len(MYSTERIES)
+        causal_path = (i // 17) % len(CAUSAL_PATHS)
+        pressure_arc = (i // 5) % len(PRESSURE_ARCS)
+        architecture = (i // 11) % len(NARRATIVE_ARCHITECTURES)
         novelty_hit = novelty.is_near_duplicate(candidate)
         semantic_hit = _semantic_match_features(
             candidate, _semantic_features(candidate), semantic, 0.72
         ) is not None
         if novelty_hit or semantic_hit:
-            collisions[(plot, architecture, "both" if novelty_hit and semantic_hit else
+            collisions[(mystery, causal_path, pressure_arc, architecture,
+                        "both" if novelty_hit and semantic_hit else
                         "novelty_only" if novelty_hit else "semantic_only")] += 1
         else:
-            accepted[(plot, architecture)] += 1
+            accepted[(mystery, causal_path, pressure_arc, architecture)] += 1
             novelty.add(candidate)
             semantic.append((candidate, _semantic_features(candidate)))
     return {
@@ -223,8 +229,9 @@ def diagnose_duplicate_pressure(sample_start=0, sample_count=200):
         "accepted_count": sum(accepted.values()),
         "rejected_count": sum(collisions.values()),
         "collisions": [
-            {"plot": p, "architecture": a, "reason": reason, "count": count}
-            for (p, a, reason), count in sorted(collisions.items())
+            {"mystery": m, "causal_path": c, "pressure_arc": p,
+             "architecture": a, "reason": reason, "count": count}
+            for (m, c, p, a, reason), count in sorted(collisions.items())
         ],
         "publication_approved": 0,
         "history_mutated": False,

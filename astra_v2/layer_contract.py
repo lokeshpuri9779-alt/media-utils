@@ -41,6 +41,21 @@ def scene_layers(shot):
     """
     visual = str(shot.get("visual") or "").lower().strip()
     resolved = shot.get("resolved_asset") or {}
+    # A scene-bound, reviewed illustration is itself the single foreground.
+    # It takes precedence over incidental media cues, matching Studio's
+    # compositor path that draws artwork_asset_id as the primary visual.
+    if shot.get("artwork_asset_id"):
+        return {
+            "foreground": "reviewed_artwork",
+            "draw_visual": False,
+            "draw_cached_media": False,
+            "draw_director_asset": False,
+            "draw_reviewed_artwork": True,
+            "visual_style_overlay": False,
+            "composition_overlay": False,
+            "attention_overlay": False,
+            "director_motion_overlay": False,
+        }
     has_media = (
         resolved.get("status") == "ready" and
         bool(resolved.get("cache_image")) and
@@ -69,6 +84,7 @@ def scene_layers(shot):
         "draw_visual": foreground == "illustration",
         "draw_cached_media": foreground == "cached_media",
         "draw_director_asset": foreground == "director_asset",
+        "draw_reviewed_artwork": False,
         "visual_style_overlay": False,
         "composition_overlay": False,
         "attention_overlay": False,
@@ -89,7 +105,7 @@ def verify_scene_layout(scenes):
     rows = []
     for index, scene in enumerate(scenes):
         layers = scene_layers(scene)
-        count = sum(1 for name in ("draw_visual", "draw_cached_media", "draw_director_asset") if layers[name])
+        count = sum(1 for name in ("draw_visual", "draw_cached_media", "draw_director_asset", "draw_reviewed_artwork") if layers[name])
         if count != 1 or layers["foreground"] == "missing_media":
             failures.append("scene_" + str(index + 1) + ":foreground_missing_or_competing")
         if any(layers[name] for name in ("visual_style_overlay", "composition_overlay",

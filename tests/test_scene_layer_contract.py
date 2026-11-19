@@ -42,6 +42,18 @@ class ExclusivityTests(unittest.TestCase):
         self.assertFalse(layers["draw_visual"])
         self.assertTrue(layers["draw_director_asset"])
 
+    def test_reviewed_scene_artwork_is_a_valid_single_foreground(self):
+        layers = scene_layers({"visual": "media", "artwork_asset_id": "approved-scene-003",
+                               "director_asset": "source-document"})
+        self.assertEqual(layers["foreground"], "reviewed_artwork")
+        self.assertTrue(layers["draw_reviewed_artwork"])
+        self.assertFalse(layers["draw_visual"])
+        self.assertFalse(layers["draw_cached_media"])
+        self.assertFalse(layers["draw_director_asset"])
+        result = verify_scene_layout([{"visual": "media", "artwork_asset_id": "approved-scene-003"}])
+        self.assertTrue(result["pass"], result["failures"])
+        self.assertEqual(result["scenes"][0]["competing_foreground_count"], 1)
+
     def test_cached_visual_replaces_instead_of_stacking_on_illustration(self):
         with tempfile.TemporaryDirectory() as tmp:
             f = Path(tmp) / "safe.png"

@@ -30,6 +30,41 @@ MYSTERIES = (
     ("the lighthouse beam stopped before reaching the sea", "a jammed brass lens mechanism", "lighthouse"),
     ("fresh snow appeared inside a sealed room", "a cold draft from a forgotten tunnel", "snow"),
 )
+
+# Each mystery is paired only with settings that can physically support its
+# mechanism. Indices refer to SETTINGS above; keep one non-empty entry per mystery.
+MYSTERY_SETTING_INDICES = (
+    (0, 4, 5, 7),       # submerged warning bell: flooded/coastal/waterfront spaces
+    (0, 2, 4, 5),       # bridge lighting and shared electrical infrastructure
+    (0, 3, 5, 6),       # waterwheel, channels and pressure-fed water
+    (1, 2, 4, 7),       # signal tower, beacon and long sight lines
+    (1, 2, 4, 7),       # survey maps, archives and stone records
+    (1, 2, 3, 7),       # fixed sunlight, clockwork and architectural shadows
+    (1, 3, 6, 7),       # rooftop optics and controlled observation
+    (0, 2, 3, 5),       # river channel, sluice and surface current
+    (1, 2, 4, 7),       # museum displays, maintenance access and footprints
+    (0, 3, 5, 6),       # orchard acoustics and irrigation infrastructure
+    (0, 1, 2, 4),       # lighthouse optics and distant beacon visibility
+    (1, 3, 6, 7),       # sealed rooms, tunnels and temperature differences
+)
+# Each mystery has a concrete mechanism that explains its own anomaly and clue.
+# Keep this tuple index-aligned with MYSTERIES; generic causal paths alone cannot
+# establish that a reveal actually solves the opening puzzle.
+MYSTERY_CAUSES = (
+    "the bell hung from a submerged warning cable, and a passing current made its hollow housing ring",
+    "a shared relay cycled through different delays, so each light followed its own wiring path",
+    "a pressure-fed pipe carried warmer reservoir water uphill through a timed release valve",
+    "the tower's rotating mirror reflected a distant beacon beyond the visible horizon",
+    "morning condensation revealed a second layer of shallow survey engravings on the stone tile",
+    "a concealed clockwork shutter redirected a fixed beam, moving its shadow against the sun",
+    "a misaligned rooftop lens scattered light across that patch of sky and washed out the faint stars",
+    "a timed sluice gate briefly reversed the surface current in the narrow channel",
+    "a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints",
+    "wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call",
+    "a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing",
+    "a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent",
+)
+
 STAKES = (
     "before the evacuation bell sent everyone away",
     "before the last ferry left the harbor",
@@ -303,6 +338,129 @@ NARRATIVE_ARCHITECTURES = (
     ),
 )
 
+# Narrative pressure variants deepen one investigation without importing a
+# second premise. Each tuple supplies a complication, reversal and payoff lens.
+STORY_OPENINGS = (
+    "At {setting}, {actor} faced one urgent puzzle: {mystery}; {stakes}.",
+    "The {role} could not ignore {mystery} in {setting}; {stakes}.",
+    "{Actor} found the same impossible sign again in {setting}: {mystery}; {stakes}.",
+    "A routine check in {setting} became urgent when {mystery}; {stakes}.",
+    "Nobody in {setting} could explain {mystery}, so {actor} began with the physical evidence; {stakes}.",
+    "Before anyone blamed a neighbor, {actor} had to explain {mystery} in {setting}; {stakes}.",
+)
+
+INVESTIGATION_FRAMES = (
+    "{Actor} set {clue} beside {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "The investigation began with {discovery}, then checked it against {clue}. {arc_complication} {causal_opening}; {causal_test}.",
+    "Rather than guess, {actor} compared {clue} with {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "{Actor} treated {discovery} as a lead, not proof, and tested it against {clue}. {arc_complication} {causal_opening}; {causal_test}.",
+    "Two pieces mattered: {clue} and {discovery}. {arc_complication} {causal_opening}; {causal_test}.",
+    "{Actor} mapped {clue} against {discovery} before choosing a test. {arc_complication} {causal_opening}; {causal_test}.",
+)
+
+TWIST_FRAMES = (
+    "{causal_reveal}. {arc_reversal}.",
+    "Then the evidence changed the case: {causal_reveal}. {arc_reversal}.",
+    "The failed test was the missing link. {causal_reveal}. {arc_reversal}.",
+    "One detail overturned the first theory: {causal_reveal}. {arc_reversal}.",
+    "The clue had not lied; the interpretation had. {causal_reveal}. {arc_reversal}.",
+    "When the team replayed the evidence, {causal_reveal}. {arc_reversal}.",
+)
+
+PAYOFF_FRAMES = (
+    "{Actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "With the danger understood, {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "The final test gave {actor} a choice; {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "{Actor} turned the discovery into action and {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "Instead of hiding the mistake, {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+    "The team left proof behind: {actor} {resolution}. {causal_aftermath}. {arc_payoff}.",
+)
+
+PRESSURE_ARCS = (
+    ("A second witness challenged the first account, so the team had to test both versions.",
+     "The conflicting accounts described different moments, not different events.",
+     "The team recorded the corrected timeline so the disagreement would not recur."),
+    ("A ticking deadline made the obvious shortcut tempting, but the shortcut risked the only clue.",
+     "A small reversible test exposed why the shortcut would have made the damage worse.",
+     "The team kept the safe test procedure for the next emergency."),
+    ("A convincing early clue pointed toward the wrong explanation and sent the team in the wrong direction.",
+     "The clue was genuine, but it had been interpreted without its surrounding evidence.",
+     "The team documented how the false lead was ruled out, not just the final answer."),
+    ("The first attempted fix caused a second warning, raising the stakes instead of ending the problem.",
+     "The second warning was a side effect of the attempted fix, not a new mystery.",
+     "The team added a check for that side effect before using the repair again."),
+    ("The neighbors disagreed about whether the evidence was safe to test in public.",
+     "A contained test answered the question without putting the original clue at risk.",
+     "The team shared the test results so the community could verify the decision."),
+    ("The only useful tool gave a confident result that contradicted what everyone could see.",
+     "An independent measurement revealed the tool's hidden limitation.",
+     "The team required a second method before trusting future critical readings."),
+    ("The protagonist hesitated after an earlier mistake, while the deadline kept closing in.",
+     "A reversible test made it possible to act without repeating the earlier mistake.",
+     "The protagonist showed the neighbors how to check uncertain explanations safely."),
+    ("A power failure interrupted the only test that could separate the two explanations.",
+     "A hand-powered repeat produced the same result and ruled out the suspected electrical fault.",
+     "The team kept a manual backup method for future emergencies."),
+    ("A quiet observer noticed that the anomaly happened only when one person was absent.",
+     "The timing matched a routine maintenance cycle rather than anyone's movements.",
+     "The team changed the maintenance schedule and checked the result in public."),
+    ("A fragile clue could be examined only once before the weather destroyed it.",
+     "The team captured measurements from several angles before making a reversible test.",
+     "The preserved measurements let others independently verify the conclusion."),
+    ("A rushed public announcement risked turning an uncertain theory into a dangerous rumor.",
+     "A quick controlled check separated what was observed from what was merely assumed.",
+     "The team published the evidence and its remaining uncertainty together."),
+    ("The protagonist's closest ally wanted to conceal a mistake that had altered the evidence.",
+     "The ally's original notes revealed exactly when the clue had changed.",
+     "The team corrected the record and agreed to disclose mistakes immediately."),
+    ("A safe-looking route became hazardous whenever the original mechanism activated.",
+     "A timed observation showed the hazard followed the mechanism's cycle.",
+     "The team marked a temporary exclusion zone and repaired the trigger."),
+    ("The community's most trusted explanation depended on a measurement nobody had repeated.",
+     "A second instrument exposed a calibration error in the original reading.",
+     "The team added independent calibration checks to the local procedure."),
+    ("A small object appeared in every account but never in the physical evidence.",
+     "A search of the object's last known location showed it had been described from memory.",
+     "The team separated eyewitness recollection from verified evidence in its report."),
+    ("The first repair restored the signal but silently disabled an important warning.",
+     "A full-cycle test revealed the warning disappeared only during the repair's final stage.",
+     "The team added an end-to-end safety test before declaring repairs complete."),
+    ("A witness refused to speak because the investigation might expose a private promise.",
+     "The team verified the relevant timing without demanding the private details.",
+     "The final report protected the witness while preserving the facts needed to prevent recurrence."),
+    ("An unusual pattern appeared to move, making the team suspect a second hidden source.",
+     "Fixed reference points showed that the observer's viewpoint was changing instead.",
+     "The team installed stable markers so future observations could be compared fairly."),
+    ("The obvious culprit offered a confession that did not match the physical timeline.",
+     "A reconstruction showed the confession described an event that could not have happened then.",
+     "The team corrected the timeline before assigning responsibility."),
+    ("A scarce replacement part forced the team to choose which system to restore first.",
+     "A temporary bypass protected both systems long enough to test the shared cause.",
+     "The team documented the bypass limits and sourced the correct part."),
+    ("The anomaly stopped whenever investigators approached, suggesting someone was hiding it.",
+     "A remote observation revealed that the investigators themselves triggered the shutdown.",
+     "The team changed its testing distance and repeated the observation without interference."),
+    ("A warning arrived in a format nobody recognized, so the team nearly discarded it.",
+     "Comparing its sequence with the original device revealed an older encoding standard.",
+     "The team added the decoded format to the emergency reference guide."),
+    ("Two harmless changes happened together, making their combined effect look like sabotage.",
+     "The team reversed each change separately and isolated which one affected the mechanism.",
+     "The maintenance log now records changes individually so causes remain traceable."),
+    ("A sudden crowd made it impossible to repeat the test safely in its usual location.",
+     "The team built a small scale model that reproduced the same critical behavior.",
+     "The model became a safe training tool for future investigators."),
+    ("A promised delivery of evidence was delayed, leaving the team with an incomplete picture.",
+     "A local copy held the same timestamp and checksum as the missing original.",
+     "The team established a verified backup process for critical records."),
+    ("The protagonist recognized a familiar pattern but feared that assumption would bias the test.",
+     "A colleague designed a blind check that did not reveal the expected answer.",
+     "The team adopted blind checks whenever prior experience could distort judgment."),
+    ("A harmless test result changed after the sample was moved, raising suspicion of tampering.",
+     "Repeating the test with sealed controls showed the container, not the sample, caused the change.",
+     "The team standardized sealed controls for later comparisons."),
+)
+
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -314,34 +472,53 @@ def proposal(index):
     # Stagger small, co-prime-ish strides so all dimensions evolve early,
     # not only after thousands of candidates; the full product remains large.
     actor, role = _pick(index, ACTORS, 1)
-    setting, setting_visual = _pick(index, SETTINGS, 7)
-    mystery, clue, visual = _pick(index, MYSTERIES, 13)
+    mystery_index = (index // 13) % len(MYSTERIES)
+    compatible_settings = MYSTERY_SETTING_INDICES[mystery_index]
+    setting_index = compatible_settings[(index // 7) % len(compatible_settings)]
+    setting, setting_visual = SETTINGS[setting_index]
+    mystery, clue, visual = MYSTERIES[mystery_index]
+    mystery_cause = MYSTERY_CAUSES[mystery_index]
     stakes = _pick(index, STAKES, 19)
     discovery = _pick(index, DISCOVERIES, 23)
-    reversal = _pick(index, REVERSALS, 31)
     resolution = _pick(index, RESOLUTIONS, 37)
     emotional = _pick(index, EMOTIONAL_TURNS, 43)
     method = _pick(index, INVESTIGATION_METHODS, 47)
     obstacle = _pick(index, OBSTACLES, 53)
     consequence = _pick(index, CONSEQUENCES, 59)
     causal_opening, causal_test, causal_reveal, causal_aftermath = _pick(index, CAUSAL_PATHS, 17)
-    plot_problem, plot_action, plot_reveal, plot_outcome = _pick(index, PLOT_ENGINES, 11)
-    arc_setup, arc_decision, arc_turn, arc_aftermath = _pick(index, NARRATIVE_ARCHITECTURES, 5)
+    # Pressure arcs add conflict and reversals to the SAME mystery. They do not
+    # inject a second, unrelated plot engine into the four-beat sequence.
+    pressure = _pick(index, PRESSURE_ARCS, 5)
+    arc_complication, arc_reversal, arc_payoff = pressure
+    architecture = _pick(index, NARRATIVE_ARCHITECTURES, 11)
+    architecture_opening, architecture_build, architecture_turn, architecture_payoff = architecture
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
     title = f"The {visual.capitalize()} Mystery of the {setting.split()[-1].capitalize()}"
-    # Keep one causal premise per candidate. Independent plot/arc templates previously
-    # introduced unrelated incidents (e.g. a bell mystery plus a science fair).
-    # The selected mystery, physical clue, test and repair now drive all four beats.
-    # The chosen plot engine and architecture remain complete causal sequences,
-    # rather than disconnected individual sentences. Preserve their full
-    # problem/action/reveal/outcome progression to maintain novelty.
+    # One mystery, one evidence trail, one resolution. Pressure arcs vary the
+    # conflict (deadline, disputed evidence, costly shortcut, false lead) while
+    # every beat remains causally attached to the opening anomaly.
+    story_vars = {
+        "setting": setting, "actor": actor, "Actor": actor.capitalize(), "role": role,
+        "mystery": mystery, "mystery_cause": mystery_cause,
+        "stakes": stakes, "clue": clue, "discovery": discovery,
+        "emotional": emotional,
+        "arc_complication": arc_complication, "causal_opening": causal_opening,
+        "causal_test": causal_test, "method": method, "obstacle": obstacle,
+        "causal_reveal": causal_reveal, "arc_reversal": arc_reversal,
+        "resolution": resolution, "causal_aftermath": causal_aftermath.rstrip(".!?"),
+        "arc_payoff": arc_payoff.rstrip(".!?"), "consequence": consequence.rstrip(".!?"),
+    }
+    opening = _pick(index, STORY_OPENINGS, 29).format(**story_vars)
+    investigation = _pick(index, INVESTIGATION_FRAMES, 31).format(**story_vars)
+    twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
+    payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}, {stakes}. {plot_problem}. {arc_setup}.", visual),
-        ("build", f"{actor.capitalize()} compared {clue} with {discovery}. {causal_opening}. {causal_test}. {plot_action}. {arc_decision}. {method}, but {obstacle}.", "book"),
-        ("twist", f"{causal_reveal}. {plot_reveal}. {arc_turn}. This explained the original mystery. The team checked the evidence again.", setting_visual),
-        ("payoff", f"With the cause understood, {actor} {resolution}. {causal_aftermath}. {plot_outcome}. {arc_aftermath}. {consequence}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"{opening} {architecture_opening}.", visual),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The attempt failed; {emotional}.", "book"),
+        ("twist", f"{twist} {mystery_cause}. {architecture_turn}.", setting_visual),
+        ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Normalize punctuation at beat boundaries so concatenated authored clauses
     # never produce doubled full stops in narration.

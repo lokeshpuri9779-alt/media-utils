@@ -115,9 +115,26 @@ def shortlist(ledger_path, review_path, output_path, limit=25):
     # narration explicitly names a recognizable object and the visual tag
     # belongs to a different recognizable object category.
     visual_cues = {
-        "bell": {"bell"}, "lighthouse": {"lighthouse"},
-        "snow": {"snow"}, "river": {"river"}, "bridge": {"bridge"},
-        "book": {"book"}, "door": {"door"}, "forest": {"forest"},
+        # Keep this vocabulary aligned with the deterministic mystery generator's
+        # concrete subject tags. This is deliberately lexical: it can flag a
+        # likely mismatch, but it cannot certify that artwork depicts an action.
+        "bell": {"bell", "bells"},
+        "lighthouse": {"lighthouse", "lighthouses"},
+        "snow": {"snow"},
+        "river": {"river", "rivers"},
+        "bridge": {"bridge", "bridges"},
+        "book": {"book", "books"},
+        "door": {"door", "doors"},
+        "forest": {"forest", "forests"},
+        "waterwheel": {"waterwheel", "waterwheels"},
+        "signal": {"signal", "signals"},
+        "map": {"map", "maps"},
+        "telescope": {"telescope", "telescopes"},
+        "statue": {"statue", "statues"},
+        "clock": {"clock", "clocks"},
+        "lantern": {"lantern", "lanterns"},
+        "ship": {"ship", "ships"},
+        "garden": {"garden", "gardens"},
     }
     for entry in selected:
         flags = []

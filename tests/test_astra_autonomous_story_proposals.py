@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from pathlib import Path
-from astra_v2.autonomous_story_proposals import replenish, proposal
+from astra_v2.autonomous_story_proposals import (replenish, proposal, MYSTERIES, MYSTERY_CAUSES, CAUSAL_PATHS, RESOLUTIONS)
 from astra_v2.publication_quality import publication_rejection
 
 
@@ -63,16 +63,36 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertGreaterEqual(len(payoff), 30)
         self.assertEqual(len({item["plot_fingerprint"] for item in candidates}), 1200)
 
+    def test_pressure_arcs_stay_inside_the_opening_mystery(self):
+        candidates = [proposal(index) for index in range(240)]
+        speeches = [" ".join(beat["speech"] for beat in item["story_beats"]).casefold()
+                    for item in candidates]
+        self.assertGreaterEqual(len(set(speeches)), 240)
+        # These were formerly injected by an independent plot-engine axis.
+        for unrelated in ("school science fair", "competition prize",
+                          "rival rescue teams", "missing delivery"):
+            self.assertTrue(all(unrelated not in speech for speech in speeches))
+        self.assertTrue(all(any(mystery in item["story_beats"][0]["speech"]
+                                for mystery, _, _ in MYSTERIES)
+                            for item in candidates))
+        self.assertTrue(all("failed" in item["story_beats"][1]["speech"].casefold()
+                            for item in candidates))
+        self.assertTrue(all(any(cause in item["story_beats"][2]["speech"]
+                                    for cause in MYSTERY_CAUSES)
+                            for item in candidates))
+        self.assertTrue(all(item["production_ready"] is False for item in candidates))
+
     def test_story_beats_form_a_causal_chain(self):
         item = proposal(37)
         beats = item["story_beats"]
         self.assertEqual([b["story_beat"] for b in beats],
                          ["reveal", "build", "twist", "payoff"])
-        self.assertIn("needed to understand why", beats[0]["speech"])
-        self.assertIn("compared", beats[1]["speech"])
-        self.assertIn("explained the original mystery", beats[2]["speech"])
-        self.assertIn("cause understood", beats[3]["speech"])
+        self.assertTrue(any(mystery in beats[0]["speech"] for mystery, _, _ in MYSTERIES))
+        self.assertTrue(any(test in beats[1]["speech"] for _, test, _, _ in CAUSAL_PATHS))
+        self.assertTrue(any(reveal in beats[2]["speech"] for _, _, reveal, _ in CAUSAL_PATHS))
+        self.assertTrue(any(resolution in beats[3]["speech"] for resolution in RESOLUTIONS))
         self.assertTrue(all(item["production_ready"] is False for item in [item]))
+        self.assertNotIn("..", beats[3]["speech"])
 
     def test_legacy_generic_titles_are_backfilled_from_story_content(self):
         from astra_v2.autonomous_story_proposals import _backfill_legacy_titles
