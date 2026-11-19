@@ -170,7 +170,10 @@ class GeminiRouteTests(unittest.TestCase):
         prompt = requests[0]["contents"][0]["parts"][0]["text"]
         self.assertIn("brief, natural spoken line", prompt)
         self.assertIn("stable personality trait", prompt)
-        self.assertIn("keep traits and relationships consistent", prompt)
+        self.assertIn("distinct speech signature", prompt)
+        self.assertIn("distinguishable without dialogue tags", prompt)
+        self.assertIn("force a choice", prompt)
+        self.assertIn("speech signatures and relationships consistent", prompt)
         self.assertIn("End beats one, two and", prompt)
         self.assertIn("sound cues only when caused by visible action", prompt)
 
