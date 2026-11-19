@@ -54,6 +54,7 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
         issues.append("open_with_a_specific_disruption_or_question")
     if total < lower_target:
         issues.append("add_story_content_not_filler")
+        issues.append("expand_into_more_visual_story_turns")
     if total > upper_target:
         issues.append("tighten_or_split_for_breathing_room")
     if len(beats) < (4 if format_name == "shorts" else 10):
