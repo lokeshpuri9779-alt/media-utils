@@ -465,6 +465,34 @@ def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
 
+def _scene_visual_prompt(actor, setting, mystery, clue, cause, beat_name, speech):
+    """Write a concrete, beat-specific visual brief; this is still unreviewed metadata."""
+    place = setting.removeprefix("a ").removeprefix("an ")
+    actor_name = actor.removeprefix("a ").removeprefix("an ")
+    if beat_name == "reveal":
+        subject = f"{actor_name} discovers the anomaly: {mystery}"
+        action = "the character visibly reacts while examining the anomalous object or event"
+        focus = mystery
+    elif beat_name == "build":
+        subject = f"{actor_name} investigates the physical clue: {clue}"
+        action = "the character compares evidence and tests a mechanism with a practical tool"
+        focus = clue
+    elif beat_name == "twist":
+        subject = f"the physical cause is exposed: {cause}"
+        action = "show the mechanism operating and the character observing the cause"
+        focus = cause
+    else:
+        subject = f"{actor_name} carries out the repair or resolution"
+        action = "show the repaired object or system working and the community seeing the result"
+        focus = speech
+    return (
+        f"Story beat: {beat_name}. Setting: {place}. Main subject: {subject}. "
+        f"Visible action: {action}. Key visual evidence: {focus}. "
+        "Keep the same protagonist, location, and important object continuity; "
+        "one clear foreground subject, readable physical action, no unrelated props."
+    )
+
+
 def proposal(index):
     """Create a deterministic four-beat candidate from independent plot dimensions."""
     if not isinstance(index, int) or isinstance(index, bool) or index < 0:
@@ -544,7 +572,15 @@ def proposal(index):
         "proposal_index": index,
         "plot_fingerprint": hashlib.sha256(fingerprint_text.encode()).hexdigest(),
         "story_beats": [
-            {"story_beat": role_name, "speech": speech, "visual": visual_name}
+            {
+                "story_beat": role_name,
+                "speech": speech,
+                "visual": visual_name,
+                "visual_prompt": _scene_visual_prompt(
+                    actor, setting, mystery, clue, mystery_cause,
+                    role_name, speech
+                ),
+            }
             for role_name, speech, visual_name in beats
         ],
     }
