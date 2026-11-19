@@ -167,6 +167,10 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("at least three genuinely different shots", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("cold-opens on a specific disruption", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("24-38 words in every beat", requests[0]["contents"][0]["parts"][0]["text"])
+        prompt = requests[0]["contents"][0]["parts"][0]["text"]
+        self.assertIn("brief, natural spoken line", prompt)
+        self.assertIn("End beats one, two and", prompt)
+        self.assertIn("sound cues only when caused by visible action", prompt)
 
     def test_valid_scene_aware_story_returns_environment_and_subject_tags(self):
         import io
