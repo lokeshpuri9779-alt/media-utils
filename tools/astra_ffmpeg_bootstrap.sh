@@ -15,7 +15,10 @@ if ! have_video_tools; then
   # Use one bounded install with apt's own retry support so partial downloads
   # can be reused; keep the hard failure if either executable is absent.
   timeout 120s sudo apt-get update -qq -o Acquire::Retries=2
-  timeout 600s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Acquire::Retries=2 ffmpeg
+  if ! timeout 600s sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Acquire::Retries=2 ffmpeg; then
+    echo "::error::Cannot install free system ffmpeg/ffprobe; refusing an unverified render." >&2
+    exit 1
+  fi
 fi
 
 have_video_tools || {
