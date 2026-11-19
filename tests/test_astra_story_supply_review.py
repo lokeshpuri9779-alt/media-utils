@@ -2,8 +2,11 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+
 from astra_v2.autonomous_story_proposals import proposal
 from astra_v2.story_supply_review import assess
+from astra_v2.causal_premise_review import CausalPremiseIndex
+from astra_v2.story_editorial import triage
 
 
 class SupplyReviewTests(unittest.TestCase):
@@ -56,6 +59,57 @@ class SupplyReviewTests(unittest.TestCase):
                 semantic.append((story, _semantic_features(story)))
             self.assertEqual(
                 [entry["editorial_issues"] for entry in result["proposals"]], expected)
+            self.assertEqual(result["approved_for_production"], 0)
+
+    def test_causal_index_preserves_first_historical_match(self):
+        from astra_v2.causal_premise_review import causal_premise_match
+        first = {"content_id": "first", "central_conflict": "blocked bridge",
+                 "decisive_choice": "share supplies", "resolution": "bridge repaired"}
+        second = dict(first, content_id="second")
+        candidate = dict(first, content_id="candidate")
+        index = CausalPremiseIndex([first, second])
+        self.assertEqual(index.match(candidate), causal_premise_match(candidate, [first, second]))
+        self.assertEqual(index.match(candidate)["matched_content_id"], "first")
+
+    def test_triage_indexes_causal_arcs_across_same_batch(self):
+        first = proposal(0)
+        second = proposal(1)
+        arc = {
+            "central_conflict": "blocked bridge isolates the village",
+            "decisive_choice": "share limited repair supplies",
+            "resolution": "neighbors rebuild the bridge together",
+        }
+        first.update(arc)
+        second.update(arc)
+        second["content_id"] = "same-batch-causal-repeat"
+        result = triage([first, second], use_semantic_index=True)
+        repeated = [item for item in result["needs_work"]
+                    if item["content_id"] == "same-batch-causal-repeat"]
+        self.assertEqual(len(repeated), 1)
+        self.assertIn("repeated_causal_premise", repeated[0]["issues"])
+        self.assertFalse(repeated[0]["publication_blocked"] is False and
+                         repeated[0].get("publication_approved", False))
+
+    def test_supply_audit_indexes_causal_arcs_across_same_batch(self):
+        with tempfile.TemporaryDirectory() as root:
+            first = proposal(0)
+            second = proposal(1)
+            arc = {
+                "central_conflict": "blocked bridge isolates the village",
+                "decisive_choice": "share limited repair supplies",
+                "resolution": "neighbors rebuild the bridge together",
+            }
+            first.update(arc)
+            second.update(arc)
+            second["content_id"] = "same-batch-causal-repeat"
+            ledger = Path(root) / "ledger.json"
+            ledger.write_text(json.dumps({"proposals": [first, second]}))
+            result = assess(ledger, Path(root) / "missing-publisher.json",
+                            Path(root) / "missing-stories.json")
+            repeated = next(item for item in result["proposals"]
+                            if item["content_id"] == "same-batch-causal-repeat")
+            self.assertIn("repeated_causal_premise", repeated["editorial_issues"])
+            self.assertFalse(repeated["eligible_for_automatic_publishing"])
             self.assertEqual(result["approved_for_production"], 0)
 
     def test_published_fingerprint_is_flagged(self):

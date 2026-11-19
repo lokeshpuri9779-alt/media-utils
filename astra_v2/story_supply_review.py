@@ -6,6 +6,7 @@ import json
 from collections import Counter
 from pathlib import Path
 from astra_v2.proposal_history import load_history
+from astra_v2.causal_premise_review import CausalPremiseIndex
 from astra_v2.story_editorial import editorial_issues
 from astra_v2.publication_quality import publication_rejection
 from astra_v2.proposal_novelty_index import NoveltyIndex
@@ -27,11 +28,12 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
     visual_issues_by_family = Counter()
     novelty_index = NoveltyIndex(history)
     semantic_index = SemanticCandidateIndex(history)
+    causal_index = CausalPremiseIndex(history)
     for story in ledger["proposals"]:
         if not isinstance(story, dict):
             raise ValueError("Invalid proposal")
         issues = editorial_issues(story, history, novelty_index=novelty_index,
-                                  semantic_index=semantic_index)
+                                  semantic_index=semantic_index, causal_index=causal_index)
         rejection = publication_rejection(story)
         editorial_reason_counts.update(issues)
         family = str(story.get('genre') or 'mystery')
@@ -52,6 +54,7 @@ def assess(ledger_path, publisher_path="astra_v2_state.json",
             "eligible_for_automatic_publishing": False,
         })
         history.append(story)
+        causal_index.add(story)
         novelty_index.add(story)
         semantic_index.add(story)
     return {
