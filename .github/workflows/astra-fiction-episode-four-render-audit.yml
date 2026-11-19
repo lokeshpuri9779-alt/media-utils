@@ -56,8 +56,10 @@ jobs:
       - name: Install pinned Studio and local video verifier
         run: |
           python -m pip install -r requirements.txt
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
+          # Reuse the pinned self-contained FFmpeg shipped by imageio-ffmpeg.
+          FFMPEG_BIN="$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')"
+          sudo ln -sf "$FFMPEG_BIN" /usr/local/bin/ffmpeg
+          ffmpeg -version | head -n 1
       - name: Verify serialized acting and pilot compatibility
         run: |
           python -m unittest discover -s tests -p 'test_episode_four_human_performance.py' -v
@@ -103,7 +105,20 @@ jobs:
           PY
       - name: Decode actual encoded frames, audio and per-shot artwork evidence
         run: |
-          ffprobe -v error -show_entries format=duration:stream=codec_type,codec_name,width,height -of json runtime-artifacts/episode-four/episode-04.mp4 > runtime-artifacts/episode-four/ffprobe.json
+          python - <<'PY'
+          import av, json
+          path = 'runtime-artifacts/episode-four/episode-04.mp4'
+          with av.open(path) as media:
+              streams = []
+              for stream in media.streams:
+                  item = {'codec_type': stream.type, 'codec_name': stream.codec_context.name}
+                  if stream.type == 'video':
+                      item.update(width=stream.width, height=stream.height)
+                  streams.append(item)
+              duration = float(media.duration / av.time_base) if media.duration else 0.0
+          with open(path.rsplit('/', 1)[0] + '/ffprobe.json', 'w') as out:
+              json.dump({'format': {'duration': duration}, 'streams': streams}, out)
+          PY
           python - <<'PY'
           import hashlib,json,subprocess
           from pathlib import Path
