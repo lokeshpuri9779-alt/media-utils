@@ -368,7 +368,7 @@ def proposal(index):
         ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}; {stakes}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
         ("build", f"{actor.capitalize()} compared {clue} alongside {discovery}. {arc_complication} {causal_opening}; {causal_test}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
         ("twist", f"{causal_reveal}. {arc_reversal}. The new explanation accounted for the original clue and the failed test. This explained the original mystery; the team repeated the check before acting.", setting_visual),
-        ("payoff", f"With the cause finally understood, {actor} {resolution}. {causal_aftermath}. {arc_payoff}. {consequence}.", _pick(index, VISUALS, 3)),
+        ("payoff", f"With the cause understood at last, {actor} {resolution}. {causal_aftermath}. {arc_payoff}. {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
