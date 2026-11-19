@@ -470,7 +470,9 @@ def make_plan(ch):
             # unknown shot locations retain the opening-story fallback.
             if not shot.get('story_environment'):
                 scene_hint = analyze_story_scene({
-                    'visual_prompt': str(shot.get('visual_prompt') or '')
+                    'visual_prompt': str(shot.get('visual_prompt') or ''),
+                    'speech': str(shot.get('speech') or ''),
+                    'headline': str(shot.get('headline') or ''),
                 })['scene']
                 shot['story_environment'] = scene_hint or story_location
             if unified_mode:
@@ -1300,6 +1302,14 @@ def asset_manifest(ch, plan):
         # This manifest deliberately does not download arbitrary web media.
         # It tells a future provider exactly what is needed and preserves provenance.
         explicit_query=' '.join(str(p.get('media_query') or '').split())
+        # Authored fiction beats must carry their own scene brief into the
+        # acquisition manifest. Episode-level topic/title is only a fallback
+        # for legacy or non-scene-directed content.
+        scene_environment=' '.join(str(p.get('story_environment') or ch.get('story_environment') or '').split())
+        scene_action=' '.join(str(p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
+        scene_parts=[x for x in (scene_environment, scene_action) if x]
+        scene_brief=' | '.join(scene_parts)
+        scene_query=('Original scene illustration: '+scene_brief) if scene_brief else ''
         if explicit_query:
             # Only an editorial beat that deliberately names the needed subject
             # may search an external provider. This preserves semantic isolation.
@@ -1310,16 +1320,16 @@ def asset_manifest(ch, plan):
             query='Evidence from the cited source for: '+topic
         elif kind in {'map-explainer','mechanism-diagram','comparison-graphic','time-visualization'}:
             strategy='original-procedural'
-            query=explicit_query or f'{kind} explaining {topic}'
+            query=(scene_query or f'{kind} explaining {topic}')
         elif kind=='editorial-illustration':
             strategy='original-illustration'
-            query=explicit_query or ('Non-likeness editorial concept illustrating: '+topic)
+            query=(scene_query or ('Non-likeness editorial concept illustrating: '+topic))
         elif kind=='character-scene':
             strategy='character-video-required'
-            query=explicit_query or ('Character-driven cinematic scene for: '+topic)
+            query=(scene_query or ('Character-driven cinematic scene for: '+topic))
         else:
             strategy='original-motion'
-            query=explicit_query or ('Abstract visual metaphor for: '+topic)
+            query=(scene_query or ('Abstract visual metaphor for: '+topic))
         manifest.append({
             'shot':i+1,'kind':kind,'strategy':strategy,'query':query[:240],
             'source_url':source if strategy=='source-derived' else '',
