@@ -209,7 +209,7 @@ class GeminiRouteTests(unittest.TestCase):
                 {"headline": "The owl explains", "speech": "Oren revealed the bell marked a hidden safe turn, not a shortcut; its echo came from a second bell tied beyond the reeds on the far bank. Only then did the owl emerge.",
                  "visual": "owl", "visual_prompt": "An owl watches a fox beside a forest path as the small brass bell rings softly.",
                  "story_environment": "forest", "label": "A safer route", "story_beat": "mechanism"},
-                {"headline": "The marked trail", "speech": "Pip rang the second bell, and its clear note guided Oren across the marked trail; the warning had protected travelers from a washed-out path all along.",
+                {"headline": "The marked trail", "speech": "Pip rang the second bell, and its clear note guided Oren across the marked trail; the warning had protected travelers from a washed-out path all along. Oren finally understood why the bells were paired.",
                  "visual": "fox", "visual_prompt": "A fox returns the brass bell to a forest marker while an owl watches from a branch.",
                  "story_environment": "forest", "label": "A shared guide", "story_beat": "payoff"},
             ],
