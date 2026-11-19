@@ -365,9 +365,9 @@ def proposal(index):
     # conflict (deadline, disputed evidence, costly shortcut, false lead) while
     # every beat remains causally attached to the opening anomaly.
     beats = (
-        ("reveal", f"As the {role} in {setting}, {actor} had to discover why {mystery}; {stakes}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
+        ("reveal", f"As the {role} in {setting}, {actor} needed to understand why {mystery}; {stakes}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
         ("build", f"{actor.capitalize()} examined {clue} alongside {discovery}. {arc_complication}. {causal_opening}; {causal_test}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{causal_reveal}. {arc_reversal}. The new explanation accounted for the original clue and the failed test; the team repeated the check before acting.", setting_visual),
+        ("twist", f"{causal_reveal}. {arc_reversal}. The new explanation accounted for the original clue and the failed test. This explained the original mystery; the team repeated the check before acting.", setting_visual),
         ("payoff", f"With the cause finally understood, {actor} {resolution}. {causal_aftermath}. {arc_payoff}. {consequence}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
