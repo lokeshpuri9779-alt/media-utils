@@ -78,7 +78,7 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
     weak_end = {"a", "an", "and", "as", "at", "but", "by", "for", "from",
                 "if", "in", "into", "of", "on", "or", "the", "to", "with"}
     weak_start = {"and", "but", "or", "so", "the", "a", "an", "of", "to"}
-    sentences = [x.strip() for x in re.split(r"(?<=[.!?])\\s+", clean) if x.strip()]
+    sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean) if x.strip()]
     chunks: list[str] = []
 
     for sentence in sentences:
