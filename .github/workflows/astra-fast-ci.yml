@@ -143,6 +143,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_gemini_batch_review.py' -v
           python -m unittest discover -s tests -p 'test_gemini_deferred_archive.py' -v
           python -m unittest discover -s tests -p 'test_gemini_deferred_triage.py' -v
+          python -m unittest discover -s tests -p 'test_gemini_deferred_retry_queue.py' -v
+          python -m unittest discover -s tests -p 'test_gemini_deferred_backlog_report.py' -v
           python -m unittest discover -s tests -p 'test_renderer_eligibility.py' -v
           python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
           python -m unittest discover -s tests -p 'test_editorial_review_packet.py' -v
