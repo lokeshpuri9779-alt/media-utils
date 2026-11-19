@@ -63,6 +63,23 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertGreaterEqual(len(payoff), 30)
         self.assertEqual(len({item["plot_fingerprint"] for item in candidates}), 1200)
 
+    def test_pressure_arcs_stay_inside_the_opening_mystery(self):
+        candidates = [proposal(index) for index in range(240)]
+        speeches = [" ".join(beat["speech"] for beat in item["story_beats"]).casefold()
+                    for item in candidates]
+        self.assertGreaterEqual(len(set(speeches)), 240)
+        # These were formerly injected by an independent plot-engine axis.
+        for unrelated in ("school science fair", "competition prize",
+                          "rival rescue teams", "missing delivery"):
+            self.assertTrue(all(unrelated not in speech for speech in speeches))
+        self.assertTrue(all("why " in item["story_beats"][0]["speech"]
+                            for item in candidates))
+        self.assertTrue(all("failed" in item["story_beats"][1]["speech"].casefold()
+                            for item in candidates))
+        self.assertTrue(all("original clue" in item["story_beats"][2]["speech"].casefold()
+                            for item in candidates))
+        self.assertTrue(all(item["production_ready"] is False for item in candidates))
+
     def test_story_beats_form_a_causal_chain(self):
         item = proposal(37)
         beats = item["story_beats"]
