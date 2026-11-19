@@ -450,6 +450,8 @@ def proposal(index):
     # inject a second, unrelated plot engine into the four-beat sequence.
     pressure = _pick(index, PRESSURE_ARCS, 5)
     arc_complication, arc_reversal, arc_payoff = pressure
+    architecture = _pick(index, NARRATIVE_ARCHITECTURES, 11)
+    architecture_opening, architecture_build, architecture_turn, architecture_payoff = architecture
     # The dimensions rotate at different strides; this produces a large
     # deterministic combination space without claiming every draft is unique.
     # Use compact, searchable story titles rather than generic inventory labels.
@@ -471,10 +473,10 @@ def proposal(index):
     twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
     beats = (
-        ("reveal", f"{opening} The first explanation sounded convincing, but the physical clue did not fit.", visual),
-        ("build", f"{investigation} {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
-        ("twist", f"{twist} The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
-        ("payoff", f"{payoff} {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
+        ("reveal", f"{opening} {architecture_opening}. The first explanation sounded convincing, but the physical clue did not fit.", visual),
+        ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The first attempt failed, making the deadline feel even closer.", "book"),
+        ("twist", f"{twist} {architecture_turn}. The new explanation accounted for the original clue and the failed test. The team repeated the check before acting.", setting_visual),
+        ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
     # Reserve distinct, story-relevant visual keys across the four beats.
     # This fixes avoidable visual repetition without changing narration or
