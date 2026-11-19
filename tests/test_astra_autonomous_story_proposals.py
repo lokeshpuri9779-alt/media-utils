@@ -82,6 +82,22 @@ class AutonomousStoryProposalTests(unittest.TestCase):
                             for item in candidates))
         self.assertTrue(all(item["production_ready"] is False for item in candidates))
 
+    def test_each_story_beat_has_a_concrete_scene_specific_visual_brief(self):
+        item = proposal(37)
+        beats = item["story_beats"]
+        self.assertEqual(len(beats), 4)
+        self.assertTrue(all(len(beat.get("visual_prompt", "")) >= 100 for beat in beats))
+        self.assertTrue(all(beat["story_beat"] in beat["visual_prompt"] for beat in beats))
+        self.assertTrue(all("Setting:" in beat["visual_prompt"] for beat in beats))
+        self.assertTrue(all("Visible action:" in beat["visual_prompt"] for beat in beats))
+        self.assertIn("anomaly", beats[0]["visual_prompt"])
+        self.assertIn("physical clue", beats[1]["visual_prompt"])
+        self.assertIn("physical cause", beats[2]["visual_prompt"])
+        self.assertIn("repair", beats[3]["visual_prompt"])
+        self.assertEqual(len({beat["visual_prompt"] for beat in beats}), 4)
+        self.assertFalse(item["production_ready"])
+        self.assertEqual(item["kind"], "unreviewed_causal_draft")
+
     def test_story_beats_form_a_causal_chain(self):
         item = proposal(37)
         beats = item["story_beats"]
