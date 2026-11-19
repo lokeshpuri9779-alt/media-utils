@@ -47,7 +47,8 @@ MYSTERY_CAUSES = (
     "a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing",
     "a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent",
 )
-\nSTAKES = (
+
+STAKES = (
     "before the evacuation bell sent everyone away",
     "before the last ferry left the harbor",
     "before the mountain pass closed for winter",
