@@ -27,7 +27,7 @@ PROMPT = (
     "but surprising clue or reversal that changes the viewer's understanding. "
     "Beat four must resolve the opening question with a decisive action and "
     "an emotional final image. Keep momentum high: short punchy sentences, "
-    "cause-and-effect, escalating consequences, vivid sensory detail and "
+    "cause-and-effect, escalating consequences and vivid sensory detail. "
     "Include at least one brief, natural spoken line of character dialogue "
     "across the story; give recurring characters distinct voices through "
     "word choice and reactions, not long speeches. Give each named protagonist "
