@@ -78,6 +78,7 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
     weak_end = {"a", "an", "and", "as", "at", "but", "by", "for", "from",
                 "if", "in", "into", "of", "on", "or", "the", "to", "with"}
     weak_start = {"and", "but", "or", "so", "the", "a", "an", "of", "to"}
+    auxiliaries = {"am", "are", "be", "been", "being", "can", "could", "did", "do", "does", "had", "has", "have", "is", "may", "might", "must", "shall", "should", "was", "were", "will", "would"}
     sentences = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean) if x.strip()]
     chunks: list[str] = []
 
@@ -118,6 +119,8 @@ def segment_for_captions(text: str, max_words: int = 7, max_chars: int = 42) -> 
                     score += 8
                 if last in weak_end:
                     score -= 16
+                if last in auxiliaries or (len(left) >= 2 and left[-2].lower().strip(",;:") in auxiliaries):
+                    score -= 24
                 if first in weak_start:
                     score -= 5
                 # Keep short final fragments from becoming one- or two-word
