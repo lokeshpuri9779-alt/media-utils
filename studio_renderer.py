@@ -29,6 +29,7 @@ from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 from astra_v2.interaction_props import draw_interaction_prop
 from astra.asset_library import draw_asset_for_scene
+from videolingo_adapter import segment_for_captions
 
 VERSION = "studio-7.3.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -1247,8 +1248,24 @@ def render_frame(plan,t,genre,total):
     dur=len(s['audio'])/RATE
     pos=max(0,min(len(words)-1,int((t-s['voice_start'])/max(.1,dur)*len(words))))
     mode=s.get('director_caption_mode','phrase')
-    width=3 if mode=='keyword' else (4 if mode=='question' else 5)
-    chunk=pos//width; text=' '.join(words[chunk*width:(chunk+1)*width])
+    if mode == 'keyword':
+        chunks=segment_for_captions(s['speech'],max_words=3,max_chars=28)
+    elif mode == 'question':
+        chunks=segment_for_captions(s['speech'],max_words=4,max_chars=34)
+    else:
+        # Keep complete punctuation-led phrases instead of cutting every five
+        # words, which can leave captions ending on "and", "the", or "but".
+        chunks=segment_for_captions(s['speech'],max_words=7,max_chars=42)
+    if not chunks:
+        text=''
+    else:
+        ends=[]
+        total=0
+        for caption in chunks:
+            total += len(caption.split())
+            ends.append(total)
+        chunk=next((i for i,end in enumerate(ends) if pos < end),len(chunks)-1)
+        text=chunks[chunk]
     if mode=='keyword' and text:
         text=max(text.split(),key=len).upper()
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
