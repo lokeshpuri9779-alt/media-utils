@@ -200,7 +200,7 @@ class GeminiRouteTests(unittest.TestCase):
                 "objects": {"Bell": "A small brass bell with a simple loop."},
             },
             "beats": [
-                {"headline": "A bell in the clearing", "speech": "Why was the brass bell ringing beside an empty clearing? Pip stopped before the narrow trail, certain the sound was warning someone about danger ahead.",
+                {"headline": "A bell in the clearing", "speech": "Why was the brass bell ringing beside an empty clearing? Pip stopped before the narrow trail, certain the sound was warning someone about danger ahead. Then it rang behind him—who was there?",
                  "visual": "fox", "visual_prompt": "A fox trots through a forest clearing and spots a small brass bell under a fern.",
                  "story_environment": "forest", "label": "The first sound", "story_beat": "reveal"},
                 {"headline": "A careful pause", "speech": "Pip followed the bell toward the stream, but the sound moved behind him each time he stepped forward. \"Stay close!\" he called. Why was it moving?",
