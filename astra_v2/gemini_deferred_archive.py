@@ -29,6 +29,7 @@ def build_archive(proposals, audit, previous=None, run_id=""):
             or not isinstance(stories, list) or len(stories) > MAX_BATCH
             or not isinstance(reviews, list) or len(reviews) != len(stories)):
         raise ValueError("invalid_deferred_review_source")
+    dropped_total = 0
     if previous is None:
         entries = []
     else:
@@ -40,6 +41,10 @@ def build_archive(proposals, audit, previous=None, run_id=""):
                 or len(previous["entries"]) > MAX_ENTRIES):
             raise ValueError("invalid_deferred_review_archive")
         entries = list(previous["entries"])
+        dropped_total = previous.get("dropped_total", 0)
+        if (not isinstance(dropped_total, int) or isinstance(dropped_total, bool)
+                or dropped_total < 0):
+            raise ValueError("invalid_deferred_archive_drop_count")
         for entry in entries:
             if (not isinstance(entry, dict)
                     or entry.get("review_status") != "deferred_unreviewed"
@@ -82,9 +87,12 @@ def build_archive(proposals, audit, previous=None, run_id=""):
         })
         known.add(digest)
         added += 1
-    entries = entries[-MAX_ENTRIES:]
+    if len(entries) > MAX_ENTRIES:
+        dropped_total += len(entries) - MAX_ENTRIES
+        entries = entries[-MAX_ENTRIES:]
     output = {
         "version": 1, "status": ARCHIVE_STATUS,
+        "dropped_total": dropped_total,
         "publication_approval": False,
         "eligible_for_automatic_publishing": False,
         "entries": entries,
@@ -92,6 +100,8 @@ def build_archive(proposals, audit, previous=None, run_id=""):
     # Bound storage in the private state branch; oldest deferred rows go first.
     while entries and len(_encoded(output)) > MAX_OUTPUT_BYTES:
         entries.pop(0)
+        dropped_total += 1
+        output["dropped_total"] = dropped_total
     if len(_encoded(output)) > MAX_OUTPUT_BYTES:
         raise ValueError("deferred_archive_too_large")
     return output, added
@@ -114,6 +124,7 @@ def main(argv=None):
     print("ASTRA_DEFERRED_ARCHIVE=" + json.dumps({
         "added": added,
         "retained": len(archive["entries"]),
+        "dropped_total": archive.get("dropped_total", 0),
         "approval": False, "publication_triggered": False,
     }))
 
