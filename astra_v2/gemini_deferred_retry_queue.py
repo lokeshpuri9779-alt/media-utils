@@ -50,6 +50,7 @@ def _validate_archive(archive):
         story = item.get("proposal")
         digest = item.get("source_sha256")
         if (item.get("review_status") != "deferred_unreviewed"
+                or not isinstance(item.get("deferred_reason"), str)
                 or item.get("deferred_reason") not in DEFERRED_REASONS
                 or not isinstance(story, dict)
                 or story.get("kind") != "microfiction"
@@ -98,23 +99,27 @@ def _validate_state(state):
         digest = row.get("source_sha256")
         content_id = row.get("content_id")
         attempts = row.get("attempts")
+        first_seen_at = row.get("first_seen_at")
         last_attempt_at = row.get("last_attempt_at")
         if (not isinstance(digest, str) or len(digest) != 64
                 or any(ch not in "0123456789abcdef" for ch in digest)
                 or not isinstance(content_id, str) or not content_id
                 or isinstance(attempts, bool) or not isinstance(attempts, int)
                 or attempts < 0 or attempts > MAX_ATTEMPTS
+                or isinstance(first_seen_at, bool)
+                or not isinstance(first_seen_at, int) or first_seen_at < 0
                 or (attempts == 0 and last_attempt_at is not None)
                 or (attempts > 0 and (
                     isinstance(last_attempt_at, bool)
                     or not isinstance(last_attempt_at, int)
-                    or last_attempt_at < 0))
+                    or last_attempt_at < first_seen_at))
                 or digest in by_hash):
             raise ValueError("invalid_retry_tracking_entry")
         by_hash[digest] = {
             "source_sha256": digest,
             "content_id": content_id,
             "attempts": attempts,
+            "first_seen_at": first_seen_at,
             "last_attempt_at": last_attempt_at,
         }
     return by_hash
@@ -155,6 +160,7 @@ def prepare_retry_batch(archive, state=None, *, now,
             "source_sha256": digest,
             "content_id": item["content_id"],
             "attempts": 0,
+            "first_seen_at": now,
             "last_attempt_at": None,
         }
         by_hash[digest] = row
@@ -169,7 +175,8 @@ def prepare_retry_batch(archive, state=None, *, now,
         if attempts >= max_attempts:
             continue
         last_attempt_at = record["last_attempt_at"]
-        if last_attempt_at is not None and now - last_attempt_at < cooldown_seconds:
+        cooldown_anchor = last_attempt_at if last_attempt_at is not None else record["first_seen_at"]
+        if now - cooldown_anchor < cooldown_seconds:
             continue
         selected.append({
             "source_sha256": item["source_sha256"],
@@ -234,6 +241,8 @@ def record_attempts_after_provider_call(state, source_hashes, *, attempted_at,
         if row["attempts"] >= max_attempts:
             raise ValueError("retry_attempt_limit_reached")
         previous = row["last_attempt_at"]
+        if attempted_at < row["first_seen_at"]:
+            raise ValueError("retry_cooldown_not_elapsed")
         if previous is not None:
             if attempted_at < previous or attempted_at - previous < cooldown_seconds:
                 raise ValueError("retry_cooldown_not_elapsed")
@@ -241,6 +250,7 @@ def record_attempts_after_provider_call(state, source_hashes, *, attempted_at,
             "source_sha256": digest,
             "content_id": row["content_id"],
             "attempts": row["attempts"] + 1,
+            "first_seen_at": row["first_seen_at"],
             "last_attempt_at": attempted_at,
         }
 
