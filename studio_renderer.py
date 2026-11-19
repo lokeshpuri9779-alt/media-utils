@@ -1706,7 +1706,7 @@ def _repair_plan(ch,plan,attempt):
 def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None):
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
-    if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+    if genre == 'fiction':
         from astra_v2.unified_story_engine import validate_title_subject
         validate_title_subject(ch)
     plan=make_plan(ch)
@@ -1752,7 +1752,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                 raise CreativeReject(
                     f'Pillow Duo preflight rejected fiction shot {index + 1}: '
                     + suitability['reason'])
-    if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
+    if genre == 'fiction':
         from astra_v2.unified_story_engine import validate_story_shot
         from astra_v2.layer_contract import scene_layers
         for index, shot in enumerate(plan):
