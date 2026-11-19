@@ -17,6 +17,11 @@ from studio_renderer import make_plan
 
 def main():
     story = dict(catalog()[0])
+    # Synthetic CI artwork does not satisfy the premium lane's external
+    # source-backed subject-media requirements. Keep production gates intact.
+    story["premium_story"] = False
+    story["production_ready"] = False
+    story["ci_fixture_only"] = True
     story.setdefault("content_id", "ci-approved-artwork-smoke")
     with tempfile.TemporaryDirectory(prefix="astra-approved-studio-") as temp:
         root = Path(temp)
@@ -52,15 +57,14 @@ def main():
             raise AssertionError("Rendered shot count differs from approved manifest")
         if not all(shot.get("artwork_asset_id") for shot in report["scenes"]):
             raise AssertionError("At least one shot omitted approved artwork")
-        probe = subprocess.run(["ffprobe", "-v", "error", "-show_streams",
-                                "-of", "json", str(output)],
-                               check=True, capture_output=True, text=True, timeout=30)
-        streams = json.loads(probe.stdout)["streams"]
-        video = next(s for s in streams if s["codec_type"] == "video")
-        if (video["width"], video["height"]) != (1080, 1920):
-            raise AssertionError(f"Incorrect Studio video dimensions: {video['width']}x{video['height']}")
-        if not any(s["codec_type"] == "audio" for s in streams):
-            raise AssertionError("Missing narration audio")
+        import av
+        with av.open(str(output)) as media:
+            videos = [stream for stream in media.streams if stream.type == "video"]
+            audios = [stream for stream in media.streams if stream.type == "audio"]
+            if len(videos) != 1 or (videos[0].width, videos[0].height) != (1080, 1920):
+                raise AssertionError("Expected exactly one 1080x1920 Studio video stream")
+            if not audios:
+                raise AssertionError("Missing narration audio")
         if len(list((root / "stills").glob("scene_*.jpg"))) != len(assets):
             raise AssertionError("Missing rendered scene stills")
         print("ASTRA_APPROVED_STUDIO_MP4_E2E_PASS", len(assets), output.stat().st_size)
