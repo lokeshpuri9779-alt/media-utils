@@ -12189,6 +12189,59 @@
       "video_id": "YtMRxdldZZg",
       "confirmed_at": "2026-11-19T13:33:29.262316+00:00",
       "title": "Why cyclone Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-gemini-113fbea6d097ad228611",
+      "video_id": "l5anERy0XIw",
+      "confirmed_at": "2026-11-19T13:37:31.547670+00:00",
+      "title": "Sammy and Pip's Railway Track Key Exchange",
+      "plot_fingerprint": "ea72c79ee6797f9f9c00432e9a4d8889b64af5da301161522e50c62ab1fe369c",
+      "story_beats": [
+        {
+          "headline": "Evaluating the Arrival Schedule",
+          "speech": "Both railway carriages arrived nearly together, leaving us with only one brass key to decide their dispatch order.",
+          "visual": "squirrel",
+          "story_environment": "railway",
+          "label": "The Railway Dilemma",
+          "story_beat": "reveal",
+          "visual_prompt": "A squirrel stands on a wooden railway platform holding a brass key near the tracks.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Inspecting the Station Records",
+          "speech": "We carefully checked the station ledger to verify which carriage arrived first at the bustling railway terminal.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Checking the Log",
+          "story_beat": "build",
+          "visual_prompt": "A mouse stands on a wooden railway platform examining a small book resting on a box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Passing the Dispatch Key",
+          "speech": "Sammy makes the fair decision to pass the brass key to Pip, ensuring the punctual carriage goes first.",
+          "visual": "squirrel",
+          "story_environment": "railway",
+          "label": "Sharing the Key",
+          "story_beat": "mechanism",
+          "visual_prompt": "A squirrel on a wooden railway platform carefully exchanges a brass key with a waiting mouse.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Smooth Departure",
+          "speech": "With the correct carriage now unlocked, the railway operations run smoothly and fairly for everyone involved.",
+          "visual": "mouse",
+          "story_environment": "railway",
+          "label": "Fair Dispatch",
+          "story_beat": "payoff",
+          "visual_prompt": "A mouse holds a brass key near the railway tracks while standing beside a stationary toy box.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
