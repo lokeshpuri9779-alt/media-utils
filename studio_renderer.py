@@ -16,6 +16,7 @@ from astra_errors import CreativeReject, StoryBackgroundPreflightReject
 import re
 import subprocess
 import tempfile
+import time
 import wave
 from functools import lru_cache
 
@@ -29,6 +30,7 @@ from astra_v2.story_visuals import select_subject, draw_subject
 from astra_v2.story_action_motion import choose_action
 from astra_v2.interaction_props import draw_interaction_prop
 from astra.asset_library import draw_asset_for_scene
+from astra_v2.camera_resample import camera_resample
 
 VERSION = "studio-7.3.1"
 W, H, FPS, RATE = 1080, 1920, 30, 24000
@@ -1152,7 +1154,7 @@ def render_frame(plan,t,genre,total):
         if cam=='drift':
             scale=1.0 + motion_boost*.010*math.sin(t*.9)
         nw,nh=int(W*scale),int(H*scale)
-        moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
+        moved=im.resize((nw,nh),camera_resample())
         dx=max(0,(nw-W)//2 + (int(math.sin(t*.55)*10*energy) if cam=='track' else 0))
         dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
@@ -1187,7 +1189,7 @@ def render_frame(plan,t,genre,total):
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
         nw,nh=int(W*pulse),int(H*pulse)
-        moved=im.resize((nw,nh),Image.Resampling.BICUBIC)
+        moved=im.resize((nw,nh),camera_resample())
         dx=max(0,(nw-W)//2); dy=max(0,(nh-H)//2)
         im=moved.crop((dx,dy,dx+W,dy+H))
     # Transition accents occur under the hero, never on top of the narration
@@ -1704,6 +1706,7 @@ def _repair_plan(ch,plan,attempt):
     return repaired
 
 def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None):
+    render_started=time.perf_counter()
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
@@ -1823,9 +1826,14 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     print('ASTRA_TEMP_STORAGE=' + ('ram' if tmp_root else 'disk'))
     with tempfile.TemporaryDirectory(prefix='astra_studio_', dir=tmp_root) as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
+        audio_started=time.perf_counter()
         audio_info=score_audio(plan,duration,genre,audio)
+        audio_seconds=time.perf_counter()-audio_started
         from astra_v2.pillow_scene_motion import render_scene_frame
         count=math.ceil(duration*FPS);actual_duration=count/FPS
+        frame_render_seconds=0.0
+        frame_pipe_seconds=0.0
+        encode_drain_seconds=0.0
         cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
              '-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','pipe:0',
              '-i',str(audio),'-map','0:v','-map','1:a','-c:v','libx264','-preset','fast','-crf','18',
@@ -1835,9 +1843,16 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             proc=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=log)
             try:
                 for i in range(count):
-                    proc.stdin.write(render_scene_frame(render_frame,plan,i/FPS,genre,duration).tobytes())
+                    frame_started=time.perf_counter()
+                    pixels=render_scene_frame(render_frame,plan,i/FPS,genre,duration).tobytes()
+                    frame_render_seconds += time.perf_counter()-frame_started
+                    pipe_started=time.perf_counter()
+                    proc.stdin.write(pixels)
+                    frame_pipe_seconds += time.perf_counter()-pipe_started
                 proc.stdin.close()
+                drain_started=time.perf_counter()
                 if proc.wait(timeout=120)!=0: raise RuntimeError('FFmpeg could not encode Studio output.')
+                encode_drain_seconds=time.perf_counter()-drain_started
             except Exception:
                 proc.kill();proc.wait();raise
         if still_dir:
@@ -1884,6 +1899,16 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
                 'transition_seconds':NEWS_MICRO_TRANSITION_SECONDS if genre=='current' else None,
             },
             'scenes':[{k:v for k,v in s.items() if k!='audio'} for s in plan]}
+    total_seconds=time.perf_counter()-render_started
+    report['render_timing_seconds']={
+        'total':round(total_seconds,3),
+        'audio':round(audio_seconds,3),
+        'frames_and_serialization':round(frame_render_seconds,3),
+        'encoder_backpressure':round(frame_pipe_seconds,3),
+        'encoder_drain':round(encode_drain_seconds,3),
+        'other_pipeline':round(max(0.0,total_seconds-audio_seconds-frame_render_seconds-frame_pipe_seconds-encode_drain_seconds),3),
+        'camera_resampling':camera_resample().name.lower(),
+    }
     print('Studio render:',json.dumps({k:v for k,v in report.items() if k!='scenes'}))
     return report
 
