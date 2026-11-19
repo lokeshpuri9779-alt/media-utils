@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Free, bounded installation of both encoder and probe on GitHub Ubuntu.
-# Ubuntu's ffmpeg dependency set can exceed three minutes on a cold runner.
 # The long-form lane fails closed instead of treating pip success as codec QA.
 set -euo pipefail
 
@@ -11,9 +10,13 @@ have_video_tools() {
 
 if ! have_video_tools; then
   echo "ASTRA_CODEC_BOOTSTRAP=system_ffmpeg_missing"
-  # Ubuntu 24.04 hosted-runner regional mirrors can be extremely slow.
-  # Prefer the public archive and allow one bounded install to finish; apt
-  # retries can reuse partial downloads instead of restarting the package set.
+  # Ubuntu 24.04's ffmpeg dependency set is large and hosted-runner mirror
+  # throughput varies. A short install timeout repeatedly discards progress.
+  # Use one bounded install with apt's own retry support so partial downloads
+  # can be reused; keep the hard failure if either executable is absent.
+  # The hosted runner's regional EC2 mirror was taking over ten minutes to
+  # fetch dependencies. Prefer Ubuntu's public archive endpoint when the
+  # runner exposes the regional mirror list; also cover ordinary source files.
   for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.sources /etc/apt/sources.list.d/*.list; do
     if [[ -f "$source" ]]; then
       sudo sed -i 's|http://us-east-2.ec2.archive.ubuntu.com/ubuntu|http://archive.ubuntu.com/ubuntu|g' "$source"
