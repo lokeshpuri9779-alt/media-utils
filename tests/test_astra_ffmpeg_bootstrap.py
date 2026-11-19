@@ -1,4 +1,4 @@
-""""Protect long-form free codec install from regressions."""
+"""Protect long-form free codec install from regressions."""
 import subprocess
 import unittest
 from pathlib import Path
