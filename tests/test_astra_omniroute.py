@@ -23,6 +23,9 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn("cold-open", omniroute.PROMPT)
         self.assertIn("24-38 spoken words per beat", omniroute.PROMPT)
         self.assertIn("fair but surprising", omniroute.PROMPT)
+        self.assertIn("consequence of each beat must directly cause the next beat's action", omniroute.PROMPT)
+        self.assertIn("seed the twist clue before revealing it", omniroute.PROMPT)
+        self.assertIn("rather than coincidence or a new object", omniroute.PROMPT)
 
     def test_prompts_require_dialogue_cliffhangers_and_grounded_sound(self):
         self.assertIn("brief, natural spoken line", omniroute.PROMPT)
