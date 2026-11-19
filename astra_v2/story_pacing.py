@@ -124,7 +124,7 @@ def validate_generated_story(beats, provider="ASTRA"):
     cliffhanger_beats = sum(
         1 for speech in speeches[:-1]
         if re.search(
-            r'\?|\\b(?:just as|only to|before [a-z]+ could|only then)\\b',
+            r'\?|\b(?:just as|only to|before [a-z]+ could|only then)\b',
             " ".join(_words(speech)[-12:])
         )
     )
