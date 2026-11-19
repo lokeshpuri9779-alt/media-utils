@@ -46,8 +46,11 @@ jobs:
           grep -vE '^[[:space:]]*(scenedetect-core|faster-whisper)[[:space:]]*@' requirements.txt > /tmp/astra-studio-review-requirements.txt
           python -m pip install --disable-pip-version-check --prefer-binary -r /tmp/astra-studio-review-requirements.txt
           if ! command -v ffmpeg >/dev/null; then
-            sudo apt-get update -qq
-            sudo apt-get install -y ffmpeg
+            # Ubuntu security/archive mirrors can transiently return 5xx responses.
+            # Let APT retry individual package downloads instead of failing the review
+            # on a short-lived mirror outage.
+            sudo apt-get -o Acquire::Retries=5 update -qq
+            sudo apt-get -o Acquire::Retries=5 install -y ffmpeg
           fi
       - name: Validate storyboard contract
         run: |
