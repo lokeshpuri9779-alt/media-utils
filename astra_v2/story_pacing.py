@@ -115,6 +115,23 @@ def validate_generated_story(beats, provider="ASTRA"):
     total = sum(counts)
     if not 96 <= total <= 152:
         raise ValueError(provider + " narration must total 96-152 words")
+    speeches = [str(beat.get("speech") or "").strip() for beat in beats]
+    dialogue_beats = sum(
+        1 for speech in speeches if re.search(r'["“].+?["”]', speech)
+    )
+    if dialogue_beats == 0:
+        raise ValueError(provider + " story needs at least one natural dialogue line")
+    cliffhanger_beats = sum(
+        1 for speech in speeches[:-1]
+        if re.search(
+            r'\?|\\b(?:just as|only to|before [a-z]+ could|only then)\\b',
+            " ".join(_words(speech)[-12:])
+        )
+    )
+    if cliffhanger_beats < 2:
+        raise ValueError(provider + " story needs at least two scene-ending hooks")
     return {"word_count": total, "beat_word_counts": counts,
+            "dialogue_beat_count": dialogue_beats,
+            "cliffhanger_beat_count": cliffhanger_beats,
             "estimated_seconds_at_150_wpm": round(total / 150 * 60),
             "approval": False}
