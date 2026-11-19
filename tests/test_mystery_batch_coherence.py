@@ -1,5 +1,5 @@
 import unittest
-from astra_v2.autonomous_story_proposals import proposal, PLOT_ENGINES
+from astra_v2.autonomous_story_proposals import proposal, PRESSURE_ARCS
 from astra_v2.mystery_novelty_benchmark import measure_sequential_novelty
 
 
@@ -10,7 +10,7 @@ class MysteryBatchCoherenceTests(unittest.TestCase):
             narration = " ".join(b["speech"] for b in story["story_beats"])
             self.assertNotIn("first warning", narration)
             self.assertNotIn("which route or system was safe to use", narration)
-            self.assertTrue(any(p[0] in narration for p in PLOT_ENGINES))
+            self.assertTrue(any(p[0] in narration for p in PRESSURE_ARCS))
             self.assertFalse(story["production_ready"])
 
     def test_sequential_novelty_is_read_only_and_deterministic(self):
