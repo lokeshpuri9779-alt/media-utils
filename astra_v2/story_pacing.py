@@ -79,7 +79,7 @@ def review_pacing(story: dict, format_name: str = "shorts") -> dict:
         1 for s in speeches[:-1]
         if re.search(
             r'\?|\b(?:just as|only to|before [a-z]+ could|only then)\b',
-            " ".join(_words(s)[-12:])
+            " ".join(s.split()[-12:])
         )
     )
     if speeches and dialogue_lines == 0:
