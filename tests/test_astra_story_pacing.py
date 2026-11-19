@@ -37,7 +37,7 @@ class StoryPacingTests(unittest.TestCase):
         story = {"story_beats": [
             {"speech": "The owl found a strange key in the garden."},
             {"speech": "The fox picked it up but the lock began to glow."},
-            {"speech": "The door opened before either friend could step away."},
+            {"speech": "The door opened and either friend could step away."},
             {"speech": "They discovered a quiet room filled with lost letters."},
         ]}
         result = review_pacing(story)
