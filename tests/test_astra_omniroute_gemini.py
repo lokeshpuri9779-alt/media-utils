@@ -165,6 +165,26 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("no third species", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("Keep at least one protagonist visual tag consistent", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("at least three genuinely different shots", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("cold-opens on a specific disruption", requests[0]["contents"][0]["parts"][0]["text"])
+        self.assertIn("24-38 words in every beat", requests[0]["contents"][0]["parts"][0]["text"])
+        prompt = requests[0]["contents"][0]["parts"][0]["text"]
+        self.assertIn("brief, natural spoken line", prompt)
+        self.assertIn("stable personality trait", prompt)
+        self.assertIn("one immediate want", prompt)
+        self.assertIn("one pressure-triggered flaw", prompt)
+        self.assertIn("recognizable decision-making habit", prompt)
+        self.assertIn("what they avoid saying", prompt)
+        self.assertIn("generic inspirational lines and repeated catchphrases", prompt)
+        self.assertIn("change the relationship, reveal a motive or force a choice", prompt)
+        self.assertIn("distinct speech signature", prompt)
+        self.assertIn("consequence of each beat must directly cause the next beat", prompt)
+        self.assertIn("seed the twist clue before revealing it", prompt)
+        self.assertIn("rather than coincidence or a new object", prompt)
+        self.assertIn("distinguishable without dialogue tags", prompt)
+        self.assertIn("force a choice", prompt)
+        self.assertIn("speech signatures and relationships consistent", prompt)
+        self.assertIn("End beats one, two and", prompt)
+        self.assertIn("sound cues only when caused by visible action", prompt)
 
     def test_valid_scene_aware_story_returns_environment_and_subject_tags(self):
         import io
@@ -186,16 +206,16 @@ class GeminiRouteTests(unittest.TestCase):
                 "objects": {"Bell": "A small brass bell with a simple loop."},
             },
             "beats": [
-                {"headline": "A bell in the clearing", "speech": "A fox notices the small bell and chooses to follow its quiet ring instead of rushing ahead.",
+                {"headline": "A bell in the clearing", "speech": "Why was the brass bell ringing beside an empty clearing? Pip stopped before the narrow trail, certain the sound was warning someone about danger ahead. Then the bell rang behind him—who was there?",
                  "visual": "fox", "visual_prompt": "A fox trots through a forest clearing and spots a small brass bell under a fern.",
                  "story_environment": "forest", "label": "The first sound", "story_beat": "reveal"},
-                {"headline": "A careful pause", "speech": "The fox waits at the forest stream, listening again before crossing the narrow path.",
+                {"headline": "A careful pause", "speech": "Pip followed the bell toward the stream, but the sound moved behind him each time he stepped forward. \"Stay close!\" he called. Why was it moving?",
                  "visual": "fox", "visual_prompt": "A fox waits beside a forest stream and listens to a small brass bell in the breeze.",
                  "story_environment": "forest", "label": "Listening twice", "story_beat": "build"},
-                {"headline": "The owl explains", "speech": "An owl explains that the bell marks a safe turn, not a shortcut through the reeds.",
+                {"headline": "The owl explains", "speech": "Oren revealed the bell marked a hidden safe turn, not a shortcut; its echo came from a second bell tied beyond the reeds on the far bank. Only then did the owl emerge.",
                  "visual": "owl", "visual_prompt": "An owl watches a fox beside a forest path as the small brass bell rings softly.",
                  "story_environment": "forest", "label": "A safer route", "story_beat": "mechanism"},
-                {"headline": "The marked trail", "speech": "The fox rings the bell once and guides the owl back along the clear forest trail.",
+                {"headline": "The marked trail", "speech": "Pip rang the second bell, and its clear note guided Oren across the marked trail; the warning had protected travelers from a washed-out path all along. Oren finally understood why the bells were paired.",
                  "visual": "fox", "visual_prompt": "A fox returns the brass bell to a forest marker while an owl watches from a branch.",
                  "story_environment": "forest", "label": "A shared guide", "story_beat": "payoff"},
             ],

@@ -19,6 +19,55 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn("story_environment", omniroute.PROMPT)
         self.assertIn("three genuinely different shots", omniroute.PROMPT)
 
+    def test_all_provider_prompts_require_fast_suspense_and_fuller_narration(self):
+        self.assertIn("cold-open", omniroute.PROMPT)
+        self.assertIn("24-38 spoken words per beat", omniroute.PROMPT)
+        self.assertIn("fair but surprising", omniroute.PROMPT)
+        self.assertIn("consequence of each beat must directly cause the next beat", omniroute.PROMPT)
+        self.assertIn("seed the twist clue before revealing it", omniroute.PROMPT)
+        self.assertIn("rather than coincidence or a new object", omniroute.PROMPT)
+        self.assertIn("consequence of each beat must directly cause the next beat's action", omniroute.PROMPT)
+        self.assertIn("seed the twist clue before revealing it", omniroute.PROMPT)
+        self.assertIn("rather than coincidence or a new object", omniroute.PROMPT)
+
+    def test_prompts_require_dialogue_cliffhangers_and_grounded_sound(self):
+        self.assertIn("brief, natural spoken line", omniroute.PROMPT)
+        self.assertIn("stable personality trait", omniroute.PROMPT)
+        self.assertIn("one immediate want", omniroute.PROMPT)
+        self.assertIn("one pressure-triggered flaw", omniroute.PROMPT)
+        self.assertIn("recognizable decision-making habit", omniroute.PROMPT)
+        self.assertIn("what they avoid saying", omniroute.PROMPT)
+        self.assertIn("generic inspirational lines and repeated catchphrases", omniroute.PROMPT)
+        self.assertIn("change the relationship, reveal a motive or force a choice", omniroute.PROMPT)
+        self.assertIn("distinct speech signature", omniroute.PROMPT)
+        self.assertIn("distinguishable without dialogue tags", omniroute.PROMPT)
+        self.assertIn("force a choice", omniroute.PROMPT)
+        self.assertIn("speech signatures and relationships consistent", omniroute.PROMPT)
+        self.assertIn("End beats one, two and", omniroute.PROMPT)
+        self.assertIn("sound cues only when caused by visible action", omniroute.PROMPT)
+
+    def test_generated_story_length_is_bounded_and_not_thin(self):
+        from astra_v2.story_pacing import validate_generated_story
+        beats = [{"speech": " ".join(["word"] * 25) + (" only then" if i < 2 else ".")}
+                 for i in range(4)]
+        beats[2]["speech"] = '"Stay close!" ' + beats[2]["speech"]
+        result = validate_generated_story(beats)
+        self.assertEqual(result["word_count"], 106)
+        self.assertEqual(result["dialogue_beat_count"], 1)
+        self.assertEqual(result["cliffhanger_beat_count"], 2)
+        self.assertFalse(result["approval"])
+        without_dialogue = [dict(beat) for beat in beats]
+        without_dialogue[2]["speech"] = " ".join(["word"] * 25) + "."
+        with self.assertRaisesRegex(ValueError, "dialogue line"):
+            validate_generated_story(without_dialogue)
+        without_hooks = [dict(beat) for beat in beats]
+        without_hooks[0]["speech"] = " ".join(["word"] * 25) + "."
+        without_hooks[1]["speech"] = " ".join(["word"] * 25) + "."
+        with self.assertRaisesRegex(ValueError, "scene-ending hooks"):
+            validate_generated_story(without_hooks)
+        with self.assertRaisesRegex(ValueError, "24-38 words"):
+            validate_generated_story([{"speech": "too short"}] * 4)
+
     def test_story_quality_requires_scene_and_subject_consistency(self):
         beats = [
             {"speech": "A curious fox discovers a bright blue feather beside the old forest stream.",

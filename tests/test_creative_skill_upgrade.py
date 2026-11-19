@@ -32,6 +32,21 @@ class CreativeSkillUpgradeTests(unittest.TestCase):
                         plan["stages"].index("render"))
         self.assertFalse(plan["publish_allowed"])
 
+    def test_script_brief_requests_fast_suspenseful_story_turns(self):
+        brief = script_brief("A lighthouse mystery")
+        self.assertEqual(brief["hook_seconds"], 3)
+        self.assertEqual(len(brief["retention_architecture"]), 6)
+        self.assertIn("never pad", brief["content_rule"])
+        self.assertFalse(brief["editorial_approval"])
+
+    def test_story_advisory_includes_pacing_without_approval(self):
+        story = {"story_beats": [{"speech": "A fox wanted a key."},
+                                 {"speech": "The door was locked."}]}
+        report = story_advisory(story)
+        self.assertIn("pacing", report)
+        self.assertIn("expand_into_more_visual_story_turns", report["pacing"]["issues"])
+        self.assertFalse(report["pacing"]["approval"])
+
     def test_no_fabricated_analytics(self):
         self.assertEqual(retention_review([])["status"], "no_analytics")
         result = retention_review([{"second": 0, "retention": 1},

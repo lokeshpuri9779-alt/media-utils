@@ -110,7 +110,35 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Avoid complex machinery, bridge or cable repairs, large-gap jumps, "
         "rescue rigging, and simultaneous multi-prop actions. Keep each beat's "
         "physical action simple enough for the current animal puppet renderer. "
-        "Use four cinematic story beats with causal progression and a meaningful ending. "
+        "Use four cinematic story beats with fast cause-and-effect progression. "
+        "Beat one cold-opens on a specific disruption, unanswered question and "
+        "clear stakes; no greeting or slow preamble. Beat two shows an attempted "
+        "solution, a concrete obstacle and a consequence. Beat three reveals a "
+        "fair but surprising clue or reversal that changes the meaning of earlier "
+        "events. Beat four resolves the opening question through a decisive action "
+        "and a memorable emotional image. "
+        "The consequence of each beat must directly cause the next beat's action; "
+        "seed the twist clue before revealing it, and make the final payoff use "
+        "that established clue rather than coincidence or a new object. "
+        "Keep sentences punchy, visual and vivid. Include at least one brief, natural spoken line "
+        "of character dialogue; distinguish recurring voices through word choice and reactions, not long speeches. Give each named protagonist "
+        "one stable personality trait, one immediate want, one pressure-triggered flaw, "
+        "and a recognizable decision-making habit. Before drafting, privately assign "
+        "each character a distinct speech signature: vocabulary, sentence rhythm, "
+        "emotional directness and what they avoid saying. Dialogue from two characters "
+        "must be distinguishable without dialogue tags; avoid interchangeable voices, "
+        "generic inspirational lines and repeated catchphrases. Make each spoken line "
+        "change the relationship, reveal a motive or force a choice. Keep traits, wants, "
+        "speech signatures and relationships consistent across all four beats. "
+        "Reveal personality through choices, not exposition. "
+        "Never rename a character, swap their role, or reverse an established "
+        "relationship between scenes. End beats one, two and "
+        "three with a concrete unanswered question, looming consequence or new "
+        "evidence that pulls directly into the next beat. Add occasional specific "
+        "sound cues only when caused by visible action (a bell rings, ice cracks, "
+        "paws scrape); do not output a detached sound-effects list. Every beat "
+        "must change the situation, reveal character or add evidence. No filler, "
+        "repeated exposition, generic moral or unexplained twist. "
         "Return only JSON keys title, question, answer, visual_bible, beats, "
         "central_conflict, decisive_choice, resolution. "
         "Describe the concrete causal conflict, decisive choice and resulting "
@@ -129,7 +157,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "different shots through action, composition, location or a supported "
         "prop; do not create variety by changing animal tags. "
         "Each beat must also have headline, speech, visual, label, story_beat. "
-        "Speech 12-24 words in every beat (at least 48 words total). "
+        "Speech 24-38 words in every beat (96-152 words total). "
         "visual must be one of the supported animal subjects and must match the "
         "animal explicitly named in visual_prompt. Keep at least one protagonist "
         "visual tag consistent across two or more beats; never change tags merely "
@@ -275,11 +303,14 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                         beat[field] = normalized
     from astra_v2.omniroute import validate_beat_quality
     validate_beat_quality(beats, "Gemini")
+    from astra_v2.story_pacing import validate_generated_story
+    validate_generated_story(beats, "Gemini")
     for beat in beats:
         if not isinstance(beat, dict):
             raise ValueError("Invalid beat")
         for key in ("headline", "speech", "label"):
-            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
+            limit = 320 if key == "speech" else 220
+            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= limit:
                 raise ValueError("Invalid beat text")
         if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
                 or beat.get("story_environment") not in SCENES

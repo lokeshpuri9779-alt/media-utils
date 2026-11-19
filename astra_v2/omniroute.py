@@ -19,7 +19,38 @@ PROMPT = (
     "conflict types, emotional stakes and endings; avoid humans, "
     "humanoids, robots, clothing, complex machinery, bridge/cable repairs, "
     "large-gap jumps and simultaneous multi-prop actions. Ground each story "
-    "in a concrete choice and consequence. Use four cinematic story beats. "
+    "in a concrete choice and consequence. Use four cinematic story beats, "
+    "but make every beat a meaningful story turn rather than a summary. "
+    "Beat one must cold-open on an immediate disruption, unanswered question "
+    "and clear stakes; no greeting or setup preamble. Beat two must show a "
+    "specific attempt, obstacle and consequence. Beat three must reveal a fair "
+    "but surprising clue or reversal that changes the viewer's understanding. "
+    "The consequence of each beat must directly cause the next beat's action; " +
+    "seed the twist clue before revealing it, and make the final payoff use " +
+    "that established clue rather than coincidence or a new object. " +
+    "Beat four must resolve the opening question with a decisive action and "
+    "an emotional final image. Keep momentum high: short punchy sentences, "
+    "cause-and-effect, escalating consequences and vivid sensory detail. "
+    "Include at least one brief, natural spoken line of character dialogue "
+    "across the story; give recurring characters distinct voices through "
+    "word choice and reactions, not long speeches. Give each named protagonist "
+    "one stable personality trait, one immediate want, one pressure-triggered flaw, "
+    "and a recognizable decision-making habit. Before drafting, privately assign "
+    "each character a distinct speech signature: vocabulary, sentence rhythm, "
+    "emotional directness and what they avoid saying. Dialogue from two characters "
+    "must be distinguishable without dialogue tags; avoid interchangeable voices, "
+    "generic inspirational lines and repeated catchphrases. Make each spoken line "
+    "change the relationship, reveal a motive or force a choice. Keep traits, wants, "
+    "speech signatures and relationships consistent across all four beats. Let "
+    "choices reveal personality instead of explaining it. "
+    "Do not rename a character, swap their role, or reverse an established relationship "
+    "between scenes. End beats one, two and "
+    "three with a concrete unanswered question, looming consequence or new "
+    "piece of evidence that pulls directly into the next beat. Use occasional "
+    "specific sound cues only when caused by visible action (a bell rings, "
+    "ice cracks, paws scrape); never add a detached sound-effects list. "
+    "Every beat must change the situation, reveal character or add evidence; "
+    "no filler, repeated exposition or generic moral. Write 24-38 spoken words per beat (96-152 total). "
     "Return only JSON keys title, question, answer, beats. Each beat needs "
     "headline, speech, visual, visual_prompt, story_environment, label, story_beat. "
     "visual must be one of: " + ", ".join(sorted(VISUALS)) + ". It names the "
@@ -31,7 +62,7 @@ PROMPT = (
     "animal action in that environment. Across four beats, create at least "
     "three genuinely different shots through action, composition, location or "
     "a supported prop; do not create variety by changing animal tags. "
-    "Speech 12-24 words per beat. "
+    "Speech must contain 24-38 words per beat, with 96-152 words total. "
     "story_beat one of reveal, build, mechanism, twist, payoff; beat one reveal, "
     "beat four payoff, middle beats build/mechanism/twist. Title 8-75 chars. "
     "Avoid copyrighted characters. "
@@ -125,16 +156,19 @@ def _validate(data, provider, excluded_ids, excluded_titles, prior_stories):
             or not isinstance(beats, list) or len(beats) != 4):
         raise ValueError(provider + " story title or beat count invalid")
     validate_beat_quality(beats, provider)
+    from astra_v2.story_pacing import validate_generated_story
+    validate_generated_story(beats, provider)
     for i, beat in enumerate(beats):
         if not isinstance(beat, dict):
             raise ValueError(provider + " invalid beat")
         for key in ("headline", "speech", "label"):
-            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= 220:
+            limit = 320 if key == "speech" else 220
+            if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= limit:
                 raise ValueError(provider + " invalid beat text")
         if beat.get("story_beat") not in ROLES:
             raise ValueError(provider + " invalid narrative role")
         words = len(beat["speech"].split())
-        if not 10 <= words <= 24:
+        if not 24 <= words <= 38:
             raise ValueError(provider + " narration word count invalid")
         if i == 0 and beat["story_beat"] != "reveal":
             raise ValueError(provider + " first beat must reveal")
