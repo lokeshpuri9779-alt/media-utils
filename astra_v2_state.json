@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "day": "2026-11-20",
+  "day": "2026-11-21",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
-  "confirmed_today": 1,
+  "attempts": 0,
+  "confirmed_today": 0,
   "last_attempt_at": "2026-11-20T09:31:58.102572+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -13721,11 +13721,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-20T17:44:57.274850+00:00",
+  "last_preflight_at": "2026-11-20T19:16:03.501630+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-20T17:46:41.390738+00:00",
+    "at": "2026-11-20T19:17:37.617197+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -27933,7 +27933,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-20T17:46:41.390695+00:00",
+    "at": "2026-11-20T19:17:37.617146+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -27944,13 +27944,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-20T17:46:41.390731+00:00",
+    "at": "2026-11-20T19:17:37.617189+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-20T17:45:46.961973+00:00",
+    "at": "2026-11-20T19:16:46.489271+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -28507,7 +28507,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-20T17:46:41.389850+00:00",
+    "at": "2026-11-20T19:17:37.616292+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -28519,7 +28519,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-20T17:46:41.390411+00:00",
+    "at": "2026-11-20T19:17:37.616829+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
