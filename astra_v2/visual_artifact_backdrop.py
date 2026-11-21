@@ -208,3 +208,47 @@ def apply_backdrop(image, shot, identity):
     overlay.paste((0, 0, 0, 0), (0, 1100, 1080, 1920))
     image.paste(Image.alpha_composite(image.convert("RGBA"),overlay).convert("RGB"))
     return image
+
+
+def apply_underwater_reveal(image, identity):
+    """Finish the underwater reveal above the acted foreground, before text layers.
+
+    The human-scene renderer owns the character and prop geometry. This final
+    environmental pass is deliberately confined to the right-side doorway and
+    frame edges so it cannot repaint Mara or the lower caption-safe region.
+    """
+    if image.mode != "RGB" or image.size != (1080, 1920):
+        raise ValueError("underwater reveal requires RGB 1080x1920")
+    seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    # Visible water shafts and bubbles, concentrated above and around the door.
+    for x, width in ((540, 90), (700, 110), (900, 85)):
+        d.polygon(((x, 0), (x + width, 0), (x + width + 100, 520),
+                   (x + 35, 520)), fill=(78, 205, 225, 76))
+    for i in range(14):
+        bx = 555 + ((seed >> (i % 16)) + i * 83) % 490
+        by = 170 + ((seed >> ((i + 5) % 16)) + i * 61) % 700
+        r = 7 + (i * 5) % 13
+        d.ellipse((bx-r, by-r, bx+r, by+r), outline=(190, 245, 248, 190), width=4)
+    # Reframe the existing doorway as a sealed, submerged stone portal.
+    d.rounded_rectangle((555, 395, 1030, 1160), radius=155,
+                        outline=(196, 224, 214, 235), width=30)
+    d.rounded_rectangle((592, 438, 992, 1150), radius=132,
+                        outline=(62, 126, 137, 245), width=18)
+    d.rounded_rectangle((632, 490, 950, 1135), radius=112,
+                        fill=(8, 62, 82, 225), outline=(150, 205, 199, 245), width=13)
+    d.line((790, 510, 790, 1120), fill=(111, 190, 190, 210), width=7)
+    d.ellipse((850, 790, 880, 820), fill=(235, 211, 142, 245))
+    for y in (465, 565, 665, 765, 865, 965, 1065):
+        d.line((565, y, 610, y+16), fill=(224, 236, 222, 190), width=8)
+        d.line((975, y+16, 1020, y), fill=(224, 236, 222, 190), width=8)
+    # Small coral silhouettes at the far lower edges; captions remain untouched.
+    for x, sign in ((48, 1), (1030, -1)):
+        d.line((x, 1400, x, 1260), fill=(231, 132, 142, 210), width=12)
+        d.line((x, 1330, x-sign*42, 1288), fill=(231, 132, 142, 205), width=9)
+        d.line((x, 1305, x+sign*38, 1268), fill=(231, 132, 142, 205), width=9)
+    image.paste(Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB"))
+    # A restrained blue-green grade ties the existing stage to the underwater reveal.
+    image.paste(Image.blend(image, Image.new("RGB", image.size, (12, 78, 91)), 0.13))
+    return image
