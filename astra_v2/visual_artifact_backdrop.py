@@ -243,12 +243,22 @@ def apply_underwater_reveal(image, identity):
     for y in (465, 565, 665, 765, 865, 965, 1065):
         d.line((565, y, 610, y+16), fill=(224, 236, 222, 190), width=8)
         d.line((975, y+16, 1020, y), fill=(224, 236, 222, 190), width=8)
-    # Small coral silhouettes at the far lower edges; captions remain untouched.
+    # Convert the exposed stage floor into a submerged seabed. Keep the
+    # lower caption-safe band (y >= 1260) clear for the later text compositor.
+    d.polygon(((0, 1038), (1080, 1038), (1080, 1258), (0, 1258)),
+              fill=(9, 91, 105, 205))
+    d.polygon(((0, 1205), (220, 1168), (470, 1210), (720, 1175),
+               (930, 1210), (1080, 1180), (1080, 1258), (0, 1258)),
+              fill=(18, 112, 119, 190))
+    d.arc((80, 1080, 430, 1245), 190, 345, fill=(119, 197, 184, 170), width=7)
+    d.arc((620, 1090, 1010, 1248), 190, 345, fill=(119, 197, 184, 170), width=7)
+    # Coral silhouettes sit on the seabed, not in the caption band.
     for x, sign in ((48, 1), (1030, -1)):
-        d.line((x, 1400, x, 1260), fill=(231, 132, 142, 210), width=12)
-        d.line((x, 1330, x-sign*42, 1288), fill=(231, 132, 142, 205), width=9)
-        d.line((x, 1305, x+sign*38, 1268), fill=(231, 132, 142, 205), width=9)
+        d.line((x, 1245, x, 1125), fill=(231, 132, 142, 225), width=12)
+        d.line((x, 1190, x-sign*42, 1150), fill=(231, 132, 142, 220), width=9)
+        d.line((x, 1160, x+sign*38, 1128), fill=(231, 132, 142, 220), width=9)
     image.paste(Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB"))
-    # A restrained blue-green grade ties the existing stage to the underwater reveal.
-    image.paste(Image.blend(image, Image.new("RGB", image.size, (12, 78, 91)), 0.13))
+    # Grade the entire stage more decisively so leftover observatory colors
+    # cannot read as a second environment; titles/captions are drawn afterward.
+    image.paste(Image.blend(image, Image.new("RGB", image.size, (8, 83, 101)), 0.27))
     return image
