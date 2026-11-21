@@ -25,7 +25,7 @@ SCENE_TERMS = {
     "village": ("village", "hamlet", "countryside"),
     "mountain": ("mountain", "summit", "mountains", "cliff", "peak"),
     "desert": ("desert", "dune", "sand dunes", "oasis"),
-    "underwater": ("underwater", "ocean", "coral", "seabed", "reef", "deep sea"),
+    "underwater": ("underwater", "undersea", "under the sea", "beneath the sea", "ocean", "ocean floor", "seafloor", "coral", "seabed", "reef", "deep sea"),
     "space": ("space", "iss", "orbital", "orbit", "planet", "galaxy", "cosmos", "astronaut"),
     "laboratory": ("laboratory", "lab", "research lab", "science lab"),
     "garden": ("garden", "greenhouse", "botanical garden", "flower garden"),
