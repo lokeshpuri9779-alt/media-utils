@@ -1,0 +1,7 @@
+# ASTRA review-only grammar: one object, exactly four story beat strings.
+# This constrains JSON syntax only, not narrative length, quality or originality.
+root ::= "{" ws "\"title\"" ws ":" ws story-string ws "," ws "\"story_beats\"" ws ":" ws story-array ws "}" ws
+story-array ::= "[" ws story-string ws "," ws story-string ws "," ws story-string ws "," ws story-string ws "]"
+story-string ::= "\"" char* "\""
+char ::= [^"\\\x7F\x00-\x1F] | "\\" (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+ws ::= [ \t\n]*
