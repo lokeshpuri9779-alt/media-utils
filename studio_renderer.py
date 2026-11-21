@@ -1191,13 +1191,6 @@ def render_frame(plan,t,genre,total):
             draw_visual(im,s,t,u,accent)
     elif genre == 'fiction' and not layers['draw_cached_media'] and not layers['draw_director_asset']:
         raise CreativeReject('Unified Studio: fiction scene has no drawable visual or authorized media.')
-    # The human-action layer can cover pre-composited environmental art.
-    # Finish this specific underwater reveal after the actor/prop pass, while
-    # still before headline and caption drawing so text remains crisp.
-    if (genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1'):
-        from astra_v2.visual_artifact_backdrop import analyze_story_scene, apply_underwater_reveal
-        if analyze_story_scene(s)['scene'] == 'underwater':
-            im = apply_underwater_reveal(im, visual_identity)
     if str(s.get('creative_format') or '')=='documentary_montage' and .36 < (u/max(.2,s['duration'])) < .62:
         p=(u/max(.2,s['duration'])-.36)/.26
         pulse=1.0+0.018*math.sin(min(1,p)*math.pi)
@@ -1225,6 +1218,13 @@ def render_frame(plan,t,genre,total):
             and os.environ.get('ASTRA_HUMAN_CINEMATIC_CAMERA', '0') == '1'):
         from astra_v2.human_cinematic_camera import apply_human_camera
         im = apply_human_camera(im, s, u)
+    # Apply the environment reveal after all base/cached artwork and camera
+    # compositing; otherwise a later illustration layer can erase the water
+    # and stone-door treatment. This remains before title/caption layers.
+    if (genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1'):
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene, apply_underwater_reveal
+        if analyze_story_scene(s)['scene'] == 'underwater':
+            im = apply_underwater_reveal(im, visual_identity)
     d=ImageDraw.Draw(im)
     comparison_labels=s.get('comparison_labels') or []
     if len(comparison_labels)==2:
