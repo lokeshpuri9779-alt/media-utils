@@ -1447,10 +1447,21 @@ def prepare_media_cache(resolved, cache_dir='asset_cache'):
     return out
 
 def composite_cached_asset(im,item,t=0.0,u=0.0,shot=None):
-    """Composite only a previously validated cached image; malformed assets fail safely."""
+    """Composite cached media only when its sidecar binds bytes to this exact scene brief."""
     path=item.get('cache_image','')
-    if not path or not os.path.isfile(path): return im
+    meta_path=item.get('cache_meta','')
+    if not path or not meta_path or not os.path.isfile(path) or not os.path.isfile(meta_path):
+        return im
     try:
+        with open(meta_path,'r',encoding='utf-8') as handle:
+            metadata=json.load(handle)
+        expected_key=media_cache_key(item)
+        if (metadata.get('cache_key') != expected_key
+                or metadata.get('query') != item.get('query')
+                or metadata.get('kind') != item.get('kind')
+                or metadata.get('cache_image') != path
+                or metadata.get('image_sha256') != hashlib.sha256(Path(path).read_bytes()).hexdigest()):
+            return im
         media=Image.open(path).convert('RGB')
         # Premium media occupies most of the vertical canvas. Diagrams and full
         # celestial discs use contain-fit so important information is never cropped.
@@ -1515,6 +1526,7 @@ def ingest_authorized_media(item, candidate, cache_dir='asset_cache'):
         if img.width<480 or img.height<480: return None
         img.save(image_path,'PNG',optimize=True)
         checked.update(cache_key=key,cache_image=image_path,cache_meta=meta_path)
+        checked['image_sha256']=hashlib.sha256(Path(image_path).read_bytes()).hexdigest()
         with open(meta_path,'w',encoding='utf-8') as h:
             json.dump({k:v for k,v in checked.items() if k!='external_request'},h,indent=2)
         return checked
