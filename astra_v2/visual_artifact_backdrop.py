@@ -137,7 +137,46 @@ def apply_backdrop(image, shot, identity):
     # later by the existing Studio pipeline.
     overlay=Image.new("RGBA",image.size,(0,0,0,0))
     d=ImageDraw.Draw(overlay)
-    if scene in {"city","village","castle","library","museum","workshop","laboratory"}:
+    if scene == "underwater":
+        # A deterministic, unmistakable underwater establishing plate. Keep
+        # the stone arch to the right so the story's characters remain clear.
+        # Light shafts, suspended bubbles, seabed and coral provide independent
+        # visual cues; the door is drawn as a readable object, not a label.
+        for ray_x, ray_w, ray_alpha in ((90,105,30),(285,78,22),(470,118,26)):
+            d.polygon(((ray_x,0),(ray_x+ray_w,0),(ray_x+ray_w+210,1030),
+                       (ray_x+110,1030)), fill=(92,205,224,ray_alpha))
+        for i in range(17):
+            bx=(seed//(i+1)+i*137)%1040+20
+            by=180+(seed//(i+3)+i*83)%790
+            radius=8+(i*7)%19
+            d.ellipse((bx-radius,by-radius,bx+radius,by+radius),
+                      outline=(180,238,244,155),width=4)
+            d.arc((bx-radius+4,by-radius+4,bx+radius-4,by+radius-4),
+                  205,310,fill=(235,255,255,190),width=3)
+        # Deep seabed and two coral silhouettes.
+        d.polygon(((0,1000),(180,960),(340,1015),(520,970),(720,1010),
+                   (900,955),(1080,990),(1080,1100),(0,1100)),
+                  fill=(18,83,91,210))
+        for cx,cy,scale in ((115,1000,1.0),(955,985,.85)):
+            d.line((cx,cy,cx-22*scale,cy-85*scale),fill=(226,117,126,220),width=13)
+            d.line((cx-10*scale,cy-38*scale,cx-54*scale,cy-72*scale),
+                   fill=(226,117,126,220),width=10)
+            d.line((cx-8*scale,cy-52*scale,cx+35*scale,cy-92*scale),
+                   fill=(226,117,126,220),width=10)
+        # Off-centre ancient stone arch with a sealed blue-green door.
+        d.rounded_rectangle((575,420,1015,1050),radius=150,
+                           fill=(45,83,91,235),outline=(190,218,211,255),width=28)
+        d.rounded_rectangle((635,500,955,1050),radius=112,
+                           fill=(7,30,45,255),outline=(116,174,178,255),width=17)
+        d.rounded_rectangle((680,565,910,1050),radius=92,
+                           fill=(17,91,111,255),outline=(190,220,210,255),width=12)
+        d.line((795,585,795,1040),fill=(125,203,203,220),width=7)
+        d.ellipse((865,790,890,815),fill=(235,214,143,255))
+        # Individual stone joints make the arch read as masonry.
+        for yy in (470,565,660,755,850,945):
+            d.line((585,yy,625,yy+18),fill=(225,235,221,180),width=7)
+            d.line((965,yy+18,1005,yy),fill=(225,235,221,180),width=7)
+    elif scene in {"city","village","castle","library","museum","workshop","laboratory"}:
         for i in range(7):
             x=i*165-25
             h=200+(seed//(i+1))%230
