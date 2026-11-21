@@ -464,18 +464,23 @@ def make_plan(ch):
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            # A beat with its own explicit visual location must not inherit
-            # the opening backdrop. Use the exact taxonomy that the pack
-            # compositor and review-only scene preflight already share.
-            # Explicit per-shot story_environment remains authoritative;
-            # unknown shot locations retain the opening-story fallback.
-            if not shot.get('story_environment'):
-                scene_hint = analyze_story_scene({
-                    'visual_prompt': str(shot.get('visual_prompt') or ''),
-                    'speech': str(shot.get('speech') or ''),
-                    'headline': str(shot.get('headline') or ''),
-                })['scene']
+            # Resolve the local beat before inheriting the episode backdrop.
+            # Episode-level locations are defaults, not permanent overrides:
+            # a later authored reveal (for example, a door beneath the sea)
+            # must be allowed to move the camera to its actual location.
+            episode_environment = str(ch.get('story_environment') or '').strip()
+            current_environment = str(shot.get('story_environment') or '').strip()
+            scene_hint = analyze_story_scene({
+                'visual_prompt': str(shot.get('visual_prompt') or ''),
+                'speech': str(shot.get('speech') or ''),
+                'headline': str(shot.get('headline') or ''),
+            })['scene']
+            if not current_environment:
                 shot['story_environment'] = scene_hint or story_location
+            elif (episode_environment and
+                  current_environment.casefold() == episode_environment.casefold() and
+                  scene_hint and scene_hint != current_environment):
+                shot['story_environment'] = scene_hint
             if unified_mode:
                 if not fixed_cast:
                     # The narration and visual prompt can introduce a new
