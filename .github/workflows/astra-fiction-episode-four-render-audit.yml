@@ -27,6 +27,10 @@ on:
       - 'astra_v2/unified_story_engine.py'
       - 'astra_v2/omniroute_local.py'
       - 'tests/test_episode_four_human_performance.py'
+      - 'astra_v2/pillow_scene_direction.py'
+      - 'astra_v2/visual_artifact_backdrop.py'
+      - 'tests/test_pillow_scene_direction.py'
+      - 'tests/test_visual_artifact_backdrop.py'
 
 permissions:
   contents: read
@@ -40,6 +44,7 @@ jobs:
       ASTRA_CHANNEL: rayvan
       ASTRA_UNIFIED_STORY_ENGINE: '1'
       ASTRA_FICTION_VISUAL_GUARD: '1'
+      ASTRA_VISUAL_ARTIFACT_BACKDROPS: '1'
       ASTRA_HUMAN_CINEMATIC_CAMERA: '1'
       ASTRA_ASSET_PACK_ENABLED: '1'
       ASTRA_ASSET_PACK_AUDIT: '1'
