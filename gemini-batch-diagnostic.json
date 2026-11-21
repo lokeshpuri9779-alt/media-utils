@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-11-21T07:02:58.991424+00:00",
+  "observed_at": "2026-11-21T19:13:16.889908+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
@@ -21,7 +21,7 @@
     },
     {
       "index": 4,
-      "reason": "validation_error_unclassified"
+      "reason": "insufficient_beat_narration"
     },
     {
       "index": 5,
@@ -65,6 +65,22 @@
     },
     {
       "index": 15,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 16,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 17,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 18,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 19,
       "reason": "provider_http_429"
     }
   ],
