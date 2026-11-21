@@ -13721,11 +13721,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-21T00:48:44.784350+00:00",
+  "last_preflight_at": "2026-11-21T02:06:58.910924+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-21T00:50:21.344337+00:00",
+    "at": "2026-11-21T02:08:39.610419+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -27933,7 +27933,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-21T00:50:21.344250+00:00",
+    "at": "2026-11-21T02:08:39.610375+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -27944,13 +27944,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-21T00:50:21.344322+00:00",
+    "at": "2026-11-21T02:08:39.610412+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-21T00:49:26.427732+00:00",
+    "at": "2026-11-21T02:07:50.276935+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -28507,7 +28507,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-21T00:50:21.342902+00:00",
+    "at": "2026-11-21T02:08:39.609555+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -28519,7 +28519,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-21T00:50:21.343728+00:00",
+    "at": "2026-11-21T02:08:39.610092+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
