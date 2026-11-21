@@ -129,6 +129,22 @@ class ArtifactBackdropTests(unittest.TestCase):
                 self.assertNotIn(digest, seen)
                 seen.add(digest)
 
+    def test_underwater_backdrop_has_rays_bubbles_seabed_and_stone_door(self):
+        from PIL import ImageChops
+        base = Image.new("RGB", (1080, 1920), (10, 20, 30))
+        rendered = apply_backdrop(
+            base.copy(),
+            {"story_environment": "underwater",
+             "speech": "A sealed stone door beneath the sea"},
+            "episode-four-sea-door",
+        )
+        self.assertIsNotNone(ImageChops.difference(base, rendered).getbbox())
+        # The arch/door occupies the right-hand scene plate, away from captions.
+        self.assertNotEqual(rendered.getpixel((795, 700)), base.getpixel((795, 700)))
+        self.assertNotEqual(rendered.getpixel((590, 700)), base.getpixel((590, 700)))
+        self.assertEqual(rendered.crop((0, 1100, 1080, 1920)).tobytes(),
+                         base.crop((0, 1100, 1080, 1920)).tobytes())
+
     def test_invalid_dimensions_fail_closed(self):
         with self.assertRaises(ValueError):
             apply_backdrop(Image.new("RGB", (540, 720)), {"speech": "forest"}, "id")
