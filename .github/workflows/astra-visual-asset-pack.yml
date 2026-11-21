@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/astra-visual-asset-pack.yml'
+  schedule:
+    # Refresh before the 30-day artifact retention window can expire.
+    - cron: '0 12 1,15 * *'
   workflow_dispatch:
     inputs:
       format:
