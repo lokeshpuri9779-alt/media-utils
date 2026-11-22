@@ -634,6 +634,36 @@ def _notebook_sea_ending(draw,t):
 
 
 
+def _underwater_left_stage(image, t):
+    """Replace inherited observatory set dressing during the sea-door reveal.
+
+    The final beat changes location. Keep this stage on the preserved left
+    side of the later underwater portal compositor, so Mara and her notebook
+    remain visible without observatory windows or instrument silhouettes.
+    """
+    if image.mode != "RGB" or image.size != (1080, 1920):
+        raise CreativeReject("Underwater finale stage expects RGB 1080x1920")
+    image.paste((12, 49, 67), (0, 0, 405, 1920))
+    d = ImageDraw.Draw(image)
+    # Soft descending light shafts and suspended bubbles establish depth.
+    for x, width, alpha in ((22, 34, 35), (145, 24, 26), (292, 30, 30)):
+        d.polygon(((x, 0), (x + width, 0), (min(404, x + width + 115), 1040),
+                   (min(404, x + 58), 1040)),
+                  fill=(48, 132, 157))
+    for i in range(10):
+        x = 24 + ((i * 79 + 31) % 360)
+        y = 170 + ((i * 137 + int(t * 9)) % 760)
+        r = 5 + (i % 3) * 3
+        d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=3)
+    # A quiet seabed horizon remains below the actor and behind the notebook.
+    d.polygon(((0, 1450), (90, 1418), (190, 1458), (300, 1422),
+               (405, 1450), (405, 1920), (0, 1920)), fill=(17, 76, 88))
+    for x, height in ((18, 92), (386, 78)):
+        d.line((x, 1460, x-5, 1460-height), fill=(65, 159, 146), width=9)
+        d.line((x-2, 1420, min(404, x+19), 1388),
+               fill=(76, 176, 158), width=7)
+
+
 def draw_human_scene(image, shot, t):
     """Draw only authenticated pilot action geometry in the 1080x1920 scene stage."""
     validate_human_scene(shot)
@@ -668,12 +698,17 @@ def draw_human_scene(image, shot, t):
                           running=bool(opts.get("running")),
                           progress=state.progress)
         return _mara(draw, x+walking_offset, y, time, **opts)
-    # Keep verified environment imagery visible through the open window.
-    draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
-    # Chapter-specific reusable art lives BEHIND the hand-acted character and
-    # story object layers. The original verified backdrop remains exposed.
-    from astra_v2.human_illustrated_materials import draw_environment_art
-    draw_environment_art(image,action,t,float(shot.get("duration") or 12))
+    # The final beat moves from the observatory to the sea floor. Do not leave
+    # the observatory's window grid and instrument silhouettes behind Mara.
+    if action == "seal_and_reveal_sea_door":
+        _underwater_left_stage(image, t)
+    else:
+        # Keep verified environment imagery visible through the open window.
+        draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
+        # Chapter-specific reusable art lives BEHIND the hand-acted character
+        # and story object layers. The original verified backdrop remains.
+        from astra_v2.human_illustrated_materials import draw_environment_art
+        draw_environment_art(image,action,t,float(shot.get("duration") or 12))
     d=ImageDraw.Draw(image)
     if action == "discover_radio":
         _radio(d,750,995,t,glow=state.event > .15)
