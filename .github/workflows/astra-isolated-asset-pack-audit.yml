@@ -41,22 +41,26 @@ jobs:
           python - <<'PY'
           import json, time
           from pathlib import Path
-          from astra_v2.quality_asset_selector import select_assets, _verified_inventory
+          from astra_v2.quality_asset_selector import (select_assets, _verified_inventory,
+                                                     _immutable_selection_cache)
           root = Path('runtime-artifacts/verified-pack')
           _verified_inventory.cache_clear()
+          _immutable_selection_cache.cache_clear()
           start = time.perf_counter()
           first = select_assets(root, kind='background', tags=('railway',), video_format='shorts', limit=50)
           cold_seconds = time.perf_counter() - start
           start = time.perf_counter()
           second = select_assets(root, kind='background', tags=('railway',), video_format='shorts', limit=50)
           warm_seconds = time.perf_counter() - start
-          info = _verified_inventory.cache_info()
+          selection_info = _immutable_selection_cache.cache_info()
+          inventory_info = _verified_inventory.cache_info()
           assert first and first == second, 'asset selection mismatch'
-          assert info.misses == 1 and info.hits >= 1, f'cache not reused: {info}'
+          assert selection_info.misses == 1 and selection_info.hits >= 1, f'selection cache not reused: {selection_info}'
+          assert inventory_info.misses == 1, f'verified inventory should be built once: {inventory_info}'
           output = Path('runtime-artifacts/audit')
           output.mkdir(parents=True, exist_ok=True)
-          (output / 'cache-benchmark.json').write_text(json.dumps({'cold_seconds': round(cold_seconds, 4), 'warm_seconds': round(warm_seconds, 4), 'verified_assets': 3200, 'cache_hits': info.hits, 'cache_misses': info.misses, 'selection_count': len(first)}, indent=2))
-          print(f'Cold {cold_seconds:.3f}s; warm {warm_seconds:.3f}s; cache hits {info.hits}')
+          (output / 'cache-benchmark.json').write_text(json.dumps({'cold_seconds': round(cold_seconds, 4), 'warm_seconds': round(warm_seconds, 4), 'verified_assets': 3200, 'selection_cache_hits': selection_info.hits, 'selection_cache_misses': selection_info.misses, 'inventory_cache_hits': inventory_info.hits, 'inventory_cache_misses': inventory_info.misses, 'selection_count': len(first)}, indent=2))
+          print(f'Cold {cold_seconds:.3f}s; warm {warm_seconds:.3f}s; selection cache hits {selection_info.hits}; inventory misses {inventory_info.misses}')
           PY
       - name: Verify actual compositor changes pixels
         run: |
