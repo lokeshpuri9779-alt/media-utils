@@ -43,7 +43,7 @@ class CreativePreflightReportTests(unittest.TestCase):
         before = json.dumps(story, sort_keys=True)
         plan = [
             {"story_environment": "forest", "speech": "A fox sees a lantern."},
-            {"visual_prompt": "An indoor cabin with a wooden hearth"},
+            {"visual_prompt": "An indoor room with a wooden hearth"},
             {"visual_prompt": "A telescope in an observatory"},
         ]
         with patch("studio_renderer.make_plan", return_value=plan) as make_plan:
@@ -73,7 +73,7 @@ class CreativePreflightReportTests(unittest.TestCase):
     def test_unknown_scene_or_failure_never_becomes_recognized(self):
         story = sample_story()
         with patch("studio_renderer.make_plan", return_value=[
-            {"visual_prompt": "A meadow and a wooden courtyard"}]):
+            {"visual_prompt": "A paved courtyard with a wooden bench"}]):
             result = scene_taxonomy_diagnostic(story)
         self.assertEqual(result["status"], "no_shots_recognized")
         self.assertEqual(result["unresolved_shots"], 1)

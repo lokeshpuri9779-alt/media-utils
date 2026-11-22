@@ -47,6 +47,28 @@ class ArtifactBackdropTests(unittest.TestCase):
         }
         self.assertEqual(choose_scene(shot), "forest")
 
+    def test_explicit_common_environments_resolve_to_matching_scene_families(self):
+        cases = (
+            ("A terrier rests beside a mossy tree root.", "forest"),
+            ("The animals return to a wooden cabin.", "village"),
+            ("A snowy winter cabin glows at night.", "snowfield"),
+            ("A team gathers on a neighborhood lawn.", "garden"),
+            ("A rabbit crosses a flower-filled meadow.", "garden"),
+            ("A fox looks down into a deep gorge.", "mountain"),
+            ("A cat waits beside the park gate.", "garden"),
+        )
+        for prompt, expected in cases:
+            with self.subTest(prompt=prompt):
+                self.assertEqual(choose_scene({"visual_prompt": prompt}), expected)
+
+    def test_longer_explicit_environment_phrase_wins_over_generic_cabin(self):
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene
+        result = analyze_story_scene({
+            "visual_prompt": "Inside a snowy winter cabin, two friends share a book."
+        })
+        self.assertEqual(result["scene"], "snowfield")
+        self.assertEqual(result["matched_term"], "winter cabin")
+
     def test_unknown_storyboard_visual_does_not_guess(self):
         self.assertIsNone(choose_scene({"visual": "an unexpected discovery"}))
 
