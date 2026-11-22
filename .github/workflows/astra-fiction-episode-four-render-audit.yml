@@ -20,6 +20,7 @@ on:
       - 'tests/test_human_stage_depth.py'
       - 'astra_v2/human_action_choreography.py'
       - 'tests/test_human_story_choreography.py'
+      - '.github/workflows/astra-fiction-episode-four-render-audit.yml'
       - 'tests/test_expressive_mara_performance.py'
       - 'astra_v2/human_cinematic_camera.py'
       - 'studio_renderer.py'
