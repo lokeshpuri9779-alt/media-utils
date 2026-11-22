@@ -934,7 +934,10 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
     else:
         expanded = []
     for key, title, genre, beats in (AUTHORED_BATCH_526 + AUTHORED_BATCH_473 + AUTHORED_BATCH_424 + AUTHORED_BATCH_423 + AUTHORED_BATCH_422 + AUTHORED_BATCH_421 + AUTHORED_BATCH_420 + AUTHORED_BATCH_407 + AUTHORED_BATCH_364 + AUTHORED_BATCH_341 + AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
-        # The slug is the only trusted source for protagonist identity. Legacy\n        # tuple visual values are often scene/icon names and must never be\n        # forwarded as actor tags. Unknown/unsupported protagonists fail closed.\n        protagonist_visual = _protagonist_visual_for_key(key)\n        if protagonist_visual is None:\n            continue\n        # Reject malformed or weak authored arcs before any expensive render.
+        # The slug is the only trusted source for protagonist identity. Legacy
+        # tuple visual values are often scene/icon names and must never be
+        # forwarded as actor tags. Unknown/unsupported protagonists fail closed.
+        protagonist_visual = _protagonist_visual_for_key(key)\n        if protagonist_visual is None:\n            continue\n        # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
         if any(not all(isinstance(field, str) and field.strip() for field in b) for b in beats):
