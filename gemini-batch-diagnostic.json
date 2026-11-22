@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-11-22T10:29:52.767294+00:00",
+  "observed_at": "2026-11-22T16:55:28.535630+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
@@ -9,47 +9,79 @@
     },
     {
       "index": 1,
-      "reason": "validation_error_unclassified"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 2,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 3,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 4,
-      "reason": "validation_error_unclassified"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 5,
-      "reason": "validation_error_unclassified"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 6,
-      "reason": "invalid_story_structure"
+      "reason": "missing_dialogue"
     },
     {
       "index": 7,
-      "reason": "validation_error_unclassified"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 8,
-      "reason": "validation_error_unclassified"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 9,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 10,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 11,
-      "reason": "provider_http_429"
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 12,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 13,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 14,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 15,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 16,
+      "reason": "missing_dialogue"
+    },
+    {
+      "index": 17,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 18,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 19,
+      "reason": "beat_word_count_out_of_range"
     }
   ],
   "reviewed": null,
