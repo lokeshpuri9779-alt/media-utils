@@ -16,7 +16,7 @@ class StoryArtworkManifestTests(unittest.TestCase):
         self.assertEqual(item["strategy"], "original-illustration")
         for required in (
             "single continuous full-bleed scene",
-            "one coherent camera view",
+            "single camera view",
             "no split-screen",
             "no collage",
             "no storyboard grid",
