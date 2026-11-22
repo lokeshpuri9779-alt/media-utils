@@ -75,6 +75,15 @@ def reconcile(youtube, state):
     return verified
 
 
+def longform_candidate_due(state, now, performance=None, enabled=None):
+    """Long-form queue intake is opt-in and still obeys the 12-hour cadence."""
+    if enabled is None:
+        enabled = os.getenv("ASTRA_LONG_ENABLED", "0") == "1"
+    return bool(enabled) and historical_long_upload_due(
+        state, now, spacing_hours=12, performance=performance
+    )
+
+
 def long_upload_due(state, now, spacing_hours=24):
     """Conservative per-format cooldown, including uploads still processing."""
     latest = []
@@ -141,7 +150,7 @@ def run():
             if not allowed:
                 report.update(outcome="skipped", reason=reason)
                 return report
-            long_due = historical_long_upload_due(state, utcnow(), spacing_hours=12, performance=read_json("performance.json"))
+            long_due = longform_candidate_due(state, utcnow(), performance=read_json("performance.json"))
             report["longform_due"] = bool(long_due)
             print("ASTRA_LONGFORM_DUE=" + str(bool(long_due)).lower())
             live_ids, live_titles = youtube.recent(youtube_channel)

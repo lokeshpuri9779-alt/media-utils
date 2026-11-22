@@ -1,8 +1,9 @@
 """Regression coverage for the independent long-form publishing interval."""
 import unittest
 from datetime import datetime, timedelta, timezone
+from unittest.mock import patch
 
-from astra_v2.run import long_upload_due
+from astra_v2.run import long_upload_due, longform_candidate_due
 
 
 class LongUploadCooldownTests(unittest.TestCase):
@@ -11,6 +12,19 @@ class LongUploadCooldownTests(unittest.TestCase):
 
     def entry(self, hours_ago, fmt="long", key="uploaded_at"):
         return {"format": fmt, key: (self.now - timedelta(hours=hours_ago)).isoformat()}
+
+    def test_longform_is_disabled_by_default(self):
+        with patch.dict("os.environ", {"ASTRA_LONG_ENABLED": "0"}):
+            self.assertFalse(longform_candidate_due({}, self.now))
+
+    def test_longform_enabled_when_12_hour_cadence_is_due(self):
+        with patch.dict("os.environ", {"ASTRA_LONG_ENABLED": "1"}):
+            self.assertTrue(longform_candidate_due({}, self.now))
+
+    def test_longform_enablement_does_not_bypass_cooldown(self):
+        state = {"published": {"long-1": self.entry(2)}}
+        with patch.dict("os.environ", {"ASTRA_LONG_ENABLED": "1"}):
+            self.assertFalse(longform_candidate_due(state, self.now))
 
     def test_first_long_video_is_allowed(self):
         self.assertTrue(long_upload_due({}, self.now))
