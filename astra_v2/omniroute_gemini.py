@@ -12,7 +12,10 @@ from astra_v2.renderer_aware_writing import background_scene_authoring_guidance,
 
 
 def enabled():
-    return os.getenv("ASTRA_GEMINI_ENABLED") == "1" and bool(os.getenv("GEMINI_API_KEY"))
+    from astra_v2.local_llm import enabled as local_llm_enabled
+    return local_llm_enabled() or (
+        os.getenv("ASTRA_GEMINI_ENABLED") == "1" and bool(os.getenv("GEMINI_API_KEY"))
+    )
 
 
 
@@ -230,60 +233,64 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             "locations": names, "objects": names},
             "required": ["style", "characters", "locations", "objects"]}},
         "required": ["title", "question", "answer", "beats", "visual_bible"]}
-    body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"responseMimeType": "application/json",
-                             "responseJsonSchema": response_schema,
-                             "temperature": 0.9, "maxOutputTokens": 2400}}).encode()
-    # A second explicitly configured free-tier model may recover from a removed
-    # model (404) or transient failures. Never bypass auth, quota or policy errors.
-    fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-3.1-flash-lite")
-    if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", fallback):
-        raise ValueError("Invalid Gemini fallback model")
-    models = [model] + ([fallback] if fallback != model else [])
-    result = None
-    for model_index, active_model in enumerate(models):
+    if os.getenv("ASTRA_LOCAL_LLM_ENABLED") == "1":
+        from astra_v2.local_llm import generate_json
+        data = generate_json(prompt, response_schema)
+    else:
+        body = json.dumps({"contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"responseMimeType": "application/json",
+                                 "responseJsonSchema": response_schema,
+                                 "temperature": 0.9, "maxOutputTokens": 2400}}).encode()
+        # A second explicitly configured free-tier model may recover from a removed
+        # model (404) or transient failures. Never bypass auth, quota or policy errors.
+        fallback = os.getenv("ASTRA_GEMINI_FALLBACK_MODEL", "gemini-3.1-flash-lite")
+        if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", fallback):
+            raise ValueError("Invalid Gemini fallback model")
+        models = [model] + ([fallback] if fallback != model else [])
         result = None
-        req = urllib.request.Request(
-            "https://generativelanguage.googleapis.com/v1beta/models/" + active_model + ":generateContent",
-            data=body, method="POST", headers={
-                "x-goog-api-key": os.environ["GEMINI_API_KEY"],
-                "Content-Type": "application/json"})
-        for attempt in range(3):
-            try:
-                with urllib.request.urlopen(req, timeout=45) as response:
-                    result = json.load(response)
-                break
-            except urllib.error.HTTPError as exc:
-                if exc.code == 404 and model_index + 1 < len(models):
+        for model_index, active_model in enumerate(models):
+            result = None
+            req = urllib.request.Request(
+                "https://generativelanguage.googleapis.com/v1beta/models/" + active_model + ":generateContent",
+                data=body, method="POST", headers={
+                    "x-goog-api-key": os.environ["GEMINI_API_KEY"],
+                    "Content-Type": "application/json"})
+            for attempt in range(3):
+                try:
+                    with urllib.request.urlopen(req, timeout=45) as response:
+                        result = json.load(response)
                     break
-                if exc.code in (500, 502, 503, 504):
+                except urllib.error.HTTPError as exc:
+                    if exc.code == 404 and model_index + 1 < len(models):
+                        break
+                    if exc.code in (500, 502, 503, 504):
+                        if attempt < 2:
+                            time.sleep(2 ** attempt)
+                            continue
+                        if model_index + 1 < len(models):
+                            break
+                    raise RuntimeError("Gemini HTTP " + str(exc.code) + " model=" + active_model) from exc
+                except (urllib.error.URLError, TimeoutError) as exc:
                     if attempt < 2:
                         time.sleep(2 ** attempt)
                         continue
                     if model_index + 1 < len(models):
                         break
-                raise RuntimeError("Gemini HTTP " + str(exc.code) + " model=" + active_model) from exc
-            except (urllib.error.URLError, TimeoutError) as exc:
-                if attempt < 2:
-                    time.sleep(2 ** attempt)
-                    continue
-                if model_index + 1 < len(models):
-                    break
-                raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
-        else:
-            continue
-        # A completed response ends failover; only exhausted transient errors continue.
-        if result is not None:
-            break
-    if result is None:
-        raise RuntimeError("Gemini exhausted configured free-tier models without a response")
-    candidates = result.get("candidates") or []
-    if not candidates:
-        raise ValueError("Gemini returned no candidates")
-    if candidates[0].get("finishReason") not in (None, "STOP"):
-        raise ValueError("Gemini response incomplete")
-    parts = (candidates[0].get("content") or {}).get("parts") or []
-    data = json.loads("".join(part.get("text", "") for part in parts))
+                    raise RuntimeError("Gemini transport failed: " + type(exc).__name__) from exc
+            else:
+                continue
+            # A completed response ends failover; only exhausted transient errors continue.
+            if result is not None:
+                break
+        if result is None:
+            raise RuntimeError("Gemini exhausted configured free-tier models without a response")
+        candidates = result.get("candidates") or []
+        if not candidates:
+            raise ValueError("Gemini returned no candidates")
+        if candidates[0].get("finishReason") not in (None, "STOP"):
+            raise ValueError("Gemini response incomplete")
+        parts = (candidates[0].get("content") or {}).get("parts") or []
+        data = json.loads("".join(part.get("text", "") for part in parts))
     title = data.get("title")
     beats = data.get("beats")
     if (not isinstance(title, str) or not 8 <= len(title) <= 75
