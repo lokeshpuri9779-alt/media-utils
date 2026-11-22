@@ -19,9 +19,9 @@ class StoryArtworkManifestTests(unittest.TestCase):
             "single camera view",
             "no split-screen",
             "no collage",
-            "no storyboard grid",
+            "storyboard grid",
             "no tiled panels",
-            "no contact sheet",
+            "contact sheets",
         ):
             with self.subTest(required=required):
                 self.assertIn(required, item["query"].lower())
