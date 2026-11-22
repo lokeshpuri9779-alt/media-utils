@@ -157,17 +157,31 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertLess(action_state("split_glass_key",DURATION*.10,DURATION).event,.02)
         self.assertGreater(action_state("split_glass_key",DURATION*.85,DURATION).event,.95)
 
-    def test_underwater_door_is_a_final_reveal_not_onscreen_at_opening(self):
+    def test_underwater_notebook_survives_the_actual_opaque_environment_repaint(self):
+        from unittest.mock import patch
+        from astra_v2.human_story_performance import draw_human_scene
+        from astra_v2.visual_artifact_backdrop import apply_underwater_reveal
+
         beat = next(shot for shot in records()
                     if shot["story_human_action"] == "seal_and_reveal_sea_door")
-        first, last = frame(beat,.10), frame(beat,.93)
-        page=(602,1020,980,1266)
+        first = Image.new("RGB", (1080, 1920), (13, 22, 37))
+        last = Image.new("RGB", (1080, 1920), (13, 22, 37))
+        self.assertTrue(draw_human_scene(first, beat, DURATION*.10))
+        self.assertTrue(draw_human_scene(last, beat, DURATION*.93))
+        identity = "episode-four-underwater-notebook-regression"
+        apply_underwater_reveal(first, identity)
+        apply_underwater_reveal(last, identity)
+        # The final page is in the preserved left stage; the old right-side
+        # page region is deliberately repainted by the underwater door layer.
+        page=(35,1078,395,1382)
         diff=ImageChops.difference(first.crop(page),last.crop(page))
         self.assertIsNotNone(diff.getbbox())
         self.assertEqual(action_state("seal_and_reveal_sea_door",
                                      DURATION*.10,DURATION).aftermath,0.0)
         self.assertGreater(action_state("seal_and_reveal_sea_door",
                                         DURATION*.93,DURATION).aftermath,.9)
+        # Confirm a recognizable page field remains after the exact overlay.
+        self.assertNotEqual(last.getpixel((70,1110)), first.getpixel((70,1110)))
 
     def test_authorized_action_contract_remains_fail_closed(self):
         record=next(records())
