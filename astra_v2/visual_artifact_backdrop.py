@@ -252,11 +252,13 @@ def apply_underwater_reveal(image, identity):
     for y in (420, 525, 630, 735, 840, 945):
         d.line((555, y, 595, y+15), fill=(225, 236, 222, 220), width=8)
         d.line((985, y+15, 1025, y), fill=(225, 236, 222, 220), width=8)
-    # New seabed replaces the old stage floor and keeps caption area untouched.
-    d.polygon(((405, 1010), (1080, 1010), (1080, 1260), (405, 1260)),
+    # New seabed replaces the old stage floor through the full visual stage.
+    # The earlier 1260px cutoff left a brown observatory floor strip in the
+    # decoded MP4 beneath the portal; captions begin below this replacement.
+    d.polygon(((405, 1010), (1080, 1010), (1080, 1400), (405, 1400)),
               fill=(8, 83, 99, 255))
     d.polygon(((405, 1175), (570, 1135), (720, 1185), (875, 1145),
-               (1010, 1180), (1080, 1150), (1080, 1260), (405, 1260)),
+               (1010, 1180), (1080, 1150), (1080, 1400), (405, 1400)),
               fill=(19, 119, 121, 255))
     d.arc((475, 1080, 740, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
     d.arc((760, 1085, 1050, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
