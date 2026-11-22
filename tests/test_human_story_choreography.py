@@ -218,7 +218,8 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         apply_underwater_reveal(frame, "underwater-floor-regression")
         # The right strip used to retain brown floor below the 1260px overlay.
         self.assertNotEqual(frame.getpixel((900, 1320)), (92, 65, 55))
-        # The preserved left stage must also replace its inherited floor.
+        # Both sides of the preserved stage must replace the inherited floor.
+        self.assertNotEqual(frame.getpixel((200, 1270)), (92, 65, 55))
         self.assertNotEqual(frame.getpixel((200, 1350)), (92, 65, 55))
 
 
