@@ -14,6 +14,7 @@ from astra_v2.pillow_duo_scene import (
     ACTORS, ALIASES, duo_compatibility, draw_duo, scene_mood, scene_prop,
 )
 from astra_v2.ensemble_scene import cast_for_shot, ensemble_frame
+from astra_v2.interaction_props import draw_interaction_prop
 
 # A real badger is not in the Studio puppet actor library. A generated
 # squirrel-only frame cannot stand in for the narrated badger character.
@@ -164,6 +165,11 @@ def draw_story_frame(image, shot, t, *, draw_directed=None,
         success = True
     if not success:
         raise CreativeReject("Unified Studio: " + mode + " scene failed to render faithfully")
+    # Beat-local physical clues must be composited in the unified renderer too.
+    # The legacy Studio draw_visual path already handled these props, but the
+    # default unified fiction engine bypassed that call and silently dropped
+    # narrated notebook/parcel/tool evidence from the final encoded frames.
+    draw_interaction_prop(image, stable_shot, t)
     if (stable_shot.get("illustrated_assets") is not None
             or stable_shot.get("auto_illustrated_art")):
         from astra_v2.illustrated_story_compositor import apply_story_art
