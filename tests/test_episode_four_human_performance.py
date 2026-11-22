@@ -76,7 +76,9 @@ class SeasonFinalePerformanceTests(unittest.TestCase):
         final = frame(beats(4)[3], 1.9)
         # Far-left upper stage is background-only: it must be deep underwater,
         # not the inherited observatory wall/window treatment.
-        self.assertEqual(final.getpixel((20, 700)), (12, 49, 67))
+        self.assertEqual(final.getpixel((20, 700)), (5, 49, 70))
+        # The old observatory sky must also be gone above the actor stage.
+        self.assertEqual(final.getpixel((20, 200)), (5, 49, 70))
         # The authored notebook's miniature arched door remains visible.
         self.assertIsNotNone(ImageChops.difference(
             final.crop((0, 1080, 405, 1385)),
