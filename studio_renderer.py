@@ -1338,7 +1338,18 @@ def asset_manifest(ch, plan):
         scene_action=' '.join(str(p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
         scene_parts=[x for x in (scene_environment, scene_action) if x]
         scene_brief=' | '.join(scene_parts)
-        scene_query=('Original scene illustration: '+scene_brief) if scene_brief else ''
+        # Original story illustrations must read as one coherent cinematic
+        # frame. Recent encoded Episode 4 output exposed accidental tiled
+        # compositions even though the asset-resolution and creative-score
+        # gates passed. Explicitly forbid contact-sheet/storyboard layouts.
+        composition_rule = (
+            ' Single continuous full-bleed scene, one coherent camera view, '
+            'natural spatial continuity; no split-screen, collage, storyboard '
+            'grid, tiled panels, inset frames, borders, contact sheet, or '
+            'multiple simultaneous viewpoints.'
+        )
+        scene_query=(('Original scene illustration: '+scene_brief+composition_rule)
+                     if scene_brief else '')
         if explicit_query:
             # Only an editorial beat that deliberately names the needed subject
             # may search an external provider. This preserves semantic isolation.
