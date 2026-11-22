@@ -658,10 +658,10 @@ def _underwater_left_stage(image, t):
     # The seafloor stays above the lower caption-safe band; the lower band
     # remains untouched for the existing subtitle compositor.
     d.polygon(((0, 1348), (90, 1322), (190, 1360), (300, 1328),
-               (405, 1348), (405, 1400), (0, 1400)), fill=(17, 76, 88))
+               (405, 1348), (405, 1399), (0, 1399)), fill=(17, 76, 88))
     for x, height in ((18, 58), (386, 48)):
-        d.line((x, 1392, x-5, 1392-height), fill=(65, 159, 146), width=9)
-        d.line((x-2, 1360, min(404, x+19), 1338),
+        d.line((x, 1398, x-5, 1398-height), fill=(65, 159, 146), width=9)
+        d.line((x-2, 1358, min(404, x+19), 1336),
                fill=(76, 176, 158), width=7)
 
 
