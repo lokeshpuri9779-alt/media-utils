@@ -90,7 +90,18 @@ class LayeredObservatoryStageTests(unittest.TestCase):
                 self.assertIsNotNone(ImageChops.difference(
                     image.crop((80,555,1000,1260)),
                     original.crop((80,555,1000,1260))).getbbox())
-                for zone in ((0,0,1080,480),(0,1400,1080,1920)):
+                if shot["story_human_action"] == "seal_and_reveal_sea_door":
+                    # The finale's underwater backdrop may occupy its left
+                    # backdrop lane, but must not cross into title-safe space.
+                    header_delta = ImageChops.difference(
+                        image.crop((0,0,1080,480)),
+                        original.crop((0,0,1080,480))).getbbox()
+                    if header_delta is not None:
+                        self.assertLessEqual(header_delta[2],405)
+                    zones = ((0,1400,1080,1920),)
+                else:
+                    zones = ((0,0,1080,480),(0,1400,1080,1920))
+                for zone in zones:
                     self.assertIsNone(ImageChops.difference(
                         image.crop(zone),original.crop(zone)).getbbox())
 
