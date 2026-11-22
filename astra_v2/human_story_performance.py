@@ -643,7 +643,7 @@ def _underwater_left_stage(image, t):
     """
     if image.mode != "RGB" or image.size != (1080, 1920):
         raise CreativeReject("Underwater finale stage expects RGB 1080x1920")
-    image.paste((12, 49, 67), (0, 0, 405, 1920))
+    image.paste((12, 49, 67), (0, 0, 405, 1400))
     d = ImageDraw.Draw(image)
     # Soft descending light shafts and suspended bubbles establish depth.
     for x, width, alpha in ((22, 34, 35), (145, 24, 26), (292, 30, 30)):
@@ -655,12 +655,13 @@ def _underwater_left_stage(image, t):
         y = 170 + ((i * 137 + int(t * 9)) % 760)
         r = 5 + (i % 3) * 3
         d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=3)
-    # A quiet seabed horizon remains below the actor and behind the notebook.
-    d.polygon(((0, 1450), (90, 1418), (190, 1458), (300, 1422),
-               (405, 1450), (405, 1920), (0, 1920)), fill=(17, 76, 88))
-    for x, height in ((18, 92), (386, 78)):
-        d.line((x, 1460, x-5, 1460-height), fill=(65, 159, 146), width=9)
-        d.line((x-2, 1420, min(404, x+19), 1388),
+    # The seafloor stays above the lower caption-safe band; the lower band
+    # remains untouched for the existing subtitle compositor.
+    d.polygon(((0, 1348), (90, 1322), (190, 1360), (300, 1328),
+               (405, 1348), (405, 1400), (0, 1400)), fill=(17, 76, 88))
+    for x, height in ((18, 58), (386, 48)):
+        d.line((x, 1392, x-5, 1392-height), fill=(65, 159, 146), width=9)
+        d.line((x-2, 1360, min(404, x+19), 1338),
                fill=(76, 176, 158), width=7)
 
 
