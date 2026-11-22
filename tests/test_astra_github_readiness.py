@@ -115,6 +115,8 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("spacing_hours=12", controller)
         self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", publisher)
         self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", longform)
+        preload = read(PRELOAD)
+        self.assertIn("ASTRA_GEMINI_RENDERER_AWARE_WRITING: '1'", preload)
 
 
 if __name__ == "__main__":
