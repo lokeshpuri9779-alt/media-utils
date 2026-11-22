@@ -169,7 +169,12 @@ def draw_story_frame(image, shot, t, *, draw_directed=None,
     # The legacy Studio draw_visual path already handled these props, but the
     # default unified fiction engine bypassed that call and silently dropped
     # narrated notebook/parcel/tool evidence from the final encoded frames.
-    draw_interaction_prop(image, stable_shot, t)
+    # Episode 4's sea-door finale already draws its authored open notebook in
+    # _notebook_sea_ending. Drawing the generic notebook prop as well creates
+    # two overlapping books in the same composition, so keep that bespoke
+    # performance as the single source of truth for this beat.
+    if stable_shot.get("story_human_action") != "seal_and_reveal_sea_door":
+        draw_interaction_prop(image, stable_shot, t)
     if (stable_shot.get("illustrated_assets") is not None
             or stable_shot.get("auto_illustrated_art")):
         from astra_v2.illustrated_story_compositor import apply_story_art
