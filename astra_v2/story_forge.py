@@ -938,8 +938,9 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         # tuple visual values are often scene/icon names and must never be
         # forwarded as actor tags. Unknown/unsupported protagonists fail closed.
         protagonist_visual = _protagonist_visual_for_key(key)
-        if protagonist_visual is None:
-            continue
+        # Keep every authored and review-only record discoverable. Unsupported
+        # protagonist IDs receive no actor tag; renderer/publication preflight
+        # must reject them rather than silently dropping editorial inventory.
         # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
