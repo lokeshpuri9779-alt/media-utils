@@ -34,7 +34,7 @@ DIRECTED_SHOTS={
     "face_duplicate_at_countdown": ("duo",1.05,1.14,540,918),
     "warn_parallel_cities": ("duo",1.02,1.13,543,923),
     "split_glass_key": ("duo",1.06,1.18,545,964),
-    "seal_and_reveal_sea_door": ("reveal",1.10,1.40,591,1035),
+    "seal_and_reveal_sea_door": ("reveal",1.02,1.08,540,920),
 }
 # Keep the story's essential on-screen people and their narrated props
 # within the source crop. A technically valid 1.5x shot previously removed
