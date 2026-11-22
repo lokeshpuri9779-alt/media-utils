@@ -1,0 +1,47 @@
+name: ASTRA Deterministic Scene Control (Review Only)
+on:
+  push:
+    branches:
+      - experiment/astra-deterministic-scene-control
+    paths:
+      - .github/workflows/astra-deterministic-scene-control.yml
+      - tools/experimental_scene_control.py
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Assert isolated experimental branch
+        shell: bash
+        run: |
+          test "$GITHUB_REF_NAME" = 'experiment/astra-deterministic-scene-control'
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow only
+        run: python -m pip install --disable-pip-version-check 'Pillow>=10,<12'
+      - name: Render deterministic geometry
+        run: python -m tools.experimental_scene_control
+      - name: Verify evidence never marks production ready
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('artifacts/experimental-scene-control/keyframe.json').read_text())
+          assert d['success'] is True and all(d['checks'].values())
+          assert d['approved'] is False and d['published'] is False
+          assert d['production_ready'] is False
+          assert d['semantic_quality'] == 'manual_review_required'
+          PY
+      - name: Upload review-only artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-scene-control-${{ github.run_id }}
+          path: artifacts/experimental-scene-control/
+          if-no-files-found: warn
+          retention-days: 7
