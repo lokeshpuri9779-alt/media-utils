@@ -57,7 +57,7 @@ def analyze_story_scene(shot):
         for scene in SCENES:
             # Preserve the first declared synonym within a scene family.
             term = next((candidate for candidate in SCENE_TERMS[scene]
-                         if re.search(r"\\b" + re.escape(candidate) + r"\\b", text)), None)
+                         if re.search(r"\b" + re.escape(candidate) + r"\b", text)), None)
             if term:
                 matches.append((len(term), scene, term))
         if matches:
