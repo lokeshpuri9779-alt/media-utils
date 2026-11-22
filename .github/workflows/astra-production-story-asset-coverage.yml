@@ -18,7 +18,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: astra-original-visual-pack
-          run-id: 39960540392
+          run-id: 45008240518
           github-token: ${{ github.token }}
           path: runtime-artifacts/download
       - name: Validate archive and extract safely

@@ -1,0 +1,66 @@
+name: ASTRA Visual Pack Equivalence (Read Only)
+
+# Read-only check that a replacement visual pack is file-for-file identical to
+# the pack it replaces, and passes the same production restore verification.
+# No publishing, no storage changes, no secrets. Runs only for changes to this
+# workflow, so it executes on the PR that proposes the re-pin.
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-visual-pack-equivalence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check 'Pillow==11.3.0'
+      - name: Download previously pinned pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 39960540392
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/old
+      - name: Download replacement pack
+        uses: actions/download-artifact@v4
+        with:
+          name: astra-original-visual-pack
+          run-id: 45008240518
+          github-token: ${{ github.token }}
+          path: runtime-artifacts/new
+      - name: Restore replacement with the production verifier
+        run: python -m tools.astra_restore_visual_pack runtime-artifacts/new/astra-visual-pack.zip runtime-artifacts/verified-new --expected 3200
+      - name: Compare old and new pack contents
+        run: |
+          python - <<'PY'
+          import hashlib, json, zipfile
+          def read(path):
+              out = {}
+              with zipfile.ZipFile(path) as z:
+                  assert z.testzip() is None
+                  for name in z.namelist():
+                      if not name.endswith('/'):
+                          out[name] = hashlib.sha256(z.read(name)).hexdigest()
+              return out
+          old = read('runtime-artifacts/old/astra-visual-pack.zip')
+          new = read('runtime-artifacts/new/astra-visual-pack.zip')
+          only_old = sorted(set(old) - set(new)); only_new = sorted(set(new) - set(old))
+          changed = sorted(n for n in set(old) & set(new) if old[n] != new[n])
+          print('ASTRA_PACK_EQUIVALENCE=' + json.dumps({
+              'old_files': len(old), 'new_files': len(new),
+              'only_old': len(only_old), 'only_new': len(only_new),
+              'changed': len(changed), 'changed_sample': changed[:5]}))
+          assert len(new) == 3201, 'expected 3200 PNGs plus manifest'
+          assert not only_old and not only_new and not changed, 'packs differ'
+          print('ASTRA_PACK_EQUIVALENT=1')
+          PY
