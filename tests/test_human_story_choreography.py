@@ -210,6 +210,17 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertEqual(action_state("discover_radio",7.32,12),
                          action_state("discover_radio",7.32,12))
 
+    def test_underwater_reveal_replaces_the_entire_old_floor_strip(self):
+        from astra_v2.human_story_performance import _underwater_left_stage
+        from astra_v2.visual_artifact_backdrop import apply_underwater_reveal
+        frame = Image.new("RGB", (1080, 1920), (92, 65, 55))
+        _underwater_left_stage(frame, 1.0)
+        apply_underwater_reveal(frame, "underwater-floor-regression")
+        # The right strip used to retain brown floor below the 1260px overlay.
+        self.assertNotEqual(frame.getpixel((900, 1320)), (92, 65, 55))
+        # The preserved left stage must also replace its inherited floor.
+        self.assertNotEqual(frame.getpixel((200, 1350)), (92, 65, 55))
+
 
 if __name__ == "__main__":
     unittest.main()
