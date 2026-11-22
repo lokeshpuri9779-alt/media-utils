@@ -50,6 +50,20 @@ class UnifiedEngineTests(unittest.TestCase):
                 "story_cast": ("squirrel",)}
         self.assertEqual(validate_story_shot(shot), "solo")
 
+    def test_unified_directed_scene_composites_narrated_notebook_clue(self):
+        shot = {"speech": "Her brother's notebook showed a second door beneath the sea."}
+        image = Image.new("RGB", (1080, 1920), "white")
+        draw = Mock()
+        with patch("astra_v2.unified_story_engine.draw_interaction_prop",
+                   wraps=__import__("astra_v2.interaction_props",
+                                   fromlist=["draw_interaction_prop"]).draw_interaction_prop) as prop:
+            result = draw_story_frame(image, shot, .5, draw_directed=draw,
+                                      global_time=2.0, accent=(80, 150, 200))
+        self.assertEqual(result, "directed")
+        self.assertTrue(prop.called)
+        self.assertNotEqual(image.getpixel((170, 1035)), (255, 255, 255))
+        self.assertNotEqual(image.getpixel((190, 1000)), (255, 255, 255))
+
     def test_duo_cast_stable(self):
         shot = {"speech": "The fox helped the rabbit carry a lantern.",
                 "story_cast": ("fox", "rabbit")}
