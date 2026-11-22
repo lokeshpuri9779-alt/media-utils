@@ -12411,6 +12411,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-4d872eadbf95456a610f",
+      "video_id": "2xVIWX6REPg",
+      "confirmed_at": "2026-11-22T22:26:26.704989+00:00",
+      "title": "Pippin the Pangolin and the Sun-Baked Trail Marker",
+      "plot_fingerprint": "0ea4fde6ac25d927f0b1ec640aada8242cf769c7da9d4e7c84459c46bf368b56",
+      "story_beats": [
+        {
+          "headline": "The Disrupted Path",
+          "speech": "Oh no, the fierce wind has knocked down our wooden navigation markers across the dusty grassland plains completely.",
+          "visual": "signal",
+          "label": "Storm Aftermath",
+          "story_beat": "reveal",
+          "visual_prompt": "Pippin the pangolin stands on dry cracked earth holding a brass compass, looking sadly at a fallen wooden sign post in a sun-scorched grassland under a bright yellow sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Checking the Heading",
+          "speech": "I must use this brass compass to find our exact bearing before the midday heat slows our journey down.",
+          "visual": "robot",
+          "label": "Reading the Needle",
+          "story_beat": "build",
+          "visual_prompt": "Close-up of Pippin the pangolin kneeling in dry grass, carefully holding an open brass compass with his paws, examining the spinning needle with a focused expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Leveraging the Post",
+          "speech": "With steady paw strength, I will lift this heavy marker back into its upright socket in the hard earth.",
+          "visual": "door",
+          "label": "Restoring Order",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pippin the pangolin pushes his scaled back against a heavy wooden post lying in the dust, straining to lift it upright on the arid grassland.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Correct Direction",
+          "speech": "Now the compass points true and the marker stands tall, guiding every traveler safely toward the distant hills.",
+          "visual": "forest",
+          "label": "Path Restored",
+          "story_beat": "payoff",
+          "visual_prompt": "Pippin the pangolin stands proudly next to a re-erected wooden sign post pointing toward distant green hills, holding a brass compass while smiling under a clear sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
