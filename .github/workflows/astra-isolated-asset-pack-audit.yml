@@ -2,6 +2,9 @@ name: ASTRA Isolated Asset Pack Render Audit
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/astra-isolated-asset-pack-audit.yml'
   push:
     branches: [main]
     paths:
