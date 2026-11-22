@@ -60,9 +60,20 @@ class HumanStoryChoreographyTests(unittest.TestCase):
                     self.assertGreater(changed_pixels, 2000,
                         "Only a blink or tiny decorative animation changed")
                 # The authored original performance remains restricted to stage.
+                # The sea-door finale intentionally replaces the upper backdrop
+                # with a static underwater environment. Keep that region stable
+                # across story time, while retaining the strict lower caption band.
                 reference = Image.new("RGB", (1080,1920), (13,22,37))
-                for pic in frames:
-                    for region in ((0,0,1080,480), (0,1400,1080,1920)):
+                for index, pic in enumerate(frames):
+                    if shot["story_human_action"] == "seal_and_reveal_sea_door":
+                        upper = (0,0,1080,480)
+                        self.assertIsNone(ImageChops.difference(
+                            pic.crop(upper), frames[0].crop(upper)).getbbox(),
+                            "Underwater backdrop changed inside headline-safe region")
+                        regions = ((0,1400,1080,1920),)
+                    else:
+                        regions = ((0,0,1080,480), (0,1400,1080,1920))
+                    for region in regions:
                         self.assertIsNone(ImageChops.difference(
                             pic.crop(region), reference.crop(region)).getbbox(),
                             "Action overlapped headline or caption-safe region")
