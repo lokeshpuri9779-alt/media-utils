@@ -1,23 +1,23 @@
 {
-  "observed_at": "2026-11-22T16:55:28.535630+00:00",
+  "observed_at": "2026-11-22T19:38:19.143194+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 1,
       "reason": "beat_word_count_out_of_range"
     },
     {
-      "index": 2,
+      "index": 1,
       "reason": "invalid_story_structure"
     },
     {
+      "index": 2,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
       "index": 3,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 4,
@@ -25,15 +25,15 @@
     },
     {
       "index": 5,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 6,
       "reason": "missing_dialogue"
     },
     {
-      "index": 7,
+      "index": 6,
       "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 7,
+      "reason": "invalid_story_structure"
     },
     {
       "index": 8,
@@ -45,11 +45,11 @@
     },
     {
       "index": 10,
-      "reason": "invalid_story_structure"
+      "reason": "missing_dialogue"
     },
     {
       "index": 11,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 12,
@@ -57,7 +57,7 @@
     },
     {
       "index": 13,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "missing_dialogue"
     },
     {
       "index": 14,
@@ -69,7 +69,7 @@
     },
     {
       "index": 16,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 17,
