@@ -1,11 +1,11 @@
 {
-  "observed_at": "2026-11-22T06:44:05.621190+00:00",
+  "observed_at": "2026-11-22T10:29:52.767294+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 1,
@@ -13,7 +13,7 @@
     },
     {
       "index": 2,
-      "reason": "insufficient_beat_narration"
+      "reason": "validation_error_unclassified"
     },
     {
       "index": 3,
@@ -29,10 +29,26 @@
     },
     {
       "index": 6,
-      "reason": "validation_error_unclassified"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 7,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 8,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 9,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 10,
+      "reason": "validation_error_unclassified"
+    },
+    {
+      "index": 11,
       "reason": "provider_http_429"
     }
   ],
