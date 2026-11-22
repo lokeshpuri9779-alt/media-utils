@@ -1,5 +1,6 @@
 """Finale: continuity, two actors, key destruction, and next-season setup."""
 import unittest
+from unittest.mock import patch
 from PIL import Image, ImageChops
 from astra_errors import CreativeReject
 from astra_v2.omniroute_local import catalog
@@ -80,6 +81,13 @@ class SeasonFinalePerformanceTests(unittest.TestCase):
         self.assertIsNotNone(ImageChops.difference(
             final.crop((0, 1080, 405, 1385)),
             Image.new('RGB', (405, 305), (12, 49, 67))).getbbox())
+
+    def test_finale_uses_only_the_bespoke_notebook_not_a_duplicate_generic_prop(self):
+        shot = beats(4)[3]
+        with patch("astra_v2.unified_story_engine.draw_interaction_prop") as generic_prop:
+            result = frame(shot, 1.9)
+        self.assertEqual(result.size, (1080, 1920))
+        generic_prop.assert_not_called()
 
     def test_wrong_episode_wrong_action_or_missing_plot_contract_rejected(self):
         sample=beats(4)[2]
