@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-22",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
-  "confirmed_today": 1,
-  "last_attempt_at": "2026-11-22T17:02:08.192250+00:00",
+  "attempts": 3,
+  "confirmed_today": 2,
+  "last_attempt_at": "2026-11-22T17:35:17.430168+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -13740,16 +13740,14 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "_r3F2qLx-Uc": {
-      "content_id": "rayvan-gemini-816e1ed91213034f5759",
+    },
+    "rayvan-gemini-816e1ed91213034f5759": {
+      "video_id": "_r3F2qLx-Uc",
+      "confirmed_at": "2026-11-22T17:33:59.927485+00:00",
       "title": "Buster and Cleo Win the Community Soccer Championship",
-      "day": "2026-11-22",
-      "uploaded_at": "2026-11-22T17:02:09.959102+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-22T17:02:09.959102+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "946c3011eeec43a073a4e34a3c1cac6988be686c46bb6802b4f282be3c0c33c4",
       "story_beats": [
@@ -13794,16 +13792,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "g6Ua49qJ0YA": {
+      "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
+      "title": "Bram's Snowy Rescue and the Pine Ridge Beacon",
+      "day": "2026-11-22",
+      "uploaded_at": "2026-11-22T17:35:18.972617+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "10b8bb6234b67d56bb84ae78b4d21ef0ed76e4b9481b9a1ab6f69f2f8e34f74f",
+      "story_beats": [
+        {
+          "headline": "The Missing Kit Discovered",
+          "speech": "Oh dear, little Pip is stranded on the snowy ridge while the storm grows dangerously fierce all around us.",
+          "visual": "forest",
+          "label": "Storm Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bram the stoat stands in a snowy forest looking worried, holding a small brass compass in his paws while gazing up at a darkening sky filled with falling snowflakes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Consulting the Compass",
+          "speech": "We must not listen to the howling wind in the gorge; this little compass needle points straight to safety.",
+          "visual": "signal",
+          "label": "Pathfinding",
+          "story_beat": "build",
+          "visual_prompt": "Bram the stoat crouches on a snow-covered boulder in the forest, carefully inspecting the glass face of a vintage compass held in both front paws as a directional signal flair glows in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Ridge",
+          "speech": "Step right where I step, keeping close to the pine trees so the deep drifts do not swallow us whole.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bram the stoat leads his smaller sister stoat across a narrow snowy timber bridge nestled inside a thick pine forest, holding a glowing lantern to light their icy path.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Warmth Restored",
+          "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
+          "visual": "ship",
+          "label": "Safe Haven",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowflakes fall harmlessly outside the open wooden doorway.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-22T17:01:08.321421+00:00",
+  "last_preflight_at": "2026-11-22T17:33:59.610614+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-22T17:02:10.321033+00:00",
+    "at": "2026-11-22T17:35:19.226349+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -28079,10 +28132,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-6af83e4896ab46b6b831": {
+      "at": "2026-11-22T17:35:17.430146+00:00",
+      "title": "Bram's Snowy Rescue and the Pine Ridge Beacon",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "10b8bb6234b67d56bb84ae78b4d21ef0ed76e4b9481b9a1ab6f69f2f8e34f74f",
+      "story_beats": [
+        {
+          "headline": "The Missing Kit Discovered",
+          "speech": "Oh dear, little Pip is stranded on the snowy ridge while the storm grows dangerously fierce all around us.",
+          "visual": "forest",
+          "label": "Storm Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bram the stoat stands in a snowy forest looking worried, holding a small brass compass in his paws while gazing up at a darkening sky filled with falling snowflakes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Consulting the Compass",
+          "speech": "We must not listen to the howling wind in the gorge; this little compass needle points straight to safety.",
+          "visual": "signal",
+          "label": "Pathfinding",
+          "story_beat": "build",
+          "visual_prompt": "Bram the stoat crouches on a snow-covered boulder in the forest, carefully inspecting the glass face of a vintage compass held in both front paws as a directional signal flair glows in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Ridge",
+          "speech": "Step right where I step, keeping close to the pine trees so the deep drifts do not swallow us whole.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bram the stoat leads his smaller sister stoat across a narrow snowy timber bridge nestled inside a thick pine forest, holding a glowing lantern to light their icy path.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Warmth Restored",
+          "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
+          "visual": "ship",
+          "label": "Safe Haven",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowflakes fall harmlessly outside the open wooden doorway.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-22T17:02:10.320973+00:00",
+    "at": "2026-11-22T17:35:19.226306+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -28093,21 +28197,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-22T17:02:10.321023+00:00",
+    "at": "2026-11-22T17:35:19.226342+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-22T17:01:56.057450+00:00",
+    "at": "2026-11-22T17:35:05.969019+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-816e1ed91213034f5759",
-    "video_url": "https://www.youtube.com/watch?v=_r3F2qLx-Uc",
+    "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
+    "video_url": "https://www.youtube.com/watch?v=g6Ua49qJ0YA",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-22T17:02:10.320170+00:00",
+    "at": "2026-11-22T17:35:19.225687+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -28119,7 +28223,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-22T17:02:10.320891+00:00",
+    "at": "2026-11-22T17:35:19.226248+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
