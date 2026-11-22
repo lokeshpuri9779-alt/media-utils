@@ -15,8 +15,7 @@ def test_catalog_never_exports_legacy_scene_labels_as_actor_tags():
     stories = catalog(limit=10000)
     assert stories
     for story in stories:
-        for beat in story["story_beats"]:
-            assert beat["visual"] in VISUALS
-            assert beat["visual"] == _protagonist_visual_for_key(
-                story["content_id"].replace("rayvan-forge-", "", 1)
-            ) if False else beat["visual"] in VISUALS
+        tags = [beat["visual"] for beat in story["story_beats"]]
+        assert len(tags) == 4
+        assert len(set(tags)) == 1
+        assert tags[0] in VISUALS
