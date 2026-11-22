@@ -29,6 +29,10 @@ class ArtifactBackdropTests(unittest.TestCase):
             ("The train station signal", "railway"),
             ("A fox in the forest", "forest"),
             ("Underwater rescue", "underwater"),
+            ("A second door beneath the sea", "underwater"),
+            ("A hidden passage under the sea", "underwater"),
+            ("An undersea chamber", "underwater"),
+            ("A key on the ocean floor", "underwater"),
         ):
             with self.subTest(term=term):
                 self.assertEqual(choose_scene({"speech": term}), expected)
