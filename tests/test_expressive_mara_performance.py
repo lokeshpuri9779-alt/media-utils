@@ -82,6 +82,12 @@ class ExpressiveMaraPerformanceTests(unittest.TestCase):
                 frame=Image.new("RGB",(1080,1920),(16,26,38))
                 self.assertEqual(draw_story_frame(frame,shot,.78),"human")
                 for zone in ((0,0,1080,480),(0,1400,1080,1920)):
+                    # The sea-door finale deliberately paints an underwater
+                    # backdrop in the upper region; only the lower caption
+                    # band remains a strict no-actor/no-prop region there.
+                    if (shot["story_human_action"] == "seal_and_reveal_sea_door"
+                            and zone == (0,0,1080,480)):
+                        continue
                     reference=Image.new("RGB",frame.crop(zone).size,(16,26,38))
                     self.assertIsNone(ImageChops.difference(
                         frame.crop(zone),reference).getbbox(),
