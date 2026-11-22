@@ -937,7 +937,10 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
         # The slug is the only trusted source for protagonist identity. Legacy
         # tuple visual values are often scene/icon names and must never be
         # forwarded as actor tags. Unknown/unsupported protagonists fail closed.
-        protagonist_visual = _protagonist_visual_for_key(key)\n        if protagonist_visual is None:\n            continue\n        # Reject malformed or weak authored arcs before any expensive render.
+        protagonist_visual = _protagonist_visual_for_key(key)
+        if protagonist_visual is None:
+            continue
+        # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
         if any(not all(isinstance(field, str) and field.strip() for field in b) for b in beats):
