@@ -21,6 +21,7 @@ on:
       - 'astra_v2/story_editorial.py'
       - 'tests/test_astra_story_editorial.py'
       - 'astra_v2/story_supply_review.py'
+      - 'astra_v2/proposal_ledger_retention.py'
       - 'astra_v2/story_review_shortlist.py'
       - 'astra_v2/automated_editorial_evidence.py'
       - 'astra_v2/editorial_evidence_export.py'
@@ -155,6 +156,13 @@ jobs:
         run: |
           python -m unittest discover -s tests -p test_astra_autonomous_story_proposals.py -v
           python -m unittest discover -s tests -p test_astra_proposal_history.py -v
+      - name: Bound the unreviewed proposal ledger (oldest drafts only)
+        # Triage/audit cost is roughly quadratic in ledger size (7,821 proposals took
+        # >20 min on Nov 22). Drops only the oldest unreviewed drafts; never a proposal
+        # with a review decision or production_ready. Earlier versions stay in astra-state history.
+        env:
+          ASTRA_LEDGER_KEEP: '2000'
+        run: python -m astra_v2.proposal_ledger_retention
       - name: Triage proposals without granting publication approval
         run: /usr/bin/time -f "ASTRA_STAGE_TRIAGE_SECONDS=%e ASTRA_STAGE_TRIAGE_PEAK_KB=%M" python -m astra_v2.story_editorial_report
       - name: Audit production eligibility without promotion

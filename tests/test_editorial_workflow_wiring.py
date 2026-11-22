@@ -17,7 +17,21 @@ class EditorialWorkflowWiringTests(unittest.TestCase):
         self.assertIn("python -m astra_v2.editorial_batch_preparation", source[prepare:summary])
         self.assertIn("assert result[\"approved_count\"] == 0", source[prepare:summary])
         self.assertIn("assert result[\"publication_triggered\"] is False", source[prepare:summary])
-        self.assertIn("            runtime-health/story_review_preparation.json\n          if-no-files-found: error", source)
+        upload = source[source.index("      - name: Store unreviewed proposal ledger"):]
+        self.assertIn("            runtime-health/story_review_preparation.json\n", upload)
+        self.assertIn("          if-no-files-found: error", upload)
+
+    def test_ledger_is_bounded_before_triage_and_audit(self):
+        source = WORKFLOW.read_text(encoding="utf-8")
+        bound = source.index("      - name: Bound the unreviewed proposal ledger (oldest drafts only)")
+        triage = source.index("      - name: Triage proposals without granting publication approval")
+        audit = source.index("      - name: Audit production eligibility without promotion")
+        self.assertLess(bound, triage)
+        self.assertLess(triage, audit)
+        step = source[bound:triage]
+        self.assertIn("python -m astra_v2.proposal_ledger_retention", step)
+        self.assertIn("ASTRA_LEDGER_KEEP: '2000'", step)
+        self.assertIn("astra_v2/proposal_ledger_retention.py", source[:source.index("jobs:")])
 
     def test_no_unindented_artifact_path_in_workflow(self):
         source = WORKFLOW.read_text(encoding="utf-8")
