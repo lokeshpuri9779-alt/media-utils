@@ -13956,28 +13956,28 @@
       "renderer": "studio-7.3.1"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-22T22:26:26.402965+00:00",
+  "last_outcome": "failure",
+  "last_error": "_ssl.c:994: The handshake operation timed out",
+  "last_preflight_at": "2026-11-22T22:46:24.675681+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "failure",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-22T22:27:46.782948+00:00",
+    "at": "2026-11-22T22:47:25.165784+00:00",
     "early_tests": "success",
-    "preflight_step": "success",
-    "render_due": "true",
-    "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "preflight_step": "failure",
+    "render_due": "false",
+    "job_status_before_persist": "failure",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-22T22:27:33.433560+00:00",
   "reserved": {
@@ -28394,10 +28394,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-22T22:27:46.782907+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-22T22:47:25.165697+00:00",
+    "publication_outcome": "failure",
+    "publication_reason": "ConnectTimeout: _ssl.c:994: The handshake operation timed out",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -28405,9 +28405,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-22T22:27:46.782941+00:00",
+    "at": "2026-11-22T22:47:25.165769+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "failure",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -28419,23 +28419,24 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-22T22:27:46.782342+00:00",
-    "preflight_due": "true",
-    "preflight_step": "success",
-    "publish_step": "success",
-    "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "at": "2026-11-22T22:47:25.164863+00:00",
+    "preflight_due": "false",
+    "preflight_step": "failure",
+    "publish_step": "skipped",
+    "job_status_before_persist": "failure",
+    "outcome": "failure",
+    "reason": "ConnectTimeout: _ssl.c:994: The handshake operation timed out",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-22T22:27:46.782849+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
-    "publish_step": "success",
-    "selection_source": "preload_artifact",
+    "at": "2026-11-22T22:47:25.165652+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
-  }
+  },
+  "last_error_at": "2026-11-22T22:47:25.035929+00:00"
 }
