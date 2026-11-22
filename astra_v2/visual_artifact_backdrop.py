@@ -16,25 +16,29 @@ from astra_v2.visual_artifact_library import SCENES, PALETTES
 
 SCENE_TERMS = {
     "observatory": ("observatory", "telescope", "planetarium", "stargazing"),
-    "forest": ("forest", "woods", "woodland", "jungle", "rainforest"),
+    "forest": ("forest", "woods", "woodland", "jungle", "rainforest",
+               "log cabin", "mossy tree", "tree root"),
     "harbor": ("harbor", "dock", "port", "marina", "seaport", "pier"),
     "library": ("library", "bookshelf", "bookstore", "reading room"),
     # Bare "station" also means the International Space Station; require rail context.
     "railway": ("railway", "train", "train station", "railway station",
                 "rail station", "metro station", "subway station", "railroad", "locomotive"),
-    "village": ("village", "hamlet", "countryside"),
-    "mountain": ("mountain", "summit", "mountains", "cliff", "peak"),
+    "village": ("village", "hamlet", "countryside", "cabin", "wooden cabin"),
+    "mountain": ("mountain", "summit", "mountains", "cliff", "peak", "gorge"),
     "desert": ("desert", "dune", "sand dunes", "oasis"),
-    "underwater": ("underwater", "ocean", "coral", "seabed", "reef", "deep sea"),
+    "underwater": ("underwater", "undersea", "under the sea", "beneath the sea",
+                   "ocean", "ocean floor", "seafloor", "coral", "seabed", "reef", "deep sea"),
     "space": ("space", "iss", "orbital", "orbit", "planet", "galaxy", "cosmos", "astronaut"),
     "laboratory": ("laboratory", "lab", "research lab", "science lab"),
-    "garden": ("garden", "greenhouse", "botanical garden", "flower garden"),
+    "garden": ("garden", "greenhouse", "botanical garden", "flower garden",
+               "meadow", "lawn", "park gate", "community park"),
     "lighthouse": ("lighthouse", "beacon tower"),
     "cave": ("cave", "cavern", "grotto", "underground cavern"),
     "city": ("city", "street", "downtown", "skyscraper", "metropolis"),
     "workshop": ("workshop", "mechanic", "garage", "repair shop"),
     "castle": ("castle", "fortress", "citadel"),
-    "snowfield": ("snowfield", "snow", "ice", "blizzard", "glacier", "tundra"),
+    "snowfield": ("snowfield", "snow", "snowy", "winter", "winter cabin",
+                  "snowy drift", "ice", "blizzard", "glacier", "tundra"),
     "island": ("island", "archipelago", "tropical island"),
     "museum": ("museum", "exhibition hall", "art gallery"),
 }
@@ -50,11 +54,19 @@ def analyze_story_scene(shot):
         if not isinstance(value, str) or not value.strip():
             continue
         text = value.lower()
-        for scene in SCENES:
-            for term in SCENE_TERMS[scene]:
-                if re.search(r"\b" + re.escape(term) + r"\b", text):
-                    return {"scene": scene, "source_field": key,
-                            "matched_term": term, "needs_background": False}
+        # Prefer the most specific explicit phrase in this field. This lets
+        # "winter cabin" resolve to snowfield instead of the generic village
+        # cue "cabin", while preserving the documented field precedence.
+        matches = [
+            (len(term), scene, term)
+            for scene in SCENES
+            for term in SCENE_TERMS[scene]
+            if re.search(r"\b" + re.escape(term) + r"\b", text)
+        ]
+        if matches:
+            _, scene, term = max(matches, key=lambda item: item[0])
+            return {"scene": scene, "source_field": key,
+                    "matched_term": term, "needs_background": False}
     return {"scene": None, "source_field": None,
             "matched_term": None, "needs_background": True}
 
