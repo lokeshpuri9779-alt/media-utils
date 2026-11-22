@@ -658,13 +658,15 @@ def _underwater_left_stage(image, t):
         y = 170 + ((i * 137 + int(t * 9)) % 760)
         r = 5 + (i % 3) * 3
         d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=3)
-    # The seafloor stays above the lower caption-safe band; the lower band
-    # remains untouched for the existing subtitle compositor.
-    d.polygon(((0, 1348), (90, 1322), (190, 1360), (300, 1328),
-               (405, 1348), (405, 1399), (0, 1399)), fill=(17, 76, 88))
+    # Replace the inherited brown floor on the preserved character side too.
+    # The notebook is drawn afterward, so this opaque seabed cannot cover it.
+    image.paste((8, 83, 99), (0, 1260, 405, 1400))
+    d = ImageDraw.Draw(image)
+    d.polygon(((0, 1288), (90, 1262), (190, 1300), (300, 1268),
+               (405, 1288), (405, 1399), (0, 1399)), fill=(17, 76, 88))
     for x, height in ((18, 58), (386, 48)):
         d.line((x, 1398, x-5, 1398-height), fill=(65, 159, 146), width=9)
-        d.line((x-2, 1358, min(404, x+19), 1336),
+        d.line((x-2, 1308, min(404, x+19), 1286),
                fill=(76, 176, 158), width=7)
 
 
