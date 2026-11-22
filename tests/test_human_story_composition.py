@@ -184,6 +184,16 @@ class DirectedPortraitAndStageTests(unittest.TestCase):
             compose_story_stage(Image.new("RGB",(720,1280)),
                                 "discover_radio",1,12)
 
+    def test_final_underwater_reveal_keeps_notebook_and_portal_in_one_frame(self):
+        # The old 1.40x reveal cropped the left half of the notebook. The final
+        # composition must show the complete page and the right-side sea door.
+        left, top, right, bottom = stage_crop_box(
+            "seal_and_reveal_sea_door", 11.16, 12.0)
+        self.assertLessEqual(left, 42)
+        self.assertGreaterEqual(right, 1035)
+        self.assertLessEqual(top, 1048)
+        self.assertGreaterEqual(bottom, 1308)
+
 
 if __name__=="__main__":
     unittest.main()
