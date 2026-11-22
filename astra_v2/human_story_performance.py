@@ -610,20 +610,28 @@ def _sealed_door_stars(draw,t):
 
 
 def _notebook_sea_ending(draw,t):
-    """Page depicts a submerged SECOND door rather than fabricating a new scene."""
-    draw.polygon(((607,1000),(952,979),(963,1235),(610,1258)),
-                 fill=(224,208,173),outline=INK,width=10)
-    draw.polygon(((655,1033),(923,1026),(919,1220),(658,1230)),
-                 fill=(105,173,195),outline=(64,111,132),width=4)
-    for k in range(4):
-        yy=1087+k*34
-        draw.arc((669,yy,902,yy+55),0,170,fill=(188,224,225),width=6)
-    draw.rectangle((749,1084,845,1214),fill=(42,78,100),outline=(228,236,213),width=8)
-    draw.ellipse((819,1140,834,1156),fill=GOLD)
-    draw.polygon(((750,1041),(769,1067),(786,1042)),fill=(242,218,157))
-    # Page turns very slightly so the reveal is a motion event, not a static card.
-    offset=int(5*math.sin(t*1.1))
-    draw.line(((626,1006+offset),(620,1232)),fill=(161,138,115),width=8)
+    """Keep the notebook in the preserved left stage beside the underwater reveal."""
+    # The underwater compositor repaints x>=405 after this human performance.
+    # Keep the page wholly left of that opaque replacement so the clue survives
+    # the actual Studio composition instead of existing only in an intermediate.
+    x, y = 42, 1088
+    draw.rounded_rectangle((x, y, x+346, y+286), radius=12,
+                           fill=(83, 61, 49), outline=(224, 194, 145), width=8)
+    draw.polygon(((x+14,y+16),(x+173,y+8),(x+173,y+268),(x+14,y+258)),
+                 fill=(246,232,194), outline=(126,96,70))
+    draw.polygon(((x+173,y+8),(x+332,y+16),(x+332,y+258),(x+173,y+268)),
+                 fill=(238,220,178), outline=(126,96,70))
+    # Miniature arched door on the left page links the clue to the sea portal.
+    draw.arc((x+42,y+58,x+122,y+190),180,360,fill=(43,94,111),width=7)
+    draw.line((x+42,y+124,x+42,y+190),fill=(43,94,111),width=7)
+    draw.line((x+122,y+124,x+122,y+190),fill=(43,94,111),width=7)
+    for yy in (y+210,y+226):
+        draw.line((x+30,yy,x+145,yy),fill=(157,126,91),width=4)
+    for yy in (y+68,y+91,y+114):
+        draw.line((x+204,yy,x+306,yy),fill=(157,126,91),width=5)
+    offset=int(4*math.sin(t*1.1))
+    draw.line(((x+173,y+8+offset),(x+173,y+268)),fill=(161,138,115),width=5)
+
 
 
 def draw_human_scene(image, shot, t):
