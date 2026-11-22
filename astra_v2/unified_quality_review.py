@@ -8,7 +8,7 @@ from __future__ import annotations
 from astra_v2.visual_diversity import review_visual_reuse
 
 
-def review_storyboard(story, frames=None, history_frames=None):
+def review_storyboard(story, frames=None, history_frames=None, duration_seconds=None, minimum_longform_beats=20):
     beats=story.get("story_beats") or []
     if not isinstance(beats,list):
         raise ValueError("story_beats must be a list")
@@ -23,6 +23,16 @@ def review_storyboard(story, frames=None, history_frames=None):
         findings.append("limited_scene_variety")
     if not any(a in meaningful for a in actions):
         findings.append("limited_action_variety")
+    # A diagnostic only: long-form renders with very few authored visual
+    # beats are likely to become static, repetitive videos. Keep this separate
+    # from publication eligibility until the threshold is calibrated on renders.
+    if duration_seconds is None:
+        durations = [float(b.get("duration") or 0) for b in beats
+                     if isinstance(b, dict)]
+        duration_seconds = sum(durations) if durations else None
+    if (duration_seconds is not None and float(duration_seconds) >= 45
+            and len(beats) < minimum_longform_beats):
+        findings.append("sparse_longform_visual_beats")
     if frames is not None and history_frames is not None:
         visual=review_visual_reuse(frames,history_frames)
         if visual["review_required"]:
@@ -31,5 +41,7 @@ def review_storyboard(story, frames=None, history_frames=None):
         visual={"review_required":False,"enforcement":"diagnostic_only",
                 "reason":"rendered_frames_unavailable"}
     return {"findings":findings,"actions":len(set(actions)),
-            "scenes":len(set(scenes)-{""}),"visual_reuse":visual,
+            "scenes":len(set(scenes)-{""}),"visual_beats":len(beats),
+            "duration_seconds":duration_seconds,
+            "visual_reuse":visual,
             "publication_decision":"unchanged","enforcement":"diagnostic_only"}
