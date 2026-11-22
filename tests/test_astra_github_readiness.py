@@ -108,7 +108,7 @@ class GithubReadinessTests(unittest.TestCase):
 
     def test_longform_publishing_is_enabled_but_remains_quality_gated(self):
         publisher, longform = read(PUBLISH), read(LONGFORM)
-        controller = read("astra_v2/run.py")
+        controller = read(ROOT / "astra_v2/run.py")
         self.assertIn("ASTRA_LONG_ENABLED: '1'", publisher)
         self.assertIn("ASTRA_LONG_ONLY: '1'", longform)
         self.assertIn("longform_candidate_due", controller)
