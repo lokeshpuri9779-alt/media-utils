@@ -610,27 +610,30 @@ def _sealed_door_stars(draw,t):
 
 
 def _notebook_sea_ending(draw,t):
-    """Keep the notebook in the preserved left stage beside the underwater reveal."""
-    # The underwater compositor repaints x>=405 after this human performance.
-    # Keep the page wholly left of that opaque replacement so the clue survives
-    # the actual Studio composition instead of existing only in an intermediate.
-    x, y = 42, 1088
-    draw.rounded_rectangle((x, y, x+346, y+286), radius=12,
+    """Show the second sea door and its tomorrow clue on a legible notebook page."""
+    # Keep the entire notebook inside the wide final reveal camera crop and
+    # left of the opaque portal replacement at x=405.
+    x, y = 42, 1048
+    draw.rounded_rectangle((x, y, x+346, y+260), radius=12,
                            fill=(83, 61, 49), outline=(224, 194, 145), width=8)
-    draw.polygon(((x+14,y+16),(x+173,y+8),(x+173,y+268),(x+14,y+258)),
+    draw.polygon(((x+14,y+16),(x+173,y+8),(x+173,y+242),(x+14,y+234)),
                  fill=(246,232,194), outline=(126,96,70))
-    draw.polygon(((x+173,y+8),(x+332,y+16),(x+332,y+258),(x+173,y+268)),
+    draw.polygon(((x+173,y+8),(x+332,y+16),(x+332,y+234),(x+173,y+242)),
                  fill=(238,220,178), outline=(126,96,70))
-    # Miniature arched door on the left page links the clue to the sea portal.
-    draw.arc((x+42,y+58,x+122,y+190),180,360,fill=(43,94,111),width=7)
-    draw.line((x+42,y+124,x+42,y+190),fill=(43,94,111),width=7)
-    draw.line((x+122,y+124,x+122,y+190),fill=(43,94,111),width=7)
-    for yy in (y+210,y+226):
-        draw.line((x+30,yy,x+145,yy),fill=(157,126,91),width=4)
-    for yy in (y+68,y+91,y+114):
-        draw.line((x+204,yy,x+306,yy),fill=(157,126,91),width=5)
+    # A small arched doorway sits beneath drawn waves: the page now reads as
+    # the same underwater door revealed on the right, not a generic arch.
+    draw.arc((x+43,y+48,x+123,y+160),180,360,fill=(43,94,111),width=7)
+    draw.line((x+43,y+104,x+43,y+160),fill=(43,94,111),width=7)
+    draw.line((x+123,y+104,x+123,y+160),fill=(43,94,111),width=7)
+    for yy in (y+169,y+181,y+193):
+        draw.arc((x+26,yy-9,x+146,yy+12),185,350,fill=(54,132,147),width=4)
+    # Explicitly write the promised date clue rather than leaving the page blank.
+    draw.text((x+196,y+139),"TOMORROW",fill=(54,74,83),stroke_width=0)
+    draw.text((x+196,y+160),"DATE: +1",fill=(84,92,89),stroke_width=0)
+    for yy in (y+190,y+207):
+        draw.line((x+194,yy,x+310,yy),fill=(157,126,91),width=4)
     offset=int(4*math.sin(t*1.1))
-    draw.line(((x+173,y+8+offset),(x+173,y+268)),fill=(161,138,115),width=5)
+    draw.line(((x+173,y+8+offset),(x+173,y+242)),fill=(161,138,115),width=5)
 
 
 
