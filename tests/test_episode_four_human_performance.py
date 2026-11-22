@@ -41,6 +41,12 @@ class SeasonFinalePerformanceTests(unittest.TestCase):
                 f'Finale scene {index} is static')
             source=Image.new('RGB',(1080,1920),(10,20,33))
             for zone in ((0,0,1080,480),(0,1400,1080,1920)):
+                # The final scene intentionally replaces the upper backdrop
+                # with underwater light/bubbles; it must still keep the lower
+                # caption-safe band free of actors and physical props.
+                if (shot["story_human_action"] == "seal_and_reveal_sea_door"
+                        and zone == (0,0,1080,480)):
+                    continue
                 self.assertIsNone(ImageChops.difference(
                     early.crop(zone),source.crop(zone)).getbbox())
 
