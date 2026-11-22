@@ -12362,6 +12362,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-6af83e4896ab46b6b831",
+      "video_id": "g6Ua49qJ0YA",
+      "confirmed_at": "2026-11-22T20:34:04.403261+00:00",
+      "title": "Bram's Snowy Rescue and the Pine Ridge Beacon",
+      "plot_fingerprint": "10b8bb6234b67d56bb84ae78b4d21ef0ed76e4b9481b9a1ab6f69f2f8e34f74f",
+      "story_beats": [
+        {
+          "headline": "The Missing Kit Discovered",
+          "speech": "Oh dear, little Pip is stranded on the snowy ridge while the storm grows dangerously fierce all around us.",
+          "visual": "forest",
+          "label": "Storm Discovery",
+          "story_beat": "reveal",
+          "visual_prompt": "Bram the stoat stands in a snowy forest looking worried, holding a small brass compass in his paws while gazing up at a darkening sky filled with falling snowflakes.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Consulting the Compass",
+          "speech": "We must not listen to the howling wind in the gorge; this little compass needle points straight to safety.",
+          "visual": "signal",
+          "label": "Pathfinding",
+          "story_beat": "build",
+          "visual_prompt": "Bram the stoat crouches on a snow-covered boulder in the forest, carefully inspecting the glass face of a vintage compass held in both front paws as a directional signal flair glows in the distance.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Crossing the Ridge",
+          "speech": "Step right where I step, keeping close to the pine trees so the deep drifts do not swallow us whole.",
+          "visual": "door",
+          "label": "The Crossing",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bram the stoat leads his smaller sister stoat across a narrow snowy timber bridge nestled inside a thick pine forest, holding a glowing lantern to light their icy path.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Warmth Restored",
+          "speech": "We made it safely home just in time, and the warm hearth fire will keep us cozy until morning.",
+          "visual": "ship",
+          "label": "Safe Haven",
+          "story_beat": "payoff",
+          "visual_prompt": "Bram and his sister stoat sit inside a warm, wooden hollow log cabin filled with soft blankets, resting together happily beside a flickering lantern while snowflakes fall harmlessly outside the open wooden doorway.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
