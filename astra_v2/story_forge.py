@@ -6,6 +6,7 @@ All outputs remain subject to the existing full render and publication gates.
 """
 import hashlib
 import re
+from astra_v2.openai_creative import VISUALS
 from astra_v2.pillow_duo_stories import PLOTS as PILLOW_DUO_PLOTS
 from astra_v2.editorial_batch_oct2026 import PLOTS as EDITORIAL_OCT2026_PLOTS
 from astra_v2.crossgenre_directed_24 import PLOTS as CROSSGENRE_DIRECTED_24
@@ -894,6 +895,22 @@ NEW_AUTHORED_PLOTS.extend([
 
 AUTHORED_KEYS = {row[0] for row in PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + AUTHORED_REPLENISHMENT_OCT2026 + AUTHORED_BATCH_341 + AUTHORED_BATCH_364 + AUTHORED_BATCH_407 + AUTHORED_BATCH_420 + AUTHORED_BATCH_421 + AUTHORED_BATCH_422 + AUTHORED_BATCH_423 + AUTHORED_BATCH_424 + AUTHORED_BATCH_473 + AUTHORED_BATCH_526}
 
+def _protagonist_visual_for_key(key):
+    """Return a supported animal only when the authored ID names it explicitly.
+
+    Legacy tuple fields used scene/icon labels (for example 'door' or 'ship')
+    in the visual slot. Never reinterpret those labels as characters. The
+    authored story ID is the explicit protagonist identity; unsupported or
+    ambiguous identities remain ineligible for the current Studio renderer.
+    """
+    normalized = str(key or "").casefold()
+    for species in sorted(VISUALS, key=len, reverse=True):
+        slug = species.replace(" ", "-")
+        if normalized == slug or normalized.startswith(slug + "-"):
+            return species
+    return None
+
+
 def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_hashes=None, history=None, include_drafts=False, include_expansion=False):
     excluded = set(excluded_ids or ())
     titles = {str(t).casefold().strip() for t in (excluded_titles or ())}
@@ -917,7 +934,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
     else:
         expanded = []
     for key, title, genre, beats in (AUTHORED_BATCH_526 + AUTHORED_BATCH_473 + AUTHORED_BATCH_424 + AUTHORED_BATCH_423 + AUTHORED_BATCH_422 + AUTHORED_BATCH_421 + AUTHORED_BATCH_420 + AUTHORED_BATCH_407 + AUTHORED_BATCH_364 + AUTHORED_BATCH_341 + AUTHORED_REPLENISHMENT_OCT2026 + PILLOW_DUO_PLOTS + PLOTS + REWRITTEN_PLOTS + NEW_AUTHORED_PLOTS + EDITORIAL_OCT2026_PLOTS + CROSSGENRE_DIRECTED_24 + (draft_catalog() if include_drafts else []) + expanded):
-        # Reject malformed or weak authored arcs before any expensive render.
+        # The slug is the only trusted source for protagonist identity. Legacy\n        # tuple visual values are often scene/icon names and must never be\n        # forwarded as actor tags. Unknown/unsupported protagonists fail closed.\n        protagonist_visual = _protagonist_visual_for_key(key)\n        if protagonist_visual is None:\n            continue\n        # Reject malformed or weak authored arcs before any expensive render.
         if len(beats) != 4 or any(not isinstance(b, (tuple, list)) or len(b) != 4 for b in beats):
             continue
         if any(not all(isinstance(field, str) and field.strip() for field in b) for b in beats):
@@ -939,7 +956,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
             "question": beats[0][1], "answer": beats[-1][1],
             "source": "", "keywords": ["original fiction", genre],
             "story_beats": [
-                {"headline": h, "speech": speech, "visual": visual,
+                {"headline": h, "speech": speech, "visual": protagonist_visual,
                  "label": label, "story_beat": role,
                  "sub": "AN ORIGINAL RAYVAN STORY", "duration": 2.1}
                 for role, (h, speech, visual, label) in
