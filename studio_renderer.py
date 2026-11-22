@@ -1343,12 +1343,12 @@ def asset_manifest(ch, plan):
         # compositions even though the asset-resolution and creative-score
         # gates passed. Explicitly forbid contact-sheet/storyboard layouts.
         composition_rule = (
-            ' Single continuous full-bleed scene, one coherent camera view, '
-            'natural spatial continuity; no split-screen, collage, storyboard '
-            'grid, tiled panels, inset frames, borders, contact sheet, or '
-            'multiple simultaneous viewpoints.'
+            ' One continuous full-bleed scene, single camera view; no '
+            'split-screen, collage, storyboard grid, tiled panels, insets, '
+            'borders, contact sheets, or multiple viewpoints. Depict: '
         )
-        scene_query=(('Original scene illustration: '+scene_brief+composition_rule)
+        scene_query=(('Original scene illustration: '+scene_environment
+                      +composition_rule+scene_action)
                      if scene_brief else '')
         if explicit_query:
             # Only an editorial beat that deliberately names the needed subject
