@@ -139,7 +139,8 @@ class GeminiRouteTests(unittest.TestCase):
 
     def test_gemini_request_constrains_visual_and_story_role_enums(self):
         import json
-        from astra_v2.openai_creative import VISUALS, ROLES
+        from astra_v2.openai_creative import ROLES
+        from astra_v2.renderer_aware_writing import SUPPORTED_ANIMALS
         from astra_v2.visual_artifact_library import SCENES
         requests = []
         def capture(request, timeout):
@@ -156,7 +157,8 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertEqual(schema["type"], "object")
         self.assertEqual(schema["properties"]["visual_bible"]["properties"]["characters"]["additionalProperties"]["type"], "string")
         beat = schema["properties"]["beats"]["items"]["properties"]
-        self.assertEqual(set(beat["visual"]["enum"]), VISUALS)
+        self.assertEqual(set(beat["visual"]["enum"]), set(SUPPORTED_ANIMALS))
+        self.assertNotIn("robot", beat["visual"]["enum"])
         self.assertEqual(set(beat["story_beat"]["enum"]), ROLES)
         self.assertEqual(set(beat["story_environment"]["enum"]), set(SCENES))
         self.assertIn("story_environment", schema["properties"]["beats"]["items"]["required"])
