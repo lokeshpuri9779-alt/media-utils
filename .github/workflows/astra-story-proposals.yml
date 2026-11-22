@@ -42,7 +42,12 @@ jobs:
   propose:
     runs-on: ubuntu-24.04
     # Two complete history audits must finish before the review bundle is exported.
-    timeout-minutes: 20
+    # Nov 22 measurement: the ledger held 7,821 proposals and "Triage proposals" alone took
+    # 10m47s, so the old 20-minute limit cancelled "Audit production eligibility" every run
+    # and the ledger was never persisted. Triage cost grows roughly quadratically with ledger
+    # size (250 -> 1.5s, 500 -> 4s, 1000 -> 14s locally), so this is headroom, not a fix:
+    # the ledger needs a retention or incremental-triage policy.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
