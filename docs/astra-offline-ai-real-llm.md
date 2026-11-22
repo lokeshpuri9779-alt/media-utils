@@ -1,0 +1,310 @@
+# ASTRA: bounded real offline GGUF inference (experimental)
+
+This is the next evidence gate after draft PR #951's three CPU-friendly
+contract-review lanes passed. It does **not** alter ASTRA Main.
+
+## Immutable inputs
+
+- Model: `bartowski/Qwen2.5-0.5B-Instruct-GGUF`, file
+  `Qwen2.5-0.5B-Instruct-Q4_K_M.gguf`, 398 MB, Apache-2.0.
+- SHA256: `6eb923e7d26e9cea28811e1a8e852009b21242fb157b26149d3b188f3a8c8653`.
+- llama.cpp: tag `b12064`, verified commit
+  `51fe42c5d14bfb9adf0612ff98a9ab79e0e7275c`.
+- Two CPU threads, zero GPU layers, max 700 generated tokens,
+  2048-token context, seeded, one prompt, 180-second inference timeout.
+- Max GitHub Actions job duration: 17 minutes, memory ceiling on the
+  subprocess: 6 GiB virtual address space.
+
+## Run conditions
+
+The workflow `.github/workflows/astra-offline-ai-oneshot.yml` only runs
+real inference for one exact experimental-branch **push commit message**
+or a deliberate manual `BENCHMARK` workflow_dispatch. No scheduled or
+PR-triggered real inference. A failed or skipped run must not be conflated
+with a passing model benchmark. GitHub Actions minutes are consumed.
+
+The job downloads and verifies the model *before* CPU-local inference.
+Therefore inference is offline; initial setup still needs internet access.
+
+## Evidence, not production readiness
+
+On successful executable completion, generated text is archived for manual
+inspection. `review-report.json` separates model execution from passing
+a structural four-beat story contract. Review JSON (if it exists) explicitly
+keeps `approved=false`, `production_ready=false`, `published=false`.
+A structural pass is not proof of creative quality, originality or character
+consistency. Neither the image route nor ASTRA publishing is changed.
+
+If this model fails the structure contract, the job fails closed while keeping
+bounded raw output and status evidence for debugging. The next experiment
+must be justified using these real results; do not automatically retry with
+larger models, API calls, or expensive multi-seed sweeps.
+
+## One-shot authorization record
+
+The exact commit message `experiment(ASTRA): one-shot offline Qwen 0.5B CPU benchmark` authorizes this single bounded experiment on the isolated branch. Later ordinary commits do not restart the large-model job.
+
+## First real result and bounded retest
+
+Run #41646109950 successfully built the pinned runtime, verified the exact 397,808,192-byte GGUF, and executed the local model in 17.332 seconds (520,776 KiB peak child RSS). The generated story **failed** the four-beat contract: five short placeholder beats followed by repetitive prose. This is a creative-quality failure, not an execution failure. Review-only flags remained false for approval, readiness, and publishing.
+
+One new bounded retest uses the **same** model, seed, source revision, prompt theme, runner and time budget, but tightens the instruction and passes a strict JSON schema (exactly four 100–500-character beat strings, one title, no extra fields) to llama.cpp. The existing structural editorial gate still separately rejects short or repeated story beats. Constrained JSON can improve output shape, not guarantee causality, originality, or publication quality. No automatic retries or bigger model sweeps.
+
+Exactly one push commit using `experiment(ASTRA): constrained JSON one-shot CPU retest` can trigger this diagnostic. The earlier one-shot authorization message no longer triggers this job.
+
+## Constrained retest execution
+
+Second bounded run authorized after the schema and new regression tests passed in parallel review workflow #41656088929. This does not approve the resulting story for production.
+
+## Second real result: JSON-schema sampler failure
+
+Run #41656194405 built pinned llama.cpp, verified the model, then exited in
+0.668 s at sampler initialization with `Failed to initialize samplers:
+std::exception`. No story was generated and the review contract failed.
+The larger JSON schema with long-string min/max limits may have caused the
+sampler failure, but the underlying exception message is insufficient to
+prove that cause.
+
+The next isolated proposal replaces the dynamic JSON-schema conversion with
+a short, explicit GBNF grammar: one title and an array with exactly four JSON
+string beats, in that order, with no other fields. Substantive beat length,
+distinctness, causality and editorial review remain separate fail-closed
+checks. This avoids claiming grammar guarantees story quality.
+
+**No third real-model benchmark was launched in this change.** Future model
+inference requires its separate explicit one-shot authorization; unit and
+preflight CI checks do not download models.
+
+### Reporting correction
+
+The second run's `llama-cli` process exited with code 0 despite logging
+`Failed to initialize samplers`. The initial benchmark script marked
+`model_executed=true` based on exit code, which was misleading. The
+updated harness recognizes that exact fatal marker, records
+`SamplerInitializationFailed`, and keeps `model_executed=false`. A
+fixture regression test locks this behavior; it does not imply a third
+model run.
+
+## Unified parallel GBNF run
+
+ASTRA uses `.github/workflows/astra-offline-ai-parallel.yml` as its single
+coordinating experimental workflow. Its story, image and motion test matrix
+runs in parallel; the aggregate gate verifies all three reports. **Only a
+successful aggregate** permits the one real CPU GGUF inference job to start,
+and only when the isolated branch push uses the exact one-shot commit message
+`experiment(ASTRA): unified parallel GBNF CPU validation`. PR triggers
+and ordinary pushes cannot run real model inference.
+
+The legacy `.github/workflows/astra-offline-ai-oneshot.yml` retains
+manual-only `BENCHMARK` dispatch for diagnostics and no longer responds to
+push commits. It is not invoked as part of this run.
+
+The real job still uses the same checksum-verified 0.5B model, pinned
+llama.cpp source, 2 CPU threads, 700-token ceiling, 180-second process
+timeout and 17-minute job deadline. New for this experiment: the
+`--grammar-file` adapter enforces JSON *structure*, but it cannot prove
+originality, causality, or production suitability. Approval and publishing
+remain disabled.
+
+Once a run finishes, use `review-report.json` plus raw generated output
+to evaluate model execution separately from structural contract and
+human narrative quality. Do not automatically retry or merge.
+
+## Unified one-shot GBNF execution authorization
+
+The consolidated review workflow was validated in [PR run #41659902726](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41659902726): story, image, motion and aggregate passed, and the real-model job correctly skipped because the review event was not the authorized push. One run on the experimental branch now uses the exact commit message `experiment(ASTRA): unified parallel GBNF CPU validation`; it runs the same three lanes plus an aggregate check, and only then permits one bounded CPU model inference. This authorization does not grant publication, automatic approval, paid API use, or production fallback.
+
+## Unified-run concurrency fix and retry
+
+The initial authorized push run #41660012605 was canceled before reaching inference because a concurrent PR validation for the same SHA shared its concurrency group. No third model output was produced. The workflow now scopes concurrency by event name and GitHub ref; PR checks can no longer cancel the authorized push run. The corrected review-only PR run #41660153898 passed all three parallel lanes and the aggregate. This one-time retry is authorized using the same exact commit-message guard; no extra prompts, models or production permissions are introduced.
+
+## Third real run: grammar worked, story quality failed
+
+[Unified run #41660334335](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41660334335)
+completed successfully with three parallel review lanes, aggregate verification
+and one GBNF-guided CPU model inference. Model checksum was verified; the
+report recorded `model_executed=true`, `story_contract_passed=true`,
+5.089 seconds elapsed and 544,292 KiB peak child RSS. The model produced
+a parseable JSON object with exactly four beats.
+
+However, inspection of the archived text shows generic repeated navigation
+actions and **no accomplished repair** in the supposed payoff. The story
+did not meet the prompt's 25–60-word-per-beat instruction. This is a
+**manual editorial failure**, even though the old 15–140-word automated
+length contract passed. Output is unapproved, unready, unpublished.
+
+The revised minimum automatic draft screen now matches the prompt's
+25–60 word beat range; a regression test reproduces and rejects the exact
+bad four-beat artifact. Longer beats alone would not establish causal
+fidelity or originality: manual review remains mandatory, no production
+promotion is permitted. This change is a validator correction only;
+**no fourth real model inference is authorized or run**.
+
+## Review-only causal negative controls after run #41660334335
+
+The real GBNF output achieved valid JSON structure but not meaningful
+story completion. A new **experimental lighthouse-only** deterministic
+negative-control audit now looks for an observable physical attempt,
+a consequential obstacle, a completed repair action and the warning
+signal visibly working in the payoff. It also flags repeated generic
+navigation instead of progress. Unknown profiles fail closed.
+
+The audit is explicitly **not semantic understanding**: keyword cues can
+miss good prose or be fooled by bad prose. It can reject a weak draft
+but cannot approve one. Only candidates passing both the 25–60-word
+four-beat structure contract and conservative causal cues get a
+review-only candidate JSON. Everything still needs human editorial and
+visual review; production-ready, approved and published remain false.
+
+The stronger prompt and new rejection tests do not authorize another
+real model benchmark. ASTRA Main, publication gates, paid services, and
+existing animation/story workflows are unchanged.
+
+## Planned four-stage causal comparison (next experimental trial)
+
+The baseline real GBNF run #41660334335 produced structurally valid but
+unresolved story text. Repeating the identical freeform prompt would not test
+a meaningful hypothesis. The next single comparison supplies a **fixed,
+review-only four-step causal plan** to the same pinned Qwen 0.5B model:
+problem, attempted fix, lightning setback, completed repair and visible
+beacon outcome.
+
+The plan is data, not an external API or an assertion that the model followed
+it. The model must expand it to four 25–60-word beats without inventing
+a different conclusion. Inference outputs continue through both the structure
+contract and conservative lighthouse-specific negative controls.
+Any passing automated result remains `semantic_quality=not_verified`,
+`approved=false`, `production_ready=false`, and `published=false`.
+The plan digest in the report records exactly what guidance was supplied.
+Manual review is still required to compare actual causal fidelity.
+
+To prevent incidental retries, the single coordinated workflow requires
+the *new exact one-shot commit message*
+`experiment(ASTRA): planned GBNF one-shot CPU validation` on its isolated
+branch, after the three parallel lightweight lanes and aggregate pass.
+Ordinary commits and PR checks do not run model inference. The legacy
+standalone manual benchmark remains separate.
+
+## One-shot planned comparison authorization
+
+The causal-plan PR review-only CI on run #41700681725 passed the three parallel lanes and aggregate. This one commit authorizes exactly one experimental free CPU model comparison using the same pinned Qwen 0.5B GGUF, the pinned llama.cpp revision, and fixed GBNF grammar. New variable: the four-step, plan-digest-stamped input prompt. No API, main integration, automatic publishing, approval, or repeated attempts are authorized. The next result must be judged from the actual generated content.
+
+## Planned 0.5B comparison result and anti-parrot safeguard
+
+[Planned benchmark #41700835738](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41700835738)
+successfully compiled the pinned CPU runtime and checked the pinned
+397,808,192-byte GGUF. Inference completed in 7.445 seconds at 561,340 KiB
+peak child RSS. The four-beat GBNF output was valid JSON, but each beat
+was little more than the supplied plan sentence with a stage label.
+The 25–60-word review contract correctly rejected this; no candidate was
+approved or published. It is **not** evidence that planned prompting alone
+solved ASTRA's writing-quality problem.
+
+The new review-only plan-copy audit separately records which stages closely
+repeat the supplied plan, including padded copies. The original bad output
+is now a regression fixture and rejected before any review candidate is
+written, even if superficial length checks would eventually pass.
+The audit is conservative and cannot establish independent originality:
+passing is `originality=not_verified` and never authorizes production.
+No additional model runs were triggered.
+
+## Pinned 1.5B comparison to test the capacity hypothesis
+
+The archived 0.5B experiments demonstrate that CPU inference and GBNF
+formatting work but *do not* establish developed original storytelling.
+Plan-guided 0.5B output copied its source plan; the plan-copy detector
+now rejects that.
+
+The next comparison preserves the existing four-stage authored lighthouse
+causal plan, GBNF constraint, seed 42, 700-token ceiling, CPU-only llama.cpp
+revision and structural/causal/plan-copy gates. Only the language model
+changes to official Apache-2.0 `Qwen/Qwen2.5-1.5B-Instruct-GGUF`
+`qwen2.5-1.5b-instruct-q4_k_m.gguf` (1,117,320,736 bytes).
+Published model SHA-256:
+`6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e`.
+Official file listing: https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/blob/main/qwen2.5-1.5b-instruct-q4_k_m.gguf
+
+The same single orchestrated experimental workflow runs story, CPU-image and
+motion tests in parallel, then checks aggregate evidence before at most one
+real model inference. The exact opt-in branch message is
+`experiment(ASTRA): Qwen 1.5B bounded CPU comparison`. The existing
+baseline path remains unchanged. A verified checksum is mandatory before
+the offline CPU inference starts; fetching model weights initially needs
+network access but the model never calls a remote inference service.
+
+Technical result ≠ successful original story. The final report must
+separate execution, four-beat length, plan-copy detection, causal cues and
+manual editorial quality. All review-only flags remain false for approval,
+production readiness and publishing. No fallback or publishing integration.
+
+## 1.5B one-shot authorization
+
+The isolated model-profile regression run
+[#41707581498](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41707581498)
+passed the story, image, motion and aggregate checks. This document-only
+commit triggers exactly one checksum-verified, CPU-only Qwen 1.5B inference
+in the existing gated experimental workflow, using no production publishing
+path. Future ordinary pushes do not repeat the benchmark.
+
+## Actual 1.5B result: CPU successful; model still copied plan (2026-11-04)
+
+[Unified experimental run #41707761872](https://github.com/lokeshpuri9779-alt/media-utils/actions/runs/41707761872)
+passed the three parallel test lanes plus aggregate and correctly ran the
+official pinned 1.5B CPU model. 1,117,320,736 bytes and SHA-256
+`6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e`
+were verified before inference. Real local generation exited 0 in
+**16.891 seconds**, with **1,884,680 KiB peak child RSS**.
+
+The real model generated one parseable JSON object with four beats,
+but **all four were too short** for the 25–60-word draft screen.
+The independent plan-copy audit rejected attempt, setback and payoff
+as too similar to the supplied author plan; normalized payoff similarity
+was **1.0** (exact repetition). Report:
+`model_executed=true`, `story_contract_passed=false`,
+`plan_copy_detected=true`,
+`causal_cue_audit_passed=false`,
+`approved=false`, `production_ready=false`,
+`published=false`. The last false means the causal cue check
+was not reached after the structural rejection, **not** that a separate
+causal assessment of this output was completed.
+
+The result does not justify promoting the 1.5B model or simply scaling
+the same plan-copying task to larger models. The actual four-beat output
+is now a regression fixture requiring both the length and copy
+negative controls to reject it. For the next real improvement, test a
+**distinct authoring approach** (not a more expensive model) with
+independent, manually reviewed causal outcomes and side-by-side evidence,
+retaining ASTRA's production protections. No additional model inference
+is triggered by this documentation or regression change.
+
+## November 4: independent assistant-drafted reference benchmark
+
+After real CPU run #41707761872 proved that Qwen 1.5B largely copied the
+supplied four-beat causal plan, the next low-cost experiment changes the
+evaluation material rather than increasing model size.
+
+`tools/astra_offline_reference_benchmark.py` contains **three newly
+assistant-drafted, distinct stories** about a jammed greenhouse shade,
+a flood-damaged duckling footbridge, and a rooftop moonlight mirror.
+Each includes four 25–60-word beats with an explicit event-state ledger
+for setup, attempt, setback, and observable payoff. The ledger validator
+fails closed on missing prerequisites, impossible/redundant transitions,
+reordered scenes, unresolved ending states, duplicate identifiers, and
+unbounded text. It does **not** prove the prose or visuals correspond to
+the declared ledger; assistant drafts are not human-quality ground truth.
+
+The existing **story** lane tests these cases without any AI inference,
+then exports a deterministic JSON packet for a separate human editorial
+and visual comparison. The **image** and **motion** regression lanes
+continue in parallel; the aggregate still fails closed on their reports.
+No new real-model invocation, model download, paid API, fallback,
+automatic approval, production integration, or publishing occurs.
+
+The packet explicitly records `reference_is_quality_ground_truth=false`,
+`model_quality_conclusion=no_new_evidence`, and all approval/production/
+publishing flags false. It should only be used to inspect what a coherent
+four-scene sequence looks like before choosing a future authoring method.
+
+## Source-masked review next step
+
+See `docs/astra-offline-blind-review.md` for source-masked comparison of the archived 0.5B and 1.5B model outputs with one post-hoc assistant-authored reference, validated score sheets, and explicit non-promotion safeguards. This adds no fresh model inference, no automated scoring and no claim of a fair model ranking.
