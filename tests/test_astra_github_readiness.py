@@ -106,10 +106,13 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertEqual(inspect_artifacts({"artifacts": []}, now=now)["status"], "missing_or_duplicate")
         self.assertGreater(pinned_run_id(ROOT), 0)
 
-    def test_longform_stays_isolated_until_publishing_proof(self):
+    def test_longform_publishing_is_enabled_but_remains_quality_gated(self):
         publisher, longform = read(PUBLISH), read(LONGFORM)
-        self.assertIn("ASTRA_LONG_ENABLED: '0'", publisher)
+        controller = read("astra_v2/run.py")
+        self.assertIn("ASTRA_LONG_ENABLED: '1'", publisher)
         self.assertIn("ASTRA_LONG_ONLY: '1'", longform)
+        self.assertIn("longform_candidate_due", controller)
+        self.assertIn("spacing_hours=12", controller)
         self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", publisher)
         self.assertIn("ASTRA_OPENAI_ALLOW_PAID_API: '0'", longform)
 
