@@ -158,7 +158,6 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertGreater(action_state("split_glass_key",DURATION*.85,DURATION).event,.95)
 
     def test_underwater_notebook_survives_the_actual_opaque_environment_repaint(self):
-        from unittest.mock import patch
         from astra_v2.human_story_performance import draw_human_scene
         from astra_v2.visual_artifact_backdrop import apply_underwater_reveal
 
