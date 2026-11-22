@@ -8,7 +8,7 @@ import urllib.request
 
 from astra_v2.openai_creative import VISUALS, ROLES
 from astra_v2.visual_artifact_library import SCENES
-from astra_v2.renderer_aware_writing import background_scene_authoring_guidance
+from astra_v2.renderer_aware_writing import background_scene_authoring_guidance, SUPPORTED_ANIMALS
 
 
 def enabled():
@@ -106,7 +106,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "Vary motivations, emotional stakes, decisions and consequences. "
         "All protagonists and acting characters must be supported animals; do not "
         "include humans, children, human professions, humanoids, robots or clothing. "
-        "Supported animal subjects: " + ", ".join(sorted(VISUALS)) + ". "
+        "Supported animal subjects: " + ", ".join(sorted(SUPPORTED_ANIMALS)) + ". "
         "Avoid complex machinery, bridge or cable repairs, large-gap jumps, "
         "rescue rigging, and simultaneous multi-prop actions. Keep each beat's "
         "physical action simple enough for the current animal puppet renderer. "
@@ -211,7 +211,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     names = {"type": "object", "additionalProperties": {"type": "string"}}
     beat_schema = {"type": "object", "properties": {
         "headline": {"type": "string"}, "speech": {"type": "string"},
-        "visual": {"type": "string", "enum": sorted(VISUALS)},
+        "visual": {"type": "string", "enum": sorted(SUPPORTED_ANIMALS)},
         "story_environment": {"type": "string", "enum": sorted(SCENES)},
         "label": {"type": "string"},
         "story_beat": {"type": "string", "enum": sorted(ROLES)},
@@ -294,7 +294,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
     # Normalize only unambiguous spelling/case variants; never invent beats.
     for beat in beats:
         if isinstance(beat, dict):
-            for field, allowed in (("visual", VISUALS), ("story_beat", ROLES),
+            for field, allowed in (("visual", SUPPORTED_ANIMALS), ("story_beat", ROLES),
                                    ("story_environment", SCENES)):
                 raw = beat.get(field)
                 if isinstance(raw, str):
@@ -312,7 +312,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             limit = 320 if key == "speech" else 220
             if not isinstance(beat.get(key), str) or not 2 <= len(beat[key]) <= limit:
                 raise ValueError("Invalid beat text")
-        if (beat.get("visual") not in VISUALS or beat.get("story_beat") not in ROLES
+        if (beat.get("visual") not in SUPPORTED_ANIMALS or beat.get("story_beat") not in ROLES
                 or beat.get("story_environment") not in SCENES
                 or not isinstance(beat.get("visual_prompt"), str)):
             raise ValueError("Invalid beat subject, environment, or narrative role")
