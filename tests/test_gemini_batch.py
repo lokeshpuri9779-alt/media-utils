@@ -136,3 +136,91 @@ class BatchTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BatchDiagnosticsAndPacingTests(unittest.TestCase):
+    def test_pacing_validator_rejections_are_classified_without_model_text(self):
+        messages = [
+            "Gemini narration must be 24-38 words per beat",
+            "Gemini narration must total 96-152 words",
+            "Gemini story needs at least one natural dialogue line",
+            "Gemini story needs at least two scene-ending hooks",
+            "Gemini requires exactly four cinematic beats",
+            "Gemini returned an invalid story beat",
+            "Invalid beat subject, environment, or narrative role",
+            "Gemini visual must name a supported animal subject",
+            "Gemini must preserve a protagonist visual across beats",
+            "Gemini private model sentence that is not a validator",
+        ]
+        queue = [ValueError(m) for m in messages]
+        def fail(*args):
+            raise queue.pop(0)
+        result = generate_batch(len(messages), generator=fail)
+        self.assertEqual([f["reason"] for f in result["failures"]], [
+            "beat_word_count_out_of_range", "total_word_count_out_of_range",
+            "missing_dialogue", "insufficient_scene_hooks", "invalid_beat_count",
+            "invalid_beat", "invalid_beat", "unsupported_visual_subject",
+            "protagonist_not_preserved", "validation_error_unclassified"])
+        self.assertNotIn("private", str(result))
+        self.assertEqual(result["attempted"], len(messages))
+
+    def test_pacing_waits_between_slots_only(self):
+        waits = []
+        def fake(ids, titles, history):
+            n = len(history)
+            return {"content_id": "s" + str(n), "title": "Story " + str(n)}
+        result = generate_batch(3, generator=fake, pace_seconds=6, sleep=waits.append)
+        self.assertEqual(result["generated"], 3)
+        self.assertEqual(waits, [6, 6])
+
+    def test_single_429_recovers_after_bounded_cooldown(self):
+        calls, waits = [], []
+        def provider(ids, titles, history):
+            calls.append(1)
+            if len(calls) == 1:
+                raise RuntimeError("Gemini HTTP 429 model=x")
+            return {"content_id": "n" + str(len(calls)), "title": "Story " + str(len(calls))}
+        result = generate_batch(2, generator=provider, rate_limit_cooldown=65,
+                                sleep=waits.append)
+        self.assertEqual(result["generated"], 2)
+        self.assertEqual(result["failures"], [])
+        self.assertEqual(result["cooldowns"], 1)
+        self.assertEqual(waits, [65])
+
+    def test_persistent_429_still_stops_the_batch(self):
+        calls, waits = [], []
+        def provider(*args):
+            calls.append(1)
+            raise RuntimeError("Gemini HTTP 429 model=x")
+        result = generate_batch(20, generator=provider, rate_limit_cooldown=65,
+                                sleep=waits.append)
+        self.assertEqual(len(calls), 2)  # first call plus one cooldown retry
+        self.assertEqual(result["generated"], 0)
+        self.assertEqual(result["failures"], [{"index": 0, "reason": "provider_http_429"}])
+        self.assertEqual(waits, [65])
+
+    def test_cooldowns_are_capped_per_batch(self):
+        waits = []
+        state = {"n": 0}
+        def provider(ids, titles, history):
+            state["n"] += 1
+            if state["n"] % 2 == 1:
+                raise RuntimeError("Gemini HTTP 429")
+            return {"content_id": "c" + str(state["n"]), "title": "Story " + str(state["n"])}
+        result = generate_batch(10, generator=provider, rate_limit_cooldown=65,
+                                max_cooldowns=2, sleep=waits.append)
+        self.assertEqual(waits, [65, 65])
+        self.assertEqual(result["cooldowns"], 2)
+        self.assertEqual(result["generated"], 2)
+        self.assertEqual(result["failures"][-1]["reason"], "provider_http_429")
+
+    def test_non_429_provider_errors_get_no_cooldown_retry(self):
+        calls, waits = [], []
+        def provider(*args):
+            calls.append(1)
+            raise RuntimeError("Gemini HTTP 403 model=x")
+        result = generate_batch(5, generator=provider, rate_limit_cooldown=65,
+                                sleep=waits.append)
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(waits, [])
+        self.assertEqual(result["failures"][0]["reason"], "provider_http_403")
