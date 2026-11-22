@@ -211,54 +211,61 @@ def apply_backdrop(image, shot, identity):
 
 
 def apply_underwater_reveal(image, identity):
-    """Finish the underwater reveal above the acted foreground, before text layers.
+    """Replace the right-side inherited set with an opaque underwater stage.
 
-    The human-scene renderer owns the character and prop geometry. This final
-    environmental pass is deliberately confined to the right-side doorway and
-    frame edges so it cannot repaint Mara or the lower caption-safe region.
+    Preserve the acted character on the left; fully repaint the old doorway,
+    windows and floor on the right so the previous observatory cannot ghost
+    through the new environment. Text and caption layers are drawn afterward.
     """
     if image.mode != "RGB" or image.size != (1080, 1920):
         raise ValueError("underwater reveal requires RGB 1080x1920")
     seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
     overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(overlay)
-    # Visible water shafts and bubbles, concentrated above and around the door.
-    for x, width in ((540, 90), (700, 110), (900, 85)):
-        d.polygon(((x, 0), (x + width, 0), (x + width + 100, 520),
-                   (x + 35, 520)), fill=(78, 205, 225, 76))
-    for i in range(14):
-        bx = 555 + ((seed >> (i % 16)) + i * 83) % 490
-        by = 170 + ((seed >> ((i + 5) % 16)) + i * 61) % 700
-        r = 7 + (i * 5) % 13
-        d.ellipse((bx-r, by-r, bx+r, by+r), outline=(190, 245, 248, 190), width=4)
-    # Reframe the existing doorway as a sealed, submerged stone portal.
-    d.rounded_rectangle((555, 395, 1030, 1160), radius=155,
-                        outline=(196, 224, 214, 235), width=30)
-    d.rounded_rectangle((592, 438, 992, 1150), radius=132,
-                        outline=(62, 126, 137, 245), width=18)
-    d.rounded_rectangle((632, 490, 950, 1135), radius=112,
-                        fill=(8, 62, 82, 225), outline=(150, 205, 199, 245), width=13)
-    d.line((790, 510, 790, 1120), fill=(111, 190, 190, 210), width=7)
-    d.ellipse((850, 790, 880, 820), fill=(235, 211, 142, 245))
-    for y in (465, 565, 665, 765, 865, 965, 1065):
-        d.line((565, y, 610, y+16), fill=(224, 236, 222, 190), width=8)
-        d.line((975, y+16, 1020, y), fill=(224, 236, 222, 190), width=8)
-    # Convert the exposed stage floor into a submerged seabed. Keep the
-    # lower caption-safe band (y >= 1260) clear for the later text compositor.
-    d.polygon(((0, 1038), (1080, 1038), (1080, 1258), (0, 1258)),
-              fill=(9, 91, 105, 205))
-    d.polygon(((0, 1205), (220, 1168), (470, 1210), (720, 1175),
-               (930, 1210), (1080, 1180), (1080, 1258), (0, 1258)),
-              fill=(18, 112, 119, 190))
-    d.arc((80, 1080, 430, 1245), 190, 345, fill=(119, 197, 184, 170), width=7)
-    d.arc((620, 1090, 1010, 1248), 190, 345, fill=(119, 197, 184, 170), width=7)
-    # Coral silhouettes sit on the seabed, not in the caption band.
-    for x, sign in ((48, 1), (1030, -1)):
-        d.line((x, 1245, x, 1125), fill=(231, 132, 142, 225), width=12)
-        d.line((x, 1190, x-sign*42, 1150), fill=(231, 132, 142, 220), width=9)
-        d.line((x, 1160, x+sign*38, 1128), fill=(231, 132, 142, 220), width=9)
+    # Opaque deep-water replacement of the old doorway / window / floor area.
+    d.rectangle((405, 0, 1080, 1260), fill=(5, 49, 70, 255))
+    # Subtle layered water gradients and strong descending shafts.
+    d.polygon(((405, 0), (1080, 0), (1080, 930), (405, 1050)),
+              fill=(8, 75, 94, 255))
+    for x, width in ((465, 72), (625, 88), (815, 75), (980, 62)):
+        d.polygon(((x, 0), (x + width, 0), (x + width + 145, 850),
+                   (x + 30, 850)), fill=(94, 204, 222, 55))
+    for i in range(18):
+        bx = 440 + ((seed >> (i % 16)) + i * 79) % 620
+        by = 100 + ((seed >> ((i + 5) % 16)) + i * 67) % 850
+        radius = 6 + (i * 5) % 15
+        d.ellipse((bx-radius, by-radius, bx+radius, by+radius),
+                  outline=(183, 237, 243, 190), width=4)
+    # Distinct freestanding stone arch and sealed door, entirely replacing
+    # the former observatory doorway rather than tracing over it.
+    d.rounded_rectangle((545, 330, 1035, 1085), radius=145,
+                        fill=(54, 103, 107, 255),
+                        outline=(190, 222, 210, 255), width=30)
+    d.rounded_rectangle((595, 390, 985, 1085), radius=125,
+                        fill=(4, 39, 58, 255),
+                        outline=(93, 163, 170, 255), width=18)
+    d.rounded_rectangle((642, 455, 938, 1085), radius=105,
+                        fill=(8, 73, 91, 255),
+                        outline=(170, 215, 204, 255), width=13)
+    d.line((790, 470, 790, 1060), fill=(116, 194, 190, 230), width=7)
+    d.ellipse((850, 760, 884, 794), fill=(235, 211, 142, 255))
+    for y in (420, 525, 630, 735, 840, 945):
+        d.line((555, y, 595, y+15), fill=(225, 236, 222, 220), width=8)
+        d.line((985, y+15, 1025, y), fill=(225, 236, 222, 220), width=8)
+    # New seabed replaces the old stage floor and keeps caption area untouched.
+    d.polygon(((405, 1010), (1080, 1010), (1080, 1260), (405, 1260)),
+              fill=(8, 83, 99, 255))
+    d.polygon(((405, 1175), (570, 1135), (720, 1185), (875, 1145),
+               (1010, 1180), (1080, 1150), (1080, 1260), (405, 1260)),
+              fill=(19, 119, 121, 255))
+    d.arc((475, 1080, 740, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
+    d.arc((760, 1085, 1050, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
+    for x, sign in ((445, 1), (1050, -1)):
+        d.line((x, 1245, x, 1125), fill=(231, 132, 142, 235), width=12)
+        d.line((x, 1190, x-sign*38, 1150), fill=(231, 132, 142, 230), width=9)
+        d.line((x, 1160, x+sign*34, 1128), fill=(231, 132, 142, 230), width=9)
     image.paste(Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB"))
-    # Grade the entire stage more decisively so leftover observatory colors
-    # cannot read as a second environment; titles/captions are drawn afterward.
-    image.paste(Image.blend(image, Image.new("RGB", image.size, (8, 83, 101)), 0.27))
+    # Cool water grade on the preserved character side without hiding the actor.
+    left_grade = Image.new("RGB", image.size, (8, 83, 101))
+    image.paste(Image.blend(image, left_grade, 0.12))
     return image
