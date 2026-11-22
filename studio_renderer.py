@@ -1314,6 +1314,30 @@ def render_frame(plan,t,genre,total):
 
 
 
+def _story_illustration_brief(shot):
+    """Prefer a concise, authored composition over a long narration transcript."""
+    action = str(shot.get('story_human_action') or '').strip()
+    authored = {
+        'face_duplicate_at_countdown': (
+            'Two distinct versions of Mara face each other across one observatory doorway; '
+            'show each figure once, with one blue glass key and two radios.'
+        ),
+        'warn_parallel_cities': (
+            'One wide observatory scene: the two versions of Mara discuss the fate of two '
+            'cities, represented by two small city displays; show each Mara only once.'
+        ),
+        'split_glass_key': (
+            'One close cinematic view of Mara breaking a blue glass key in half and offering '
+            'one half to her single double beside her; both figures appear once.'
+        ),
+        'seal_and_reveal_sea_door': (
+            'At home, Mara holds her brother’s open notebook; clearly show one drawing of '
+            'a single underwater door and tomorrow’s date on its page.'
+        ),
+    }
+    return authored.get(action, '')
+
+
 def asset_manifest(ch, plan):
     """Create a provenance-aware acquisition/generation brief for every shot."""
     topic=' '.join(str(ch.get('topic') or ch.get('title') or '').split())
@@ -1335,20 +1359,16 @@ def asset_manifest(ch, plan):
         # acquisition manifest. Episode-level topic/title is only a fallback
         # for legacy or non-scene-directed content.
         scene_environment=' '.join(str(p.get('story_environment') or ch.get('story_environment') or '').split())
-        scene_action=' '.join(str(p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
+        authored_visual = _story_illustration_brief(p)
+        scene_action=' '.join(str(authored_visual or p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
         scene_parts=[x for x in (scene_environment, scene_action) if x]
         scene_brief=' | '.join(scene_parts)
-        # Original story illustrations must read as one coherent cinematic
-        # frame. Recent encoded Episode 4 output exposed accidental tiled
-        # compositions even though the asset-resolution and creative-score
-        # gates passed. Explicitly forbid contact-sheet/storyboard layouts.
-        composition_rule = (
-            ' One continuous full-bleed scene, single camera view; no '
-            'split-screen, collage, storyboard grid, tiled panels, insets, '
-            'borders, contact sheets, or multiple viewpoints. Depict: '
-        )
-        scene_query=(('Original scene illustration: '+scene_environment
-                      +composition_rule+scene_action)
+        # Keep the action brief before the compact composition constraint:
+        # the manifest is capped at 240 characters, so a verbose negative
+        # prompt used to truncate the actual scene direction.
+        composition_rule = ' Single full-bleed camera view; no collage or panels.'
+        scene_query=(('Original cinematic scene: '+scene_environment+'. '
+                      +scene_action+'.'+composition_rule)
                      if scene_brief else '')
         if explicit_query:
             # Only an editorial beat that deliberately names the needed subject
