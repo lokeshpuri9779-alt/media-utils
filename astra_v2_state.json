@@ -13733,11 +13733,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-22T02:13:08.692940+00:00",
+  "last_preflight_at": "2026-11-22T08:39:07.420463+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-22T02:14:50.346985+00:00",
+    "at": "2026-11-22T08:41:05.823225+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -13754,7 +13754,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-21T20:21:01.397175+00:00",
+  "last_feedback_attempt_at": "2026-11-22T08:40:13.530120+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -27955,7 +27955,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-22T02:14:50.346922+00:00",
+    "at": "2026-11-22T08:41:05.823179+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -27966,13 +27966,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-22T02:14:50.346974+00:00",
+    "at": "2026-11-22T08:41:05.823217+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-22T02:13:56.207841+00:00",
+    "at": "2026-11-22T08:40:13.313818+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -28529,7 +28529,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-22T02:14:50.345913+00:00",
+    "at": "2026-11-22T08:41:05.822302+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -28541,7 +28541,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-22T02:14:50.346561+00:00",
+    "at": "2026-11-22T08:41:05.822892+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
