@@ -638,35 +638,37 @@ def _notebook_sea_ending(draw,t):
 
 
 def _underwater_left_stage(image, t):
-    """Replace inherited observatory set dressing during the sea-door reveal.
+    """Paint one continuous underwater stage before Mara and her notebook.
 
-    The final beat changes location. Keep this stage on the preserved left
-    side of the later underwater portal compositor, so Mara and her notebook
-    remain visible without observatory windows or instrument silhouettes.
+    The old implementation repainted only the lower-left quadrant. The upper
+    left retained the observatory sky while the right-side portal was painted
+    later, producing visible rectangular seams in encoded frames. This stage
+    now establishes a single full-width underwater base; the actor and props
+    are drawn afterward, and the portal compositor adds the door on the right.
     """
     if image.mode != "RGB" or image.size != (1080, 1920):
         raise CreativeReject("Underwater finale stage expects RGB 1080x1920")
-    # Keep the global headline band untouched; the underwater environment
-    # begins at the authored scene stage and ends before the subtitle band.
-    image.paste((12, 49, 67), (0, 480, 405, 1400))
+    # Repaint the complete environment stage, including the old headline
+    # backdrop. Headline and caption glyphs are drawn later by Studio.
+    image.paste((5, 49, 70), (0, 0, 405, 1400))
     d = ImageDraw.Draw(image)
-    # Soft descending light shafts and suspended bubbles establish depth.
-    for x, width, alpha in ((22, 34, 35), (145, 24, 26), (292, 30, 30)):
-        d.polygon(((x, 480), (x + width, 480),
+    # Light shafts and bubbles run from the top of the scene to the seabed.
+    for x, width in ((22, 34), (145, 24), (292, 30)):
+        d.polygon(((x, 0), (x + width, 0),
                    (min(404, x + width + 115), 1040),
                    (min(404, x + 58), 1040)),
                   fill=(48, 132, 157))
-    for i in range(10):
+    for i in range(14):
         x = 24 + ((i * 79 + 31) % 360)
-        y = 500 + ((i * 137 + int(t * 9)) % 760)
+        y = 90 + ((i * 137 + int(t * 9)) % 1020)
         r = 5 + (i % 3) * 3
         d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=3)
-    # Replace the inherited brown floor on the preserved character side too.
-    # The notebook is drawn afterward, so this opaque seabed cannot cover it.
-    image.paste((8, 83, 99), (0, 1260, 405, 1400))
+    # Continue the seabed across the stage rather than leaving a brown floor
+    # strip or a hard horizontal rectangle beneath the character.
+    image.paste((8, 83, 99), (0, 1120, 405, 1400))
     d = ImageDraw.Draw(image)
-    d.polygon(((0, 1288), (90, 1262), (190, 1300), (300, 1268),
-               (405, 1288), (405, 1399), (0, 1399)), fill=(17, 76, 88))
+    d.polygon(((0, 1175), (90, 1135), (190, 1185), (300, 1145),
+               (405, 1178), (405, 1399), (0, 1399)), fill=(17, 76, 88))
     for x, height in ((18, 58), (386, 48)):
         d.line((x, 1398, x-5, 1398-height), fill=(65, 159, 146), width=9)
         d.line((x-2, 1308, min(404, x+19), 1286),
