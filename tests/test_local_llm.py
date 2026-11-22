@@ -56,6 +56,3 @@ class LocalLLMTests(unittest.TestCase):
                 local_llm.generate_json("Write a story", {"type": "object"})
 
 
-if __js__:
-    pass
-
