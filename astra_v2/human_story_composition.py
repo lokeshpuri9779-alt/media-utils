@@ -25,7 +25,7 @@ DIRECTED_SHOTS={
     "flee_door": ("tracking",1.16,1.32,492,914),
     "guard_knocking_door": ("tracking",1.18,1.34,615,883),
     "inspect_generator_clue": ("object",1.28,1.49,613,938),
-    "inspect_future_photograph": ("object",1.23,1.34,569,923),
+    "inspect_future_photograph": ("object",1.30,1.40,569,923),
     "stop_stranger_switch": ("tracking",1.16,1.34,573,898),
     "survey_dead_city": ("wide",1.01,1.09,539,922),
     "inspect_reverse_clock": ("object",1.28,1.46,608,878),
@@ -34,7 +34,7 @@ DIRECTED_SHOTS={
     "face_duplicate_at_countdown": ("duo",1.05,1.14,540,918),
     "warn_parallel_cities": ("duo",1.02,1.13,543,923),
     "split_glass_key": ("duo",1.06,1.18,545,964),
-    "seal_and_reveal_sea_door": ("reveal",1.10,1.40,591,1035),
+    "seal_and_reveal_sea_door": ("reveal",1.02,1.08,540,920),
 }
 # Keep the story's essential on-screen people and their narrated props
 # within the source crop. A technically valid 1.5x shot previously removed

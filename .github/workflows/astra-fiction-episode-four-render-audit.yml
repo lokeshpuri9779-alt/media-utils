@@ -20,6 +20,7 @@ on:
       - 'tests/test_human_stage_depth.py'
       - 'astra_v2/human_action_choreography.py'
       - 'tests/test_human_story_choreography.py'
+      - '.github/workflows/astra-fiction-episode-four-render-audit.yml'
       - 'tests/test_expressive_mara_performance.py'
       - 'astra_v2/human_cinematic_camera.py'
       - 'studio_renderer.py'
@@ -27,6 +28,11 @@ on:
       - 'astra_v2/unified_story_engine.py'
       - 'astra_v2/omniroute_local.py'
       - 'tests/test_episode_four_human_performance.py'
+      - 'tests/test_human_story_choreography.py'
+      - 'astra_v2/pillow_scene_direction.py'
+      - 'astra_v2/visual_artifact_backdrop.py'
+      - 'tests/test_pillow_scene_direction.py'
+      - 'tests/test_visual_artifact_backdrop.py'
 
 permissions:
   contents: read
@@ -40,6 +46,7 @@ jobs:
       ASTRA_CHANNEL: rayvan
       ASTRA_UNIFIED_STORY_ENGINE: '1'
       ASTRA_FICTION_VISUAL_GUARD: '1'
+      ASTRA_VISUAL_ARTIFACT_BACKDROPS: '1'
       ASTRA_HUMAN_CINEMATIC_CAMERA: '1'
       ASTRA_ASSET_PACK_ENABLED: '1'
       ASTRA_ASSET_PACK_AUDIT: '1'

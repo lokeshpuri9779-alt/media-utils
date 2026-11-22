@@ -16,6 +16,8 @@ def prop_for_shot(shot):
     if action in ("carry", "pick", "push", "pull") and re.search(
             r"\b(?:box|boxes|parcel|parcels|crate|crates|package|packages|cart|carts)\b", text):
         return "parcel"
+    if re.search(r"\bnotebook\b", text):
+        return "notebook"
     if action == "repair" and re.search(
             r"\b(?:tool|tools|hammer|wrench|repair|repairs|repaired|fix|fixes|fixed)\b", text):
         return "tool"
@@ -32,6 +34,28 @@ def draw_interaction_prop(image, shot, t):
     action = shot.get("story_action", "idle")
     dx, dy = offset(action, t)
     d = ImageDraw.Draw(image)
+    if prop == "notebook":
+        # A narrated notebook reveal must have a visible page, not only a
+        # caption. Keep the open spread in the lower-left stage, clear of the
+        # protagonist's face and the underwater doorway on the right.
+        x, y = 235, 1035
+        d.rounded_rectangle((x-118, y-112, x+118, y+112), radius=12,
+                            fill=(82, 57, 48), outline=(224, 194, 145), width=8)
+        d.polygon(((x, y-88), (x-102, y-78), (x-102, y+88), (x, y+74)),
+                  fill=(246, 232, 194), outline=(126, 96, 70))
+        d.polygon(((x, y-88), (x+102, y-78), (x+102, y+88), (x, y+74)),
+                  fill=(238, 220, 178), outline=(126, 96, 70))
+        # A miniature arched door makes the notebook's drawing legible as the
+        # clue that connects the page to the submerged portal.
+        d.arc((x-58, y-54, x-8, y+28), 180, 360, fill=(43, 94, 111), width=5)
+        d.line((x-58, y-13, x-58, y+28), fill=(43, 94, 111), width=5)
+        d.line((x-8, y-13, x-8, y+28), fill=(43, 94, 111), width=5)
+        for yy in (y+42, y+55):
+            d.line((x-74, yy, x-14, yy), fill=(157, 126, 91), width=3)
+        d.line((x+22, y-35, x+78, y-35), fill=(157, 126, 91), width=4)
+        d.line((x+22, y-17, x+78, y-17), fill=(157, 126, 91), width=4)
+        d.line((x+22, y+1, x+68, y+1), fill=(157, 126, 91), width=4)
+        return True
     if prop == "parcel":
         # Held parcels follow body motion; pushed/pulled parcels remain at ground.
         if action in ("push", "pull"):

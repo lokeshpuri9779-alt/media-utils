@@ -464,18 +464,23 @@ def make_plan(ch):
             # Wardrobe, colors and accessories are selected once per story.
             # A fresh narration beat must not silently change a character.
             shot['story_visual_seed'] = visual_seed
-            # A beat with its own explicit visual location must not inherit
-            # the opening backdrop. Use the exact taxonomy that the pack
-            # compositor and review-only scene preflight already share.
-            # Explicit per-shot story_environment remains authoritative;
-            # unknown shot locations retain the opening-story fallback.
-            if not shot.get('story_environment'):
-                scene_hint = analyze_story_scene({
-                    'visual_prompt': str(shot.get('visual_prompt') or ''),
-                    'speech': str(shot.get('speech') or ''),
-                    'headline': str(shot.get('headline') or ''),
-                })['scene']
+            # Resolve the local beat before inheriting the episode backdrop.
+            # Episode-level locations are defaults, not permanent overrides:
+            # a later authored reveal (for example, a door beneath the sea)
+            # must be allowed to move the camera to its actual location.
+            episode_environment = str(ch.get('story_environment') or '').strip()
+            current_environment = str(shot.get('story_environment') or '').strip()
+            scene_hint = analyze_story_scene({
+                'visual_prompt': str(shot.get('visual_prompt') or ''),
+                'speech': str(shot.get('speech') or ''),
+                'headline': str(shot.get('headline') or ''),
+            })['scene']
+            if not current_environment:
                 shot['story_environment'] = scene_hint or story_location
+            elif (episode_environment and
+                  current_environment.casefold() == episode_environment.casefold() and
+                  scene_hint and scene_hint != current_environment):
+                shot['story_environment'] = scene_hint
             if unified_mode:
                 if not fixed_cast:
                     # The narration and visual prompt can introduce a new
@@ -1213,6 +1218,13 @@ def render_frame(plan,t,genre,total):
             and os.environ.get('ASTRA_HUMAN_CINEMATIC_CAMERA', '0') == '1'):
         from astra_v2.human_cinematic_camera import apply_human_camera
         im = apply_human_camera(im, s, u)
+    # Apply the environment reveal after all base/cached artwork and camera
+    # compositing; otherwise a later illustration layer can erase the water
+    # and stone-door treatment. This remains before title/caption layers.
+    if (genre == 'fiction' and os.getenv('ASTRA_VISUAL_ARTIFACT_BACKDROPS', '0') == '1'):
+        from astra_v2.visual_artifact_backdrop import analyze_story_scene, apply_underwater_reveal
+        if analyze_story_scene(s)['scene'] == 'underwater':
+            im = apply_underwater_reveal(im, visual_identity)
     d=ImageDraw.Draw(im)
     comparison_labels=s.get('comparison_labels') or []
     if len(comparison_labels)==2:
@@ -1302,6 +1314,30 @@ def render_frame(plan,t,genre,total):
 
 
 
+def _story_illustration_brief(shot):
+    """Prefer a concise, authored composition over a long narration transcript."""
+    action = str(shot.get('story_human_action') or '').strip()
+    authored = {
+        'face_duplicate_at_countdown': (
+            'Two distinct versions of Mara face each other across one observatory doorway; '
+            'show each figure once, with one blue glass key and two radios.'
+        ),
+        'warn_parallel_cities': (
+            'One wide observatory scene: the two versions of Mara discuss the fate of two '
+            'cities, represented by two small city displays; show each Mara only once.'
+        ),
+        'split_glass_key': (
+            'One close cinematic view of Mara breaking a blue glass key in half and offering '
+            'one half to her single double beside her; both figures appear once.'
+        ),
+        'seal_and_reveal_sea_door': (
+            'At home, Mara holds her brother’s open notebook; clearly show one drawing of '
+            'a single underwater door and tomorrow’s date on its page.'
+        ),
+    }
+    return authored.get(action, '')
+
+
 def asset_manifest(ch, plan):
     """Create a provenance-aware acquisition/generation brief for every shot."""
     topic=' '.join(str(ch.get('topic') or ch.get('title') or '').split())
@@ -1323,10 +1359,17 @@ def asset_manifest(ch, plan):
         # acquisition manifest. Episode-level topic/title is only a fallback
         # for legacy or non-scene-directed content.
         scene_environment=' '.join(str(p.get('story_environment') or ch.get('story_environment') or '').split())
-        scene_action=' '.join(str(p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
+        authored_visual = _story_illustration_brief(p)
+        scene_action=' '.join(str(authored_visual or p.get('visual_prompt') or p.get('speech') or p.get('story_human_action') or '').split())
         scene_parts=[x for x in (scene_environment, scene_action) if x]
         scene_brief=' | '.join(scene_parts)
-        scene_query=('Original scene illustration: '+scene_brief) if scene_brief else ''
+        # Keep the action brief before the compact composition constraint:
+        # the manifest is capped at 240 characters, so a verbose negative
+        # prompt used to truncate the actual scene direction.
+        composition_rule = ' Single full-bleed camera view; no collage or panels.'
+        scene_query=(('Original cinematic scene: '+scene_environment+'. '
+                      +scene_action+'.'+composition_rule)
+                     if scene_brief else '')
         if explicit_query:
             # Only an editorial beat that deliberately names the needed subject
             # may search an external provider. This preserves semantic isolation.

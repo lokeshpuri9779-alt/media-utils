@@ -60,9 +60,25 @@ class HumanStoryChoreographyTests(unittest.TestCase):
                     self.assertGreater(changed_pixels, 2000,
                         "Only a blink or tiny decorative animation changed")
                 # The authored original performance remains restricted to stage.
+                # The sea-door finale intentionally replaces the upper backdrop
+                # with a static underwater environment. Keep that region stable
+                # across story time, while retaining the strict lower caption band.
                 reference = Image.new("RGB", (1080,1920), (13,22,37))
-                for pic in frames:
-                    for region in ((0,0,1080,480), (0,1400,1080,1920)):
+                for index, pic in enumerate(frames):
+                    if shot["story_human_action"] == "seal_and_reveal_sea_door":
+                        upper = (0,0,1080,480)
+                        upper_delta = ImageChops.difference(
+                            pic.crop(upper), frames[0].crop(upper)).getbbox()
+                        # Only the left-side underwater bubble field animates
+                        # above the stage. Keep that motion confined to its
+                        # backdrop lane; no actor or prop may enter the header.
+                        if upper_delta is not None:
+                            self.assertLessEqual(upper_delta[2], 405,
+                                "Actor/prop entered headline-safe region")
+                        regions = ((0,1400,1080,1920),)
+                    else:
+                        regions = ((0,0,1080,480), (0,1400,1080,1920))
+                    for region in regions:
                         self.assertIsNone(ImageChops.difference(
                             pic.crop(region), reference.crop(region)).getbbox(),
                             "Action overlapped headline or caption-safe region")
@@ -157,17 +173,30 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertLess(action_state("split_glass_key",DURATION*.10,DURATION).event,.02)
         self.assertGreater(action_state("split_glass_key",DURATION*.85,DURATION).event,.95)
 
-    def test_underwater_door_is_a_final_reveal_not_onscreen_at_opening(self):
+    def test_underwater_notebook_survives_the_actual_opaque_environment_repaint(self):
+        from astra_v2.human_story_performance import draw_human_scene
+        from astra_v2.visual_artifact_backdrop import apply_underwater_reveal
+
         beat = next(shot for shot in records()
                     if shot["story_human_action"] == "seal_and_reveal_sea_door")
-        first, last = frame(beat,.10), frame(beat,.93)
-        page=(602,1020,980,1266)
+        first = Image.new("RGB", (1080, 1920), (13, 22, 37))
+        last = Image.new("RGB", (1080, 1920), (13, 22, 37))
+        self.assertTrue(draw_human_scene(first, beat, DURATION*.10))
+        self.assertTrue(draw_human_scene(last, beat, DURATION*.93))
+        identity = "episode-four-underwater-notebook-regression"
+        apply_underwater_reveal(first, identity)
+        apply_underwater_reveal(last, identity)
+        # The final page is in the preserved left stage; the old right-side
+        # page region is deliberately repainted by the underwater door layer.
+        page=(35,1078,395,1382)
         diff=ImageChops.difference(first.crop(page),last.crop(page))
         self.assertIsNotNone(diff.getbbox())
         self.assertEqual(action_state("seal_and_reveal_sea_door",
                                      DURATION*.10,DURATION).aftermath,0.0)
         self.assertGreater(action_state("seal_and_reveal_sea_door",
                                         DURATION*.93,DURATION).aftermath,.9)
+        # Confirm a recognizable page field remains after the exact overlay.
+        self.assertNotEqual(last.getpixel((70,1110)), first.getpixel((70,1110)))
 
     def test_authorized_action_contract_remains_fail_closed(self):
         record=next(records())
@@ -196,6 +225,18 @@ class HumanStoryChoreographyTests(unittest.TestCase):
         self.assertEqual(a.tobytes(),b.tobytes())
         self.assertEqual(action_state("discover_radio",7.32,12),
                          action_state("discover_radio",7.32,12))
+
+    def test_underwater_reveal_replaces_the_entire_old_floor_strip(self):
+        from astra_v2.human_story_performance import _underwater_left_stage
+        from astra_v2.visual_artifact_backdrop import apply_underwater_reveal
+        frame = Image.new("RGB", (1080, 1920), (92, 65, 55))
+        _underwater_left_stage(frame, 1.0)
+        apply_underwater_reveal(frame, "underwater-floor-regression")
+        # The right strip used to retain brown floor below the 1260px overlay.
+        self.assertNotEqual(frame.getpixel((900, 1320)), (92, 65, 55))
+        # Both sides of the preserved stage must replace the inherited floor.
+        self.assertNotEqual(frame.getpixel((200, 1270)), (92, 65, 55))
+        self.assertNotEqual(frame.getpixel((200, 1350)), (92, 65, 55))
 
 
 if __name__ == "__main__":

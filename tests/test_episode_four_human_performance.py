@@ -1,5 +1,6 @@
 """Finale: continuity, two actors, key destruction, and next-season setup."""
 import unittest
+from unittest.mock import patch
 from PIL import Image, ImageChops
 from astra_errors import CreativeReject
 from astra_v2.omniroute_local import catalog
@@ -41,6 +42,12 @@ class SeasonFinalePerformanceTests(unittest.TestCase):
                 f'Finale scene {index} is static')
             source=Image.new('RGB',(1080,1920),(10,20,33))
             for zone in ((0,0,1080,480),(0,1400,1080,1920)):
+                # The final scene intentionally replaces the upper backdrop
+                # with underwater light/bubbles; it must still keep the lower
+                # caption-safe band free of actors and physical props.
+                if (shot["story_human_action"] == "seal_and_reveal_sea_door"
+                        and zone == (0,0,1080,480)):
+                    continue
                 self.assertIsNone(ImageChops.difference(
                     early.crop(zone),source.crop(zone)).getbbox())
 
@@ -64,6 +71,25 @@ class SeasonFinalePerformanceTests(unittest.TestCase):
         page=(602,1030,968,1264)
         self.assertIsNotNone(ImageChops.difference(
             final.crop(page),before.crop(page)).getbbox())
+
+    def test_final_sea_door_replaces_observatory_stage_behind_mara(self):
+        final = frame(beats(4)[3], 1.9)
+        # Far-left upper stage is background-only: it must be deep underwater,
+        # not the inherited observatory wall/window treatment.
+        self.assertEqual(final.getpixel((20, 700)), (5, 49, 70))
+        # The old observatory sky must also be gone above the actor stage.
+        self.assertEqual(final.getpixel((20, 200)), (5, 49, 70))
+        # The authored notebook's miniature arched door remains visible.
+        self.assertIsNotNone(ImageChops.difference(
+            final.crop((0, 1080, 405, 1385)),
+            Image.new('RGB', (405, 305), (12, 49, 67))).getbbox())
+
+    def test_finale_uses_only_the_bespoke_notebook_not_a_duplicate_generic_prop(self):
+        shot = beats(4)[3]
+        with patch("astra_v2.unified_story_engine.draw_interaction_prop") as generic_prop:
+            result = frame(shot, 1.9)
+        self.assertEqual(result.size, (1080, 1920))
+        generic_prop.assert_not_called()
 
     def test_wrong_episode_wrong_action_or_missing_plot_contract_rejected(self):
         sample=beats(4)[2]

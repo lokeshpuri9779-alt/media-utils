@@ -610,20 +610,69 @@ def _sealed_door_stars(draw,t):
 
 
 def _notebook_sea_ending(draw,t):
-    """Page depicts a submerged SECOND door rather than fabricating a new scene."""
-    draw.polygon(((607,1000),(952,979),(963,1235),(610,1258)),
-                 fill=(224,208,173),outline=INK,width=10)
-    draw.polygon(((655,1033),(923,1026),(919,1220),(658,1230)),
-                 fill=(105,173,195),outline=(64,111,132),width=4)
-    for k in range(4):
-        yy=1087+k*34
-        draw.arc((669,yy,902,yy+55),0,170,fill=(188,224,225),width=6)
-    draw.rectangle((749,1084,845,1214),fill=(42,78,100),outline=(228,236,213),width=8)
-    draw.ellipse((819,1140,834,1156),fill=GOLD)
-    draw.polygon(((750,1041),(769,1067),(786,1042)),fill=(242,218,157))
-    # Page turns very slightly so the reveal is a motion event, not a static card.
-    offset=int(5*math.sin(t*1.1))
-    draw.line(((626,1006+offset),(620,1232)),fill=(161,138,115),width=8)
+    """Show the second sea door and its tomorrow clue on a legible notebook page."""
+    # Keep the entire notebook inside the wide final reveal camera crop and
+    # left of the opaque portal replacement at x=405.
+    x, y = 42, 1048
+    draw.rounded_rectangle((x, y, x+346, y+260), radius=12,
+                           fill=(83, 61, 49), outline=(224, 194, 145), width=8)
+    draw.polygon(((x+14,y+16),(x+173,y+8),(x+173,y+242),(x+14,y+234)),
+                 fill=(246,232,194), outline=(126,96,70))
+    draw.polygon(((x+173,y+8),(x+332,y+16),(x+332,y+234),(x+173,y+242)),
+                 fill=(238,220,178), outline=(126,96,70))
+    # A small arched doorway sits beneath drawn waves: the page now reads as
+    # the same underwater door revealed on the right, not a generic arch.
+    draw.arc((x+43,y+48,x+123,y+160),180,360,fill=(43,94,111),width=7)
+    draw.line((x+43,y+104,x+43,y+160),fill=(43,94,111),width=7)
+    draw.line((x+123,y+104,x+123,y+160),fill=(43,94,111),width=7)
+    for yy in (y+169,y+181,y+193):
+        draw.arc((x+26,yy-9,x+146,yy+12),185,350,fill=(54,132,147),width=4)
+    # Explicitly write the promised date clue rather than leaving the page blank.
+    draw.text((x+196,y+139),"TOMORROW",fill=(54,74,83),stroke_width=0)
+    draw.text((x+196,y+160),"DATE: +1",fill=(84,92,89),stroke_width=0)
+    for yy in (y+190,y+207):
+        draw.line((x+194,yy,x+310,yy),fill=(157,126,91),width=4)
+    offset=int(4*math.sin(t*1.1))
+    draw.line(((x+173,y+8+offset),(x+173,y+242)),fill=(161,138,115),width=5)
+
+
+
+def _underwater_left_stage(image, t):
+    """Paint one continuous underwater stage before Mara and her notebook.
+
+    The old implementation repainted only the lower-left quadrant. The upper
+    left retained the observatory sky while the right-side portal was painted
+    later, producing visible rectangular seams in encoded frames. This stage
+    now establishes a single full-width underwater base; the actor and props
+    are drawn afterward, and the portal compositor adds the door on the right.
+    """
+    if image.mode != "RGB" or image.size != (1080, 1920):
+        raise CreativeReject("Underwater finale stage expects RGB 1080x1920")
+    # Repaint the complete environment stage, including the old headline
+    # backdrop. Headline and caption glyphs are drawn later by Studio.
+    image.paste((5, 49, 70), (0, 0, 405, 1400))
+    d = ImageDraw.Draw(image)
+    # Light shafts and bubbles run from the top of the scene to the seabed.
+    for x, width in ((22, 34), (145, 24), (292, 30)):
+        d.polygon(((x, 0), (x + width, 0),
+                   (min(404, x + width + 115), 1040),
+                   (min(404, x + 58), 1040)),
+                  fill=(48, 132, 157))
+    for i in range(14):
+        x = 24 + ((i * 79 + 31) % 360)
+        y = 90 + ((i * 137 + int(t * 9)) % 1020)
+        r = 5 + (i % 3) * 3
+        d.ellipse((x-r, y-r, x+r, y+r), outline=(154, 224, 236), width=3)
+    # Continue the seabed across the stage rather than leaving a brown floor
+    # strip or a hard horizontal rectangle beneath the character.
+    image.paste((8, 83, 99), (0, 1120, 405, 1400))
+    d = ImageDraw.Draw(image)
+    d.polygon(((0, 1175), (90, 1135), (190, 1185), (300, 1145),
+               (405, 1178), (405, 1399), (0, 1399)), fill=(17, 76, 88))
+    for x, height in ((18, 58), (386, 48)):
+        d.line((x, 1398, x-5, 1398-height), fill=(65, 159, 146), width=9)
+        d.line((x-2, 1308, min(404, x+19), 1286),
+               fill=(76, 176, 158), width=7)
 
 
 def draw_human_scene(image, shot, t):
@@ -660,12 +709,17 @@ def draw_human_scene(image, shot, t):
                           running=bool(opts.get("running")),
                           progress=state.progress)
         return _mara(draw, x+walking_offset, y, time, **opts)
-    # Keep verified environment imagery visible through the open window.
-    draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
-    # Chapter-specific reusable art lives BEHIND the hand-acted character and
-    # story object layers. The original verified backdrop remains exposed.
-    from astra_v2.human_illustrated_materials import draw_environment_art
-    draw_environment_art(image,action,t,float(shot.get("duration") or 12))
+    # The final beat moves from the observatory to the sea floor. Do not leave
+    # the observatory's window grid and instrument silhouettes behind Mara.
+    if action == "seal_and_reveal_sea_door":
+        _underwater_left_stage(image, t)
+    else:
+        # Keep verified environment imagery visible through the open window.
+        draw_observatory_stage(image,action,t,float(shot.get("duration") or 12))
+        # Chapter-specific reusable art lives BEHIND the hand-acted character
+        # and story object layers. The original verified backdrop remains.
+        from astra_v2.human_illustrated_materials import draw_environment_art
+        draw_environment_art(image,action,t,float(shot.get("duration") or 12))
     d=ImageDraw.Draw(image)
     if action == "discover_radio":
         _radio(d,750,995,t,glow=state.event > .15)

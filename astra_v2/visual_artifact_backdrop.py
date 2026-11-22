@@ -25,7 +25,7 @@ SCENE_TERMS = {
     "village": ("village", "hamlet", "countryside"),
     "mountain": ("mountain", "summit", "mountains", "cliff", "peak"),
     "desert": ("desert", "dune", "sand dunes", "oasis"),
-    "underwater": ("underwater", "ocean", "coral", "seabed", "reef", "deep sea"),
+    "underwater": ("underwater", "ocean", "sea", "beneath the sea", "under the sea", "ocean floor", "seabed", "reef", "coral", "deep sea"),
     "space": ("space", "iss", "orbital", "orbit", "planet", "galaxy", "cosmos", "astronaut"),
     "laboratory": ("laboratory", "lab", "research lab", "science lab"),
     "garden": ("garden", "greenhouse", "botanical garden", "flower garden"),
@@ -137,7 +137,46 @@ def apply_backdrop(image, shot, identity):
     # later by the existing Studio pipeline.
     overlay=Image.new("RGBA",image.size,(0,0,0,0))
     d=ImageDraw.Draw(overlay)
-    if scene in {"city","village","castle","library","museum","workshop","laboratory"}:
+    if scene == "underwater":
+        # A deterministic, unmistakable underwater establishing plate. Keep
+        # the stone arch to the right so the story's characters remain clear.
+        # Light shafts, suspended bubbles, seabed and coral provide independent
+        # visual cues; the door is drawn as a readable object, not a label.
+        for ray_x, ray_w, ray_alpha in ((90,105,30),(285,78,22),(470,118,26)):
+            d.polygon(((ray_x,0),(ray_x+ray_w,0),(ray_x+ray_w+210,1030),
+                       (ray_x+110,1030)), fill=(92,205,224,ray_alpha))
+        for i in range(17):
+            bx=(seed//(i+1)+i*137)%1040+20
+            by=180+(seed//(i+3)+i*83)%790
+            radius=8+(i*7)%19
+            d.ellipse((bx-radius,by-radius,bx+radius,by+radius),
+                      outline=(180,238,244,155),width=4)
+            d.arc((bx-radius+4,by-radius+4,bx+radius-4,by+radius-4),
+                  205,310,fill=(235,255,255,190),width=3)
+        # Deep seabed and two coral silhouettes.
+        d.polygon(((0,1000),(180,960),(340,1015),(520,970),(720,1010),
+                   (900,955),(1080,990),(1080,1100),(0,1100)),
+                  fill=(18,83,91,210))
+        for cx,cy,scale in ((115,1000,1.0),(955,985,.85)):
+            d.line((cx,cy,cx-22*scale,cy-85*scale),fill=(226,117,126,220),width=13)
+            d.line((cx-10*scale,cy-38*scale,cx-54*scale,cy-72*scale),
+                   fill=(226,117,126,220),width=10)
+            d.line((cx-8*scale,cy-52*scale,cx+35*scale,cy-92*scale),
+                   fill=(226,117,126,220),width=10)
+        # Off-centre ancient stone arch with a sealed blue-green door.
+        d.rounded_rectangle((575,420,1015,1050),radius=150,
+                           fill=(45,83,91,235),outline=(190,218,211,255),width=28)
+        d.rounded_rectangle((635,500,955,1050),radius=112,
+                           fill=(7,30,45,255),outline=(116,174,178,255),width=17)
+        d.rounded_rectangle((680,565,910,1050),radius=92,
+                           fill=(17,91,111,255),outline=(190,220,210,255),width=12)
+        d.line((795,585,795,1040),fill=(125,203,203,220),width=7)
+        d.ellipse((865,790,890,815),fill=(235,214,143,255))
+        # Individual stone joints make the arch read as masonry.
+        for yy in (470,565,660,755,850,945):
+            d.line((585,yy,625,yy+18),fill=(225,235,221,180),width=7)
+            d.line((965,yy+18,1005,yy),fill=(225,235,221,180),width=7)
+    elif scene in {"city","village","castle","library","museum","workshop","laboratory"}:
         for i in range(7):
             x=i*165-25
             h=200+(seed//(i+1))%230
@@ -168,4 +207,67 @@ def apply_backdrop(image, shot, identity):
     # headline, and caption drawing retain ownership of their own layers.
     overlay.paste((0, 0, 0, 0), (0, 1100, 1080, 1920))
     image.paste(Image.alpha_composite(image.convert("RGBA"),overlay).convert("RGB"))
+    return image
+
+
+def apply_underwater_reveal(image, identity):
+    """Replace the right-side inherited set with an opaque underwater stage.
+
+    Preserve the acted character on the left; fully repaint the old doorway,
+    windows and floor on the right so the previous observatory cannot ghost
+    through the new environment. Text and caption layers are drawn afterward.
+    """
+    if image.mode != "RGB" or image.size != (1080, 1920):
+        raise ValueError("underwater reveal requires RGB 1080x1920")
+    seed = int.from_bytes(hashlib.sha256(str(identity).encode()).digest()[:4], "big")
+    overlay = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(overlay)
+    # Opaque deep-water replacement of the old doorway / window / floor area.
+    d.rectangle((405, 0, 1080, 1260), fill=(5, 49, 70, 255))
+    # Subtle layered water gradients and strong descending shafts.
+    d.polygon(((405, 0), (1080, 0), (1080, 930), (405, 1050)),
+              fill=(8, 75, 94, 255))
+    for x, width in ((465, 72), (625, 88), (815, 75), (980, 62)):
+        d.polygon(((x, 0), (x + width, 0), (x + width + 145, 850),
+                   (x + 30, 850)), fill=(94, 204, 222, 55))
+    for i in range(18):
+        bx = 440 + ((seed >> (i % 16)) + i * 79) % 620
+        by = 100 + ((seed >> ((i + 5) % 16)) + i * 67) % 850
+        radius = 6 + (i * 5) % 15
+        d.ellipse((bx-radius, by-radius, bx+radius, by+radius),
+                  outline=(183, 237, 243, 190), width=4)
+    # Distinct freestanding stone arch and sealed door, entirely replacing
+    # the former observatory doorway rather than tracing over it.
+    d.rounded_rectangle((545, 330, 1035, 1085), radius=145,
+                        fill=(54, 103, 107, 255),
+                        outline=(190, 222, 210, 255), width=30)
+    d.rounded_rectangle((595, 390, 985, 1085), radius=125,
+                        fill=(4, 39, 58, 255),
+                        outline=(93, 163, 170, 255), width=18)
+    d.rounded_rectangle((642, 455, 938, 1085), radius=105,
+                        fill=(8, 73, 91, 255),
+                        outline=(170, 215, 204, 255), width=13)
+    d.line((790, 470, 790, 1060), fill=(116, 194, 190, 230), width=7)
+    d.ellipse((850, 760, 884, 794), fill=(235, 211, 142, 255))
+    for y in (420, 525, 630, 735, 840, 945):
+        d.line((555, y, 595, y+15), fill=(225, 236, 222, 220), width=8)
+        d.line((985, y+15, 1025, y), fill=(225, 236, 222, 220), width=8)
+    # New seabed replaces the old stage floor through the full visual stage.
+    # The earlier 1260px cutoff left a brown observatory floor strip in the
+    # decoded MP4 beneath the portal; captions begin below this replacement.
+    d.polygon(((405, 1010), (1080, 1010), (1080, 1400), (405, 1400)),
+              fill=(8, 83, 99, 255))
+    d.polygon(((405, 1175), (570, 1135), (720, 1185), (875, 1145),
+               (1010, 1180), (1080, 1150), (1080, 1400), (405, 1400)),
+              fill=(19, 119, 121, 255))
+    d.arc((475, 1080, 740, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
+    d.arc((760, 1085, 1050, 1245), 190, 345, fill=(137, 207, 190, 210), width=7)
+    for x, sign in ((445, 1), (1050, -1)):
+        d.line((x, 1245, x, 1125), fill=(231, 132, 142, 235), width=12)
+        d.line((x, 1190, x-sign*38, 1150), fill=(231, 132, 142, 230), width=9)
+        d.line((x, 1160, x+sign*34, 1128), fill=(231, 132, 142, 230), width=9)
+    image.paste(Image.alpha_composite(image.convert("RGBA"), overlay).convert("RGB"))
+    # Cool water grade on the preserved character side without hiding the actor.
+    left_grade = Image.new("RGB", image.size, (8, 83, 101))
+    image.paste(Image.blend(image, left_grade, 0.12))
     return image
