@@ -12509,6 +12509,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-61b884322ce6d9d8476f",
+      "video_id": "_--nfLjzpjc",
+      "confirmed_at": "2026-11-23T03:15:33.863504+00:00",
+      "title": "Bramen the Stoat and Vesper the Fox's Shared Winter Tome",
+      "plot_fingerprint": "bfae8cc9b6b43e5a156e72836600908bc2ed8aa188b7a60c8b2cf61803b13e34",
+      "story_beats": [
+        {
+          "headline": "The Disputed Discovery",
+          "speech": "This single frost book is mine alone to read, for I found it first beneath the frozen pine roots.",
+          "visual": "forest",
+          "label": "Exclusive Claim",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramen the Stoat and Vesper the Fox standing inside a snowy forest clearing, glaring angrily at a single open book resting on a mossy log between them under pale moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Lonely Shortcut",
+          "speech": "I will snatch the book away into my deep burrow so I alone can memorize every warmth recipe.",
+          "visual": "door",
+          "label": "Burrow Retreat",
+          "story_beat": "build",
+          "visual_prompt": "Vesper the Fox gripping the cover of a small book in her jaws while backing quickly toward a dark wooden cabin door embedded in a snowy drift.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Split",
+          "speech": "Instead of fighting over frozen pages, let us place the book flat on this stump and share our berries.",
+          "visual": "signal",
+          "label": "Stump Compromise",
+          "story_beat": "mechanism",
+          "visual_prompt": "Bramen the Stoat carefully sliding a handful of red berries across a flat tree stump toward Vesper the Fox, while the open book rests in the center under a glowing lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Harmonious Reading",
+          "speech": "Together we have mastered the winter recipes, keeping our paws warm and our spirits bright through the frost.",
+          "visual": "ship",
+          "label": "Joint Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramen the Stoat and Vesper the Fox sitting side by side on a cozy wooden bench inside a warm cabin, peacefully reading the open book together while a lantern glows softly.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
