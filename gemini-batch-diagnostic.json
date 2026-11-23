@@ -1,23 +1,23 @@
 {
-  "observed_at": "2026-11-23T07:36:38.464875+00:00",
+  "observed_at": "2026-11-23T23:54:29.356706+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 1,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 2,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 3,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 4,
@@ -25,23 +25,23 @@
     },
     {
       "index": 5,
-      "reason": "invalid_story_structure"
+      "reason": "environment_not_in_visual_prompt"
     },
     {
       "index": 6,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "environment_not_in_visual_prompt"
     },
     {
       "index": 7,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 8,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 9,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 10,
@@ -49,39 +49,39 @@
     },
     {
       "index": 11,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 12,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 13,
-      "reason": "invalid_story_structure"
-    },
-    {
-      "index": 14,
       "reason": "missing_dialogue"
     },
     {
+      "index": 13,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 14,
+      "reason": "beat_word_count_out_of_range"
+    },
+    {
       "index": 15,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 16,
-      "reason": "invalid_story_structure"
+      "reason": "missing_dialogue"
     },
     {
       "index": 17,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 18,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 19,
-      "reason": "invalid_story_structure"
+      "reason": "beat_word_count_out_of_range"
     }
   ],
   "reviewed": null,
