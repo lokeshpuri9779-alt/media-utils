@@ -1,11 +1,11 @@
 {
-  "observed_at": "2026-11-22T19:38:19.143194+00:00",
+  "observed_at": "2026-11-23T07:36:38.464875+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
     {
       "index": 0,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 1,
@@ -13,19 +13,19 @@
     },
     {
       "index": 2,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "missing_dialogue"
     },
     {
       "index": 3,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 4,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "missing_dialogue"
     },
     {
       "index": 5,
-      "reason": "missing_dialogue"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 6,
@@ -33,55 +33,55 @@
     },
     {
       "index": 7,
-      "reason": "invalid_story_structure"
+      "reason": "missing_dialogue"
     },
     {
       "index": 8,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "missing_dialogue"
     },
     {
       "index": 9,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 10,
-      "reason": "missing_dialogue"
-    },
-    {
-      "index": 11,
       "reason": "invalid_story_structure"
     },
     {
-      "index": 12,
+      "index": 10,
       "reason": "beat_word_count_out_of_range"
     },
     {
-      "index": 13,
+      "index": 11,
       "reason": "missing_dialogue"
     },
     {
+      "index": 12,
+      "reason": "invalid_story_structure"
+    },
+    {
+      "index": 13,
+      "reason": "invalid_story_structure"
+    },
+    {
       "index": 14,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "missing_dialogue"
     },
     {
       "index": 15,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 16,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 17,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 18,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     },
     {
       "index": 19,
-      "reason": "beat_word_count_out_of_range"
+      "reason": "invalid_story_structure"
     }
   ],
   "reviewed": null,
