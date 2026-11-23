@@ -12607,6 +12607,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-b6efc6bc020bfcad9930",
+      "video_id": "MtSQC5Mmm7Q",
+      "confirmed_at": "2026-11-23T13:13:02.262731+00:00",
+      "title": "Bramen the Stoat and Jasper the Fox's Winter Cabin Book Dilemma",
+      "plot_fingerprint": "ef64c9388838fb6a8ca4a78e757bd683ed6b0f005bd03f1072dd8963e673f640",
+      "story_beats": [
+        {
+          "headline": "The Last Winter Volume",
+          "speech": "We only have one book left for the whole winter, and we cannot decide whether to read it or burn its pages.",
+          "visual": "forest",
+          "label": "The Scarce Volume",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a snowy winter cabin, Bramen the Stoat and Jasper the Fox stand beside a cold stone hearth staring down at a single worn book resting on a wooden table. Bramen holds a lantern, and Jasper points anxiously at the hearth.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Testing the Hearth Theory",
+          "speech": "If we burn just one chapter, the room will grow warm quickly, but we will lose the final ending of the tale forever.",
+          "visual": "door",
+          "label": "The Burning Debate",
+          "story_beat": "build",
+          "visual_prompt": "Inside the snowy winter cabin, Jasper the Fox holds the book near the open stone hearth while Bramen the Stoat steps forward with an open box to catch stray embers, debating the fire risk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Shield Choice",
+          "speech": "Let us place the book flat on the center table so we can read every word together without losing a single page.",
+          "visual": "signal",
+          "label": "The Table Compromise",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the snowy winter cabin, Bramen the Stoat and Jasper the Fox sit across from each other at the wooden table, pushing the book safely to the center while a small lantern glows beside them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Reading by the Lantern",
+          "speech": "Sharing the story keeps our minds warm and preserves the treasure for both of us through the long snowy night.",
+          "visual": "forest",
+          "label": "The Peaceful Evening",
+          "story_beat": "payoff",
+          "visual_prompt": "Inside the cozy snowy winter cabin, Bramen the Stoat and Jasper the Fox sit side by side reading the open book on the wooden table illuminated by a warm lantern glow.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
