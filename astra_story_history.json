@@ -12460,6 +12460,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-23e65e65720310a75bd8",
+      "video_id": "cnc6pH7hEmk",
+      "confirmed_at": "2026-11-23T03:02:19.644527+00:00",
+      "title": "Bramble Ridge and the Frost-Locked Timber Gate",
+      "plot_fingerprint": "1bd0f5192ce2c556bcca5547374e7154ed677f2dfe4e352650a400900241521a",
+      "story_beats": [
+        {
+          "headline": "The Frozen Obstacle",
+          "speech": "Look how the heavy morning frost has sealed the iron padlock completely shut against the freezing wood.",
+          "visual": "forest",
+          "label": "Frozen Gate",
+          "story_beat": "reveal",
+          "visual_prompt": "Bramble the red fox and Clover the white rabbit standing in a snowy forest before a large wooden gate sealed in thick blue frost with a rusted padlock hanging from the center.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Gathering Warmth",
+          "speech": "We must bring the glowing brass lantern close to the frozen metal so the trapped ice begins to melt away.",
+          "visual": "signal",
+          "label": "Warming the Lock",
+          "story_beat": "build",
+          "visual_prompt": "Bramble the red fox holding a glowing brass lantern close to the frozen padlock while Clover the white rabbit watches anxiously in the snowy forest clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Turning the Key",
+          "speech": "Now push the copper key firmly into the warm shackle before the biting winter wind freezes everything solid again.",
+          "visual": "door",
+          "label": "Unlocking the Gate",
+          "story_beat": "mechanism",
+          "visual_prompt": "Clover the white rabbit holding a shiny copper key and inserting it into the thawed padlock on the wooden gate while Bramble the red fox steadies the heavy latch.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Open Path",
+          "speech": "The heavy timber panels swing wide open at last, revealing the sunlit orchard filled with sweet winter berries.",
+          "visual": "forest",
+          "label": "Harvest Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Bramble the red fox and Clover the white rabbit cheering happily as the heavy wooden forest gate stands wide open, revealing bright green bushes and red berries beyond.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
