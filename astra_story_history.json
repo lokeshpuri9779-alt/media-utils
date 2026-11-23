@@ -12558,6 +12558,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-77f03cf6fabcdc33b84e",
+      "video_id": "IPcADJRqjlk",
+      "confirmed_at": "2026-11-23T10:11:14.939079+00:00",
+      "title": "Tansy the Tapir and the Midday Meadow Shade",
+      "plot_fingerprint": "273f4c4e60508fa43a2eacf41eb87e6063cee7b8f1904425486a98f630c3712a",
+      "story_beats": [
+        {
+          "headline": "The Hidden Sprout",
+          "speech": "Oh dear, the little clover stems are completely hidden beneath this thick pile of heavy golden leaves today.",
+          "visual": "forest",
+          "label": "Clover Patch",
+          "story_beat": "reveal",
+          "visual_prompt": "Tansy the gray tapir with a flexible snout stands in a sunlit meadow forest clearing, looking down at a cluster of pale clover sprouts nearly buried under dry fallen leaves.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tempting Rest",
+          "speech": "I could simply lie down and snooze here in the warm shade, ignoring the covered stems until tomorrow.",
+          "visual": "signal",
+          "label": "Resting Spot",
+          "story_beat": "build",
+          "visual_prompt": "Tansy the gray tapir yawns softly in the sunlit meadow forest clearing, eyeing a comfortable patch of soft green moss next to the fallen leaves.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Clearing Sweep",
+          "speech": "No, I must sweep these heavy leaves away right now so the little clover sprouts can finally drink the sunlight.",
+          "visual": "door",
+          "label": "Clearing Effort",
+          "story_beat": "mechanism",
+          "visual_prompt": "Tansy the gray tapir uses her strong flexible snout to physically push and scatter the heavy golden leaves away from the pale clover sprouts in the meadow clearing.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Vibrant Bloom",
+          "speech": "Look at how brightly the green clover stands up now that the heavy leaves are completely gone.",
+          "visual": "planet",
+          "label": "Thriving Meadow",
+          "story_beat": "payoff",
+          "visual_prompt": "Tansy the gray tapir smiles happily in the sunlit meadow forest clearing, standing proudly beside a bright, fully uncovered patch of healthy green clover.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
