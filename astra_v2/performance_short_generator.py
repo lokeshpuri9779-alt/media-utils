@@ -194,6 +194,7 @@ def generate(prior_stories=(), excluded_fingerprints=(), creative_brief=""):
         "source": "gemini_performance_short_generator",
         "keywords": ["original animated story", "RAYVAN", "YouTube Shorts"],
         "premise": outline["premise"],
+        "story_environment": outline["scenes"][0]["story_environment"],
         "central_conflict": outline["premise"]["central_conflict"],
         "decisive_choice": outline["premise"]["causal_discovery"],
         "resolution": outline["premise"]["resolution"],
