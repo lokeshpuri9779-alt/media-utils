@@ -208,3 +208,66 @@ def generate(prior_stories=(), excluded_fingerprints=(), creative_brief=""):
     if issues:
         raise ValueError("Performance story failed planning: " + ",".join(issues))
     return story
+
+
+def _read_history(path):
+    if not path:
+        return []
+    from pathlib import Path
+    raw = Path(path).read_text(encoding="utf-8")
+    if not raw.strip():
+        return []
+    try:
+        data = json.loads(raw)
+        return data if isinstance(data, list) else [data]
+    except json.JSONDecodeError:
+        return [json.loads(line) for line in raw.splitlines() if line.strip()]
+
+
+def main(argv=None):
+    """Generate exactly one review-only candidate and packet when explicitly enabled."""
+    import argparse
+    from pathlib import Path
+    from astra_v2.performance_short_review_packet import build_packet
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--history", default=None, help="JSON or JSONL of recent story records")
+    parser.add_argument("--output", required=True, help="Candidate JSON output")
+    parser.add_argument("--packet", required=True, help="Review packet JSON output")
+    parser.add_argument("--brief", default="", help="Optional creative direction")
+    args = parser.parse_args(argv)
+    if not enabled():
+        raise SystemExit("ASTRA_GEMINI_ENABLED=1 and GEMINI_API_KEY are required; no files written")
+    history = _read_history(args.history)
+    fingerprints = []
+    for item in history:
+        premise = item.get("premise") if isinstance(item, dict) else None
+        if isinstance(premise, dict):
+            try:
+                fingerprints.append(premise_fingerprint(premise))
+            except ValueError:
+                pass
+    candidate = generate(history, fingerprints, args.brief)
+    if candidate is None:
+        raise SystemExit("Generation disabled; no files written")
+    packet = build_packet([candidate])
+    candidate_path = Path(args.output)
+    packet_path = Path(args.packet)
+    candidate_path.parent.mkdir(parents=True, exist_ok=True)
+    packet_path.parent.mkdir(parents=True, exist_ok=True)
+    candidate_path.write_text(json.dumps(candidate, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    packet_path.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    print("ASTRA_PERFORMANCE_SHORT_REVIEW_ONLY=" + json.dumps({
+        "candidate_id": candidate["content_id"],
+        "scene_count": len(candidate["performance_scenes"]),
+        "duration_seconds": candidate["visual_duration_seconds"],
+        "approved": False,
+        "production_ready": False,
+        "rendered": False,
+        "published": False,
+    }, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    main()
