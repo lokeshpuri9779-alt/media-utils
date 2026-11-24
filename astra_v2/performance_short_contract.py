@@ -54,7 +54,7 @@ def validate_short_outline(outline: dict, history=()) -> dict:
         if not isinstance(duration, (int, float)) or isinstance(duration, bool) or not 2.5 <= duration <= 7.0:
             raise ValueError(f"scene_{index}_duration_invalid")
         total += float(duration)
-        for field in ("narration", "action", "visual_prompt", "camera", "environment"):
+        for field in ("narration", "action", "visual_prompt", "camera", "environment", "headline", "speech", "visual", "label", "story_environment"):
             if not isinstance(scene.get(field), str) or len(scene[field].strip()) < 8:
                 raise ValueError(f"scene_{index}_{field}_missing")
         props = scene.get("required_props")
@@ -92,3 +92,39 @@ def validate_short_outline(outline: dict, history=()) -> dict:
         "production_ready": False,
         "published": False,
     }
+
+
+def to_renderer_beats(outline: dict) -> list:
+    """Translate an approved-shape outline into Studio's existing scene schema.
+
+    This is a structural adapter only. It never grants editorial or publication
+    approval; downstream gates remain mandatory.
+    """
+    result = validate_short_outline(outline)
+    if not result["valid"]:
+        raise ValueError("performance_short_not_valid")
+    role_map = {
+        "hook": "reveal", "stakes": "build", "attempt": "build",
+        "setback": "mechanism", "discovery": "twist",
+        "climax": "mechanism", "payoff": "payoff",
+    }
+    beats = []
+    for scene in outline["scenes"]:
+        beats.append({
+            "headline": scene["headline"],
+            "speech": scene["speech"],
+            "visual": scene["visual"],
+            "label": scene["label"],
+            "sub": "AN ORIGINAL RAYVAN STORY",
+            "story_beat": role_map[scene["role"]],
+            "visual_prompt": scene["visual_prompt"],
+            "story_environment": scene["story_environment"],
+            "duration": float(scene["duration_seconds"]),
+            "story_action": scene["action"],
+            "camera": scene["camera"],
+            "environment": scene["environment"],
+            "required_props": list(scene["required_props"]),
+            "transition_question": scene.get("transition_question", ""),
+            "performance_role": scene["role"],
+        })
+    return beats
