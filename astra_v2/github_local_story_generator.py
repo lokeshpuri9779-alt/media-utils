@@ -275,7 +275,8 @@ def _load_history(path: Path) -> list[dict]:
 
 
 def _build_prompt(lane: str, history: list[dict], seed: int,
-                  sources: list[dict] | None = None) -> str:
+                  sources: list[dict] | None = None,
+                  retry_feedback: str | None = None) -> str:
     recent = [
         {"title": row.get("title", ""), "premise": row.get("premise", "")}
         for row in history[-5:]
@@ -315,8 +316,13 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
     scene_min, scene_max = (12, 18) if compact_structure else (6, 14)
     structure_name = STRUCTURE_NAMES.get(lane, "seven_beat_story")
     direction = creative_direction(lane, seed)
+    retry_block = (
+        "IMPORTANT CORRECTION FROM THE PREVIOUS ATTEMPT: " + retry_feedback +
+        " Correct this exact validation issue in the new candidate; recount every scene aloud before returning JSON. "
+        if retry_feedback else ""
+    )
     return (
-        "Create one original, high-retention English YouTube Short for RAYVAN. "
+        "Create one original, high-retention English YouTube Short for RAYVAN. " + retry_block
         "Format is narration plus synchronized captions only: no visual descriptions, "
         "no animation directions, no B-roll instructions. "
         f"Content direction: {LANES[lane]} "
@@ -391,9 +397,10 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         n_batch=256, verbose=False,
     )
     last_error = None
+    retry_feedback = None
     validated = None
     for attempt in range(3):
-        prompt = _build_prompt(lane, history, seed + attempt, sources)
+        prompt = _build_prompt(lane, history, seed + attempt, sources, retry_feedback)
         messages = [
             {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
             {"role": "user", "content": prompt},
@@ -444,6 +451,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             # model emitted a thinking preamble, truncated JSON, or plain text.
             preview = repr(raw[:400]) if isinstance(raw, str) else repr(raw)
             finish_reason = choice.get("finish_reason", "unknown")
+            retry_feedback = f"{type(exc).__name__}: {exc}"
             last_error = ValueError(
                 f"Candidate rejected ({type(exc).__name__}: {exc}; "
                 f"finish_reason={finish_reason}; response_preview={preview})"
