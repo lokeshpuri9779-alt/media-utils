@@ -146,6 +146,16 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "too similar"):
             validate_candidate(item, history)
 
+    def test_nine_direction_batch_lanes_exist_in_generator_catalog(self):
+        batch_lanes = {
+            "brain_puzzle", "science_explained", "india_gk", "money_business",
+            "mystery", "geography_gk", "psychology", "what_if", "trending_topics",
+        }
+        self.assertTrue(batch_lanes.issubset(LANES))
+        self.assertTrue(batch_lanes.issubset(STRUCTURES | {"mystery"}))
+        for lane in batch_lanes:
+            self.assertTrue(select_engagement_format(lane, 17))
+
     def test_content_catalog_includes_requested_formats(self):
         for lane in ("weird_facts", "history_gk", "india_gk", "space_facts",
                      "brain_puzzle", "riddle", "quick_quiz", "spot_the_lie",
