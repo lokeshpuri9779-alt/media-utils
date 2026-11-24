@@ -39,7 +39,7 @@ def _renderer_prop_is_visible(prop: str, visual_prompt: str) -> bool:
     if prop == "none":
         return True
     terms = _PROP_TERMS.get(prop)
-    return bool(terms and any(re.search(r"\\b" + re.escape(term) + r"\\b", visual_prompt, re.I)
+    return bool(terms and any(re.search(r"\b" + re.escape(term) + r"\b", visual_prompt, re.I)
                               for term in terms))
 
 
