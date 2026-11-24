@@ -36,6 +36,16 @@ def caption_chunks(text: str, max_words: int = 6) -> list[str]:
     return chunks
 
 
+def _fit_speed_to_duration(speed: float, duration_seconds: float,
+                              target_seconds: float = 34.0) -> float:
+    """Estimate a bounded Kokoro speed correction toward the 28–40s target."""
+    if duration_seconds <= 0 or target_seconds <= 0:
+        raise ValueError("Audio duration and target must be positive")
+    if 28.0 <= duration_seconds <= 40.0:
+        return float(speed)
+    return max(0.75, min(1.25, float(speed) * duration_seconds / target_seconds))
+
+
 def _font(size: int):
     candidates = (
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
@@ -116,20 +126,34 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
         raise ValueError("Output filename must end in .mp4")
     target.parent.mkdir(parents=True, exist_ok=True)
 
-    audio_parts, durations = [], []
-    for phrase in chunks:
-        samples, sample_rate = engine.create(phrase, voice=voice, speed=float(speed), lang="en-us")
-        samples = np.asarray(samples, dtype=np.float32)
-        if sample_rate != RATE or not len(samples) or not np.isfinite(samples).all():
-            raise RuntimeError("Kokoro returned invalid narration audio")
-        peak = float(np.max(np.abs(samples)))
-        if peak > 0:
-            samples = samples * (0.72 / peak)
-        audio_parts.append(samples)
-        durations.append(len(samples) / RATE)
+    from astra_v2.performance_short_contract import (
+        MAX_SECONDS, MIN_SECONDS, validate_rendered_duration,
+    )
 
+    def synthesize_at(requested_speed: float):
+        parts, phrase_durations = [], []
+        for phrase in chunks:
+            samples, sample_rate = engine.create(
+                phrase, voice=voice, speed=float(requested_speed), lang="en-us"
+            )
+            samples = np.asarray(samples, dtype=np.float32)
+            if sample_rate != RATE or not len(samples) or not np.isfinite(samples).all():
+                raise RuntimeError("Kokoro returned invalid narration audio")
+            peak = float(np.max(np.abs(samples)))
+            if peak > 0:
+                samples = samples * (0.72 / peak)
+            parts.append(samples)
+            phrase_durations.append(len(samples) / RATE)
+        return parts, phrase_durations
+
+    audio_parts, durations = synthesize_at(float(speed))
     actual_duration = sum(durations) + 0.12 * max(0, len(durations) - 1)
-    from astra_v2.performance_short_contract import validate_rendered_duration
+    if not MIN_SECONDS <= actual_duration <= MAX_SECONDS:
+        adjusted_speed = _fit_speed_to_duration(float(speed), actual_duration)
+        if abs(adjusted_speed - float(speed)) >= 0.01:
+            audio_parts, durations = synthesize_at(adjusted_speed)
+            speed = adjusted_speed
+            actual_duration = sum(durations) + 0.12 * max(0, len(durations) - 1)
     validate_rendered_duration(actual_duration)
 
     with tempfile.TemporaryDirectory(prefix="astra-caption-") as temp:
@@ -183,7 +207,7 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
                         "captions": manifest}, indent=2), encoding="utf-8")
     return {"output": str(target), "duration_seconds": round(cursor, 3),
             "caption_count": len(chunks), "resolution": "1080x1920",
-            "voice": voice, "quality_check": "passed", "published": False}
+            "voice": voice, "speed": round(float(speed), 3), "quality_check": "passed", "published": False}
 
 
 def main():
