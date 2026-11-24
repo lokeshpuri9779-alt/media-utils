@@ -23,6 +23,10 @@ on:
         default: "20261125"
         type: string
 
+concurrency:
+  group: astra-caption-production
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
