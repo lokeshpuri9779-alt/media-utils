@@ -76,7 +76,7 @@ jobs:
 
       - name: Render narration and timed captions
         env:
-          ASTRA_VOICE_CACHE: ~/.cache/astra-voice
+          ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
           CANDIDATE_PATH: ${{ inputs.candidate_path }}
           VOICE: ${{ inputs.voice }}
           SPEED: ${{ inputs.speed }}
