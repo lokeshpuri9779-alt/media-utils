@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate, validate_source_pack
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -235,6 +235,43 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
                      "two_truths_one_lie", "what_if", "current_news", "trending_topics"):
             self.assertIn(lane, LANES)
 
+    def test_factual_source_pack_requires_two_distinct_publishers_and_metadata(self):
+        rows = [
+            {"title": "Research report A", "url": "https://a.example/report",
+             "published": "2026-11-24T10:00:00+00:00", "publisher": "Publisher A",
+             "summary": "A detailed summary of the research and its key finding."},
+            {"title": "Research report B", "url": "https://b.example/report",
+             "published": "2026-11-23T10:00:00+00:00", "publisher": "Publisher B",
+             "summary": "An independent report explaining the same underlying subject."},
+        ]
+        validated = validate_source_pack(rows, "science_explained")
+        self.assertEqual(len(validated), 2)
+        self.assertGreater(len(validated[0]["summary"]), 100)
+
+    def test_factual_source_pack_rejects_same_publisher_twice(self):
+        rows = [
+            {"title": "Report A", "url": "https://a.example/one",
+             "published": "2026-11-24", "publisher": "Same Publisher",
+             "summary": "A sufficiently detailed summary for evidence validation."},
+            {"title": "Report B", "url": "https://a.example/two",
+             "published": "2026-11-23", "publisher": "Same Publisher",
+             "summary": "Another sufficiently detailed summary from the same outlet."},
+        ]
+        with self.assertRaisesRegex(ValueError, "distinct publishers"):
+            validate_source_pack(rows, "india_gk")
+
+    def test_factual_source_pack_rejects_missing_publication_metadata(self):
+        rows = [
+            {"title": "Report A", "url": "https://a.example/one",
+             "published": "", "publisher": "Publisher A",
+             "summary": "A sufficiently detailed summary for evidence validation."},
+            {"title": "Report B", "url": "https://b.example/two",
+             "published": "2026-11-23", "publisher": "Publisher B",
+             "summary": "Another sufficiently detailed independent summary."},
+        ]
+        with self.assertRaisesRegex(ValueError, "publication date"):
+            validate_source_pack(rows, "psychology")
+
     def test_current_news_prompt_requires_source_pack(self):
         prompt = _build_prompt("current_news", [], 42, [
             {"title": "A verified headline", "url": "https://example.com/story"}
@@ -251,9 +288,11 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
     def test_collector_writes_parseable_json_array(self):
         rows = [
             {"title": "Headline one", "url": "https://example.com/one",
-             "published": "", "publisher": "Example", "summary": ""},
-            {"title": "Headline two", "url": "https://example.com/two",
-             "published": "", "publisher": "Example", "summary": ""},
+             "published": "2026-11-24T10:00:00+00:00", "publisher": "Publisher One",
+             "summary": "A sufficiently detailed source summary for this headline."},
+            {"title": "Headline two", "url": "https://another.example/two",
+             "published": "2026-11-23T10:00:00+00:00", "publisher": "Publisher Two",
+             "summary": "An independent source summary for the second headline."},
         ]
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "sources.json"
