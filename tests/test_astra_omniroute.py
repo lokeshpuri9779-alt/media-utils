@@ -1,7 +1,7 @@
 import os
 import unittest
 from unittest.mock import patch
-from astra_v2 import omniroute
+from astra_v2 import omniroute, omniroute_gemini
 
 
 class OmniRouteTests(unittest.TestCase):
@@ -108,6 +108,41 @@ class OmniRouteTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "12 words"):
             omniroute.validate_beat_quality([{**beat, "speech": "Too short narration."}
                 if index == 0 else beat for index, beat in enumerate(beats)])
+
+    def test_gemini_scene_token_is_repaired_without_changing_natural_prompt(self):
+        beat = {"story_environment": "forest",
+                "visual_prompt": "A fox studies a glowing seed beside a quiet stream."}
+        original = beat["visual_prompt"]
+        omniroute_gemini._ensure_environment_token(beat)
+        self.assertIn(original, beat["visual_prompt"])
+        self.assertIn("Environment tag: forest.", beat["visual_prompt"])
+        omniroute.validate_beat_quality([
+            {"speech": "A curious fox follows the bright seed into the forest clearing.",
+             "visual": "fox", "visual_prompt": beat["visual_prompt"],
+             "story_environment": "forest"},
+            {"speech": "The fox finds the seed resting beneath a fern in the forest.",
+             "visual": "fox", "visual_prompt": "A fox finds a seed beneath a fern in the forest.",
+             "story_environment": "forest"},
+            {"speech": "An owl watches the seed glow softly among the forest roots.",
+             "visual": "owl", "visual_prompt": "An owl watches a glowing seed among forest roots.",
+             "story_environment": "forest"},
+            {"speech": "The fox returns the seed to the forest floor before dawn.",
+             "visual": "fox", "visual_prompt": "A fox places the seed on the forest floor.",
+             "story_environment": "forest"},
+        ])
+
+    def test_gemini_scene_token_repair_rejects_conflicting_environment(self):
+        beat = {"story_environment": "forest",
+                "visual_prompt": "A fox crosses a busy city street beside tall buildings."}
+        with self.assertRaisesRegex(ValueError, "conflicts with story_environment"):
+            omniroute_gemini._ensure_environment_token(beat)
+
+    def test_gemini_scene_token_repair_is_idempotent(self):
+        beat = {"story_environment": "forest",
+                "visual_prompt": "A fox waits quietly in the forest."}
+        original = beat["visual_prompt"]
+        omniroute_gemini._ensure_environment_token(beat)
+        self.assertEqual(beat["visual_prompt"], original)
 
     def test_disabled_without_provider_credentials(self):
         with patch.dict(os.environ, {}, clear=True):
