@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASTRA · Performance Shorts Review</title>
+<style>
+:root{color-scheme:dark;--bg:#10131a;--panel:#191f2b;--line:#30394a;--ink:#eef2f8;--muted:#aab5c6;--accent:#a9c7ff;--good:#a9dfbd;--warn:#f2d28b;--bad:#f2a7a7}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1050px;margin:auto;padding:22px 16px 64px}h1{font-size:clamp(24px,5vw,36px);margin:4px 0}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px}.muted,small{color:var(--muted)}.panel,.scene{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.spacer{flex:1}button,.file{border:1px solid var(--line);border-radius:9px;background:#252e3e;color:var(--ink);padding:10px 13px;font:inherit;cursor:pointer}button:hover{border-color:var(--accent)}button.primary{background:#263b5c;border-color:#5476a6}button.good{border-color:#527c64}button.bad{border-color:#875858}
+input[type=file]{max-width:100%}.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:3px 9px;font-size:12px;color:var(--muted)}.warning{color:var(--warn)}.safe{color:var(--good)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.scene{margin:0;padding:14px}.scene p{margin:7px 0;overflow-wrap:anywhere}.scene label{display:block;margin-top:12px;color:var(--muted);font-size:13px}.scene select{width:100%;margin-top:4px;background:#101722;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;border-radius:8px;color:#dce7f7}.hidden{display:none}#status{min-height:24px}.checks{display:flex;gap:10px;flex-wrap:wrap}.checks label{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body><main>
+<header>
+ <span class="pill">REVIEW ONLY · NO RENDER · NO PUBLISH</span>
+ <h1>ASTRA Performance Shorts</h1>
+ <p class="muted">Inspect the story before production. This page does not approve, render, schedule, or publish anything.</p>
+</header>
+<section class="panel">
+ <h2>Load the review queue</h2>
+ <div class="row"><input id="file" type="file" accept=".json,application/json"><button id="load" class="primary">Load selected JSON</button><button id="sample">Load sample from repository</button><span class="spacer"></span><button id="export" disabled>Export review notes</button></div>
+ <p id="status" class="muted" role="status">Choose the queue JSON downloaded from the astra-state branch.</p>
+ <div class="checks"><label><input id="showAll" type="checkbox" checked> Show all candidates</label><span class="pill">Editorial notes stay in this browser until exported</span></div>
+</section>
+<section id="summary" class="panel hidden"></section>
+<section id="candidateList"></section>
+<footer class="panel"><strong>Safety boundary</strong><p class="muted">A review status is not production approval. Visual prompts are text instructions, not proof that an image was generated. Check actual rendered frames separately before any production decision. The queue file is never modified by this page.</p></footer>
+</main>
+<script>
+(() => {
+ const $ = id => document.getElementById(id);
+ let queue = null, decisions = {};
+ const roles = ["hook","stakes","attempt","setback","discovery","climax","payoff"];
+ const setStatus = s => { $("status").textContent = s; };
+ const esc = v => String(v ?? "");
+ function validate(q){
+  if(!q || q.format_profile!=="shorts_v2_7scene" || !Array.isArray(q.candidates)) throw Error("Unsupported or malformed review queue.");
+  if(q.approved_count!==0 || q.rendering_triggered!==false || q.publication_triggered!==false) throw Error("Queue safety flags are not review-only. Loading stopped.");
+  for(const c of q.candidates){
+   if(c.approved!==false || c.production_ready!==false || c.eligible_for_automatic_publishing!==false || c.published!==false || c.decision!=="not_approved") throw Error("Candidate contains an approval/readiness flag. Loading stopped.");
+   if(!Array.isArray(c.performance_scenes) || c.performance_scenes.length!==7) throw Error("Candidate does not contain exactly seven scenes.");
+   for(let i=0;i<7;i++) if(c.performance_scenes[i].role!==roles[i]) throw Error("Scene order/role mismatch.");
+  }
+  return q;
+ }
+ function sceneCard(s,i){
+  const card=document.createElement("article");card.className="scene";
+  const h=document.createElement("h3");h.textContent=(i+1)+". "+roles[i].toUpperCase();card.append(h);
+  const fields=[["Narration",s.narration],["Dialogue",s.speech],["Action",s.action],["Visual prompt",s.visual_prompt],["Camera",s.camera],["Environment",s.environment],["Required props",(s.required_props||[]).join(", ")||"None listed"],["Story prop",s.story_prop],["Transition question",s.transition_question]];
+  for(const [label,value] of fields){const p=document.createElement("p");const b=document.createElement("strong");b.textContent=label+": ";p.append(b,document.createTextNode(esc(value)||"—"));card.append(p);}
+  return card;
+ }
+ function render(){
+  $("summary").classList.remove("hidden");$("export").disabled=false;
+  const s=$("summary");s.replaceChildren();
+  const title=document.createElement("h2");title.textContent="Queue · "+queue.count+" candidates";s.append(title);
+  const meta=document.createElement("p");meta.className="muted";meta.textContent="Approved: 0 · Rendering: off · Publication: off";s.append(meta);
+  const list=$("candidateList");list.replaceChildren();
+  queue.candidates.forEach((c,index)=>{
+   const wrap=document.createElement("section");wrap.className="panel";
+   const head=document.createElement("div");head.className="row";
+   const name=document.createElement("h2");name.textContent=c.title||c.candidate_id;head.append(name);
+   const id=document.createElement("span");id.className="pill";id.textContent=c.candidate_id;head.append(id);wrap.append(head);
+   const premise=document.createElement("p");premise.textContent=c.premise?.central_conflict||c.premise||"No premise supplied";wrap.append(premise);
+   const bible=document.createElement("p");bible.innerHTML="<strong>Character bible:</strong> ";bible.append(document.createTextNode(esc(c.character_bible)||"—"));wrap.append(bible);
+   const qa=document.createElement("p");qa.innerHTML="<strong>Hook question:</strong> ";qa.append(document.createTextNode(esc(c.question)||"—"));wrap.append(qa);
+   const score=document.createElement("p");score.className="muted";score.textContent="Scorecard: "+JSON.stringify(c.scorecard||{});wrap.append(score);
+   const sceneGrid=document.createElement("div");sceneGrid.className="grid";c.performance_scenes.forEach((sc,i)=>sceneGrid.append(sceneCard(sc,i)));wrap.append(sceneGrid);
+   const label=document.createElement("label");label.textContent="Editorial review status (does not approve production)";
+   const select=document.createElement("select");
+   [["not_reviewed","Not reviewed"],["needs_changes","Needs changes"],["editorially_promising","Editorially promising — visual proof still required"],["reject","Reject candidate"]].forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;select.append(o)});
+   select.value=decisions[c.candidate_id]?.status||"not_reviewed";
+   select.addEventListener("change",()=>{decisions[c.candidate_id]={...(decisions[c.candidate_id]||{}),status:select.value};});
+   label.append(select);wrap.append(label);
+   const note=document.createElement("textarea");note.placeholder="Editorial notes: originality, clarity, prop continuity, emotional payoff…";note.value=decisions[c.candidate_id]?.notes||"";note.style.cssText="width:100%;min-height:80px;margin-top:9px;background:#101722;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit";
+   note.addEventListener("input",()=>{decisions[c.candidate_id]={...(decisions[c.candidate_id]||{}),status:select.value,notes:note.value};});wrap.append(note);
+   list.append(wrap);
+  });
+  if(!queue.candidates.length){const p=document.createElement("p");p.className="muted";p.textContent="Queue is empty. No candidates have been generated or imported.";list.append(p);}
+ }
+ async function loadQueue(q){queue=validate(q);decisions={};render();setStatus("Loaded "+queue.candidates.length+" review-only candidate(s). The source queue has not been changed.");}
+ $("load").addEventListener("click",async()=>{try{const f=$("file").files[0];if(!f)throw Error("Select a JSON file first.");await loadQueue(JSON.parse(await f.text()));}catch(e){setStatus("Load failed: "+e.message);}});
+ $("sample").addEventListener("click",async()=>{try{const r=await fetch("https://raw.githubusercontent.com/lokeshpuri9779-alt/media-utils/astra-state/performance_short_review_queue.json",{cache:"no-store"});if(!r.ok)throw Error("Repository queue fetch failed ("+r.status+").");await loadQueue(await r.json());}catch(e){setStatus("Load failed: "+e.message+" You can download the JSON and load it locally.");}});
+ $("export").addEventListener("click",()=>{
+  if(!queue)return;
+  const out={schema_version:1,format_profile:"shorts_v2_7scene_editorial_notes",source_queue_count:queue.count,production_approval:false,rendering_triggered:false,publication_triggered:false,decisions:Object.entries(decisions).map(([candidate_id,v])=>({candidate_id,status:v.status||"not_reviewed",notes:v.notes||"",production_approved:false}))};
+  const blob=new Blob([JSON.stringify(out,null,2)+"\n"],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="astra-performance-short-editorial-notes.json";a.click();URL.revokeObjectURL(url);
+  setStatus("Exported review notes only. No approval or queue mutation occurred.");
+ });
+})();
+</script></body></html>
