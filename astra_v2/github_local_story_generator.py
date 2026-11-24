@@ -210,7 +210,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
                   sources: list[dict] | None = None) -> str:
     recent = [
         {"title": row.get("title", ""), "premise": row.get("premise", "")}
-        for row in history[-25:]
+        for row in history[-12:]
     ]
     source_block = json.dumps(sources or [], ensure_ascii=False)
     factual = lane in {
@@ -297,9 +297,9 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
                 "url": str(item.get("url", ""))[:500],
                 "published": str(item.get("published", ""))[:80],
                 "publisher": str(item.get("publisher", ""))[:100],
-                "summary": str(item.get("summary", ""))[:280],
+                "summary": str(item.get("summary", ""))[:180],
             }
-            for item in sources[:10] if isinstance(item, dict) and item.get("title") and item.get("url")
+            for item in sources[:6] if isinstance(item, dict) and item.get("title") and item.get("url")
         ]
     if lane in {"current_news", "trending_topics"} and len(sources) < 2:
         raise ValueError("Current news/trending directions require at least two retrieved sources")
@@ -320,7 +320,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
             presence_penalty=1.5,
-            max_tokens=1400,
+            max_tokens=1100,
         )
         raw = result["choices"][0]["message"]["content"]
         try:
