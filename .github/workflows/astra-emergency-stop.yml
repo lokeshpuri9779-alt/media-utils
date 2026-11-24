@@ -7,10 +7,12 @@ on:
 permissions:
   actions: write
 jobs:
-  cancel-unapproved-gemini-batch:
+  cancel-unapproved-gemini-batches:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel the already-running unapproved Gemini batch
+      - name: Cancel all queued or running unapproved Gemini batches
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh run cancel 45470648006 --repo "${GITHUB_REPOSITORY}"
+        run: |
+          gh run cancel 45470648006 --repo "${GITHUB_REPOSITORY}" || true
+          gh run cancel 45471017751 --repo "${GITHUB_REPOSITORY}" || true
