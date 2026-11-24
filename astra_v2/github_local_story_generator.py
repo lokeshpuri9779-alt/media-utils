@@ -12,6 +12,27 @@ import re
 from pathlib import Path
 
 ROLES = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
+PUZZLE_ROLES = ["challenge", "thinking_pause", "answer", "explanation"]
+FACT_ROLES = ["curiosity_hook", "surprising_fact", "explanation", "why_it_matters"]
+QUIZ_ROLES = ["quiz_hook", "question_or_options", "answer_reveal", "explanation"]
+NEWS_ROLES = ["news_hook", "what_changed", "context", "why_it_matters"]
+STRUCTURES = {
+    **{lane: PUZZLE_ROLES for lane in ("brain_puzzle", "logic_puzzle", "riddle", "guess_the_number")},
+    **{lane: QUIZ_ROLES for lane in ("quick_quiz", "spot_the_lie", "two_truths_one_lie", "india_gk")},
+    **{lane: FACT_ROLES for lane in (
+        "weird_facts", "science_explained", "history_gk", "geography_gk", "world_gk",
+        "myth_vs_fact", "psychology", "money_business", "tech_explained", "space_facts",
+        "nature_facts", "human_body", "inventions", "mini_case_study", "ranked_countdown", "what_if"
+    )},
+    **{lane: NEWS_ROLES for lane in ("current_news", "trending_topics")},
+}
+STRUCTURE_NAMES = {
+    "brain_puzzle": "puzzle_challenge_reveal", "logic_puzzle": "puzzle_challenge_reveal",
+    "riddle": "puzzle_challenge_reveal", "guess_the_number": "estimation_challenge_reveal",
+    "quick_quiz": "quiz_question_reveal", "spot_the_lie": "quiz_question_reveal",
+    "two_truths_one_lie": "quiz_question_reveal", "india_gk": "quiz_question_reveal",
+    "current_news": "news_context_impact", "trending_topics": "trend_context_impact",
+}
 MODEL_REPO = "Qwen/Qwen3-4B-GGUF"
 MODEL_REVISION = "bc640142c66e1fdd12af0bd68f40445458f3869b"
 MODEL_FILE = "Qwen3-4B-Q4_K_M.gguf"
@@ -91,8 +112,9 @@ DEFAULT_ENGAGEMENT_FORMATS = [
     "predict_then_reveal", "mini_case_study", "counterintuitive_explanation",
 ]
 
-def _candidate_json_schema() -> dict:
-    """Constrain local decoding to the candidate shape before semantic validation."""
+def _candidate_json_schema(lane: str = "surprise") -> dict:
+    """Constrain local decoding to the lane-specific scene structure."""
+    roles = STRUCTURES.get(lane, ROLES)
     return {
         "type": "object",
         "properties": {
@@ -101,12 +123,12 @@ def _candidate_json_schema() -> dict:
             "question": {"type": "string"},
             "performance_scenes": {
                 "type": "array",
-                "minItems": 7,
-                "maxItems": 7,
+                "minItems": len(roles),
+                "maxItems": len(roles),
                 "items": {
                     "type": "object",
                     "properties": {
-                        "role": {"type": "string", "enum": ROLES},
+                        "role": {"type": "string", "enum": roles},
                         "speech": {"type": "string"},
                     },
                     "required": ["role", "speech"],
@@ -144,7 +166,7 @@ def _fallback_title(title: str, premise: str) -> str:
     return fallback[:80]
 
 
-def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
+def validate_candidate(data: dict, history: list[dict] | None = None, lane: str = "surprise") -> dict:
     """Validate the text-only seven-beat Short before it enters the render path."""
     if not isinstance(data, dict):
         raise ValueError("Model output must be a JSON object")
@@ -152,20 +174,23 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
     title = " ".join(str(data.get("title") or "").split())
     question = " ".join(str(data.get("question") or "").split())
     scenes = data.get("performance_scenes")
+    expected_roles = STRUCTURES.get(lane, ROLES)
+    compact_structure = len(expected_roles) <= 4
+    min_scene_words, max_scene_words = (12, 18) if compact_structure else (6, 14)
     title = _fallback_title(title, premise)
     if not 8 <= len(title) <= 80:
         raise ValueError("Title must be 8–80 characters")
-    if not isinstance(scenes, list) or len(scenes) != 7:
-        raise ValueError("Exactly seven performance_scenes are required")
+    if not isinstance(scenes, list) or len(scenes) != len(expected_roles):
+        raise ValueError(f"Expected exactly {len(expected_roles)} performance_scenes for {lane}")
 
     speech_lines = []
-    for index, (scene, role) in enumerate(zip(scenes, ROLES), start=1):
+    for index, (scene, role) in enumerate(zip(scenes, expected_roles), start=1):
         if not isinstance(scene, dict) or scene.get("role") != role:
             raise ValueError(f"Scene {index} must have role {role}")
         speech = " ".join(str(scene.get("speech") or "").split())
         count = len(_words(speech))
-        if not 6 <= count <= 14:
-            raise ValueError(f"Scene {index} narration must contain 6–14 words")
+        if not min_scene_words <= count <= max_scene_words:
+            raise ValueError(f"Scene {index} narration must contain {min_scene_words}–{max_scene_words} words")
         speech_lines.append(speech)
 
     # Small local models sometimes underfill metadata fields. The spoken script is
@@ -211,7 +236,7 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
         "question": question,
         "performance_scenes": [
             {"role": role, "speech": speech}
-            for role, speech in zip(ROLES, speech_lines)
+            for role, speech in zip(expected_roles, speech_lines)
         ],
         "word_count": total_words,
         "premise_fingerprint": premise_fp,
@@ -269,6 +294,10 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "Never use an ambiguous trick answer. "
         if lane in {"brain_puzzle", "logic_puzzle", "riddle", "quick_quiz", "spot_the_lie", "two_truths_one_lie", "guess_the_number"} else ""
     )
+    roles = STRUCTURES.get(lane, ROLES)
+    compact_structure = len(roles) <= 4
+    scene_min, scene_max = (12, 18) if compact_structure else (6, 14)
+    structure_name = STRUCTURE_NAMES.get(lane, "seven_beat_story")
     return (
         "Create one original, high-retention English YouTube Short for RAYVAN. "
         "Format is narration plus synchronized captions only: no visual descriptions, "
@@ -277,14 +306,13 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         + evidence_rule + puzzle_rule +
         "Use a strong curiosity gap in the first sentence, concrete details, escalating "
         "interest, a satisfying reveal or useful payoff, and a specific viewer question. "
-        "Use exactly seven performance_scenes in this order: " + ", ".join(ROLES) + ". "
+        f"Use the {structure_name} structure with exactly {len(roles)} performance_scenes in this order: " + ", ".join(roles) + ". "
         f"Use this engagement mechanic for this Short: {select_engagement_format(lane, seed)}. "
         "Make the viewer actively predict, decide, test memory, solve, compare, or investigate "
         "where appropriate; do not force a question into every sentence. "
-        "Interpret the beats to suit the selected format: hook; context/setup; build/clues; "
-        "complication or thinking challenge; reveal/discovery; clear explanation/payoff; "
-        "audience challenge/question setup. For puzzles, do not reveal the answer too early. "
-        "Each speech line must contain 6–14 words. The seven lines plus the final spoken "
+        f"Interpret each beat according to its role. Each speech line must contain {scene_min}–{scene_max} words. "
+        "For puzzles, keep the answer out of the challenge and thinking-pause beats. "
+        "The scene lines plus the final spoken "
         "engagement question must total 65–85 words for a 28–40 second Short. "
         "Make every line add new information; avoid filler, generic moral lessons, and "
         "generic 'like and subscribe' calls. The final question must invite a real answer. "
@@ -343,7 +371,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
                 {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
                 {"role": "user", "content": prompt},
             ],
-            response_format={"type": "json_schema", "schema": _candidate_json_schema()},
+            response_format={"type": "json_schema", "schema": _candidate_json_schema(lane)},
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
             presence_penalty=1.5,
@@ -352,7 +380,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         raw = result["choices"][0]["message"]["content"]
         try:
             parsed = json.loads(raw)
-            validated = validate_candidate(parsed, history)
+            validated = validate_candidate(parsed, history, lane)
             break
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             last_error = exc
@@ -363,6 +391,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         "schema_version": 1,
         "kind": "github_local_caption_content",
         "content_type": lane,
+        "structure_type": STRUCTURE_NAMES.get(lane, "seven_beat_story"),
         "engagement_format": select_engagement_format(lane, seed),
         "source": "qwen3_4b_local_github_actions",
         "research_sources": sources,
