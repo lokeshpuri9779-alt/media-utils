@@ -33,7 +33,7 @@ def sample():
 
 class GithubLocalStoryGeneratorTests(unittest.TestCase):
     def test_strips_leading_qwen_think_block_before_json(self):
-        raw = '<think>\\n\\n</think>\\n\\n{"title":"A puzzle"}'
+        raw = '<think>\n\n</think>\n\n{"title":"A puzzle"}'
         self.assertEqual(_strip_reasoning_preamble(raw), '{"title":"A puzzle"}')
 
     def test_keeps_json_without_reasoning_wrapper_unchanged(self):
