@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, creative_direction, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -105,6 +105,21 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         result = validate_candidate(item, lane="brain_puzzle")
         self.assertEqual(len(result["performance_scenes"]), 4)
         self.assertEqual(result["performance_scenes"][0]["role"], "challenge")
+
+    def test_creative_direction_is_deterministic_and_varied(self):
+        first = creative_direction("brain_puzzle", 12345)
+        self.assertEqual(first, creative_direction("brain_puzzle", 12345))
+        self.assertEqual(set(first), {"engagement_format", "tone", "opening_pattern", "payoff_type"})
+        samples = [creative_direction("mystery", seed) for seed in range(100, 112)]
+        self.assertGreater(len({row["tone"] for row in samples}), 1)
+        self.assertGreater(len({row["opening_pattern"] for row in samples}), 1)
+        self.assertGreater(len({row["payoff_type"] for row in samples}), 1)
+
+    def test_prompt_contains_distinct_creative_direction(self):
+        prompt = _build_prompt("mystery", [], 12345)
+        direction = creative_direction("mystery", 12345)
+        for value in direction.values():
+            self.assertIn(value, prompt)
 
     def test_prompt_selects_an_engagement_mechanic(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
