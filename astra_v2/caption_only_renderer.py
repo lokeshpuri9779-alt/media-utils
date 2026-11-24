@@ -200,7 +200,7 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
         if not target.is_file() or target.stat().st_size < 1024:
             raise RuntimeError("FFmpeg did not produce a valid MP4 file")
         # Decode the finished file once before marking it ready for human review.
-        subprocess.run([ffmpeg, "-v", "error", "-i", str(target), "-f", "null", "-"],
+        subprocess.run([ffmpeg, "-v", "error", "-i", str(target), "-map", "0:v:0", "-map", "0:a:0", "-f", "null", "-"],
                        check=True, capture_output=True, text=True)
         (target.with_suffix(".captions.json")).write_text(
             json.dumps({"schema_version": 1, "fps": FPS, "duration_seconds": round(cursor, 3),
