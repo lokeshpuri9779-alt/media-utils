@@ -1,4 +1,4 @@
-# ASTRA GitHub-native story-to-Short pipeline
+# ASTRA GitHub-native multi-format Shorts pipeline
 
 ASTRA's caption-only production path now runs on GitHub-hosted Actions. It produces narration + synchronized captions only: no animation, illustrations, stock footage, or music.
 
@@ -6,7 +6,7 @@ ASTRA's caption-only production path now runs on GitHub-hosted Actions. It produ
 
 1. Open the repository's **Actions** tab.
 2. Select **ASTRA Local Story to Caption Short**.
-3. Click **Run workflow** and choose a creative lane: surprise, mystery, sci-fi, emotional, thriller, or moral dilemma.
+3. Click **Run workflow** and choose a content direction: fiction, facts, science, history/geography/GK, myth-vs-fact, puzzles, riddles, quizzes, psychology, business, technology, current news, or trending topics.
 4. Wait for the runner to generate a story, apply quality gates, synthesize narration, render captions, and decode-check the MP4.
 5. Download the `rayvan-local-story-short-<run id>` artifact from the completed run.
 
@@ -14,12 +14,23 @@ No local computer, WSL2, Gemini key, vidIQ credits, hosted inference API, or ext
 
 ## What the local story engine does
 
-- Generates a seven-beat original microfiction script.
-- Requires a 65–85 word complete spoken script, including a story-specific engagement question.
-- Rejects wrong beat order, weak length, generic CTAs, repeated lines, selected cliché endings, and premises too similar to the recent story history.
+- Generates a seven-beat short-form script adapted to the selected content direction.
+- Requires a 65–85 word complete spoken script, including a format-specific audience question.
+- Rejects wrong beat order, weak length, generic CTAs, repeated lines, selected cliché endings, and topics too similar to recent ASTRA content.
 - Saves only title, premise, and fingerprint in `data/story_history.jsonl` to help prevent repeated plots.
 - Passes the candidate into the existing Kokoro narration + timed-caption renderer.
 - Leaves approval and publishing false. The output is a review artifact only.
+
+## Content directions
+
+- **Fiction:** surprise, mystery, sci-fi, emotional, thriller, moral dilemma.
+- **Facts and explainers:** weird facts, science explained, history GK, geography GK, world GK, myth vs fact, psychology, money/business, technology explained.
+- **Interactive:** brain puzzles, logic puzzles, riddles, three-question quick quizzes.
+- **Timely:** current news and trending topics, with an RSS source pack collected at run time from Google News India and Google Trends India.
+
+Puzzles are structured to give viewers a chance to think before the reveal. Quizzes should give clear answers and short explanations. Facts and GK are still AI-generated drafts: automated word-count and structure checks do **not** prove factual accuracy. Human verification is required before approval.
+
+For **current news** and **trending topics**, the workflow retrieves RSS headlines and links before generation, passes those items to the model, and stores them in `candidate.json` and `sources.json`. RSS headlines are leads, not independent fact-checking. The script must not invent dates, statistics, or outcomes, and a human must open the source links and verify claims before publishing. If the feeds fail or return too few sources, that run stops rather than inventing a news script.
 
 ## Outputs
 
