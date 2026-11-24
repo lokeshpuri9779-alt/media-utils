@@ -19,9 +19,22 @@ def narration_from_candidate(candidate: dict) -> str:
     scenes = candidate.get("performance_scenes")
     if not isinstance(scenes, list) or len(scenes) not in (4, 7):
         raise ValueError("Expected four compact-format scenes or seven story beats")
-    compact_roles = ["challenge", "thinking_pause", "answer", "explanation"]
-    story_roles = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
-    expected_roles = compact_roles if len(scenes) == 4 else story_roles
+    # The generator has several distinct four-beat structures (puzzle, fact,
+    # quiz, and news). Do not assume every four-scene candidate is a puzzle.
+    # The lane metadata is emitted by the generator; retain puzzle fallback for
+    # older review-only candidates that predate content_type.
+    from astra_v2.github_local_story_generator import ROLES, STRUCTURES
+
+    lane = str(candidate.get("content_type") or "")
+    if lane:
+        expected_roles = STRUCTURES.get(lane, ROLES)
+    else:
+        expected_roles = (
+            ["challenge", "thinking_pause", "answer", "explanation"]
+            if len(scenes) == 4 else ROLES
+        )
+    if len(expected_roles) != len(scenes):
+        raise ValueError(f"Unsupported scene structure for content lane: {lane or 'legacy'}")
     narration = []
     seen_roles = set()
     for index, scene in enumerate(scenes, start=1):
