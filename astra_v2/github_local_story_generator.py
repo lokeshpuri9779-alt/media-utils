@@ -435,6 +435,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
                 )
                 continue
         try:
+            raw = _strip_reasoning_preamble(raw)
             parsed = json.loads(raw)
             validated = validate_candidate(parsed, history, lane)
             break
