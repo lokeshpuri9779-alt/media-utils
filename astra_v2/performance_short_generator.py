@@ -124,6 +124,7 @@ def _prompt(history=(), creative_brief="") -> str:
         "and props legible. Each scene needs distinct narration/speech, a concise headline, "
         "an action, camera, environment, label and story_beat. Include at least one brief "
         "natural dialogue line. The final scene must visibly resolve the opening question. "
+        "The separate question field is the final spoken engagement CTA: make it a concise, natural, story-specific question that invites viewers to share what they would do or noticed; do not use a generic like/follow request. The answer field briefly states the actual payoff. "
         "Score honestly: originality /25, hook /20, emotional_payoff /15, progression /15, "
         "visual_clarity /15, audience_fit /10. Set hard_failures for any serious defect; do "
         "not inflate scores to pass. Return only schema-conforming JSON. "
