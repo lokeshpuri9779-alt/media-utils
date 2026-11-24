@@ -12803,6 +12803,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-30c5db2a54bfb295801d",
+      "video_id": "TNobbHMNG8c",
+      "confirmed_at": "2026-11-24T10:19:16.135586+00:00",
+      "title": "Pip the Pangolin and Orion the Owl and the Moonlit Signal",
+      "plot_fingerprint": "66ed7b169ffea5c96c41771411b36f7c62b42a85922ddf1098f475f9f494b1c7",
+      "story_beats": [
+        {
+          "headline": "The Hidden Canyon Mist",
+          "speech": "Heavy fog blocks our view, masking the midnight seed harvest path completely across the shadowy ravine.",
+          "visual": "signal",
+          "label": "Ravine Mist",
+          "story_beat": "reveal",
+          "visual_prompt": "Pip the pangolin holding a polished brass bell stands on a mossy forest log while Orion the owl perches above on a pine branch, looking down into a thick gray canyon fog under a bright silver moon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shadowy Obstacle",
+          "speech": "Our initial lantern signals fade instantly inside the dense mist, hiding the proper harvesting locations from our sight.",
+          "visual": "forest",
+          "label": "Blocked View",
+          "story_beat": "build",
+          "visual_prompt": "Pip the pangolin peers closely at a brass bell on the dark forest floor, while Orion the owl tilts his head in concern beside a glowing lantern on a tree stump surrounded by towering pines.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reflected Beam",
+          "speech": "I must angle this brass bell precisely to bounce your lantern light across the deep gorge.",
+          "visual": "door",
+          "label": "Clearing Path",
+          "story_beat": "mechanism",
+          "visual_prompt": "Pip the pangolin holds the gleaming brass bell high to catch a beam of light, while Orion the owl holds a glowing lantern nearby on an elevated stone ledge.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Harvest Success",
+          "speech": "Our synchronized signal pierces the darkness perfectly, guiding us both to a rich midnight harvest.",
+          "visual": "signal",
+          "label": "Shared Success",
+          "story_beat": "payoff",
+          "visual_prompt": "Pip the pangolin and Orion the owl sit side by side on a moonlit forest path, surrounded by small flower patches and holding a shared brass bell under a starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
