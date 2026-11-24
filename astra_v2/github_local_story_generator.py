@@ -504,12 +504,6 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
              sources_path: str | None = None) -> dict:
     if lane not in LANES:
         raise ValueError("Unsupported creative lane")
-    from huggingface_hub import hf_hub_download
-    from llama_cpp import Llama
-
-    model_file = model_path or hf_hub_download(
-        repo_id=MODEL_REPO, filename=MODEL_FILE, revision=MODEL_REVISION
-    )
     history_file = Path(history_path)
     history = _load_history(history_file)
     sources = []
@@ -519,6 +513,15 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             raise ValueError("Source pack must be a JSON array")
     if lane in SOURCED_FACTUAL_LANES:
         sources = validate_source_pack(sources, lane)
+
+    # Reject missing or stale evidence before importing inference runtimes or
+    # downloading the model, so an invalid factual job fails fast and cheaply.
+    from huggingface_hub import hf_hub_download
+    from llama_cpp import Llama
+
+    model_file = model_path or hf_hub_download(
+        repo_id=MODEL_REPO, filename=MODEL_FILE, revision=MODEL_REVISION
+    )
     llm = Llama(
         model_path=model_file, n_ctx=4096, n_threads=2,
         n_batch=256, verbose=False,
