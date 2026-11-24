@@ -242,6 +242,19 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "too similar"):
             validate_candidate(item, history)
 
+    def test_what_if_evidence_is_passed_through_both_workflows(self):
+        diagnostic = Path(".github/workflows/astra-single-lane-diagnostic.yml").read_text(
+            encoding="utf-8"
+        )
+        batch = Path(".github/workflows/astra-parallel-caption-batch.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertGreaterEqual(diagnostic.count('"what_if"'), 2)
+        self.assertIn('--direction "${{ inputs.lane }}"', diagnostic)
+        self.assertIn("format('--sources-file output/{0}/sources.json', inputs.lane)", diagnostic)
+        self.assertGreaterEqual(batch.count('"what_if"'), 2)
+        self.assertIn("format('--sources-file output/{0}/sources.json', matrix.lane)", batch)
+
     def test_every_sourced_factual_lane_has_a_collector_query(self):
         self.assertTrue(SOURCED_FACTUAL_LANES.issubset(LANES))
         self.assertTrue(SOURCED_FACTUAL_LANES.issubset(TOPIC_QUERIES))
