@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, creative_direction, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -32,6 +32,14 @@ def sample():
 
 
 class GithubLocalStoryGeneratorTests(unittest.TestCase):
+    def test_strips_leading_qwen_think_block_before_json(self):
+        raw = '<think>\\n\\n</think>\\n\\n{"title":"A puzzle"}'
+        self.assertEqual(_strip_reasoning_preamble(raw), '{"title":"A puzzle"}')
+
+    def test_keeps_json_without_reasoning_wrapper_unchanged(self):
+        raw = '{"title":"A puzzle"}'
+        self.assertEqual(_strip_reasoning_preamble(raw), raw)
+
     def test_accepts_valid_seven_beat_story(self):
         result = validate_candidate(sample())
         self.assertEqual(len(result["performance_scenes"]), 7)
