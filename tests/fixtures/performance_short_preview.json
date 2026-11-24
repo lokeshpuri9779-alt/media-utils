@@ -1,0 +1,185 @@
+{
+  "genre": "fiction",
+  "content_id": "astra-performance-short-render-fixture",
+  "kind": "performance_short_candidate",
+  "format_profile": "shorts_v2_7scene",
+  "title": "The Lantern, the Key, and the Quiet Chest",
+  "question": "Why does a lantern lead a fox to a hidden chest?",
+  "answer": "The lantern reveals a key and a chest holding a glowing seed.",
+  "character_bible": "a small russet fox with a white chest and amber eyes",
+  "story_cast": [
+    "fox"
+  ],
+  "story_environment": "forest",
+  "premise": {
+    "central_conflict": "A fox needs light to find its way through a dark forest",
+    "failed_attempt": "The lantern dims near a stone and the key slips away",
+    "causal_discovery": "The lantern beam reveals a hidden chest and its matching lock",
+    "resolution": "The key opens the chest and a glowing seed lights the path home"
+  },
+  "performance_premise": {
+    "central_conflict": "A fox needs light to find its way through a dark forest",
+    "failed_attempt": "The lantern dims near a stone and the key slips away",
+    "causal_discovery": "The lantern beam reveals a hidden chest and its matching lock",
+    "resolution": "The key opens the chest and a glowing seed lights the path home"
+  },
+  "performance_scenes": [
+    {
+      "role": "hook",
+      "duration_seconds": 4.5,
+      "narration": "A fox finds a lantern glowing beside the forest trail.",
+      "speech": "A fox finds a lantern glowing beside the forest trail.",
+      "headline": "A LIGHT IN THE WOODS",
+      "visual": "fox",
+      "label": "THE LANTERN",
+      "story_environment": "forest",
+      "story_beat": "reveal",
+      "action": "look",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes studies a brass lantern glowing beside a moonlit forest trail.",
+      "camera": "Wide establishing shot, then slow push toward the lantern",
+      "environment": "moonlit forest trail",
+      "required_props": [
+        "brass lantern"
+      ],
+      "story_prop": "lantern",
+      "transition_question": "Why does the lantern glow here?"
+    },
+    {
+      "role": "stakes",
+      "duration_seconds": 4.5,
+      "narration": "Its flame fades whenever the fox approaches one dark stone.",
+      "speech": "Its flame fades whenever the fox approaches one dark stone.",
+      "headline": "THE LIGHT GOES OUT",
+      "visual": "fox",
+      "label": "A STRANGE CLUE",
+      "story_environment": "forest",
+      "story_beat": "build",
+      "action": "look",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes leans toward the brass lantern as its flame dims beside a dark stone in the forest.",
+      "camera": "Medium close-up from low angle, lantern foreground",
+      "environment": "shadowed forest clearing",
+      "required_props": [
+        "brass lantern",
+        "dark stone"
+      ],
+      "story_prop": "lantern",
+      "transition_question": "What is hiding beneath the stone?"
+    },
+    {
+      "role": "attempt",
+      "duration_seconds": 4.5,
+      "narration": "A brass key glints beneath that stone, just out of reach.",
+      "speech": "A brass key glints beneath that stone, just out of reach.",
+      "headline": "A KEY UNDER STONE",
+      "visual": "fox",
+      "label": "THE FIRST ANSWER",
+      "story_environment": "forest",
+      "story_beat": "build",
+      "action": "pick",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes discovers a brass key glinting beneath a flat stone on the forest floor.",
+      "camera": "Ground-level close-up following the fox's paw",
+      "environment": "mossy forest floor",
+      "required_props": [
+        "brass key",
+        "flat stone"
+      ],
+      "story_prop": "key",
+      "transition_question": "Can the fox reach the key?"
+    },
+    {
+      "role": "setback",
+      "duration_seconds": 4.5,
+      "narration": "The key slips away and stops beside a hidden crack.",
+      "speech": "The key slips away and stops beside a hidden crack.",
+      "headline": "THE KEY ESCAPES",
+      "visual": "fox",
+      "label": "A NARROW GAP",
+      "story_environment": "forest",
+      "story_beat": "mechanism",
+      "action": "push",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes watches the brass key slide toward a narrow crack between roots in the forest floor.",
+      "camera": "Tracking close-up along the sliding key",
+      "environment": "root-covered forest floor",
+      "required_props": [
+        "brass key"
+      ],
+      "story_prop": "key",
+      "transition_question": "What can reveal the crack's secret?"
+    },
+    {
+      "role": "discovery",
+      "duration_seconds": 4.5,
+      "narration": "The lantern beam reveals a treasure chest beneath tangled roots.",
+      "speech": "The lantern beam reveals a treasure chest beneath tangled roots.",
+      "headline": "HIDDEN TREASURE",
+      "visual": "fox",
+      "label": "THE REAL SECRET",
+      "story_environment": "forest",
+      "story_beat": "twist",
+      "action": "look",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes raises the brass lantern above a small treasure chest hidden beneath tangled roots in the forest.",
+      "camera": "Over-the-shoulder reveal, chest emerging from shadow",
+      "environment": "ancient forest roots",
+      "required_props": [
+        "brass lantern",
+        "treasure chest"
+      ],
+      "story_prop": "box",
+      "transition_question": "Will the key fit the chest?"
+    },
+    {
+      "role": "climax",
+      "duration_seconds": 4.5,
+      "narration": "The fox turns the key, and the chest lock clicks open.",
+      "speech": "The fox turns the key, and the chest lock clicks open.",
+      "headline": "THE LOCK TURNS",
+      "visual": "fox",
+      "label": "ONE LAST TRY",
+      "story_environment": "forest",
+      "story_beat": "mechanism",
+      "action": "open",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes turns the brass key in the lock of a small treasure chest in the forest.",
+      "camera": "Tight close-up on the key turning, fox visible behind",
+      "environment": "root-covered forest clearing",
+      "required_props": [
+        "brass key",
+        "treasure chest"
+      ],
+      "story_prop": "key",
+      "transition_question": "What is waiting inside?"
+    },
+    {
+      "role": "payoff",
+      "duration_seconds": 4.5,
+      "narration": "Inside, a glowing seed lights the fox's winding path home.",
+      "speech": "Inside, a glowing seed lights the fox's winding path home.",
+      "headline": "A LIGHT TO KEEP",
+      "visual": "fox",
+      "label": "THE WAY HOME",
+      "story_environment": "forest",
+      "story_beat": "payoff",
+      "action": "open",
+      "visual_prompt": "A a small russet fox with a white chest and amber eyes opens the small treasure chest to reveal a glowing seed on the forest floor.",
+      "camera": "Warm close-up of the open chest, then pull back to the fox",
+      "environment": "quiet moonlit forest path",
+      "required_props": [
+        "treasure chest"
+      ],
+      "story_prop": "box",
+      "transition_question": ""
+    }
+  ],
+  "performance_scorecard": {
+    "originality": 22,
+    "hook": 18,
+    "emotional_payoff": 14,
+    "progression": 14,
+    "visual_clarity": 14,
+    "audience_fit": 9
+  },
+  "performance_hard_failures": [],
+  "approved": false,
+  "production_ready": false,
+  "eligible_for_automatic_publishing": false,
+  "published": false
+}
