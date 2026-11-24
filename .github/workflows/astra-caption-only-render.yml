@@ -1,0 +1,100 @@
+name: ASTRA Caption-only Render
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_path:
+        description: JSON story candidate under queue/pending/
+        required: true
+        default: queue/pending/candidate.json
+        type: string
+      voice:
+        description: Kokoro voice
+        required: true
+        default: af_heart
+        type: string
+      speed:
+        description: Narration speed (0.75–1.25)
+        required: true
+        default: "1.04"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-caption-render-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-caption-only.txt
+
+      - name: Restore Kokoro voice model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
+
+      - name: Install caption-only dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Validate candidate path and JSON
+        env:
+          CANDIDATE_PATH: ${{ inputs.candidate_path }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          raw = os.environ["CANDIDATE_PATH"]
+          path = Path(raw)
+          if path.is_absolute() or ".." in path.parts:
+              raise SystemExit("Candidate path must stay inside queue/pending/")
+          if not raw.startswith("queue/pending/") or path.suffix.lower() != ".json":
+              raise SystemExit("Candidate must be a .json file inside queue/pending/")
+          if not path.is_file():
+              raise SystemExit(f"Candidate file not found: {raw}")
+          with path.open(encoding="utf-8") as handle:
+              data = json.load(handle)
+          if not isinstance(data, dict):
+              raise SystemExit("Candidate JSON must contain an object")
+          print(f"Validated candidate: {raw}")
+          PY
+
+      - name: Render narration and timed captions
+        env:
+          ASTRA_VOICE_CACHE: ~/.cache/astra-voice
+          CANDIDATE_PATH: ${{ inputs.candidate_path }}
+          VOICE: ${{ inputs.voice }}
+          SPEED: ${{ inputs.speed }}
+        run: |
+          python -m astra_v2.caption_short_pipeline \
+            --candidate "$CANDIDATE_PATH" \
+            --output output/rayvan-short.mp4 \
+            --voice "$VOICE" \
+            --speed "$SPEED"
+
+      - name: Upload review-only video and manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rayvan-caption-short-${{ github.run_id }}
+          path: |
+            output/rayvan-short.mp4
+            output/rayvan-short.captions.json
+            output/rayvan-short.review.json
+          if-no-files-found: ignore
+          retention-days: 7
