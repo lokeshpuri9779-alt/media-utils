@@ -50,6 +50,24 @@ class CaptionShortPipelineTests(unittest.TestCase):
             + " Would you have noticed the hidden clue?",
         )
 
+    def test_accepts_fact_quiz_and_news_four_beat_lanes(self):
+        lane_roles = {
+            "science_explained": ["curiosity_hook", "surprising_fact", "explanation", "why_it_matters"],
+            "india_gk": ["quiz_hook", "question_or_options", "answer_reveal", "explanation"],
+            "trending_topics": ["news_hook", "what_changed", "context", "why_it_matters"],
+        }
+        for lane, roles in lane_roles.items():
+            with self.subTest(lane=lane):
+                candidate = self.candidate()
+                candidate["content_type"] = lane
+                candidate["performance_scenes"] = [
+                    {"role": role, "speech": f"Spoken line for {role}."}
+                    for role in roles
+                ]
+                result = narration_from_candidate(candidate)
+                self.assertTrue(result.startswith("Spoken line for " + roles[0]))
+                self.assertTrue(result.endswith(candidate["question"]))
+
     def test_requires_all_review_only_flags_to_be_explicit_false(self):
         candidate = self.candidate()
         del candidate["published"]
