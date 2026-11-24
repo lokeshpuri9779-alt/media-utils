@@ -9,8 +9,10 @@ import argparse
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
+from html import unescape
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROLES = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
 PUZZLE_ROLES = ["challenge", "thinking_pause", "answer", "explanation"]
@@ -51,8 +53,8 @@ SOURCED_FACTUAL_LANES = {
     "world_gk", "myth_vs_fact", "psychology", "money_business",
     "tech_explained", "india_gk", "space_facts", "nature_facts",
     "human_body", "inventions", "mini_case_study", "ranked_countdown",
-    "guess_the_number", "spot_the_lie", "two_truths_one_lie",
-    "current_news", "trending_topics",
+    "guess_the_number", "quick_quiz", "spot_the_lie", "two_truths_one_lie",
+    "what_if", "current_news", "trending_topics",
 }
 
 LANES = {
@@ -359,38 +361,23 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         for row in history[-5:]
     ]
     source_block = json.dumps(sources or [], ensure_ascii=False)
-    factual = lane in {
-        "weird_facts", "science_explained", "history_gk", "geography_gk",
-        "world_gk", "myth_vs_fact", "psychology", "money_business",
-        "tech_explained", "india_gk", "space_facts", "nature_facts", "human_body", "inventions", "mini_case_study", "ranked_countdown", "guess_the_number", "spot_the_lie", "two_truths_one_lie", "current_news", "trending_topics",
-    }
-    if lane in SOURCED_FACTUAL_LANES:
+    factual = lane in SOURCED_FACTUAL_LANES
+    if factual:
         evidence_rule = (
             "Use ONLY the supplied source pack for factual claims. Every concrete factual claim, "
             "number, date, study result, historical detail, or named example must be supported "
-            "by the supplied evidence. Do not invent causes, quotes, statistics, or outcomes. "
-            "If sources disagree or are too thin, state only what is supported and omit the rest. "
+            "by the supplied evidence. Cross-check the central claim against both independent "
+            "publishers; if only one source supports a detail, attribute it clearly and qualify "
+            "it as single-source. Do not invent causes, quotes, statistics, or outcomes. If "
+            "sources disagree or are too thin, state only what is supported and omit the rest. "
             "Mention a publisher/source naturally in narration. For news, do not present an old "
             "story as breaking news. "
-        )
-    elif lane in SOURCED_FACTUAL_LANES:
-        evidence_rule = (
-            "Use ONLY the supplied evidence pack for factual claims. Build the Short around "
-            "one clear finding that is supported by the supplied sources, and mention a "
-            "publisher naturally in the narration. Do not add dates, numbers, causal claims, "
-            "quotes, or mechanisms that the sources do not support. If the sources disagree "
-            "or do not establish a claim, omit it or state the uncertainty plainly. "
-        )
-    elif factual:
-        evidence_rule = (
-            "Accuracy is more important than surprise. Do not fabricate statistics, studies, "
-            "historical details, scientific mechanisms, or quotations. Avoid precise claims "
-            "you cannot confidently support; phrase uncertainty honestly. "
         )
     else:
         evidence_rule = (
             "Do not imitate or adapt existing copyrighted stories, franchises, characters, or plots. "
-            "Use fresh names and a self-contained fictional premise. "
+            "Use fresh names and a self-contained fictional premise. Clearly label hypothetical "
+            "scenarios as hypothetical rather than presenting them as observed fact. "
         )
     puzzle_rule = (
         "For puzzles and riddles, state all necessary conditions, make the answer logically "
@@ -450,11 +437,19 @@ def _strip_reasoning_preamble(raw):
 
 
 def validate_source_pack(sources: list[dict], lane: str) -> list[dict]:
-    """Require usable, attributable evidence from at least two distinct publishers."""
+    """Require attributable sources; enforce freshness for live news and trends."""
     if lane not in SOURCED_FACTUAL_LANES:
         return sources
+    if not isinstance(sources, list):
+        raise ValueError("Source pack must be a JSON array")
     usable = []
     publishers = set()
+    urls = set()
+    now = datetime.now(timezone.utc)
+    freshness = {
+        "current_news": timedelta(hours=72),
+        "trending_topics": timedelta(days=7),
+    }.get(lane)
     for item in sources:
         if not isinstance(item, dict):
             continue
@@ -462,28 +457,44 @@ def validate_source_pack(sources: list[dict], lane: str) -> list[dict]:
         url = str(item.get("url") or "").strip()
         publisher = str(item.get("publisher") or "").strip()
         published = str(item.get("published") or "").strip()
-        summary = str(item.get("summary") or "").strip()
-        if not (title and url.startswith(("https://", "http://")) and publisher
-                and published and len(summary) >= 20):
+        summary = unescape(re.sub(r"<[^>]+>", " ", str(item.get("summary") or "")))
+        summary = " ".join(summary.split())
+        parsed_url = urlsplit(url)
+        if not (title and parsed_url.scheme in {"https", "http"} and parsed_url.netloc
+                and publisher and published and len(summary) >= 20):
             continue
         try:
-            datetime.fromisoformat(published.replace("Z", "+00:00"))
-        except (TypeError, ValueError):
+            published_at = datetime.fromisoformat(published.replace("Z", "+00:00"))
+            if published_at.tzinfo is None:
+                published_at = published_at.replace(tzinfo=timezone.utc)
+            published_at = published_at.astimezone(timezone.utc)
+        except (TypeError, ValueError, OverflowError):
+            continue
+        age = now - published_at
+        if age < -timedelta(hours=24):
+            continue
+        if freshness and age > freshness:
             continue
         normalized_publisher = re.sub(r"[^a-z0-9]+", "", publisher.lower())
+        normalized_url = url.lower().rstrip("/")
         if not normalized_publisher or normalized_publisher in {"rssfeed", "googletrends"}:
             continue
-        if normalized_publisher in publishers:
+        if normalized_publisher in publishers or normalized_url in urls:
             continue
         publishers.add(normalized_publisher)
+        urls.add(normalized_url)
         usable.append({
             "title": title[:240], "url": url[:500], "published": published[:80],
             "publisher": publisher[:100], "summary": summary[:500],
         })
     if len(usable) < 2:
+        freshness_note = (
+            f" published within {int(freshness.total_seconds() // 3600)} hours"
+            if freshness else ""
+        )
         raise ValueError(
-            f"{lane} requires at least two usable evidence items from distinct publishers "
-            "with title, URL, publication date, publisher, and summary"
+            f"{lane} requires at least two usable evidence items from distinct publishers"
+            f"{freshness_note}, with title, URL, publication date, publisher, and summary"
         )
     return usable[:4]
 
