@@ -1,88 +1,9 @@
 {
-  "observed_at": "2026-11-24T09:54:40.256919+00:00",
-  "generated": 0,
-  "requested": 20,
+  "observed_at": "2026-11-24T19:32:46.318740+00:00",
+  "generated": null,
+  "requested": null,
   "generation_failures": [
-    {
-      "index": 0,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 1,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 2,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 3,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 4,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 5,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 6,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 7,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 8,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 9,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 10,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 11,
-      "reason": "missing_dialogue"
-    },
-    {
-      "index": 12,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 13,
-      "reason": "missing_dialogue"
-    },
-    {
-      "index": 14,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 15,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 16,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 17,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 18,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 19,
-      "reason": "beat_word_count_out_of_range"
-    }
+    "generation_not_completed"
   ],
   "reviewed": null,
   "review_deferred": null,
