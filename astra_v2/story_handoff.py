@@ -11,7 +11,12 @@ from copy import deepcopy
 # Only fields necessary to reconstruct the same approved Studio storyboard
 # are eligible for propagation through a bounded candidate.json artifact.
 STORY_CONTEXT_FIELDS = (
-    "kind", "production_ready", "validation_candidate",
+    "kind", "production_ready", "approved", "eligible_for_automatic_publishing",
+    "published", "validation_candidate", "format_profile", "premise",
+    "character_bible", "performance_scenes", "performance_scorecard",
+    "performance_validation", "performance_hard_failures",
+    "visual_duration_seconds", "plot_fingerprint", "central_conflict",
+    "decisive_choice", "resolution",
     "hook", "question", "answer", "keywords", "source",
     "story_beats", "story_cast", "story_environment", "story_prop",
     "story_prop_id", "story_prop_owner", "story_human_actor",
