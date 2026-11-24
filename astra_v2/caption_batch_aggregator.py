@@ -11,8 +11,10 @@ import math
 from pathlib import Path
 
 from astra_v2.github_local_story_generator import (
+    LANES,
     SOURCED_FACTUAL_LANES,
     accepted_unique_candidates,
+    validate_candidate,
     validate_source_pack,
 )
 
@@ -37,6 +39,15 @@ def validate_rendered_package(candidate_path: Path) -> tuple[dict, dict]:
         raise ValueError("candidate premise and fingerprint are required")
 
     lane = str(candidate.get("content_type") or "")
+    if lane not in LANES:
+        raise ValueError("candidate content_type is missing or unsupported")
+    validated = validate_candidate(candidate, history=[], lane=lane)
+    if candidate.get("premise_fingerprint") != validated["premise_fingerprint"]:
+        raise ValueError("candidate premise fingerprint does not match its premise")
+    if candidate.get("word_count") != validated["word_count"]:
+        raise ValueError("candidate word_count does not match its validated narration")
+    if candidate.get("content_id") != "rayvan-" + validated["premise_fingerprint"][:20]:
+        raise ValueError("candidate content ID does not match its premise fingerprint")
     if lane in SOURCED_FACTUAL_LANES:
         sources = candidate.get("research_sources")
         if not isinstance(sources, list):
