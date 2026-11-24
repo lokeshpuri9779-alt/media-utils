@@ -209,6 +209,7 @@ def generate(prior_stories=(), excluded_fingerprints=(), creative_brief=""):
         "performance_scenes": outline["scenes"],
         "story_beats": beats,
         "performance_scorecard": outline["scorecard"],
+        "performance_hard_failures": list(outline.get("hard_failures") or []),
         "performance_validation": validation,
         "visual_duration_seconds": validation["duration_seconds"],
         "plot_fingerprint": validation["premise_fingerprint"],
