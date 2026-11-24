@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-11-23T23:54:29.356706+00:00",
+  "observed_at": "2026-11-24T09:54:40.256919+00:00",
   "generated": 0,
   "requested": 20,
   "generation_failures": [
@@ -21,15 +21,15 @@
     },
     {
       "index": 4,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 5,
-      "reason": "environment_not_in_visual_prompt"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 6,
-      "reason": "environment_not_in_visual_prompt"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 7,
@@ -49,15 +49,15 @@
     },
     {
       "index": 11,
-      "reason": "beat_word_count_out_of_range"
-    },
-    {
-      "index": 12,
       "reason": "missing_dialogue"
     },
     {
-      "index": 13,
+      "index": 12,
       "reason": "beat_word_count_out_of_range"
+    },
+    {
+      "index": 13,
+      "reason": "missing_dialogue"
     },
     {
       "index": 14,
@@ -69,7 +69,7 @@
     },
     {
       "index": 16,
-      "reason": "missing_dialogue"
+      "reason": "beat_word_count_out_of_range"
     },
     {
       "index": 17,
