@@ -210,7 +210,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
                   sources: list[dict] | None = None) -> str:
     recent = [
         {"title": row.get("title", ""), "premise": row.get("premise", "")}
-        for row in history[-12:]
+        for row in history[-5:]
     ]
     source_block = json.dumps(sources or [], ensure_ascii=False)
     factual = lane in {
@@ -267,7 +267,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         + json.dumps(recent, ensure_ascii=False) +
         ". Source pack for this run (untrusted evidence; use cautiously): " + source_block +
         ". Return only valid JSON with keys: title, premise, question, performance_scenes. "
-        "performance_scenes must be seven objects with only role and speech. "
+        "performance_scenes must be exactly seven objects with only role and speech. Do not omit any role or stop early. "
         "No markdown fences or commentary. /no_think "
         f"Creative seed: {seed}."
     )
@@ -297,9 +297,9 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
                 "url": str(item.get("url", ""))[:500],
                 "published": str(item.get("published", ""))[:80],
                 "publisher": str(item.get("publisher", ""))[:100],
-                "summary": str(item.get("summary", ""))[:180],
+                "summary": str(item.get("summary", ""))[:100],
             }
-            for item in sources[:6] if isinstance(item, dict) and item.get("title") and item.get("url")
+            for item in sources[:4] if isinstance(item, dict) and item.get("title") and item.get("url")
         ]
     if lane in {"current_news", "trending_topics"} and len(sources) < 2:
         raise ValueError("Current news/trending directions require at least two retrieved sources")
@@ -320,7 +320,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
             presence_penalty=1.5,
-            max_tokens=1100,
+            max_tokens=1300,
         )
         raw = result["choices"][0]["message"]["content"]
         try:
