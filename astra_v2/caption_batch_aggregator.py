@@ -74,6 +74,8 @@ def validate_rendered_package(candidate_path: Path) -> tuple[dict, dict]:
         raise ValueError("render review points to a different output file")
     if review.get("candidate_id") != candidate.get("content_id"):
         raise ValueError("render review candidate ID does not match candidate")
+    if render.get("resolution") != "1080x1920":
+        raise ValueError("render review must confirm 1080x1920 portrait output")
 
     duration = captions.get("duration_seconds")
     render_duration = render.get("duration_seconds")
@@ -88,6 +90,8 @@ def validate_rendered_package(candidate_path: Path) -> tuple[dict, dict]:
         raise ValueError("render review is missing a valid duration")
     if abs(float(duration) - float(render_duration)) > 0.25:
         raise ValueError("caption and render durations do not match")
+    if render.get("caption_count") != len(caption_rows):
+        raise ValueError("render and caption sidecar counts do not match")
     previous_end = 0.0
     for index, row in enumerate(caption_rows, 1):
         if not isinstance(row, dict) or not str(row.get("caption") or "").strip():
