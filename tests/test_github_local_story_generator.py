@@ -152,7 +152,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
             "mystery", "geography_gk", "psychology", "what_if", "trending_topics",
         }
         self.assertTrue(batch_lanes.issubset(LANES))
-        self.assertTrue(batch_lanes.issubset(STRUCTURES | {"mystery"}))
+        self.assertTrue(batch_lanes.issubset(set(STRUCTURES) | {"mystery"}))
         for lane in batch_lanes:
             self.assertTrue(select_engagement_format(lane, 17))
 
