@@ -1,8 +1,10 @@
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, validate_candidate
+from astra_v2.trend_source_collector import _parse_feed
 
 
 def sample():
@@ -67,6 +69,19 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertIn("Use ONLY the supplied source pack", prompt)
         self.assertIn("Do not invent dates, numbers", prompt)
 
+    @patch("astra_v2.trend_source_collector._fetch")
+    def test_rss_collector_parses_title_link_and_publisher(self, mocked_fetch):
+        mocked_fetch.return_value = (
+            b'<rss><channel><item><title>Example headline</title>'
+            b'<link>https://example.com/story</link><pubDate>Tue, 24 Nov 2026 10:00:00 GMT</pubDate>'
+            b'<source>Example News</source><description>Short summary</description>'
+            b'</item></channel></rss>'
+        )
+        rows = _parse_feed("https://example.com/feed", 5)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["title"], "Example headline")
+        self.assertEqual(rows[0]["publisher"], "Example News")
+        self.assertEqual(rows[0]["url"], "https://example.com/story")
     def test_puzzle_prompt_delays_answer(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
         self.assertIn("place the answer after a clear thinking pause", prompt)
