@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "pack_id": "rayvan-the-bell-beneath-the-fog",
+  "title": "The Bell Beneath the Fog",
+  "format_profile": "shorts_v2_7scene",
+  "source": "human_authored_offline_candidate",
+  "status": {
+    "approved": false,
+    "production_ready": false,
+    "rendering_triggered": false,
+    "publication_triggered": false,
+    "published": false
+  },
+  "output": {
+    "image_count": 7,
+    "aspect_ratio": "9:16",
+    "file_type": "png",
+    "directory": "frames"
+  },
+  "character_reference": {
+    "description": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+    "reference_frame": "frames/scene-01-hook.png",
+    "reuse_for_all_scenes": true
+  },
+  "generation_policy": {
+    "generate_one_frame_at_a_time": true,
+    "reuse_same_checkpoint_and_core_settings": true,
+    "inspect_each_frame_before_next": true,
+    "do_not_interpolate_before_all_seven_frames_reviewed": true,
+    "do_not_render_or_publish_automatically": true
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "role": "hook",
+      "filename": "scene-01-hook.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside a bronze harbor bell on a buoy, listening as fog hides the harbor. The bell and its wet signal rope are clearly visible. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "low waterline close-up, slow push toward the bell",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter surfaces and presses one ear close to the silent bronze bell.",
+      "continuity_question": "What could silence a bell in the middle of the harbor?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 2,
+      "role": "stakes",
+      "filename": "scene-02-stakes.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear watches two small fishing boats drift toward the harbor breakwater through dense fog. A bronze harbor bell and its wet signal rope hang from a buoy in the foreground. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "wide establishing shot, gentle pan from boats to buoy",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell"
+      ],
+      "story_prop": "bell",
+      "action": "The otter looks from the drifting boats back to the silent bell.",
+      "continuity_question": "Can the otter make the bell ring in time?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 3,
+      "role": "attempt",
+      "filename": "scene-03-attempt.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear grips the wet signal rope beside the bronze harbor bell on the buoy, pulling hard as the rope stretches taut above the harbor water. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "medium side shot, slight camera shake on the pull",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter braces its paws on the buoy and pulls the signal rope.",
+      "continuity_question": "Why does the rope move while the bell stays still?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 4,
+      "role": "setback",
+      "filename": "scene-04-setback.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear recoils as a wet signal rope tightens through the bronze harbor bell frame, visibly pinning the clapper against the bell's inner rim on the buoy. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "tight insert on the clapper trapped by the rope, then rack focus to otter",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter releases the rope as the knot tightens around the bell frame.",
+      "continuity_question": "What is the rope caught around?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 5,
+      "role": "discovery",
+      "filename": "scene-05-discovery.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear dives beneath the harbor buoy and discovers the wet signal rope threaded through the bronze bell frame, with the loop visibly holding the clapper against the rim. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "underwater close-up, tilt up to reveal the bell clapper",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter follows the rope underwater and finds the hidden loop.",
+      "continuity_question": "Can the otter reach the loop before the boats hit the rocks?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 6,
+      "role": "climax",
+      "filename": "scene-06-climax.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear uses both paws to pull the wet signal rope loop free from the bronze harbor bell frame beneath the buoy; the clapper swings clear as a wave rocks the bell. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "dramatic underwater-to-surface reveal, quick upward camera move",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter untangles the loop and the wave swings the freed clapper into the bell.",
+      "continuity_question": "Will the boats hear the warning through the fog?",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    },
+    {
+      "scene_number": 7,
+      "role": "payoff",
+      "filename": "scene-07-payoff.png",
+      "duration_seconds": 4.5,
+      "character_lock": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+      "prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside the now-ringing bronze harbor bell as two fishing boats turn away from the breakwater toward the safe channel through thinning fog; the freed signal rope hangs loose. High-end cinematic 3D animated family adventure film, polished but tactile fur, expressive natural animal anatomy, physically believable water and rope, cinematic volumetric sea fog, soft dawn rim light, rich readable silhouettes, detailed bronze and weathered harbor materials, coherent color grading, crisp subject separation, vertical 9:16 composition, no text, no subtitles, no watermark.",
+      "negative_prompt": "different animal species, extra animals, humans, clothing, humanoid body, altered fur color, missing cream muzzle, missing hazel eyes, missing nick in left ear, inconsistent body proportions, duplicate otter, extra limbs, malformed paws, deformed face, floating props, missing bell, missing rope when specified, unreadable clapper, rope passing through solid objects except where explicitly looped through bell frame, text, letters, logo, watermark, collage, split screen, horizontal frame, low detail, flat lighting, excessive motion blur",
+      "camera": "wide warm dawn shot, slow pullback revealing boats in safe water",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_visible_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "action": "The otter watches the boats turn safely as the bell rings behind it.",
+      "continuity_question": "",
+      "review_checks": [
+        "Same otter identity and proportions as the approved reference frame",
+        "Visible and recognizable: bell",
+        "Visible and recognizable: rope",
+        "Action readable at phone size in one glance",
+        "No text, subtitles, logos or watermark"
+      ]
+    }
+  ]
+}
