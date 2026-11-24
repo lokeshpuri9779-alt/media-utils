@@ -118,8 +118,14 @@ jobs:
             seed_suffix: "49"
           - lane: mystery
             seed_suffix: "61"
-          - lane: trending_topics
+          - lane: geography_gk
             seed_suffix: "73"
+          - lane: psychology
+            seed_suffix: "83"
+          - lane: what_if
+            seed_suffix: "97"
+          - lane: trending_topics
+            seed_suffix: "109"
     steps:
       - name: Check out ASTRA
         uses: actions/checkout@v4
