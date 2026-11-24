@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -143,6 +143,14 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertGreater(len({row["tone"] for row in samples}), 1)
         self.assertGreater(len({row["opening_pattern"] for row in samples}), 1)
         self.assertGreater(len({row["payoff_type"] for row in samples}), 1)
+
+    def test_every_adaptive_lane_uses_its_correct_structure_label(self):
+        for lane, roles in STRUCTURES.items():
+            with self.subTest(lane=lane):
+                prompt = _build_prompt(lane, [], 20261125)
+                self.assertIn(f"Use the {STRUCTURE_NAMES[lane]} structure", prompt)
+                self.assertIn(f"exactly {len(roles)} performance_scenes", prompt)
+                self.assertNotIn("seven_beat_story structure", prompt)
 
     def test_prompt_contains_distinct_creative_direction(self):
         prompt = _build_prompt("mystery", [], 12345)
