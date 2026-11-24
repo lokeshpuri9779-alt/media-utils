@@ -18,6 +18,9 @@ on:
       - "tests/test_caption_short_pipeline.py"
       - "astra_v2/github_local_story_generator.py"
       - "astra_v2/trend_source_collector.py"
+      - "astra_v2/caption_batch_aggregator.py"
+      - "tests/test_caption_batch_aggregator.py"
+      - ".github/workflows/astra-parallel-caption-batch.yml"
       - "tests/test_github_local_story_generator.py"
       - "astra_v2/omniroute.py"
       - "astra_v2/omniroute_gemini.py"
@@ -45,3 +48,4 @@ jobs:
           python -m unittest tests.test_astra_story_handoff -v
           python -m unittest tests.test_caption_only_renderer tests.test_caption_short_pipeline -v
           python -m unittest tests.test_github_local_story_generator -v
+          python -m unittest tests.test_caption_batch_aggregator -v
