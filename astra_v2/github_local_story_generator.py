@@ -91,6 +91,33 @@ DEFAULT_ENGAGEMENT_FORMATS = [
     "predict_then_reveal", "mini_case_study", "counterintuitive_explanation",
 ]
 
+def _candidate_json_schema() -> dict:
+    """Constrain local decoding to the candidate shape before semantic validation."""
+    return {
+        "type": "object",
+        "properties": {
+            "title": {"type": "string"},
+            "premise": {"type": "string"},
+            "question": {"type": "string"},
+            "performance_scenes": {
+                "type": "array",
+                "minItems": 7,
+                "maxItems": 7,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "role": {"type": "string", "enum": ROLES},
+                        "speech": {"type": "string"},
+                    },
+                    "required": ["role", "speech"],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": ["title", "premise", "question", "performance_scenes"],
+        "additionalProperties": False,
+    }
+
 def select_engagement_format(lane: str, seed: int) -> str:
     """Deterministically rotate interaction patterns without adding dependencies."""
     options = ENGAGEMENT_FORMATS.get(lane, DEFAULT_ENGAGEMENT_FORMATS)
@@ -316,7 +343,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
                 {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
                 {"role": "user", "content": prompt},
             ],
-            response_format={"type": "json_object"},
+            response_format={"type": "json_schema", "schema": _candidate_json_schema()},
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
             presence_penalty=1.5,
