@@ -223,10 +223,11 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
+          from astra_v2.github_local_story_generator import find_duplicate_premises
 
           history_path = Path("data/story_history.jsonl")
           history_path.parent.mkdir(parents=True, exist_ok=True)
-          seen = set()
+          history_rows = []
           if history_path.exists():
               for line in history_path.read_text(encoding="utf-8").splitlines():
                   if not line.strip():
@@ -235,13 +236,15 @@ jobs:
                       row = json.loads(line)
                   except json.JSONDecodeError:
                       continue
-                  if row.get("fingerprint"):
-                      seen.add(row["fingerprint"])
+                  if row.get("premise"):
+                      history_rows.append(row)
 
           history_path.touch(exist_ok=True)
           candidates = sorted(Path("batch-output").glob("**/candidate.json"))
+          if not candidates:
+              raise SystemExit("No candidate JSON files were downloaded")
 
-          added = []
+          candidate_rows = []
           for candidate_path in candidates:
               candidate = json.loads(candidate_path.read_text(encoding="utf-8"))
               fingerprint = candidate.get("premise_fingerprint")
@@ -249,14 +252,23 @@ jobs:
                   raise SystemExit(f"Invalid candidate: {candidate_path}")
               if candidate.get("approved") is not False or candidate.get("published") is not False:
                   raise SystemExit(f"Candidate safety flags are not review-only: {candidate_path}")
-              if fingerprint in seen:
-                  continue
-              seen.add(fingerprint)
-              added.append({
+              candidate_rows.append(candidate)
+
+          duplicates = find_duplicate_premises(candidate_rows, history_rows)
+          if duplicates:
+              raise SystemExit(
+                  "Cross-batch originality gate rejected near-duplicate candidates: "
+                  + json.dumps(duplicates, ensure_ascii=False)
+              )
+
+          added = [
+              {
                   "title": candidate.get("title", ""),
                   "premise": candidate["premise"],
-                  "fingerprint": fingerprint,
-              })
+                  "fingerprint": candidate["premise_fingerprint"],
+              }
+              for candidate in candidate_rows
+          ]
 
           with history_path.open("a", encoding="utf-8") as handle:
               for row in added:
