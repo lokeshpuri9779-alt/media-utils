@@ -1,0 +1,94 @@
+"""Performance-first Shorts contract for ASTRA.
+
+This is an isolated, review-only contract. It does not change the live four-beat
+renderer or publishing path until compatibility is proven in a separate rollout.
+"""
+from __future__ import annotations
+
+import hashlib
+import re
+
+SCENE_ROLES = (
+    "hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"
+)
+MIN_SECONDS = 28.0
+MAX_SECONDS = 40.0
+MIN_SCORE = 80
+
+
+def _norm(value: str) -> str:
+    return " ".join(re.findall(r"[a-z0-9]+", str(value or "").casefold()))
+
+
+def premise_fingerprint(premise: dict) -> str:
+    """Fingerprint the causal mechanism, not character names or setting."""
+    fields = ("central_conflict", "failed_attempt", "causal_discovery", "resolution")
+    values = [_norm(premise.get(key, "")) for key in fields]
+    if not all(values):
+        raise ValueError("premise_missing_causal_fields")
+    return hashlib.sha256("|".join(values).encode("utf-8")).hexdigest()
+
+
+def validate_short_outline(outline: dict, history=()) -> dict:
+    """Validate a seven-scene 28–40s outline; never grants production approval."""
+    if not isinstance(outline, dict):
+        raise ValueError("outline_must_be_object")
+    premise = outline.get("premise")
+    if not isinstance(premise, dict):
+        raise ValueError("premise_missing")
+    fingerprint = premise_fingerprint(premise)
+    if fingerprint in set(history):
+        raise ValueError("repeated_underlying_plot_mechanism")
+
+    scenes = outline.get("scenes")
+    if not isinstance(scenes, list) or len(scenes) != 7:
+        raise ValueError("short_requires_exactly_seven_scenes")
+
+    total = 0.0
+    for index, (scene, expected_role) in enumerate(zip(scenes, SCENE_ROLES), start=1):
+        if not isinstance(scene, dict):
+            raise ValueError(f"scene_{index}_invalid")
+        if scene.get("role") != expected_role:
+            raise ValueError(f"scene_{index}_role_invalid")
+        duration = scene.get("duration_seconds")
+        if not isinstance(duration, (int, float)) or isinstance(duration, bool) or not 2.5 <= duration <= 7.0:
+            raise ValueError(f"scene_{index}_duration_invalid")
+        total += float(duration)
+        for field in ("narration", "action", "visual_prompt", "camera", "environment"):
+            if not isinstance(scene.get(field), str) or len(scene[field].strip()) < 8:
+                raise ValueError(f"scene_{index}_{field}_missing")
+        props = scene.get("required_props")
+        if not isinstance(props, list) or any(not isinstance(p, str) or not p.strip() for p in props):
+            raise ValueError(f"scene_{index}_required_props_invalid")
+        visual = scene["visual_prompt"].casefold()
+        for prop in props:
+            if prop.casefold() not in visual:
+                raise ValueError(f"scene_{index}_required_prop_not_in_visual_prompt:{prop}")
+        if index < 7 and not isinstance(scene.get("transition_question"), str):
+            raise ValueError(f"scene_{index}_transition_question_missing")
+    if not MIN_SECONDS <= total <= MAX_SECONDS:
+        raise ValueError("short_duration_out_of_range")
+
+    scorecard = outline.get("scorecard")
+    if not isinstance(scorecard, dict):
+        raise ValueError("scorecard_missing")
+    dimensions = ("originality", "hook", "emotional_payoff", "progression", "visual_clarity", "audience_fit")
+    if any(not isinstance(scorecard.get(key), int) or not 0 <= scorecard[key] <= weight
+           for key, weight in zip(dimensions, (25, 20, 15, 15, 15, 10))):
+        raise ValueError("scorecard_invalid")
+    score = sum(scorecard[key] for key in dimensions)
+    hard_failures = outline.get("hard_failures", [])
+    if not isinstance(hard_failures, list):
+        raise ValueError("hard_failures_invalid")
+    return {
+        "valid": score >= MIN_SCORE and not hard_failures,
+        "score": score,
+        "minimum_score": MIN_SCORE,
+        "duration_seconds": round(total, 2),
+        "scene_count": 7,
+        "premise_fingerprint": fingerprint,
+        "hard_failures": hard_failures,
+        "approved": False,
+        "production_ready": False,
+        "published": False,
+    }
