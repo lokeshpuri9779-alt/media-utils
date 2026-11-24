@@ -3,7 +3,7 @@ import unittest
 from astra_v2.story_planning import planning_issues
 
 from astra_v2.performance_short_contract import (
-    SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_rendered_duration, validate_short_outline
+    SCENE_ROLES, premise_fingerprint, renderer_outline_from_story, to_renderer_beats, validate_rendered_duration, validate_short_outline
 )
 
 
@@ -62,6 +62,19 @@ class PerformanceShortContractTests(unittest.TestCase):
         self.assertFalse(result["approved"])
         self.assertFalse(result["production_ready"])
         self.assertFalse(result["published"])
+
+    def test_persisted_candidate_fields_normalize_for_studio_renderer(self):
+        outline = sample_outline()
+        story = {
+            "premise": outline["premise"],
+            "character_bible": outline["character_bible"],
+            "performance_scenes": outline["scenes"],
+            "performance_scorecard": outline["scorecard"],
+            "performance_hard_failures": [],
+        }
+        normalized = renderer_outline_from_story(story)
+        self.assertEqual(validate_short_outline(normalized)["scene_count"], 7)
+        self.assertEqual(len(to_renderer_beats(normalized)), 7)
 
     def test_adapts_to_seven_studio_scenes_without_approval(self):
         beats = to_renderer_beats(sample_outline())
