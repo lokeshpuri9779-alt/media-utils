@@ -127,7 +127,7 @@ jobs:
         env:
           HF_HOME: /home/runner/.cache/huggingface
         run: |
-          python -m astra_v2.github_local_story_generator \
+          timeout --foreground --signal=TERM --kill-after=30s 12m python -m astra_v2.github_local_story_generator \
             --output "output/${{ inputs.lane }}/candidate.json" \
             --history data/story_history.jsonl \
             --lane "${{ inputs.lane }}" \
@@ -138,7 +138,7 @@ jobs:
         env:
           ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
         run: |
-          python -m astra_v2.caption_short_pipeline \
+          timeout --foreground --signal=TERM --kill-after=30s 8m python -m astra_v2.caption_short_pipeline \
             --candidate "output/${{ inputs.lane }}/candidate.json" \
             --output "output/${{ inputs.lane }}/rayvan-short.mp4"
 
