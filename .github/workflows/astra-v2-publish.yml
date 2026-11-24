@@ -727,3 +727,5 @@ jobs:
           else
             echo "::warning::ASTRA external heartbeat could not be delivered"
           fi
+
+# Owner-requested ASTRA recovery trigger: 2026-11-25
