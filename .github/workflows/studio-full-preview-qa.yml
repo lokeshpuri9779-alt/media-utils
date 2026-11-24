@@ -96,6 +96,7 @@ jobs:
           PY
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
+          set -o pipefail
           mkdir -p /tmp/astra-studio-review
           python -m tests.render_performance_short_preview --story tests/fixtures/performance_short_preview.json --output /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills 2>&1 | tee /tmp/astra-studio-review/render.log
       - name: Require confirmed asset-pack use in narrated render
