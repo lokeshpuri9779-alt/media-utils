@@ -7,6 +7,11 @@ on:
       - 'studio_renderer.py'
       - 'astra_v2/visual_artifact_backdrop.py'
       - 'astra_v2/quality_asset_selector.py'
+      - 'astra_v2/performance_short_contract.py'
+      - 'astra_v2/pillow_duo_scene.py'
+      - 'tests/fixtures/performance_short_preview.json'
+      - 'tests/render_performance_short_preview.py'
+      - 'tests/verify_studio_preview.py'
   workflow_dispatch:
   pull_request:
     paths:
@@ -15,6 +20,9 @@ on:
       - 'tests/test_astra_studio_preview_asset_gate.py'
       - 'tests/test_studio_audio_gate.py'
       - 'tests/test_visual_artifact_backdrop.py'
+      - 'tests/fixtures/performance_short_preview.json'
+      - 'tests/render_performance_short_preview.py'
+      - 'tests/verify_studio_preview.py'
       - '.github/workflows/studio-full-preview-qa.yml'
 permissions:
   contents: read
@@ -27,7 +35,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m py_compile tests/verify_studio_preview.py studio_renderer.py
+      - run: python -m py_compile tests/verify_studio_preview.py tests/render_performance_short_preview.py studio_renderer.py
       - run: python -m pip install pillow imageio-ffmpeg
       - run: python -m unittest tests.test_studio_audio_gate tests.test_visual_artifact_backdrop -v
       - run: python -m unittest tests.test_astra_studio_preview_asset_gate -v
@@ -89,7 +97,7 @@ jobs:
       - name: Render real Studio narration preview (no YouTube upload)
         run: |
           mkdir -p /tmp/astra-studio-review
-          python studio_renderer.py --preview /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills 2>&1 | tee /tmp/astra-studio-review/render.log
+          python -m tests.render_performance_short_preview --story tests/fixtures/performance_short_preview.json --output /tmp/astra-studio-review/studio-preview.mp4 --stills-dir /tmp/astra-studio-review/stills 2>&1 | tee /tmp/astra-studio-review/render.log
       - name: Require confirmed asset-pack use in narrated render
         run: |
           python -m astra_v2.studio_preview_asset_gate \
