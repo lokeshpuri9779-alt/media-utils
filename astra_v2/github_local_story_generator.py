@@ -324,7 +324,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "Use a strong curiosity gap in the first sentence, concrete details, escalating "
         "interest, a satisfying reveal or useful payoff, and a specific viewer question. "
         f"Use the {structure_name} structure with exactly {len(roles)} performance_scenes in this order: " + ", ".join(roles) + ". "
-        f"Creative treatment: tone={direction['tone']}; opening_pattern={direction['opening_pattern']}; payoff_type={direction['payoff_type']}; engagement={direction['engagement_format']}. "
+        f"Creative treatment and engagement mechanic: tone={direction['tone']}; opening_pattern={direction['opening_pattern']}; payoff_type={direction['payoff_type']}; engagement={direction['engagement_format']}. "
         "Make this treatment clearly audible in the narration; do not merely label it. "
         "Make the viewer actively predict, decide, test memory, solve, compare, or investigate "
         "where appropriate; do not force a question into every sentence. "
