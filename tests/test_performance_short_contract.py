@@ -7,13 +7,13 @@ from astra_v2.performance_short_contract import (
 
 def sample_outline():
     prompts = [
-        "A tiny fox discovers a glass jar glowing under moonlight.",
-        "The fox sees a firefly trapped inside the glass jar.",
-        "The fox nudges the glass jar toward a flat stone.",
-        "The glass jar rolls toward a shallow stream and the firefly flickers.",
-        "The fox notices a loose cork beside the glass jar.",
-        "The fox removes the cork and opens the glass jar.",
-        "The firefly flies free and lights the fox's path home.",
+        "A tiny fox discovers a glass jar glowing under moonlight in the forest.",
+        "The fox sees a firefly trapped inside the glass jar in the forest.",
+        "The fox nudges the glass jar toward a flat stone in the forest.",
+        "The glass jar rolls toward a shallow stream and the firefly flickers in the forest.",
+        "The fox notices a loose cork beside the glass jar in the forest.",
+        "The fox removes the cork and opens the glass jar in the forest.",
+        "The firefly flies free and lights the fox's path home through the forest.",
     ]
     scenes = []
     for i, role in enumerate(SCENE_ROLES):
@@ -25,7 +25,7 @@ def sample_outline():
             "headline": f"RESCUE BEAT {i+1}",
             "visual": "fox",
             "label": "ORIGINAL STORY",
-            "story_environment": "forest clearing",
+            "story_environment": "forest",
             "story_beat": "reveal" if i == 0 else "payoff" if i == 6 else "build",
             "action": f"The fox performs a visible action for {role}.",
             "visual_prompt": prompts[i],
