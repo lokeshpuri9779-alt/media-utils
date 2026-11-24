@@ -118,7 +118,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         item = {
             "title": "A Sheep Count That Tricks You",
             "premise": "A short language puzzle asks how many sheep remain after all but nine escape. The wording sounds like a subtraction problem, but its exact meaning gives a much simpler answer. Viewers get a pause to solve it before the reveal explains the phrase.",
-            "question": "Did you solve it immediately, or did the wording trick you?",
+            "question": "Did you solve it immediately, or did the wording trick you today?",
             "performance_scenes": [
                 {"role": "challenge", "speech": "Seventeen sheep escape, but nine remain inside the farmer's field."},
                 {"role": "thinking_pause", "speech": "Pause now and decide exactly how many sheep remain safely inside the farmer's field."},
