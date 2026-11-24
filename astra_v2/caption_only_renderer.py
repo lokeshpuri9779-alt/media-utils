@@ -40,6 +40,9 @@ def _font(size: int):
     candidates = (
         "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
         "/usr/share/fonts/dejavu/DejaVuSans-Bold.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+        "C:/Windows/Fonts/Arial.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
     )
     for candidate in candidates:
         if Path(candidate).is_file():
@@ -70,8 +73,10 @@ def _caption_frame(text: str, output: Path, index: int):
             line = candidate
     if line:
         lines.append(line)
-    while len(lines) > 3 and font.size > 48:
-        font = _font(font.size - 4)
+    font_size = getattr(font, "size", 76)
+    while len(lines) > 3 and font_size > 48:
+        font_size -= 4
+        font = _font(font_size)
         lines, line = [], ""
         for word in words:
             candidate = (line + " " + word).strip()
@@ -127,6 +132,10 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
             samples = samples * (0.72 / peak)
         audio_parts.append(samples)
         durations.append(len(samples) / RATE)
+
+    actual_duration = sum(durations) + 0.12 * max(0, len(durations) - 1)
+    from astra_v2.performance_short_contract import validate_rendered_duration
+    validate_rendered_duration(actual_duration)
 
     with tempfile.TemporaryDirectory(prefix="astra-caption-") as temp:
         work = Path(temp)
