@@ -257,12 +257,15 @@ def validate_candidate(data: dict, history: list[dict] | None = None, lane: str 
 
     premise_fp = _fingerprint(premise)
     premise_tokens = _content_tokens(premise)
-    for prior in (history or [])[-100:]:
+    for prior in (history or []):
+        prior_fingerprint = prior.get("premise_fingerprint") or prior.get("fingerprint")
+        if prior_fingerprint and prior_fingerprint == premise_fp:
+            raise ValueError("Content premise is too similar to a recent ASTRA Short")
         old = _content_tokens(prior.get("premise", ""))
         if not old:
             continue
         overlap = len(premise_tokens & old) / max(1, len(premise_tokens | old))
-        if overlap >= 0.48 or prior.get("fingerprint") == premise_fp:
+        if overlap >= 0.48:
             raise ValueError("Content premise is too similar to a recent ASTRA Short")
 
     return {
@@ -342,14 +345,16 @@ def _load_history(path: Path) -> list[dict]:
     if not path.exists():
         return []
     rows = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            try:
-                item = json.loads(line)
-                if isinstance(item, dict):
-                    rows.append(item)
-            except json.JSONDecodeError:
-                continue
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Corrupt originality history JSON on line {line_number}") from exc
+        if not isinstance(item, dict):
+            raise ValueError(f"Originality history line {line_number} must be a JSON object")
+        rows.append(item)
     return rows
 
 
