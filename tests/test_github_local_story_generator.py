@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, SOURCED_FACTUAL_LANES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate, validate_source_pack
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, SOURCED_FACTUAL_LANES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate, validate_source_pack, _load_history, _fingerprint
 from astra_v2.trend_source_collector import TOPIC_QUERIES, _parse_feed, collect
 
 
@@ -213,6 +213,28 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         history = [{"premise": sample()["premise"], "fingerprint": "old"}]
         duplicates = find_duplicate_premises([candidate], history)
         self.assertEqual(duplicates[0]["reason"], "premise_token_overlap")
+
+    def test_exact_fingerprint_is_checked_even_if_old_history_premise_is_missing(self):
+        item = sample()
+        history = [{"premise": "", "fingerprint": _fingerprint(item["premise"])}]
+        history.extend({"premise": f"Unrelated historical premise number {index}."}
+                       for index in range(120))
+        with self.assertRaisesRegex(ValueError, "too similar"):
+            validate_candidate(item, history)
+
+    def test_history_loader_fails_closed_on_corrupt_json(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "history.jsonl"
+            path.write_text('{"premise":"valid"}\n{broken json\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "line 2"):
+                _load_history(path)
+
+    def test_history_loader_rejects_non_object_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "history.jsonl"
+            path.write_text('[]\n', encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "JSON object"):
+                _load_history(path)
 
     def test_rejects_repeated_premise(self):
         item = sample()
