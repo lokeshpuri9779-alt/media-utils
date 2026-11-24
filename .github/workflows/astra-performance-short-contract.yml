@@ -3,10 +3,12 @@ on:
   push:
     branches: [main]
     paths:
-      - "astra_v2/performance_short_contract.py"\n      - "astra_v2/performance_short_generator.py"
+      - "astra_v2/performance_short_contract.py"
+      - "astra_v2/performance_short_generator.py"
       - "astra_v2/story_planning.py"
       - "studio_renderer.py"
-      - "tests/test_performance_short_contract.py"\n      - "tests/test_performance_short_generator.py"
+      - "tests/test_performance_short_contract.py"
+      - "tests/test_performance_short_generator.py"
       - ".github/workflows/astra-performance-short-contract.yml"
   workflow_dispatch:
 permissions:
