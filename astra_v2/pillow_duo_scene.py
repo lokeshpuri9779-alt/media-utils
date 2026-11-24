@@ -134,6 +134,8 @@ def scene_prop(shot):
     declared = shot.get("story_prop")
     if declared is not None:
         name = str(declared).lower().strip()
+        if name in {"", "none"}:
+            return None
         if name not in PROPS:
             from astra_errors import CreativeReject
             raise CreativeReject("Studio story prop is not representable: " + name[:60])
