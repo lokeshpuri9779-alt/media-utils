@@ -31,6 +31,7 @@ def build_packet(candidates):
             raise ValueError("candidate_must_remain_unapproved_and_unpublished")
         outline = {
             "premise": candidate.get("premise"),
+            "character_bible": candidate.get("character_bible"),
             "scenes": candidate.get("performance_scenes"),
             "scorecard": candidate.get("performance_scorecard"),
             "hard_failures": candidate.get("hard_failures", []),
@@ -50,6 +51,8 @@ def build_packet(candidates):
             "question": candidate.get("question"),
             "answer": candidate.get("answer"),
             "premise": candidate["premise"],
+            "character_bible": candidate["character_bible"],
+            "story_cast": candidate.get("story_cast"),
             "performance_scenes": candidate["performance_scenes"],
             "story_beats": candidate.get("story_beats"),
             "scorecard": candidate["performance_scorecard"],
