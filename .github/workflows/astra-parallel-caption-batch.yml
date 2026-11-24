@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: astra-caption-production
@@ -207,6 +207,8 @@ jobs:
     needs: generate-and-render
     if: always()
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check out ASTRA
         uses: actions/checkout@v4
