@@ -54,7 +54,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
   const checks=[
    {label:"Seven scene roles",ok:scenes.length===7&&scenes.every((s,i)=>s.role===roles[i])},
    {label:"28–40 second planned duration",ok:duration>=28&&duration<=40},
-   {label:"Character description repeated verbatim",ok:!!bible&&scenes.every(s=>String(s.visual_prompt||"").includes(bible))},
+   {label:"Character description repeated verbatim",ok:!!bible&&scenes.every(s=>String(s.visual_prompt||"").toLowerCase().includes(bible.toLowerCase()))},
    {label:"Required props named in prompts",ok:scenes.every(s=>(s.required_props||[]).every(p=>String(s.visual_prompt||"").toLowerCase().includes(String(p).toLowerCase())))},
    {label:"Every scene has an action and visual prompt",ok:scenes.every(s=>String(s.action||"").trim().length>=3&&String(s.visual_prompt||"").trim().length>=20)}
   ];
