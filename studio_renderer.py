@@ -475,6 +475,8 @@ def make_plan(ch):
             story_prop = infer_story_prop(ch)
         for shot in formatted:
             shot['story_title'] = str(ch.get('title') or '')
+            if ch.get('format_profile') == 'shorts_v2_7scene':
+                shot['performance_short'] = True
             if named_humans:
                 shot['story_named_humans'] = named_humans
             if story_prop is not None:
@@ -544,6 +546,9 @@ def voice_plan(plan, genre, max_duration=None, voice_name='af_heart', voice_spee
     # Narration is allowed to run for its natural complete duration.
     # Preserve all spoken beats; never reject or re-synthesize solely to
     # satisfy an arbitrary narration-length target.
+    if any(s.get('performance_short') for s in plan):
+        from astra_v2.performance_short_contract import validate_rendered_duration
+        validate_rendered_duration(cursor)
     return cursor
 
 
