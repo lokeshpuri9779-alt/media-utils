@@ -45,6 +45,15 @@ MODEL_REVISION = "bc640142c66e1fdd12af0bd68f40445458f3869b"
 MODEL_FILE = "Qwen3-4B-Q4_K_M.gguf"
 STOPWORDS = set("a an and are as at be been before but by for from had has have he her his in into is it its of on or our she that the their them then there they this to was were when where which while who with would you your".split())
 
+SOURCED_FACTUAL_LANES = {
+    "weird_facts", "science_explained", "history_gk", "geography_gk",
+    "world_gk", "myth_vs_fact", "psychology", "money_business",
+    "tech_explained", "india_gk", "space_facts", "nature_facts",
+    "human_body", "inventions", "mini_case_study", "ranked_countdown",
+    "guess_the_number", "spot_the_lie", "two_truths_one_lie",
+    "current_news", "trending_topics",
+}
+
 LANES = {
     "surprise": "Original microfiction with a surprising, earned payoff.",
     "mystery": "A fair-play mystery with clues planted early and a logical reveal.",
@@ -429,6 +438,41 @@ def _strip_reasoning_preamble(raw):
     return cleaned.lstrip()
 
 
+def validate_source_pack(sources: list[dict], lane: str) -> list[dict]:
+    """Require usable, attributable evidence from at least two distinct publishers."""
+    if lane not in SOURCED_FACTUAL_LANES:
+        return sources
+    usable = []
+    publishers = set()
+    for item in sources:
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("title") or "").strip()
+        url = str(item.get("url") or "").strip()
+        publisher = str(item.get("publisher") or "").strip()
+        published = str(item.get("published") or "").strip()
+        summary = str(item.get("summary") or "").strip()
+        if not (title and url.startswith(("https://", "http://")) and publisher
+                and published and len(summary) >= 20):
+            continue
+        normalized_publisher = re.sub(r"[^a-z0-9]+", "", publisher.lower())
+        if not normalized_publisher or normalized_publisher in {"rssfeed", "googletrends"}:
+            continue
+        if normalized_publisher in publishers:
+            continue
+        publishers.add(normalized_publisher)
+        usable.append({
+            "title": title[:240], "url": url[:500], "published": published[:80],
+            "publisher": publisher[:100], "summary": summary[:500],
+        })
+    if len(usable) < 2:
+        raise ValueError(
+            f"{lane} requires at least two usable evidence items from distinct publishers "
+            "with title, URL, publication date, publisher, and summary"
+        )
+    return usable[:4]
+
+
 def generate(output_path: str, history_path: str, lane: str = "surprise",
              seed: int = 1, model_path: str | None = None,
              sources_path: str | None = None) -> dict:
@@ -447,18 +491,8 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         sources = json.loads(Path(sources_path).read_text(encoding="utf-8"))
         if not isinstance(sources, list):
             raise ValueError("Source pack must be a JSON array")
-        sources = [
-            {
-                "title": str(item.get("title", ""))[:240],
-                "url": str(item.get("url", ""))[:500],
-                "published": str(item.get("published", ""))[:80],
-                "publisher": str(item.get("publisher", ""))[:100],
-                "summary": str(item.get("summary", ""))[:100],
-            }
-            for item in sources[:4] if isinstance(item, dict) and item.get("title") and item.get("url")
-        ]
-    if lane in {"current_news", "trending_topics"} and len(sources) < 2:
-        raise ValueError("Current news/trending directions require at least two retrieved sources")
+    if lane in SOURCED_FACTUAL_LANES:
+        sources = validate_source_pack(sources, lane)
     llm = Llama(
         model_path=model_file, n_ctx=4096, n_threads=2,
         n_batch=256, verbose=False,
