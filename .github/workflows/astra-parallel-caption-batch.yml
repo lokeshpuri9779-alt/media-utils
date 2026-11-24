@@ -223,7 +223,7 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          from astra_v2.github_local_story_generator import find_duplicate_premises
+          from astra_v2.github_local_story_generator import accepted_unique_candidates
 
           history_path = Path("data/story_history.jsonl")
           history_path.parent.mkdir(parents=True, exist_ok=True)
@@ -255,12 +255,7 @@ jobs:
                       raise SystemExit(f"Candidate safety flag {flag} is not false: {candidate_path}")
               candidate_rows.append(candidate)
 
-          duplicates = find_duplicate_premises(candidate_rows, history_rows)
-          duplicate_indices = {row["candidate_index"] for row in duplicates}
-          accepted = [
-              candidate for index, candidate in enumerate(candidate_rows)
-              if index not in duplicate_indices
-          ]
+          accepted, duplicates = accepted_unique_candidates(candidate_rows, history_rows)
           added = [
               {
                   "title": candidate.get("title", ""),
