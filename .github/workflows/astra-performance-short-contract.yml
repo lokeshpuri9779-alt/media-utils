@@ -27,6 +27,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Install CPU-only Studio planning dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            'httpx==0.28.1' 'Pillow==11.3.0' 'imageio-ffmpeg==0.6.0' 'numpy==2.2.6'
       - name: Validate seven-scene contract and legacy compatibility
         run: |
           python -m unittest discover -s tests -p "test_performance_short_*.py" -v
