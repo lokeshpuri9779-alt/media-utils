@@ -13,13 +13,13 @@ from astra_v2.performance_short_review_packet import build_packet
 
 def valid_payload():
     prompts = [
-        "A fox discovers a glass jar glowing under moonlight in the forest.",
-        "The fox sees a firefly trapped inside the glass jar in the forest.",
-        "The fox nudges the glass jar toward a flat stone in the forest.",
-        "The fox watches as the glass jar rolls toward a shallow stream and the firefly flickers in the forest.",
-        "The fox notices a loose cork beside the glass jar in the forest.",
-        "The fox removes the cork and opens the glass jar in the forest.",
-        "The firefly flies free and lights the fox's path home through the forest.",
+        "A fox discovers a glass jar glowing under moonlight in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox sees a firefly trapped inside the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox nudges the glass jar toward a flat stone in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox watches as the glass jar rolls toward a shallow stream and the firefly flickers in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox notices a loose cork beside the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox removes the cork and opens the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The firefly flies free and lights the fox's path home through the forest. Character: a small russet fox with a white chest and amber eyes.",
     ]
     scenes = []
     for i, role in enumerate(SCENE_ROLES):
@@ -41,6 +41,7 @@ def valid_payload():
         "title": "The Firefly in the Jar",
         "question": "Can the fox free the firefly before the jar reaches the stream?",
         "answer": "The fox spots the loose cork and opens the jar.",
+        "character_bible": "a small russet fox with a white chest and amber eyes",
         "premise": {
             "central_conflict": "A firefly is trapped inside a sealed glass jar",
             "failed_attempt": "The fox pushes the jar and it rolls toward water",
