@@ -13,7 +13,7 @@ import urllib.error
 import urllib.request
 
 from astra_v2.performance_short_contract import (
-    SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_short_outline,
+    RENDERER_PROPS, SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_short_outline,
 )
 from astra_v2.story_planning import planning_issues
 
@@ -40,12 +40,13 @@ def _schema() -> dict:
             "camera": {"type": "string"},
             "environment": {"type": "string"},
             "required_props": {"type": "array", "items": {"type": "string"}},
+            "story_prop": {"type": "string", "enum": ["none", *RENDERER_PROPS]},
             "transition_question": {"type": "string"},
         },
         "required": [
             "role", "duration_seconds", "narration", "speech", "headline",
             "visual", "label", "story_environment", "story_beat", "action",
-            "visual_prompt", "camera", "environment", "required_props",
+            "visual_prompt", "camera", "environment", "required_props", "story_prop",
             "transition_question",
         ],
     }
@@ -114,7 +115,11 @@ def _prompt(history=(), creative_brief="") -> str:
         "Every visual_prompt must explicitly show the protagonist and the exact "
         "story_environment token, and describe one clear, filmable action. List every "
         "essential prop in required_props and name each required prop verbatim in its "
-        "visual_prompt. Props must be visibly present in the scenes where used. Do not rely "
+        "visual_prompt. For each scene choose story_prop as exactly one renderer-supported prop "
+        "or none; supported prop ids: " + ", ".join(RENDERER_PROPS) + ". This exact "
+        "prop id controls the object drawn in the foreground. If a prop is used, choose "
+        "its id and include its visible name in visual_prompt and required_props. Props "
+        "must be visibly present in the scenes where used. Do not rely "
         "on narration to make an absent object appear. Camera framing must make the action "
         "and props legible. Each scene needs distinct narration/speech, a concise headline, "
         "an action, camera, environment, label and story_beat. Include at least one brief "
