@@ -10,6 +10,9 @@ on:
       - "studio_renderer.py"
       - "tests/test_performance_short_contract.py"
       - "tests/test_performance_short_generator.py"
+      - "astra_v2/omniroute.py"
+      - "astra_v2/omniroute_gemini.py"
+      - "tests/test_astra_omniroute.py"
       - ".github/workflows/astra-performance-short-contract.yml"
   workflow_dispatch:
 permissions:
@@ -23,4 +26,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Validate seven-scene contract and legacy compatibility
-        run: python -m unittest discover -s tests -p "test_performance_short_*.py" -v
+        run: |
+          python -m unittest discover -s tests -p "test_performance_short_*.py" -v
+          python -m unittest tests.test_astra_omniroute -v
