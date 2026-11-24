@@ -21,7 +21,8 @@ class CaptionShortPipelineTests(unittest.TestCase):
         self.assertEqual(
             narration_from_candidate(self.candidate()),
             " ".join(f"Spoken line for {role}." for role in
-                     ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]),
+                     ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"])
+            + " Would you have noticed the hidden clue?",
         )
 
     def test_rejects_missing_engagement_question(self):
