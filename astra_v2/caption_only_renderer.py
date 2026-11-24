@@ -107,6 +107,16 @@ def _caption_frame(text: str, output: Path, index: int):
     image.save(output, "PNG", optimize=True)
 
 
+def _verify_mp4_streams(target: Path) -> None:
+    """Decode both required streams; fail if the muxed file lacks audio or video."""
+    ffmpeg = get_ffmpeg_exe()
+    subprocess.run(
+        [ffmpeg, "-v", "error", "-i", str(target),
+         "-map", "0:v:0", "-map", "0:a:0", "-f", "null", "-"],
+        check=True, capture_output=True, text=True,
+    )
+
+
 def render_caption_video(narration: str, output: str, voice: str = "af_heart",
                          speed: float = 1.04, fps: int = FPS) -> dict:
     """Synthesize each phrase, hold its caption for the exact phrase audio, mux MP4."""
@@ -199,9 +209,8 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
         subprocess.run(command, check=True, capture_output=True, text=True)
         if not target.is_file() or target.stat().st_size < 1024:
             raise RuntimeError("FFmpeg did not produce a valid MP4 file")
-        # Decode the finished file once before marking it ready for human review.
-        subprocess.run([ffmpeg, "-v", "error", "-i", str(target), "-map", "0:v:0", "-map", "0:a:0", "-f", "null", "-"],
-                       check=True, capture_output=True, text=True)
+        # Require both streams to decode before marking the MP4 ready for review.
+        _verify_mp4_streams(target)
         (target.with_suffix(".captions.json")).write_text(
             json.dumps({"schema_version": 1, "fps": FPS, "duration_seconds": round(cursor, 3),
                         "captions": manifest}, indent=2), encoding="utf-8")
