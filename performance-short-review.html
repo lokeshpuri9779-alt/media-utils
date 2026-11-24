@@ -51,7 +51,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
   const scenes=c.performance_scenes||[];
   const bible=String(c.character_bible||"").trim();
   const duration=scenes.reduce((sum,s)=>sum+Number(s.duration_seconds||0),0);
-  const wordCount=value=>String(value||"").trim().split(/\\s+/).filter(Boolean).length;
+  const wordCount=value=>String(value||"").trim().split(/\s+/).filter(Boolean).length;
   const speechWords=scenes.map(s=>wordCount(s.speech));
   const totalSpeechWords=speechWords.reduce((sum,n)=>sum+n,0);
   const normalize=value=>String(value||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
