@@ -89,7 +89,7 @@ def _caption_frame(text: str, output: Path, index: int):
             lines.append(line)
     if len(lines) > 3:
         raise ValueError("Caption exceeds the safe three-line display limit")
-    line_height = font.size + 22
+    line_height = font_size + 22
     y = (HEIGHT - sum([line_height] * len(lines))) // 2
     for line in lines:
         box = draw.textbbox((0, 0), line, font=font)
