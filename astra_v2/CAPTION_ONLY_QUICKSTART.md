@@ -1,55 +1,49 @@
 # ASTRA GitHub-native multi-format Shorts pipeline
 
-ASTRA's caption-only production path now runs on GitHub-hosted Actions. It produces narration + synchronized captions only: no animation, illustrations, stock footage, or music.
+ASTRA's caption-only path runs on GitHub-hosted Actions. It produces narration plus phrase-synchronized captions on a solid background: no animation, illustrations, stock footage, B-roll, music, branding overlays, or CTA overlays.
 
-## One-click local story generation and rendering
+## Workflows
 
-1. Open the repository's **Actions** tab.
-2. Select **ASTRA Local Story to Caption Short**.
-3. Click **Run workflow** and choose a content direction: fiction, facts, science, history/geography/GK, myth-vs-fact, puzzles, riddles, quizzes, psychology, business, technology, current news, or trending topics.
-4. Wait for the runner to generate a story, apply quality gates, synthesize narration, render captions, and decode-check the MP4.
-5. Download the `rayvan-local-story-short-<run id>` artifact from the completed run.
+- **ASTRA Parallel Caption Shorts Batch** — manually starts a nine-lane review batch: brain puzzle, science, India GK, money/business, mystery, geography, psychology, what-if, and trending topics. Up to four lane jobs may run concurrently after a shared cache-preparation job.
+- **ASTRA Single-Lane Diagnostic** — manually tests one lane end-to-end without writing story history or publishing.
+- **ASTRA Local Story to Caption Short** — manually generates one selected direction and renders a review artifact.
+- **ASTRA Caption-only Render** — renders an existing review candidate from `queue/pending/`.
 
-No local computer, WSL2, Gemini key, vidIQ credits, hosted inference API, or external paid AI API is used for generation. The Qwen3-4B Q4_K_M model is downloaded from its public model repository and runs locally on the GitHub Actions CPU runner. Its model card lists Apache-2.0 licensing and a 2.5 GB quantized model. The first run downloads the model; subsequent runs may restore it from GitHub Actions cache.
+The caption inference workflows share one concurrency group to prevent overlapping model runs and competing writes to the shared originality history. Generation and rendering commands have hard time limits. A timeout fails the run safely; it does not trigger publishing.
 
-## What the local story engine does
+## Generation and validation
 
-- Generates a seven-beat short-form script adapted to the selected content direction.
-- Requires a 65–85 word complete spoken script, including a format-specific audience question.
-- Rejects wrong beat order, weak length, generic CTAs, repeated lines, selected cliché endings, and topics too similar to recent ASTRA content.
-- Saves only title, premise, and fingerprint in `data/story_history.jsonl` to help prevent repeated plots.
-- Passes the candidate into the existing Kokoro narration + timed-caption renderer.
-- Leaves approval and publishing false. The output is a review artifact only.
+The pinned Qwen3-4B Q4_K_M model runs locally on the GitHub Actions CPU runner. No paid inference API, Gemini, vidIQ credits, local computer, WSL2, or external paid AI service is required.
 
-## Content directions
+The generator adapts structure to the content direction:
+- Puzzles use challenge, thinking pause, answer, and explanation.
+- Facts and explainers use curiosity hook, surprising fact, explanation, and why it matters.
+- Quizzes use quiz hook, question/options, answer reveal, and explanation.
+- News uses news hook, what changed, context, and why it matters.
+- Original fiction uses a seven-beat story arc.
 
-- **Fiction:** surprise, mystery, sci-fi, emotional, thriller, moral dilemma.
-- **Facts and explainers:** weird facts, science explained, history/geography/world/India GK, space and nature facts, human-body science, inventions, myth vs fact, psychology, money/business, and technology explained.
-- **Interactive:** brain puzzles, logic puzzles, riddles, quick quizzes, spot-the-lie, two-truths-one-lie, and guess-the-number.
-- **Creative and analytical:** what-if scenarios, mini case studies, and ranked countdowns with explicit criteria.
-- **Timely:** current news and trending topics, with an RSS source pack collected at run time from Google News India and Google Trends India.
+The complete spoken script is constrained to 65–85 words, including a specific audience question. Compact four-beat scenes allow 10–18 words each, with the prompt aiming for 14–16 words. Validation rejects incorrect role order, weak length, generic CTAs, repeated lines, selected cliché endings, and topics too similar to recent ASTRA content. Validation does not prove factual accuracy, originality in the legal sense, or audience performance.
 
-Puzzles are structured to give viewers a chance to think before the reveal. Quizzes should give clear answers and short explanations. Facts and GK are still AI-generated drafts: automated word-count and structure checks do **not** prove factual accuracy. Human verification is required before approval.
+Candidates are explicitly marked `approved: false`, `production_ready: false`, and `published: false`. The renderer refuses candidates without those explicit review-only flags and validates the expected scene-role sequence.
 
-For **current news** and **trending topics**, the workflow retrieves RSS headlines and links before generation, passes those items to the model, and stores them in `candidate.json` and `sources.json`. RSS headlines are leads, not independent fact-checking. The script must not invent dates, statistics, or outcomes, and a human must open the source links and verify claims before publishing. If the feeds fail or return too few sources, that run stops rather than inventing a news script.
+## Factual and timely content
 
-## Outputs
+Facts and GK remain AI-generated drafts. Human verification is required before approval. Current news and trending topics use RSS headlines as leads; they are not independent fact-checking. The source links must be opened and claims verified before publishing. If feeds fail or return too few usable sources, the run stops rather than inventing a news script.
+
+## Review artifacts
 
 - `candidate.json` — generated story candidate
-- `rayvan-short.mp4` — narration with static, timed captions
+- `rayvan-short.mp4` — narration with synchronized captions
 - `rayvan-short.captions.json` — phrase timing manifest
 - `rayvan-short.review.json` — review report
+- `sources.json` — source leads for news/trending lanes
 
-## Boundaries and honest limitations
+The output is for human review only. No workflow in this caption-only path uploads or publishes to YouTube. The separate YouTube publisher is a different, manually invoked workflow and is not part of this pipeline.
 
-- This is local model inference **on GitHub's runner**, not an external hosted AI API. Model weights are downloaded from Hugging Face; source code, orchestration, execution, history, and output artifacts are managed through GitHub.
-- The 4B model is a small CPU-friendly starting point, not a frontier writing model. Passing automated checks does not prove a story will perform well. We need actual audience retention and engagement data to calibrate it.
-- The first run may take longer because the model and Python runtime are installed. Runner CPU time and artifact/cache quotas apply.
-- Workflow is manual-only. No daily schedule is enabled, and no YouTube upload or publishing occurs.
-- The story history commit requires the workflow's repository write permission. If branch protection blocks the bot push, the generation step may complete but persistence of history will fail.
-- The separate **ASTRA Caption-only Render** workflow remains available for rendering an existing candidate under `queue/pending/`.
+## Known limitations
 
-## Test the story validator
-
-The fast, model-free checks run in the existing **ASTRA Performance Shorts Contract** workflow when the generator or tests change:
-`python -m unittest tests.test_github_local_story_generator -v`.
+- The 4B model is a practical CPU-runner starting point, not a frontier writing model.
+- A green contract-test workflow proves software contracts, not that the model will produce a strong story on every attempt.
+- Audio duration is checked after synthesis; a script can pass text validation and still fail the render-duration gate.
+- GitHub runner capacity, cache quotas, artifact retention, and model download times can affect throughput.
+- Actual audience performance must be calibrated from retention and engagement data after reviewed videos are published by an authorized operator.
