@@ -31,11 +31,24 @@ class CaptionShortPipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "engagement question"):
             narration_from_candidate(candidate)
 
-    def test_rejects_wrong_scene_count(self):
+    def test_rejects_unsupported_scene_count(self):
         candidate = self.candidate()
-        candidate["performance_scenes"].pop()
-        with self.assertRaisesRegex(ValueError, "exactly seven"):
+        candidate["performance_scenes"] = candidate["performance_scenes"][:3]
+        with self.assertRaisesRegex(ValueError, "four compact-format"):
             narration_from_candidate(candidate)
+
+    def test_accepts_compact_four_scene_format(self):
+        candidate = self.candidate()
+        roles = ["challenge", "thinking_pause", "answer", "explanation"]
+        candidate["performance_scenes"] = [
+            {"role": role, "speech": f"Spoken line for {role}."}
+            for role in roles
+        ]
+        self.assertEqual(
+            narration_from_candidate(candidate),
+            " ".join(f"Spoken line for {role}." for role in roles)
+            + " Would you have noticed the hidden clue?",
+        )
 
     def test_rejects_missing_speech(self):
         candidate = self.candidate()
