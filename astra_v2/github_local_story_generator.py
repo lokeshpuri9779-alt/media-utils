@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 
 ROLES = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
@@ -464,6 +465,10 @@ def validate_source_pack(sources: list[dict], lane: str) -> list[dict]:
         summary = str(item.get("summary") or "").strip()
         if not (title and url.startswith(("https://", "http://")) and publisher
                 and published and len(summary) >= 20):
+            continue
+        try:
+            datetime.fromisoformat(published.replace("Z", "+00:00"))
+        except (TypeError, ValueError):
             continue
         normalized_publisher = re.sub(r"[^a-z0-9]+", "", publisher.lower())
         if not normalized_publisher or normalized_publisher in {"rssfeed", "googletrends"}:
