@@ -1,5 +1,7 @@
 import unittest
 
+from astra_v2.story_planning import planning_issues
+
 from astra_v2.performance_short_contract import (
     SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_short_outline
 )
@@ -66,6 +68,15 @@ class PerformanceShortContractTests(unittest.TestCase):
         self.assertEqual(beats[0]["duration"], 4.5)
         self.assertEqual(beats[0]["story_beat"], "reveal")
         self.assertEqual(beats[-1]["story_beat"], "payoff")
+
+    def test_story_planning_accepts_seven_scene_performance_record(self):
+        outline = sample_outline()
+        beats = to_renderer_beats(outline)
+        record = {
+            "performance_scenes": outline["scenes"],
+            "story_beats": beats,
+        }
+        self.assertEqual(planning_issues(record), [])
 
     def test_rejects_four_beat_legacy_story(self):
         outline = sample_outline()
