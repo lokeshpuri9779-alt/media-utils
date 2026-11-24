@@ -3,7 +3,7 @@ import unittest
 from astra_v2.story_planning import planning_issues
 
 from astra_v2.performance_short_contract import (
-    SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_short_outline
+    SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_rendered_duration, validate_short_outline
 )
 
 
@@ -77,6 +77,15 @@ class PerformanceShortContractTests(unittest.TestCase):
             "story_beats": beats,
         }
         self.assertEqual(planning_issues(record), [])
+
+    def test_actual_rendered_duration_is_hard_limited(self):
+        validate_rendered_duration(31.5)
+        validate_rendered_duration(28)
+        validate_rendered_duration(40)
+        with self.assertRaisesRegex(ValueError, "rendered_duration_out_of_range"):
+            validate_rendered_duration(40.1)
+        with self.assertRaisesRegex(ValueError, "rendered_duration_out_of_range"):
+            validate_rendered_duration(27.9)
 
     def test_rejects_four_beat_legacy_story(self):
         outline = sample_outline()
