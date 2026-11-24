@@ -1,16 +1,9 @@
 name: ASTRA V2 - Verified YouTube Publisher
 
-# One publishing workflow. Development CI and legacy schedulers remain disabled.
+# Publishing is manual-only. No scheduled, push-triggered, or preload-completion
+# event may invoke YouTube publishing without an explicit owner action.
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/astra-v2-publish.yml', 'astra_v2/preload_queue.py', 'astra_v2/run.py', 'astra_v2/creative.py', 'astra_v2/omniroute_gemini.py', 'astra_v2/omniroute.py', 'astra_v2/preflight.py', 'astra_v2/story_forge.py', 'tests/test_astra_story_inventory.py']
-  schedule:
-    - cron: '*/5 * * * *'
-  workflow_run:
-    workflows: ['ASTRA V2 - Preload Approved Videos', 'ASTRA V2 - Long-form Preload']
-    types: [completed]
 
 concurrency:
   group: astra-v2-publishing
