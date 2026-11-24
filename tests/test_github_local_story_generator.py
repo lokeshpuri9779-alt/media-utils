@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, _fallback_title, select_engagement_format, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -44,6 +44,27 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         result = validate_candidate(item)
         self.assertGreaterEqual(len(result["title"]), 8)
         self.assertIn("Coastal", result["title"])
+
+    def test_title_fallback_handles_unbroken_oversized_title(self):
+        result = _fallback_title("X" * 200, sample()["premise"])
+        self.assertGreaterEqual(len(result), 8)
+        self.assertLessEqual(len(result), 80)
+        self.assertIn("coastal", result.lower())
+
+    def test_title_fallback_handles_empty_model_title(self):
+        result = _fallback_title("", sample()["premise"])
+        self.assertGreaterEqual(len(result), 8)
+        self.assertLessEqual(len(result), 80)
+
+    def test_engagement_formats_rotate_deterministically(self):
+        first = select_engagement_format("brain_puzzle", 1)
+        self.assertEqual(first, select_engagement_format("brain_puzzle", 1))
+        self.assertNotEqual(first, select_engagement_format("brain_puzzle", 2))
+
+    def test_prompt_selects_an_engagement_mechanic(self):
+        prompt = _build_prompt("brain_puzzle", [], 42)
+        self.assertIn("engagement mechanic", prompt)
+        self.assertIn(select_engagement_format("brain_puzzle", 42), prompt)
 
     def test_rejects_wrong_role_order(self):
         item = sample()
