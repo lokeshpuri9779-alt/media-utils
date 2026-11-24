@@ -51,14 +51,20 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
   const scenes=c.performance_scenes||[];
   const bible=String(c.character_bible||"").trim();
   const duration=scenes.reduce((sum,s)=>sum+Number(s.duration_seconds||0),0);
+  const wordCount=value=>String(value||"").trim().split(/\\s+/).filter(Boolean).length;
+  const speechWords=scenes.map(s=>wordCount(s.speech));
+  const totalSpeechWords=speechWords.reduce((sum,n)=>sum+n,0);
   const checks=[
    {label:"Seven scene roles",ok:scenes.length===7&&scenes.every((s,i)=>s.role===roles[i])},
    {label:"28–40 second planned duration",ok:duration>=28&&duration<=40},
+   {label:"Dialogue 7–13 words in every scene",ok:speechWords.length===7&&speechWords.every(n=>n>=7&&n<=13)},
+   {label:"65–85 total dialogue words",ok:totalSpeechWords>=65&&totalSpeechWords<=85},
+   {label:"Transition question in scenes 1–6",ok:scenes.slice(0,6).every(s=>String(s.transition_question||"").trim().length>0)},
    {label:"Character description repeated verbatim",ok:!!bible&&scenes.every(s=>String(s.visual_prompt||"").toLowerCase().includes(bible.toLowerCase()))},
    {label:"Required props named in prompts",ok:scenes.every(s=>(s.required_props||[]).every(p=>String(s.visual_prompt||"").toLowerCase().includes(String(p).toLowerCase())))},
    {label:"Every scene has an action and visual prompt",ok:scenes.every(s=>String(s.action||"").trim().length>=3&&String(s.visual_prompt||"").trim().length>=20)}
   ];
-  return {checks,duration};
+  return {checks,duration,speechWords,totalSpeechWords};
  }
  function sceneCard(s,i,candidateId){
   const card=document.createElement("article");card.className="scene";
@@ -96,7 +102,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
    const id=document.createElement("span");id.className="pill";id.textContent=c.candidate_id;head.append(id);wrap.append(head);
    const audit=qualityChecks(c);
    const auditBox=document.createElement("div");auditBox.className="panel";
-   const auditTitle=document.createElement("strong");auditTitle.textContent="Automated text checks · planned duration "+audit.duration.toFixed(1)+"s";auditBox.append(auditTitle);
+   const auditTitle=document.createElement("strong");auditTitle.textContent="Automated text checks · planned duration "+audit.duration.toFixed(1)+"s · dialogue "+audit.totalSpeechWords+" words";auditBox.append(auditTitle);
+   const wordDetail=document.createElement("p");wordDetail.className="muted";wordDetail.textContent="Dialogue words by scene: "+audit.speechWords.join(" / ");auditBox.append(wordDetail);
    audit.checks.forEach(item=>{const line=document.createElement("p");line.style.margin="5px 0";line.className=item.ok?"safe":"warning";line.textContent=(item.ok?"PASS · ":"CHECK · ")+item.label;auditBox.append(line);});
    const proof=document.createElement("p");proof.className="muted";proof.textContent="These checks inspect text only. They do not confirm that generated frames contain the character or props.";auditBox.append(proof);wrap.append(auditBox);
    const premise=document.createElement("p");premise.textContent=c.premise?.central_conflict||c.premise||"No premise supplied";wrap.append(premise);
