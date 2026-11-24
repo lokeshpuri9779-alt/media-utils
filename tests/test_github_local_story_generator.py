@@ -239,7 +239,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         rows = [
             {"title": "Research report A", "url": "https://a.example/report",
              "published": "2026-11-24T10:00:00+00:00", "publisher": "Publisher A",
-             "summary": "A detailed summary of the research and its key finding."},
+             "summary": "A detailed summary of the research and its key finding, including the methods, the reported outcome, the limits of the evidence, and why the finding matters to readers."},
             {"title": "Research report B", "url": "https://b.example/report",
              "published": "2026-11-23T10:00:00+00:00", "publisher": "Publisher B",
              "summary": "An independent report explaining the same underlying subject."},
