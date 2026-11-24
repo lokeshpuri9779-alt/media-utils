@@ -4,7 +4,7 @@ from unittest.mock import patch
 from pathlib import Path
 
 from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, validate_candidate
-from astra_v2.trend_source_collector import _parse_feed
+from astra_v2.trend_source_collector import _parse_feed, collect
 
 
 def sample():
@@ -80,6 +80,22 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         prompt = _build_prompt("brain_puzzle", [], 42)
         self.assertIn("place the answer after a clear thinking pause", prompt)
         self.assertIn("Never use an ambiguous trick answer", prompt)
+
+
+    def test_collector_writes_parseable_json_array(self):
+        rows = [
+            {"title": "Headline one", "url": "https://example.com/one",
+             "published": "", "publisher": "Example", "summary": ""},
+            {"title": "Headline two", "url": "https://example.com/two",
+             "published": "", "publisher": "Example", "summary": ""},
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "sources.json"
+            with patch("astra_v2.trend_source_collector._parse_feed", return_value=rows):
+                collected = collect("current_news", str(output))
+            parsed = __import__("json").loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(parsed, collected)
+            self.assertEqual(len(parsed), 2)
 
     def test_rejects_short_spoken_script(self):
         item = sample()
