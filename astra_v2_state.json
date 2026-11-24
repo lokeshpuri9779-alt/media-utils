@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "day": "2026-11-23",
+  "day": "2026-11-24",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 6,
-  "confirmed_today": 5,
-  "last_attempt_at": "2026-11-23T13:13:59.648512+00:00",
+  "attempts": 1,
+  "confirmed_today": 0,
+  "last_attempt_at": "2026-11-24T00:17:32.655958+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -14111,16 +14111,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "D6R5qDeuDfw": {
-      "content_id": "rayvan-gemini-47176e676e36eb63e95c",
+    },
+    "rayvan-gemini-47176e676e36eb63e95c": {
+      "video_id": "D6R5qDeuDfw",
+      "confirmed_at": "2026-11-24T00:16:49.017484+00:00",
       "title": "Jasper the Stoat and Finn the Fox's Cabin Tome",
-      "day": "2026-11-23",
-      "uploaded_at": "2026-11-23T13:14:01.728458+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-23T13:14:01.728458+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "2a2f4e06e471e1ba9c88854e067638741fc0b62f89c901429501c0c1c4aa4d1d",
       "story_beats": [
@@ -14165,16 +14163,71 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "SdZx97g7x2U": {
+      "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+      "title": "Silas the Stoat and Fennec the Fox’s Winter Book Rule",
+      "day": "2026-11-24",
+      "uploaded_at": "2026-11-24T00:17:34.071458+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "8a6412ed07b87bbf5c53823b115b9d073b11c245eeb9535fc738c465907055a7",
+      "story_beats": [
+        {
+          "headline": "The Cabin Standoff",
+          "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts.",
+          "visual": "door",
+          "label": "The Cabin Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the corners of an old book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Proposal",
+          "speech": "Fennec suggests they track the falling snowflakes outside to determine whose turn it is to read the next page.",
+          "visual": "forest",
+          "label": "Cabin Window",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fennec the fox points a paw toward the window revealing a snowy forest, while Silas the stoat sits on a chair listening intently, the book resting on the table between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reading Cycle",
+          "speech": "Silas reads his page as the snow continues to fall, waiting for his partner to take the book when requested.",
+          "visual": "signal",
+          "label": "Snowy Cabin Interior",
+          "story_beat": "build",
+          "visual_prompt": "Silas the stoat holds the open book and reads with a focused expression, while Fennec the fox sits patiently nearby in the cozy wooden cabin, watching the snow outside the window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Completion",
+          "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm.",
+          "visual": "door",
+          "label": "Final Cabin View",
+          "story_beat": "payoff",
+          "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden door settles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-23T13:13:01.813748+00:00",
+  "last_preflight_at": "2026-11-24T00:16:48.457040+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-23T13:14:02.052971+00:00",
+    "at": "2026-11-24T00:17:34.393281+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -14191,7 +14244,7 @@
     "oauth_tests": "success",
     "layer_tests": "success"
   },
-  "last_feedback_attempt_at": "2026-11-23T12:16:31.054491+00:00",
+  "last_feedback_attempt_at": "2026-11-24T00:17:22.477642+00:00",
   "reserved": {
     "rayvan-gemini-ed365c573c8c2d479669": {
       "at": "2026-10-22T23:52:30.401944+00:00",
@@ -28807,10 +28860,61 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-173005e4020c2ffacc25": {
+      "at": "2026-11-24T00:17:32.655939+00:00",
+      "title": "Silas the Stoat and Fennec the Fox’s Winter Book Rule",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "8a6412ed07b87bbf5c53823b115b9d073b11c245eeb9535fc738c465907055a7",
+      "story_beats": [
+        {
+          "headline": "The Cabin Standoff",
+          "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts.",
+          "visual": "door",
+          "label": "The Cabin Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the corners of an old book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Proposal",
+          "speech": "Fennec suggests they track the falling snowflakes outside to determine whose turn it is to read the next page.",
+          "visual": "forest",
+          "label": "Cabin Window",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fennec the fox points a paw toward the window revealing a snowy forest, while Silas the stoat sits on a chair listening intently, the book resting on the table between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reading Cycle",
+          "speech": "Silas reads his page as the snow continues to fall, waiting for his partner to take the book when requested.",
+          "visual": "signal",
+          "label": "Snowy Cabin Interior",
+          "story_beat": "build",
+          "visual_prompt": "Silas the stoat holds the open book and reads with a focused expression, while Fennec the fox sits patiently nearby in the cozy wooden cabin, watching the snow outside the window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Completion",
+          "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm.",
+          "visual": "door",
+          "label": "Final Cabin View",
+          "story_beat": "payoff",
+          "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden door settles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-23T13:14:02.052915+00:00",
+    "at": "2026-11-24T00:17:34.393243+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -28821,21 +28925,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-23T13:14:02.052961+00:00",
+    "at": "2026-11-24T00:17:34.393274+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-23T13:13:43.167159+00:00",
+    "at": "2026-11-24T00:17:22.162949+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-47176e676e36eb63e95c",
-    "video_url": "https://www.youtube.com/watch?v=D6R5qDeuDfw",
+    "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+    "video_url": "https://www.youtube.com/watch?v=SdZx97g7x2U",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-23T13:14:02.052204+00:00",
+    "at": "2026-11-24T00:17:34.392644+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -28847,7 +28951,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-23T13:14:02.052837+00:00",
+    "at": "2026-11-24T00:17:34.393182+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
