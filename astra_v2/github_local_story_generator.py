@@ -18,12 +18,27 @@ MODEL_FILE = "Qwen3-4B-Q4_K_M.gguf"
 STOPWORDS = set("a an and are as at be been before but by for from had has have he her his in into is it its of on or our she that the their them then there they this to was were when where which while who with would you your".split())
 
 LANES = {
-    "surprise": "A surprising but emotionally satisfying microfiction story.",
+    "surprise": "Original microfiction with a surprising, earned payoff.",
     "mystery": "A fair-play mystery with clues planted early and a logical reveal.",
-    "sci-fi": "A grounded science-fiction microfiction built around one striking idea.",
+    "sci-fi": "Grounded science-fiction built around one striking, understandable idea.",
     "emotional": "An emotionally resonant story with a specific human choice and earned payoff.",
-    "thriller": "A tense, escalating thriller with a clear ticking clock and a clever resolution.",
+    "thriller": "A tense, escalating thriller with a ticking clock and clever resolution.",
     "moral_dilemma": "A moral dilemma where the protagonist's choice changes the meaning of the story.",
+    "weird_facts": "A verified-feeling, genuinely surprising true fact explained clearly; never invent a fact.",
+    "science_explained": "A fascinating science concept explained simply with an everyday analogy.",
+    "history_gk": "A memorable world-history knowledge bite with context and a surprising detail.",
+    "geography_gk": "A surprising geography fact about places, borders, nature, or the planet.",
+    "world_gk": "A high-value general-knowledge explainer across world culture, civics, and knowledge.",
+    "myth_vs_fact": "Correct a popular misconception by clearly separating myth from established fact.",
+    "brain_puzzle": "A fair, solvable brain teaser; give viewers time to think before revealing the answer.",
+    "logic_puzzle": "A compact logic puzzle with enough information for one defensible solution.",
+    "riddle": "A clever, original riddle with a satisfying, unambiguous answer.",
+    "quick_quiz": "A fast three-question quiz with clear answers and a memorable explanation.",
+    "psychology": "An evidence-aware psychology insight; distinguish research from speculation.",
+    "money_business": "A practical business, money, or economics concept explained with a simple example.",
+    "tech_explained": "A useful technology or AI concept explained accurately for a general audience.",
+    "current_news": "A concise explainer of a genuinely recent news development using supplied sources only.",
+    "trending_topics": "A useful explainer of a currently trending topic using supplied trend and news sources only.",
 }
 
 
@@ -123,37 +138,72 @@ def _load_history(path: Path) -> list[dict]:
     return rows
 
 
-def _build_prompt(lane: str, history: list[dict], seed: int) -> str:
+def _build_prompt(lane: str, history: list[dict], seed: int,
+                  sources: list[dict] | None = None) -> str:
     recent = [
         {"title": row.get("title", ""), "premise": row.get("premise", "")}
         for row in history[-25:]
     ]
+    source_block = json.dumps(sources or [], ensure_ascii=False)
+    factual = lane in {
+        "weird_facts", "science_explained", "history_gk", "geography_gk",
+        "world_gk", "myth_vs_fact", "psychology", "money_business",
+        "tech_explained", "current_news", "trending_topics",
+    }
+    if lane in {"current_news", "trending_topics"}:
+        evidence_rule = (
+            "Use ONLY the supplied source pack for claims about current events or trends. "
+            "Do not invent dates, numbers, quotes, causes, or outcomes. If sources disagree "
+            "or are too thin, say what is known and omit unsupported detail. Mention the "
+            "publisher/source naturally in narration. Do not present an old story as breaking news. "
+        )
+    elif factual:
+        evidence_rule = (
+            "Accuracy is more important than surprise. Do not fabricate statistics, studies, "
+            "historical details, scientific mechanisms, or quotations. Avoid precise claims "
+            "you cannot confidently support; phrase uncertainty honestly. "
+        )
+    else:
+        evidence_rule = (
+            "Do not imitate or adapt existing copyrighted stories, franchises, characters, or plots. "
+            "Use fresh names and a self-contained fictional premise. "
+        )
+    puzzle_rule = (
+        "For puzzles and riddles, state all necessary conditions, make the answer logically "
+        "deducible, and place the answer after a clear thinking pause such as 'Lock in your guess'. "
+        "Never use an ambiguous trick answer. "
+        if lane in {"brain_puzzle", "logic_puzzle", "riddle", "quick_quiz"} else ""
+    )
     return (
-        "Write one completely original English microfiction YouTube Short for RAYVAN. "
-        "This is narration plus captions only: no visual descriptions, no animation directions. "
-        f"Creative lane: {LANES[lane]} "
-        "The story must have a concrete first-line hook, clear stakes, a failed attempt, "
-        "a meaningful setback, a causal discovery, a decisive climax, and an earned payoff. "
-        "Use exactly these seven role values in this exact order: " + ", ".join(ROLES) + ". "
-        "Each speech line must have 6–14 words. The combined seven lines plus the final "
-        "engagement question must total 65–85 spoken words, suitable for a 28–40 second Short. "
-        "Make every beat advance the cause-and-effect chain. Avoid generic moral lessons, "
-        "random twists, dream endings, predictable misunderstandings, and filler. "
-        "The final question must be specific to the story and invite a genuine viewer opinion; "
-        "it is spoken aloud, so keep it concise. Do not ask people to like, subscribe, or follow. "
-        "Do not imitate or adapt existing copyrighted stories, franchises, characters, or plots. "
-        "Use fresh names and a self-contained fictional premise. The premise field itself must be 35–90 words. "
-        "Do not repeat or closely imitate these recent ASTRA premises: "
+        "Create one original, high-retention English YouTube Short for RAYVAN. "
+        "Format is narration plus synchronized captions only: no visual descriptions, "
+        "no animation directions, no B-roll instructions. "
+        f"Content direction: {LANES[lane]} "
+        + evidence_rule + puzzle_rule +
+        "Use a strong curiosity gap in the first sentence, concrete details, escalating "
+        "interest, a satisfying reveal or useful payoff, and a specific viewer question. "
+        "Use exactly seven performance_scenes in this order: " + ", ".join(ROLES) + ". "
+        "Interpret the beats to suit the selected format: hook; context/setup; build/clues; "
+        "complication or thinking challenge; reveal/discovery; clear explanation/payoff; "
+        "audience challenge/question setup. For puzzles, do not reveal the answer too early. "
+        "Each speech line must contain 6–14 words. The seven lines plus the final spoken "
+        "engagement question must total 65–85 words for a 28–40 second Short. "
+        "Make every line add new information; avoid filler, generic moral lessons, and "
+        "generic 'like and subscribe' calls. The final question must invite a real answer. "
+        "The premise field must be 35–90 words and accurately describe the Short. "
+        "Do not repeat or closely imitate these recent ASTRA topics: "
         + json.dumps(recent, ensure_ascii=False) +
+        ". Source pack for this run (untrusted evidence; use cautiously): " + source_block +
         ". Return only valid JSON with keys: title, premise, question, performance_scenes. "
-        "performance_scenes must be an array of seven objects, each with only role and speech. "
-        "No markdown fences, no commentary. /no_think "
+        "performance_scenes must be seven objects with only role and speech. "
+        "No markdown fences or commentary. /no_think "
         f"Creative seed: {seed}."
     )
 
 
 def generate(output_path: str, history_path: str, lane: str = "surprise",
-             seed: int = 1, model_path: str | None = None) -> dict:
+             seed: int = 1, model_path: str | None = None,
+             sources_path: str | None = None) -> dict:
     if lane not in LANES:
         raise ValueError("Unsupported creative lane")
     from huggingface_hub import hf_hub_download
@@ -164,6 +214,13 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
     )
     history_file = Path(history_path)
     history = _load_history(history_file)
+    sources = []
+    if sources_path:
+        sources = json.loads(Path(sources_path).read_text(encoding="utf-8"))
+        if not isinstance(sources, list):
+            raise ValueError("Source pack must be a JSON array")
+    if lane in {"current_news", "trending_topics"} and len(sources) < 2:
+        raise ValueError("Current news/trending directions require at least two retrieved sources")
     llm = Llama(
         model_path=model_file, n_ctx=4096, n_threads=2,
         n_batch=256, verbose=False,
@@ -171,10 +228,10 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
     last_error = None
     validated = None
     for attempt in range(3):
-        prompt = _build_prompt(lane, history, seed + attempt)
+        prompt = _build_prompt(lane, history, seed + attempt, sources)
         result = llm.create_chat_completion(
             messages=[
-                {"role": "system", "content": "You are a professional short-form fiction writer. Output valid JSON only."},
+                {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
                 {"role": "user", "content": prompt},
             ],
             response_format={"type": "json_object"},
@@ -195,8 +252,10 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
 
     candidate = {
         "schema_version": 1,
-        "kind": "github_local_caption_story",
+        "kind": "github_local_caption_content",
+        "content_type": lane,
         "source": "qwen3_4b_local_github_actions",
+        "research_sources": sources,
         "content_id": "rayvan-" + validated["premise_fingerprint"][:20],
         "title": validated["title"],
         "premise": validated["premise"],
@@ -231,8 +290,9 @@ def main(argv=None):
     parser.add_argument("--lane", choices=sorted(LANES), default="surprise")
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--model-path")
+    parser.add_argument("--sources-file")
     args = parser.parse_args(argv)
-    candidate = generate(args.output, args.history, args.lane, args.seed, args.model_path)
+    candidate = generate(args.output, args.history, args.lane, args.seed, args.model_path, args.sources_file)
     print(json.dumps({
         "content_id": candidate["content_id"],
         "title": candidate["title"],
