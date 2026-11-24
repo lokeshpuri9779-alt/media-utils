@@ -1,0 +1,16 @@
+name: ASTRA Emergency Stop
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-emergency-stop.yml'
+permissions:
+  actions: write
+jobs:
+  cancel-unapproved-gemini-batch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel the already-running unapproved Gemini batch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run cancel 45470648006 --repo "${GITHUB_REPOSITORY}"
