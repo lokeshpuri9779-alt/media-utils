@@ -5,7 +5,8 @@ import unittest
 from unittest.mock import patch
 
 from astra_v2.performance_short_generator import _prompt, _schema, generate
-from astra_v2.performance_short_contract import SCENE_ROLES\nfrom astra_v2.performance_short_review_packet import build_packet\n
+from astra_v2.performance_short_contract import SCENE_ROLES
+from astra_v2.performance_short_review_packet import build_packet\n
 
 def valid_payload():
     prompts = [
