@@ -18,6 +18,30 @@ NEWS_URL = "https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en"
 TRENDS_URL = "https://trends.google.com/trending/rss?geo=IN"
 HEADERS = {"User-Agent": "ASTRA-RAYVAN-RSS-Reader/1.0 (+https://github.com/lokeshpuri9779-alt/media-utils)"}
 
+TOPIC_QUERIES = {
+    "science_explained": "science research discovery physics biology",
+    "india_gk": "India history geography constitution culture facts",
+    "money_business": "business economics markets companies India",
+    "geography_gk": "geography climate earth borders oceans",
+    "psychology": "psychology behavioural science research",
+    "weird_facts": "verified science history unusual facts",
+    "history_gk": "world history archaeology discovery",
+    "world_gk": "world knowledge science culture civics",
+    "myth_vs_fact": "fact check science history misconceptions",
+    "tech_explained": "technology artificial intelligence engineering",
+    "space_facts": "astronomy space science discovery",
+    "nature_facts": "wildlife ecology nature research",
+    "human_body": "human biology medical research health science",
+    "inventions": "engineering inventions technology history",
+    "mini_case_study": "business case study company innovation",
+    "ranked_countdown": "science technology geography rankings data",
+    "guess_the_number": "science statistics population geography data",
+    "spot_the_lie": "science history fact check claims",
+    "two_truths_one_lie": "science history verified facts",
+    "current_news": "",
+    "trending_topics": "",
+}
+
 
 def _fetch(url: str) -> bytes:
     request = urllib.request.Request(url, headers=HEADERS)
@@ -69,20 +93,26 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
 
 
 def collect(direction: str, output: str) -> list[dict]:
-    if direction not in {"current_news", "trending_topics"}:
+    if direction not in TOPIC_QUERIES:
         raise ValueError("Unsupported sourced direction")
     if direction == "current_news":
-        sources = _parse_feed(NEWS_URL, 12)
-    else:
+        sources = _parse_feed(NEWS_URL, 20)
+    elif direction == "trending_topics":
         trends = _parse_feed(TRENDS_URL, 12)
         sources = list(trends)
-        for trend in trends[:5]:
-            query = urllib.parse.urlencode({"q": trend["title"], "hl": "en-IN", "gl": "IN", "ceid": "IN:en"})
+        queries = [trend["title"] for trend in trends[:5]]
+        for query_text in queries:
+            query = urllib.parse.urlencode({"q": query_text, "hl": "en-IN", "gl": "IN", "ceid": "IN:en"})
             url = "https://news.google.com/rss/search?" + query
             try:
-                sources.extend(_parse_feed(url, 2))
+                sources.extend(_parse_feed(url, 4))
             except Exception as exc:  # Keep other independently retrieved feeds usable.
                 print(f"Skipping one trend news lookup: {type(exc).__name__}")
+    else:
+        query = urllib.parse.urlencode({
+            "q": TOPIC_QUERIES[direction], "hl": "en-IN", "gl": "IN", "ceid": "IN:en"
+        })
+        sources = _parse_feed("https://news.google.com/rss/search?" + query, 20)
     # Deduplicate by canonical feed URL while preserving order.
     unique = []
     seen = set()
@@ -90,8 +120,20 @@ def collect(direction: str, output: str) -> list[dict]:
         if item["url"] not in seen:
             seen.add(item["url"])
             unique.append(item)
-    if len(unique) < 2:
-        raise RuntimeError("RSS collection returned fewer than two usable sources")
+    # Require distinct named publishers, not two URLs from one publisher or the
+    # generic RSS-feed placeholder. The generator applies the full metadata gate.
+    independent = []
+    seen_publishers = set()
+    for item in unique:
+        publisher = str(item.get("publisher") or "").strip()
+        key = "".join(ch.lower() for ch in publisher if ch.isalnum())
+        if not key or key in {"rssfeed", "googletrends"} or key in seen_publishers:
+            continue
+        seen_publishers.add(key)
+        independent.append(item)
+    if len(independent) < 2:
+        raise RuntimeError("RSS collection returned fewer than two distinct named publishers")
+    unique = independent
     payload = {
         "direction": direction,
         "region": "IN",
@@ -109,7 +151,7 @@ def collect(direction: str, output: str) -> list[dict]:
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--direction", choices=["current_news", "trending_topics"], required=True)
+    parser.add_argument("--direction", choices=sorted(TOPIC_QUERIES), required=True)
     parser.add_argument("--output", required=True)
     args = parser.parse_args(argv)
     collect(args.direction, args.output)
