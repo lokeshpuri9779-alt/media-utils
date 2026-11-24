@@ -256,8 +256,8 @@ def main(argv=None):
     packet_path = Path(args.packet)
     candidate_path.parent.mkdir(parents=True, exist_ok=True)
     packet_path.parent.mkdir(parents=True, exist_ok=True)
-    candidate_path.write_text(json.dumps(candidate, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
-    packet_path.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    candidate_path.write_text(json.dumps(candidate, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    packet_path.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print("ASTRA_PERFORMANCE_SHORT_REVIEW_ONLY=" + json.dumps({
         "candidate_id": candidate["content_id"],
         "scene_count": len(candidate["performance_scenes"]),
