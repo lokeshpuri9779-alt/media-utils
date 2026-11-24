@@ -10,6 +10,7 @@ class CaptionShortPipelineTests(unittest.TestCase):
             "approved": False,
             "production_ready": False,
             "published": False,
+            "question": "Would you have noticed the hidden clue?",
             "performance_scenes": [
                 {"role": role, "speech": f"Spoken line for {role}."}
                 for role in roles
@@ -22,6 +23,12 @@ class CaptionShortPipelineTests(unittest.TestCase):
             " ".join(f"Spoken line for {role}." for role in
                      ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]),
         )
+
+    def test_rejects_missing_engagement_question(self):
+        candidate = self.candidate()
+        candidate["question"] = ""
+        with self.assertRaisesRegex(ValueError, "engagement question"):
+            narration_from_candidate(candidate)
 
     def test_rejects_wrong_scene_count(self):
         candidate = self.candidate()
