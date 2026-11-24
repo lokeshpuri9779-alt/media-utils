@@ -71,7 +71,7 @@ def persist_packet(path, incoming):
                                 delete=False) as handle:
             temp_name = handle.name
             json.dump(result, handle, ensure_ascii=False, indent=2, sort_keys=True)
-            handle.write("\\n")
+            handle.write(chr(10))
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_name, target)
