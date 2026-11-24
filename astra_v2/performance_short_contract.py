@@ -137,3 +137,13 @@ def to_renderer_beats(outline: dict) -> list:
             "performance_role": scene["role"],
         })
     return beats
+
+
+def validate_rendered_duration(duration_seconds: float) -> None:
+    """Reject actual voice/video timelines outside the 28–40 second target."""
+    try:
+        duration = float(duration_seconds)
+    except (TypeError, ValueError):
+        raise ValueError("rendered_duration_invalid")
+    if not MIN_SECONDS <= duration <= MAX_SECONDS:
+        raise ValueError("rendered_duration_out_of_range")
