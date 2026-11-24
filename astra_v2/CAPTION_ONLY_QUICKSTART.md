@@ -1,37 +1,43 @@
-# ASTRA caption-only Shorts: GitHub workflow
+# ASTRA GitHub-native story-to-Short pipeline
 
-This path creates **narration + timed captions only**. It does not create animations, illustrations, stock footage, music, or publish to YouTube.
+ASTRA's caption-only production path now runs on GitHub-hosted Actions. It produces narration + synchronized captions only: no animation, illustrations, stock footage, or music.
 
-## Run entirely on GitHub
+## One-click local story generation and rendering
 
-1. Add a review-only story candidate JSON file under `queue/pending/`.
-2. Open the repository's **Actions** tab.
-3. Select **ASTRA Caption-only Render**.
-4. Choose **Run workflow**, enter the candidate path (for example, `queue/pending/candidate.json`), and keep the default voice and speed unless you have a reason to change them.
-5. Open the completed run and download the `rayvan-caption-short-<run id>` artifact.
+1. Open the repository's **Actions** tab.
+2. Select **ASTRA Local Story to Caption Short**.
+3. Click **Run workflow** and choose a creative lane: surprise, mystery, sci-fi, emotional, thriller, or moral dilemma.
+4. Wait for the runner to generate a story, apply quality gates, synthesize narration, render captions, and decode-check the MP4.
+5. Download the `rayvan-local-story-short-<run id>` artifact from the completed run.
 
-The GitHub-hosted Ubuntu runner installs the focused dependencies, restores or downloads the checksum-verified Kokoro ONNX voice assets into its runner cache, synthesizes narration, creates phrase-synchronized captions, encodes a vertical 1080x1920 MP4, and runs a decode check.
+No local computer, WSL2, Gemini key, vidIQ credits, hosted inference API, or external paid AI API is used for generation. The Qwen3-4B Q4_K_M model is downloaded from its public model repository and runs locally on the GitHub Actions CPU runner. Its model card lists Apache-2.0 licensing and a 2.5 GB quantized model. The first run downloads the model; subsequent runs may restore it from GitHub Actions cache.
 
-## Candidate contract
+## What the local story engine does
 
-The candidate must be an unapproved, unpublished JSON object with exactly seven `performance_scenes` in this order:
-
-`hook`, `stakes`, `attempt`, `setback`, `discovery`, `climax`, `payoff`.
-
-Every scene must have non-empty `speech`; the root object must include a story-specific `question` that becomes the spoken engagement prompt. The actual rendered audio must pass the existing 28–40 second Shorts duration gate.
+- Generates a seven-beat original microfiction script.
+- Requires a 65–85 word complete spoken script, including a story-specific engagement question.
+- Rejects wrong beat order, weak length, generic CTAs, repeated lines, selected cliché endings, and premises too similar to the recent story history.
+- Saves only title, premise, and fingerprint in `data/story_history.jsonl` to help prevent repeated plots.
+- Passes the candidate into the existing Kokoro narration + timed-caption renderer.
+- Leaves approval and publishing false. The output is a review artifact only.
 
 ## Outputs
 
+- `candidate.json` — generated story candidate
 - `rayvan-short.mp4` — narration with static, timed captions
 - `rayvan-short.captions.json` — phrase timing manifest
 - `rayvan-short.review.json` — review report
 
-The report always leaves `approved`, `production_ready`, and `published` false. The workflow only creates a review artifact; it does not upload, schedule, or publish to YouTube.
+## Boundaries and honest limitations
 
-## Compute, costs and current boundary
+- This is local model inference **on GitHub's runner**, not an external hosted AI API. Model weights are downloaded from Hugging Face; source code, orchestration, execution, history, and output artifacts are managed through GitHub.
+- The 4B model is a small CPU-friendly starting point, not a frontier writing model. Passing automated checks does not prove a story will perform well. We need actual audience retention and engagement data to calibrate it.
+- The first run may take longer because the model and Python runtime are installed. Runner CPU time and artifact/cache quotas apply.
+- Workflow is manual-only. No daily schedule is enabled, and no YouTube upload or publishing occurs.
+- The story history commit requires the workflow's repository write permission. If branch protection blocks the bot push, the generation step may complete but persistence of history will fail.
+- The separate **ASTRA Caption-only Render** workflow remains available for rendering an existing candidate under `queue/pending/`.
 
-- Rendering runs on GitHub-hosted Actions; no personal PC, laptop, WSL2, or 24/7 machine is needed.
-- Kokoro model files are downloaded from the existing upstream release and checksum-verified. GitHub Actions cache is used to avoid repeat downloads when the cache is available.
-- No Gemini, vidIQ, or paid AI API is called by this workflow.
-- GitHub Actions minutes, artifact storage, and cache limits still apply. This workflow is manual-only; it does not run on a recurring schedule.
-- **Story supply is not automated yet.** This workflow renders a candidate already present in `queue/pending/`. The existing story generator remains Gemini-backed and disabled by default. A GitHub-hosted story-generation stage is a separate next milestone and must not silently activate paid services.
+## Test the story validator
+
+The fast, model-free checks run in the existing **ASTRA Performance Shorts Contract** workflow when the generator or tests change:
+`python -m unittest tests.test_github_local_story_generator -v`.
