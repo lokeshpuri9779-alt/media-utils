@@ -12901,6 +12901,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-98421acb2d4775f6ea85",
+      "video_id": "quOAfIJLQ78",
+      "confirmed_at": "2026-11-24T11:55:33.924871+00:00",
+      "title": "Silas the Squirrel and the Overturned Seed Sieve",
+      "plot_fingerprint": "5627e6b0d37e52dfe2ae6b167312ff6296e3f1690948256bd20aff92d8cc3484",
+      "story_beats": [
+        {
+          "headline": "The Tilted Sieve",
+          "speech": "Oh no, the heavy wooden seed sieve has tipped over on the slope and threatens to roll away into the thick brush.",
+          "visual": "forest",
+          "label": "Reveal",
+          "story_beat": "reveal",
+          "visual_prompt": "Silas the squirrel stands on a sloping forest floor, looking with a worried expression at a large wooden seed sieve tilted dangerously on the moss.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fetching the Anchor",
+          "speech": "I must act quickly to find a sturdy wooden box that is heavy enough to hold the rolling sieve in place.",
+          "visual": "door",
+          "label": "Build",
+          "story_beat": "build",
+          "visual_prompt": "Silas the squirrel stands near a mossy tree root, gripping a small wooden box tightly with both paws while looking up the slope.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Wedging the Frame",
+          "speech": "By pushing this heavy box firmly beneath the lower rim of the sieve frame, I can stop it from rolling further.",
+          "visual": "signal",
+          "label": "Mechanism",
+          "story_beat": "mechanism",
+          "visual_prompt": "Silas the squirrel pushes a heavy wooden box beneath the tilted edge of the wooden seed sieve on the forest floor, straining with focused effort.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Harvest Secured",
+          "speech": "The sieve is completely stable now, and the precious woodland seeds are safely preserved for the coming season.",
+          "visual": "forest",
+          "label": "Payoff",
+          "story_beat": "payoff",
+          "visual_prompt": "Silas the squirrel sits happily beside the securely anchored wooden seed sieve on the flat forest floor, surrounded by neat piles of collected seeds.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
