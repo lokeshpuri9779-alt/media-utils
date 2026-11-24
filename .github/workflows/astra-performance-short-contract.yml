@@ -5,6 +5,7 @@ on:
     paths:
       - "astra_v2/performance_short_contract.py"
       - "astra_v2/performance_short_generator.py"
+      - "astra_v2/performance_short_review_packet.py"
       - "astra_v2/story_planning.py"
       - "studio_renderer.py"
       - "tests/test_performance_short_contract.py"
