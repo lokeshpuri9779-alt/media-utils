@@ -13,7 +13,9 @@ from pathlib import Path
 
 ROLES = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
 MODEL_REPO = "Qwen/Qwen3-4B-GGUF"
+MODEL_REVISION = "bc640142c66e1fdd12af0bd68f40445458f3869b"
 MODEL_FILE = "Qwen3-4B-Q4_K_M.gguf"
+STOPWORDS = set("a an and are as at be been before but by for from had has have he her his in into is it its of on or our she that the their them then there they this to was were when where which while who with would you your".split())
 
 LANES = {
     "surprise": "A surprising but emotionally satisfying microfiction story.",
@@ -33,6 +35,10 @@ def _fingerprint(premise: str) -> str:
     tokens = _words(premise)
     normalized = " ".join(tokens)
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+
+
+def _content_tokens(premise: str) -> set[str]:
+    return {token for token in _words(premise) if len(token) > 2 and token not in STOPWORDS}
 
 
 def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
@@ -80,9 +86,9 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
         raise ValueError("Overused or disallowed plot phrase detected")
 
     premise_fp = _fingerprint(premise)
-    premise_tokens = set(_words(premise))
+    premise_tokens = _content_tokens(premise)
     for prior in (history or [])[-100:]:
-        old = set(_words(prior.get("premise", "")))
+        old = _content_tokens(prior.get("premise", ""))
         if not old:
             continue
         overlap = len(premise_tokens & old) / max(1, len(premise_tokens | old))
@@ -136,7 +142,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int) -> str:
         "The final question must be specific to the story and invite a genuine viewer opinion; "
         "it is spoken aloud, so keep it concise. Do not ask people to like, subscribe, or follow. "
         "Do not imitate or adapt existing copyrighted stories, franchises, characters, or plots. "
-        "Use fresh names and a self-contained fictional premise. "
+        "Use fresh names and a self-contained fictional premise. The premise field itself must be 35–90 words. "
         "Do not repeat or closely imitate these recent ASTRA premises: "
         + json.dumps(recent, ensure_ascii=False) +
         ". Return only valid JSON with keys: title, premise, question, performance_scenes. "
@@ -154,7 +160,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
     from llama_cpp import Llama
 
     model_file = model_path or hf_hub_download(
-        repo_id=MODEL_REPO, filename=MODEL_FILE
+        repo_id=MODEL_REPO, filename=MODEL_FILE, revision=MODEL_REVISION
     )
     history_file = Path(history_path)
     history = _load_history(history_file)
@@ -174,6 +180,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             response_format={"type": "json_object"},
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
+            presence_penalty=1.5,
             max_tokens=1400,
         )
         raw = result["choices"][0]["message"]["content"]
