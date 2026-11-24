@@ -277,7 +277,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
             {"title": "Study A", "url": "https://a.example", "publisher": "Publisher A"},
             {"title": "Study B", "url": "https://b.example", "publisher": "Publisher B"},
         ])
-        self.assertIn("Use ONLY the supplied evidence pack", prompt)
+        self.assertIn("Use ONLY the supplied source pack for factual claims", prompt)
         self.assertIn("mention a publisher naturally", prompt)
         self.assertIn("Do not add dates, numbers", prompt)
 
@@ -310,7 +310,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
             {"title": "A verified headline", "url": "https://example.com/story"}
         ])
         self.assertIn("Use ONLY the supplied source pack", prompt)
-        self.assertIn("Do not invent dates, numbers", prompt)
+        self.assertIn("Do not invent causes, quotes, statistics, or outcomes", prompt)
 
     def test_puzzle_prompt_delays_answer(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
