@@ -38,6 +38,22 @@ class StoryHandoffTests(unittest.TestCase):
         self.assertTrue(source["story_beats"][0]["visual"],
                         "Handoff should never mutate the approved source")
 
+    def test_seven_scene_review_candidate_survives_handoff_without_promotion(self):
+        source = json.loads(Path("tests/fixtures/performance_short_preview.json").read_text(encoding="utf-8"))
+        handoff = approved_story_context(source)
+        for field in ("format_profile", "premise", "character_bible", "performance_scenes",
+                      "performance_scorecard", "performance_validation",
+                      "visual_duration_seconds", "plot_fingerprint", "story_beats"):
+            self.assertEqual(handoff[field], source[field], field)
+        self.assertFalse(handoff["approved"])
+        self.assertFalse(handoff["production_ready"])
+        self.assertFalse(handoff["eligible_for_automatic_publishing"])
+        self.assertFalse(handoff["published"])
+        self.assertEqual(len(handoff["performance_scenes"]), 7)
+        handoff["performance_scenes"][0]["visual_prompt"] = "mutated copy only"
+        self.assertNotEqual(handoff["performance_scenes"][0]["visual_prompt"],
+                            source["performance_scenes"][0]["visual_prompt"])
+
     @unittest.skipUnless(STUDIO_DEPS_AVAILABLE, "Studio dependencies checked in readiness CI")
     @patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"})
     def test_real_story_survives_serialized_archive_and_publisher_gate(self):
