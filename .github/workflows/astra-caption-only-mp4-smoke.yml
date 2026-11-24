@@ -1,0 +1,146 @@
+name: ASTRA Caption-only Real MP4 Smoke
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: astra-caption-mp4-smoke
+  cancel-in-progress: false
+
+jobs:
+  render-and-verify:
+    name: Synthesize narration, synchronize captions, decode MP4
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-caption-only.txt
+
+      - name: Restore or create pinned Kokoro voice cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
+
+      - name: Install caption-only dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Install FFprobe
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Create a deterministic review-only narration fixture
+        run: |
+          mkdir -p output/caption-smoke
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          roles = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
+          lines = [
+              "The observatory lights flashed although its power cable was missing.",
+              "A student heard the same signal repeating beneath the locked telescope.",
+              "She compared each flash with a map of the night sky.",
+              "One bright point moved while every other star stayed perfectly still.",
+              "The signal matched an asteroid approaching the nearby valley.",
+              "She restored the warning transmitter before the next flash arrived.",
+              "The village received the alert early and moved everyone to safety.",
+          ]
+          candidate = {
+              "schema_version": 1,
+              "kind": "github_local_caption_content",
+              "content_type": "mystery",
+              "content_id": "caption-smoke-fixture",
+              "title": "The Observatory Warning",
+              "question": "Would you have recognized the moving star before the warning?",
+              "performance_scenes": [
+                  {"role": role, "speech": speech}
+                  for role, speech in zip(roles, lines)
+              ],
+              "approved": False,
+              "production_ready": False,
+              "published": False,
+          }
+          Path("output/caption-smoke/candidate.json").write_text(
+              json.dumps(candidate, indent=2) + "\\n", encoding="utf-8"
+          )
+          PY
+
+      - name: Render narration and synchronized captions only
+        env:
+          ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
+        run: |
+          timeout --foreground --signal=TERM --kill-after=20s 7m python -m astra_v2.caption_short_pipeline \
+            --candidate output/caption-smoke/candidate.json \
+            --output output/caption-smoke/rayvan-short.mp4
+
+      - name: Verify video, audio, duration, and caption timings
+        run: |
+          ffprobe -v error -show_entries format=duration:stream=index,codec_type,codec_name,width,height,r_frame_rate,sample_rate -of json output/caption-smoke/rayvan-short.mp4 > output/caption-smoke/ffprobe.json
+          python - <<'PY'
+          import json
+          import math
+          from pathlib import Path
+
+          root = Path("output/caption-smoke")
+          video = root / "rayvan-short.mp4"
+          review = json.loads((root / "rayvan-short.review.json").read_text())
+          captions = json.loads((root / "rayvan-short.captions.json").read_text())
+          probe = json.loads((root / "ffprobe.json").read_text())
+          assert video.is_file() and video.stat().st_size > 10_000
+          streams = probe["streams"]
+          video_streams = [x for x in streams if x["codec_type"] == "video"]
+          audio_streams = [x for x in streams if x["codec_type"] == "audio"]
+          assert len(video_streams) == 1 and video_streams[0]["codec_name"] == "h264"
+          assert (video_streams[0]["width"], video_streams[0]["height"]) == (1080, 1920)
+          assert video_streams[0]["r_frame_rate"] == "30/1"
+          assert audio_streams and any(x["codec_name"] == "aac" for x in audio_streams)
+          duration = float(probe["format"]["duration"])
+          assert 28 <= duration <= 40, duration
+          assert review["approved"] is False
+          assert review["production_ready"] is False
+          assert review["published"] is False
+          assert review["render"]["quality_check"] == "passed"
+          assert review["render"]["published"] is False
+          assert abs(duration - captions["duration_seconds"]) <= 0.25
+          rows = captions["captions"]
+          assert rows and review["render"]["caption_count"] == len(rows)
+          previous_end = 0.0
+          for row in rows:
+              start, end = row["start"], row["end"]
+              assert row["caption"].strip()
+              assert math.isfinite(start) and math.isfinite(end)
+              assert previous_end <= start < end <= captions["duration_seconds"] + 0.1
+              previous_end = end
+          print(json.dumps({
+              "video_bytes": video.stat().st_size,
+              "duration_seconds": duration,
+              "resolution": "1080x1920",
+              "video_codec": video_streams[0]["codec_name"],
+              "audio_codec": audio_streams[0]["codec_name"],
+              "fps": video_streams[0]["r_frame_rate"],
+              "caption_count": len(rows),
+              "published": False,
+              "result": "PASS",
+          }, indent=2))
+          PY
+
+      - name: Upload review-only MP4 and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-caption-only-mp4-smoke-${{ github.run_id }}
+          path: output/caption-smoke/
+          if-no-files-found: warn
+          retention-days: 7
