@@ -352,7 +352,7 @@ def _strip_reasoning_preamble(raw):
     if not isinstance(raw, str):
         return raw
     cleaned = raw.lstrip()
-    cleaned = re.sub(r"^(?:<think>.*?</think>\\s*)+", "", cleaned, count=1, flags=re.DOTALL | re.IGNORECASE)
+    cleaned = re.sub(r"^(?:<think>.*?</think>\s*)+", "", cleaned, count=1, flags=re.DOTALL | re.IGNORECASE)
     return cleaned.lstrip()
 
 
