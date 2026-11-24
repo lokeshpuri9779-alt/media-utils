@@ -278,7 +278,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
             {"title": "Study B", "url": "https://b.example", "publisher": "Publisher B"},
         ])
         self.assertIn("Use ONLY the supplied source pack for factual claims", prompt)
-        self.assertIn("mention a publisher naturally", prompt)
+        self.assertIn("Mention a publisher/source naturally", prompt)
         self.assertIn("Do not add dates, numbers", prompt)
 
     def test_factual_prompt_requires_claims_to_use_evidence_pack(self):
