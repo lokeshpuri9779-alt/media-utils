@@ -37,6 +37,17 @@ LANES = {
     "psychology": "An evidence-aware psychology insight; distinguish research from speculation.",
     "money_business": "A practical business, money, or economics concept explained with a simple example.",
     "tech_explained": "A useful technology or AI concept explained accurately for a general audience.",
+    "india_gk": "A memorable India-focused GK bite spanning geography, history, culture, or civics.",
+    "space_facts": "An astonishing but accurate space and astronomy fact explained simply.",
+    "nature_facts": "A surprising animal, wildlife, or nature fact with a clear explanation.",
+    "human_body": "An accurate human-body or health-science explainer; avoid medical advice.",
+    "inventions": "The surprising origin, mechanism, or impact of an invention or engineering idea.",
+    "spot_the_lie": "A three-statement fact game with exactly one false statement and a clear reveal.",
+    "two_truths_one_lie": "A fast two-truths-and-one-lie challenge using verifiable statements.",
+    "guess_the_number": "A surprising numerical estimation challenge with a defensible sourced answer.",
+    "what_if": "A thought-provoking what-if scenario grounded in plausible science or clearly labelled fiction.",
+    "mini_case_study": "A compact real-world business, science, or history case with a lesson supported by facts.",
+    "ranked_countdown": "A short ranked countdown with clear criteria and accurate, non-arbitrary ranking.",
     "current_news": "A concise explainer of a genuinely recent news development using supplied sources only.",
     "trending_topics": "A useful explainer of a currently trending topic using supplied trend and news sources only.",
 }
@@ -148,7 +159,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
     factual = lane in {
         "weird_facts", "science_explained", "history_gk", "geography_gk",
         "world_gk", "myth_vs_fact", "psychology", "money_business",
-        "tech_explained", "current_news", "trending_topics",
+        "tech_explained", "india_gk", "space_facts", "nature_facts", "human_body", "inventions", "mini_case_study", "ranked_countdown", "guess_the_number", "spot_the_lie", "two_truths_one_lie", "current_news", "trending_topics",
     }
     if lane in {"current_news", "trending_topics"}:
         evidence_rule = (
@@ -172,7 +183,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "For puzzles and riddles, state all necessary conditions, make the answer logically "
         "deducible, and place the answer after a clear thinking pause such as 'Lock in your guess'. "
         "Never use an ambiguous trick answer. "
-        if lane in {"brain_puzzle", "logic_puzzle", "riddle", "quick_quiz"} else ""
+        if lane in {"brain_puzzle", "logic_puzzle", "riddle", "quick_quiz", "spot_the_lie", "two_truths_one_lie", "guess_the_number"} else ""
     )
     return (
         "Create one original, high-retention English YouTube Short for RAYVAN. "
