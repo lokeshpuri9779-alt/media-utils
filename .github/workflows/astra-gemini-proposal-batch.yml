@@ -1,26 +1,22 @@
 name: ASTRA Gemini Proposal Batch
+# Gemini API generation/review requires an explicit manual owner action.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/astra-gemini-proposal-batch.yml'
-      - 'astra_v2/gemini_batch.py'
-      - 'astra_v2/omniroute_gemini.py'
-      - 'astra_v2/gemini_batch_review.py'
-      - 'astra_v2/creative_preflight_report.py'
-      - 'astra_v2/renderer_aware_writing.py'
-  schedule:
-    - cron: '17 */6 * * *'
   workflow_dispatch:
     inputs:
+      confirm_api_usage:
+        description: Confirm you have checked billing and authorize Gemini generation/review API calls
+        type: boolean
+        required: true
+        default: false
       count:
         description: Story proposals to request (1-50)
         required: true
-        default: '20'
+        default: '1'
 permissions:
   contents: write
 jobs:
   generate:
+    if: inputs.confirm_api_usage == true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     concurrency:
@@ -69,6 +65,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ASTRA_GEMINI_ENABLED: '1'
+          ASTRA_GEMINI_BATCH_CONFIRM: '1'
           # 18:34 UTC diagnostic: 12/18 stories requested unsupported human actors.
           # Prompt-only change, same bounded free-tier calls and independent review.
           ASTRA_GEMINI_RENDERER_AWARE_WRITING: '1'
