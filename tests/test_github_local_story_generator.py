@@ -4,8 +4,8 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate, validate_source_pack
-from astra_v2.trend_source_collector import _parse_feed, collect
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, SOURCED_FACTUAL_LANES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate, validate_source_pack
+from astra_v2.trend_source_collector import TOPIC_QUERIES, _parse_feed, collect
 
 
 def sample():
@@ -219,6 +219,10 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         history = [{"premise": item["premise"], "fingerprint": "old"}]
         with self.assertRaisesRegex(ValueError, "too similar"):
             validate_candidate(item, history)
+
+    def test_every_sourced_factual_lane_has_a_collector_query(self):
+        self.assertTrue(SOURCED_FACTUAL_LANES.issubset(LANES))
+        self.assertTrue(SOURCED_FACTUAL_LANES.issubset(TOPIC_QUERIES))
 
     def test_nine_direction_batch_lanes_exist_in_generator_catalog(self):
         batch_lanes = {
