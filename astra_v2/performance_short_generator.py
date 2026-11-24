@@ -244,6 +244,7 @@ def main(argv=None):
     parser.add_argument("--history", default=None, help="JSON or JSONL of recent story records")
     parser.add_argument("--output", required=True, help="Candidate JSON output")
     parser.add_argument("--packet", required=True, help="Review packet JSON output")
+    parser.add_argument("--queue", default=None, help="Optional local review queue JSON to update atomically")
     parser.add_argument("--brief", default="", help="Optional creative direction")
     args = parser.parse_args(argv)
     if not enabled():
@@ -261,6 +262,10 @@ def main(argv=None):
     if candidate is None:
         raise SystemExit("Generation disabled; no files written")
     packet = build_packet([candidate])
+    queue_result = None
+    if args.queue:
+        from astra_v2.performance_short_intake import persist_packet
+        queue_result = persist_packet(args.queue, packet)
     candidate_path = Path(args.output)
     packet_path = Path(args.packet)
     candidate_path.parent.mkdir(parents=True, exist_ok=True)
@@ -275,6 +280,8 @@ def main(argv=None):
         "production_ready": False,
         "rendered": False,
         "published": False,
+        "queue_updated": bool(args.queue),
+        "queue_count": queue_result["count"] if queue_result is not None else None,
     }, sort_keys=True))
     return 0
 
