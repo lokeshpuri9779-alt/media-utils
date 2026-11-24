@@ -1,0 +1,23 @@
+name: ASTRA Performance Shorts Contract
+on:
+  push:
+    branches: [main]
+    paths:
+      - "astra_v2/performance_short_contract.py"
+      - "astra_v2/story_planning.py"
+      - "studio_renderer.py"
+      - "tests/test_performance_short_contract.py"
+      - ".github/workflows/astra-performance-short-contract.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate seven-scene contract and legacy compatibility
+        run: python -m unittest discover -s tests -p "test_performance_short_contract.py" -v
