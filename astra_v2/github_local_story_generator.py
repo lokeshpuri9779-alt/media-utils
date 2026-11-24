@@ -372,6 +372,14 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
             "Mention a publisher/source naturally in narration. For news, do not present an old "
             "story as breaking news. "
         )
+    elif lane in SOURCED_FACTUAL_LANES:
+        evidence_rule = (
+            "Use ONLY the supplied evidence pack for factual claims. Build the Short around "
+            "one clear finding that is supported by the supplied sources, and mention a "
+            "publisher naturally in the narration. Do not add dates, numbers, causal claims, "
+            "quotes, or mechanisms that the sources do not support. If the sources disagree "
+            "or do not establish a claim, omit it or state the uncertainty plainly. "
+        )
     elif factual:
         evidence_rule = (
             "Accuracy is more important than surprise. Do not fabricate statistics, studies, "
