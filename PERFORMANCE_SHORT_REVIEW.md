@@ -25,7 +25,7 @@ Review the resulting JSON and commit it to this branch explicitly. Do not connec
 
 ## Review interface checks
 
-The browser review page checks the seven-scene structure, 28–40 second planned duration, 7–13 dialogue words per scene, 65–85 dialogue words overall, transition questions in scenes 1–6, repeated character description, required prop mentions, and non-empty scene actions/prompts. These are text-only pacing and structure checks; they do not validate spoken delivery, audio timing, or generated-frame contents.
+The browser review page checks the seven-scene structure, 28–40 second planned duration, 7–13 dialogue words per scene, 65–85 dialogue words overall, transition questions in scenes 1–6, distinct camera directions across at least six scenes, distinct scene actions, repeated character description, required prop mentions, and non-empty scene actions/prompts. These are text-only pacing, structure, and variation checks; they do not validate spoken delivery, audio timing, actual visual similarity, or generated-frame contents.
 
 ## Current status
 
