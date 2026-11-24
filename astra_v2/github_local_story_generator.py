@@ -27,11 +27,18 @@ STRUCTURES = {
     **{lane: NEWS_ROLES for lane in ("current_news", "trending_topics")},
 }
 STRUCTURE_NAMES = {
-    "brain_puzzle": "puzzle_challenge_reveal", "logic_puzzle": "puzzle_challenge_reveal",
-    "riddle": "puzzle_challenge_reveal", "guess_the_number": "estimation_challenge_reveal",
-    "quick_quiz": "quiz_question_reveal", "spot_the_lie": "quiz_question_reveal",
-    "two_truths_one_lie": "quiz_question_reveal", "india_gk": "quiz_question_reveal",
-    "current_news": "news_context_impact", "trending_topics": "trend_context_impact",
+    **{lane: "puzzle_challenge_reveal" for lane in
+       ("brain_puzzle", "logic_puzzle", "riddle")},
+    "guess_the_number": "estimation_challenge_reveal",
+    **{lane: "quiz_question_reveal" for lane in
+       ("quick_quiz", "spot_the_lie", "two_truths_one_lie", "india_gk")},
+    **{lane: "fact_explainer" for lane in (
+        "weird_facts", "science_explained", "history_gk", "geography_gk",
+        "world_gk", "myth_vs_fact", "psychology", "money_business",
+        "tech_explained", "space_facts", "nature_facts", "human_body",
+        "inventions", "mini_case_study", "ranked_countdown", "what_if"
+    )},
+    **{lane: "news_context_impact" for lane in ("current_news", "trending_topics")},
 }
 MODEL_REPO = "Qwen/Qwen3-4B-GGUF"
 MODEL_REVISION = "bc640142c66e1fdd12af0bd68f40445458f3869b"
