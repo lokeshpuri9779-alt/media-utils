@@ -5,6 +5,7 @@ originality history. Generation alone is not a successful deliverable.
 """
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -140,3 +141,18 @@ def aggregate_batch(history_path: str | Path, batch_dir: str | Path,
         json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     return report
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--history", required=True)
+    parser.add_argument("--batch-dir", required=True)
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--batch-result", required=True)
+    args = parser.parse_args(argv)
+    report = aggregate_batch(args.history, args.batch_dir, args.run_id, args.batch_result)
+    print(json.dumps(report, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
