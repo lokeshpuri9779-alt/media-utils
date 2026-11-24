@@ -12,7 +12,7 @@ def sample_outline():
         "A tiny fox discovers a glass jar glowing under moonlight in the forest.",
         "The fox sees a firefly trapped inside the glass jar in the forest.",
         "The fox nudges the glass jar toward a flat stone in the forest.",
-        "The glass jar rolls toward a shallow stream and the firefly flickers in the forest.",
+        "The fox watches as the glass jar rolls toward a shallow stream and the firefly flickers in the forest.",
         "The fox notices a loose cork beside the glass jar in the forest.",
         "The fox removes the cork and opens the glass jar in the forest.",
         "The firefly flies free and lights the fox's path home through the forest.",
