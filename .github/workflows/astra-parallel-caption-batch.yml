@@ -281,10 +281,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/story_history.jsonl
-          if ! git diff --cached --quiet; then
-            git commit -m "Record ASTRA parallel batch story fingerprints"
-            git push
+          if [ -s data/story_history.jsonl ]; then
+            git add data/story_history.jsonl
+            if ! git diff --cached --quiet; then
+              git commit -m "Record ASTRA parallel batch story fingerprints"
+              git push
+            fi
+          else
+            echo "No successful candidates; originality history unchanged."
           fi
 
       - name: Upload batch report
