@@ -109,7 +109,13 @@ def to_renderer_beats(outline: dict) -> list:
         "climax": "mechanism", "payoff": "payoff",
     }
     beats = []
+    from astra_v2.openai_creative import VISUALS, visual_subject_matches
+    from astra_v2.visual_artifact_library import SCENES
     for scene in outline["scenes"]:
+        if scene["visual"] not in VISUALS or not visual_subject_matches(scene["visual"], scene["visual_prompt"]):
+            raise ValueError("performance_scene_visual_subject_mismatch")
+        if scene["story_environment"] not in SCENES or not re.search(r"\\b" + re.escape(scene["story_environment"]) + r"\\b", scene["visual_prompt"], re.I):
+            raise ValueError("performance_scene_environment_mismatch")
         beats.append({
             "headline": scene["headline"],
             "speech": scene["speech"],
