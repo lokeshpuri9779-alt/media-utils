@@ -99,7 +99,7 @@ jobs:
           PY
 
   generate-and-render:
-    name: Generate \${{ matrix.lane }} Short
+    name: Generate ${{ matrix.lane }} Short
     needs: warm-model-caches
     runs-on: ubuntu-latest
     timeout-minutes: 55
@@ -160,42 +160,42 @@ jobs:
       - name: Collect current trend sources
         if: matrix.lane == 'trending_topics'
         run: |
-          python -m astra_v2.trend_source_collector \\
-            --direction "trending_topics" \\
-            --output "output/\${{ matrix.lane }}/sources.json"
+          python -m astra_v2.trend_source_collector \
+            --direction "trending_topics" \
+            --output "output/${{ matrix.lane }}/sources.json"
 
       - name: Generate original Short on this runner
         env:
           HF_HOME: /home/runner/.cache/huggingface
         run: |
-          python -m astra_v2.github_local_story_generator \\
-            --output "output/\${{ matrix.lane }}/candidate.json" \\
-            --history data/story_history.jsonl \\
-            --lane "\${{ matrix.lane }}" \\
-            --seed "\${{ github.run_id }}\${{ matrix.seed_suffix }}" \\
-            \${{ matrix.lane == 'trending_topics' && format('--sources-file output/{0}/sources.json', matrix.lane) || '' }}
+          python -m astra_v2.github_local_story_generator \
+            --output "output/${{ matrix.lane }}/candidate.json" \
+            --history data/story_history.jsonl \
+            --lane "${{ matrix.lane }}" \
+            --seed "${{ github.run_id }}${{ matrix.seed_suffix }}" \
+            ${{ matrix.lane == 'trending_topics' && format('--sources-file output/{0}/sources.json', matrix.lane) || '' }}
 
       - name: Render narration and synchronized captions
         env:
           ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
         run: |
-          python -m astra_v2.caption_short_pipeline \\
-            --candidate "output/\${{ matrix.lane }}/candidate.json" \\
-            --output "output/\${{ matrix.lane }}/rayvan-short.mp4"
+          python -m astra_v2.caption_short_pipeline \
+            --candidate "output/${{ matrix.lane }}/candidate.json" \
+            --output "output/${{ matrix.lane }}/rayvan-short.mp4"
 
       - name: Upload this lane's review package
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: astra-short-\${{ matrix.lane }}-\${{ github.run_id }}
-          path: output/\${{ matrix.lane }}/
+          name: astra-short-${{ matrix.lane }}-${{ github.run_id }}
+          path: output/${{ matrix.lane }}/
           if-no-files-found: ignore
           retention-days: 7
 
   aggregate-history:
     name: Merge originality history and batch report
     needs: generate-and-render
-    if: \${{ needs.generate-and-render.result == 'success' }}
+    if: ${{ needs.generate-and-render.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out ASTRA
@@ -204,7 +204,7 @@ jobs:
       - name: Download all lane review packages
         uses: actions/download-artifact@v4
         with:
-          pattern: astra-short-*-\${{ github.run_id }}
+          pattern: astra-short-*-${{ github.run_id }}
           path: batch-output
 
       - name: Merge story fingerprints once
@@ -250,10 +250,10 @@ jobs:
 
           with history_path.open("a", encoding="utf-8") as handle:
               for row in added:
-                  handle.write(json.dumps(row, ensure_ascii=False) + "\\n")
+                  handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
           report = {
-              "run_id": "\${{ github.run_id }}",
+              "run_id": "${{ github.run_id }}",
               "generated_candidates": len(candidates),
               "new_history_records": len(added),
               "review_only": True,
@@ -261,7 +261,7 @@ jobs:
               "candidate_files": [str(path) for path in candidates],
           }
           Path("batch-output/batch-report.json").write_text(
-              json.dumps(report, indent=2) + "\\n", encoding="utf-8"
+              json.dumps(report, indent=2) + "\n", encoding="utf-8"
           )
           print(json.dumps(report, indent=2))
           PY
@@ -279,6 +279,6 @@ jobs:
       - name: Upload batch report
         uses: actions/upload-artifact@v4
         with:
-          name: astra-batch-report-\${{ github.run_id }}
+          name: astra-batch-report-${{ github.run_id }}
           path: batch-output/batch-report.json
           retention-days: 7
