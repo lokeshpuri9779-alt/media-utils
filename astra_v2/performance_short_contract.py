@@ -114,7 +114,7 @@ def to_renderer_beats(outline: dict) -> list:
     for scene in outline["scenes"]:
         if scene["visual"] not in VISUALS or not visual_subject_matches(scene["visual"], scene["visual_prompt"]):
             raise ValueError("performance_scene_visual_subject_mismatch")
-        if scene["story_environment"] not in SCENES or not re.search(r"\\b" + re.escape(scene["story_environment"]) + r"\\b", scene["visual_prompt"], re.I):
+        if scene["story_environment"] not in SCENES or not re.search(r"\b" + re.escape(scene["story_environment"]) + r"\b", scene["visual_prompt"], re.I):
             raise ValueError("performance_scene_environment_mismatch")
         beats.append({
             "headline": scene["headline"],
