@@ -218,74 +218,13 @@ jobs:
           pattern: astra-short-*-${{ github.run_id }}
           path: batch-output
 
-      - name: Merge story fingerprints once
+      - name: Verify rendered packages and merge originality history
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          from astra_v2.github_local_story_generator import accepted_unique_candidates
-
-          history_path = Path("data/story_history.jsonl")
-          history_path.parent.mkdir(parents=True, exist_ok=True)
-          history_rows = []
-          if history_path.exists():
-              for line in history_path.read_text(encoding="utf-8").splitlines():
-                  if not line.strip():
-                      continue
-                  try:
-                      row = json.loads(line)
-                  except json.JSONDecodeError:
-                      continue
-                  if row.get("premise"):
-                      history_rows.append(row)
-
-          history_path.touch(exist_ok=True)
-          batch_dir = Path("batch-output")
-          batch_dir.mkdir(parents=True, exist_ok=True)
-          candidates = sorted(batch_dir.glob("**/candidate.json"))
-
-          candidate_rows = []
-          for candidate_path in candidates:
-              candidate = json.loads(candidate_path.read_text(encoding="utf-8"))
-              fingerprint = candidate.get("premise_fingerprint")
-              if not fingerprint or not candidate.get("premise"):
-                  raise SystemExit(f"Invalid candidate: {candidate_path}")
-              for flag in ("approved", "production_ready", "published"):
-                  if candidate.get(flag) is not False:
-                      raise SystemExit(f"Candidate safety flag {flag} is not false: {candidate_path}")
-              candidate_rows.append(candidate)
-
-          accepted, duplicates = accepted_unique_candidates(candidate_rows, history_rows)
-          added = [
-              {
-                  "title": candidate.get("title", ""),
-                  "premise": candidate["premise"],
-                  "fingerprint": candidate["premise_fingerprint"],
-              }
-              for candidate in accepted
-          ]
-
-          if added:
-              with history_path.open("a", encoding="utf-8") as handle:
-                  for row in added:
-                      handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-
-          report = {
-              "run_id": "${{ github.run_id }}",
-              "batch_result": "${{ needs.generate-and-render.result }}",
-              "generated_candidates": len(candidates),
-              "accepted_unique_candidates": len(accepted),
-              "duplicate_candidates": duplicates,
-              "new_history_records": len(added),
-              "review_only": True,
-              "published": False,
-              "candidate_files": [str(path) for path in candidates],
-          }
-          (batch_dir / "batch-report.json").write_text(
-              json.dumps(report, indent=2) + "\n", encoding="utf-8"
-          )
-          print(json.dumps(report, indent=2))
-          PY
+          python -m astra_v2.caption_batch_aggregator \
+            --history data/story_history.jsonl \
+            --batch-dir batch-output \
+            --run-id "${{ github.run_id }}" \
+            --batch-result "${{ needs.generate-and-render.result }}"
 
       - name: Commit shared originality history once
         run: |
