@@ -322,7 +322,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         if retry_feedback else ""
     )
     return (
-        "Create one original, high-retention English YouTube Short for RAYVAN. " + retry_block
+        "Create one original, high-retention English YouTube Short for RAYVAN. " + retry_block +
         "Format is narration plus synchronized captions only: no visual descriptions, "
         "no animation directions, no B-roll instructions. "
         f"Content direction: {LANES[lane]} "
