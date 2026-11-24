@@ -183,7 +183,7 @@ jobs:
             --history data/story_history.jsonl \
             --lane "${{ matrix.lane }}" \
             --seed "${{ github.run_id }}${{ matrix.seed_suffix }}" \
-            ${{ contains('science_explained,india_gk,money_business,geography_gk,psychology,trending_topics', matrix.lane) && format('--sources-file output/{0}/sources.json', matrix.lane) || '' }}
+            ${{ contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","trending_topics"]'), matrix.lane) && format('--sources-file output/{0}/sources.json', matrix.lane) || '' }}
 
       - name: Render narration and synchronized captions
         env:
