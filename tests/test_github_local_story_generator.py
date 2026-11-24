@@ -129,6 +129,12 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         for value in direction.values():
             self.assertIn(value, prompt)
 
+    def test_retry_prompt_includes_specific_validation_feedback(self):
+        prompt = _build_prompt("brain_puzzle", [], 42, retry_feedback="Scene 3 narration must contain 12–18 words")
+        self.assertIn("IMPORTANT CORRECTION FROM THE PREVIOUS ATTEMPT", prompt)
+        self.assertIn("Scene 3 narration must contain 12–18 words", prompt)
+        self.assertIn("recount every scene", prompt)
+
     def test_prompt_selects_an_engagement_mechanic(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
         self.assertIn("engagement mechanic", prompt)
