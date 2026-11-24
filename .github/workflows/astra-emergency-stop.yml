@@ -1,0 +1,18 @@
+name: ASTRA Emergency Stop
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/astra-emergency-stop.yml'
+permissions:
+  actions: write
+jobs:
+  cancel-obsolete-studio-previews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel preview runs that lack unified story mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run cancel 45473653243 --repo "${GITHUB_REPOSITORY}" || true
+          gh run cancel 45473802674 --repo "${GITHUB_REPOSITORY}" || true
