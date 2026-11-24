@@ -52,13 +52,10 @@ def _font(size: int):
 
 def _caption_frame(text: str, output: Path, index: int):
     """Create a restrained caption card; no illustrations or animated scenes."""
-    image = Image.new("RGB", (WIDTH, HEIGHT), (7, 10, 18))
+    # Solid background and synchronized narration captions only: no branding,
+    # decorative labels, CTA overlays, illustrations, or scene imagery.
+    image = Image.new("RGB", (WIDTH, HEIGHT), (8, 12, 20))
     draw = ImageDraw.Draw(image)
-    # Subtle static gradient gives the captions contrast without visual clutter.
-    for y in range(HEIGHT):
-        shade = int(7 + 8 * y / HEIGHT)
-        draw.line((0, y, WIDTH, y), fill=(shade, shade + 2, shade + 8))
-    draw.text((72, 130), "RAYVAN", font=_font(28), fill=(145, 158, 180))
     draw.rounded_rectangle((74, 755, 1006, 1165), radius=34,
                            fill=(15, 21, 34), outline=(48, 62, 84), width=3)
     font = _font(76)
@@ -97,8 +94,6 @@ def _caption_frame(text: str, output: Path, index: int):
         draw.text((x + 2, y + 3), line, font=font, fill=(0, 0, 0))
         draw.text((x, y), line, font=font, fill=(250, 252, 255))
         y += line_height
-    draw.text((72, 1770), "FOLLOW FOR MORE STORIES", font=_font(25),
-              fill=(132, 148, 172))
     image.save(output, "PNG", optimize=True)
 
 
