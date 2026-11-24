@@ -112,6 +112,14 @@ class PerformanceShortGeneratorTests(unittest.TestCase):
             self.assertEqual(packet["approved_count"], 0)
             self.assertFalse(packet["rendering_triggered"])
             self.assertFalse(packet["publication_triggered"])
+            review = packet["candidates"][0]
+            self.assertFalse(review["approved"])
+            self.assertFalse(review["production_ready"])
+            self.assertFalse(review["eligible_for_automatic_publishing"])
+            self.assertFalse(review["published"])
+            candidate["performance_hard_failures"] = ["editorial_block"]
+            with self.assertRaisesRegex(ValueError, "candidate_failed_performance_contract"):
+                build_packet([candidate])
 
     def test_cli_does_not_write_when_generation_is_disabled(self):
         from astra_v2.performance_short_generator import main
