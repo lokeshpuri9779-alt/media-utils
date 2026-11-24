@@ -96,7 +96,7 @@ class PerformanceShortContractTests(unittest.TestCase):
 
     def test_rejects_missing_required_prop_in_visual_prompt(self):
         outline = sample_outline()
-        outline["scenes"][2]["visual_prompt"] = "A tiny fox nudges an empty wooden box."
+        outline["scenes"][2]["visual_prompt"] = "A small russet fox with a white chest and amber eyes nudges an empty wooden box in the forest."
         with self.assertRaisesRegex(ValueError, "required_prop_not_in_visual_prompt"):
             validate_short_outline(outline)
 
