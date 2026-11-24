@@ -16,6 +16,8 @@ on:
       - "astra_v2/caption_short_pipeline.py"
       - "tests/test_caption_only_renderer.py"
       - "tests/test_caption_short_pipeline.py"
+      - "astra_v2/github_local_story_generator.py"
+      - "tests/test_github_local_story_generator.py"
       - "astra_v2/omniroute.py"
       - "astra_v2/omniroute_gemini.py"
       - "tests/test_astra_omniroute.py"
@@ -41,3 +43,4 @@ jobs:
           python -m unittest tests.test_astra_omniroute -v
           python -m unittest tests.test_astra_story_handoff -v
           python -m unittest tests.test_caption_only_renderer tests.test_caption_short_pipeline -v
+          python -m unittest tests.test_github_local_story_generator -v
