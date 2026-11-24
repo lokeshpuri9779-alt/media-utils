@@ -101,7 +101,7 @@ def collect(direction: str, output: str) -> list[dict]:
     }
     target = Path(output)
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(payload["sources"], indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    target.write_text(json.dumps(payload["sources"], indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({"direction": direction, "source_count": len(payload["sources"]),
                       "retrieved_at": payload["retrieved_at"]}, indent=2))
     return payload["sources"]
