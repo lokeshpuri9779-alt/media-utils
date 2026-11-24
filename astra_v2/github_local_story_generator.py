@@ -107,6 +107,22 @@ ENGAGEMENT_FORMATS = {
     "psychology": ["self_test", "prediction", "behaviour_reveal"],
     "money_business": ["business_case", "choose_the_strategy", "prediction"],
 }
+CREATIVE_TONES = ["curious", "playful", "tense", "awe-filled", "thoughtful", "urgent-but-calm"]
+OPENING_PATTERNS = ["cold_open_question", "bold_contradiction", "strange_detail", "stakes_first", "direct_challenge", "unexpected_number"]
+PAYOFF_TYPES = ["clear_explanation", "logical_reveal", "practical_lesson", "surprising_connection", "consequence", "emotional_resolution"]
+
+def _rotate(options: list[str], seed: int) -> str:
+    return options[abs(int(seed)) % len(options)]
+
+def creative_direction(lane: str, seed: int) -> dict:
+    """Select a reproducible creative treatment independent of the subject lane."""
+    return {
+        **creative_direction(lane, seed),
+        "tone": _rotate(CREATIVE_TONES, seed // 3),
+        "opening_pattern": _rotate(OPENING_PATTERNS, seed // 5),
+        "payoff_type": _rotate(PAYOFF_TYPES, seed // 7),
+    }
+
 DEFAULT_ENGAGEMENT_FORMATS = [
     "mystery_question", "choose_your_side", "unexpected_connection",
     "predict_then_reveal", "mini_case_study", "counterintuitive_explanation",
@@ -298,6 +314,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
     compact_structure = len(roles) <= 4
     scene_min, scene_max = (12, 18) if compact_structure else (6, 14)
     structure_name = STRUCTURE_NAMES.get(lane, "seven_beat_story")
+    direction = creative_direction(lane, seed)
     return (
         "Create one original, high-retention English YouTube Short for RAYVAN. "
         "Format is narration plus synchronized captions only: no visual descriptions, "
@@ -307,7 +324,8 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "Use a strong curiosity gap in the first sentence, concrete details, escalating "
         "interest, a satisfying reveal or useful payoff, and a specific viewer question. "
         f"Use the {structure_name} structure with exactly {len(roles)} performance_scenes in this order: " + ", ".join(roles) + ". "
-        f"Use this engagement mechanic for this Short: {select_engagement_format(lane, seed)}. "
+        f"Creative treatment: tone={direction['tone']}; opening_pattern={direction['opening_pattern']}; payoff_type={direction['payoff_type']}; engagement={direction['engagement_format']}. "
+        "Make this treatment clearly audible in the narration; do not merely label it. "
         "Make the viewer actively predict, decide, test memory, solve, compare, or investigate "
         "where appropriate; do not force a question into every sentence. "
         f"Interpret each beat according to its role. Each speech line must contain {scene_min}–{scene_max} words. "
@@ -315,6 +333,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "The scene lines plus the final spoken "
         "engagement question must total 65–85 words for a 28–40 second Short. "
         "Make every line add new information; avoid filler, generic moral lessons, and "
+        "Do not default every format to a quiz or rhetorical question; use the selected treatment naturally. "
         "generic 'like and subscribe' calls. The final question must invite a real answer. "
         "The title must be 8–80 characters, specific to this Short, and not a generic label. "
         "The premise field must be 35–90 words and accurately describe the Short. "
