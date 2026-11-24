@@ -24,8 +24,9 @@ No local computer, WSL2, Gemini key, vidIQ credits, hosted inference API, or ext
 ## Content directions
 
 - **Fiction:** surprise, mystery, sci-fi, emotional, thriller, moral dilemma.
-- **Facts and explainers:** weird facts, science explained, history GK, geography GK, world GK, myth vs fact, psychology, money/business, technology explained.
-- **Interactive:** brain puzzles, logic puzzles, riddles, three-question quick quizzes.
+- **Facts and explainers:** weird facts, science explained, history/geography/world/India GK, space and nature facts, human-body science, inventions, myth vs fact, psychology, money/business, and technology explained.
+- **Interactive:** brain puzzles, logic puzzles, riddles, quick quizzes, spot-the-lie, two-truths-one-lie, and guess-the-number.
+- **Creative and analytical:** what-if scenarios, mini case studies, and ranked countdowns with explicit criteria.
 - **Timely:** current news and trending topics, with an RSS source pack collected at run time from Google News India and Google Trends India.
 
 Puzzles are structured to give viewers a chance to think before the reveal. Quizzes should give clear answers and short explanations. Facts and GK are still AI-generated drafts: automated word-count and structure checks do **not** prove factual accuracy. Human verification is required before approval.
