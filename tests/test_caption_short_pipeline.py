@@ -85,6 +85,20 @@ class CaptionShortPipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Scene 2 must have role thinking_pause"):
             narration_from_candidate(candidate)
 
+    def test_accepts_each_adaptive_four_beat_structure(self):
+        from astra_v2.github_local_story_generator import STRUCTURES
+        for lane in ("science_explained", "quick_quiz", "trending_topics"):
+            candidate = self.candidate()
+            candidate["content_type"] = lane
+            roles = STRUCTURES[lane]
+            candidate["performance_scenes"] = [
+                {"role": role, "speech": f"Spoken line for {role}."}
+                for role in roles
+            ]
+            narration = narration_from_candidate(candidate)
+            self.assertTrue(narration.endswith(candidate["question"]))
+            self.assertEqual(len(candidate["performance_scenes"]), 4)
+
     def test_rejects_missing_speech(self):
         candidate = self.candidate()
         candidate["performance_scenes"][2]["speech"] = ""
