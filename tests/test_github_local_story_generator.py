@@ -88,10 +88,10 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
 
     def test_compact_puzzle_candidate_validates_with_four_beats(self):
         lines = [
-            "A farmer has seventeen sheep and all but nine escape overnight.",
-            "Pause now and decide exactly how many sheep remain inside.",
-            "The answer is nine because all but nine means nine stayed.",
-            "The wording tests whether you interpret the phrase rather than subtract blindly.",
+            "A farmer starts with seventeen sheep, but all except nine escape overnight during a storm.",
+            "Pause now and decide exactly how many sheep remain safely inside the farmer's field.",
+            "The answer is nine, because all but nine means nine sheep stayed behind there.",
+            "The wording tests whether you interpret the phrase instead of subtracting every sheep that escaped.",
         ]
         item = {
             "title": "How Many Sheep Actually Remain?",
