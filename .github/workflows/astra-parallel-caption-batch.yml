@@ -1,0 +1,284 @@
+name: ASTRA Parallel Caption Shorts Batch
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astra-parallel-caption-batch
+  cancel-in-progress: false
+
+jobs:
+  warm-model-caches:
+    name: Prepare shared model caches
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-caption-only.txt
+            requirements-story-engine.txt
+
+      - name: Restore or create Qwen model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub
+          key: astra-qwen3-4b-q4km-bc640142c66e1fdd
+
+      - name: Restore or create Kokoro voice cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
+
+      - name: Install CPU build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build
+
+      - name: Install story and caption runtimes
+        env:
+          CMAKE_ARGS: -DGGML_NATIVE=ON -DGGML_OPENMP=ON
+          FORCE_CMAKE: "1"
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements-story-engine.txt
+          python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Warm pinned Qwen model cache
+        env:
+          HF_HOME: /home/runner/.cache/huggingface
+        run: |
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          hf_hub_download(
+              repo_id="Qwen/Qwen3-4B-GGUF",
+              filename="Qwen3-4B-Q4_K_M.gguf",
+              revision="bc640142c66e1fdd12af0bd68f40445458f3869b",
+          )
+          PY
+
+      - name: Warm and verify Kokoro voice cache
+        env:
+          ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
+        run: |
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          import httpx
+
+          root = Path.home() / ".cache" / "astra-voice"
+          root.mkdir(parents=True, exist_ok=True)
+          base = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/"
+          expected = {
+              "kokoro-v1.0.onnx": "beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
+              "voices-v1.0.bin": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+          }
+          with httpx.Client(timeout=90, follow_redirects=True) as client:
+              for name, digest in expected.items():
+                  target = root / name
+                  if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest() == digest:
+                      continue
+                  temporary = target.with_suffix(target.suffix + ".part")
+                  with client.stream("GET", base + name) as response:
+                      response.raise_for_status()
+                      with temporary.open("wb") as handle:
+                          for chunk in response.iter_bytes(1024 * 1024):
+                              handle.write(chunk)
+                  if hashlib.sha256(temporary.read_bytes()).hexdigest() != digest:
+                      raise RuntimeError(f"Checksum mismatch for {name}")
+                  temporary.replace(target)
+          PY
+
+  generate-and-render:
+    name: Generate \${{ matrix.lane }} Short
+    needs: warm-model-caches
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - lane: brain_puzzle
+            seed_suffix: "11"
+          - lane: weird_facts
+            seed_suffix: "23"
+          - lane: india_gk
+            seed_suffix: "37"
+          - lane: trending_topics
+            seed_suffix: "49"
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-caption-only.txt
+            requirements-story-engine.txt
+
+      - name: Restore warmed Qwen model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub
+          key: astra-qwen3-4b-q4km-bc640142c66e1fdd
+
+      - name: Restore warmed Kokoro voice cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
+
+      - name: Install CPU build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build
+
+      - name: Install local story and caption runtimes
+        env:
+          CMAKE_ARGS: -DGGML_NATIVE=ON -DGGML_OPENMP=ON
+          FORCE_CMAKE: "1"
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements-story-engine.txt
+          python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Run model-free quality tests
+        run: python -m unittest tests.test_github_local_story_generator -v
+
+      - name: Collect current trend sources
+        if: matrix.lane == 'trending_topics'
+        run: |
+          python -m astra_v2.trend_source_collector \\
+            --direction "trending_topics" \\
+            --output "output/\${{ matrix.lane }}/sources.json"
+
+      - name: Generate original Short on this runner
+        env:
+          HF_HOME: /home/runner/.cache/huggingface
+        run: |
+          python -m astra_v2.github_local_story_generator \\
+            --output "output/\${{ matrix.lane }}/candidate.json" \\
+            --history data/story_history.jsonl \\
+            --lane "\${{ matrix.lane }}" \\
+            --seed "\${{ github.run_id }}\${{ matrix.seed_suffix }}" \\
+            \${{ matrix.lane == 'trending_topics' && format('--sources-file output/{0}/sources.json', matrix.lane) || '' }}
+
+      - name: Render narration and synchronized captions
+        env:
+          ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
+        run: |
+          python -m astra_v2.caption_short_pipeline \\
+            --candidate "output/\${{ matrix.lane }}/candidate.json" \\
+            --output "output/\${{ matrix.lane }}/rayvan-short.mp4"
+
+      - name: Upload this lane's review package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-short-\${{ matrix.lane }}-\${{ github.run_id }}
+          path: output/\${{ matrix.lane }}/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  aggregate-history:
+    name: Merge originality history and batch report
+    needs: generate-and-render
+    if: \${{ needs.generate-and-render.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Download all lane review packages
+        uses: actions/download-artifact@v4
+        with:
+          pattern: astra-short-*-\${{ github.run_id }}
+          path: batch-output
+
+      - name: Merge story fingerprints once
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          history_path = Path("data/story_history.jsonl")
+          history_path.parent.mkdir(parents=True, exist_ok=True)
+          seen = set()
+          if history_path.exists():
+              for line in history_path.read_text(encoding="utf-8").splitlines():
+                  if not line.strip():
+                      continue
+                  try:
+                      row = json.loads(line)
+                  except json.JSONDecodeError:
+                      continue
+                  if row.get("fingerprint"):
+                      seen.add(row["fingerprint"])
+
+          candidates = sorted(Path("batch-output").glob("**/candidate.json"))
+          if not candidates:
+              raise SystemExit("No candidate JSON files were downloaded")
+
+          added = []
+          for candidate_path in candidates:
+              candidate = json.loads(candidate_path.read_text(encoding="utf-8"))
+              fingerprint = candidate.get("premise_fingerprint")
+              if not fingerprint or not candidate.get("premise"):
+                  raise SystemExit(f"Invalid candidate: {candidate_path}")
+              if candidate.get("approved") is not False or candidate.get("published") is not False:
+                  raise SystemExit(f"Candidate safety flags are not review-only: {candidate_path}")
+              if fingerprint in seen:
+                  continue
+              seen.add(fingerprint)
+              added.append({
+                  "title": candidate.get("title", ""),
+                  "premise": candidate["premise"],
+                  "fingerprint": fingerprint,
+              })
+
+          with history_path.open("a", encoding="utf-8") as handle:
+              for row in added:
+                  handle.write(json.dumps(row, ensure_ascii=False) + "\\n")
+
+          report = {
+              "run_id": "\${{ github.run_id }}",
+              "generated_candidates": len(candidates),
+              "new_history_records": len(added),
+              "review_only": True,
+              "published": False,
+              "candidate_files": [str(path) for path in candidates],
+          }
+          Path("batch-output/batch-report.json").write_text(
+              json.dumps(report, indent=2) + "\\n", encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2))
+          PY
+
+      - name: Commit shared originality history once
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/story_history.jsonl
+          if ! git diff --cached --quiet; then
+            git commit -m "Record ASTRA parallel batch story fingerprints"
+            git push
+          fi
+
+      - name: Upload batch report
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-batch-report-\${{ github.run_id }}
+          path: batch-output/batch-report.json
+          retention-days: 7
