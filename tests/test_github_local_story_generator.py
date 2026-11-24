@@ -55,8 +55,9 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
             validate_candidate(item, history)
 
     def test_content_catalog_includes_requested_formats(self):
-        for lane in ("weird_facts", "history_gk", "brain_puzzle", "riddle",
-                     "quick_quiz", "current_news", "trending_topics"):
+        for lane in ("weird_facts", "history_gk", "india_gk", "space_facts",
+                     "brain_puzzle", "riddle", "quick_quiz", "spot_the_lie",
+                     "two_truths_one_lie", "what_if", "current_news", "trending_topics"):
             self.assertIn(lane, LANES)
 
     def test_current_news_prompt_requires_source_pack(self):
