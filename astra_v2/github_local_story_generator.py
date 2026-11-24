@@ -57,7 +57,7 @@ def _content_tokens(premise: str) -> set[str]:
 
 
 def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
-    """Validate the text-only seven-beat story before it enters the render path."""
+    """Validate the text-only seven-beat Short before it enters the render path."""
     if not isinstance(data, dict):
         raise ValueError("Model output must be a JSON object")
     title = " ".join(str(data.get("title") or "").split())
@@ -82,9 +82,9 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
         speech_lines.append(speech)
 
     if not 8 <= len(_words(question)) <= 20 or not question.endswith("?"):
-        raise ValueError("Story-specific engagement question must be 8–20 words and end with ?")
+        raise ValueError("Audience engagement question must be 8–20 words and end with ?")
     if re.search(r"\b(like and subscribe|smash that like|follow for more|comment below)\b", question, re.I):
-        raise ValueError("Engagement question must be story-specific, not a generic CTA")
+        raise ValueError("Engagement question must be content-specific, not a generic CTA")
 
     all_speech = " ".join(speech_lines + [question])
     total_words = len(_words(all_speech))
@@ -108,7 +108,7 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
             continue
         overlap = len(premise_tokens & old) / max(1, len(premise_tokens | old))
         if overlap >= 0.48 or prior.get("fingerprint") == premise_fp:
-            raise ValueError("Story premise is too similar to a recent ASTRA story")
+            raise ValueError("Content premise is too similar to a recent ASTRA Short")
 
     return {
         "title": title,
@@ -219,6 +219,16 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         sources = json.loads(Path(sources_path).read_text(encoding="utf-8"))
         if not isinstance(sources, list):
             raise ValueError("Source pack must be a JSON array")
+        sources = [
+            {
+                "title": str(item.get("title", ""))[:240],
+                "url": str(item.get("url", ""))[:500],
+                "published": str(item.get("published", ""))[:80],
+                "publisher": str(item.get("publisher", ""))[:100],
+                "summary": str(item.get("summary", ""))[:280],
+            }
+            for item in sources[:10] if isinstance(item, dict) and item.get("title") and item.get("url")
+        ]
     if lane in {"current_news", "trending_topics"} and len(sources) < 2:
         raise ValueError("Current news/trending directions require at least two retrieved sources")
     llm = Llama(
