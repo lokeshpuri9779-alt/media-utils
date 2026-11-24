@@ -236,6 +236,15 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
                      "two_truths_one_lie", "what_if", "current_news", "trending_topics"):
             self.assertIn(lane, LANES)
 
+    def test_factual_lane_rejects_missing_sources_before_model_runtime_load(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "candidate.json"
+            with self.assertRaisesRegex(ValueError, "at least two usable evidence items"):
+                from astra_v2.github_local_story_generator import generate
+                generate(str(output), str(Path(directory) / "history.jsonl"),
+                         lane="science_explained", seed=1)
+            self.assertFalse(output.exists())
+
     def test_quick_quiz_is_required_to_use_a_validated_source_pack(self):
         rows = [
             {"title": "Quiz source A", "url": "https://a.example/quiz",
