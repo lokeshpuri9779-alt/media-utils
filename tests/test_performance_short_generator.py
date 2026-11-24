@@ -35,6 +35,7 @@ def valid_payload():
             "camera": "Medium shot, clear readable subject action",
             "environment": "moonlit forest clearing",
             "required_props": ["glass jar"] if i in (0, 1, 2, 3, 5) else [],
+            "story_prop": "none",
             "transition_question": "What happens next?" if i < 6 else "",
         })
     return {
@@ -62,12 +63,14 @@ class PerformanceShortGeneratorTests(unittest.TestCase):
         schema = _schema()
         self.assertEqual(schema["properties"]["scenes"]["minItems"], 7)
         self.assertEqual(schema["properties"]["scenes"]["maxItems"], 7)
+        self.assertIn("story_prop", schema["properties"]["scenes"]["items"]["required"])
 
     def test_prompt_includes_recent_story_exclusions_and_new_plot_rule(self):
         prompt = _prompt([{"title": "Earlier tale", "central_conflict": "A bell went missing"}])
         self.assertIn("Earlier tale", prompt)
         self.assertIn("different cause-and-effect chain", prompt)
         self.assertIn("required_props", prompt)
+        self.assertIn("story_prop", prompt)
 
     def test_generator_returns_review_only_candidate(self):
         payload = valid_payload()
