@@ -166,9 +166,9 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
         concat_file = work / "frames.txt"
         with concat_file.open("w", encoding="utf-8") as handle:
             for index, item in enumerate(manifest):
-                handle.write(f"file '{(work / f'caption-{index:04d}.png').as_posix()}'\\n")
-                handle.write(f"duration {durations[index] + (0.12 if index != len(chunks)-1 else 0):.6f}\\n")
-            handle.write(f"file '{(work / f'caption-{len(chunks)-1:04d}.png').as_posix()}'\\n")
+                handle.write(f"file '{(work / f'caption-{index:04d}.png').as_posix()}'\n")
+                handle.write(f"duration {durations[index] + (0.12 if index != len(chunks)-1 else 0):.6f}\n")
+            handle.write(f"file '{(work / f'caption-{len(chunks)-1:04d}.png').as_posix()}'\n")
         command = [
             get_ffmpeg_exe(), "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
             "-i", str(concat_path), "-vf", f"fps={FPS},format=yuv420p",
