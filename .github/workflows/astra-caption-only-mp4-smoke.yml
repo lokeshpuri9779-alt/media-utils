@@ -73,7 +73,7 @@ jobs:
               "published": False,
           }
           Path("output/caption-smoke/candidate.json").write_text(
-              json.dumps(candidate, indent=2) + "\\n", encoding="utf-8"
+              json.dumps(candidate, indent=2) + "\n", encoding="utf-8"
           )
           PY
 
