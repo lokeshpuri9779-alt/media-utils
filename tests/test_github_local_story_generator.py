@@ -38,6 +38,13 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertGreaterEqual(result["word_count"], 65)
         self.assertLessEqual(result["word_count"], 85)
 
+    def test_recovers_short_premise_from_validated_narration(self):
+        item = sample()
+        item["premise"] = "Too short."
+        result = validate_candidate(item)
+        self.assertGreaterEqual(len(result["premise"].split()), 35)
+        self.assertIn("lighthouse", result["premise"].lower())
+
     def test_recovers_short_model_title_from_story_premise(self):
         item = sample()
         item["title"] = "Oops"
