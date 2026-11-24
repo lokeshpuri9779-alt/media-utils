@@ -120,8 +120,8 @@ jobs:
       - name: Run model-free quality tests
         run: python -m unittest tests.test_github_local_story_generator -v
 
-      - name: Collect current trend sources
-        if: inputs.lane == 'trending_topics'
+      - name: Collect independent factual evidence
+        if: contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","trending_topics"]'), inputs.lane)
         run: |
           python -m astra_v2.trend_source_collector \
             --direction "trending_topics" \
@@ -136,7 +136,7 @@ jobs:
             --history data/story_history.jsonl \
             --lane "${{ inputs.lane }}" \
             --seed "${{ inputs.seed }}" \
-            ${{ inputs.lane == 'trending_topics' && format('--sources-file output/{0}/sources.json', inputs.lane) || '' }}
+            ${{ contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","trending_topics"]'), inputs.lane) && format('--sources-file output/{0}/sources.json', inputs.lane) || '' }}
 
       - name: Render narration and synchronized captions
         env:
