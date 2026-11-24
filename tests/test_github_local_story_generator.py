@@ -114,6 +114,27 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertEqual(len(result["performance_scenes"]), 4)
         self.assertEqual(result["performance_scenes"][0]["role"], "challenge")
 
+    def test_compact_puzzle_accepts_ten_word_scene_when_total_script_is_valid(self):
+        item = {
+            "title": "A Sheep Count That Tricks You",
+            "premise": "A short language puzzle asks how many sheep remain after all but nine escape. The wording sounds like a subtraction problem, but its exact meaning gives a much simpler answer. Viewers get a pause to solve it before the reveal explains the phrase.",
+            "question": "Did you solve it immediately, or did the wording trick you?",
+            "performance_scenes": [
+                {"role": "challenge", "speech": "Seventeen sheep escape, but nine remain inside the farmer's field."},
+                {"role": "thinking_pause", "speech": "Pause now and decide exactly how many sheep remain safely inside the farmer's field."},
+                {"role": "answer", "speech": "The answer is nine, because all but nine means nine sheep stayed behind there."},
+                {"role": "explanation", "speech": "The wording tests whether you interpret the phrase instead of subtracting every sheep that escaped."},
+            ],
+        }
+        result = validate_candidate(item, lane="brain_puzzle")
+        self.assertEqual(result["performance_scenes"][0]["speech"], item["performance_scenes"][0]["speech"])
+
+    def test_compact_prompt_uses_flexible_but_explicit_word_budget(self):
+        prompt = _build_prompt("brain_puzzle", [], 42)
+        self.assertIn("10–18 words", prompt)
+        self.assertIn("aim for 14–16 words per line", prompt)
+        self.assertIn("expand short lines with a concrete clue or explanation", prompt)
+
     def test_creative_direction_is_deterministic_and_varied(self):
         first = creative_direction("brain_puzzle", 12345)
         self.assertEqual(first, creative_direction("brain_puzzle", 12345))
