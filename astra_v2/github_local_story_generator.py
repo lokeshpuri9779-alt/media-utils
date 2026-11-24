@@ -430,7 +430,14 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             validated = validate_candidate(parsed, history, lane)
             break
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
-            last_error = exc
+            # Preserve a short, sanitized sample so CI tells us whether the
+            # model emitted a thinking preamble, truncated JSON, or plain text.
+            preview = repr(raw[:400]) if isinstance(raw, str) else repr(raw)
+            finish_reason = choice.get("finish_reason", "unknown")
+            last_error = ValueError(
+                f"Candidate rejected ({type(exc).__name__}: {exc}; "
+                f"finish_reason={finish_reason}; response_preview={preview})"
+            )
     if validated is None:
         raise RuntimeError(f"Local model failed story quality gates after 3 attempts: {last_error}")
 
