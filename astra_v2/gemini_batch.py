@@ -141,6 +141,10 @@ def _bounded_float(name, default, high):
 
 
 def main():
+    if os.getenv("ASTRA_GEMINI_BATCH_CONFIRM") != "1":
+        raise SystemExit(
+            "Gemini batch is disabled unless ASTRA_GEMINI_BATCH_CONFIRM=1 is explicitly set"
+        )
     parser = argparse.ArgumentParser()
     parser.add_argument("--count", type=int, default=10)
     parser.add_argument("--output", default="runtime-health/gemini-proposals.json")
