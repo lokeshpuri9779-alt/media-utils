@@ -205,14 +205,15 @@ jobs:
   aggregate-history:
     name: Merge originality history and batch report
     needs: generate-and-render
-    if: ${{ needs.generate-and-render.result == 'success' }}
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Check out ASTRA
         uses: actions/checkout@v4
 
-      - name: Download all lane review packages
+      - name: Download all available lane review packages
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           pattern: astra-short-*-${{ github.run_id }}
           path: batch-output
@@ -237,9 +238,8 @@ jobs:
                   if row.get("fingerprint"):
                       seen.add(row["fingerprint"])
 
+          history_path.touch(exist_ok=True)
           candidates = sorted(Path("batch-output").glob("**/candidate.json"))
-          if not candidates:
-              raise SystemExit("No candidate JSON files were downloaded")
 
           added = []
           for candidate_path in candidates:
@@ -266,6 +266,7 @@ jobs:
               "run_id": "${{ github.run_id }}",
               "generated_candidates": len(candidates),
               "new_history_records": len(added),
+              "batch_result": "${{ needs.generate-and-render.result }}",
               "review_only": True,
               "published": False,
               "candidate_files": [str(path) for path in candidates],
