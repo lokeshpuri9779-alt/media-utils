@@ -1,0 +1,109 @@
+name: ASTRA Local Story to Caption Short
+
+on:
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: Story style
+        required: true
+        default: surprise
+        type: choice
+        options:
+          - surprise
+          - mystery
+          - sci-fi
+          - emotional
+          - thriller
+          - moral_dilemma
+
+permissions:
+  contents: write
+
+concurrency:
+  group: astra-local-story-production
+  cancel-in-progress: false
+
+jobs:
+  story-and-render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - name: Check out ASTRA
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-caption-only.txt
+            requirements-story-engine.txt
+
+      - name: Restore local story model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub
+          key: astra-qwen3-4b-q4km-v1
+
+      - name: Restore Kokoro voice model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
+
+      - name: Install CPU build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build
+
+      - name: Install local model runtime
+        env:
+          CMAKE_ARGS: -DGGML_NATIVE=OFF -DGGML_OPENMP=ON
+          FORCE_CMAKE: "1"
+        run: |
+          python -m pip install --disable-pip-version-check -r requirements-story-engine.txt
+
+      - name: Generate original story locally on GitHub runner
+        env:
+          HF_HOME: /home/runner/.cache/huggingface
+        run: |
+          python -m astra_v2.github_local_story_generator \
+            --output output/candidate.json \
+            --history data/story_history.jsonl \
+            --lane "${{ inputs.lane }}" \
+            --seed "${{ github.run_id }}"
+
+      - name: Persist story fingerprint history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/story_history.jsonl
+          if ! git diff --cached --quiet; then
+            git commit -m "Record ASTRA generated story fingerprint"
+            git push
+          fi
+
+      - name: Install caption renderer dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Render narration and synchronized captions
+        env:
+          ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
+        run: |
+          python -m astra_v2.caption_short_pipeline \
+            --candidate output/candidate.json \
+            --output output/rayvan-short.mp4
+
+      - name: Upload story, MP4 and review manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rayvan-local-story-short-${{ github.run_id }}
+          path: |
+            output/candidate.json
+            output/rayvan-short.mp4
+            output/rayvan-short.captions.json
+            output/rayvan-short.review.json
+          if-no-files-found: ignore
+          retention-days: 7
