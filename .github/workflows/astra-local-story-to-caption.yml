@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       lane:
-        description: Story style
+        description: Content direction
         required: true
         default: surprise
         type: choice
@@ -15,6 +15,21 @@ on:
           - emotional
           - thriller
           - moral_dilemma
+          - weird_facts
+          - science_explained
+          - history_gk
+          - geography_gk
+          - world_gk
+          - myth_vs_fact
+          - brain_puzzle
+          - logic_puzzle
+          - riddle
+          - quick_quiz
+          - psychology
+          - money_business
+          - tech_explained
+          - current_news
+          - trending_topics
 
 permissions:
   contents: write
@@ -67,6 +82,13 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check -r requirements-story-engine.txt
 
+      - name: Collect current news or trending sources
+        if: inputs.lane == 'current_news' || inputs.lane == 'trending_topics'
+        run: |
+          python -m astra_v2.trend_source_collector \
+            --direction "${{ inputs.lane }}" \
+            --output output/sources.json
+
       - name: Generate original story locally on GitHub runner
         env:
           HF_HOME: /home/runner/.cache/huggingface
@@ -75,7 +97,8 @@ jobs:
             --output output/candidate.json \
             --history data/story_history.jsonl \
             --lane "${{ inputs.lane }}" \
-            --seed "${{ github.run_id }}"
+            --seed "${{ github.run_id }}" \
+            ${{ (inputs.lane == 'current_news' || inputs.lane == 'trending_topics') && '--sources-file output/sources.json' || '' }}
 
       - name: Persist story fingerprint history
         run: |
@@ -105,6 +128,7 @@ jobs:
           name: rayvan-local-story-short-${{ github.run_id }}
           path: |
             output/candidate.json
+            output/sources.json
             output/rayvan-short.mp4
             output/rayvan-short.captions.json
             output/rayvan-short.review.json
