@@ -54,8 +54,11 @@ def validate_short_outline(outline: dict, history=()) -> dict:
         if not isinstance(duration, (int, float)) or isinstance(duration, bool) or not 2.5 <= duration <= 7.0:
             raise ValueError(f"scene_{index}_duration_invalid")
         total += float(duration)
-        for field in ("narration", "action", "visual_prompt", "camera", "environment", "headline", "speech", "visual", "label", "story_environment"):
+        for field in ("narration", "action", "visual_prompt", "camera", "environment", "headline", "speech", "label"):
             if not isinstance(scene.get(field), str) or len(scene[field].strip()) < 8:
+                raise ValueError(f"scene_{index}_{field}_missing")
+        for field in ("visual", "story_environment", "story_beat"):
+            if not isinstance(scene.get(field), str) or not scene[field].strip():
                 raise ValueError(f"scene_{index}_{field}_missing")
         props = scene.get("required_props")
         if not isinstance(props, list) or any(not isinstance(p, str) or not p.strip() for p in props):
