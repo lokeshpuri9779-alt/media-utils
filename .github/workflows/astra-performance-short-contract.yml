@@ -17,6 +17,7 @@ on:
       - "tests/test_caption_only_renderer.py"
       - "tests/test_caption_short_pipeline.py"
       - "astra_v2/github_local_story_generator.py"
+      - "astra_v2/trend_source_collector.py"
       - "tests/test_github_local_story_generator.py"
       - "astra_v2/omniroute.py"
       - "astra_v2/omniroute_gemini.py"
@@ -37,7 +38,7 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check \
             'httpx==0.28.1' 'Pillow==11.3.0' 'imageio-ffmpeg==0.6.0' 'numpy==2.2.6'
-      - name: Validate seven-scene contract and legacy compatibility
+      - name: Validate multi-format content contract and legacy compatibility
         run: |
           python -m unittest discover -s tests -p "test_performance_short_*.py" -v
           python -m unittest tests.test_astra_omniroute -v
