@@ -269,36 +269,61 @@ def validate_candidate(data: dict, history: list[dict] | None = None, lane: str 
 
 def find_duplicate_premises(candidates: list[dict], history: list[dict] | None = None,
                             threshold: float = 0.48) -> list[dict]:
-    """Find exact or high-overlap premises across a batch and prior history."""
+    """Find exact or high-overlap premises against history and earlier accepted batch items."""
     if not 0.0 < threshold <= 1.0:
         raise ValueError("Similarity threshold must be in (0, 1]")
-    prior_rows = list(history or [])
+    accepted_prior = list(history or [])
     duplicates = []
     for index, candidate in enumerate(candidates):
         premise = str(candidate.get("premise") or "")
         tokens = _content_tokens(premise)
         fingerprint = str(candidate.get("premise_fingerprint") or candidate.get("fingerprint") or "")
-        if not tokens:
-            duplicates.append({"candidate_index": index, "prior_index": None, "similarity": 1.0,
-                               "reason": "premise_missing"})
+        if not premise.strip() or not tokens:
+            duplicates.append({
+                "candidate_index": index, "prior_index": None,
+                "similarity": 1.0, "reason": "premise_missing",
+            })
             continue
-        for prior_index, prior in enumerate(prior_rows):
-            prior_tokens = _content_tokens(prior.get("premise", ""))
-            prior_fingerprint = str(prior.get("premise_fingerprint") or prior.get("fingerprint") or "")
+        duplicate = None
+        for prior_index, prior in enumerate(accepted_prior):
+            prior_fingerprint = str(
+                prior.get("premise_fingerprint") or prior.get("fingerprint") or ""
+            )
+            prior_premise = str(prior.get("premise") or "")
+            prior_tokens = _content_tokens(prior_premise)
+            if fingerprint and fingerprint == prior_fingerprint:
+                duplicate = {
+                    "candidate_index": index, "prior_index": prior_index,
+                    "similarity": 1.0, "reason": "exact_fingerprint",
+                }
+                break
             if not prior_tokens:
                 continue
             overlap = len(tokens & prior_tokens) / max(1, len(tokens | prior_tokens))
-            if (fingerprint and fingerprint == prior_fingerprint) or overlap >= threshold:
-                duplicates.append({
-                    "candidate_index": index,
-                    "prior_index": prior_index,
-                    "similarity": round(overlap, 3),
-                    "reason": "exact_fingerprint" if fingerprint and fingerprint == prior_fingerprint
-                              else "premise_token_overlap",
-                })
+            if overlap >= threshold:
+                duplicate = {
+                    "candidate_index": index, "prior_index": prior_index,
+                    "similarity": round(overlap, 3), "reason": "premise_token_overlap",
+                }
                 break
-        prior_rows.append(candidate)
+        if duplicate:
+            duplicates.append(duplicate)
+        else:
+            # Rejected duplicates must not poison comparisons for later candidates.
+            accepted_prior.append(candidate)
     return duplicates
+
+
+def accepted_unique_candidates(candidates: list[dict], history: list[dict] | None = None,
+                               threshold: float = 0.48) -> tuple[list[dict], list[dict]]:
+    """Return accepted candidates and duplicate diagnostics using the shared gate."""
+    duplicates = find_duplicate_premises(candidates, history, threshold)
+    rejected_indices = {item["candidate_index"] for item in duplicates}
+    accepted = [
+        candidate for index, candidate in enumerate(candidates)
+        if index not in rejected_indices
+    ]
+    return accepted, duplicates
 
 
 def _load_history(path: Path) -> list[dict]:
