@@ -33,7 +33,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
 <script>
 (() => {
  const $ = id => document.getElementById(id);
- let queue = null, decisions = {};
+ let queue = null, decisions = {}, visualReviews = {}, previewUrls = {};
  const roles = ["hook","stakes","attempt","setback","discovery","climax","payoff"];
  const setStatus = s => { $("status").textContent = s; };
  const esc = v => String(v ?? "");
@@ -60,11 +60,27 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
   ];
   return {checks,duration};
  }
- function sceneCard(s,i){
+ function sceneCard(s,i,candidateId){
   const card=document.createElement("article");card.className="scene";
   const h=document.createElement("h3");h.textContent=(i+1)+". "+roles[i].toUpperCase();card.append(h);
   const fields=[["Narration",s.narration],["Dialogue",s.speech],["Action",s.action],["Visual prompt",s.visual_prompt],["Camera",s.camera],["Environment",s.environment],["Required props",(s.required_props||[]).join(", ")||"None listed"],["Story prop",s.story_prop],["Transition question",s.transition_question]];
   for(const [label,value] of fields){const p=document.createElement("p");const b=document.createElement("strong");b.textContent=label+": ";p.append(b,document.createTextNode(esc(value)||"—"));card.append(p);}
+  const proof=document.createElement("div");proof.style.cssText="border-top:1px solid var(--line);margin-top:12px;padding-top:10px";
+  const proofTitle=document.createElement("strong");proofTitle.textContent="Actual frame proof";proof.append(proofTitle);
+  const upload=document.createElement("input");upload.type="file";upload.accept="image/png,image/jpeg,image/webp";upload.style.display="block";upload.style.marginTop="8px";
+  const proofKey=candidateId+":"+i;
+  const prior=visualReviews[proofKey]||{};
+  const verdict=document.createElement("select");verdict.style.cssText="width:100%;margin-top:8px;background:#101722;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px";
+  [["not_checked","Not visually checked"],["matches","Character and required props visibly match"],["character_mismatch","Character mismatch"],["missing_prop","Required prop missing or unclear"],["composition_issue","Composition/action unclear"]].forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;verdict.append(o)});
+  verdict.value=prior.verdict||"not_checked";
+  const preview=document.createElement("img");preview.alt="Selected scene frame preview";preview.style.cssText="display:none;max-width:100%;max-height:240px;object-fit:contain;margin-top:10px;border-radius:8px";
+  const fileName=document.createElement("p");fileName.className="muted";fileName.textContent=prior.filename?"Selected: "+prior.filename:"No frame selected";
+  if(prior.previewUrl){preview.src=prior.previewUrl;preview.style.display="block";}
+  upload.addEventListener("change",()=>{const file=upload.files&&upload.files[0];if(!file)return;if(!file.type.startsWith("image/")){fileName.textContent="Unsupported file type";return;}if(previewUrls[proofKey])URL.revokeObjectURL(previewUrls[proofKey]);const url=URL.createObjectURL(file);previewUrls[proofKey]=url;preview.src=url;preview.style.display="block";visualReviews[proofKey]={...(visualReviews[proofKey]||{}),filename:file.name,verdict:verdict.value,previewUrl:url};fileName.textContent="Selected: "+file.name;});
+  verdict.addEventListener("change",()=>{visualReviews[proofKey]={...(visualReviews[proofKey]||{}),filename:visualReviews[proofKey]?.filename||"",verdict:verdict.value,previewUrl:previewUrls[proofKey]||""};});
+  proof.append(upload,verdict,fileName,preview);
+  const proofNote=document.createElement("p");proofNote.className="muted";proofNote.textContent="Frame files are previewed locally in this browser and are not uploaded or embedded in the export. Export records only filename and your visual verdict.";proof.append(proofNote);
+  card.append(proof);
   return card;
  }
  function render(){
@@ -87,7 +103,7 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
    const bible=document.createElement("p");bible.innerHTML="<strong>Character bible:</strong> ";bible.append(document.createTextNode(esc(c.character_bible)||"—"));wrap.append(bible);
    const qa=document.createElement("p");qa.innerHTML="<strong>Hook question:</strong> ";qa.append(document.createTextNode(esc(c.question)||"—"));wrap.append(qa);
    const score=document.createElement("p");score.className="muted";score.textContent="Scorecard: "+JSON.stringify(c.scorecard||{});wrap.append(score);
-   const sceneGrid=document.createElement("div");sceneGrid.className="grid";c.performance_scenes.forEach((sc,i)=>sceneGrid.append(sceneCard(sc,i)));wrap.append(sceneGrid);
+   const sceneGrid=document.createElement("div");sceneGrid.className="grid";c.performance_scenes.forEach((sc,i)=>sceneGrid.append(sceneCard(sc,i,c.candidate_id)));wrap.append(sceneGrid);
    const label=document.createElement("label");label.textContent="Editorial review status (does not approve production)";
    const select=document.createElement("select");
    [["not_reviewed","Not reviewed"],["needs_changes","Needs changes"],["editorially_promising","Editorially promising — visual proof still required"],["reject","Reject candidate"]].forEach(([v,t])=>{const o=document.createElement("option");o.value=v;o.textContent=t;select.append(o)});
@@ -100,12 +116,12 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#101722;padding:10px;
   });
   if(!queue.candidates.length){const p=document.createElement("p");p.className="muted";p.textContent="Queue is empty. No candidates have been generated or imported.";list.append(p);}
  }
- async function loadQueue(q){queue=validate(q);decisions={};render();setStatus("Loaded "+queue.candidates.length+" review-only candidate(s). The source queue has not been changed.");}
+ async function loadQueue(q){queue=validate(q);decisions={};visualReviews={};Object.values(previewUrls).forEach(URL.revokeObjectURL);previewUrls={};render();setStatus("Loaded "+queue.candidates.length+" review-only candidate(s). The source queue has not been changed.");}
  $("load").addEventListener("click",async()=>{try{const f=$("file").files[0];if(!f)throw Error("Select a JSON file first.");await loadQueue(JSON.parse(await f.text()));}catch(e){setStatus("Load failed: "+e.message);}});
  $("sample").addEventListener("click",async()=>{try{const r=await fetch("https://raw.githubusercontent.com/lokeshpuri9779-alt/media-utils/astra-state/performance_short_review_queue.json",{cache:"no-store"});if(!r.ok)throw Error("Repository queue fetch failed ("+r.status+").");await loadQueue(await r.json());}catch(e){setStatus("Load failed: "+e.message+" You can download the JSON and load it locally.");}});
  $("export").addEventListener("click",()=>{
   if(!queue)return;
-  const out={schema_version:1,format_profile:"shorts_v2_7scene_editorial_notes",source_queue_count:queue.count,production_approval:false,rendering_triggered:false,publication_triggered:false,decisions:Object.entries(decisions).map(([candidate_id,v])=>({candidate_id,status:v.status||"not_reviewed",notes:v.notes||"",production_approved:false}))};
+  const out={schema_version:1,format_profile:"shorts_v2_7scene_editorial_notes",source_queue_count:queue.count,production_approval:false,rendering_triggered:false,publication_triggered:false,decisions:Object.entries(decisions).map(([candidate_id,v])=>({candidate_id,status:v.status||"not_reviewed",notes:v.notes||"",production_approved:false})),visual_checks:Object.entries(visualReviews).map(([key,v])=>({candidate_id:key.slice(0,key.lastIndexOf(":")),scene_index:Number(key.slice(key.lastIndexOf(":")+1)),filename:v.filename||"",verdict:v.verdict||"not_checked",image_embedded:false,production_approved:false}))};
   const blob=new Blob([JSON.stringify(out,null,2)+"\n"],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="astra-performance-short-editorial-notes.json";a.click();URL.revokeObjectURL(url);
   setStatus("Exported review notes only. No approval or queue mutation occurred.");
  });
