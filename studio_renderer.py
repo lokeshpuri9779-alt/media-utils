@@ -102,7 +102,7 @@ def _story_plan(ch):
     if ch.get('performance_scenes') is not None:
         from astra_v2.performance_short_contract import to_renderer_beats
         outline = {
-            "premise": ch.get("performance_premise"),
+            "premise": ch.get("performance_premise") or ch.get("premise"),
             "scenes": ch.get("performance_scenes"),
             "scorecard": ch.get("performance_scorecard"),
             "hard_failures": ch.get("performance_hard_failures", []),
