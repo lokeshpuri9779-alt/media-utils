@@ -99,19 +99,26 @@ class PerformanceShortGeneratorTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             candidate_path = Path(directory) / "candidate.json"
             packet_path = Path(directory) / "packet.json"
+            queue_path = Path(directory) / "review-queue.json"
             with patch.dict(os.environ, {"ASTRA_GEMINI_ENABLED": "1", "GEMINI_API_KEY": "test-key",
                                          "ASTRA_GEMINI_MODEL": "gemini-test"}, clear=False):
                 with patch("astra_v2.performance_short_generator.urllib.request.urlopen",
                            return_value=io.BytesIO(json.dumps(response).encode())):
                     from astra_v2.performance_short_generator import main
                     self.assertEqual(main(["--output", str(candidate_path),
-                                           "--packet", str(packet_path)]), 0)
+                                           "--packet", str(packet_path),
+                                           "--queue", str(queue_path)]), 0)
             candidate = json.loads(candidate_path.read_text())
             packet = json.loads(packet_path.read_text())
             self.assertEqual(len(candidate["performance_scenes"]), 7)
             self.assertEqual(packet["approved_count"], 0)
             self.assertFalse(packet["rendering_triggered"])
             self.assertFalse(packet["publication_triggered"])
+            queue = json.loads(queue_path.read_text())
+            self.assertEqual(queue["count"], 1)
+            self.assertFalse(queue["candidates"][0]["approved"])
+            self.assertFalse(queue["rendering_triggered"])
+            self.assertFalse(queue["publication_triggered"])
             review = packet["candidates"][0]
             self.assertFalse(review["approved"])
             self.assertFalse(review["production_ready"])
