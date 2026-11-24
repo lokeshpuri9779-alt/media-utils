@@ -136,7 +136,7 @@ jobs:
             --history data/story_history.jsonl \
             --lane "${{ inputs.lane }}" \
             --seed "${{ inputs.seed }}" \
-            ${{ contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","trending_topics"]'), inputs.lane) && format('--sources-file output/{0}/sources.json', inputs.lane) || '' }}
+            ${{ contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","what_if","trending_topics"]'), inputs.lane) && format('--sources-file output/{0}/sources.json', inputs.lane) || '' }}
 
       - name: Render narration and synchronized captions
         env:
