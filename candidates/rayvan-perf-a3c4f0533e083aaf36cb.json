@@ -1,0 +1,355 @@
+{
+  "genre": "fiction",
+  "kind": "performance_short_candidate",
+  "format_profile": "shorts_v2_7scene",
+  "production_ready": false,
+  "approved": false,
+  "eligible_for_automatic_publishing": false,
+  "published": false,
+  "content_id": "rayvan-perf-a3c4f0533e083aaf36cb",
+  "title": "The Bell Beneath the Fog",
+  "hook": "The warning bell is silent.",
+  "question": "Can a little otter make the silent harbor bell ring before the boats reach the rocks?",
+  "answer": "The bell was never broken; its own signal rope had trapped the clapper.",
+  "source": "human_authored_offline_candidate",
+  "keywords": [
+    "original animated story",
+    "RAYVAN",
+    "YouTube Shorts",
+    "otter",
+    "harbor bell"
+  ],
+  "premise": {
+    "central_conflict": "A fog-bound harbor cannot hear its warning bell because the bell clapper is tangled in its own signal rope",
+    "failed_attempt": "The otter pulls the wet rope from the pier but the knot tightens and the bell stays silent",
+    "causal_discovery": "The rope has looped through the bell frame and pins the clapper against its rim",
+    "resolution": "The otter dives beneath the buoy and frees the loop so the next wave swings the clapper and rings the harbor warning"
+  },
+  "character_bible": "a small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear",
+  "story_cast": [
+    "otter"
+  ],
+  "story_environment": "harbor",
+  "central_conflict": "A fog-bound harbor cannot hear its warning bell because the bell clapper is tangled in its own signal rope",
+  "decisive_choice": "The rope has looped through the bell frame and pins the clapper against its rim",
+  "resolution": "The otter dives beneath the buoy and frees the loop so the next wave swings the clapper and rings the harbor warning",
+  "performance_scenes": [
+    {
+      "role": "hook",
+      "duration_seconds": 4.5,
+      "narration": "A silent bell hangs just above the black water while the otter listens beneath it.",
+      "speech": "The harbor bell has stopped ringing, and the fog is swallowing every boat.",
+      "headline": "The warning bell is silent.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "reveal",
+      "action": "The otter surfaces and presses one ear close to the silent bronze bell.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside a bronze harbor bell on a buoy, listening as fog hides the harbor. The bell and its wet signal rope are clearly visible.",
+      "camera": "low waterline close-up, slow push toward the bell",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "What could silence a bell in the middle of the harbor?"
+    },
+    {
+      "role": "stakes",
+      "duration_seconds": 4.5,
+      "narration": "Fishing boats drift toward the stone breakwater as the fog thickens.",
+      "speech": "Without the warning bell, the boats cannot find the safe channel.",
+      "headline": "The boats are losing the channel.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "build",
+      "action": "The otter looks from the drifting boats back to the silent bell.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear watches two small fishing boats drift toward the harbor breakwater through dense fog. A bronze harbor bell and its wet signal rope hang from a buoy in the foreground.",
+      "camera": "wide establishing shot, gentle pan from boats to buoy",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Can the otter make the bell ring in time?"
+    },
+    {
+      "role": "attempt",
+      "duration_seconds": 4.5,
+      "narration": "The otter grabs the signal rope and pulls with all its strength.",
+      "speech": "The rope jerks, but the bell gives no sound.",
+      "headline": "The first attempt fails.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "build",
+      "action": "The otter braces its paws on the buoy and pulls the signal rope.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear grips the wet signal rope beside the bronze harbor bell on the buoy, pulling hard as the rope stretches taut above the harbor water.",
+      "camera": "medium side shot, slight camera shake on the pull",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Why does the rope move while the bell stays still?"
+    },
+    {
+      "role": "setback",
+      "duration_seconds": 4.5,
+      "narration": "The rope cinches tighter and pins the bell's clapper against its rim.",
+      "speech": "The harder the otter pulls, the more tightly the bell is trapped.",
+      "headline": "The rope is the problem, not the bell.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "mechanism",
+      "action": "The otter releases the rope as the knot tightens around the bell frame.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear recoils as a wet signal rope tightens through the bronze harbor bell frame, visibly pinning the clapper against the bell's inner rim on the buoy.",
+      "camera": "tight insert on the clapper trapped by the rope, then rack focus to otter",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "What is the rope caught around?"
+    },
+    {
+      "role": "discovery",
+      "duration_seconds": 4.5,
+      "narration": "Under the buoy, the otter spots the rope looped through the bell frame.",
+      "speech": "The clapper is trapped by a loop hidden below the waterline.",
+      "headline": "The hidden loop can be freed from below.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "twist",
+      "action": "The otter follows the rope underwater and finds the hidden loop.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear dives beneath the harbor buoy and discovers the wet signal rope threaded through the bronze bell frame, with the loop visibly holding the clapper against the rim.",
+      "camera": "underwater close-up, tilt up to reveal the bell clapper",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Can the otter reach the loop before the boats hit the rocks?"
+    },
+    {
+      "role": "climax",
+      "duration_seconds": 4.5,
+      "narration": "The otter slips the loop free just as a wave rocks the buoy.",
+      "speech": "The clapper swings clear and strikes the bronze bell.",
+      "headline": "The bell rings at last.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "mechanism",
+      "action": "The otter untangles the loop and the wave swings the freed clapper into the bell.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear uses both paws to pull the wet signal rope loop free from the bronze harbor bell frame beneath the buoy; the clapper swings clear as a wave rocks the bell.",
+      "camera": "dramatic underwater-to-surface reveal, quick upward camera move",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Will the boats hear the warning through the fog?"
+    },
+    {
+      "role": "payoff",
+      "duration_seconds": 4.5,
+      "narration": "The bell rings across the water, and the boats turn toward the safe channel.",
+      "speech": "The otter's small dive gives the whole harbor its way home.",
+      "headline": "One small untangling saves the harbor.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "story_environment": "harbor",
+      "story_beat": "payoff",
+      "action": "The otter watches the boats turn safely as the bell rings behind it.",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside the now-ringing bronze harbor bell as two fishing boats turn away from the breakwater toward the safe channel through thinning fog; the freed signal rope hangs loose.",
+      "camera": "wide warm dawn shot, slow pullback revealing boats in safe water",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": ""
+    }
+  ],
+  "story_beats": [
+    {
+      "headline": "The warning bell is silent.",
+      "speech": "The harbor bell has stopped ringing, and the fog is swallowing every boat.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "reveal",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside a bronze harbor bell on a buoy, listening as fog hides the harbor. The bell and its wet signal rope are clearly visible.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter surfaces and presses one ear close to the silent bronze bell.",
+      "camera": "low waterline close-up, slow push toward the bell",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "What could silence a bell in the middle of the harbor?",
+      "performance_role": "hook"
+    },
+    {
+      "headline": "The boats are losing the channel.",
+      "speech": "Without the warning bell, the boats cannot find the safe channel.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "build",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear watches two small fishing boats drift toward the harbor breakwater through dense fog. A bronze harbor bell and its wet signal rope hang from a buoy in the foreground.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter looks from the drifting boats back to the silent bell.",
+      "camera": "wide establishing shot, gentle pan from boats to buoy",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Can the otter make the bell ring in time?",
+      "performance_role": "stakes"
+    },
+    {
+      "headline": "The first attempt fails.",
+      "speech": "The rope jerks, but the bell gives no sound.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "build",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear grips the wet signal rope beside the bronze harbor bell on the buoy, pulling hard as the rope stretches taut above the harbor water.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter braces its paws on the buoy and pulls the signal rope.",
+      "camera": "medium side shot, slight camera shake on the pull",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Why does the rope move while the bell stays still?",
+      "performance_role": "attempt"
+    },
+    {
+      "headline": "The rope is the problem, not the bell.",
+      "speech": "The harder the otter pulls, the more tightly the bell is trapped.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "mechanism",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear recoils as a wet signal rope tightens through the bronze harbor bell frame, visibly pinning the clapper against the bell's inner rim on the buoy.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter releases the rope as the knot tightens around the bell frame.",
+      "camera": "tight insert on the clapper trapped by the rope, then rack focus to otter",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "What is the rope caught around?",
+      "performance_role": "setback"
+    },
+    {
+      "headline": "The hidden loop can be freed from below.",
+      "speech": "The clapper is trapped by a loop hidden below the waterline.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "twist",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear dives beneath the harbor buoy and discovers the wet signal rope threaded through the bronze bell frame, with the loop visibly holding the clapper against the rim.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter follows the rope underwater and finds the hidden loop.",
+      "camera": "underwater close-up, tilt up to reveal the bell clapper",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Can the otter reach the loop before the boats hit the rocks?",
+      "performance_role": "discovery"
+    },
+    {
+      "headline": "The bell rings at last.",
+      "speech": "The clapper swings clear and strikes the bronze bell.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "mechanism",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear uses both paws to pull the wet signal rope loop free from the bronze harbor bell frame beneath the buoy; the clapper swings clear as a wave rocks the bell.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter untangles the loop and the wave swings the freed clapper into the bell.",
+      "camera": "dramatic underwater-to-surface reveal, quick upward camera move",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "Will the boats hear the warning through the fog?",
+      "performance_role": "climax"
+    },
+    {
+      "headline": "One small untangling saves the harbor.",
+      "speech": "The otter's small dive gives the whole harbor its way home.",
+      "visual": "otter",
+      "label": "RAYVAN ORIGINAL STORY",
+      "sub": "AN ORIGINAL RAYVAN STORY",
+      "story_beat": "payoff",
+      "visual_prompt": "A small dark-brown river otter with a cream muzzle, bright hazel eyes, and a nick in the left ear surfaces beside the now-ringing bronze harbor bell as two fishing boats turn away from the breakwater toward the safe channel through thinning fog; the freed signal rope hangs loose.",
+      "story_environment": "harbor",
+      "duration": 4.5,
+      "story_action": "The otter watches the boats turn safely as the bell rings behind it.",
+      "camera": "wide warm dawn shot, slow pullback revealing boats in safe water",
+      "environment": "harbor at dawn, dense sea fog, wet wood and dark water",
+      "required_props": [
+        "bell",
+        "rope"
+      ],
+      "story_prop": "bell",
+      "transition_question": "",
+      "performance_role": "payoff"
+    }
+  ],
+  "performance_scorecard": {
+    "originality": 22,
+    "hook": 18,
+    "emotional_payoff": 14,
+    "progression": 14,
+    "visual_clarity": 14,
+    "audience_fit": 9
+  },
+  "performance_hard_failures": [],
+  "performance_validation": {
+    "valid": true,
+    "score": 91,
+    "minimum_score": 80,
+    "duration_seconds": 31.5,
+    "scene_count": 7,
+    "premise_fingerprint": "a3c4f0533e083aaf36cb981ecb10452e273edad972aa3cfc3ff1ad4f3ec132b8",
+    "hard_failures": [],
+    "approved": false,
+    "production_ready": false,
+    "published": false
+  },
+  "visual_duration_seconds": 31.5,
+  "plot_fingerprint": "a3c4f0533e083aaf36cb981ecb10452e273edad972aa3cfc3ff1ad4f3ec132b8"
+}
