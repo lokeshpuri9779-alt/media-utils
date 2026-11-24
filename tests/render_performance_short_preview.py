@@ -40,7 +40,7 @@ def main(argv=None):
     }
     output = Path(args.output)
     output.with_suffix(".json").write_text(
-        json.dumps(report, indent=2, ensure_ascii=False, default=str) + "\\n",
+        json.dumps(report, indent=2, ensure_ascii=False, default=str) + "\n",
         encoding="utf-8",
     )
     print("ASTRA_PERFORMANCE_SHORT_RENDER=" + json.dumps(
