@@ -100,7 +100,7 @@ class PerformanceShortContractTests(unittest.TestCase):
         outline = sample_outline()
         for scene in outline["scenes"]:
             scene["duration_seconds"] = 7.0
-        with self.assertRaisesRegex(ValueError, "duration_out_of_range"):
+        with self.assertRaisesRegex(ValueError, "short_duration_out_of_range"):
             validate_short_outline(outline)
 
     def test_rejects_low_score_and_hard_failures(self):
