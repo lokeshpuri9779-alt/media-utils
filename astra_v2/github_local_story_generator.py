@@ -71,10 +71,16 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
     """Validate the text-only seven-beat Short before it enters the render path."""
     if not isinstance(data, dict):
         raise ValueError("Model output must be a JSON object")
-    title = " ".join(str(data.get("title") or "").split())
     premise = " ".join(str(data.get("premise") or "").split())
+    title = " ".join(str(data.get("title") or "").split())
     question = " ".join(str(data.get("question") or "").split())
     scenes = data.get("performance_scenes")
+    # Small local models occasionally return a one-word title despite a valid
+    # story. Derive a deterministic, content-specific fallback from the premise.
+    if len(title) < 8:
+        title = " ".join(word.title() for word in _words(premise)[:8])
+    if len(title) > 80:
+        title = title[:80].rsplit(" ", 1)[0].rstrip(" .,:;-")
     if not 8 <= len(title) <= 80:
         raise ValueError("Title must be 8–80 characters")
     if not 35 <= len(_words(premise)) <= 90:
@@ -201,6 +207,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "engagement question must total 65–85 words for a 28–40 second Short. "
         "Make every line add new information; avoid filler, generic moral lessons, and "
         "generic 'like and subscribe' calls. The final question must invite a real answer. "
+        "The title must be 8–80 characters, specific to this Short, and not a generic label. "
         "The premise field must be 35–90 words and accurately describe the Short. "
         "Do not repeat or closely imitate these recent ASTRA topics: "
         + json.dumps(recent, ensure_ascii=False) +
