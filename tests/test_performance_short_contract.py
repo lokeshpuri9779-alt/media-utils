@@ -1,4 +1,6 @@
 import unittest
+import json
+from pathlib import Path
 
 from astra_v2.story_planning import planning_issues
 
@@ -63,6 +65,19 @@ class PerformanceShortContractTests(unittest.TestCase):
         self.assertFalse(result["approved"])
         self.assertFalse(result["production_ready"])
         self.assertFalse(result["published"])
+
+    def test_render_fixture_is_a_valid_seven_scene_story_with_explicit_props(self):
+        story = json.loads(Path("tests/fixtures/performance_short_preview.json").read_text())
+        outline = renderer_outline_from_story(story)
+        result = validate_short_outline(outline)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["scene_count"], 7)
+        beats = to_renderer_beats(outline)
+        self.assertEqual([beat["story_prop"] for beat in beats],
+                         ["lantern", "lantern", "key", "key", "box", "key", "box"])
+        self.assertFalse(story["approved"])
+        self.assertFalse(story["production_ready"])
+        self.assertFalse(story["published"])
 
     def test_persisted_candidate_fields_normalize_for_studio_renderer(self):
         outline = sample_outline()
