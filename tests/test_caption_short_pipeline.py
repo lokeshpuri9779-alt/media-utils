@@ -76,7 +76,7 @@ class CaptionShortPipelineTests(unittest.TestCase):
     def test_rejects_approved_candidate(self):
         candidate = self.candidate()
         candidate["approved"] = True
-        with self.assertRaisesRegex(ValueError, "review-only"):
+        with self.assertRaisesRegex(ValueError, "approved=false explicitly"):
             narration_from_candidate(candidate)
 
 
