@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from astra_v2.caption_batch_aggregator import aggregate_batch, validate_rendered_package
+from astra_v2.caption_batch_aggregator import aggregate_batch, validate_rendered_package, main
 
 
 def write_package(root: Path, name: str, premise: str = "A distinct mystery premise with a hidden observatory and a careful investigator.") -> Path:
@@ -73,6 +73,33 @@ class CaptionBatchAggregatorTests(unittest.TestCase):
             review_path.write_text(json.dumps(review), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "candidate ID"):
                 validate_rendered_package(candidate_path)
+
+    def test_review_package_rejects_invalid_caption_timing(self):
+        with tempfile.TemporaryDirectory() as temp:
+            candidate_path = write_package(Path(temp), "lane-one")
+            captions_path = candidate_path.with_name("rayvan-short.captions.json")
+            captions = json.loads(captions_path.read_text(encoding="utf-8"))
+            captions["captions"][0]["start"] = 2.0
+            captions["captions"][0]["end"] = 1.0
+            captions_path.write_text(json.dumps(captions), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "out-of-order timing"):
+                validate_rendered_package(candidate_path)
+
+    def test_cli_entrypoint_executes_aggregation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            batch = root / "batch"
+            write_package(batch, "lane-one")
+            history = root / "history.jsonl"
+            main([
+                "--history", str(history),
+                "--batch-dir", str(batch),
+                "--run-id", "456",
+                "--batch-result", "success",
+            ])
+            report = json.loads((batch / "batch-report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["run_id"], "456")
+            self.assertEqual(report["new_history_records"], 1)
 
     def test_review_package_rejects_caption_duration_mismatch(self):
         with tempfile.TemporaryDirectory() as temp:
