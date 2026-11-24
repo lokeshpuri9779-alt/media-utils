@@ -272,6 +272,15 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "publication date"):
             validate_source_pack(rows, "psychology")
 
+    def test_sourced_factual_prompt_requires_evidence_pack(self):
+        prompt = _build_prompt("science_explained", [], 42, [
+            {"title": "Study A", "url": "https://a.example", "publisher": "Publisher A"},
+            {"title": "Study B", "url": "https://b.example", "publisher": "Publisher B"},
+        ])
+        self.assertIn("Use ONLY the supplied evidence pack", prompt)
+        self.assertIn("mention a publisher naturally", prompt)
+        self.assertIn("Do not add dates, numbers", prompt)
+
     def test_current_news_prompt_requires_source_pack(self):
         prompt = _build_prompt("current_news", [], 42, [
             {"title": "A verified headline", "url": "https://example.com/story"}
