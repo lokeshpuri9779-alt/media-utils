@@ -104,7 +104,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         item = {
             "title": "How Many Sheep Actually Remain?",
             "premise": "A short language puzzle asks how many sheep remain after all but nine escape. The wording sounds like a subtraction problem, but its exact meaning gives a much simpler answer. Viewers get a pause to solve it before the reveal explains the phrase.",
-            "question": "Did you solve it immediately, or did the wording trick you today?",
+            "question": "Did you solve it immediately, or did the wording trick you?",
             "performance_scenes": [
                 {"role": role, "speech": speech}
                 for role, speech in zip(STRUCTURES["brain_puzzle"], lines)
