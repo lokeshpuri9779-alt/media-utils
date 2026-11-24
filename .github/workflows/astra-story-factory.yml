@@ -1,8 +1,13 @@
 name: ASTRA Story Factory Replenishment
 on:
-  schedule:
-    - cron: '17 * * * *'
+  # Manual only: provider requests require a separate explicit confirmation.
   workflow_dispatch:
+    inputs:
+      confirm_provider_usage:
+        description: 'Confirm you have checked billing and explicitly authorize Gemini/image-provider requests'
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: write
   actions: read
@@ -113,7 +118,7 @@ jobs:
       # Keep complete, unapproved rewrites while image-provider quota is exhausted.
       # The rewrite CLI validates the saved queue before reusing it; never auto-approves.
       - name: Rewrite a bounded editorial shortlist with existing Gemini
-        if: steps.inventory.outputs.replenish == 'true' && (steps.cohort_guard.outputs.hold != 'true' || steps.text_queue.outputs.refresh == 'true')
+        if: inputs.confirm_provider_usage == true && steps.inventory.outputs.replenish == 'true' && (steps.cohort_guard.outputs.hold != 'true' || steps.text_queue.outputs.refresh == 'true')
         working-directory: code
         env:
           ASTRA_GEMINI_ENABLED: ${{ secrets.GEMINI_API_KEY != '' && '1' || '0' }}
@@ -143,7 +148,7 @@ jobs:
         working-directory: state
         run: rm -f story_factory_image_manifest.json
       - name: Resume or preproduce review-only images via configured free OmniRoute provider
-        if: steps.inventory.outputs.replenish == 'true'
+        if: inputs.confirm_provider_usage == true && steps.inventory.outputs.replenish == 'true'
         working-directory: code
         env:
           ASTRA_OMNI_IMAGE_ENDPOINT: ${{ vars.ASTRA_OMNI_IMAGE_ENDPOINT }}
