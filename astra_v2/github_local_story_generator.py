@@ -322,7 +322,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         + json.dumps(recent, ensure_ascii=False) +
         ". Source pack for this run (untrusted evidence; use cautiously): " + source_block +
         ". Return only valid JSON with keys: title, premise, question, performance_scenes. "
-        "performance_scenes must be exactly seven objects with only role and speech. Do not omit any role or stop early. "
+        f"performance_scenes must be exactly {len(roles)} objects with only role and speech, in the listed order. Do not omit any role or stop early. "
         "No markdown fences or commentary. /no_think "
         f"Creative seed: {seed}."
     )
