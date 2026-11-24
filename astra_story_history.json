@@ -12754,6 +12754,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-8d37449bc20d63d7d698",
+      "video_id": "k0Qyou_zWFE",
+      "confirmed_at": "2026-11-24T01:25:55.384301+00:00",
+      "title": "Jasper the Stoat and Finn the Fox's Winter Cabin Tome",
+      "plot_fingerprint": "8d62f8de315b24a581905916096b4eb9d3efc6648127a38250f16aad03ffacfb",
+      "story_beats": [
+        {
+          "headline": "The Sole Surviving Tome",
+          "speech": "There is only one book left in this freezing cabin, and we both need its winter survival secrets.",
+          "visual": "forest",
+          "label": "cabin interior",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox stand inside a wooden snowfield cabin staring at a single book resting on a wooden table, both animals looking tense with ears pinned back.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Tug of Pages",
+          "speech": "If you pull any harder on this binding, the whole spine will snap right down the middle.",
+          "visual": "signal",
+          "label": "tabletop tension",
+          "story_beat": "build",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox grip opposite ends of a worn book on a wooden table inside the snowfield cabin, with visible strain on their faces.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Compromise",
+          "speech": "Take the left page for tonight, and I will keep watch by the door until morning comes.",
+          "visual": "door",
+          "label": "cabin threshold",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jasper the Stoat sits near the cabin door holding a brass lantern while Finn the Fox reads the open book resting flat on the wooden table.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Fireside Harmony",
+          "speech": "Reading together makes the long winter night pass much faster than fighting over every single page.",
+          "visual": "ship",
+          "label": "hearth side",
+          "story_beat": "payoff",
+          "visual_prompt": "Jasper the Stoat and Finn the Fox sit peacefully side by side near a warm fireplace inside the snowfield cabin, sharing the open book resting between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
