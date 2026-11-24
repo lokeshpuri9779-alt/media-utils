@@ -14,6 +14,33 @@ SCENE_ROLES = (
 MIN_SECONDS = 28.0
 MAX_SECONDS = 40.0
 MIN_SCORE = 80
+RENDERER_PROPS = (
+    "box", "book", "ball", "flower", "lantern", "key", "bell",
+    "compass", "shield", "rocket", "heart", "wrench", "clock",
+)
+_PROP_TERMS = {
+    "box": ("box", "chest", "treasure chest", "package", "parcel", "gift", "present"),
+    "book": ("book", "letter", "letters", "pages", "scroll"),
+    "ball": ("ball", "orb", "marble"),
+    "flower": ("flower", "bouquet", "rose"),
+    "lantern": ("lantern", "lamp", "light"),
+    "key": ("key", "keys"),
+    "bell": ("bell", "chime"),
+    "compass": ("compass", "navigation dial"),
+    "shield": ("shield", "badge"),
+    "rocket": ("rocket", "spaceship"),
+    "heart": ("heart", "valentine"),
+    "wrench": ("wrench", "spanner"),
+    "clock": ("clock", "timepiece"),
+}
+
+
+def _renderer_prop_is_visible(prop: str, visual_prompt: str) -> bool:
+    if prop == "none":
+        return True
+    terms = _PROP_TERMS.get(prop)
+    return bool(terms and any(re.search(r"\\b" + re.escape(term) + r"\\b", visual_prompt, re.I)
+                              for term in terms))
 
 
 def _norm(value: str) -> str:
@@ -66,6 +93,12 @@ def validate_short_outline(outline: dict, history=()) -> dict:
         for field in ("visual", "story_environment", "story_beat"):
             if not isinstance(scene.get(field), str) or not scene[field].strip():
                 raise ValueError(f"scene_{index}_{field}_missing")
+        story_prop = scene.get("story_prop")
+        if story_prop is not None:
+            if story_prop != "none" and story_prop not in RENDERER_PROPS:
+                raise ValueError(f"scene_{index}_story_prop_unsupported")
+            if not _renderer_prop_is_visible(story_prop, scene["visual_prompt"]):
+                raise ValueError(f"scene_{index}_story_prop_not_visible")
         props = scene.get("required_props")
         if not isinstance(props, list) or any(not isinstance(p, str) or not p.strip() for p in props):
             raise ValueError(f"scene_{index}_required_props_invalid")
@@ -141,6 +174,7 @@ def to_renderer_beats(outline: dict) -> list:
             "camera": scene["camera"],
             "environment": scene["environment"],
             "required_props": list(scene["required_props"]),
+            "story_prop": scene.get("story_prop"),
             "transition_question": scene.get("transition_question", ""),
             "performance_role": scene["role"],
         })
