@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: astra-parallel-caption-batch
+  group: astra-caption-production
   cancel-in-progress: false
 
 jobs:
