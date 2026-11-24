@@ -67,6 +67,54 @@ def _content_tokens(premise: str) -> set[str]:
     return {token for token in _words(premise) if len(token) > 2 and token not in STOPWORDS}
 
 
+ENGAGEMENT_FORMATS = {
+    "brain_puzzle": ["timed_challenge", "predict_then_reveal", "spot_the_flaw", "memory_test"],
+    "logic_puzzle": ["timed_challenge", "predict_then_reveal", "elimination_game"],
+    "riddle": ["mystery_question", "clue_by_clue", "predict_then_reveal"],
+    "quick_quiz": ["three_round_quiz", "confidence_check", "score_yourself"],
+    "spot_the_lie": ["find_the_lie", "evidence_reveal", "confidence_check"],
+    "two_truths_one_lie": ["find_the_lie", "three_claims_one_fake", "evidence_reveal"],
+    "guess_the_number": ["estimation_challenge", "closest_wins", "predict_then_reveal"],
+    "weird_facts": ["curiosity_gap", "myth_buster", "unexpected_connection", "explain_the_why"],
+    "science_explained": ["what_if", "everyday_mystery", "unexpected_connection"],
+    "history_gk": ["history_mystery", "forgotten_detail", "timeline_twist"],
+    "geography_gk": ["map_mystery", "borderline_impossible", "geography_surprise"],
+    "india_gk": ["india_quiz", "history_mystery", "myth_buster", "unexpected_connection"],
+    "current_news": ["what_changed", "why_it_matters", "fact_check"],
+    "trending_topics": ["trend_explainer", "what_changed", "fact_check"],
+    "what_if": ["scenario_simulation", "choose_the_outcome", "consequence_chain"],
+    "psychology": ["self_test", "prediction", "behaviour_reveal"],
+    "money_business": ["business_case", "choose_the_strategy", "prediction"],
+}
+DEFAULT_ENGAGEMENT_FORMATS = [
+    "mystery_question", "choose_your_side", "unexpected_connection",
+    "predict_then_reveal", "mini_case_study", "counterintuitive_explanation",
+]
+
+def select_engagement_format(lane: str, seed: int) -> str:
+    """Deterministically rotate interaction patterns without adding dependencies."""
+    options = ENGAGEMENT_FORMATS.get(lane, DEFAULT_ENGAGEMENT_FORMATS)
+    return options[abs(int(seed)) % len(options)]
+
+
+def _fallback_title(title: str, premise: str) -> str:
+    """Recover malformed titles from a valid premise without fragile word slicing."""
+    title = " ".join(str(title or "").split()).strip(" .,:;-")
+    if 8 <= len(title) <= 80:
+        return title
+    # Keep the model's title when it can be safely shortened.
+    shortened = title[:80].rsplit(" ", 1)[0].strip(" .,:;-")
+    if len(shortened) >= 8:
+        return shortened
+    # Derive a readable fallback from the premise, preserving its original casing.
+    clean = re.sub(r"[^A-Za-z0-9' -]", " ", str(premise or ""))
+    words = " ".join(clean.split())
+    fallback = words[:72].rsplit(" ", 1)[0].strip(" .,:;-")
+    if len(fallback) < 8:
+        fallback = "A Curious Story"
+    return fallback[:80]
+
+
 def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
     """Validate the text-only seven-beat Short before it enters the render path."""
     if not isinstance(data, dict):
@@ -75,12 +123,7 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
     title = " ".join(str(data.get("title") or "").split())
     question = " ".join(str(data.get("question") or "").split())
     scenes = data.get("performance_scenes")
-    # Small local models occasionally return a one-word title despite a valid
-    # story. Derive a deterministic, content-specific fallback from the premise.
-    if len(title) < 8:
-        title = " ".join(word.title() for word in _words(premise)[:8])
-    if len(title) > 80:
-        title = title[:80].rsplit(" ", 1)[0].rstrip(" .,:;-")
+    title = _fallback_title(title, premise)
     if not 8 <= len(title) <= 80:
         raise ValueError("Title must be 8–80 characters")
     if not 35 <= len(_words(premise)) <= 90:
@@ -200,6 +243,9 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "Use a strong curiosity gap in the first sentence, concrete details, escalating "
         "interest, a satisfying reveal or useful payoff, and a specific viewer question. "
         "Use exactly seven performance_scenes in this order: " + ", ".join(ROLES) + ". "
+        f"Use this engagement mechanic for this Short: {select_engagement_format(lane, seed)}. "
+        "Make the viewer actively predict, decide, test memory, solve, compare, or investigate "
+        "where appropriate; do not force a question into every sentence. "
         "Interpret the beats to suit the selected format: hook; context/setup; build/clues; "
         "complication or thinking challenge; reveal/discovery; clear explanation/payoff; "
         "audience challenge/question setup. For puzzles, do not reveal the answer too early. "
@@ -282,6 +328,7 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
         "schema_version": 1,
         "kind": "github_local_caption_content",
         "content_type": lane,
+        "engagement_format": select_engagement_format(lane, seed),
         "source": "qwen3_4b_local_github_actions",
         "research_sources": sources,
         "content_id": "rayvan-" + validated["premise_fingerprint"][:20],
