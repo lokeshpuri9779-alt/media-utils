@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, _fallback_title, select_engagement_format, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -67,6 +67,14 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         first = select_engagement_format("brain_puzzle", 1)
         self.assertEqual(first, select_engagement_format("brain_puzzle", 1))
         self.assertNotEqual(first, select_engagement_format("brain_puzzle", 2))
+
+    def test_generation_schema_requires_exactly_seven_scenes(self):
+        schema = _candidate_json_schema()
+        scenes = schema["properties"]["performance_scenes"]
+        self.assertEqual(scenes["minItems"], 7)
+        self.assertEqual(scenes["maxItems"], 7)
+        self.assertEqual(scenes["items"]["properties"]["role"]["enum"], ROLES)
+        self.assertFalse(scenes["items"]["additionalProperties"])
 
     def test_prompt_selects_an_engagement_mechanic(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
