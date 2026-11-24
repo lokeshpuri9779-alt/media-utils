@@ -379,6 +379,21 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertIn("Never use an ambiguous trick answer", prompt)
 
 
+    def test_rss_parser_extracts_publisher_and_normalizes_publication_date(self):
+        feed = b"""<?xml version="1.0"?>
+        <rss><channel><item>
+          <title>Research finding</title>
+          <link>https://news.google.com/articles/example</link>
+          <pubDate>Tue, 24 Nov 2026 10:00:00 GMT</pubDate>
+          <source url="https://publisher.example">Publisher A</source>
+          <description><![CDATA[<p>A detailed source summary about a verified research finding.</p>]]></description>
+        </item></channel></rss>"""
+        with patch("astra_v2.trend_source_collector._fetch", return_value=feed):
+            rows = _parse_feed("https://example.test/feed", 5)
+        self.assertEqual(rows[0]["publisher"], "Publisher A")
+        self.assertEqual(rows[0]["published"], "2026-11-24T10:00:00+00:00")
+        self.assertIn("<p>", rows[0]["summary"])
+
     def test_collector_writes_parseable_json_array(self):
         rows = [
             {"title": "Headline one", "url": "https://example.com/one",
