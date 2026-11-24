@@ -1,12 +1,11 @@
 import unittest
 
 from astra_v2.performance_short_contract import (
-    SCENE_ROLES, premise_fingerprint, validate_short_outline
+    SCENE_ROLES, premise_fingerprint, to_renderer_beats, validate_short_outline
 )
 
 
 def sample_outline():
-    roles = SCENE_ROLES
     prompts = [
         "A tiny fox discovers a glass jar glowing under moonlight.",
         "The fox sees a firefly trapped inside the glass jar.",
@@ -17,11 +16,17 @@ def sample_outline():
         "The firefly flies free and lights the fox's path home.",
     ]
     scenes = []
-    for i, role in enumerate(roles):
+    for i, role in enumerate(SCENE_ROLES):
         scenes.append({
             "role": role,
             "duration_seconds": 4.5,
             "narration": f"Scene {i+1} advances the rescue with a clear consequence.",
+            "speech": f"Scene {i+1} advances the rescue with a clear consequence.",
+            "headline": f"RESCUE BEAT {i+1}",
+            "visual": "fox",
+            "label": "ORIGINAL STORY",
+            "story_environment": "forest clearing",
+            "story_beat": "reveal" if i == 0 else "payoff" if i == 6 else "build",
             "action": f"The fox performs a visible action for {role}.",
             "visual_prompt": prompts[i],
             "camera": "clear medium shot with readable subject action",
@@ -54,6 +59,13 @@ class PerformanceShortContractTests(unittest.TestCase):
         self.assertFalse(result["approved"])
         self.assertFalse(result["production_ready"])
         self.assertFalse(result["published"])
+
+    def test_adapts_to_seven_studio_scenes_without_approval(self):
+        beats = to_renderer_beats(sample_outline())
+        self.assertEqual(len(beats), 7)
+        self.assertEqual(beats[0]["duration"], 4.5)
+        self.assertEqual(beats[0]["story_beat"], "reveal")
+        self.assertEqual(beats[-1]["story_beat"], "payoff")
 
     def test_rejects_four_beat_legacy_story(self):
         outline = sample_outline()
