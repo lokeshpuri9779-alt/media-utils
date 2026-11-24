@@ -20,11 +20,11 @@ def _ensure_environment_token(beat):
     prompt = beat.get("visual_prompt")
     if environment not in SCENES or not isinstance(prompt, str) or len(prompt.strip()) < 20:
         raise ValueError("Gemini requires a supported scene and concrete visual prompt")
-    if re.search(r"\\b" + re.escape(environment) + r"\\b", prompt, re.I):
+    if re.search(r"\b" + re.escape(environment) + r"\b", prompt, re.I):
         return
     conflicting = [
         scene for scene in SCENES
-        if scene != environment and re.search(r"\\b" + re.escape(scene) + r"\\b", prompt, re.I)
+        if scene != environment and re.search(r"\b" + re.escape(scene) + r"\b", prompt, re.I)
     ]
     if conflicting:
         raise ValueError("Gemini visual_prompt conflicts with story_environment: "
