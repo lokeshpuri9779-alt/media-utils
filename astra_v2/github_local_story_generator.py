@@ -347,6 +347,15 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
     )
 
 
+def _strip_reasoning_preamble(raw):
+    """Remove a leading Qwen-style reasoning block before parsing JSON."""
+    if not isinstance(raw, str):
+        return raw
+    cleaned = raw.lstrip()
+    cleaned = re.sub(r"^(?:<think>.*?</think>\\s*)+", "", cleaned, count=1, flags=re.DOTALL | re.IGNORECASE)
+    return cleaned.lstrip()
+
+
 def generate(output_path: str, history_path: str, lane: str = "surprise",
              seed: int = 1, model_path: str | None = None,
              sources_path: str | None = None) -> dict:
