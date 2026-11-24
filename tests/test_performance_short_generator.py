@@ -2,6 +2,8 @@ import io
 import json
 import os
 import unittest
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 from astra_v2.performance_short_generator import _prompt, _schema, generate
@@ -84,6 +86,39 @@ class PerformanceShortGeneratorTests(unittest.TestCase):
         self.assertFalse(story["eligible_for_automatic_publishing"])
         self.assertFalse(story["published"])
         self.assertEqual(story["format_profile"], "shorts_v2_7scene")
+
+    def test_cli_writes_candidate_and_review_packet_only(self):
+        payload = valid_payload()
+        response = {"candidates": [{"finishReason": "STOP", "content": {
+            "parts": [{"text": json.dumps(payload)}]
+        }}]}
+        with tempfile.TemporaryDirectory() as directory:
+            candidate_path = Path(directory) / "candidate.json"
+            packet_path = Path(directory) / "packet.json"
+            with patch.dict(os.environ, {"ASTRA_GEMINI_ENABLED": "1", "GEMINI_API_KEY": "test-key",
+                                         "ASTRA_GEMINI_MODEL": "gemini-test"}, clear=False):
+                with patch("astra_v2.performance_short_generator.urllib.request.urlopen",
+                           return_value=io.BytesIO(json.dumps(response).encode())):
+                    from astra_v2.performance_short_generator import main
+                    self.assertEqual(main(["--output", str(candidate_path),
+                                           "--packet", str(packet_path)]), 0)
+            candidate = json.loads(candidate_path.read_text())
+            packet = json.loads(packet_path.read_text())
+            self.assertEqual(len(candidate["performance_scenes"]), 7)
+            self.assertEqual(packet["approved_count"], 0)
+            self.assertFalse(packet["rendering_triggered"])
+            self.assertFalse(packet["publication_triggered"])
+
+    def test_cli_does_not_write_when_generation_is_disabled(self):
+        from astra_v2.performance_short_generator import main
+        with tempfile.TemporaryDirectory() as directory:
+            candidate_path = Path(directory) / "candidate.json"
+            packet_path = Path(directory) / "packet.json"
+            with patch.dict(os.environ, {"ASTRA_GEMINI_ENABLED": "0"}, clear=False):
+                with self.assertRaises(SystemExit):
+                    main(["--output", str(candidate_path), "--packet", str(packet_path)])
+            self.assertFalse(candidate_path.exists())
+            self.assertFalse(packet_path.exists())
 
     def test_generator_stays_off_without_explicit_enablement(self):
         with patch.dict(os.environ, {"ASTRA_GEMINI_ENABLED": "0"}, clear=False):
