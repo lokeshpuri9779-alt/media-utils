@@ -12852,6 +12852,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-34e93d76b1816e266a96",
+      "video_id": "70E3M4npntQ",
+      "confirmed_at": "2026-11-24T10:49:28.438142+00:00",
+      "title": "Bram the Stoat and Faelen the Fox's Shared Winter Tome",
+      "plot_fingerprint": "16e6dcea65f7383f10e94be266e21769391f7682310115deb0b4526d80047221",
+      "story_beats": [
+        {
+          "headline": "The Tense Tug",
+          "speech": "Both animals pulled fiercely on opposite ends of the fragile winter book inside the drafty wooden cabin, risking total ruin.",
+          "visual": "forest",
+          "label": "cabin interior",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a cozy wooden cabin during a snowstorm, Bram the brown stoat and Faelen the orange fox pull in opposite directions on a single worn book resting on a wooden table, both holding angry expressions.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Sudden Halt",
+          "speech": "Bram noticed a fresh tear forming near the spine and immediately froze, realizing that fighting would destroy their only guide.",
+          "visual": "door",
+          "label": "cabin doorway",
+          "story_beat": "build",
+          "visual_prompt": "Inside the wooden cabin, Bram the stoat stares down at the torn edge of the book with wide eyes while Faelen the fox glares across the table near the frosted wooden doorway.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Trade",
+          "speech": "Deciding cooperation outweighed pride, Bram pushed the book entirely across the table toward Faelen with a steady paw.",
+          "visual": "signal",
+          "label": "table surface",
+          "story_beat": "mechanism",
+          "visual_prompt": "Inside the wooden cabin, Bram the stoat pushes the open book across the wooden table toward Faelen the fox, who watches with a surprised and softening expression.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shared Wisdom",
+          "speech": "Seated side by side near the glowing hearth, they read the vital pages together and weathered the freezing storm in harmony.",
+          "visual": "planet",
+          "label": "cabin hearth",
+          "story_beat": "payoff",
+          "visual_prompt": "Inside the warm wooden cabin, Bram the stoat and Faelen the fox sit closely side by side on a woven rug near a stone fireplace, reading the shared book under the glow of a lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
