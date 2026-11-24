@@ -366,18 +366,46 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
     validated = None
     for attempt in range(3):
         prompt = _build_prompt(lane, history, seed + attempt, sources)
+        messages = [
+            {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
+            {"role": "user", "content": prompt},
+        ]
         result = llm.create_chat_completion(
-            messages=[
-                {"role": "system", "content": "You are a precise, engaging short-form YouTube writer and explainer. Output valid JSON only."},
-                {"role": "user", "content": prompt},
-            ],
+            messages=messages,
             response_format={"type": "json_schema", "schema": _candidate_json_schema(lane)},
             temperature=0.78 + attempt * 0.04,
             top_p=0.85,
             presence_penalty=1.5,
             max_tokens=1300,
         )
-        raw = result["choices"][0]["message"]["content"]
+        choices = result.get("choices") or []
+        choice = choices[0] if choices else {}
+        message = choice.get("message") or {}
+        raw = message.get("content")
+        if not isinstance(raw, str) or not raw.strip():
+            # Some local model/runtime combinations can return an empty message
+            # with constrained decoding. Retry once in JSON-object mode before
+            # rejecting the candidate; all semantic gates still run below.
+            fallback = llm.create_chat_completion(
+                messages=messages,
+                response_format={"type": "json_object"},
+                temperature=0.72 + attempt * 0.04,
+                top_p=0.85,
+                presence_penalty=1.5,
+                max_tokens=1300,
+            )
+            fallback_choices = fallback.get("choices") or []
+            fallback_choice = fallback_choices[0] if fallback_choices else {}
+            fallback_message = fallback_choice.get("message") or {}
+            raw = fallback_message.get("content")
+            if not isinstance(raw, str) or not raw.strip():
+                finish_reason = choice.get("finish_reason", "unknown")
+                fallback_finish = fallback_choice.get("finish_reason", "unknown")
+                last_error = ValueError(
+                    "Empty model response in schema and JSON-object modes "
+                    f"(finish_reason={finish_reason}; fallback={fallback_finish})"
+                )
+                continue
         try:
             parsed = json.loads(raw)
             validated = validate_candidate(parsed, history, lane)
