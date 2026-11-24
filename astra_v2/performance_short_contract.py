@@ -33,6 +33,9 @@ def validate_short_outline(outline: dict, history=()) -> dict:
     """Validate a seven-scene 28–40s outline; never grants production approval."""
     if not isinstance(outline, dict):
         raise ValueError("outline_must_be_object")
+    character_bible = outline.get("character_bible")
+    if not isinstance(character_bible, str) or not 15 <= len(character_bible.strip()) <= 240:
+        raise ValueError("character_bible_missing_or_invalid")
     premise = outline.get("premise")
     if not isinstance(premise, dict):
         raise ValueError("premise_missing")
@@ -44,6 +47,9 @@ def validate_short_outline(outline: dict, history=()) -> dict:
     if not isinstance(scenes, list) or len(scenes) != 7:
         raise ValueError("short_requires_exactly_seven_scenes")
 
+    visual_subjects = {str(scene.get("visual", "")).strip() for scene in scenes if isinstance(scene, dict)}
+    if len(visual_subjects) != 1:
+        raise ValueError("protagonist_species_must_remain_consistent")
     total = 0.0
     for index, (scene, expected_role) in enumerate(zip(scenes, SCENE_ROLES), start=1):
         if not isinstance(scene, dict):
@@ -64,6 +70,8 @@ def validate_short_outline(outline: dict, history=()) -> dict:
         if not isinstance(props, list) or any(not isinstance(p, str) or not p.strip() for p in props):
             raise ValueError(f"scene_{index}_required_props_invalid")
         visual = scene["visual_prompt"].casefold()
+        if character_bible.strip().casefold() not in visual:
+            raise ValueError(f"scene_{index}_character_bible_missing")
         for prop in props:
             if prop.casefold() not in visual:
                 raise ValueError(f"scene_{index}_required_prop_not_in_visual_prompt:{prop}")
