@@ -29,6 +29,14 @@ def verify(video):
         data = json.loads(report.read_text(encoding="utf-8"))
         if data.get("frames", 0) <= 0 or data.get("duration", 0) <= 0:
             raise ValueError("Invalid Studio render report")
+        performance = data.get("performance_short_preview")
+        if performance is not None:
+            if performance.get("scene_count") != 7 or not 28 <= float(data["duration"]) <= 40:
+                raise ValueError("Performance Short preview must contain seven scenes and run 28–40 seconds")
+            if (performance.get("approved") is not False
+                    or performance.get("production_ready") is not False
+                    or performance.get("published") is not False):
+                raise ValueError("Performance Short preview must remain review-only")
     frame = video.with_name("studio-frame.png")
     run(ff, "-v", "error", "-y", "-ss", "0.5", "-i", str(video), "-frames:v", "1", str(frame))
     im = Image.open(frame).convert("RGB")
