@@ -1,6 +1,8 @@
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
-from astra_v2.caption_only_renderer import caption_chunks, _fit_speed_to_duration
+from astra_v2.caption_only_renderer import caption_chunks, _fit_speed_to_duration, _verify_mp4_streams
 
 
 class CaptionChunkTests(unittest.TestCase):
@@ -30,6 +32,15 @@ class CaptionChunkTests(unittest.TestCase):
     def test_speed_adjustment_stays_within_supported_bounds(self):
         self.assertEqual(_fit_speed_to_duration(1.04, 5.0), 0.75)
         self.assertEqual(_fit_speed_to_duration(1.04, 100.0), 1.25)
+
+    def test_mp4_verification_requires_both_video_and_audio_streams(self):
+        with patch("astra_v2.caption_only_renderer.get_ffmpeg_exe", return_value="ffmpeg"), \
+             patch("astra_v2.caption_only_renderer.subprocess.run") as run:
+            _verify_mp4_streams(Path("sample.mp4"))
+        command = run.call_args.args[0]
+        self.assertIn("0:v:0", command)
+        self.assertIn("0:a:0", command)
+        self.assertTrue(run.call_args.kwargs["check"])
 
     def test_empty_input(self):
         self.assertEqual(caption_chunks("   "), [])
