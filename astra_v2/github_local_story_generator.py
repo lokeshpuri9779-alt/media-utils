@@ -363,12 +363,14 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "world_gk", "myth_vs_fact", "psychology", "money_business",
         "tech_explained", "india_gk", "space_facts", "nature_facts", "human_body", "inventions", "mini_case_study", "ranked_countdown", "guess_the_number", "spot_the_lie", "two_truths_one_lie", "current_news", "trending_topics",
     }
-    if lane in {"current_news", "trending_topics"}:
+    if lane in SOURCED_FACTUAL_LANES:
         evidence_rule = (
-            "Use ONLY the supplied source pack for claims about current events or trends. "
-            "Do not invent dates, numbers, quotes, causes, or outcomes. If sources disagree "
-            "or are too thin, say what is known and omit unsupported detail. Mention the "
-            "publisher/source naturally in narration. Do not present an old story as breaking news. "
+            "Use ONLY the supplied source pack for factual claims. Every concrete factual claim, "
+            "number, date, study result, historical detail, or named example must be supported "
+            "by the supplied evidence. Do not invent causes, quotes, statistics, or outcomes. "
+            "If sources disagree or are too thin, state only what is supported and omit the rest. "
+            "Mention a publisher/source naturally in narration. For news, do not present an old "
+            "story as breaking news. "
         )
     elif factual:
         evidence_rule = (
