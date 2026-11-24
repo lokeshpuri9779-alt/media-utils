@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 def narration_from_candidate(candidate: dict) -> str:
-    """Extract spoken lines from a validated seven-scene candidate in order."""
+    """Extract spoken lines from any supported lane-specific candidate in order."""
     if not isinstance(candidate, dict):
         raise ValueError("Candidate must be a JSON object")
     if candidate.get("approved") is True or candidate.get("production_ready") is True:
@@ -18,13 +18,17 @@ def narration_from_candidate(candidate: dict) -> str:
     if candidate.get("published") is True:
         raise ValueError("Published candidates cannot be reprocessed by this review pipeline")
     scenes = candidate.get("performance_scenes")
-    if not isinstance(scenes, list) or len(scenes) != 7:
-        raise ValueError("Expected exactly seven performance scenes")
-    expected = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
+    if not isinstance(scenes, list) or len(scenes) not in (4, 7):
+        raise ValueError("Expected four compact-format scenes or seven story beats")
     narration = []
-    for index, (scene, role) in enumerate(zip(scenes, expected), start=1):
-        if not isinstance(scene, dict) or scene.get("role") != role:
-            raise ValueError(f"Scene {index} must have role {role}")
+    seen_roles = set()
+    for index, scene in enumerate(scenes, start=1):
+        if not isinstance(scene, dict) or not str(scene.get("role") or "").strip():
+            raise ValueError(f"Scene {index} must include a role")
+        role = str(scene["role"]).strip()
+        if role in seen_roles:
+            raise ValueError(f"Scene {index} repeats role {role}")
+        seen_roles.add(role)
         speech = " ".join(str(scene.get("speech") or "").split())
         if not speech:
             raise ValueError(f"Scene {index} has no narration")
