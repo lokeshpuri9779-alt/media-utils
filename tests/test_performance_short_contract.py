@@ -9,13 +9,13 @@ from astra_v2.performance_short_contract import (
 
 def sample_outline():
     prompts = [
-        "A tiny fox discovers a glass jar glowing under moonlight in the forest.",
-        "The fox sees a firefly trapped inside the glass jar in the forest.",
-        "The fox nudges the glass jar toward a flat stone in the forest.",
-        "The fox watches as the glass jar rolls toward a shallow stream and the firefly flickers in the forest.",
-        "The fox notices a loose cork beside the glass jar in the forest.",
-        "The fox removes the cork and opens the glass jar in the forest.",
-        "The firefly flies free and lights the fox's path home through the forest.",
+        "A tiny fox discovers a glass jar glowing under moonlight in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox sees a firefly trapped inside the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox nudges the glass jar toward a flat stone in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox watches as the glass jar rolls toward a shallow stream and the firefly flickers in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox notices a loose cork beside the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The fox removes the cork and opens the glass jar in the forest. Character: a small russet fox with a white chest and amber eyes.",
+        "The firefly flies free and lights the fox's path home through the forest. Character: a small russet fox with a white chest and amber eyes.",
     ]
     scenes = []
     for i, role in enumerate(SCENE_ROLES):
@@ -37,6 +37,7 @@ def sample_outline():
             "transition_question": "What will happen next?" if i < 6 else "",
         })
     return {
+        "character_bible": "a small russet fox with a white chest and amber eyes",
         "premise": {
             "central_conflict": "a firefly is trapped inside a sealed glass jar",
             "failed_attempt": "the fox pushes the jar but it rolls toward water",
