@@ -34,7 +34,7 @@ def build_packet(candidates):
             "character_bible": candidate.get("character_bible"),
             "scenes": candidate.get("performance_scenes"),
             "scorecard": candidate.get("performance_scorecard"),
-            "hard_failures": candidate.get("hard_failures", []),
+            "hard_failures": candidate.get("performance_hard_failures", candidate.get("hard_failures", [])),
         }
         validation = validate_short_outline(outline)
         if not validation["valid"]:
@@ -59,8 +59,10 @@ def build_packet(candidates):
             "validation": validation,
             "decision": "not_approved",
             "required_next_action": "human_editorial_review_and_visual_proof",
+            "approved": False,
             "production_ready": False,
             "eligible_for_automatic_publishing": False,
+            "published": False,
         })
     return {
         "schema_version": 2,
