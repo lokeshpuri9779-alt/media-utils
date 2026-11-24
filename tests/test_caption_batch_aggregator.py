@@ -53,6 +53,8 @@ def write_package(root: Path, name: str, premise: str = (
             "output": f"output/{name}/rayvan-short.mp4",
             "duration_seconds": 33.0,
             "quality_check": "passed",
+            "resolution": "1080x1920",
+            "caption_count": 1,
             "published": False,
         },
     }
@@ -131,6 +133,26 @@ class CaptionBatchAggregatorTests(unittest.TestCase):
             report = json.loads((batch / "batch-report.json").read_text(encoding="utf-8"))
             self.assertEqual(report["run_id"], "456")
             self.assertEqual(report["new_history_records"], 1)
+
+    def test_review_package_rejects_wrong_portrait_resolution(self):
+        with tempfile.TemporaryDirectory() as temp:
+            candidate_path = write_package(Path(temp), "lane-one")
+            review_path = candidate_path.with_name("rayvan-short.review.json")
+            review = json.loads(review_path.read_text(encoding="utf-8"))
+            review["render"]["resolution"] = "1920x1080"
+            review_path.write_text(json.dumps(review), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "1080x1920"):
+                validate_rendered_package(candidate_path)
+
+    def test_review_package_rejects_caption_count_mismatch(self):
+        with tempfile.TemporaryDirectory() as temp:
+            candidate_path = write_package(Path(temp), "lane-one")
+            review_path = candidate_path.with_name("rayvan-short.review.json")
+            review = json.loads(review_path.read_text(encoding="utf-8"))
+            review["render"]["caption_count"] = 2
+            review_path.write_text(json.dumps(review), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "counts do not match"):
+                validate_rendered_package(candidate_path)
 
     def test_review_package_rejects_caption_duration_mismatch(self):
         with tempfile.TemporaryDirectory() as temp:
