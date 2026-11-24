@@ -71,6 +71,7 @@ def _schema() -> dict:
         "type": "object",
         "properties": {
             "title": {"type": "string"},
+            "character_bible": {"type": "string"},
             "question": {"type": "string"},
             "answer": {"type": "string"},
             "premise": premise,
@@ -78,7 +79,7 @@ def _schema() -> dict:
             "scorecard": scorecard,
             "hard_failures": {"type": "array", "items": {"type": "string"}},
         },
-        "required": ["title", "question", "answer", "premise", "scenes", "scorecard", "hard_failures"],
+        "required": ["title", "character_bible", "question", "answer", "premise", "scenes", "scorecard", "hard_failures"],
     }
 
 
@@ -108,8 +109,8 @@ def _prompt(history=(), creative_brief="") -> str:
         "recent stories: " + json.dumps(exclusions, ensure_ascii=False) + ". "
         "Use supported animal subjects only from: " + ", ".join(sorted(VISUALS)) + ". "
         "Choose a renderer-supported environment from: " + ", ".join(SCENES) + ". "
-        "Use one or two recurring animal protagonists, no humans, clothing, humanoids or "
-        "third species. Keep the protagonist species and character appearance consistent. "
+        "Use exactly one supported animal protagonist species throughout all seven scenes; no humans, clothing, humanoids or "
+        "other animal species. Supply one precise character_bible (fur/feathers, colors, markings, eyes and body proportions) and repeat that exact description verbatim in every visual_prompt. Keep it identical in all seven scenes. "
         "Every visual_prompt must explicitly show the protagonist and the exact "
         "story_environment token, and describe one clear, filmable action. List every "
         "essential prop in required_props and name each required prop verbatim in its "
@@ -168,7 +169,7 @@ def generate(prior_stories=(), excluded_fingerprints=(), creative_brief=""):
     if not 8 <= len(title) <= 90:
         raise ValueError("Invalid performance story title")
     outline = {key: data.get(key) for key in (
-        "premise", "scenes", "scorecard", "hard_failures"
+        "premise", "scenes", "scorecard", "hard_failures", "character_bible"
     )}
     validation = validate_short_outline(outline, history=excluded_fingerprints)
     if not validation["valid"]:
@@ -194,6 +195,8 @@ def generate(prior_stories=(), excluded_fingerprints=(), creative_brief=""):
         "source": "gemini_performance_short_generator",
         "keywords": ["original animated story", "RAYVAN", "YouTube Shorts"],
         "premise": outline["premise"],
+        "character_bible": data["character_bible"].strip(),
+        "story_cast": [outline["scenes"][0]["visual"]],
         "story_environment": outline["scenes"][0]["story_environment"],
         "central_conflict": outline["premise"]["central_conflict"],
         "decisive_choice": outline["premise"]["causal_discovery"],
