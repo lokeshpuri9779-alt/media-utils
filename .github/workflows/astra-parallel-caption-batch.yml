@@ -273,7 +273,7 @@ jobs:
           if added:
               with history_path.open("a", encoding="utf-8") as handle:
                   for row in added:
-                      handle.write(json.dumps(row, ensure_ascii=False) + "\\n")
+                      handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
           report = {
               "run_id": "${{ github.run_id }}",
@@ -287,7 +287,7 @@ jobs:
               "candidate_files": [str(path) for path in candidates],
           }
           (batch_dir / "batch-report.json").write_text(
-              json.dumps(report, indent=2) + "\\n", encoding="utf-8"
+              json.dumps(report, indent=2) + "\n", encoding="utf-8"
           )
           print(json.dumps(report, indent=2))
           PY
