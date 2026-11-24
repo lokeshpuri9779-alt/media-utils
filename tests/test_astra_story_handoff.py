@@ -40,10 +40,17 @@ class StoryHandoffTests(unittest.TestCase):
 
     def test_seven_scene_review_candidate_survives_handoff_without_promotion(self):
         source = json.loads(Path("tests/fixtures/performance_short_preview.json").read_text(encoding="utf-8"))
+        source.update({
+            "performance_validation": {"valid": True, "duration_seconds": 31.5},
+            "visual_duration_seconds": 31.5,
+            "plot_fingerprint": "a" * 64,
+            "story_beats": [{"speech": "A clear scene action unfolds.", "visual": "fox"} for _ in range(7)],
+        })
         handoff = approved_story_context(source)
         for field in ("format_profile", "premise", "character_bible", "performance_scenes",
-                      "performance_scorecard", "performance_validation",
-                      "visual_duration_seconds", "plot_fingerprint", "story_beats"):
+                      "performance_scorecard", "performance_hard_failures",
+                      "performance_validation", "visual_duration_seconds",
+                      "plot_fingerprint", "story_beats"):
             self.assertEqual(handoff[field], source[field], field)
         self.assertFalse(handoff["approved"])
         self.assertFalse(handoff["production_ready"])
