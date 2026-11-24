@@ -192,7 +192,7 @@ def validate_candidate(data: dict, history: list[dict] | None = None, lane: str 
     scenes = data.get("performance_scenes")
     expected_roles = STRUCTURES.get(lane, ROLES)
     compact_structure = len(expected_roles) <= 4
-    min_scene_words, max_scene_words = (12, 18) if compact_structure else (6, 14)
+    min_scene_words, max_scene_words = (10, 18) if compact_structure else (6, 14)
     title = _fallback_title(title, premise)
     if not 8 <= len(title) <= 80:
         raise ValueError("Title must be 8–80 characters")
@@ -313,12 +313,12 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
     )
     roles = STRUCTURES.get(lane, ROLES)
     compact_structure = len(roles) <= 4
-    scene_min, scene_max = (12, 18) if compact_structure else (6, 14)
+    scene_min, scene_max = (10, 18) if compact_structure else (6, 14)
     structure_name = STRUCTURE_NAMES.get(lane, "seven_beat_story")
     direction = creative_direction(lane, seed)
     retry_block = (
         "IMPORTANT CORRECTION FROM THE PREVIOUS ATTEMPT: " + retry_feedback +
-        " Correct this exact validation issue in the new candidate; recount every scene aloud before returning JSON. "
+        " Correct only the failing scene or field, preserve valid content, and recount every scene aloud before returning JSON. "
         if retry_feedback else ""
     )
     return (
@@ -334,7 +334,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "Make this treatment clearly audible in the narration; do not merely label it. "
         "Make the viewer actively predict, decide, test memory, solve, compare, or investigate "
         "where appropriate; do not force a question into every sentence. "
-        f"Interpret each beat according to its role. Each speech line must contain {scene_min}–{scene_max} words. "
+        f"Interpret each beat according to its role. Each speech line must contain {scene_min}–{scene_max} words. "" For compact four-beat formats, aim for 14–16 words per line; 10 is the hard minimum. "" Count the spoken words in each line before returning JSON; expand short lines with a concrete clue or explanation, never filler. "
         "For puzzles, keep the answer out of the challenge and thinking-pause beats. "
         "The scene lines plus the final spoken "
         "engagement question must total 65–85 words for a 28–40 second Short. "
