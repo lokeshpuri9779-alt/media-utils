@@ -281,6 +281,30 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertIn("mention a publisher naturally", prompt)
         self.assertIn("Do not add dates, numbers", prompt)
 
+    def test_factual_prompt_requires_claims_to_use_evidence_pack(self):
+        prompt = _build_prompt("science_explained", [], 42, [
+            {"title": "Study A", "url": "https://a.example/study",
+             "published": "2026-11-24", "publisher": "Publisher A",
+             "summary": "A detailed summary of the published research findings."},
+            {"title": "Study B", "url": "https://b.example/study",
+             "published": "2026-11-23", "publisher": "Publisher B",
+             "summary": "An independent summary of the same scientific subject."},
+        ])
+        self.assertIn("Use ONLY the supplied source pack for factual claims", prompt)
+        self.assertIn("Every concrete factual claim", prompt)
+
+    def test_factual_source_pack_rejects_unparseable_publication_dates(self):
+        rows = [
+            {"title": "Report A", "url": "https://a.example/one",
+             "published": "last Tuesday", "publisher": "Publisher A",
+             "summary": "A sufficiently detailed summary for evidence validation."},
+            {"title": "Report B", "url": "https://b.example/two",
+             "published": "2026-11-23", "publisher": "Publisher B",
+             "summary": "Another sufficiently detailed independent summary."},
+        ]
+        with self.assertRaisesRegex(ValueError, "publication date"):
+            validate_source_pack(rows, "science_explained")
+
     def test_current_news_prompt_requires_source_pack(self):
         prompt = _build_prompt("current_news", [], 42, [
             {"title": "A verified headline", "url": "https://example.com/story"}
