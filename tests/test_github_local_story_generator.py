@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, _build_prompt, _candidate_json_schema, _fallback_title, select_engagement_format, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -75,6 +75,36 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertEqual(scenes["maxItems"], 7)
         self.assertEqual(scenes["items"]["properties"]["role"]["enum"], ROLES)
         self.assertFalse(scenes["items"]["additionalProperties"])
+
+    def test_lane_schemas_use_compact_puzzle_and_news_structures(self):
+        puzzle = _candidate_json_schema("brain_puzzle")["properties"]["performance_scenes"]
+        news = _candidate_json_schema("trending_topics")["properties"]["performance_scenes"]
+        self.assertEqual(puzzle["minItems"], 4)
+        self.assertEqual(puzzle["items"]["properties"]["role"]["enum"],
+                         ["challenge", "thinking_pause", "answer", "explanation"])
+        self.assertEqual(news["maxItems"], 4)
+        self.assertEqual(news["items"]["properties"]["role"]["enum"],
+                         ["news_hook", "what_changed", "context", "why_it_matters"])
+
+    def test_compact_puzzle_candidate_validates_with_four_beats(self):
+        lines = [
+            "A farmer has seventeen sheep and all but nine escape overnight.",
+            "Pause now and decide exactly how many sheep remain inside.",
+            "The answer is nine because all but nine means nine stayed.",
+            "The wording tests whether you interpret the phrase rather than subtract blindly.",
+        ]
+        item = {
+            "title": "How Many Sheep Actually Remain?",
+            "premise": "A short language puzzle asks how many sheep remain after all but nine escape. The wording sounds like a subtraction problem, but its exact meaning gives a much simpler answer. Viewers get a pause to solve it before the reveal explains the phrase.",
+            "question": "Did you solve it immediately, or did the wording trick you?",
+            "performance_scenes": [
+                {"role": role, "speech": speech}
+                for role, speech in zip(STRUCTURES["brain_puzzle"], lines)
+            ],
+        }
+        result = validate_candidate(item, lane="brain_puzzle")
+        self.assertEqual(len(result["performance_scenes"]), 4)
+        self.assertEqual(result["performance_scenes"][0]["role"], "challenge")
 
     def test_prompt_selects_an_engagement_mechanic(self):
         prompt = _build_prompt("brain_puzzle", [], 42)
