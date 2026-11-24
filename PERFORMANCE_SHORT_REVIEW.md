@@ -34,3 +34,7 @@ The queue contains one human-authored offline candidate: `The Bell Beneath the F
 ## Dialogue counter correction (25 Nov 2026)
 
 The browser review interface previously used an over-escaped whitespace regular expression, which could count an entire dialogue line as one token. This has been corrected to split on actual whitespace. The saved candidate was independently recounted from its seven `speech` fields: 13 / 11 / 9 / 12 / 11 / 9 / 11 words, 76 total. It therefore meets the current text-level target of 7–13 words per scene and 65–85 words overall. This correction validates dialogue tokenization only; it does not validate spoken delivery speed, timing, generated audio, or visual quality.
+
+## Seven-frame visual proof progress
+
+The browser review page now tracks, per candidate, how many of the seven scene frames have been selected, how many are marked as matching, and how many have flagged issues. The progress display updates when a frame is selected or its verdict changes. A complete 7/7 matching count is only an editor-entered review status; it is not automated image recognition, production approval, or permission to render or publish. Frame files remain local to the browser and are not uploaded by the review page.
