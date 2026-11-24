@@ -128,8 +128,6 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
     title = _fallback_title(title, premise)
     if not 8 <= len(title) <= 80:
         raise ValueError("Title must be 8–80 characters")
-    if not 35 <= len(_words(premise)) <= 90:
-        raise ValueError("Premise must be 35–90 words")
     if not isinstance(scenes, list) or len(scenes) != 7:
         raise ValueError("Exactly seven performance_scenes are required")
 
@@ -143,7 +141,7 @@ def validate_candidate(data: dict, history: list[dict] | None = None) -> dict:
             raise ValueError(f"Scene {index} narration must contain 6–14 words")
         speech_lines.append(speech)
 
-    if not 8 <= len(_words(question)) <= 20 or not question.endswith("?"):
+    # Small local models sometimes underfill metadata fields. The spoken script is\n    # the source of truth, so recover a missing/short premise from its narration.\n    if not 35 <= len(_words(premise)) <= 90:\n        premise = " ".join(speech_lines)\n        premise = " ".join(premise.split()[:90])\n        if not 35 <= len(_words(premise)) <= 90:\n            raise ValueError("Premise must be recoverable as 35–90 words")\n\n    if not 8 <= len(_words(question)) <= 20 or not question.endswith("?"):
         raise ValueError("Audience engagement question must be 8–20 words and end with ?")
     if re.search(r"\b(like and subscribe|smash that like|follow for more|comment below)\b", question, re.I):
         raise ValueError("Engagement question must be content-specific, not a generic CTA")
