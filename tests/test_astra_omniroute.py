@@ -117,7 +117,7 @@ class OmniRouteTests(unittest.TestCase):
         self.assertIn(original, beat["visual_prompt"])
         self.assertIn("Environment tag: forest.", beat["visual_prompt"])
         omniroute.validate_beat_quality([
-            {"speech": "A curious fox follows the bright seed into the forest clearing.",
+            {"speech": "A curious fox follows the bright seed into the quiet forest clearing.",
              "visual": "fox", "visual_prompt": beat["visual_prompt"],
              "story_environment": "forest"},
             {"speech": "The fox finds the seed resting beneath a fern in the forest.",
