@@ -29,6 +29,12 @@ def narration_from_candidate(candidate: dict) -> str:
         if not speech:
             raise ValueError(f"Scene {index} has no narration")
         narration.append(speech)
+    engagement_question = " ".join(str(candidate.get("question") or "").split())
+    if not engagement_question:
+        raise ValueError("Candidate must include an audience engagement question")
+    if engagement_question.rstrip()[-1:] not in ".!?":
+        engagement_question += "?"
+    narration.append(engagement_question)
     return " ".join(narration)
 
 
