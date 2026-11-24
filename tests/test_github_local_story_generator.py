@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -182,6 +182,22 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         item["question"] = "Please like and subscribe to see more stories?"
         with self.assertRaises(ValueError):
             validate_candidate(item)
+
+
+    def test_batch_similarity_gate_catches_near_duplicate_candidates(self):
+        first = {"premise": "A lighthouse keeper disappears before a storm. A young mechanic discovers the lamp sends coded warnings through its old gears.", "fingerprint": "one"}
+        near_duplicate = {"premise": "Before a storm, the lighthouse keeper vanishes. A young mechanic finds that the lamp sends coded warnings using its ancient gears.", "fingerprint": "two"}
+        unrelated = {"premise": "A botanist studies desert seeds that remain dormant for decades until rare rainfall triggers germination across the valley.", "fingerprint": "three"}
+        duplicates = find_duplicate_premises([first, near_duplicate, unrelated], threshold=0.35)
+        self.assertEqual(len(duplicates), 1)
+        self.assertEqual(duplicates[0]["candidate_index"], 1)
+        self.assertEqual(duplicates[0]["reason"], "premise_token_overlap")
+
+    def test_batch_similarity_gate_checks_prior_history(self):
+        candidate = {"premise": sample()["premise"], "fingerprint": "new"}
+        history = [{"premise": sample()["premise"], "fingerprint": "old"}]
+        duplicates = find_duplicate_premises([candidate], history)
+        self.assertEqual(duplicates[0]["reason"], "premise_token_overlap")
 
     def test_rejects_repeated_premise(self):
         item = sample()
