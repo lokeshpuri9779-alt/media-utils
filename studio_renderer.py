@@ -98,6 +98,30 @@ def scene(headline, speech, visual, label='', sub='', duration=0, **extra):
 
 def _story_plan(ch):
     genre, cid = ch.get('genre', 'challenge'), ch.get('content_id', '')
+    # New seven-scene fiction path. Legacy story_beats remain unchanged.
+    if ch.get('performance_scenes') is not None:
+        from astra_v2.performance_short_contract import to_renderer_beats
+        outline = {
+            "premise": ch.get("performance_premise"),
+            "scenes": ch.get("performance_scenes"),
+            "scorecard": ch.get("performance_scorecard"),
+            "hard_failures": ch.get("performance_hard_failures", []),
+        }
+        beats = to_renderer_beats(outline)
+        out = []
+        for raw in beats:
+            item = dict(raw)
+            speech = str(item.pop("speech", "")).strip()
+            visual = str(item.pop("visual", "")).strip()
+            headline = str(item.pop("headline", "")).strip()
+            if not speech or not visual or not headline:
+                raise ValueError("Performance scene requires headline, speech and visual")
+            out.append(scene(
+                headline, speech, visual,
+                item.pop("label", ""), item.pop("sub", ""),
+                duration=item.pop("duration", 0), **item
+            ))
+        return out
     # Reviewed beat sheets are authoritative; legacy Q/A is only required for
     # stories without an authored scene plan.
     if ch.get('story_beats'):
