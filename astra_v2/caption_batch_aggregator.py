@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 from astra_v2.github_local_story_generator import (
@@ -64,13 +65,29 @@ def validate_rendered_package(candidate_path: Path) -> tuple[dict, dict]:
         raise ValueError("render review candidate ID does not match candidate")
 
     duration = captions.get("duration_seconds")
+    render_duration = render.get("duration_seconds")
     caption_rows = captions.get("captions")
     if captions.get("fps") != 30 or not isinstance(caption_rows, list) or not caption_rows:
         raise ValueError("caption sidecar is missing valid 30fps caption timings")
-    if not isinstance(duration, (int, float)) or not 28 <= duration <= 40:
+    if (isinstance(duration, bool) or not isinstance(duration, (int, float))
+            or not math.isfinite(float(duration)) or not 28 <= duration <= 40):
         raise ValueError("caption sidecar duration must be between 28 and 40 seconds")
-    if abs(float(duration) - float(render.get("duration_seconds", -999))) > 0.25:
+    if (isinstance(render_duration, bool) or not isinstance(render_duration, (int, float))
+            or not math.isfinite(float(render_duration))):
+        raise ValueError("render review is missing a valid duration")
+    if abs(float(duration) - float(render_duration)) > 0.25:
         raise ValueError("caption and render durations do not match")
+    previous_end = 0.0
+    for index, row in enumerate(caption_rows, 1):
+        if not isinstance(row, dict) or not str(row.get("caption") or "").strip():
+            raise ValueError(f"caption {index} is missing its text")
+        start, end = row.get("start"), row.get("end")
+        if (isinstance(start, bool) or isinstance(end, bool)
+                or not isinstance(start, (int, float)) or not isinstance(end, (int, float))
+                or not math.isfinite(float(start)) or not math.isfinite(float(end))
+                or start < previous_end or end <= start or end > float(duration) + 0.1):
+            raise ValueError(f"caption {index} has invalid or out-of-order timing")
+        previous_end = float(end)
     return candidate, {
         "video": str(video_path),
         "review": str(review_path),
