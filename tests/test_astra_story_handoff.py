@@ -63,6 +63,24 @@ class StoryHandoffTests(unittest.TestCase):
 
     @unittest.skipUnless(STUDIO_DEPS_AVAILABLE, "Studio dependencies checked in readiness CI")
     @patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"})
+    def test_seven_scene_candidate_builds_real_studio_plan_without_approval(self):
+        from studio_renderer import make_plan
+        source = json.loads(Path("tests/fixtures/performance_short_preview.json").read_text(encoding="utf-8"))
+        source["performance_validation"] = {"valid": True, "duration_seconds": 31.5}
+        source["visual_duration_seconds"] = 31.5
+        plan = make_plan(dict(source))
+        self.assertEqual(len(plan), 7)
+        self.assertEqual([shot.get("performance_role") for shot in plan],
+                         ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"])
+        self.assertEqual([shot.get("story_prop") for shot in plan],
+                         ["lantern", "lantern", "key", "key", "box", "key", "box"])
+        self.assertFalse(source["approved"])
+        self.assertFalse(source["production_ready"])
+        self.assertFalse(source["eligible_for_automatic_publishing"])
+        self.assertFalse(source["published"])
+
+    @unittest.skipUnless(STUDIO_DEPS_AVAILABLE, "Studio dependencies checked in readiness CI")
+    @patch.dict(os.environ, {"ASTRA_UNIFIED_STORY_ENGINE": "1"})
     def test_real_story_survives_serialized_archive_and_publisher_gate(self):
         source = self._story()
         candidate = {
