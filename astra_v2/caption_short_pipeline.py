@@ -13,19 +13,23 @@ def narration_from_candidate(candidate: dict) -> str:
     """Extract spoken lines from any supported lane-specific candidate in order."""
     if not isinstance(candidate, dict):
         raise ValueError("Candidate must be a JSON object")
-    if candidate.get("approved") is True or candidate.get("production_ready") is True:
-        raise ValueError("This pipeline accepts review-only candidates, not approval packets")
-    if candidate.get("published") is True:
-        raise ValueError("Published candidates cannot be reprocessed by this review pipeline")
+    for flag in ("approved", "production_ready", "published"):
+        if candidate.get(flag) is not False:
+            raise ValueError(f"Review pipeline requires {flag}=false explicitly")
     scenes = candidate.get("performance_scenes")
     if not isinstance(scenes, list) or len(scenes) not in (4, 7):
         raise ValueError("Expected four compact-format scenes or seven story beats")
+    compact_roles = ["challenge", "thinking_pause", "answer", "explanation"]
+    story_roles = ["hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"]
+    expected_roles = compact_roles if len(scenes) == 4 else story_roles
     narration = []
     seen_roles = set()
     for index, scene in enumerate(scenes, start=1):
         if not isinstance(scene, dict) or not str(scene.get("role") or "").strip():
             raise ValueError(f"Scene {index} must include a role")
         role = str(scene["role"]).strip()
+        if role != expected_roles[index - 1]:
+            raise ValueError(f"Scene {index} must have role {expected_roles[index - 1]}")
         if role in seen_roles:
             raise ValueError(f"Scene {index} repeats role {role}")
         seen_roles.add(role)
