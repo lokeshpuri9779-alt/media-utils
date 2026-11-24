@@ -110,6 +110,8 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         prompt = _build_prompt("brain_puzzle", [], 42)
         self.assertIn("engagement mechanic", prompt)
         self.assertIn(select_engagement_format("brain_puzzle", 42), prompt)
+        self.assertIn("performance_scenes must be exactly 4 objects", prompt)
+        self.assertNotIn("exactly seven objects", prompt)
 
     def test_rejects_wrong_role_order(self):
         item = sample()
