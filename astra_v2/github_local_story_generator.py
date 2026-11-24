@@ -117,7 +117,7 @@ def _rotate(options: list[str], seed: int) -> str:
 def creative_direction(lane: str, seed: int) -> dict:
     """Select a reproducible creative treatment independent of the subject lane."""
     return {
-        **creative_direction(lane, seed),
+        "engagement_format": select_engagement_format(lane, seed),
         "tone": _rotate(CREATIVE_TONES, seed // 3),
         "opening_pattern": _rotate(OPENING_PATTERNS, seed // 5),
         "payoff_type": _rotate(PAYOFF_TYPES, seed // 7),
@@ -332,9 +332,9 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "For puzzles, keep the answer out of the challenge and thinking-pause beats. "
         "The scene lines plus the final spoken "
         "engagement question must total 65–85 words for a 28–40 second Short. "
-        "Make every line add new information; avoid filler, generic moral lessons, and "
+        "Make every line add new information; avoid filler, generic moral lessons, and generic calls to action. "
         "Do not default every format to a quiz or rhetorical question; use the selected treatment naturally. "
-        "generic 'like and subscribe' calls. The final question must invite a real answer. "
+        "The final question must invite a real answer. "
         "The title must be 8–80 characters, specific to this Short, and not a generic label. "
         "The premise field must be 35–90 words and accurately describe the Short. "
         "Do not repeat or closely imitate these recent ASTRA topics: "
