@@ -102,14 +102,16 @@ def _fallback_title(title: str, premise: str) -> str:
     title = " ".join(str(title or "").split()).strip(" .,:;-")
     if 8 <= len(title) <= 80:
         return title
-    # Keep the model's title when it can be safely shortened.
-    shortened = title[:80].rsplit(" ", 1)[0].strip(" .,:;-")
-    if len(shortened) >= 8:
-        return shortened
-    # Derive a readable fallback from the premise, preserving its original casing.
+    # A normal multiword title can be shortened at a word boundary.
+    if len(title) > 80 and " " in title:
+        shortened = title[:80].rsplit(" ", 1)[0].strip(" .,:;-")
+        if len(shortened) >= 8:
+            return shortened
+    # Discard empty, too-short, or unbroken oversized model output.
     clean = re.sub(r"[^A-Za-z0-9' -]", " ", str(premise or ""))
-    words = " ".join(clean.split())
-    fallback = words[:72].rsplit(" ", 1)[0].strip(" .,:;-")
+    words = clean.split()
+    fallback = " ".join(word.capitalize() for word in words[:10])
+    fallback = fallback[:80].rsplit(" ", 1)[0].strip(" .,:;-")
     if len(fallback) < 8:
         fallback = "A Curious Story"
     return fallback[:80]
