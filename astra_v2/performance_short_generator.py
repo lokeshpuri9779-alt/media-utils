@@ -100,7 +100,7 @@ def _prompt(history=(), creative_brief="") -> str:
         "seconds, escalating cause and effect, an earned reversal, a decisive climax and a "
         "satisfying final image. Use exactly seven scenes with roles in this exact order: "
         + ", ".join(SCENE_ROLES) + ". Total duration must be 28–40 seconds; each scene 2.5–7 "
-        "seconds. Every scene must materially change the situation. No filler, repeated "
+        "seconds. Keep each spoken scene to roughly 7–13 words and the complete spoken script near 65–85 words; concise visual storytelling must carry the rest. Every scene must materially change the situation. No filler, repeated "
         "actions, interchangeable dialogue, unexplained coincidence or recycled plot "
         "mechanisms. The premise must describe a specific conflict, failed attempt, causal "
         "discovery and resolution. A new species, prop or setting does NOT make an old "
