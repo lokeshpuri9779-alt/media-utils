@@ -36,6 +36,8 @@ TOPIC_QUERIES = {
     "mini_case_study": "business case study company innovation",
     "ranked_countdown": "science technology geography rankings data",
     "guess_the_number": "science statistics population geography data",
+    "quick_quiz": "verified general knowledge science history geography facts",
+    "what_if": "physics climate science engineering evidence research",
     "spot_the_lie": "science history fact check claims",
     "two_truths_one_lie": "science history verified facts",
     "current_news": "",
