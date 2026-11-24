@@ -50,6 +50,23 @@ class CaptionShortPipelineTests(unittest.TestCase):
             + " Would you have noticed the hidden clue?",
         )
 
+    def test_requires_all_review_only_flags_to_be_explicit_false(self):
+        candidate = self.candidate()
+        del candidate["published"]
+        with self.assertRaisesRegex(ValueError, "published=false explicitly"):
+            narration_from_candidate(candidate)
+
+    def test_rejects_wrong_compact_scene_role_order(self):
+        candidate = self.candidate()
+        roles = ["challenge", "thinking_pause", "answer", "explanation"]
+        candidate["performance_scenes"] = [
+            {"role": role, "speech": f"Spoken line for {role}."}
+            for role in roles
+        ]
+        candidate["performance_scenes"][1]["role"] = "stakes"
+        with self.assertRaisesRegex(ValueError, "Scene 2 must have role thinking_pause"):
+            narration_from_candidate(candidate)
+
     def test_rejects_missing_speech(self):
         candidate = self.candidate()
         candidate["performance_scenes"][2]["speech"] = ""
