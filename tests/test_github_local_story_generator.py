@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 from pathlib import Path
 
@@ -234,6 +235,31 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
                      "brain_puzzle", "riddle", "quick_quiz", "spot_the_lie",
                      "two_truths_one_lie", "what_if", "current_news", "trending_topics"):
             self.assertIn(lane, LANES)
+
+    def test_quick_quiz_is_required_to_use_a_validated_source_pack(self):
+        rows = [
+            {"title": "Quiz source A", "url": "https://a.example/quiz",
+             "published": "2026-11-24", "publisher": "Publisher A",
+             "summary": "A detailed verified source summary for quiz question content."},
+            {"title": "Quiz source B", "url": "https://b.example/quiz",
+             "published": "2026-11-23", "publisher": "Publisher B",
+             "summary": "A second independent source summary for the quiz content."},
+        ]
+        self.assertEqual(len(validate_source_pack(rows, "quick_quiz")), 2)
+
+    def test_current_news_rejects_stale_evidence(self):
+        old = (datetime.now(timezone.utc) - timedelta(days=5)).isoformat()
+        recent = datetime.now(timezone.utc).isoformat()
+        rows = [
+            {"title": "Recent report", "url": "https://a.example/recent",
+             "published": recent, "publisher": "Publisher A",
+             "summary": "A sufficiently detailed current report summary for this topic."},
+            {"title": "Old report", "url": "https://b.example/old",
+             "published": old, "publisher": "Publisher B",
+             "summary": "A sufficiently detailed but stale report summary for this topic."},
+        ]
+        with self.assertRaisesRegex(ValueError, "within 72 hours"):
+            validate_source_pack(rows, "current_news")
 
     def test_factual_source_pack_requires_two_distinct_publishers_and_metadata(self):
         rows = [
