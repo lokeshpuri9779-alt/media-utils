@@ -12705,6 +12705,55 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-173005e4020c2ffacc25",
+      "video_id": "SdZx97g7x2U",
+      "confirmed_at": "2026-11-24T00:58:49.260768+00:00",
+      "title": "Silas the Stoat and Fennec the Fox’s Winter Book Rule",
+      "plot_fingerprint": "8a6412ed07b87bbf5c53823b115b9d073b11c245eeb9535fc738c465907055a7",
+      "story_beats": [
+        {
+          "headline": "The Cabin Standoff",
+          "speech": "Silas and Fennec stare intensely at the single book, both wanting to read the text before the other starts.",
+          "visual": "door",
+          "label": "The Cabin Entrance",
+          "story_beat": "reveal",
+          "visual_prompt": "Inside a wooden cabin with a closed door, Silas the white stoat and Fennec the orange fox stand on opposite sides of a small wooden table, both clutching the corners of an old book.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A Fair Proposal",
+          "speech": "Fennec suggests they track the falling snowflakes outside to determine whose turn it is to read the next page.",
+          "visual": "forest",
+          "label": "Cabin Window",
+          "story_beat": "mechanism",
+          "visual_prompt": "Fennec the fox points a paw toward the window revealing a snowy forest, while Silas the stoat sits on a chair listening intently, the book resting on the table between them.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Reading Cycle",
+          "speech": "Silas reads his page as the snow continues to fall, waiting for his partner to take the book when requested.",
+          "visual": "signal",
+          "label": "Snowy Cabin Interior",
+          "story_beat": "build",
+          "visual_prompt": "Silas the stoat holds the open book and reads with a focused expression, while Fennec the fox sits patiently nearby in the cozy wooden cabin, watching the snow outside the window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Completion",
+          "speech": "The book is finished, and both animals feel satisfied because they followed their fair rule of alternating during the storm.",
+          "visual": "door",
+          "label": "Final Cabin View",
+          "story_beat": "payoff",
+          "visual_prompt": "Silas the stoat and Fennec the fox sit side by side in the cabin, looking at the closed book on the table, appearing content as the storm outside the wooden door settles.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
