@@ -11,6 +11,27 @@ from astra_v2.visual_artifact_library import SCENES
 from astra_v2.renderer_aware_writing import background_scene_authoring_guidance, SUPPORTED_ANIMALS
 
 
+
+def _ensure_environment_token(beat):
+    """Repair a missing machine-readable scene tag without overriding conflicts."""
+    if not isinstance(beat, dict):
+        raise ValueError("Invalid Gemini beat")
+    environment = beat.get("story_environment")
+    prompt = beat.get("visual_prompt")
+    if environment not in SCENES or not isinstance(prompt, str) or len(prompt.strip()) < 20:
+        raise ValueError("Gemini requires a supported scene and concrete visual prompt")
+    if re.search(r"\\b" + re.escape(environment) + r"\\b", prompt, re.I):
+        return
+    conflicting = [
+        scene for scene in SCENES
+        if scene != environment and re.search(r"\\b" + re.escape(scene) + r"\\b", prompt, re.I)
+    ]
+    if conflicting:
+        raise ValueError("Gemini visual_prompt conflicts with story_environment: "
+                         + environment + " vs " + ",".join(conflicting))
+    beat["visual_prompt"] = prompt.rstrip(" .") + ". Environment tag: " + environment + "."
+
+
 def enabled():
     return os.getenv("ASTRA_GEMINI_ENABLED") == "1" and bool(os.getenv("GEMINI_API_KEY"))
 
@@ -301,6 +322,8 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                     normalized = raw.strip().lower().replace("-", "_").replace(" ", "_")
                     if normalized in allowed:
                         beat[field] = normalized
+    for beat in beats:
+        _ensure_environment_token(beat)
     from astra_v2.omniroute import validate_beat_quality
     validate_beat_quality(beats, "Gemini")
     from astra_v2.story_pacing import validate_generated_story
