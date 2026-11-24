@@ -155,3 +155,16 @@ def validate_rendered_duration(duration_seconds: float) -> None:
         raise ValueError("rendered_duration_invalid")
     if not MIN_SECONDS <= duration <= MAX_SECONDS:
         raise ValueError("rendered_duration_out_of_range")
+
+
+def renderer_outline_from_story(story: dict) -> dict:
+    """Normalize the generator's persisted candidate fields for Studio."""
+    if not isinstance(story, dict):
+        raise ValueError("performance_story_must_be_object")
+    return {
+        "premise": story.get("performance_premise") or story.get("premise"),
+        "character_bible": story.get("character_bible"),
+        "scenes": story.get("performance_scenes"),
+        "scorecard": story.get("performance_scorecard"),
+        "hard_failures": story.get("performance_hard_failures", []),
+    }
