@@ -123,7 +123,9 @@ def aggregate_batch(history_path: str | Path, batch_dir: str | Path,
                 row = json.loads(line)
             except json.JSONDecodeError as exc:
                 raise ValueError(f"Corrupt history JSON on line {line_number}") from exc
-            if isinstance(row, dict) and row.get("premise"):
+            if not isinstance(row, dict):
+                raise ValueError(f"Originality history line {line_number} must be a JSON object")
+            if row.get("premise"):
                 history_rows.append(row)
 
     candidate_paths = sorted(batch_dir.glob("**/candidate.json"))
