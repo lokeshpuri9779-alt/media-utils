@@ -34,6 +34,7 @@ def sample_outline():
             "camera": "clear medium shot with readable subject action",
             "environment": "moonlit forest clearing",
             "required_props": ["glass jar"] if i in (0, 1, 2, 3, 5) else [],
+            "story_prop": "none",
             "transition_question": "What will happen next?" if i < 6 else "",
         })
     return {
@@ -91,6 +92,25 @@ class PerformanceShortContractTests(unittest.TestCase):
             "story_beats": beats,
         }
         self.assertEqual(planning_issues(record), [])
+
+    def test_explicit_supported_prop_is_carried_to_renderer(self):
+        outline = sample_outline()
+        outline["scenes"][0]["visual_prompt"] += " beside a brass lantern."
+        outline["scenes"][0]["required_props"].append("lantern")
+        outline["scenes"][0]["story_prop"] = "lantern"
+        beats = to_renderer_beats(outline)
+        self.assertEqual(beats[0]["story_prop"], "lantern")
+        self.assertEqual(beats[1]["story_prop"], "none")
+
+    def test_unsupported_or_invisible_explicit_prop_is_rejected(self):
+        outline = sample_outline()
+        outline["scenes"][0]["story_prop"] = "glass_jar"
+        with self.assertRaisesRegex(ValueError, "story_prop_unsupported"):
+            validate_short_outline(outline)
+        outline = sample_outline()
+        outline["scenes"][0]["story_prop"] = "lantern"
+        with self.assertRaisesRegex(ValueError, "story_prop_not_visible"):
+            validate_short_outline(outline)
 
     def test_actual_rendered_duration_is_hard_limited(self):
         validate_rendered_duration(31.5)
