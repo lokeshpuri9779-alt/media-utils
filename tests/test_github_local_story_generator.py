@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 
-from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, validate_candidate
+from astra_v2.github_local_story_generator import LANES, ROLES, STRUCTURES, STRUCTURE_NAMES, _build_prompt, _candidate_json_schema, _fallback_title, _strip_reasoning_preamble, select_engagement_format, creative_direction, find_duplicate_premises, accepted_unique_candidates, validate_candidate
 from astra_v2.trend_source_collector import _parse_feed, collect
 
 
@@ -192,6 +192,20 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertEqual(len(duplicates), 1)
         self.assertEqual(duplicates[0]["candidate_index"], 1)
         self.assertEqual(duplicates[0]["reason"], "premise_token_overlap")
+
+    def test_duplicate_fingerprint_is_checked_even_when_prior_premise_is_missing(self):
+        candidates = [{"premise": "A sufficiently long and distinctive premise about a lost observatory.", "fingerprint": "same"}]
+        history = [{"premise": "", "fingerprint": "same"}]
+        duplicates = find_duplicate_premises(candidates, history)
+        self.assertEqual(duplicates[0]["reason"], "exact_fingerprint")
+
+    def test_rejected_duplicate_does_not_poison_later_batch_comparisons(self):
+        first = {"premise": "A lighthouse keeper disappears before a storm while a mechanic discovers coded warnings hidden in the rotating lamp gears.", "fingerprint": "first"}
+        duplicate = {"premise": first["premise"], "fingerprint": "duplicate"}
+        third = {"premise": "A botanist studies desert seeds that remain dormant for decades until rare rainfall triggers germination across the valley.", "fingerprint": "third"}
+        accepted, duplicates = accepted_unique_candidates([first, duplicate, third])
+        self.assertEqual(len(duplicates), 1)
+        self.assertEqual(accepted, [first, third])
 
     def test_batch_similarity_gate_checks_prior_history(self):
         candidate = {"premise": sample()["premise"], "fingerprint": "new"}
