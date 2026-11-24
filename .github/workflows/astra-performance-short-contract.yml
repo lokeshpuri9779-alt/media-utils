@@ -22,6 +22,8 @@ on:
       - "tests/test_caption_batch_aggregator.py"
       - ".github/workflows/astra-parallel-caption-batch.yml"
       - ".github/workflows/astra-single-lane-diagnostic.yml"
+      - ".github/workflows/astra-caption-only-mp4-smoke.yml"
+      - ".github/workflows/astra-single-lane-diagnostic.yml"
       - "tests/test_github_local_story_generator.py"
       - "astra_v2/omniroute.py"
       - "astra_v2/omniroute_gemini.py"
