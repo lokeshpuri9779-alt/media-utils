@@ -57,6 +57,8 @@ jobs:
           cache: pip
       - name: Install Studio production dependencies
         run: python -m pip install -r requirements.txt
+      - name: Test sentence-aware narration cadence
+        run: python -m unittest tests.test_studio_narration -v
       - name: Cache voice model
         uses: actions/cache@v4
         with:
