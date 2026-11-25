@@ -402,6 +402,18 @@ def frame(plan,t,total):
     d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
     d.line((80,1045,80+1765*min(1,t/total),1045),fill=accent,width=4)
 
+    # Gentle kinetic camera movement keeps long-form scenes alive without
+    # making captions or evidence cards difficult to read. Each four-second
+    # cycle eases in and out; the small horizontal drift adds parallax-like motion.
+    motion_phase=(u % 4.0) / 4.0
+    motion_ease=0.5-0.5*math.cos(2*math.pi*motion_phase)
+    zoom=1.0 + 0.025*motion_ease
+    scaled=im.resize((round(1920*zoom),round(1080*zoom)),Image.Resampling.LANCZOS)
+    max_x=scaled.width-1920; max_y=scaled.height-1080
+    pan_x=max(0,min(max_x,round(max_x*(0.5+0.22*math.sin(u*0.7)))))
+    pan_y=max(0,min(max_y,round(max_y*(0.5+0.18*math.cos(u*0.55)))))
+    im=scaled.crop((pan_x,pan_y,pan_x+1920,pan_y+1080))
+
     if index and u<.14:
         shade=Image.new('RGB',im.size,(7,13,24))
         im=Image.blend(shade,im,.52+.48*u/.14)
