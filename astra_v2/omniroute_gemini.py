@@ -269,7 +269,10 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
             data=body, method="POST", headers={
                 "x-goog-api-key": os.environ["GEMINI_API_KEY"],
                 "Content-Type": "application/json"})
-        for attempt in range(3):
+        # Free-tier endpoints can return short-lived 503 overloads. Retry with
+        # bounded exponential backoff before falling through to the configured
+        # secondary model; never relax editorial or publication gates.
+        for attempt in range(5):
             try:
                 with urllib.request.urlopen(req, timeout=45) as response:
                     result = json.load(response)
@@ -278,15 +281,15 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
                 if exc.code == 404 and model_index + 1 < len(models):
                     break
                 if exc.code in (500, 502, 503, 504):
-                    if attempt < 2:
-                        time.sleep(2 ** attempt)
+                    if attempt < 4:
+                        time.sleep(min(16, 2 ** (attempt + 1)))
                         continue
                     if model_index + 1 < len(models):
                         break
                 raise RuntimeError("Gemini HTTP " + str(exc.code) + " model=" + active_model) from exc
             except (urllib.error.URLError, TimeoutError) as exc:
-                if attempt < 2:
-                    time.sleep(2 ** attempt)
+                if attempt < 4:
+                    time.sleep(min(16, 2 ** (attempt + 1)))
                     continue
                 if model_index + 1 < len(models):
                     break
