@@ -118,6 +118,16 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertEqual(inspect_artifacts({"artifacts": []}, now=now)["status"], "missing_or_duplicate")
         self.assertGreater(pinned_run_id(ROOT), 0)
 
+    def test_preload_has_zero_spend_fallback_and_visible_result_summary(self):
+        preload = read(PRELOAD)
+        self.assertIn("ASTRA_OMNIROUTE_ORDER: 'gemini,openrouter'", preload)
+        self.assertIn("ASTRA_OPENROUTER_MODEL: 'openrouter/free'", preload)
+        self.assertIn("vars.ASTRA_OPENROUTER_ENABLED || '0'", preload)
+        self.assertIn("secrets.OPENROUTER_API_KEY", preload)
+        self.assertIn("- name: Show readable preload result", preload)
+        self.assertIn("ASTRA_STORY_SELECTION", preload)
+        self.assertIn("- name: Archive readable preload result", preload)
+
     def test_longform_publishing_is_enabled_but_remains_quality_gated(self):
         publisher, longform = read(PUBLISH), read(LONGFORM)
         controller = read(ROOT / "astra_v2/run.py")
