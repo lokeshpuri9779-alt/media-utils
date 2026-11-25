@@ -33,7 +33,12 @@ jobs:
       ASTRA_GEMINI_RENDERER_AWARE_WRITING: '1' # Generate only Studio-supported animal casts, scenes and visible actions
       # One free-tier editorial generation lane replenishes the approved Shorts queue.
       # Other lanes consume independent approved inventory without racing the model quota.
-      ASTRA_OMNIROUTE_ORDER: 'gemini'
+      ASTRA_OMNIROUTE_ORDER: 'gemini,openrouter'
+      # Zero-spend fallback only; OpenRouter is used only when its explicit
+      # repository variable and secret are configured, with openrouter/free.
+      ASTRA_OPENROUTER_ENABLED: ${{ vars.ASTRA_OPENROUTER_ENABLED || '0' }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      ASTRA_OPENROUTER_MODEL: 'openrouter/free'
       ASTRA_GEMINI_ENABLED: ${{ matrix.lane == 0 && '1' || '0' }}
       ASTRA_GEMINI_MODEL: 'gemini-3.8-flash'
       ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.5-flash-lite'
@@ -384,7 +389,63 @@ jobs:
           ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
           ASTRA_STORY_HISTORY_PATH: astra_story_history.json
         run: |
-          /usr/bin/time -v -o /tmp/astra-render-memory.txt python -m astra_v2.preload_worker
+          set -o pipefail
+          mkdir -p runtime-health
+          /usr/bin/time -v -o /tmp/astra-render-memory.txt python -m astra_v2.preload_worker 2>&1 | tee runtime-health/preload-worker.log
+      - name: Show readable preload result
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          log = Path("runtime-health/preload-worker.log")
+          lines = log.read_text(encoding="utf-8", errors="replace").splitlines() if log.is_file() else []
+          def payload(prefix):
+              for line in reversed(lines):
+                  marker = prefix + "="
+                  if marker in line:
+                      raw = line.split(marker, 1)[1].strip()
+                      try:
+                          return json.loads(raw)
+                      except (ValueError, TypeError):
+                          return {"raw": raw[:300]}
+              return None
+          outcome = payload("ASTRA_PRELOAD")
+          selection = payload("ASTRA_STORY_SELECTION")
+          provider_failures = [line.split("ASTRA_OMNIROUTE_PROVIDER_FAILED=", 1)[1][:220]
+                               for line in lines if "ASTRA_OMNIROUTE_PROVIDER_FAILED=" in line]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as summary:
+              summary.write("## ASTRA preload result\\n\\n")
+              content_id = os.getenv("ASTRA_RENDER_CONTENT_ID", "")
+              summary.write("**Package:** " + (content_id if content_id else "No approved video package produced") + "\\n\\n")
+              if outcome:
+                  summary.write("**Outcome:** " + str(outcome.get("outcome", "unknown")) + "\\n\\n")
+                  if outcome.get("reason"):
+                      summary.write("**Reason:** " + str(outcome["reason"])[:300] + "\\n\\n")
+              if selection:
+                  summary.write("**Candidate audit:**\\n\\n")
+                  for key in ("considered", "approved", "not_ready", "already_seen", "background_preflight_rejected", "render_qa_rejected", "render_exception"):
+                      if key in selection:
+                          summary.write("- " + key.replace("_", " ") + ": " + str(selection[key]) + "\\n")
+                  summary.write("\\n")
+              if provider_failures:
+                  summary.write("**Creative provider fallback/errors:**\\n\\n")
+                  for item in provider_failures[-4:]:
+                      summary.write("- " + item + "\\n")
+                  summary.write("\\n")
+              if not outcome and not selection:
+                  summary.write("No structured render result was emitted. Inspect the job log for the failing step.\\n")
+          PY
+      - name: Archive readable preload result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-preload-result-${{ github.run_id }}-${{ matrix.lane }}
+          path: runtime-health/preload-worker.log
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Report render peak RAM
         if: always()
         run: |
