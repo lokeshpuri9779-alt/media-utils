@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from astra_v2.trend_source_collector import enrich_trends
-from longform_trends import build_plan, long_quality_gate, sourced_topics
+from longform_trends import build_plan, long_quality_gate, retention_contract, sourced_topics
 
 
 class LongformRssEnrichmentTests(unittest.TestCase):
@@ -83,6 +83,20 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         report = long_quality_gate(plan, topics)
         self.assertGreaterEqual(report['score'], 85)
         self.assertEqual(report['usable_summary_count'], 2)
+        self.assertIn('what do the reports actually confirm', plan[0]['speech'].lower())
+        self.assertIn('what can we actually say', plan[-1]['speech'].lower())
+        retention = retention_contract(plan)
+        self.assertLessEqual(retention['opening_words'], 45)
+        self.assertEqual(retention['distinct_beats'], 8)
+
+    def test_retention_contract_rejects_opening_without_a_question(self):
+        plan = [
+            {'speech': 'This is the reported headline.', 'story_beat': 'promise'},
+            {'speech': 'Context.', 'story_beat': 'context'},
+            {'speech': 'The ending actually say reported but unconfirmed.', 'story_beat': 'takeaway'},
+        ]
+        with self.assertRaisesRegex(RuntimeError, 'opening must establish'):
+            retention_contract(plan)
 
     def test_story_plan_rejects_headlines_without_summaries(self):
         item = {
