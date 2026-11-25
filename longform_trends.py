@@ -438,29 +438,37 @@ def frame(plan,t,total):
     d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
     d.line((80,1045,80+1765*min(1,t/total),1045),fill=accent,width=4)
 
-    # High-energy editorial camera: reset the visual emphasis every 2.4s,
-    # matching the three-beat rail. A quick eased punch-in/out creates a visible
-    # rhythm while the restrained pan keeps captions and evidence in frame.
+    # Punch-in on each 2.4s editorial beat, then release quickly. This is
+    # deliberately more assertive than a slow Ken Burns drift: the camera hit
+    # lands at the beat boundary and clears before the next caption phrase.
     motion_phase=(u % 2.4) / 2.4
-    motion_ease=math.sin(math.pi*motion_phase)**2
-    zoom=1.0 + 0.065*motion_ease
+    punch=max(0.0,1.0-motion_phase/0.38)
+    punch=0.5-0.5*math.cos(math.pi*punch)
+    zoom=1.0 + 0.085*punch
     scaled=im.resize((round(1920*zoom),round(1080*zoom)),Image.Resampling.LANCZOS)
     max_x=scaled.width-1920; max_y=scaled.height-1080
-    pan_x=max(0,min(max_x,round(max_x*(0.5+0.46*math.sin(u*0.72)))))
-    pan_y=max(0,min(max_y,round(max_y*(0.5+0.34*math.cos(u*0.58)))))
+    pan_x=max(0,min(max_x,round(max_x*(0.5+0.48*math.sin(u*0.92)))))
+    pan_y=max(0,min(max_y,round(max_y*(0.5+0.38*math.cos(u*0.76)))))
+    # A short directional camera snap adds impact without moving the caption
+    # band out of its safe area.
+    snap=max(0.0,1.0-((u % 2.4)/0.16))
+    shake_x=int(12*snap*math.sin(u*85.0))
+    shake_y=int(7*snap*math.cos(u*79.0))
+    pan_x=max(0,min(max_x,pan_x+shake_x))
+    pan_y=max(0,min(max_y,pan_y+shake_y))
     im=scaled.crop((pan_x,pan_y,pan_x+1920,pan_y+1080))
 
-    # Brief directional edge streak at each micro-beat reset. Keep the centre
-    # clear so the title, evidence and captions remain legible.
-    impact=max(0.0,1.0-((u % 2.4)/0.18))
+    # Directional edge streaks flare at each beat reset. Their duration is
+    # long enough to read as an impact, while the central evidence stays clean.
+    impact=max(0.0,1.0-((u % 2.4)/0.28))
     if impact>0:
         streak=Image.new('RGBA',im.size,(0,0,0,0))
         sd=ImageDraw.Draw(streak)
-        alpha=int(105*impact)
-        for k in range(5):
-            yy=90+k*18
-            sd.line((0,yy,260,yy+38),fill=(114,209,255,alpha),width=5)
-            sd.line((1660,yy+38,1920,yy),fill=(255,224,147,alpha),width=5)
+        alpha=int(150*impact)
+        for k in range(7):
+            yy=72+k*23
+            sd.line((0,yy,340,yy+54),fill=(114,209,255,alpha),width=7)
+            sd.line((1580,yy+54,1920,yy),fill=(255,224,147,alpha),width=7)
         im=Image.alpha_composite(im.convert('RGBA'),streak).convert('RGB')
 
     if index and u<.14:
