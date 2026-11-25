@@ -312,15 +312,25 @@ def frame(plan,t,total):
     studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
     studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
 
-    if s['visual'] in {'signal','timeline'}:
-        points=[]
-        for xx in range(100,1110,10):
-            yy=720+math.sin(xx*.018+t*4)*38+math.sin(xx*.006-t*1.3)*56
-            points.append((xx,int(yy)))
-        d.line(points,fill=accent,width=5)
-        for k in range(3):
-            r=60+((t*50+k*90)%280)
-            d.ellipse((605-r,725-r*.45,605+r,725+r*.45),outline=(39+20*k,77+20*k,105+25*k),width=2)
+    if s['visual']=='signal':
+        # An attention pulse: deliberately no fabricated search-volume axis.
+        pulse=1.0+0.10*math.sin(t*2.2)
+        cx,cy=620,735
+        for radius in (105,190,275):
+            r=radius*pulse
+            d.ellipse((cx-r,cy-r*.48,cx+r,cy+r*.48),
+                      outline=(48,91,124),width=3)
+        d.ellipse((cx-48,cy-48,cx+48,cy+48),fill=accent)
+        d.text((cx,cy+112),'THE QUESTION',font=studio.font(27),
+               fill=(225,235,246),anchor='mm')
+    elif s['visual']=='timeline':
+        # Verification steps, not a prediction or invented schedule.
+        steps=('OPEN ORIGINAL REPORTS','CHECK DATES AND SCOPE','SEEK INDEPENDENT UPDATE')
+        for j,label in enumerate(steps):
+            yy=650+j*92
+            d.ellipse((155,yy,205,yy+50),outline=accent,width=4)
+            d.line((180,yy+50,180,yy+83),fill=(48,91,124),width=3)
+            d.text((235,yy+7),label,font=studio.font(25),fill=(225,235,246))
     elif s['visual'] in {'evidence','contrast'}:
         cards=s.get('source_cards') or []
         d.text((125,625),'SOURCE NOTES' if s['visual']=='evidence' else 'TWO REPORTS / CHECK THE DETAILS',
@@ -342,15 +352,31 @@ def frame(plan,t,total):
                 d.text((x0+22,700),'SECOND SUMMARY NOT AVAILABLE',
                        font=studio.font(20),fill=(178,202,221))
     elif s['visual']=='map':
-        d.ellipse((250,600,940,900),outline=accent,width=6)
-        for k in range(7):
-            ang=k*.9+t*.15; x=595+math.cos(ang)*250; y=750+math.sin(ang)*110
-            d.ellipse((x-12,y-12,x+12,y+12),fill=accent)
-        d.line((595,750,845,680),fill=(178,202,221),width=4)
+        # Show the distinction between attention, reporting and confirmation.
+        nodes=[(175,735,'SEARCH SIGNAL'),(510,735,'PUBLISHED REPORT'),(855,735,'CONFIRMED DETAIL')]
+        for j,(x,y,label) in enumerate(nodes):
+            d.rounded_rectangle((x,y-62,x+250,y+62),radius=22,
+                                fill=(18,36,58),outline=accent if j==1 else (48,91,124),width=4)
+            studio.fit_text(d,label,(x+12,y-35,x+238,y+35),size=22,
+                            fill=(225,235,246),max_lines=2)
+            if j<2:
+                d.line((x+255,y,x+320,y),fill=(178,202,221),width=5)
+                d.polygon(((x+320,y),(x+302,y-12),(x+302,y+12)),fill=(178,202,221))
+        d.text((510,855),'Each step needs evidence; attention alone proves nothing.',
+               font=studio.font(22),fill=(150,180,205),anchor='mm')
     elif s['visual']=='impact':
-        for k,val in enumerate((.32,.58,.82)):
-            x=180+k*300; h=int(260*val*(.75+.25*math.sin(t*1.4+k)))
-            d.rounded_rectangle((x,860-h,x+170,860),radius=18,fill=(45+25*k,100+15*k,145+20*k))
+        # Qualitative consequence paths; no made-up magnitudes or percentages.
+        center=(600,745)
+        d.ellipse((center[0]-68,center[1]-68,center[0]+68,center[1]+68),
+                  fill=(20,52,78),outline=accent,width=5)
+        d.text(center,'IF TRUE',font=studio.font(23),fill='white',anchor='mm')
+        for j,(x,y,label) in enumerate(((250,640,'WHO IS AFFECTED?'),
+                                       (870,640,'WHAT COULD CHANGE?'),
+                                       (560,900,'WHAT IS STILL UNKNOWN?'))):
+            d.line((center[0],center[1],x,y),fill=(48,91,124),width=5)
+            d.rounded_rectangle((x-145,y-42,x+145,y+42),radius=18,
+                                fill=(18,36,58),outline=(48,91,124),width=3)
+            d.text((x,y),label,font=studio.font(19),fill=(225,235,246),anchor='mm')
     else:
         # Payoff scene deliberately simplifies composition after denser evidence.
         d.ellipse((360,620,870,900),fill=(20,52,78),outline=accent,width=5)
