@@ -19,7 +19,7 @@ def assess(story, history=(), *, model=None, api_key=None, transport=None):
     problems = candidate_issues(story, history)
     if problems:
         return {"approved": False, "issues": sorted(set(problems)), "record": None}
-    model = model or os.getenv("ASTRA_EDITORIAL_REVIEW_MODEL", "gemini-3.1-flash-lite")
+    model = model or os.getenv("ASTRA_EDITORIAL_REVIEW_MODEL", "gemini-3.8-flash")
     api_key = api_key if api_key is not None else os.getenv("GEMINI_API_KEY")
     if not api_key:
         return {"approved": False, "issues": ["reviewer_unavailable"], "record": None}
