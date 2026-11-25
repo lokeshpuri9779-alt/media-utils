@@ -521,13 +521,29 @@ def make_plan(ch):
 
 
 def narration_segments(text):
-    """Split narration at sentence boundaries while preserving spoken wording."""
+    """Split at sentence boundaries without breaking common abbreviations or decimals."""
     normalized=' '.join(str(text or '').replace('; ', '. ').split())
     if not normalized:
         return []
-    # Keep punctuation attached to each segment so Kokoro can shape the ending.
-    parts=re.split(r'(?<=[.!?])\s+(?=[A-Z0-9“"])',normalized)
-    return [part.strip() for part in parts if part.strip()]
+    # Protect periods that are part of abbreviations, initials and decimal values.
+    marker='\uE000'
+    abbreviations=(
+        'U.S.', 'U.K.', 'U.N.', 'E.U.', 'e.g.', 'i.e.', 'etc.',
+        'Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.', 'Sr.', 'Jr.', 'St.',
+        'vs.', 'No.', 'Fig.', ' approx.'
+    )
+    protected=normalized
+    for abbreviation in abbreviations:
+        pattern=re.escape(abbreviation)
+        protected=re.sub(pattern, lambda m:m.group(0).replace('.',marker), protected,
+                         flags=re.IGNORECASE)
+    protected=re.sub(r'(?<=\\d)\\.(?=\\d)',marker,protected)
+    # An initial before a name is not the end of a sentence (e.g. A. Smith).
+    protected=re.sub(r'\\b([A-Z])\\.(?=\\s+[A-Z][a-z])',
+                     lambda m:m.group(1)+marker,protected)
+    # Keep closing quotation marks attached to the sentence they close.
+    parts=re.split(r'(?<=[.!?][””"’\\']?)\\s+(?=[A-Z0-9“"\\'])',protected)
+    return [part.replace(marker,'.').strip() for part in parts if part.strip()]
 
 
 def _sentence_pause_seconds(segment):
