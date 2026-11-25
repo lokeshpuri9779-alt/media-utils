@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from html.parser import HTMLParser
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -77,7 +78,8 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
         source_url = source_node.attrib.get("url", "") if source_node is not None else ""
         publisher_domain = urllib.parse.urlsplit(source_url).hostname or ""
         publisher_domain = publisher_domain.lower().removeprefix("www.")
-        description = _tag(item, "description") or _tag(item, "summary")
+        description = (_tag(item, "description") or _tag(item, "summary")
+                       or _tag(item, "encoded"))
         try:
             dt = parsedate_to_datetime(published)
             if dt.tzinfo is None:
@@ -99,6 +101,77 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
     return rows
 
 
+
+
+class _ArticleText(HTMLParser):
+    """Extract publisher-provided descriptions and readable article paragraphs."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.meta = []
+        self.paragraphs = []
+        self._paragraph = []
+        self._in_paragraph = False
+        self._blocked = 0
+
+    def handle_starttag(self, tag, attrs):
+        attrs = {str(k).lower(): str(v or "") for k, v in attrs}
+        if tag in {"script", "style", "noscript", "svg", "nav", "footer", "header"}:
+            self._blocked += 1
+        if tag == "meta":
+            key = (attrs.get("name") or attrs.get("property") or "").lower()
+            if key in {"description", "og:description", "twitter:description"}:
+                value = " ".join(attrs.get("content", "").split())
+                if value:
+                    self.meta.append(value)
+        if tag == "p" and not self._blocked:
+            self._in_paragraph = True
+            self._paragraph = []
+
+    def handle_endtag(self, tag):
+        if tag == "p" and self._in_paragraph:
+            value = " ".join(" ".join(self._paragraph).split())
+            if len(value) >= 55:
+                self.paragraphs.append(value)
+            self._paragraph = []
+            self._in_paragraph = False
+        if tag in {"script", "style", "noscript", "svg", "nav", "footer", "header"}:
+            self._blocked = max(0, self._blocked - 1)
+
+    def handle_data(self, data):
+        if self._in_paragraph and not self._blocked:
+            clean = " ".join(str(data or "").split())
+            if clean:
+                self._paragraph.append(clean)
+
+
+def _publisher_page_summary(url: str) -> str:
+    """Recover source-authored context when RSS supplies headlines only.
+
+    This does not invent or paraphrase facts: it extracts publisher metadata or
+    article paragraphs. Unavailable/paywalled pages remain summary-less.
+    """
+    if not isinstance(url, str) or not url.startswith(("https://", "http://")):
+        return ""
+    request = urllib.request.Request(url, headers={
+        **HEADERS, "Accept": "text/html,application/xhtml+xml"})
+    try:
+        with urllib.request.urlopen(request, timeout=8) as response:
+            content_type = str(response.headers.get("Content-Type", "")).lower()
+            if "html" not in content_type:
+                return ""
+            raw = response.read(1_200_000)
+        parser = _ArticleText()
+        parser.feed(raw.decode("utf-8", errors="replace"))
+        # Prefer the publisher's explicit summary; otherwise use a small,
+        # ordered excerpt from visible article paragraphs.
+        candidates = parser.meta + parser.paragraphs[:3]
+        for value in candidates:
+            value = " ".join(value.split())
+            if len(value) >= 55:
+                return value[:500]
+    except Exception as exc:
+        print(f"Skipping publisher article context: {type(exc).__name__}")
+    return ""
 
 def enrich_trends(trends: list[dict], max_topics: int = 4) -> list[dict]:
     """Attach bounded Google News RSS context to live trend items.
@@ -139,6 +212,13 @@ def enrich_trends(trends: list[dict], max_topics: int = 4) -> list[dict]:
                 "published": source.get("published", ""),
                 "summary": source.get("summary", ""),
             })
+        # RSS may expose independent headlines but omit descriptions. Recover
+        # actual publisher-authored context for at most two articles per topic.
+        for source in item["news"][:2]:
+            if isinstance(source, dict) and len(str(source.get("summary") or "").strip()) < 55:
+                extracted = _publisher_page_summary(str(source.get("url") or ""))
+                if extracted:
+                    source["summary"] = extracted
     return enriched
 
 
