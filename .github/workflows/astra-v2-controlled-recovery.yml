@@ -56,7 +56,7 @@ jobs:
           if any(str(r["id"]) != os.environ["GITHUB_RUN_ID"] and
                  minutes(r["created_at"]) < 90 for r in own):
               skip("recovery_cooldown")
-          subprocess.run(["gh","workflow","run","astra-v2-publish.yml",
+          subprocess.run(["gh","workflow","run","astra-v2-preload.yml",
                           "--repo",repo,"--ref","main"],check=True,timeout=35)
-          print("ASTRA_RECOVERY=DISPATCHED")
+          print("ASTRA_RECOVERY=PRELOAD_DISPATCHED")
           PY
