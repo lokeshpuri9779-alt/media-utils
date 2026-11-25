@@ -481,16 +481,20 @@ def validate_source_pack(sources: list[dict], lane: str) -> list[dict]:
         if freshness and age > freshness:
             continue
         normalized_publisher = re.sub(r"[^a-z0-9]+", "", publisher.lower())
+        publisher_domain = str(item.get("publisher_domain") or "").strip().lower()
+        publisher_domain = publisher_domain.removeprefix("www.")
+        publisher_key = publisher_domain or normalized_publisher
         normalized_url = url.lower().rstrip("/")
-        if not normalized_publisher or normalized_publisher in {"rssfeed", "googletrends"}:
+        if not publisher_key or publisher_key in {"rssfeed", "googletrends"}:
             continue
-        if normalized_publisher in publishers or normalized_url in urls:
+        if publisher_key in publishers or normalized_url in urls:
             continue
-        publishers.add(normalized_publisher)
+        publishers.add(publisher_key)
         urls.add(normalized_url)
         usable.append({
             "title": title[:240], "url": url[:500], "published": published[:80],
-            "publisher": publisher[:100], "summary": summary[:500],
+            "publisher": publisher[:100], "publisher_domain": publisher_domain[:253],
+            "summary": summary[:500],
         })
     if len(usable) < 2:
         freshness_note = (
