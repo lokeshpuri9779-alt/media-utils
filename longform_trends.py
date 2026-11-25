@@ -153,6 +153,37 @@ def _distinctive_thumbnail_copy(headline, topic):
     return ' '.join(str(topic or 'CURRENT STORY').split()).upper()[:58]
 
 
+def _retention_opening(headline, topic):
+    """Create a factual open loop from the actual headline, without adding claims."""
+    clean=' '.join(str(headline or topic or 'This story').split()).rstrip('.!?')
+    return (f'{clean}. But what do the reports actually confirm about {topic}, '
+            'and what is still unknown? We will separate the reported facts from the unanswered questions.')
+
+
+def _retention_payoff(topic, source_summary):
+    """Close the opening loop using only source-provided detail and explicit limits."""
+    detail=_clean_summary(source_summary, limit=260)
+    if not detail:
+        detail='The available source record does not provide enough detail to confirm more.'
+    return (f'So, what can we actually say about {topic}? The available report says: {detail}. '
+            'That is the reported development. Anything beyond it remains unconfirmed until the full reports establish it.')
+
+
+def retention_contract(plan):
+    """Fail if the opening creates no question or the ending fails to resolve it."""
+    if len(plan) < 3:
+        raise RuntimeError('Retention contract rejected story: too few narrative beats.')
+    opening=str(plan[0].get('speech') or '')
+    ending=str(plan[-1].get('speech') or '')
+    if '?' not in opening or len(opening.split()) > 45:
+        raise RuntimeError('Retention contract rejected story: opening must establish a concise, explicit question.')
+    if not all(token in ending.lower() for token in ('actually say', 'reported', 'unconfirmed')):
+        raise RuntimeError('Retention contract rejected story: ending does not resolve the opening with evidence limits.')
+    if opening == ending or len({x.get('story_beat') for x in plan}) < 6:
+        raise RuntimeError('Retention contract rejected story: repetitive or insufficiently differentiated beats.')
+    return {'opening_words':len(opening.split()),'closing_words':len(ending.split()),'distinct_beats':len({x.get('story_beat') for x in plan})}
+
+
 def build_plan(items, offset=0):
     t=story_candidate(items, offset=offset)
     if not t:
@@ -181,7 +212,7 @@ def build_plan(items, offset=0):
     # cross-check, stakes, open question, and a bounded conclusion.
     beats=[
       ('THE DETAIL THAT STARTED IT',
-       f'{headline} That is the reported development drawing attention to {topic}. Before accepting the first impression, let us separate the report from the search spike.',
+       _retention_opening(headline, topic),
        'signal',thumbnail_copy,'THE OPENING QUESTION'),
       ('WHAT THE REPORT ACTUALLY SAYS',
        f'The first linked report is from {source_a["name"]}. Its available summary says: {source_a["summary"]}. That is the concrete starting point; anything beyond it needs another source.',
@@ -202,7 +233,7 @@ def build_plan(items, offset=0):
        f'The next useful update is specific: check the original linked reports for the full details, look for newer reporting from independent publishers, and see whether key dates or claims have changed. Until then, the unresolved parts stay unresolved.',
        'timeline','WHAT TO VERIFY NEXT','THE OPEN QUESTION'),
       ('THE TAKEAWAY',
-       f'{topic} has earned attention, but attention is only the starting signal. The strongest conclusion supported here is the reported development, the source context, and the questions that still need confirmation. That is the difference between a trend recap and an evidence-led explainer.',
+       _retention_payoff(topic, source_a['summary']),
        'payoff','FOLLOW THE EVIDENCE','RAYVAN'),
     ]
     beat_names=['promise','catalyst','context','evidence','complication','implication','outlook','takeaway']
@@ -404,6 +435,7 @@ def render(out, episode_id, trend_items):
         if ii is not None and ii>4:
             item=plan.pop(ii); plan.insert(4,item)
     quality=long_quality_gate(plan,topics)
+    quality['retention']=retention_contract(plan)
     total=studio.voice_plan(plan,'current',max_duration=600)
     if total < 90:
         raise RuntimeError('Trend brief is too short to qualify as long-form.')
