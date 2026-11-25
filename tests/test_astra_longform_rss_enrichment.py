@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch
 
-from astra_v2.trend_source_collector import enrich_trends
+from astra_v2.trend_source_collector import _ArticleText, enrich_trends
 from longform_trends import build_plan, long_quality_gate, retention_contract, sourced_topics
 
 
@@ -24,6 +24,25 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         self.assertIn("new milestone", article["summary"])
         self.assertTrue(article["published"])
         parse_feed.assert_called_once()
+
+    def test_article_parser_prefers_publisher_description_metadata(self):
+        parser = _ArticleText()
+        parser.feed('<html><head><meta property="og:description" content="A publisher-authored summary with enough detail to explain the reported development and its context."></head><body><p>A longer paragraph that is not selected when explicit publisher metadata exists.</p></body></html>')
+        self.assertTrue(parser.meta)
+        self.assertIn("publisher-authored summary", parser.meta[0])
+
+    @patch("astra_v2.trend_source_collector._publisher_page_summary",
+           return_value="Publisher page describes the confirmed development and gives substantive context for the reported event.")
+    @patch("astra_v2.trend_source_collector._parse_feed")
+    def test_enrichment_recovers_missing_rss_summary_from_publisher_page(self, parse_feed, page_summary):
+        parse_feed.return_value = [{
+            "title": "Mars mission reaches orbit", "url": "https://publisher.example/story",
+            "publisher": "Publisher A", "publisher_domain": "publisher.example",
+            "published": "2026-11-25", "summary": "",
+        }]
+        result = enrich_trends([{"title": "Mars mission", "news": []}])
+        self.assertIn("confirmed development", result[0]["news"][0]["summary"])
+        page_summary.assert_called_once_with("https://publisher.example/story")
 
     @patch("astra_v2.trend_source_collector._parse_feed")
     def test_preserves_existing_links_and_deduplicates_urls(self, parse_feed):
