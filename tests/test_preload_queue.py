@@ -101,7 +101,10 @@ class PreloadQueueTests(unittest.TestCase):
             video.write_bytes(b"safe-media-test")
             candidate = {"content_id": "story-1", "title": "New story",
                          "description": "Original", "synthetic": True,
-                         "genre": "fiction", "format": "short", "renderer": "studio-7.3.0"}
+                         "genre": "fiction", "format": "short", "renderer": "studio-7.3.0",
+                         "caption_qa": {"status": "pass", "burned_in": True,
+                                        "scene_count": 2, "covered_scenes": 2,
+                                        "covered_words": 8, "caption_phrases": 3}}
             with patch("astra_v2.creative.inspect_video", return_value={
                 "seconds": 12, "width": 1080, "height": 1920, "size": 15}):
                 folder = queue.prepare(video, candidate)
