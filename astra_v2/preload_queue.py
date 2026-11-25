@@ -316,6 +316,15 @@ def prepare(path, candidate):
         raise ValueError("Publication quality rejected: " + rejection)
     payload = {k: candidate[k] for k in (
         "content_id", "title", "description", "synthetic", "genre", "format")}
+    if fmt == "short":
+        caption_qa = candidate.get("caption_qa")
+        if (not isinstance(caption_qa, dict)
+                or caption_qa.get("status") != "pass"
+                or caption_qa.get("burned_in") is not True
+                or caption_qa.get("covered_scenes") != caption_qa.get("scene_count")
+                or int(caption_qa.get("covered_words") or 0) < 1):
+            raise ValueError("Short preload is missing complete burned-in caption QA")
+        payload["caption_qa"] = caption_qa
     if "made_for_kids" in candidate:
         if not isinstance(candidate["made_for_kids"], bool):
             raise ValueError("made_for_kids must be boolean")
@@ -475,6 +484,15 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                         continue
                     if candidate["format"] == "long" and not allow_long:
                         continue
+                    if candidate["format"] == "short":
+                        caption_qa = candidate.get("caption_qa")
+                        if (not isinstance(caption_qa, dict)
+                                or caption_qa.get("status") != "pass"
+                                or caption_qa.get("burned_in") is not True
+                                or caption_qa.get("covered_scenes") != caption_qa.get("scene_count")
+                                or int(caption_qa.get("covered_words") or 0) < 1):
+                            print("ASTRA_PRELOAD_CAPTION_QA_SKIP=" + cid)
+                            continue
                     if candidate.get("title", "").casefold().strip() in excluded_titles:
                         continue
                     # The controlled Studio 7.2 rollout must not consume an
