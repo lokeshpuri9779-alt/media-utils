@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch
 
-from astra_v2.trend_source_collector import _ArticleText, _parse_feed, enrich_trends
+from astra_v2.trend_source_collector import _ArticleText, _parse_feed, _reader_summary_from_text, enrich_trends
 from longform_trends import build_plan, long_quality_gate, retention_contract, sourced_topics
 
 
@@ -30,6 +30,20 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         parser.feed('<html><head><meta property="og:description" content="A publisher-authored summary with enough detail to explain the reported development and its context."></head><body><p>A longer paragraph that is not selected when explicit publisher metadata exists.</p></body></html>')
         self.assertTrue(parser.meta)
         self.assertIn("publisher-authored summary", parser.meta[0])
+
+    def test_reader_fallback_extracts_source_paragraphs_not_metadata(self):
+        source = """Title: Example article
+URL Source: https://publisher.example/story
+Markdown Content:
+# Example article
+
+The publisher reports that the spacecraft reached orbit after a successful launch. The team confirmed the next observation phase and described the mission timeline in its latest statement.
+
+A second paragraph adds source context and explains what the mission team plans to measure next."""
+        summary = _reader_summary_from_text(source)
+        self.assertIn("spacecraft reached orbit", summary)
+        self.assertNotIn("URL Source", summary)
+        self.assertLessEqual(len(summary), 500)
 
     @patch("astra_v2.trend_source_collector._fetch")
     def test_bing_rss_redirect_is_unwrapped_to_publisher_url(self, fetch):
