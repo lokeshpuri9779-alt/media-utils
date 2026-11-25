@@ -1,12 +1,13 @@
 name: ASTRA V2 - Verified YouTube Publisher
 
-# Event-driven publishing: run only after the dedicated long-form render succeeds.
+# One publishing pass runs only after Shorts preload and the optional long-form preparation stage finish.
+# Long-form preparation is non-blocking; the publisher selects the best eligible queued format.
 # No cron or manual dispatch; preflight and publication-quality gates remain mandatory.
 on:
   workflow_run:
     # Shorts are the primary publishing lane: do not wait for long-form cadence.
     # Long-form completion also wakes the publisher for eligible long episodes.
-    workflows: ["ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload"]
+    workflows: ["ASTRA V2 - Long-form Preload"]
     types: [completed]
 
 concurrency:
