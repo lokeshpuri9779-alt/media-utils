@@ -238,6 +238,25 @@ def run():
                         report.update(outcome="quality_skip", reason=str(exc)[:250], story_selection=getattr(exc, "selection", None) or {})
                         return report
                     rejection = publication_rejection(candidate)
+                if candidate.get("format") == "short":
+                    caption_qa = candidate.get("caption_qa")
+                    if (not isinstance(caption_qa, dict)
+                            or caption_qa.get("status") != "pass"
+                            or caption_qa.get("burned_in") is not True
+                            or caption_qa.get("covered_scenes") != caption_qa.get("scene_count")
+                            or int(caption_qa.get("covered_words") or 0) < 1):
+                        report.update(outcome="quality_skip", reason="shorts_burned_in_caption_qa_missing_or_failed",
+                                      content_id=candidate.get("content_id"))
+                        print("ASTRA_SHORTS_CAPTION_QA=blocked")
+                        return report
+                    report["caption_qa"] = {
+                        "status": caption_qa["status"],
+                        "burned_in": caption_qa["burned_in"],
+                        "covered_scenes": caption_qa["covered_scenes"],
+                        "scene_count": caption_qa["scene_count"],
+                        "caption_phrases": caption_qa.get("caption_phrases", 0),
+                    }
+                    print("ASTRA_SHORTS_CAPTION_QA=pass")
                 if rejection:
                     report.update(outcome="quality_skip", reason=rejection)
                     return report

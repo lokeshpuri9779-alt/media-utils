@@ -60,7 +60,8 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: false", preload)
         self.assertIn('workflows: ["ASTRA V2 - Preload Approved Videos"]', longform)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", longform)
-        self.assertIn('workflows: ["ASTRA V2 - Long-form Preload"]', publisher)
+        self.assertIn('      - "ASTRA V2 - Preload Approved Videos"', publisher)
+        self.assertIn('      - "ASTRA V2 - Long-form Preload"', publisher)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", publisher)
         self.assertIn("continue-on-error: true", longform)
 

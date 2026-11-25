@@ -141,6 +141,10 @@ class QueueFormatSelectionTests(unittest.TestCase):
                 "description": "Original narrative", "genre": "fiction",
                 "synthetic": True, "sha256": hashlib.sha256(video).hexdigest(),
             }
+            if fmt == "short":
+                candidate["caption_qa"] = {"status": "pass", "burned_in": True,
+                    "scene_count": 1, "covered_scenes": 1, "covered_words": 4}
+
             stream = io.BytesIO()
             with zipfile.ZipFile(stream, "w") as z:
                 z.writestr("candidate.json", json.dumps(candidate))
@@ -198,6 +202,8 @@ class QueueFormatSelectionTests(unittest.TestCase):
         candidate = {"content_id": "with-cover", "title": "Original with cover",
                      "description": "Original narrative", "genre": "fiction",
                      "format": "short", "synthetic": True,
+                     "caption_qa": {"status": "pass", "burned_in": True,
+                         "scene_count": 1, "covered_scenes": 1, "covered_words": 4},
                      "sha256": hashlib.sha256(video).hexdigest()}
         stream = io.BytesIO()
         with zipfile.ZipFile(stream, "w") as z:
@@ -246,6 +252,8 @@ class QueueFormatSelectionTests(unittest.TestCase):
         video = b"original-short-video"
         good = {"content_id": "good", "title": "Original good", "description": "Original narrative",
                 "genre": "fiction", "format": "short", "synthetic": True,
+                "caption_qa": {"status": "pass", "burned_in": True,
+                    "scene_count": 1, "covered_scenes": 1, "covered_words": 4},
                 "sha256": hashlib.sha256(video).hexdigest()}
         packages = {1: archive({"content_id": "bad", "title": None, "format": "short"}),
                     2: archive(good)}
@@ -303,6 +311,8 @@ class StudioRendererFloorTests(unittest.TestCase):
             candidate = {"content_id": cid, "format": "short",
                 "title": "Original " + cid, "description": "Original narrative",
                 "genre": "fiction", "synthetic": True, "renderer": renderer,
+                "caption_qa": {"status": "pass", "burned_in": True,
+                    "scene_count": 1, "covered_scenes": 1, "covered_words": 4},
                 "sha256": hashlib.sha256(video).hexdigest()}
             stream = io.BytesIO()
             with zipfile.ZipFile(stream, "w") as z:

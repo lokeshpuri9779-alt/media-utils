@@ -325,6 +325,15 @@ def prepare(path, candidate):
         raise ValueError("Approved preload is missing verified renderer provenance")
     payload["renderer"] = renderer.strip()
     if fmt == "short":
+        caption_qa = candidate.get("caption_qa")
+        if (not isinstance(caption_qa, dict)
+                or caption_qa.get("status") != "pass"
+                or caption_qa.get("burned_in") is not True
+                or caption_qa.get("covered_scenes") != caption_qa.get("scene_count")
+                or int(caption_qa.get("covered_words") or 0) < 1):
+            raise ValueError("Short preload is missing complete burned-in caption QA")
+        payload["caption_qa"] = caption_qa
+    if fmt == "short":
         from astra_v2.story_handoff import approved_story_context
         payload["plot_fingerprint"] = str(candidate.get("plot_fingerprint") or "")
         payload["plot_key"] = str(candidate.get("plot_key") or "")
@@ -475,6 +484,15 @@ def take(excluded_ids, excluded_titles, output, allow_long=True):
                         continue
                     if candidate["format"] == "long" and not allow_long:
                         continue
+                    if candidate["format"] == "short":
+                        caption_qa = candidate.get("caption_qa")
+                        if (not isinstance(caption_qa, dict)
+                                or caption_qa.get("status") != "pass"
+                                or caption_qa.get("burned_in") is not True
+                                or caption_qa.get("covered_scenes") != caption_qa.get("scene_count")
+                                or int(caption_qa.get("covered_words") or 0) < 1):
+                            print("ASTRA_PRELOAD_CAPTION_QA_SKIP=" + cid)
+                            continue
                     if candidate.get("title", "").casefold().strip() in excluded_titles:
                         continue
                     # The controlled Studio 7.2 rollout must not consume an
