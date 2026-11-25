@@ -419,7 +419,7 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "engagement question must total 65–85 words for a 28–40 second Short. "
         "Make every line add new information; avoid filler, generic moral lessons, and generic calls to action. "
         "Do not default every format to a quiz or rhetorical question; use the selected treatment naturally. "
-        "The final question must invite a real answer. "
+        "The final question must invite a real, content-specific answer, contain 8–20 words, and end with a question mark. "
         "The title must be 8–80 characters, specific to this Short, and not a generic label. "
         "The premise field must be 35–90 words and accurately describe the Short. "
         "Do not repeat or closely imitate these recent ASTRA topics: "
