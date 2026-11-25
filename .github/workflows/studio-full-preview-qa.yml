@@ -28,6 +28,10 @@ on:
       - 'tests/render_performance_short_preview.py'
       - 'tests/verify_studio_preview.py'
       - '.github/workflows/studio-full-preview-qa.yml'
+concurrency:
+  group: astra-full-studio-preview-qa
+  cancel-in-progress: true
+
 permissions:
   contents: read
   actions: read
