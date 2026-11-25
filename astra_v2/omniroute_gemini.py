@@ -141,7 +141,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "The consequence of each beat must directly cause the next beat's action; "
         "seed the twist clue before revealing it, and make the final payoff use "
         "that established clue rather than coincidence or a new object. "
-        "Keep sentences punchy, visual and vivid. At least one beat speech MUST contain a character's actual spoken words inside double quotation marks, for example: The otter whispered, \\"Hold the lantern steady.\\" Do not merely describe speech or use indirect dialogue. "
+        "Keep sentences punchy, visual and vivid. At least one beat speech MUST contain a character's actual spoken words inside double quotation marks, for example: The otter whispered, “Hold the lantern steady.” Do not merely describe speech or use indirect dialogue. "
         "Distinguish recurring voices through word choice and reactions, not long speeches. Give each named protagonist "
         "one stable personality trait, one immediate want, one pressure-triggered flaw, "
         "and a recognizable decision-making habit. Before drafting, privately assign "
