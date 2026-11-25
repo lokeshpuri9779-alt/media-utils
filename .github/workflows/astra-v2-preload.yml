@@ -5,6 +5,7 @@ on:
   # No path filter: code, workflow, editorial, and recovery changes all trigger it.
   push:
     branches: [main]
+  workflow_dispatch:
 
 # Keep one coherent four-lane render batch active at a time.
 # Scheduled triggers that arrive during a batch must not cancel its jobs.
