@@ -52,6 +52,10 @@ class GithubReadinessTests(unittest.TestCase):
             self.assertNotIn("schedule:", source)
             self.assertNotIn("- cron:", source)
         self.assertIn("push:", preload)
+        trigger = preload.split("concurrency:", 1)[0]
+        self.assertIn("branches: [main]", trigger)
+        self.assertNotIn("paths:", trigger)
+        self.assertIn("cancel-in-progress: false", preload)
         self.assertIn("lane: [0, 1, 2, 3]", preload)
         self.assertIn("cancel-in-progress: false", preload)
         self.assertIn('workflows: ["ASTRA V2 - Preload Approved Videos"]', longform)
