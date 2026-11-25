@@ -78,7 +78,7 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         self.assertEqual(len(plan), 8)
         self.assertEqual(len({x['story_beat'] for x in plan}), 8)
         self.assertIn('spacecraft reached orbit', plan[3]['speech'])
-        self.assertIn('second report', plan[4]['speech'].lower())
+        self.assertIn('Publisher B adds', plan[4]['speech'])
         self.assertIn('MARS MISSION REACHES ORBIT', topics[0]['thumbnail_copy'])
         report = long_quality_gate(plan, topics)
         self.assertGreaterEqual(report['score'], 85)
