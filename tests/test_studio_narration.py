@@ -24,6 +24,20 @@ class StudioNarrationTests(unittest.TestCase):
             ['A real change happened.', 'Why did it happen?', 'Here is what matters!'],
         )
 
+    def test_sentence_split_does_not_break_abbreviations_or_decimals(self):
+        text = 'Dr. Rao visited the U.S. in 2026. The value was 3.14. It worked.'
+        self.assertEqual(
+            studio.narration_segments(text),
+            ['Dr. Rao visited the U.S. in 2026.', 'The value was 3.14.', 'It worked.'],
+        )
+
+    def test_sentence_split_keeps_initials_and_quoted_endings(self):
+        text = 'A. Smith said, “It is ready.” Then it shipped.'
+        self.assertEqual(
+            studio.narration_segments(text),
+            ['A. Smith said, “It is ready.”', 'Then it shipped.'],
+        )
+
     def test_empty_narration_has_no_segments(self):
         self.assertEqual(studio.narration_segments('   '), [])
 
