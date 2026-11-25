@@ -17,6 +17,7 @@ from pathlib import Path
 
 NEWS_URL = "https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en"
 TRENDS_URL = "https://trends.google.com/trending/rss?geo=IN"
+BING_NEWS_URL = "https://www.bing.com/news/search"
 HEADERS = {"User-Agent": "ASTRA-RAYVAN-RSS-Reader/1.0 (+https://github.com/lokeshpuri9779-alt/media-utils)"}
 
 TOPIC_QUERIES = {
@@ -54,7 +55,7 @@ def _fetch(url: str) -> bytes:
 
 def _tag(element, name: str) -> str:
     for child in element:
-        if child.tag.rsplit("}", 1)[-1] == name:
+        if child.tag.rsplit("}", 1)[-1].lower() == name.lower():
             return (child.text or "").strip()
     return ""
 
@@ -69,11 +70,11 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
         link = _tag(item, "link")
         if not link:
             for child in item:
-                if child.tag.rsplit("}", 1)[-1] == "link":
+                if child.tag.rsplit("}", 1)[-1].lower() == "link":
                     link = child.attrib.get("href", "")
                     break
         published = _tag(item, "pubDate") or _tag(item, "published") or _tag(item, "updated")
-        source_node = next((child for child in item if child.tag.rsplit("}", 1)[-1] == "source"), None)
+        source_node = next((child for child in item if child.tag.rsplit("}", 1)[-1].lower() == "source"), None)
         source = (source_node.text or "").strip() if source_node is not None else ""
         source_url = source_node.attrib.get("url", "") if source_node is not None else ""
         publisher_domain = urllib.parse.urlsplit(source_url).hostname or ""
@@ -87,6 +88,10 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
             published_iso = dt.astimezone(timezone.utc).isoformat()
         except (TypeError, ValueError, OverflowError):
             published_iso = published
+        if link.startswith("https://www.bing.com/news/apiclick.aspx"):
+            destination = urllib.parse.parse_qs(urllib.parse.urlsplit(link).query).get("url", [])
+            if destination and destination[0].startswith(("https://", "http://")):
+                link = destination[0]
         if title and link:
             rows.append({
                 "title": title,
@@ -194,11 +199,24 @@ def enrich_trends(trends: list[dict], max_topics: int = 4) -> list[dict]:
         query = urllib.parse.urlencode({
             "q": topic, "hl": "en-IN", "gl": "IN", "ceid": "IN:en"
         })
+        fetched = []
         try:
             fetched = _parse_feed("https://news.google.com/rss/search?" + query, 6)
         except Exception as exc:
-            print(f"Skipping long-form trend context: {type(exc).__name__}")
-            continue
+            print(f"Skipping Google News trend context: {type(exc).__name__}")
+        # Google News RSS frequently returns headlines without descriptions or
+        # is unavailable to hosted runners. Bing's public RSS search includes
+        # publisher snippets; treat those snippets as leads and retain source
+        # identity/date/URL rather than inventing narration.
+        if not any(len(str(row.get("summary") or "").strip()) >= 55 for row in fetched):
+            bing_query = urllib.parse.urlencode({
+                "q": topic, "format": "rss", "setmkt": "en-IN", "setlang": "en-IN"
+            })
+            try:
+                bing = _parse_feed(BING_NEWS_URL + "?" + bing_query, 8)
+                fetched.extend(row for row in bing if len(str(row.get("summary") or "").strip()) >= 55)
+            except Exception as exc:
+                print(f"Skipping Bing News trend context: {type(exc).__name__}")
         seen = {str(x.get("url") or "") for x in item["news"] if isinstance(x, dict)}
         for source in fetched:
             if source.get("url") in seen:
