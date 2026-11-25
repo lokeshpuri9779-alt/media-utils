@@ -146,11 +146,21 @@ def _clean_summary(value, limit=420):
 
 
 def _distinctive_thumbnail_copy(headline, topic):
-    """Use a short, source-linked headline phrase rather than only the trend name."""
+    """Create a compact, readable hook while preserving the source headline's wording."""
     words=re.findall(r"[A-Za-z0-9']+", str(headline or ''))
     if len(words) >= 3:
-        return ' '.join(words[:7]).upper()[:58]
-    return ' '.join(str(topic or 'CURRENT STORY').split()).upper()[:58]
+        chosen=words[:6]
+        # Avoid ending the thumbnail on a dangling connector.
+        while len(chosen)>3 and chosen[-1].lower() in {
+            'a','an','the','and','or','of','for','to','in','on','with','as','by'
+        }:
+            chosen.pop()
+        phrase=' '.join(chosen)
+        if len(phrase)>42:
+            phrase=' '.join(chosen[:5])
+        return phrase.upper()
+    fallback=' '.join(str(topic or 'CURRENT STORY').split())
+    return fallback.upper()[:42]
 
 
 def _retention_opening(headline, topic, source_name='', source_summary=''):
@@ -466,8 +476,11 @@ def thumbnail(path, topics):
     d.rounded_rectangle((65, 65, 1090, 1015), radius=42, fill=(8, 19, 34), outline=(38, 68, 94), width=3)
     d.rounded_rectangle((105, 125, 125, 245), radius=9, fill=accent)
     d.text((165, 145), 'RAYVAN / EXPLAINED', font=studio.font(34), fill=(203, 220, 236))
-    studio.fit_text(d, headline_copy, (115, 300, 1035, 785), size=112, fill='white', align='left', max_lines=4)
-    d.text((115, 875), topic.upper()[:58], font=studio.font(25), fill=accent)
+    # Short copy is intentionally oversized for phone-sized previews.
+    studio.fit_text(d, headline_copy, (115, 310, 1035, 745), size=132,
+                    fill='white', align='left', max_lines=3)
+    d.rounded_rectangle((110, 805, 1060, 910), radius=18, fill=(17, 35, 55))
+    d.text((145, 840), topic.upper()[:42], font=studio.font(25), fill=accent)
     _draw_thumbnail_hero(d, style, accent)
     im.resize((1280, 720), Image.Resampling.LANCZOS).save(path, 'JPEG', quality=94, optimize=True)
 
