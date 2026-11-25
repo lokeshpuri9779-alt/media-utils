@@ -17,6 +17,9 @@ permissions:
 jobs:
   longform:
     if: github.event.workflow_run.conclusion == 'success'
+    # Long-form is an optional preparation stage: even a source/render failure
+    # must not prevent the single downstream publisher from shipping an approved Short.
+    continue-on-error: true
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     env:
