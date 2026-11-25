@@ -72,7 +72,11 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
                     link = child.attrib.get("href", "")
                     break
         published = _tag(item, "pubDate") or _tag(item, "published") or _tag(item, "updated")
-        source = _tag(item, "source")
+        source_node = next((child for child in item if child.tag.rsplit("}", 1)[-1] == "source"), None)
+        source = (source_node.text or "").strip() if source_node is not None else ""
+        source_url = source_node.attrib.get("url", "") if source_node is not None else ""
+        publisher_domain = urllib.parse.urlsplit(source_url).hostname or ""
+        publisher_domain = publisher_domain.lower().removeprefix("www.")
         description = _tag(item, "description") or _tag(item, "summary")
         try:
             dt = parsedate_to_datetime(published)
@@ -87,6 +91,7 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
                 "url": link,
                 "published": published_iso,
                 "publisher": source or "RSS feed",
+                "publisher_domain": publisher_domain,
                 "summary": description[:500],
             })
         if len(rows) >= limit:
@@ -128,7 +133,8 @@ def collect(direction: str, output: str) -> list[dict]:
     seen_publishers = set()
     for item in unique:
         publisher = str(item.get("publisher") or "").strip()
-        key = "".join(ch.lower() for ch in publisher if ch.isalnum())
+        normalized_name = "".join(ch.lower() for ch in publisher if ch.isalnum())
+        key = item.get("publisher_domain") or normalized_name
         if not key or key in {"rssfeed", "googletrends"} or key in seen_publishers:
             continue
         seen_publishers.add(key)
