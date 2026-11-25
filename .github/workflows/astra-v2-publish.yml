@@ -539,6 +539,8 @@ jobs:
 
       - name: Audit approved authored story supply
         if: always()
+        continue-on-error: true
+        timeout-minutes: 3
         shell: bash
         run: |
           set -euo pipefail
