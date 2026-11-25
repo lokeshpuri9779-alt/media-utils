@@ -499,6 +499,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                 "character_episode": story.get("character_episode"),
                 "creative_director": evaluation["director"],
                 "asset_pack_usage": rendered.get("asset_pack_usage"),
+                 "caption_qa": rendered.get("caption_qa"),
                 "renderer": rendered.get("renderer"), "format": "short",
             }
             title = story["title"]
@@ -588,7 +589,8 @@ def make_candidate(path, excluded_ids, excluded_titles):
             "character_approved": meta.get("character_approved") is True,
             "character_episode": meta.get("character_episode"),
             "renderer": str(meta.get("renderer") or "unknown"),
-            "asset_pack_usage": meta.get("asset_pack_usage")}
+            "asset_pack_usage": meta.get("asset_pack_usage"),
+             "caption_qa": meta.get("caption_qa")}
 
 
 def make_long_candidate(path, excluded_ids, excluded_titles):
