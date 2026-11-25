@@ -31,6 +31,14 @@ jobs:
       ASTRA_CHANNEL: rayvan
       ASTRA_UNIFIED_STORY_ENGINE: '1' # One Studio renderer for directed, solo, duo and ensemble scenes; fail closed
       ASTRA_GEMINI_RENDERER_AWARE_WRITING: '1' # Generate only Studio-supported animal casts, scenes and visible actions
+      # One free-tier editorial generation lane replenishes the approved Shorts queue.
+      # Other lanes consume independent approved inventory without racing the model quota.
+      ASTRA_OMNIROUTE_ORDER: 'gemini'
+      ASTRA_GEMINI_ENABLED: ${{ matrix.lane == 0 && '1' || '0' }}
+      ASTRA_GEMINI_MODEL: 'gemini-3.5-flash-lite'
+      ASTRA_GEMINI_FALLBACK_MODEL: 'gemini-3.1-flash-lite'
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      ASTRA_AUTONOMOUS_EDITORIAL: '1'
       YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
