@@ -429,6 +429,8 @@ jobs:
           retention-days: 14
       - name: Report pre-render inventory snapshot
         if: always() && matrix.lane == 0
+        continue-on-error: true
+        timeout-minutes: 3
         shell: bash
         run: |
           python - <<'PY'
