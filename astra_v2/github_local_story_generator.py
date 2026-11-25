@@ -415,8 +415,9 @@ def _build_prompt(lane: str, history: list[dict], seed: int,
         "where appropriate; do not force a question into every sentence. "
         f"Interpret each beat according to its role. Each speech line must contain {scene_min}–{scene_max} words. "" For compact four-beat formats, aim for 14–16 words per line; 10 is the hard minimum. "" Count the spoken words in each line before returning JSON; expand short lines with a concrete clue or explanation, never filler. "
         "For puzzles, keep the answer out of the challenge and thinking-pause beats. "
-        "The scene lines plus the final spoken "
-        "engagement question must total 65–85 words for a 28–40 second Short. "
+        "WORD-BUDGET RULE: all scene speech plus the final question must total 65–85 words. "
+        "Aim for 72–78 words, not the minimum. For four-scene formats, write 14–16 words in EACH scene (56–64 scene words) and a 10–14 word final question; then recount the complete total. "
+        "Never submit a 55–64 word script: add a useful clue, context, or explanation before returning JSON. "
         "Make every line add new information; avoid filler, generic moral lessons, and generic calls to action. "
         "Do not default every format to a quiz or rhetorical question; use the selected treatment naturally. "
         "The final question must invite a real, content-specific answer, contain 8–20 words, and end with a question mark. "
@@ -591,6 +592,24 @@ def generate(output_path: str, history_path: str, lane: str = "surprise",
             preview = repr(raw[:400]) if isinstance(raw, str) else repr(raw)
             finish_reason = choice.get("finish_reason", "unknown")
             retry_feedback = f"{type(exc).__name__}: {exc}"
+            # Give the model an arithmetic repair instruction when scene lines
+            # are valid individually but the complete spoken script is under budget.
+            if isinstance(parsed, dict) and "Complete spoken script must be 65–85 words" in str(exc):
+                parsed_scenes = parsed.get("performance_scenes") or []
+                scene_total = sum(
+                    len(_words(str(scene.get("speech") or "")))
+                    for scene in parsed_scenes if isinstance(scene, dict)
+                )
+                question_total = len(_words(str(parsed.get("question") or "")))
+                total = scene_total + question_total
+                deficit = max(0, 65 - total)
+                retry_feedback = (
+                    f"The previous complete script had {total} words: {scene_total} in scene lines "
+                    f"plus {question_total} in the final question. The minimum is 65, so add at least "
+                    f"{deficit} useful spoken words. Target 72–78 total; for this four-scene format "
+                    "target 14–16 words in each scene and 10–14 in the question. "
+                    "Keep factual claims supported and add only useful context or explanation."
+                )
             last_error = ValueError(
                 f"Candidate rejected ({type(exc).__name__}: {exc}; "
                 f"finish_reason={finish_reason}; response_preview={preview})"
