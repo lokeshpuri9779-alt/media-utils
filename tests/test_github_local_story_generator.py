@@ -322,6 +322,20 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertEqual(len(validated), 2)
         self.assertGreater(len(validated[0]["summary"]), 100)
 
+    def test_factual_source_pack_rejects_publisher_name_aliases_on_same_domain(self):
+        rows = [
+            {"title": "Report A", "url": "https://news.example/one",
+             "published": "2026-11-24", "publisher": "Example News",
+             "publisher_domain": "www.example.com",
+             "summary": "A sufficiently detailed summary for evidence validation."},
+            {"title": "Report B", "url": "https://news.example/two",
+             "published": "2026-11-23", "publisher": "Example Media",
+             "publisher_domain": "example.com",
+             "summary": "Another sufficiently detailed summary from the same outlet."},
+        ]
+        with self.assertRaisesRegex(ValueError, "distinct publishers"):
+            validate_source_pack(rows, "india_gk")
+
     def test_factual_source_pack_rejects_same_publisher_twice(self):
         rows = [
             {"title": "Report A", "url": "https://a.example/one",
@@ -404,6 +418,7 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         with patch("astra_v2.trend_source_collector._fetch", return_value=feed):
             rows = _parse_feed("https://example.test/feed", 5)
         self.assertEqual(rows[0]["publisher"], "Publisher A")
+        self.assertEqual(rows[0]["publisher_domain"], "publisher.example")
         self.assertEqual(rows[0]["published"], "2026-11-24T10:00:00+00:00")
         self.assertIn("<p>", rows[0]["summary"])
 
