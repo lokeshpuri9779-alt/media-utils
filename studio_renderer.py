@@ -526,7 +526,7 @@ def narration_segments(text):
     if not normalized:
         return []
     # Keep punctuation attached to each segment so Kokoro can shape the ending.
-    parts=re.split(r'(?<=[.!?])\\s+(?=[A-Z0-9“\"])',normalized)
+    parts=re.split(r'(?<=[.!?])\s+(?=[A-Z0-9“"])',normalized)
     return [part.strip() for part in parts if part.strip()]
 
 
