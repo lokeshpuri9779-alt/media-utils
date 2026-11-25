@@ -4,7 +4,7 @@ name: ASTRA V2 - Publisher Health Watch
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17,47 * * * *'
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: read
@@ -12,7 +12,7 @@ permissions:
 jobs:
   health:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - name: Check publisher heartbeat and state
