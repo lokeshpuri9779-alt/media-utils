@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m py_compile tests/verify_studio_preview.py tests/render_performance_short_preview.py studio_renderer.py
+      - run: python -m py_compile tests/verify_studio_preview.py tests/render_performance_short_preview.py studio_renderer.py longform_trends.py
       - run: python -m pip install pillow imageio-ffmpeg
       - run: python -m unittest tests.test_studio_audio_gate tests.test_visual_artifact_backdrop -v
       - run: python -m unittest tests.test_astra_studio_preview_asset_gate -v
