@@ -253,6 +253,15 @@ def build_plan(items, offset=0):
         plan.append(studio.scene(h,speech,visual_modes[i-1],label,sub,duration=12.0,
                                  section=i,source=t['source'],topic=topic,
                                  story_beat=beat_names[i-1]))
+    # Carry concise source provenance into the compositor so evidence scenes
+    # show the actual reporting inputs rather than generic animated bars.
+    visual_sources=[
+        {'name':row['name'],'published':row['published'],
+         'summary':' '.join(row['summary'].split()[:22])}
+        for row in source_rows
+    ]
+    for scene_item in plan:
+        scene_item['source_cards']=visual_sources
     topics=[dict(t, thumbnail_copy=thumbnail_copy)]
     return plan,topics
 
@@ -312,11 +321,25 @@ def frame(plan,t,total):
             r=60+((t*50+k*90)%280)
             d.ellipse((605-r,725-r*.45,605+r,725+r*.45),outline=(39+20*k,77+20*k,105+25*k),width=2)
     elif s['visual'] in {'evidence','contrast'}:
-        d.rounded_rectangle((110,650,1120,845),radius=26,fill=(18,36,58),outline=(48,91,124),width=3)
-        widths=(650,850) if s['visual']=='contrast' else (675,865)
-        for j,w in enumerate(widths):
-            d.rounded_rectangle((145,700+j*72,145+w,742+j*72),radius=12,fill=(41+j*15,80+j*8,112+j*12))
-        d.text((160,665),'SOURCE CHECK' if s['visual']=='evidence' else 'COMPARE THE CLAIMS',font=studio.font(25),fill=accent)
+        cards=s.get('source_cards') or []
+        d.text((125,625),'SOURCE NOTES' if s['visual']=='evidence' else 'TWO REPORTS / CHECK THE DETAILS',
+               font=studio.font(23),fill=accent)
+        for j in range(2):
+            x0=115+j*505
+            d.rounded_rectangle((x0,665,x0+480,865),radius=22,fill=(18,36,58),
+                                outline=(48,91,124),width=3)
+            if j < len(cards):
+                card=cards[j]
+                name=' '.join(str(card.get('name') or 'Publisher').split())[:30]
+                published=' '.join(str(card.get('published') or 'date not supplied').split())[:24]
+                summary=' '.join(str(card.get('summary') or '').split())[:150]
+                d.text((x0+22,685),name,font=studio.font(24),fill=accent)
+                d.text((x0+22,720),published,font=studio.font(18),fill=(150,180,205))
+                studio.fit_text(d,summary,(x0+22,755,x0+455,842),size=23,
+                                fill=(225,235,244),max_lines=3)
+            else:
+                d.text((x0+22,700),'SECOND SUMMARY NOT AVAILABLE',
+                       font=studio.font(20),fill=(178,202,221))
     elif s['visual']=='map':
         d.ellipse((250,600,940,900),outline=accent,width=6)
         for k in range(7):
