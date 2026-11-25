@@ -202,6 +202,8 @@ class QueueFormatSelectionTests(unittest.TestCase):
         candidate = {"content_id": "with-cover", "title": "Original with cover",
                      "description": "Original narrative", "genre": "fiction",
                      "format": "short", "synthetic": True,
+                     "caption_qa": {"status": "pass", "burned_in": True,
+                         "scene_count": 1, "covered_scenes": 1, "covered_words": 4},
                      "sha256": hashlib.sha256(video).hexdigest()}
         stream = io.BytesIO()
         with zipfile.ZipFile(stream, "w") as z:
