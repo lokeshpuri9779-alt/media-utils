@@ -3,7 +3,7 @@
   "day": "2026-11-25",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 1,
-  "confirmed_today": 0,
+  "confirmed_today": 1,
   "last_attempt_at": "2026-11-25T12:29:30.343878+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -14441,29 +14441,28 @@
       "plot_fingerprint": "",
       "story_beats": [],
       "genre": "current"
-    }
-  },
-  "pending": {
-    "BbXN_UJRiZU": {
-      "content_id": "trend-brief-2026-11-25-am",
+    },
+    "trend-brief-2026-11-25-am": {
+      "video_id": "BbXN_UJRiZU",
+      "confirmed_at": "2026-11-25T17:45:21.992117+00:00",
       "title": "Why gta6 endings Is Getting Attention Now | RAYVAN",
-      "day": "2026-11-25",
-      "uploaded_at": "2026-11-25T12:29:31.969397+00:00",
-      "genre": "current",
       "format": "long",
+      "uploaded_at": "2026-11-25T12:29:31.969397+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "",
       "story_beats": [],
-      "renderer": "studio-7.3.1"
+      "genre": "current"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-25T12:28:44.195853+00:00",
+  "last_preflight_at": "2026-11-25T17:45:21.513778+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-25T12:29:37.489427+00:00",
+    "at": "2026-11-25T17:51:08.420487+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -29374,10 +29373,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-25T12:29:37.489370+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-25T17:51:08.420446+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -29385,37 +29384,279 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-25T12:29:37.489417+00:00",
+    "at": "2026-11-25T17:51:08.420480+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-25T12:29:20.016526+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "trend-brief-2026-11-25-am",
-    "video_url": "https://www.youtube.com/watch?v=BbXN_UJRiZU",
-    "story_selection": {}
+    "at": "2026-11-25T17:50:20.568198+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 128,
+      "not_ready": 64,
+      "policy_rejected": {
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {
+        "CreativeReject": 3
+      },
+      "background_preflight_rejected": 3,
+      "background_review_gaps": [
+        {
+          "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth.",
+                  "visual": "robot",
+                  "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, il",
+                  "visual": "door",
+                  "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        },
+        {
+          "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+          "shot_count": 4,
+          "reason": "missing_backgrounds",
+          "missing_shots": [
+            {
+              "shot": 2,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Ollie the otter pulls the brass lantern toward his muddy riverbank den while Felix the cat tugs it back toward his dry stone ledge, casting a flickering yellow ",
+                  "visual": "signal",
+                  "speech": "I found this lantern washed ashore near my favorite fishing pool, so it should stay on my side."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            },
+            {
+              "shot": 3,
+              "reason": "scene_unresolved",
+              "authored_context": {
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_prompt": "Felix the cat steps back thoughtfully while Ollie the otter sets the brass lantern down atop a flat neutral milestone situated equidistant between their respect",
+                  "visual": "door",
+                  "speech": "Instead of fighting, let us place the lantern on this central milestone where it benefits us equally."
+                },
+                "source": "unmodified_story_input",
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified"
+        }
+      ],
+      "approved": 0,
+      "exhausted": true,
+      "rejection_total": 128,
+      "next_action": "review_missing_story_scene_backgrounds"
+    }
   },
   "last_workflow_result": {
-    "at": "2026-11-25T12:29:37.488581+00:00",
+    "at": "2026-11-25T17:51:08.419736+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-25T12:29:37.489297+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
+    "at": "2026-11-25T17:51:08.420282+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "selection_source": "preload_artifact",
-    "counters": {},
+    "selection_source": "fresh_candidate_evaluation",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 7,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 163
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 163,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 128,
+        "title": 1,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 128,
+        "remaining": 6
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 0,
+        "background_preflight_rejected": 3,
+        "background_review_gaps": [
+          {
+            "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A cheerful wire-haired terrier emerges from behind the stacked wooden crates carrying the heavy shiny timepiece carefully.",
+                    "visual": "robot",
+                    "visual_prompt": "A scruffy terrier named Pip sitting proudly among luggage stacks, holding the golden brass watch gently in his small mouth."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow.",
+                    "visual": "door",
+                    "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, il"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          },
+          {
+            "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "I found this lantern washed ashore near my favorite fishing pool, so it should stay on my side.",
+                    "visual": "signal",
+                    "visual_prompt": "Ollie the otter pulls the brass lantern toward his muddy riverbank den while Felix the cat tugs it back toward his dry stone ledge, casting a flickering yellow "
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Instead of fighting, let us place the lantern on this central milestone where it benefits us equally.",
+                    "visual": "door",
+                    "visual_prompt": "Felix the cat steps back thoughtfully while Ollie the otter sets the brass lantern down atop a flat neutral milestone situated equidistant between their respect"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          }
+        ],
+        "considered": 128,
+        "duration_rejected": 0,
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
+        },
+        "render_exception": {
+          "CreativeReject": 3
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
