@@ -60,8 +60,9 @@ class GithubReadinessTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: false", preload)
         self.assertIn('workflows: ["ASTRA V2 - Preload Approved Videos"]', longform)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", longform)
-        self.assertIn('workflows: ["ASTRA V2 - Preload Approved Videos", "ASTRA V2 - Long-form Preload"]', publisher)
+        self.assertIn('workflows: ["ASTRA V2 - Long-form Preload"]', publisher)
         self.assertIn("github.event.workflow_run.conclusion == 'success'", publisher)
+        self.assertIn("continue-on-error: true", longform)
 
     def test_all_production_paths_pin_the_same_artwork_pack(self):
         publisher, preload, longform = map(read, (PUBLISH, PRELOAD, LONGFORM))
