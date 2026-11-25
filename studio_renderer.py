@@ -1934,9 +1934,14 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     encode_started=_time.perf_counter()
     with tempfile.TemporaryDirectory(prefix='astra_studio_', dir=tmp_root) as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
+        audio_mix_started=_time.perf_counter()
         audio_info=score_audio(plan,duration,genre,audio)
+        audio_mix_seconds=_time.perf_counter()-audio_mix_started
         from astra_v2.pillow_scene_motion import render_scene_frame
         count=math.ceil(duration*FPS);actual_duration=count/FPS
+        frame_composition_seconds=0.0
+        frame_pipe_write_seconds=0.0
+        ffmpeg_wait_seconds=0.0
         cmd=[get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
              '-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','pipe:0',
              '-i',str(audio),'-map','0:v','-map','1:a','-c:v','libx264','-preset','fast','-crf','18',
@@ -1946,9 +1951,17 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             proc=subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=log)
             try:
                 for i in range(count):
-                    proc.stdin.write(render_scene_frame(render_frame,plan,i/FPS,genre,duration).tobytes())
+                    frame_started=_time.perf_counter()
+                    frame=render_scene_frame(render_frame,plan,i/FPS,genre,duration)
+                    frame_composition_seconds+=_time.perf_counter()-frame_started
+                    write_started=_time.perf_counter()
+                    proc.stdin.write(frame.tobytes())
+                    frame_pipe_write_seconds+=_time.perf_counter()-write_started
                 proc.stdin.close()
-                if proc.wait(timeout=120)!=0: raise RuntimeError('FFmpeg could not encode Studio output.')
+                wait_started=_time.perf_counter()
+                return_code=proc.wait(timeout=120)
+                ffmpeg_wait_seconds=_time.perf_counter()-wait_started
+                if return_code!=0: raise RuntimeError('FFmpeg could not encode Studio output.')
             except Exception:
                 proc.kill();proc.wait();raise
         if still_dir:
@@ -1988,6 +2001,10 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             'render_performance':{
                 'asset_resolution_seconds':round(asset_seconds,3),
                 'narration_synthesis_seconds':round(narration_seconds,3),
+                'audio_mix_seconds':round(audio_mix_seconds,3),
+                'frame_composition_seconds':round(frame_composition_seconds,3),
+                'frame_pipe_write_seconds':round(frame_pipe_write_seconds,3),
+                'ffmpeg_finalize_seconds':round(ffmpeg_wait_seconds,3),
                 'encode_and_composition_seconds':round(encode_seconds,3),
                 'total_wall_seconds':round(total_seconds,3),
                 'wall_to_video_ratio':round(total_seconds/max(actual_duration,.001),3),
