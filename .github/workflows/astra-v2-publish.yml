@@ -1,9 +1,11 @@
 name: ASTRA V2 - Verified YouTube Publisher
 
-# Publishing is manual-only. No scheduled, push-triggered, or preload-completion
-# event may invoke YouTube publishing without an explicit owner action.
+# Event-driven publishing: run only after the dedicated long-form render succeeds.
+# No cron or manual dispatch; preflight and publication-quality gates remain mandatory.
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["ASTRA V2 - Long-form Preload"]
+    types: [completed]
 
 concurrency:
   group: astra-v2-publishing
@@ -15,6 +17,7 @@ permissions:
 
 jobs:
   publish:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     # Allow dependency fallback, verified render and YouTube upload to finish.
     # No extra runs are scheduled; concurrency remains unchanged.

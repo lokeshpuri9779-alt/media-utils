@@ -1,10 +1,10 @@
 name: ASTRA V2 - Long-form Preload
 
 on:
-  workflow_dispatch:
-  schedule:
-    # 07:30 and 19:30 IST, after the 07:00/19:00 episode eligibility gates.
-    - cron: '0 2,14 * * *'
+  # Event-driven chain: start long-form only after the four-lane preload succeeds.
+  workflow_run:
+    workflows: ["ASTRA V2 - Preload Approved Videos"]
+    types: [completed]
 
 concurrency:
   group: astra-v2-longform-render
@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   longform:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     env:
