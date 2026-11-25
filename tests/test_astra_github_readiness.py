@@ -45,12 +45,19 @@ class GithubReadinessTests(unittest.TestCase):
             self.assertIn(pinned, requirements)
             self.assertIn(pinned, publisher)
 
-    def test_four_lane_schedule_is_bounded(self):
-        preload = read(PRELOAD)
-        self.assertIn("- cron: '*/30 * * * *'", preload)
-        self.assertNotIn("- cron: '*/5 * * * *'", preload)
+    def test_four_lane_preload_is_event_driven_without_manual_or_cron_triggers(self):
+        preload, longform, publisher = map(read, (PRELOAD, LONGFORM, PUBLISH))
+        for source in (preload, longform, publisher):
+            self.assertNotIn("workflow_dispatch:", source)
+            self.assertNotIn("schedule:", source)
+            self.assertNotIn("- cron:", source)
+        self.assertIn("push:", preload)
         self.assertIn("lane: [0, 1, 2, 3]", preload)
         self.assertIn("cancel-in-progress: false", preload)
+        self.assertIn('workflows: ["ASTRA V2 - Preload Approved Videos"]', longform)
+        self.assertIn("github.event.workflow_run.conclusion == 'success'", longform)
+        self.assertIn('workflows: ["ASTRA V2 - Long-form Preload"]', publisher)
+        self.assertIn("github.event.workflow_run.conclusion == 'success'", publisher)
 
     def test_all_production_paths_pin_the_same_artwork_pack(self):
         publisher, preload, longform = map(read, (PUBLISH, PRELOAD, LONGFORM))
