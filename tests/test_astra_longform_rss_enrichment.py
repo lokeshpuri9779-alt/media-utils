@@ -49,10 +49,10 @@ class LongformRssEnrichmentTests(unittest.TestCase):
             'title': 'Mars mission', 'traffic': '20K+',
             'news': [
                 {'title': 'Mars mission reaches orbit', 'url': 'https://news.google.com/a',
-                 'source': 'Publisher A', 'publisher_domain': 'a.example',
+                 'source': 'Publisher A', 'publisher_domain': 'publisher-a.com',
                  'summary': '<p>Mission reaches orbit.</p>', 'published': '2026-11-25'},
                 {'title': 'Mars mission science update', 'url': 'https://news.google.com/b',
-                 'source': 'Publisher B', 'publisher_domain': 'b.example',
+                 'source': 'Publisher B', 'publisher_domain': 'publisher-b.com',
                  'summary': 'Scientists describe the next phase.', 'published': '2026-11-24'},
             ],
         }
@@ -65,11 +65,11 @@ class LongformRssEnrichmentTests(unittest.TestCase):
             'title': 'Mars mission', 'traffic': '20K+',
             'news': [
                 {'title': 'Mars mission reaches orbit after launch', 'url': 'https://news.google.com/a',
-                 'source': 'Publisher A', 'publisher_domain': 'a.example',
+                 'source': 'Publisher A', 'publisher_domain': 'publisher-a.com',
                  'summary': 'Mission team reports spacecraft reached orbit after a successful launch.',
                  'published': '2026-11-25'},
                 {'title': 'Mars mission scientists describe orbit milestone', 'url': 'https://news.google.com/b',
-                 'source': 'Publisher B', 'publisher_domain': 'b.example',
+                 'source': 'Publisher B', 'publisher_domain': 'publisher-b.com',
                  'summary': 'Scientists describe the orbit milestone and the next planned observation phase.',
                  'published': '2026-11-24'},
             ],
@@ -89,9 +89,9 @@ class LongformRssEnrichmentTests(unittest.TestCase):
             'title': 'Mars mission', 'traffic': '20K+',
             'news': [
                 {'title': 'Mars mission reaches orbit', 'url': 'https://news.google.com/a',
-                 'source': 'Publisher A', 'publisher_domain': 'a.example'},
+                 'source': 'Publisher A', 'publisher_domain': 'publisher-a.com'},
                 {'title': 'Mars mission science update', 'url': 'https://news.google.com/b',
-                 'source': 'Publisher B', 'publisher_domain': 'b.example'},
+                 'source': 'Publisher B', 'publisher_domain': 'publisher-b.com'},
             ],
         }
         with self.assertRaisesRegex(RuntimeError, 'no source summaries'):
