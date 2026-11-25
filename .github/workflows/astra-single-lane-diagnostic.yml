@@ -47,18 +47,6 @@ jobs:
             requirements-caption-only.txt
             requirements-story-engine.txt
 
-      - name: Restore or create Qwen model cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface/hub
-          key: astra-qwen3-4b-q4km-bc640142c66e1fdd
-
-      - name: Restore or create Kokoro voice cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/astra-voice
-          key: astra-kokoro-onnx-v1-model-files-v1.1
-
       - name: Install CPU build tools
         run: |
           sudo apt-get update
@@ -71,6 +59,13 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check -r requirements-story-engine.txt
           python -m pip install --disable-pip-version-check -r requirements-caption-only.txt
+
+      - name: Collect independent factual evidence
+        if: contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","what_if","trending_topics"]'), inputs.lane)
+        run: |
+          python -m astra_v2.trend_source_collector \
+            --direction "${{ inputs.lane }}" \
+            --output "output/${{ inputs.lane }}/sources.json"
 
       - name: Warm pinned Qwen model cache
         env:
@@ -120,12 +115,17 @@ jobs:
       - name: Run model-free quality tests
         run: python -m unittest tests.test_github_local_story_generator -v
 
-      - name: Collect independent factual evidence
-        if: contains(fromJSON('["science_explained","india_gk","money_business","geography_gk","psychology","what_if","trending_topics"]'), inputs.lane)
-        run: |
-          python -m astra_v2.trend_source_collector \
-            --direction "${{ inputs.lane }}" \
-            --output "output/${{ inputs.lane }}/sources.json"
+      - name: Restore or create Qwen model cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface/hub
+          key: astra-qwen3-4b-q4km-bc640142c66e1fdd
+
+      - name: Restore or create Kokoro voice cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/astra-voice
+          key: astra-kokoro-onnx-v1-model-files-v1.1
 
       - name: Generate one diagnostic candidate
         env:
