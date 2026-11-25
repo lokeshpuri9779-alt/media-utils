@@ -2058,6 +2058,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             },
             'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,'layer_qa':layer_report,
             'asset_pack_usage':pack_receipt,
+            'caption_qa':caption_qa,
             'visual_edit':{
                 'narration_beat_count':len(plan),
                 'pillow_duo_scenes':duo_count,
