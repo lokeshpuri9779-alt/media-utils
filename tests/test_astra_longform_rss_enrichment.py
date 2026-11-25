@@ -82,6 +82,9 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         self.assertEqual([card['name'] for card in plan[3]['source_cards']],
                          ['Publisher A', 'Publisher B'])
         self.assertIn('spacecraft reached orbit', plan[3]['source_cards'][0]['summary'])
+        self.assertEqual(plan[2]['visual'], 'map')
+        self.assertEqual(plan[5]['visual'], 'impact')
+        self.assertEqual(plan[6]['visual'], 'timeline')
         self.assertIn('MARS MISSION REACHES ORBIT', topics[0]['thumbnail_copy'])
         report = long_quality_gate(plan, topics)
         self.assertGreaterEqual(report['score'], 85)
