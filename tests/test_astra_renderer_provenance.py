@@ -27,7 +27,9 @@ class RendererProvenanceTests(unittest.TestCase):
             candidate = {"content_id": "test", "title": "Test",
                          "description": "Test", "genre": "fiction",
                          "format": "short", "synthetic": True,
-                         "renderer": "unknown"}
+                         "renderer": "unknown",
+                          "caption_qa": {"status": "pass", "burned_in": True,
+                              "scene_count": 1, "covered_scenes": 1, "covered_words": 4}}
             # This synthetic test is only for renderer provenance. The fake
             # candidate has no scene plan, question or approved artwork and
             # must not be evaluated as a real publishable story.
