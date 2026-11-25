@@ -1386,7 +1386,7 @@ def render_frame(plan,t,genre,total):
         chunk=next((i for i,end in enumerate(ends) if pos < end),len(chunks)-1)
         text=chunks[chunk]
     if mode=='keyword' and text:
-        text=max(text.split(),key=len).upper()
+        text=text.upper()
     elif mode=='question' and text and ('?' in s.get('speech','') or s.get('director_role')=='cold_open'):
         text=text.rstrip(' .!?')+'?'
     if s.get('countdown') and t>s['voice_start']+dur+.1: text='YOUR TURN'
@@ -1863,9 +1863,6 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     if scene_surgery:
         from retention_surgery import apply_surgery
         plan=apply_surgery(plan, scene_surgery)
-    caption_qa = caption_qa_report(plan)
-    if caption_qa["status"] != "pass":
-        raise CreativeReject("Shorts burned-in caption QA failed: " + json.dumps(caption_qa))
     # Repair/re-score weak plans before abandoning a publish slot.
     repair_attempts=0
     while True:
@@ -1875,6 +1872,10 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             if repair_attempts>=2: raise
             repair_attempts+=1
             plan=_repair_plan(ch,plan,repair_attempts)
+    # Run caption coverage on the final repaired plan, before audio synthesis or encoding.
+    caption_qa = caption_qa_report(plan)
+    if caption_qa["status"] != "pass":
+        raise CreativeReject("Shorts burned-in caption QA failed: " + json.dumps(caption_qa))
     # Reject generic Studio fallback when reviewed AI illustrations are required.
     from astra_v2.strict_ai_visual_preflight import require_reviewed_story_art
     require_reviewed_story_art(ch)
