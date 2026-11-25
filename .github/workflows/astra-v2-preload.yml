@@ -40,11 +40,6 @@ on:
       - 'astra_v2/procedural_stories.py'
       - 'astra_v2/publication_quality.py'
       - 'astra_v2/preflight.py'
-  schedule:
-    # Four lanes every 30 minutes is enough capacity for staged production
-    # without launching a 4-job matrix every five minutes.
-    # Push and manual triggers still start fresh production immediately.
-    - cron: '*/30 * * * *'
 
 # Keep one coherent four-lane render batch active at a time.
 # Scheduled triggers that arrive during a batch must not cancel its jobs.
