@@ -126,6 +126,10 @@ def main():
                     from longform_trends import available
                     now = datetime.now(ZoneInfo("Asia/Kolkata"))
                     trends = legacy.fetch_trends(now)
+                    # Enrich only the first four live trend candidates with
+                    # publisher summaries/dates; RSS remains a lead, not proof.
+                    from astra_v2.trend_source_collector import enrich_trends
+                    trends = enrich_trends(trends, max_topics=4)
                     if trends and available(trends):
                         perf = legacy.load_performance()
                         perf["trend_snapshot"] = {
