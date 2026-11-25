@@ -1808,6 +1808,8 @@ def _repair_plan(ch,plan,attempt):
     return repaired
 
 def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None):
+    import time as _time
+    render_started=_time.perf_counter()
     genre=ch.get('genre','challenge')
     if genre not in THEMES: raise ValueError('Unsupported genre')
     if genre == 'fiction' and os.environ.get('ASTRA_UNIFIED_STORY_ENGINE', '0') == '1':
@@ -1875,9 +1877,11 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             background_check, sort_keys=True))
         if background_check['status'] == 'blocked':
             raise StoryBackgroundPreflightReject(background_check)
+    asset_started=_time.perf_counter()
     assets=asset_manifest(ch,plan)
     resolved_assets=prepare_media_cache(resolve_assets(assets))
     resolved_assets=acquire_story_media(resolved_assets)
+    asset_seconds=_time.perf_counter()-asset_started
     asset_report=asset_resolution_gate(resolved_assets)
     if ch.get('premium_story'):
         verified=sum(1 for x in resolved_assets if x.get('provider')=='wikimedia-commons')
@@ -1898,9 +1902,11 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     layer_report=verify_scene_layout(plan)
     if not layer_report['pass']:
         raise CreativeReject('Scene collision QA failed: '+json.dumps(layer_report['failures']))
+    narration_started=_time.perf_counter()
     duration=voice_plan(plan,genre,
                         voice_name=str(ch.get('voice_profile') or 'af_heart'),
                         voice_speed=float(ch.get('voice_speed') or 1.09))
+    narration_seconds=_time.perf_counter()-narration_started
     # Reject the actual rendered golden-guide and edge-flash signatures
     # BEFORE FFmpeg or automatic publication. This samples the same final
     # Studio compositor that public videos use, not isolated preview code.
@@ -1925,6 +1931,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
             pass
     tmp_root = str(ram_tmp) if ram_free >= 512 * 1024 * 1024 else None
     print('ASTRA_TEMP_STORAGE=' + ('ram' if tmp_root else 'disk'))
+    encode_started=_time.perf_counter()
     with tempfile.TemporaryDirectory(prefix='astra_studio_', dir=tmp_root) as tmp:
         tmp=Path(tmp);audio=tmp/'mix.wav'
         audio_info=score_audio(plan,duration,genre,audio)
@@ -1975,7 +1982,16 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     visual_rate=(micro_count / actual_duration) if actual_duration > 0 else 0.0
     from astra_v2.asset_usage_audit import finish as finish_asset_audit
     pack_receipt = finish_asset_audit(out, renderer=VERSION, expected_shots=len(plan))
+    encode_seconds=_time.perf_counter()-encode_started
+    total_seconds=_time.perf_counter()-render_started
     report={'cover_path':str(cover_path) if cover_candidates else None,'renderer':VERSION,'genre':genre,'frames':count,'duration':round(actual_duration,3),
+            'render_performance':{
+                'asset_resolution_seconds':round(asset_seconds,3),
+                'narration_synthesis_seconds':round(narration_seconds,3),
+                'encode_and_composition_seconds':round(encode_seconds,3),
+                'total_wall_seconds':round(total_seconds,3),
+                'wall_to_video_ratio':round(total_seconds/max(actual_duration,.001),3),
+            },
             'resolution':[W,H],'fps':FPS,'audio':audio_info,'creative_quality':creative_report,'layer_qa':layer_report,
             'asset_pack_usage':pack_receipt,
             'visual_edit':{
