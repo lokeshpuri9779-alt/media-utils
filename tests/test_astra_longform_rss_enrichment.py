@@ -15,7 +15,7 @@ class LongformRssEnrichmentTests(unittest.TestCase):
             "publisher": "Example Science",
             "publisher_domain": "science.example",
             "published": "2026-11-25T10:00:00+00:00",
-            "summary": "<p>Mission team reports a new milestone.</p>",
+            "summary": "<p>Mission team reports a new milestone and explains the confirmed next phase of the spacecraft programme.</p>",
         }]
         result = enrich_trends([{"title": "Mars mission", "news": []}])
         article = result[0]["news"][0]
@@ -109,7 +109,7 @@ A second paragraph adds source context and explains what the mission team plans 
     def test_limits_network_enrichment_to_four_topics(self, parse_feed):
         parse_feed.return_value = []
         enrich_trends([{"title": f"Topic {i}", "news": []} for i in range(8)])
-        self.assertEqual(parse_feed.call_count, 4)
+        self.assertEqual(parse_feed.call_count, 8)  # Google News plus Bing RSS fallback per topic
 
     def test_renderer_retains_summary_and_publisher_domain(self):
         item = {
