@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from html.parser import HTMLParser
 import urllib.parse
 import urllib.request
@@ -149,11 +150,33 @@ class _ArticleText(HTMLParser):
                 self._paragraph.append(clean)
 
 
-def _publisher_page_summary(url: str) -> str:
-    """Recover source-authored context when RSS supplies headlines only.
+def _reader_summary_from_text(value: str) -> str:
+    """Extract article paragraphs from Jina Reader's text/Markdown response."""
+    text = str(value or "")
+    marker = "Markdown Content:"
+    if marker in text:
+        text = text.split(marker, 1)[1]
+    paragraphs = []
+    for block in text.split("\n\n"):
+        clean = " ".join(block.split())
+        clean = re.sub(r"!\[[^]]*\]\([^)]*\)", " ", clean)
+        clean = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", clean)
+        clean = re.sub(r"^[#>*_ -]+", " ", clean)
+        clean = " ".join(clean.split())
+        if len(clean) >= 65 and not clean.lower().startswith(
+                ("title:", "url source:", "warning:", "markdown content:")):
+            paragraphs.append(clean)
+        if len(paragraphs) >= 3:
+            break
+    return " ".join(paragraphs)[:500]
 
-    This does not invent or paraphrase facts: it extracts publisher metadata or
-    article paragraphs. Unavailable/paywalled pages remain summary-less.
+
+def _publisher_page_summary(url: str) -> str:
+    """Recover source-authored context from publisher HTML or reader extraction.
+
+    Direct publisher HTML is preferred. If hosted-runner egress blocks a page,
+    the public Jina Reader endpoint is a text-only fallback for that same public
+    URL. No generated summary is substituted for source text.
     """
     if not isinstance(url, str) or not url.startswith(("https://", "http://")):
         return ""
@@ -162,20 +185,30 @@ def _publisher_page_summary(url: str) -> str:
     try:
         with urllib.request.urlopen(request, timeout=8) as response:
             content_type = str(response.headers.get("Content-Type", "")).lower()
-            if "html" not in content_type:
-                return ""
-            raw = response.read(1_200_000)
-        parser = _ArticleText()
-        parser.feed(raw.decode("utf-8", errors="replace"))
-        # Prefer the publisher's explicit summary; otherwise use a small,
-        # ordered excerpt from visible article paragraphs.
-        candidates = parser.meta + parser.paragraphs[:3]
-        for value in candidates:
-            value = " ".join(value.split())
-            if len(value) >= 55:
-                return value[:500]
+            if "html" in content_type:
+                raw = response.read(1_200_000)
+                parser = _ArticleText()
+                parser.feed(raw.decode("utf-8", errors="replace"))
+                candidates = parser.meta + parser.paragraphs[:3]
+                for value in candidates:
+                    value = " ".join(value.split())
+                    if len(value) >= 55:
+                        return value[:500]
     except Exception as exc:
-        print(f"Skipping publisher article context: {type(exc).__name__}")
+        print(f"Direct publisher context unavailable: {type(exc).__name__}")
+    # Reader fallback sends only the already-public article URL, never secrets
+    # or private user data. It is bounded and optional; failures remain empty.
+    try:
+        reader = urllib.request.Request(
+            "https://r.jina.ai/" + url,
+            headers={"User-Agent": HEADERS["User-Agent"], "Accept": "text/plain"})
+        with urllib.request.urlopen(reader, timeout=12) as response:
+            extracted = _reader_summary_from_text(
+                response.read(1_200_000).decode("utf-8", errors="replace"))
+        if extracted:
+            return extracted
+    except Exception as exc:
+        print(f"Reader publisher context unavailable: {type(exc).__name__}")
     return ""
 
 def enrich_trends(trends: list[dict], max_topics: int = 4) -> list[dict]:
