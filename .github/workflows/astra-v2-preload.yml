@@ -1,7 +1,6 @@
 name: ASTRA V2 - Preload Approved Videos
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
     paths:
