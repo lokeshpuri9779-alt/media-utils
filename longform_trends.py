@@ -322,23 +322,49 @@ def frame(plan,t,total):
     studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
     studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
 
+    # Three-beat editorial motion rail: the active marker advances every 2.4s,
+    # giving each 12s chapter a visible internal rhythm instead of one frozen card.
+    rail_y=665
+    rail_x=(1325,1560,1795)
+    d.line((rail_x[0],rail_y,rail_x[-1],rail_y),fill=(48,75,98),width=5)
+    active_beat=int(u/2.4)%3
+    beat_phase=(u%2.4)/2.4
+    marker_x=rail_x[active_beat]+int((rail_x[min(active_beat+1,2)]-rail_x[active_beat])*beat_phase) if active_beat<2 else rail_x[2]
+    for beat_i,bx in enumerate(rail_x):
+        radius=10 if beat_i!=active_beat else 15+int(4*math.sin(beat_phase*math.pi))
+        color=(48,91,124) if beat_i!=active_beat else accent
+        d.ellipse((bx-radius,rail_y-radius,bx+radius,rail_y+radius),fill=color)
+    d.line((rail_x[0],rail_y,marker_x,rail_y),fill=(255,224,147),width=7)
+    d.ellipse((marker_x-8,rail_y-8,marker_x+8,rail_y+8),fill=(255,244,211))
+
+    phase=(u % 4.8)/4.8
+    ease=0.5-0.5*math.cos(2*math.pi*phase)
     if s['visual']=='signal':
-        # An attention pulse: deliberately no fabricated search-volume axis.
-        pulse=1.0+0.10*math.sin(t*2.2)
+        # Animated orbit gives the opening a visible focal point without inventing data.
+        pulse=1.0+0.12*math.sin(u*2.8)
         cx,cy=620,735
         for radius in (105,190,275):
             r=radius*pulse
             d.ellipse((cx-r,cy-r*.48,cx+r,cy+r*.48),
                       outline=(48,91,124),width=3)
+        angle=u*1.8
+        dot_x=cx+int(275*pulse*math.cos(angle))
+        dot_y=cy+int(132*pulse*math.sin(angle))
+        d.ellipse((dot_x-17,dot_y-17,dot_x+17,dot_y+17),fill=(255,224,147))
         d.ellipse((cx-48,cy-48,cx+48,cy+48),fill=accent)
         d.text((cx,cy+112),'THE QUESTION',font=studio.font(27),
                fill=(225,235,246),anchor='mm')
     elif s['visual']=='timeline':
         # Verification steps, not a prediction or invented schedule.
         steps=('OPEN ORIGINAL REPORTS','CHECK DATES AND SCOPE','SEEK INDEPENDENT UPDATE')
+        active=min(2,int((u/12.0)*3))
         for j,label in enumerate(steps):
             yy=650+j*92
-            d.ellipse((155,yy,205,yy+50),outline=accent,width=4)
+            done=j<=active
+            d.ellipse((155,yy,205,yy+50),outline=accent if done else (48,91,124),
+                      fill=(20,52,78) if done else (13,27,45),width=4)
+            if done:
+                d.line((167,yy+25,178,yy+36,195,yy+13),fill=accent,width=5)
             d.line((180,yy+50,180,yy+83),fill=(48,91,124),width=3)
             d.text((235,yy+7),label,font=studio.font(25),fill=(225,235,246))
     elif s['visual'] in {'evidence','contrast'}:
@@ -346,7 +372,10 @@ def frame(plan,t,total):
         d.text((125,625),'SOURCE NOTES' if s['visual']=='evidence' else 'TWO REPORTS / CHECK THE DETAILS',
                font=studio.font(23),fill=accent)
         for j in range(2):
-            x0=115+j*505
+            # Staggered card entrances create clear scene-level motion.
+            entrance=max(0.0,min(1.0,(u-j*0.42)/0.75))
+            entrance=0.5-0.5*math.cos(math.pi*entrance)
+            x0=115+j*505+int((1.0-entrance)*150)
             d.rounded_rectangle((x0,665,x0+480,865),radius=22,fill=(18,36,58),
                                 outline=(48,91,124),width=3)
             if j < len(cards):
@@ -365,13 +394,16 @@ def frame(plan,t,total):
         # Show the distinction between attention, reporting and confirmation.
         nodes=[(175,735,'SEARCH SIGNAL'),(510,735,'PUBLISHED REPORT'),(855,735,'CONFIRMED DETAIL')]
         for j,(x,y,label) in enumerate(nodes):
-            d.rounded_rectangle((x,y-62,x+250,y+62),radius=22,
-                                fill=(18,36,58),outline=accent if j==1 else (48,91,124),width=4)
-            studio.fit_text(d,label,(x+12,y-35,x+238,y+35),size=22,
+            bob=int(10*math.sin(u*2.1-j*0.8))
+            yy=y+bob
+            glow=accent if j==1 else (48,91,124)
+            d.rounded_rectangle((x,yy-62,x+250,yy+62),radius=22,
+                                fill=(18,36,58),outline=glow,width=4)
+            studio.fit_text(d,label,(x+12,yy-35,x+238,yy+35),size=22,
                             fill=(225,235,246),max_lines=2)
             if j<2:
-                d.line((x+255,y,x+320,y),fill=(178,202,221),width=5)
-                d.polygon(((x+320,y),(x+302,y-12),(x+302,y+12)),fill=(178,202,221))
+                d.line((x+255,yy,x+320,yy),fill=(178,202,221),width=5)
+                d.polygon(((x+320,yy),(x+302,yy-12),(x+302,yy+12)),fill=(178,202,221))
         d.text((510,855),'Each step needs evidence; attention alone proves nothing.',
                font=studio.font(22),fill=(150,180,205),anchor='mm')
     elif s['visual']=='impact':
@@ -383,24 +415,61 @@ def frame(plan,t,total):
         for j,(x,y,label) in enumerate(((250,640,'WHO IS AFFECTED?'),
                                        (870,640,'WHAT COULD CHANGE?'),
                                        (560,900,'WHAT IS STILL UNKNOWN?'))):
-            d.line((center[0],center[1],x,y),fill=(48,91,124),width=5)
-            d.rounded_rectangle((x-145,y-42,x+145,y+42),radius=18,
+            bob=int(12*math.sin(u*2.0-j))
+            yy=y+bob
+            d.line((center[0],center[1],x,yy),fill=(48,91,124),width=5)
+            d.rounded_rectangle((x-145,yy-42,x+145,yy+42),radius=18,
                                 fill=(18,36,58),outline=(48,91,124),width=3)
-            d.text((x,y),label,font=studio.font(19),fill=(225,235,246),anchor='mm')
+            d.text((x,yy),label,font=studio.font(19),fill=(225,235,246),anchor='mm')
     else:
         # Payoff scene deliberately simplifies composition after denser evidence.
         d.ellipse((360,620,870,900),fill=(20,52,78),outline=accent,width=5)
+        sweep=int((u*95)%360)
+        d.arc((385,645,845,875),start=sweep,end=sweep+118,fill=(255,224,147),width=12)
         d.text((615,760),'WHY IT MATTERS',font=studio.font(48),fill='white',anchor='mm')
 
     words=s['speech'].split()
     dur=max(.1,len(s['audio'])/studio.RATE)
     pos=max(0,min(len(words)-1,int((t-s['voice_start'])/dur*len(words))))
-    chunk=max(0,pos//10)
-    caption=' '.join(words[chunk*10:(chunk+1)*10])
+    chunk=max(0,pos//6)
+    caption=' '.join(words[chunk*6:(chunk+1)*6])
     d.rounded_rectangle((80,880,1845,1018),radius=28,fill=(6,12,22))
     studio.fit_text(d,caption,(115,895,1810,1003),size=42,fill=(222,235,246),max_lines=2)
     d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
     d.line((80,1045,80+1765*min(1,t/total),1045),fill=accent,width=4)
+
+    # Punch-in on each 2.4s editorial beat, then release quickly. This is
+    # deliberately more assertive than a slow Ken Burns drift: the camera hit
+    # lands at the beat boundary and clears before the next caption phrase.
+    motion_phase=(u % 2.4) / 2.4
+    punch=max(0.0,1.0-motion_phase/0.38)
+    punch=0.5-0.5*math.cos(math.pi*punch)
+    zoom=1.0 + 0.085*punch
+    scaled=im.resize((round(1920*zoom),round(1080*zoom)),Image.Resampling.LANCZOS)
+    max_x=scaled.width-1920; max_y=scaled.height-1080
+    pan_x=max(0,min(max_x,round(max_x*(0.5+0.48*math.sin(u*0.92)))))
+    pan_y=max(0,min(max_y,round(max_y*(0.5+0.38*math.cos(u*0.76)))))
+    # A short directional camera snap adds impact without moving the caption
+    # band out of its safe area.
+    snap=max(0.0,1.0-((u % 2.4)/0.16))
+    shake_x=int(12*snap*math.sin(u*85.0))
+    shake_y=int(7*snap*math.cos(u*79.0))
+    pan_x=max(0,min(max_x,pan_x+shake_x))
+    pan_y=max(0,min(max_y,pan_y+shake_y))
+    im=scaled.crop((pan_x,pan_y,pan_x+1920,pan_y+1080))
+
+    # Directional edge streaks flare at each beat reset. Their duration is
+    # long enough to read as an impact, while the central evidence stays clean.
+    impact=max(0.0,1.0-((u % 2.4)/0.28))
+    if impact>0:
+        streak=Image.new('RGBA',im.size,(0,0,0,0))
+        sd=ImageDraw.Draw(streak)
+        alpha=int(150*impact)
+        for k in range(7):
+            yy=72+k*23
+            sd.line((0,yy,340,yy+54),fill=(114,209,255,alpha),width=7)
+            sd.line((1580,yy+54,1920,yy),fill=(255,224,147,alpha),width=7)
+        im=Image.alpha_composite(im.convert('RGBA'),streak).convert('RGB')
 
     if index and u<.14:
         shade=Image.new('RGB',im.size,(7,13,24))
@@ -512,7 +581,7 @@ def render(out, episode_id, trend_items):
     quality=long_quality_gate(plan,topics)
     quality['retention']=retention_contract(plan)
     narration_started=_time.perf_counter()
-    total=studio.voice_plan(plan,'current',max_duration=600)
+    total=studio.voice_plan(plan,'current',max_duration=600,voice_speed=1.14)
     narration_seconds=_time.perf_counter()-narration_started
     if total < 90:
         raise RuntimeError('Trend brief is too short to qualify as long-form.')
@@ -573,6 +642,7 @@ def render(out, episode_id, trend_items):
             'wall_to_video_ratio':round(total_wall_seconds/max(total,.001),3),
         },
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
+        'pacing_profile':{'name':'high-energy','voice_speed':1.14,'caption_words_per_change':6,'visual_transition_seconds':0.14,'target_music_bpm':128},
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
         'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
         'scenes':[{k:v for k,v in x.items() if k!='audio'} for x in plan],

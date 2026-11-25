@@ -606,7 +606,7 @@ def score_audio(plan, duration, genre, path):
     rng=np.random.default_rng(2104)
     # Rounded synthesizer tones; different harmonic palette for each series.
     root={'space':146.832,'fiction':130.813,'tech':164.814,'football':146.832,'challenge':164.814,'current':155.563}[genre]
-    beat=60/(96 if genre in {'fiction','space'} else 112)
+    beat=60/(96 if genre in {'fiction','space'} else (128 if genre == 'current' else 112))
     phase=np.mod(t,beat)
     kick=np.sin(2*np.pi*(48*phase+20*(1-np.exp(-18*phase))/18))*np.exp(-phase*18)*.065
     melody=np.zeros(n,dtype=np.float32)
@@ -617,7 +617,7 @@ def score_audio(plan, duration, genre, path):
         note=root*2**([0,7,12,10,0,7,15,12][i%8]/12)
         melody[start:start+length]+=(np.sin(2*np.pi*note*u)+.23*np.sin(4*np.pi*note*u))*np.exp(-u*13)*.027
     pad=(np.sin(2*np.pi*root*.5*t)+np.sin(2*np.pi*root*.5*1.5*t))*.015
-    music=(kick+melody+pad)*.18
+    music=(kick+melody+pad)*(.24 if genre == 'current' else .18)
     duck=np.ones(n,dtype=np.float32)
     speech=np.zeros(n,dtype=np.float32); fx=np.zeros(n,dtype=np.float32)
     for s in plan:
@@ -631,9 +631,9 @@ def score_audio(plan, duration, genre, path):
         u=np.arange(size,dtype=np.float32)/RATE
         noise=rng.normal(0,1,size).astype(np.float32)
         noise=np.convolve(noise,np.ones(12)/12,mode='same')
-        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*.025
+        fx[k:k+size]+=noise*np.sin(np.pi*np.arange(size)/max(1,size))*(.034 if genre == 'current' else .025)
         # Attention transient: strongest on the opening beat, lighter thereafter.
-        hit=.055 if s.get('start',0)<.1 else .032
+        hit=.085 if s.get('start',0)<.1 else .052
         fx[k:k+size]+=np.sin(2*np.pi*(110+420*u)*u)*np.exp(-u*18)*hit
         if s.get('answer'):
             fx[k:k+size]+=np.sin(2*np.pi*880*u)*np.exp(-u*14)*.035
