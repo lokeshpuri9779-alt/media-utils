@@ -7,7 +7,9 @@ on:
   workflow_run:
     # Shorts are the primary publishing lane: do not wait for long-form cadence.
     # Long-form completion also wakes the publisher for eligible long episodes.
-    workflows: ["ASTRA V2 - Long-form Preload"]
+    workflows:
+      - "ASTRA V2 - Preload Approved Videos"
+      - "ASTRA V2 - Long-form Preload"
     types: [completed]
 
 concurrency:
