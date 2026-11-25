@@ -271,16 +271,77 @@ def frame(plan,t,total):
     return im
 
 
+def _thumbnail_style(topic):
+    """Choose a topic-relevant vector motif without inventing a factual image."""
+    value = str(topic or '').lower()
+    groups = (
+        (('space','planet','moon','mars','venus','solar','orbit','universe','nasa'), 'space', (111, 190, 255)),
+        (('climate','weather','storm','flood','heat','earthquake','ocean','energy'), 'earth', (93, 220, 184)),
+        (('money','business','bank','market','stock','economy','inflation','price'), 'economy', (255, 190, 92)),
+        (('ai','artificial intelligence','robot','chip','technology','tech','computer','data'), 'technology', (190, 153, 255)),
+        (('history','ancient','empire','war','king','civilization'), 'history', (255, 151, 126)),
+        (('health','brain','body','science','medical','disease'), 'science', (112, 220, 226)),
+    )
+    for words, style, accent in groups:
+        if any(word in value for word in words):
+            return style, accent
+    return 'signal', (114, 209, 255)
+
+
+def _draw_thumbnail_hero(draw, style, accent):
+    """Draw a bold, recognizable vector motif in the right-side hero area."""
+    dark = (15, 34, 57)
+    draw.ellipse((1190, 90, 1875, 775), fill=dark, outline=accent, width=7)
+    if style == 'space':
+        draw.ellipse((1390, 285, 1675, 570), fill=(31, 72, 112), outline=accent, width=8)
+        draw.ellipse((1450, 345, 1615, 510), fill=(75, 125, 176))
+        draw.ellipse((1280, 225, 1790, 625), outline=(111, 151, 190), width=5)
+        draw.ellipse((1690, 260, 1730, 300), fill=(255, 224, 147))
+    elif style == 'earth':
+        draw.ellipse((1355, 250, 1715, 610), fill=(25, 105, 103), outline=accent, width=8)
+        draw.arc((1390, 265, 1685, 595), 20, 155, fill=(190, 236, 218), width=9)
+        draw.arc((1390, 265, 1685, 595), 200, 335, fill=(190, 236, 218), width=9)
+        draw.line((1375, 430, 1695, 430), fill=(190, 236, 218), width=7)
+    elif style == 'economy':
+        for x, height in ((1330, 150), (1450, 245), (1570, 330), (1690, 430)):
+            draw.rounded_rectangle((x, 650-height, x+82, 650), radius=16, fill=accent)
+        draw.line((1310, 470, 1440, 385, 1560, 330, 1715, 205), fill=(255, 232, 184), width=12)
+    elif style == 'technology':
+        draw.rounded_rectangle((1390, 280, 1680, 570), radius=38, fill=(50, 43, 96), outline=accent, width=9)
+        for offset in range(4):
+            x = 1425 + offset*72
+            draw.line((x, 225, x, 280), fill=accent, width=10)
+            draw.line((x, 570, x, 625), fill=accent, width=10)
+        draw.text((1535, 425), 'AI', font=studio.font(112), fill='white', anchor='mm')
+    elif style == 'history':
+        draw.polygon(((1335, 570), (1390, 335), (1535, 220), (1680, 335), (1735, 570)), fill=(96, 58, 50), outline=accent)
+        for x in (1430, 1535, 1640):
+            draw.rounded_rectangle((x-24, 365, x+24, 565), radius=8, fill=(236, 197, 153))
+    elif style == 'science':
+        draw.ellipse((1425, 320, 1645, 540), outline=accent, width=12)
+        draw.ellipse((1480, 375, 1590, 485), fill=(67, 132, 157))
+        draw.ellipse((1310, 285, 1760, 575), outline=(171, 218, 232), width=8)
+        draw.ellipse((1508, 190, 1562, 244), fill=(255, 230, 153))
+    else:
+        draw.ellipse((1400, 295, 1670, 565), outline=accent, width=12)
+        draw.line((1350, 430, 1720, 430), fill=accent, width=10)
+        draw.line((1535, 245, 1535, 615), fill=accent, width=10)
+        draw.ellipse((1490, 385, 1580, 475), fill=(255, 255, 255))
+
+
 def thumbnail(path, topics):
-    im=_background(); d=ImageDraw.Draw(im)
-    d.text((90,90),'RAYVAN',font=studio.font(44),fill=(224,235,247))
-    top=topics[0]['topic'].upper() if topics else 'CURRENT STORY'
-    # Thumbnail promise is topic-first; avoid the same generic WHAT CHANGED card.
-    promise=('WHY NOW?' if len(top)<34 else 'THE STORY\nBEHIND IT')
-    studio.fit_text(d,promise,(90,220,1080,850),size=170,fill=(114,209,255),align='left',max_lines=2)
-    studio.fit_text(d,top,(1120,260,1820,790),size=68,fill='white',max_lines=5)
-    d.text((95,965),'ONE STORY / MULTIPLE SOURCES / CONTEXT > HYPE',font=studio.font(30),fill=(175,199,219))
-    im.resize((1280,720),Image.Resampling.LANCZOS).save(path,'JPEG',quality=92)
+    """Create a topic-led, mobile-readable 16:9 thumbnail with a distinct hero motif."""
+    topic = ' '.join(str((topics[0] if topics else {}).get('topic') or 'CURRENT STORY').split())
+    style, accent = _thumbnail_style(topic)
+    im = _background()
+    d = ImageDraw.Draw(im)
+    d.rounded_rectangle((65, 65, 1090, 1015), radius=42, fill=(8, 19, 34), outline=(38, 68, 94), width=3)
+    d.rounded_rectangle((105, 125, 125, 245), radius=9, fill=accent)
+    d.text((165, 145), 'RAYVAN / EXPLAINED', font=studio.font(34), fill=(203, 220, 236))
+    studio.fit_text(d, topic.upper(), (115, 300, 1035, 785), size=112, fill='white', align='left', max_lines=4)
+    d.text((115, 875), 'THE FACTS. THE CONTEXT. THE BIGGER PICTURE.', font=studio.font(25), fill=accent)
+    _draw_thumbnail_hero(d, style, accent)
+    im.resize((1280, 720), Image.Resampling.LANCZOS).save(path, 'JPEG', quality=94, optimize=True)
 
 
 def render(out, episode_id, trend_items):
