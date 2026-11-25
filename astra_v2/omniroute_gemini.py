@@ -178,7 +178,7 @@ def generate(excluded_ids, excluded_titles, prior_stories=(), premise=None):
         "different shots through action, composition, location or a supported "
         "prop; do not create variety by changing animal tags. "
         "Each beat must also have headline, speech, visual, label, story_beat. "
-        "Speech 24-38 words in every beat (96-152 words total). "
+        "Each beat speech MUST contain 28-32 whitespace-separated words (112-128 total). Count every beat before returning JSON and rewrite any beat outside this range; headline and label words do not count. "
         "visual must be one of the supported animal subjects and must match the "
         "animal explicitly named in visual_prompt. Keep at least one protagonist "
         "visual tag consistent across two or more beats; never change tags merely "
