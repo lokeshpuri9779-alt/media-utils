@@ -316,6 +316,14 @@ def prepare(path, candidate):
         raise ValueError("Publication quality rejected: " + rejection)
     payload = {k: candidate[k] for k in (
         "content_id", "title", "description", "synthetic", "genre", "format")}
+    if "made_for_kids" in candidate:
+        if not isinstance(candidate["made_for_kids"], bool):
+            raise ValueError("made_for_kids must be boolean")
+        payload["made_for_kids"] = candidate["made_for_kids"]
+    renderer = candidate.get("renderer")
+    if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
+        raise ValueError("Approved preload is missing verified renderer provenance")
+    payload["renderer"] = renderer.strip()
     if fmt == "short":
         caption_qa = candidate.get("caption_qa")
         if (not isinstance(caption_qa, dict)
@@ -325,14 +333,6 @@ def prepare(path, candidate):
                 or int(caption_qa.get("covered_words") or 0) < 1):
             raise ValueError("Short preload is missing complete burned-in caption QA")
         payload["caption_qa"] = caption_qa
-    if "made_for_kids" in candidate:
-        if not isinstance(candidate["made_for_kids"], bool):
-            raise ValueError("made_for_kids must be boolean")
-        payload["made_for_kids"] = candidate["made_for_kids"]
-    renderer = candidate.get("renderer")
-    if not isinstance(renderer, str) or not renderer.strip() or renderer.strip() == "unknown":
-        raise ValueError("Approved preload is missing verified renderer provenance")
-    payload["renderer"] = renderer.strip()
     if fmt == "short":
         from astra_v2.story_handoff import approved_story_context
         payload["plot_fingerprint"] = str(candidate.get("plot_fingerprint") or "")
