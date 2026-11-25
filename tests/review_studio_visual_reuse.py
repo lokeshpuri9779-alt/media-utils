@@ -55,5 +55,5 @@ if __name__ == "__main__":
         raise SystemExit("No scene_*.jpg preview stills found")
     report = review_frames(paths)
     output = Path(sys.argv[2]) if len(sys.argv) > 2 else root / "visual-reuse-review.json"
-    output.write_text(json.dumps(report, indent=2) + "\\n", encoding="utf-8")
+    output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
