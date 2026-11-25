@@ -322,23 +322,34 @@ def frame(plan,t,total):
     studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
     studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
 
+    phase=(u % 4.8)/4.8
+    ease=0.5-0.5*math.cos(2*math.pi*phase)
     if s['visual']=='signal':
-        # An attention pulse: deliberately no fabricated search-volume axis.
-        pulse=1.0+0.10*math.sin(t*2.2)
+        # Animated orbit gives the opening a visible focal point without inventing data.
+        pulse=1.0+0.12*math.sin(u*2.8)
         cx,cy=620,735
         for radius in (105,190,275):
             r=radius*pulse
             d.ellipse((cx-r,cy-r*.48,cx+r,cy+r*.48),
                       outline=(48,91,124),width=3)
+        angle=u*1.8
+        dot_x=cx+int(275*pulse*math.cos(angle))
+        dot_y=cy+int(132*pulse*math.sin(angle))
+        d.ellipse((dot_x-17,dot_y-17,dot_x+17,dot_y+17),fill=(255,224,147))
         d.ellipse((cx-48,cy-48,cx+48,cy+48),fill=accent)
         d.text((cx,cy+112),'THE QUESTION',font=studio.font(27),
                fill=(225,235,246),anchor='mm')
     elif s['visual']=='timeline':
         # Verification steps, not a prediction or invented schedule.
         steps=('OPEN ORIGINAL REPORTS','CHECK DATES AND SCOPE','SEEK INDEPENDENT UPDATE')
+        active=min(2,int((u/12.0)*3))
         for j,label in enumerate(steps):
             yy=650+j*92
-            d.ellipse((155,yy,205,yy+50),outline=accent,width=4)
+            done=j<=active
+            d.ellipse((155,yy,205,yy+50),outline=accent if done else (48,91,124),
+                      fill=(20,52,78) if done else (13,27,45),width=4)
+            if done:
+                d.line((167,yy+25,178,yy+36,195,yy+13),fill=accent,width=5)
             d.line((180,yy+50,180,yy+83),fill=(48,91,124),width=3)
             d.text((235,yy+7),label,font=studio.font(25),fill=(225,235,246))
     elif s['visual'] in {'evidence','contrast'}:
@@ -346,7 +357,10 @@ def frame(plan,t,total):
         d.text((125,625),'SOURCE NOTES' if s['visual']=='evidence' else 'TWO REPORTS / CHECK THE DETAILS',
                font=studio.font(23),fill=accent)
         for j in range(2):
-            x0=115+j*505
+            # Staggered card entrances create clear scene-level motion.
+            entrance=max(0.0,min(1.0,(u-j*0.42)/0.75))
+            entrance=0.5-0.5*math.cos(math.pi*entrance)
+            x0=115+j*505+int((1.0-entrance)*150)
             d.rounded_rectangle((x0,665,x0+480,865),radius=22,fill=(18,36,58),
                                 outline=(48,91,124),width=3)
             if j < len(cards):
@@ -365,13 +379,16 @@ def frame(plan,t,total):
         # Show the distinction between attention, reporting and confirmation.
         nodes=[(175,735,'SEARCH SIGNAL'),(510,735,'PUBLISHED REPORT'),(855,735,'CONFIRMED DETAIL')]
         for j,(x,y,label) in enumerate(nodes):
-            d.rounded_rectangle((x,y-62,x+250,y+62),radius=22,
-                                fill=(18,36,58),outline=accent if j==1 else (48,91,124),width=4)
-            studio.fit_text(d,label,(x+12,y-35,x+238,y+35),size=22,
+            bob=int(10*math.sin(u*2.1-j*0.8))
+            yy=y+bob
+            glow=accent if j==1 else (48,91,124)
+            d.rounded_rectangle((x,yy-62,x+250,yy+62),radius=22,
+                                fill=(18,36,58),outline=glow,width=4)
+            studio.fit_text(d,label,(x+12,yy-35,x+238,yy+35),size=22,
                             fill=(225,235,246),max_lines=2)
             if j<2:
-                d.line((x+255,y,x+320,y),fill=(178,202,221),width=5)
-                d.polygon(((x+320,y),(x+302,y-12),(x+302,y+12)),fill=(178,202,221))
+                d.line((x+255,yy,x+320,yy),fill=(178,202,221),width=5)
+                d.polygon(((x+320,yy),(x+302,yy-12),(x+302,yy+12)),fill=(178,202,221))
         d.text((510,855),'Each step needs evidence; attention alone proves nothing.',
                font=studio.font(22),fill=(150,180,205),anchor='mm')
     elif s['visual']=='impact':
@@ -383,13 +400,17 @@ def frame(plan,t,total):
         for j,(x,y,label) in enumerate(((250,640,'WHO IS AFFECTED?'),
                                        (870,640,'WHAT COULD CHANGE?'),
                                        (560,900,'WHAT IS STILL UNKNOWN?'))):
-            d.line((center[0],center[1],x,y),fill=(48,91,124),width=5)
-            d.rounded_rectangle((x-145,y-42,x+145,y+42),radius=18,
+            bob=int(12*math.sin(u*2.0-j))
+            yy=y+bob
+            d.line((center[0],center[1],x,yy),fill=(48,91,124),width=5)
+            d.rounded_rectangle((x-145,yy-42,x+145,yy+42),radius=18,
                                 fill=(18,36,58),outline=(48,91,124),width=3)
-            d.text((x,y),label,font=studio.font(19),fill=(225,235,246),anchor='mm')
+            d.text((x,yy),label,font=studio.font(19),fill=(225,235,246),anchor='mm')
     else:
         # Payoff scene deliberately simplifies composition after denser evidence.
         d.ellipse((360,620,870,900),fill=(20,52,78),outline=accent,width=5)
+        sweep=int((u*95)%360)
+        d.arc((385,645,845,875),start=sweep,end=sweep+118,fill=(255,224,147),width=12)
         d.text((615,760),'WHY IT MATTERS',font=studio.font(48),fill='white',anchor='mm')
 
     words=s['speech'].split()
