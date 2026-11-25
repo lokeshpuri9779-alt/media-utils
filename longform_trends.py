@@ -486,6 +486,8 @@ def thumbnail(path, topics):
 
 
 def render(out, episode_id, trend_items):
+    import time as _time
+    render_started=_time.perf_counter()
     # The evening edition must cover a different independently sourced topic.
     offset = 1 if str(episode_id).endswith('-pm') else 0
     plan,topics=build_plan(trend_items, offset=offset)
@@ -509,14 +511,19 @@ def render(out, episode_id, trend_items):
             item=plan.pop(ii); plan.insert(4,item)
     quality=long_quality_gate(plan,topics)
     quality['retention']=retention_contract(plan)
+    narration_started=_time.perf_counter()
     total=studio.voice_plan(plan,'current',max_duration=600)
+    narration_seconds=_time.perf_counter()-narration_started
     if total < 90:
         raise RuntimeError('Trend brief is too short to qualify as long-form.')
     out=Path(out); out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_trend_long_') as td:
         td=Path(td); audio=td/'mix.wav'
+        audio_started=_time.perf_counter()
         audio_info=studio.score_audio(plan,total,'current',audio)
+        audio_seconds=_time.perf_counter()-audio_started
         count=math.ceil(total*studio.FPS)
+        encode_started=_time.perf_counter()
         cmd=[studio.get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
              '-f','rawvideo','-pix_fmt','rgb24','-s','1920x1080','-r',str(studio.FPS),'-i','pipe:0',
              '-i',str(audio),'-c:v','libx264','-preset','fast','-crf','18','-threads','2',
@@ -535,7 +542,11 @@ def render(out, episode_id, trend_items):
             except Exception:
                 proc.kill(); proc.wait(); raise
 
+    encode_seconds=_time.perf_counter()-encode_started
+    thumbnail_started=_time.perf_counter()
     thumb=out.with_suffix('.jpg'); thumbnail(thumb,topics)
+    thumbnail_seconds=_time.perf_counter()-thumbnail_started
+    total_wall_seconds=_time.perf_counter()-render_started
     source_rows=[]; seen_urls=set()
     for x in topics:
         for s in x.get('sources',[]):
@@ -553,6 +564,14 @@ def render(out, episode_id, trend_items):
     report={
         'renderer':studio.VERSION,'format':'long','genre':'current','content_id':episode_id,
         'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,
+        'render_performance':{
+            'narration_synthesis_seconds':round(narration_seconds,3),
+            'audio_mix_seconds':round(audio_seconds,3),
+            'video_composition_and_encoding_seconds':round(encode_seconds,3),
+            'thumbnail_seconds':round(thumbnail_seconds,3),
+            'total_wall_seconds':round(total_wall_seconds,3),
+            'wall_to_video_ratio':round(total_wall_seconds/max(total,.001),3),
+        },
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
         'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
