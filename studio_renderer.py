@@ -1193,6 +1193,54 @@ def _micro_scene_transition(im, micro, accent):
     return im
 
 
+def _caption_chunks_for_shot(shot):
+    """Return the exact caption phrases used by the final frame compositor."""
+    speech = " ".join(str(shot.get("speech") or "").split())
+    if not speech:
+        return []
+    mode = shot.get("director_caption_mode", "phrase")
+    if mode == "keyword":
+        return segment_for_captions(speech, max_words=3, max_chars=28)
+    if mode == "question":
+        return segment_for_captions(speech, max_words=4, max_chars=34)
+    return segment_for_captions(speech, max_words=7, max_chars=42)
+
+
+def caption_qa_report(plan):
+    """Prove every narrated Studio shot has readable, fully covering burned-in caption phrases."""
+    failures = []
+    phrase_count = 0
+    word_count = 0
+    for index, shot in enumerate(plan or [], start=1):
+        speech = " ".join(str(shot.get("speech") or "").split())
+        chunks = _caption_chunks_for_shot(shot)
+        expected_words = len(speech.split())
+        covered_words = sum(len(chunk.split()) for chunk in chunks)
+        if not speech or not chunks or covered_words != expected_words:
+            failures.append({"scene": index, "reason": "caption_text_missing_or_incomplete"})
+            continue
+        if any(len(chunk.split()) > (3 if shot.get("director_caption_mode") == "keyword"
+                                     else 4 if shot.get("director_caption_mode") == "question"
+                                     else 7) for chunk in chunks):
+            failures.append({"scene": index, "reason": "caption_phrase_exceeds_word_limit"})
+            continue
+        phrase_count += len(chunks)
+        word_count += covered_words
+    total = len(plan or [])
+    passed = total > 0 and not failures and word_count > 0
+    return {
+        "status": "pass" if passed else "fail",
+        "burned_in": True,
+        "timing": "scene_voice_window_phrase_progress",
+        "style": "native_shorts_floating_captions",
+        "scene_count": total,
+        "covered_scenes": total - len(failures),
+        "caption_phrases": phrase_count,
+        "covered_words": word_count,
+        "failures": failures,
+    }
+
+
 def render_frame(plan,t,genre,total):
     index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
     s=plan[index];u=t-s['start']; accent=THEMES[genre][2]
@@ -1325,14 +1373,8 @@ def render_frame(plan,t,genre,total):
     dur=len(s['audio'])/RATE
     pos=max(0,min(len(words)-1,int((t-s['voice_start'])/max(.1,dur)*len(words))))
     mode=s.get('director_caption_mode','phrase')
-    if mode == 'keyword':
-        chunks=segment_for_captions(s['speech'],max_words=3,max_chars=28)
-    elif mode == 'question':
-        chunks=segment_for_captions(s['speech'],max_words=4,max_chars=34)
-    else:
-        # Keep complete punctuation-led phrases instead of cutting every five
-        # words, which can leave captions ending on "and", "the", or "but".
-        chunks=segment_for_captions(s['speech'],max_words=7,max_chars=42)
+    # Same deterministic phrase segmentation is used by pre-encode QA.
+    chunks=_caption_chunks_for_shot(s)
     if not chunks:
         text=''
     else:
@@ -1821,6 +1863,9 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     if scene_surgery:
         from retention_surgery import apply_surgery
         plan=apply_surgery(plan, scene_surgery)
+    caption_qa = caption_qa_report(plan)
+    if caption_qa["status"] != "pass":
+        raise CreativeReject("Shorts burned-in caption QA failed: " + json.dumps(caption_qa))
     # Repair/re-score weak plans before abandoning a publish slot.
     repair_attempts=0
     while True:
@@ -1896,6 +1941,7 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     for shot,item in zip(plan,resolved_assets): shot['resolved_asset']=item
     creative_report=creative_quality_gate(ch,plan)
     creative_report['repair_attempts']=repair_attempts
+    creative_report['caption_qa']=caption_qa
     creative_report['asset_manifest']=resolved_assets
     creative_report['asset_resolution']=asset_report
     from astra_v2.layer_contract import verify_scene_layout
