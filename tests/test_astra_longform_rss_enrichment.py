@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from astra_v2.trend_source_collector import enrich_trends
+from longform_trends import sourced_topics
 
 
 class LongformRssEnrichmentTests(unittest.TestCase):
@@ -43,6 +44,22 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         enrich_trends([{"title": f"Topic {i}", "news": []} for i in range(8)])
         self.assertEqual(parse_feed.call_count, 4)
 
+    def test_renderer_retains_summary_and_publisher_domain(self):
+        item = {
+            'title': 'Mars mission', 'traffic': '20K+',
+            'news': [
+                {'title': 'Mars mission reaches orbit', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.example',
+                 'summary': '<p>Mission reaches orbit.</p>', 'published': '2026-11-25'},
+                {'title': 'Mars mission science update', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.example',
+                 'summary': 'Scientists describe the next phase.', 'published': '2026-11-24'},
+            ],
+        }
+        candidate = sourced_topics([item])[0]
+        self.assertEqual(len(candidate['sources']), 2)
+        self.assertIn('Mission reaches orbit', candidate['sources'][0]['summary'])
+        self.assertEqual(candidate['sources'][0]['published'], '2026-11-25')
     @patch("astra_v2.trend_source_collector._parse_feed", side_effect=OSError("offline"))
     def test_feed_failure_keeps_original_trend(self, parse_feed):
         original = {"title": "Mars mission", "news": []}
