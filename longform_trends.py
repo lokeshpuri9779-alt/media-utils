@@ -140,56 +140,80 @@ def available(items, minimum=1):
     return len([t for t in sourced_topics(items, limit=8)
                 if len(t.get('sources') or []) >= 2]) >= minimum
 
+def _clean_summary(value, limit=420):
+    """Normalize source-provided RSS context without treating it as verified fact."""
+    return ' '.join(re.sub(r'<[^>]+>', ' ', str(value or '')).split())[:limit]
+
+
+def _distinctive_thumbnail_copy(headline, topic):
+    """Use a short, source-linked headline phrase rather than only the trend name."""
+    words=re.findall(r"[A-Za-z0-9']+", str(headline or ''))
+    if len(words) >= 3:
+        return ' '.join(words[:7]).upper()[:58]
+    return ' '.join(str(topic or 'CURRENT STORY').split()).upper()[:58]
+
+
 def build_plan(items, offset=0):
     t=story_candidate(items, offset=offset)
     if not t:
         raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
     topic=t['topic']; headline=t['headline']; sources=t['source_names']
-    evidence = [x for x in (t.get('sources') or []) if x.get('summary')]
-    evidence_lines = ' '.join(
-        f"{x['source']} reports: {x['summary']}" for x in evidence
-    )[:900]
-    evidence_line = evidence_lines or (
-        "The available source records provide headlines and links, but no usable article summaries."
-    )
-    # One subject, multiple narrative functions. Repetition is deliberate only
-    # where it reinforces the central promise; scenes otherwise advance it.
+    source_rows=[]
+    for source in (t.get('sources') or []):
+        summary=_clean_summary(source.get('summary'))
+        source_rows.append({
+            'name':str(source.get('source') or 'Publisher')[:100],
+            'published':str(source.get('published') or 'date not supplied')[:80],
+            'summary':summary,
+        })
+    usable=[x for x in source_rows if x['summary']]
+    if not usable:
+        raise RuntimeError('Long-form story rejected: independent headlines exist, but no source summaries are available for substantive narration.')
+    evidence_line=' '.join(
+        f"{x['name']} ({x['published']}): {x['summary']}" for x in usable
+    )[:1100]
+    source_a=usable[0]
+    source_b=usable[1] if len(usable)>1 else None
+    second_line=(f"{source_b['name']} adds: {source_b['summary']}" if source_b else
+                 "A second usable article summary is not available, so corroboration remains limited.")
+    thumbnail_copy=_distinctive_thumbnail_copy(headline,topic)
+    # Every beat has a different job: hook, catalyst, context, evidence,
+    # cross-check, stakes, open question, and a bounded conclusion.
     beats=[
-      ('THE STORY BEHIND THE SURGE',
-       f'{topic} is drawing fresh search interest. The useful question is what actually changed, and why people are paying attention now.',
-       'signal',topic[:54].upper(),'THE PROMISE'),
-      ('WHAT CHANGED?',
-       f'Current source-linked reporting centers on this development: {headline}',
-       'screen','THE CATALYST','WHAT WE KNOW'),
-      ('WHY NOW?',
-       f'The attention spike matters only if it connects to a real development. Reporting from {sources} gives us independent context rather than treating search volume as proof.',
-       'signal','ATTENTION + EVENT','THE CONTEXT'),
-      ('THE EVIDENCE',
-       f'Two independent publisher records are attached. Source-provided context (a lead for verification, not a confirmed fact) is: {evidence_line}',
-       'screen','SOURCE CHECK','VERIFY, DON’T GUESS'),
-      ('WHAT PEOPLE MAY MISS',
-       f'The headline and the search spike are not the same thing. For {topic}, compare the reported context: {evidence_line} Treat any detail not supported by the linked reporting as unknown.',
-       'signal','SIGNAL ≠ CONCLUSION','THE COMPLICATION'),
-      ('WHY IT MATTERS',
-       f'This story is worth following because a measurable attention shift is now attached to source-linked reporting. The consequence is not popularity itself; it is what the underlying event may change next.',
-       'screen','CONSEQUENCE > HYPE','THE IMPLICATION'),
-      ('WHAT TO WATCH NEXT',
-       f'Watch for new verified reporting around {topic}. If later facts change the picture, the sources should lead the update—not the trend chart.',
-       'signal','NEXT DEVELOPMENT','THE OUTLOOK'),
+      ('THE DETAIL THAT STARTED IT',
+       f'{headline} That is the reported development drawing attention to {topic}. Before accepting the first impression, let us separate the report from the search spike.',
+       'signal',thumbnail_copy,'THE OPENING QUESTION'),
+      ('WHAT THE REPORT ACTUALLY SAYS',
+       f'The first linked report is from {source_a["name"]}. Its available summary says: {source_a["summary"]}. That is the concrete starting point; anything beyond it needs another source.',
+       'screen','THE REPORTED DEVELOPMENT','THE CATALYST'),
+      ('PUT THE HEADLINE IN CONTEXT',
+       f'The trend chart tells us that people are searching for {topic}; it does not tell us why. The reporting context comes from {sources}. We should keep those two signals separate.',
+       'map','SEARCH INTEREST ≠ PROOF','THE CONTEXT'),
+      ('FOLLOW THE EVIDENCE',
+       f'Here is the source-provided detail, in plain language: {evidence_line}. These are publisher summaries, not independently verified findings, so the linked reports remain the place to check the full context.',
+       'evidence','WHAT THE SOURCES SAY','THE EVIDENCE'),
+      ('CHECK WHAT THE SECOND REPORT ADDS',
+       f'{second_line} Compare the details, dates and scope before treating the reports as agreement. If they do not establish the same point, the responsible conclusion is that the point remains unsettled.',
+       'contrast','AGREEMENT OR OPEN QUESTION?','THE CROSS-CHECK'),
+      ('WHY THE DISTINCTION MATTERS',
+       f'For {topic}, the meaningful question is what this reported development could change if the details hold up. The available summaries do not establish every consequence, so we should not present a possible impact as an accomplished fact.',
+       'impact','POSSIBLE CONSEQUENCE','THE STAKES'),
+      ('WHAT STILL NEEDS CONFIRMING',
+       f'The next useful update is specific: check the original linked reports for the full details, look for newer reporting from independent publishers, and see whether key dates or claims have changed. Until then, the unresolved parts stay unresolved.',
+       'timeline','WHAT TO VERIFY NEXT','THE OPEN QUESTION'),
       ('THE TAKEAWAY',
-       f'{topic} earned attention, but attention was only the starting signal. RAYVAN follows the evidence, builds the context, and leaves uncertainty visible.',
-       'screen','STORIES BEYOND THE ORDINARY','RAYVAN'),
+       f'{topic} has earned attention, but attention is only the starting signal. The strongest conclusion supported here is the reported development, the source context, and the questions that still need confirmation. That is the difference between a trend recap and an evidence-led explainer.',
+       'payoff','FOLLOW THE EVIDENCE','RAYVAN'),
     ]
     beat_names=['promise','catalyst','context','evidence','complication','implication','outlook','takeaway']
     visual_modes=['signal','evidence','map','evidence','contrast','impact','timeline','payoff']
     plan=[]
     for i,(h,speech,visual,label,sub) in enumerate(beats,1):
-        # Long-form uses explicit narrative beats so visuals, pacing and later
-        # retention learning can reason about structure instead of scene number.
         plan.append(studio.scene(h,speech,visual_modes[i-1],label,sub,duration=12.0,
                                  section=i,source=t['source'],topic=topic,
                                  story_beat=beat_names[i-1]))
-    return plan,[t]
+    topics=[dict(t, thumbnail_copy=thumbnail_copy)]
+    return plan,topics
 
 def long_quality_gate(plan,topics):
     if not plan or not topics: raise RuntimeError('Long-form creative gate: empty story.')
@@ -197,12 +221,14 @@ def long_quality_gate(plan,topics):
     sources=topics[0].get('sources') or []
     score=45
     score+=min(20,len(set(beats))*3)
+    summaries=[x for x in sources if len(_clean_summary(x.get('summary'))) >= 35]
     score+=15 if len(sources)>=2 else -30
+    score+=10 if len(summaries)>=1 else -25
     score+=10 if {'promise','evidence','complication','implication','takeaway'}.issubset(set(beats)) else -20
     score+=10 if len(set(x.get('visual') for x in plan))>=5 else -15
     report={'score':score,'beats':beats,'visual_modes':[x.get('visual') for x in plan],
-            'source_count':len(sources)}
-    if score<75: raise RuntimeError('Long-form creative gate rejected weak story: '+json.dumps(report))
+            'source_count':len(sources),'usable_summary_count':len(summaries)}
+    if score<85: raise RuntimeError('Long-form creative gate rejected weak story: '+json.dumps(report))
     return report
 
 
@@ -342,14 +368,15 @@ def _draw_thumbnail_hero(draw, style, accent):
 def thumbnail(path, topics):
     """Create a topic-led, mobile-readable 16:9 thumbnail with a distinct hero motif."""
     topic = ' '.join(str((topics[0] if topics else {}).get('topic') or 'CURRENT STORY').split())
+    headline_copy = ' '.join(str((topics[0] if topics else {}).get('thumbnail_copy') or topic).split())
     style, accent = _thumbnail_style(topic)
     im = _background()
     d = ImageDraw.Draw(im)
     d.rounded_rectangle((65, 65, 1090, 1015), radius=42, fill=(8, 19, 34), outline=(38, 68, 94), width=3)
     d.rounded_rectangle((105, 125, 125, 245), radius=9, fill=accent)
     d.text((165, 145), 'RAYVAN / EXPLAINED', font=studio.font(34), fill=(203, 220, 236))
-    studio.fit_text(d, topic.upper(), (115, 300, 1035, 785), size=112, fill='white', align='left', max_lines=4)
-    d.text((115, 875), 'THE FACTS. THE CONTEXT. THE BIGGER PICTURE.', font=studio.font(25), fill=accent)
+    studio.fit_text(d, headline_copy, (115, 300, 1035, 785), size=112, fill='white', align='left', max_lines=4)
+    d.text((115, 875), topic.upper()[:58], font=studio.font(25), fill=accent)
     _draw_thumbnail_hero(d, style, accent)
     im.resize((1280, 720), Image.Resampling.LANCZOS).save(path, 'JPEG', quality=94, optimize=True)
 
