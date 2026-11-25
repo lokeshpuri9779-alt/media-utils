@@ -23,6 +23,17 @@ class LongformThumbnailTests(unittest.TestCase):
                 self.assertEqual(image.size, (1280, 720))
                 self.assertEqual(image.format, "JPEG")
 
+    def test_thumbnail_uses_story_hook_when_available(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "thumbnail.jpg"
+            thumbnail(path, [{
+                "topic": "Mars mission",
+                "thumbnail_copy": "MARS MISSION REACHES ORBIT",
+            }])
+            with Image.open(path) as image:
+                self.assertEqual(image.size, (1280, 720))
+                self.assertEqual(image.format, "JPEG")
+
     def test_missing_topic_uses_safe_fallback(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "thumbnail.jpg"
