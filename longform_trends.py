@@ -438,17 +438,30 @@ def frame(plan,t,total):
     d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
     d.line((80,1045,80+1765*min(1,t/total),1045),fill=accent,width=4)
 
-    # Kinetic camera movement: a longer push/pull avoids a visibly repeating
-    # four-second pulse. The 5% scale envelope and restrained pan add motion
-    # while keeping the full caption/evidence composition inside the safe frame.
-    motion_phase=(u % 8.0) / 8.0
-    motion_ease=0.5-0.5*math.cos(2*math.pi*motion_phase)
-    zoom=1.0 + 0.05*motion_ease
+    # High-energy editorial camera: reset the visual emphasis every 2.4s,
+    # matching the three-beat rail. A quick eased punch-in/out creates a visible
+    # rhythm while the restrained pan keeps captions and evidence in frame.
+    motion_phase=(u % 2.4) / 2.4
+    motion_ease=math.sin(math.pi*motion_phase)**2
+    zoom=1.0 + 0.065*motion_ease
     scaled=im.resize((round(1920*zoom),round(1080*zoom)),Image.Resampling.LANCZOS)
     max_x=scaled.width-1920; max_y=scaled.height-1080
-    pan_x=max(0,min(max_x,round(max_x*(0.5+0.42*math.sin(u*0.34)))))
-    pan_y=max(0,min(max_y,round(max_y*(0.5+0.30*math.cos(u*0.27)))))
+    pan_x=max(0,min(max_x,round(max_x*(0.5+0.46*math.sin(u*0.72)))))
+    pan_y=max(0,min(max_y,round(max_y*(0.5+0.34*math.cos(u*0.58)))))
     im=scaled.crop((pan_x,pan_y,pan_x+1920,pan_y+1080))
+
+    # Brief directional edge streak at each micro-beat reset. Keep the centre
+    # clear so the title, evidence and captions remain legible.
+    impact=max(0.0,1.0-((u % 2.4)/0.18))
+    if impact>0:
+        streak=Image.new('RGBA',im.size,(0,0,0,0))
+        sd=ImageDraw.Draw(streak)
+        alpha=int(105*impact)
+        for k in range(5):
+            yy=90+k*18
+            sd.line((0,yy,260,yy+38),fill=(114,209,255,alpha),width=5)
+            sd.line((1660,yy+38,1920,yy),fill=(255,224,147,alpha),width=5)
+        im=Image.alpha_composite(im.convert('RGBA'),streak).convert('RGB')
 
     if index and u<.14:
         shade=Image.new('RGB',im.size,(7,13,24))
