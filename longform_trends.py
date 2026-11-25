@@ -395,8 +395,8 @@ def frame(plan,t,total):
     words=s['speech'].split()
     dur=max(.1,len(s['audio'])/studio.RATE)
     pos=max(0,min(len(words)-1,int((t-s['voice_start'])/dur*len(words))))
-    chunk=max(0,pos//10)
-    caption=' '.join(words[chunk*10:(chunk+1)*10])
+    chunk=max(0,pos//6)
+    caption=' '.join(words[chunk*6:(chunk+1)*6])
     d.rounded_rectangle((80,880,1845,1018),radius=28,fill=(6,12,22))
     studio.fit_text(d,caption,(115,895,1810,1003),size=42,fill=(222,235,246),max_lines=2)
     d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
@@ -512,7 +512,7 @@ def render(out, episode_id, trend_items):
     quality=long_quality_gate(plan,topics)
     quality['retention']=retention_contract(plan)
     narration_started=_time.perf_counter()
-    total=studio.voice_plan(plan,'current',max_duration=600)
+    total=studio.voice_plan(plan,'current',max_duration=600,voice_speed=1.14)
     narration_seconds=_time.perf_counter()-narration_started
     if total < 90:
         raise RuntimeError('Trend brief is too short to qualify as long-form.')
@@ -573,6 +573,7 @@ def render(out, episode_id, trend_items):
             'wall_to_video_ratio':round(total_wall_seconds/max(total,.001),3),
         },
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
+        'pacing_profile':{'name':'high-energy','voice_speed':1.14,'caption_words_per_change':6,'visual_transition_seconds':0.14,'target_music_bpm':128},
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
         'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
         'scenes':[{k:v for k,v in x.items() if k!='audio'} for x in plan],
