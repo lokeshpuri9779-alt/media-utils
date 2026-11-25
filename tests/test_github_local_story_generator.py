@@ -136,6 +136,10 @@ class GithubLocalStoryGeneratorTests(unittest.TestCase):
         self.assertIn("aim for 14–16 words per line", prompt)
         self.assertIn("expand short lines with a concrete clue or explanation", prompt)
         self.assertIn("contain 8–20 words, and end with a question mark", prompt)
+        self.assertIn("Aim for 72–78 words, not the minimum", prompt)
+        self.assertIn("14–16 words in EACH scene", prompt)
+        self.assertIn("10–14 word final question", prompt)
+        self.assertIn("Never submit a 55–64 word script", prompt)
 
     def test_creative_direction_is_deterministic_and_varied(self):
         first = creative_direction("brain_puzzle", 12345)
