@@ -6,7 +6,7 @@ source context. If enough sourced topics are unavailable it refuses to render.
 """
 from __future__ import annotations
 
-import json, math, re, subprocess, tempfile
+import json, math, re, subprocess, tempfile, wave
 from pathlib import Path
 
 import numpy as np
@@ -171,12 +171,11 @@ def build_plan(items, offset=0):
        'screen','STORIES BEYOND THE ORDINARY','RAYVAN'),
     ]
     beat_names=['promise','catalyst','context','evidence','complication','implication','outlook','takeaway']
-    visual_modes=['signal','evidence','map','evidence','contrast','impact','timeline','payoff']
     plan=[]
     for i,(h,speech,visual,label,sub) in enumerate(beats,1):
-        # Long-form uses explicit narrative beats so visuals, pacing and later
-        # retention learning can reason about structure instead of scene number.
-        plan.append(studio.scene(h,speech,visual_modes[i-1],label,sub,duration=12.0,
+        # The long-form contract is narration plus synchronized captions only.
+        # Keep narrative beat metadata, but do not create visual scenes.
+        plan.append(studio.scene(h,speech,'captions_only',label,sub,duration=12.0,
                                  section=i,source=t['source'],topic=topic,
                                  story_beat=beat_names[i-1]))
     return plan,[t]
@@ -189,9 +188,10 @@ def long_quality_gate(plan,topics):
     score+=min(20,len(set(beats))*3)
     score+=15 if len(sources)>=2 else -30
     score+=10 if {'promise','evidence','complication','implication','takeaway'}.issubset(set(beats)) else -20
-    score+=10 if len(set(x.get('visual') for x in plan))>=5 else -15
-    report={'score':score,'beats':beats,'visual_modes':[x.get('visual') for x in plan],
-            'source_count':len(sources)}
+    caption_only=all(x.get('visual')=='captions_only' for x in plan)
+    score+=10 if caption_only else -30
+    report={'score':score,'beats':beats,'output_mode':'narration_with_synchronized_captions',
+            'visual_scenes':False,'music':False,'source_count':len(sources)}
     if score<75: raise RuntimeError('Long-form creative gate rejected weak story: '+json.dumps(report))
     return report
 
@@ -207,68 +207,55 @@ def _background():
 
 
 def frame(plan,t,total):
-    index=next((i for i,s in enumerate(plan) if t<s['end']),len(plan)-1)
-    s=plan[index]; u=t-s['start']; accent=(114,209,255)
-    im=_background(); d=ImageDraw.Draw(im)
-
-    d.rounded_rectangle((62,48,116,102),radius=15,fill=accent)
-    d.text((89,75),'R',font=studio.font(34),fill=(7,13,24),anchor='mm')
-    d.text((140,62),'RAYVAN / EXPLAINED',font=studio.font(27),fill=(224,235,247))
-    d.text((1845,67),f'{index+1:02d} / {len(plan):02d}',font=studio.font(24),fill=accent,anchor='rm')
-
-    section=int(s.get('section') or 0)
-    if section:
-        d.text((86,210),f'CHAPTER {section:02d}',font=studio.font(28),fill=accent)
-    studio.fit_text(d,s['headline'],(80,250,1180,535),size=92,fill='white',align='left',max_lines=3)
-
-    d.rounded_rectangle((1240,210,1845,690),radius=34,fill=(13,27,45),outline=(48,91,124),width=3)
-    studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
-    studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
-
-    if s['visual'] in {'signal','timeline'}:
-        points=[]
-        for xx in range(100,1110,10):
-            yy=720+math.sin(xx*.018+t*4)*38+math.sin(xx*.006-t*1.3)*56
-            points.append((xx,int(yy)))
-        d.line(points,fill=accent,width=5)
-        for k in range(3):
-            r=60+((t*50+k*90)%280)
-            d.ellipse((605-r,725-r*.45,605+r,725+r*.45),outline=(39+20*k,77+20*k,105+25*k),width=2)
-    elif s['visual'] in {'evidence','contrast'}:
-        d.rounded_rectangle((110,650,1120,845),radius=26,fill=(18,36,58),outline=(48,91,124),width=3)
-        widths=(650,850) if s['visual']=='contrast' else (675,865)
-        for j,w in enumerate(widths):
-            d.rounded_rectangle((145,700+j*72,145+w,742+j*72),radius=12,fill=(41+j*15,80+j*8,112+j*12))
-        d.text((160,665),'SOURCE CHECK' if s['visual']=='evidence' else 'COMPARE THE CLAIMS',font=studio.font(25),fill=accent)
-    elif s['visual']=='map':
-        d.ellipse((250,600,940,900),outline=accent,width=6)
-        for k in range(7):
-            ang=k*.9+t*.15; x=595+math.cos(ang)*250; y=750+math.sin(ang)*110
-            d.ellipse((x-12,y-12,x+12,y+12),fill=accent)
-        d.line((595,750,845,680),fill=(178,202,221),width=4)
-    elif s['visual']=='impact':
-        for k,val in enumerate((.32,.58,.82)):
-            x=180+k*300; h=int(260*val*(.75+.25*math.sin(t*1.4+k)))
-            d.rounded_rectangle((x,860-h,x+170,860),radius=18,fill=(45+25*k,100+15*k,145+20*k))
-    else:
-        # Payoff scene deliberately simplifies composition after denser evidence.
-        d.ellipse((360,620,870,900),fill=(20,52,78),outline=accent,width=5)
-        d.text((615,760),'WHY IT MATTERS',font=studio.font(48),fill='white',anchor='mm')
-
-    words=s['speech'].split()
-    dur=max(.1,len(s['audio'])/studio.RATE)
-    pos=max(0,min(len(words)-1,int((t-s['voice_start'])/dur*len(words))))
-    chunk=max(0,pos//10)
-    caption=' '.join(words[chunk*10:(chunk+1)*10])
-    d.rounded_rectangle((80,880,1845,1018),radius=28,fill=(6,12,22))
-    studio.fit_text(d,caption,(115,895,1810,1003),size=42,fill=(222,235,246),max_lines=2)
-    d.line((80,1045,1845,1045),fill=(42,65,84),width=4)
-    d.line((80,1045,80+1765*min(1,t/total),1045),fill=accent,width=4)
-
-    if index and u<.14:
-        shade=Image.new('RGB',im.size,(7,13,24))
-        im=Image.blend(shade,im,.52+.48*u/.14)
+    """Static black frame with phrase captions; no scenes, motion graphics or overlays."""
+    index=next((i for i,scene in enumerate(plan) if t<scene['end']),len(plan)-1)
+    scene=plan[index]
+    elapsed=t-scene['voice_start']
+    audio_duration=len(scene['audio'])/studio.RATE
+    im=Image.new('RGB',(1920,1080),(0,0,0))
+    if elapsed < 0 or elapsed >= audio_duration:
+        return im
+    words=scene['speech'].split()
+    if not words:
+        return im
+    # Captions advance proportionally through the generated narration segment.
+    chunk_size=8
+    chunk_count=math.ceil(len(words)/chunk_size)
+    chunk=min(chunk_count-1,int((elapsed/audio_duration)*chunk_count))
+    caption=' '.join(words[chunk*chunk_size:(chunk+1)*chunk_size])
+    draw=ImageDraw.Draw(im)
+    draw.rounded_rectangle((145,390,1775,690),radius=28,fill=(12,12,12),
+                           outline=(75,75,75),width=2)
+    studio.fit_text(draw,caption,(205,435,1715,645),size=76,
+                    fill=(255,255,255),align='center',max_lines=3)
     return im
+
+
+def write_voice_only(plan,duration,path):
+    """Write narration only: no music bed, stingers, transitions or effects."""
+    count=int(math.ceil(duration*studio.RATE))
+    voice=np.zeros(count,dtype=np.float32)
+    for scene in plan:
+        samples=np.asarray(scene['audio'],dtype=np.float32)
+        start=int(round(float(scene['voice_start'])*studio.RATE))
+        end=min(count,start+len(samples))
+        if start<0 or end<=start:
+            raise RuntimeError('Invalid narration timing in long-form plan.')
+        voice[start:end]+=samples[:end-start]
+    fade_in=np.clip(np.arange(count,dtype=np.float32)/(studio.RATE*.08),0,1)
+    fade_out=np.clip((count-np.arange(count,dtype=np.float32))/(studio.RATE*.12),0,1)
+    voice*=np.minimum(fade_in,fade_out)
+    peak=float(np.max(np.abs(voice))) if count else 0.0
+    if peak>0.94:
+        voice*=0.94/peak
+    with wave.open(str(path),'wb') as output:
+        output.setnchannels(1)
+        output.setsampwidth(2)
+        output.setframerate(studio.RATE)
+        output.writeframes((voice*32767).astype('<i2').tobytes())
+    peak=max(float(np.max(np.abs(voice))) if count else 0.0,1e-9)
+    return {'peak_dbfs':round(20*math.log10(peak),2),
+            'voice':'Kokoro expressive profile','music':'none','sound_effects':'none'}
 
 
 def thumbnail(path, topics):
@@ -312,7 +299,7 @@ def render(out, episode_id, trend_items):
     out=Path(out); out.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='astra_trend_long_') as td:
         td=Path(td); audio=td/'mix.wav'
-        audio_info=studio.score_audio(plan,total,'current',audio)
+        audio_info=write_voice_only(plan,total,audio)
         count=math.ceil(total*studio.FPS)
         cmd=[studio.get_ffmpeg_exe(),'-hide_banner','-loglevel','error','-y',
              '-f','rawvideo','-pix_fmt','rgb24','-s','1920x1080','-r',str(studio.FPS),'-i','pipe:0',
@@ -345,14 +332,15 @@ def render(out, episode_id, trend_items):
         'A source-linked RAYVAN explainer built around one live story with independent reporting. '
         'Trend status is treated as a signal, not proof of importance.\n\nSources:\n'+sources+
         '\n\nRAYVAN — Stories Beyond the Ordinary.\n'
-        'Original motion graphics and music; AI-assisted production and synthetic narration.'
+        'Narration with synchronized phrase captions only. No music, sound effects, motion graphics or illustrative scenes.'
     )
     report={
         'renderer':studio.VERSION,'format':'long','genre':'current','content_id':episode_id,
         'duration':round(total,3),'resolution':[1920,1080],'fps':studio.FPS,
         'scene_count':len(plan),'topic_count':1,'story_mode':'single-topic-deep-dive','audio':audio_info,
         'thumbnail':str(thumb),'sources':[s['url'] for x in topics for s in x.get('sources',[])],
-        'creative_quality':quality,'story_beats':[x.get('story_beat') for x in plan],
+        'creative_quality':quality,'output_mode':'narration_with_synchronized_captions',
+        'visual_scenes':False,'music':False,'story_beats':[x.get('story_beat') for x in plan],
         'scenes':[{k:v for k,v in x.items() if k!='audio'} for x in plan],
     }
     out.with_suffix('.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
