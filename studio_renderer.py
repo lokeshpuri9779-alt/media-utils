@@ -520,18 +520,48 @@ def make_plan(ch):
     return formatted
 
 
-def voice_plan(plan, genre, max_duration=None, voice_name='af_heart', voice_speed=1.09):
+def narration_segments(text):
+    """Split narration at sentence boundaries while preserving spoken wording."""
+    normalized=' '.join(str(text or '').replace('; ', '. ').split())
+    if not normalized:
+        return []
+    # Keep punctuation attached to each segment so Kokoro can shape the ending.
+    parts=re.split(r'(?<=[.!?])\\s+(?=[A-Z0-9“\"])',normalized)
+    return [part.strip() for part in parts if part.strip()]
+
+
+def _sentence_pause_seconds(segment):
+    """Give sentence endings room to land instead of rushing into the next thought."""
+    value=str(segment or '').rstrip()
+    if value.endswith('?'):
+        return .26
+    if value.endswith('!'):
+        return .22
+    if value.endswith(('.', '…')):
+        return .18
+    return .10
+
+
+def voice_plan(plan, genre, max_duration=None, voice_name='af_heart', voice_speed=1.04):
     engine=voice_engine()
     cursor=0.0
     for s in plan:
         spoken=str(s['speech']).strip()
-        # Natural cadence wins over synthetic "news voice" punctuation tricks.
-        spoken=spoken.replace('; ', '. ').replace('  ',' ')
-        samples, rate=engine.create(spoken,voice=voice_name,speed=voice_speed,lang='en-us')
-        samples=np.asarray(samples,dtype=np.float32)
-        if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
-            raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
-        # Normalize each line gently, then mix with a substantially quieter score.
+        segments=narration_segments(spoken)
+        if not segments:
+            raise RuntimeError('Empty narration; refusing to render a silent scene.')
+        rendered=[]
+        for index,segment in enumerate(segments):
+            samples, rate=engine.create(segment,voice=voice_name,speed=voice_speed,lang='en-us')
+            samples=np.asarray(samples,dtype=np.float32)
+            if rate!=RATE or len(samples)==0 or not np.isfinite(samples).all():
+                raise RuntimeError('Invalid narration audio; refusing to publish an incomplete video.')
+            rendered.append(samples)
+            if index < len(segments)-1:
+                rendered.append(np.zeros(int(_sentence_pause_seconds(segment)*RATE),dtype=np.float32))
+        samples=np.concatenate(rendered).astype(np.float32,copy=False)
+        # Normalize the complete scene, not each sentence, to preserve natural
+        # loudness variation within a line of narration.
         peak=float(np.max(np.abs(samples)))
         if peak>0: samples=samples*(.65/peak)
         s.update(audio=samples,start=cursor,voice_start=cursor+.08,
