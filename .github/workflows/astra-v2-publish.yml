@@ -687,7 +687,7 @@ jobs:
                   summary.write('No candidate render usage evidence produced; '
                                 'asset restoration does not prove asset usage.\n')
               summary.write('\n')
-              for key in ('outcome','video_url','reason','character_memory','character_memory_error','queue_error_type','attempts_today','confirmed_today','pending','blocked_until'):
+              for key in ('outcome','video_url','reason','caption_qa','character_memory','character_memory_error','queue_error_type','attempts_today','confirmed_today','pending','blocked_until'):
                   summary.write(f'- {key}: {data.get(key)}\n')
               snapshot=Path('character-continuity.json')
               first=Path('runtime-health/character-first-candidate.json')
