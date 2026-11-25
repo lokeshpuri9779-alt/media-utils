@@ -395,6 +395,8 @@ jobs:
       - name: Show readable preload result
         if: always()
         shell: bash
+        env:
+          ASTRA_RENDER_CONTENT_ID: ${{ steps.render.outputs.content_id }}
         run: |
           python - <<'PY'
           import json
