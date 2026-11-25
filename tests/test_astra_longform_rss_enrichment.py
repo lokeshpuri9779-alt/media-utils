@@ -91,6 +91,8 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         self.assertIn('spacecraft reached orbit', plan[0]['speech'])
         self.assertLessEqual(len(plan[0]['speech'].split()), 45)
         self.assertIn('what can we actually say', plan[-1]['speech'].lower())
+        self.assertIn('we opened with this reported detail', plan[-1]['speech'].lower())
+        self.assertLessEqual(len(plan[-1]['speech'].split()), 55)
         self.assertLessEqual(len(plan[3]['speech'].split()), 115)
         retention = retention_contract(plan)
         self.assertLessEqual(retention['opening_words'], 45)
