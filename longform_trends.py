@@ -77,7 +77,7 @@ def _distinct_news(items, topic):
     for x in items or []:
         if not isinstance(x,dict) or not x.get('title') or not x.get('url') or not x.get('source'):
             continue
-        host=_host(x.get('url'))
+        host=str(x.get('publisher_domain') or '').lower().removeprefix('www.') or _host(x.get('url'))
         if not host or not _topic_relevant(topic, x.get('title')):
             continue
         publisher=_publisher_key(host)
@@ -115,7 +115,10 @@ def sourced_topics(items, limit=5):
             'url':str(first['url'])[:1000],
             'source_names':' / '.join(' '.join(str(x['source']).split())[:100] for x in chosen),
             'sources':[{'source':' '.join(str(x['source']).split())[:100],
-                        'url':str(x['url'])[:1000]} for x in chosen],
+                        'url':str(x['url'])[:1000],
+                        'published':' '.join(str(x.get('published') or '').split())[:80],
+                        'summary':' '.join(re.sub(r'<[^>]+>', ' ', str(x.get('summary') or '')).split())[:500]}
+                       for x in chosen],
             'sensitive':sensitive,
             'score':_traffic_number(item.get('traffic')),
         })
@@ -142,6 +145,13 @@ def build_plan(items, offset=0):
     if not t:
         raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
     topic=t['topic']; headline=t['headline']; sources=t['source_names']
+    evidence = [x for x in (t.get('sources') or []) if x.get('summary')]
+    evidence_lines = ' '.join(
+        f"{x['source']} reports: {x['summary']}" for x in evidence
+    )[:900]
+    evidence_line = evidence_lines or (
+        "The available source records provide headlines and links, but no usable article summaries."
+    )
     # One subject, multiple narrative functions. Repetition is deliberate only
     # where it reinforces the central promise; scenes otherwise advance it.
     beats=[
@@ -155,10 +165,10 @@ def build_plan(items, offset=0):
        f'The attention spike matters only if it connects to a real development. Reporting from {sources} gives us independent context rather than treating search volume as proof.',
        'signal','ATTENTION + EVENT','THE CONTEXT'),
       ('THE EVIDENCE',
-       f'Two independent source domains are attached to this story. The primary reported angle is: {headline}',
+       f'Two independent publisher records are attached. Source-provided context (a lead for verification, not a confirmed fact) is: {evidence_line}',
        'screen','SOURCE CHECK','VERIFY, DON’T GUESS'),
       ('WHAT PEOPLE MAY MISS',
-       f'The headline and the search spike are not the same thing. For {topic}, separate what the sources actually report from assumptions created by the trend itself.',
+       f'The headline and the search spike are not the same thing. For {topic}, compare the reported context: {evidence_line} Treat any detail not supported by the linked reporting as unknown.',
        'signal','SIGNAL ≠ CONCLUSION','THE COMPLICATION'),
       ('WHY IT MATTERS',
        f'This story is worth following because a measurable attention shift is now attached to source-linked reporting. The consequence is not popularity itself; it is what the underlying event may change next.',
