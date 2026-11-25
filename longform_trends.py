@@ -322,6 +322,21 @@ def frame(plan,t,total):
     studio.fit_text(d,s.get('label',''),(1280,260,1805,475),size=64,fill=accent,max_lines=4)
     studio.fit_text(d,s.get('sub',''),(1280,520,1805,640),size=28,fill=(178,202,221),max_lines=3)
 
+    # Three-beat editorial motion rail: the active marker advances every 2.4s,
+    # giving each 12s chapter a visible internal rhythm instead of one frozen card.
+    rail_y=665
+    rail_x=(1325,1560,1795)
+    d.line((rail_x[0],rail_y,rail_x[-1],rail_y),fill=(48,75,98),width=5)
+    active_beat=int(u/2.4)%3
+    beat_phase=(u%2.4)/2.4
+    marker_x=rail_x[active_beat]+int((rail_x[min(active_beat+1,2)]-rail_x[active_beat])*beat_phase) if active_beat<2 else rail_x[2]
+    for beat_i,bx in enumerate(rail_x):
+        radius=10 if beat_i!=active_beat else 15+int(4*math.sin(beat_phase*math.pi))
+        color=(48,91,124) if beat_i!=active_beat else accent
+        d.ellipse((bx-radius,rail_y-radius,bx+radius,rail_y+radius),fill=color)
+    d.line((rail_x[0],rail_y,marker_x,rail_y),fill=(255,224,147),width=7)
+    d.ellipse((marker_x-8,rail_y-8,marker_x+8,rail_y+8),fill=(255,244,211))
+
     phase=(u % 4.8)/4.8
     ease=0.5-0.5*math.cos(2*math.pi*phase)
     if s['visual']=='signal':
