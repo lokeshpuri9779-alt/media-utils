@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import patch
 
-from astra_v2.trend_source_collector import _ArticleText, enrich_trends
+from astra_v2.trend_source_collector import _ArticleText, _parse_feed, enrich_trends
 from longform_trends import build_plan, long_quality_gate, retention_contract, sourced_topics
 
 
@@ -30,6 +30,40 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         parser.feed('<html><head><meta property="og:description" content="A publisher-authored summary with enough detail to explain the reported development and its context."></head><body><p>A longer paragraph that is not selected when explicit publisher metadata exists.</p></body></html>')
         self.assertTrue(parser.meta)
         self.assertIn("publisher-authored summary", parser.meta[0])
+
+    @patch("astra_v2.trend_source_collector._fetch")
+    def test_bing_rss_redirect_is_unwrapped_to_publisher_url(self, fetch):
+        fetch.return_value = b"""<rss><channel><item>
+        <title>Mars mission reaches orbit</title>
+        <link>https://www.bing.com/news/apiclick.aspx?url=https%3A%2F%2Fpublisher.example%2Fstory</link>
+        <description>Publisher summary describes the spacecraft reaching orbit and the next phase of the mission.</description>
+        <source url="https://publisher.example">Publisher A</source>
+        <pubDate>Wed, 25 Nov 2026 10:00:00 GMT</pubDate>
+        </item></channel></rss>"""
+        rows = _parse_feed("https://www.bing.com/news/search?q=mars&format=rss")
+        self.assertEqual(rows[0]["url"], "https://publisher.example/story")
+        self.assertEqual(rows[0]["publisher"], "Publisher A")
+        self.assertIn("spacecraft reaching orbit", rows[0]["summary"])
+
+    @patch("astra_v2.trend_source_collector._publisher_page_summary")
+    @patch("astra_v2.trend_source_collector._parse_feed")
+    def test_bing_rss_fallback_supplies_source_summary_when_google_is_unavailable(
+            self, parse_feed, page_summary):
+        page_summary.return_value = ""
+        parse_feed.side_effect = [
+            OSError("Google News unavailable"),
+            [{
+                "title": "Mars mission reaches orbit",
+                "url": "https://publisher.example/story",
+                "publisher": "Publisher A",
+                "publisher_domain": "publisher.example",
+                "published": "2026-11-25",
+                "summary": "Publisher reports the spacecraft reached orbit and outlines the next observation phase.",
+            }],
+        ]
+        result = enrich_trends([{"title": "Mars mission", "news": []}])
+        self.assertIn("spacecraft reached orbit", result[0]["news"][0]["summary"])
+        self.assertEqual(parse_feed.call_count, 2)
 
     @patch("astra_v2.trend_source_collector._publisher_page_summary",
            return_value="Publisher page describes the confirmed development and gives substantive context for the reported event.")
