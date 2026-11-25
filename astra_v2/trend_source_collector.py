@@ -99,6 +99,49 @@ def _parse_feed(url: str, limit: int = 10) -> list[dict]:
     return rows
 
 
+
+def enrich_trends(trends: list[dict], max_topics: int = 4) -> list[dict]:
+    """Attach bounded Google News RSS context to live trend items.
+
+    RSS descriptions are source-provided leads, not verified facts. Keep the
+    original Google Trends links and merge independent publisher records so
+    the long-form renderer can preserve dates, summaries and provenance.
+    """
+    enriched = []
+    for trend in trends or []:
+        if not isinstance(trend, dict):
+            continue
+        item = dict(trend)
+        item["news"] = list(item.get("news") or [])
+        enriched.append(item)
+    for item in enriched[:max(0, min(4, int(max_topics)))]:
+        topic = str(item.get("title") or "").strip()
+        if not topic:
+            continue
+        query = urllib.parse.urlencode({
+            "q": topic, "hl": "en-IN", "gl": "IN", "ceid": "IN:en"
+        })
+        try:
+            fetched = _parse_feed("https://news.google.com/rss/search?" + query, 6)
+        except Exception as exc:
+            print(f"Skipping long-form trend context: {type(exc).__name__}")
+            continue
+        seen = {str(x.get("url") or "") for x in item["news"] if isinstance(x, dict)}
+        for source in fetched:
+            if source.get("url") in seen:
+                continue
+            seen.add(source.get("url"))
+            item["news"].append({
+                "title": source.get("title", ""),
+                "url": source.get("url", ""),
+                "source": source.get("publisher", ""),
+                "publisher_domain": source.get("publisher_domain", ""),
+                "published": source.get("published", ""),
+                "summary": source.get("summary", ""),
+            })
+    return enriched
+
+
 def collect(direction: str, output: str) -> list[dict]:
     if direction not in TOPIC_QUERIES:
         raise ValueError("Unsupported sourced direction")
