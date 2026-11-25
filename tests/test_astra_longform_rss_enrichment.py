@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import patch
 
 from astra_v2.trend_source_collector import enrich_trends
-from longform_trends import sourced_topics
+from longform_trends import build_plan, long_quality_gate, sourced_topics
 
 
 class LongformRssEnrichmentTests(unittest.TestCase):
@@ -60,6 +60,43 @@ class LongformRssEnrichmentTests(unittest.TestCase):
         self.assertEqual(len(candidate['sources']), 2)
         self.assertIn('Mission reaches orbit', candidate['sources'][0]['summary'])
         self.assertEqual(candidate['sources'][0]['published'], '2026-11-25')
+    def test_story_plan_uses_source_led_distinct_beats_and_thumbnail_hook(self):
+        item = {
+            'title': 'Mars mission', 'traffic': '20K+',
+            'news': [
+                {'title': 'Mars mission reaches orbit after launch', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.example',
+                 'summary': 'Mission team reports spacecraft reached orbit after a successful launch.',
+                 'published': '2026-11-25'},
+                {'title': 'Mars mission scientists describe orbit milestone', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.example',
+                 'summary': 'Scientists describe the orbit milestone and the next planned observation phase.',
+                 'published': '2026-11-24'},
+            ],
+        }
+        plan, topics = build_plan([item])
+        self.assertEqual(len(plan), 8)
+        self.assertEqual(len({x['story_beat'] for x in plan}), 8)
+        self.assertIn('spacecraft reached orbit', plan[3]['speech'])
+        self.assertIn('second report', plan[4]['speech'].lower())
+        self.assertIn('MARS MISSION REACHES ORBIT', topics[0]['thumbnail_copy'])
+        report = long_quality_gate(plan, topics)
+        self.assertGreaterEqual(report['score'], 85)
+        self.assertEqual(report['usable_summary_count'], 2)
+
+    def test_story_plan_rejects_headlines_without_summaries(self):
+        item = {
+            'title': 'Mars mission', 'traffic': '20K+',
+            'news': [
+                {'title': 'Mars mission reaches orbit', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.example'},
+                {'title': 'Mars mission science update', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.example'},
+            ],
+        }
+        with self.assertRaisesRegex(RuntimeError, 'no source summaries'):
+            build_plan([item])
+
     @patch("astra_v2.trend_source_collector._parse_feed", side_effect=OSError("offline"))
     def test_feed_failure_keeps_original_trend(self, parse_feed):
         original = {"title": "Mars mission", "news": []}
