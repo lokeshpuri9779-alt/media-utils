@@ -153,11 +153,16 @@ def _distinctive_thumbnail_copy(headline, topic):
     return ' '.join(str(topic or 'CURRENT STORY').split()).upper()[:58]
 
 
-def _retention_opening(headline, topic):
-    """Create a factual open loop from the actual headline, without adding claims."""
+def _retention_opening(headline, topic, source_name='', source_summary=''):
+    """Open with a short source-provided detail and a question the episode will answer."""
     clean=' '.join(str(headline or topic or 'This story').split()).rstrip('.!?')
-    return (f'{clean}. But what do the reports actually confirm about {topic}, '
-            'and what is still unknown? We will separate the reported facts from the unanswered questions.')
+    headline_lead=' '.join(clean.split()[:9])
+    summary=' '.join(_clean_summary(source_summary, limit=180).split()[:12])
+    source=str(source_name or 'The linked report').strip()
+    detail=(f'{source} reports: {summary}.' if summary else
+            f'{source} is the starting point for this report.')
+    return (f'{headline_lead}. {detail} What do the reports actually confirm about {topic}, '
+            'and what remains unknown?')
 
 
 def _retention_payoff(topic, source_summary):
@@ -200,11 +205,16 @@ def build_plan(items, offset=0):
     usable=[x for x in source_rows if x['summary']]
     if not usable:
         raise RuntimeError('Long-form story rejected: independent headlines exist, but no source summaries are available for substantive narration.')
+    # Keep evidence readable aloud: use the two strongest available summaries,
+    # with a strict per-source word budget instead of dumping the full RSS descriptions.
+    source_rows=usable[:2]
+    for row in source_rows:
+        row['summary']=' '.join(row['summary'].split()[:32])
     evidence_line=' '.join(
-        f"{x['name']} ({x['published']}): {x['summary']}" for x in usable
-    )[:1100]
-    source_a=usable[0]
-    source_b=usable[1] if len(usable)>1 else None
+        f"{x['name']} ({x['published']}): {x['summary']}" for x in source_rows
+    )
+    source_a=source_rows[0]
+    source_b=source_rows[1] if len(source_rows)>1 else None
     second_line=(f"{source_b['name']} adds: {source_b['summary']}" if source_b else
                  "A second usable article summary is not available, so corroboration remains limited.")
     thumbnail_copy=_distinctive_thumbnail_copy(headline,topic)
@@ -212,7 +222,7 @@ def build_plan(items, offset=0):
     # cross-check, stakes, open question, and a bounded conclusion.
     beats=[
       ('THE DETAIL THAT STARTED IT',
-       _retention_opening(headline, topic),
+       _retention_opening(headline, topic, source_a['name'], source_a['summary']),
        'signal',thumbnail_copy,'THE OPENING QUESTION'),
       ('WHAT THE REPORT ACTUALLY SAYS',
        f'The first linked report is from {source_a["name"]}. Its available summary says: {source_a["summary"]}. That is the concrete starting point; anything beyond it needs another source.',
