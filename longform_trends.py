@@ -166,12 +166,13 @@ def _retention_opening(headline, topic, source_name='', source_summary=''):
 
 
 def _retention_payoff(topic, source_summary):
-    """Close the opening loop using only source-provided detail and explicit limits."""
-    detail=_clean_summary(source_summary, limit=260)
+    """Answer the opening question without replaying the entire source summary."""
+    detail=' '.join(_clean_summary(source_summary, limit=180).split()[:16])
     if not detail:
-        detail='The available source record does not provide enough detail to confirm more.'
-    return (f'So, what can we actually say about {topic}? The available report says: {detail}. '
-            'That is the reported development. Anything beyond it remains unconfirmed until the full reports establish it.')
+        detail='the available source record does not provide enough detail to confirm more'
+    return (f'So, what can we actually say about {topic}? We opened with this reported detail: {detail}. '
+            'The available summaries show that it was reported, but they do not independently establish '
+            'every underlying claim or consequence. Anything beyond that remains unconfirmed.')
 
 
 def retention_contract(plan):
