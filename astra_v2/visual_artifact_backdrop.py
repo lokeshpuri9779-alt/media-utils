@@ -22,7 +22,7 @@ SCENE_TERMS = {
     # Bare "station" also means the International Space Station; require rail context.
     "railway": ("railway", "train", "train station", "railway station",
                 "rail station", "metro station", "subway station", "railroad", "locomotive"),
-    "village": ("wooden cabin", "cabin", "village", "hamlet", "countryside"),
+    "village": ("harvest festival", "harvest", "farmland", "farm", "crop fields", "village", "hamlet", "countryside", "wooden cabin", "cabin"),
     "mountain": ("mountain", "summit", "mountains", "cliff", "peak", "gorge"),
     "desert": ("desert", "dune", "sand dunes", "oasis"),
     "underwater": ("underwater", "undersea", "under the sea", "beneath the sea", "ocean", "ocean floor", "seafloor", "coral", "seabed", "reef", "deep sea"),
@@ -45,7 +45,7 @@ def analyze_story_scene(shot):
     Explicit storyboard locations outrank narration. Unknown environments stay
     unresolved rather than silently selecting unrelated artwork.
     """
-    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "visual", "speech", "headline", "story_title"):
+    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "headline", "speech", "story_title", "visual"):
         value = shot.get(key)
         if not isinstance(value, str) or not value.strip():
             continue
