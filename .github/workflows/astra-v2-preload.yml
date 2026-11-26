@@ -5,7 +5,6 @@ on:
   # No path filter: code, workflow, editorial, and recovery changes all trigger it.
   push:
     branches: [main]
-  workflow_dispatch:
 
 # Keep one coherent four-lane render batch active at a time.
 # Scheduled triggers that arrive during a batch must not cancel its jobs.
@@ -382,9 +381,12 @@ jobs:
               output.write('ASTRA_REVIEWED_ART_CONTENT_ID=' + os.environ['ASTRA_REVIEWED_ART_CONTENT_ID'] + '\n')
           PY
 
+      - name: Test bounded fiction rejection frame diagnostics
+        run: python -m unittest discover -s tests -p 'test_fiction_visual_guard.py' -v
       - name: Render and approve next original video
         id: render
         env:
+          ASTRA_FICTION_QA_REJECT_DIR: runtime-health/fiction-visual-rejects
           ASTRA_EDITORIAL_STORIES_FILE: editorial/reviewed_stories.json
           ASTRA_EDITORIAL_REVIEWS_FILE: editorial/reviewed_decisions.json
           ASTRA_PUBLISHER_STATE_PATH: astra_v2_state.json
@@ -449,6 +451,14 @@ jobs:
           path: runtime-health/preload-worker.log
           if-no-files-found: ignore
           retention-days: 14
+      - name: Archive rejected fiction frame diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: astra-fiction-visual-rejects-${{ github.run_id }}-${{ matrix.lane }}
+          path: runtime-health/fiction-visual-rejects/
+          if-no-files-found: ignore
+          retention-days: 3
       - name: Report render peak RAM
         if: always()
         run: |

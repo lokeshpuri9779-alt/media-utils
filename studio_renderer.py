@@ -1960,7 +1960,8 @@ def render_short(ch,out,still_dir=None,director_repair_pass=0,scene_surgery=None
     if genre=='fiction' and os.environ.get('ASTRA_FICTION_VISUAL_GUARD','1')=='1':
         from astra_v2.fiction_visual_guard import validate_fiction_frames
         creative_report['fiction_visual_guard']=validate_fiction_frames(
-            plan,render_frame,duration)
+            plan, render_frame, duration,
+            diagnostic_dir=os.environ.get('ASTRA_FICTION_QA_REJECT_DIR') or None)
     # Begin only after preview/preflight sampling: receipts must originate from
     # the actual FFmpeg frame stream, not QA previews or test renders.
     from astra_v2.asset_usage_audit import begin as begin_asset_audit

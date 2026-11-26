@@ -12,12 +12,13 @@ class Studio721ReleaseTests(unittest.TestCase):
         self.assertFalse(_studio_meets_floor("studio-7.2.1","7.3.1"))
         self.assertTrue(_studio_meets_floor(VERSION,"7.3.1"))
 
-    def test_actual_pillow_source_edits_trigger_the_parallel_preloader(self):
+    def test_production_source_edits_trigger_the_parallel_preloader(self):
         workflow=Path(".github/workflows/astra-v2-preload.yml").read_text()
-        for path in ("astra_v2/pillow_duo_scene.py",
-                     "astra_v2/pillow_scene_direction.py",
-                     "astra_v2/pillow_duo_stories.py"):
-            self.assertIn(path,workflow)
+        # Push trigger intentionally has no path filter: every production source,
+        # workflow, and editorial change re-enters the autonomous pipeline.
+        self.assertIn("push:",workflow)
+        self.assertIn("branches: [main]",workflow)
+        self.assertNotIn("paths:",workflow)
         self.assertIn("matrix:",workflow)
         self.assertIn("lane: [0, 1, 2, 3]",workflow)
         self.assertIn("cancel-in-progress: false",workflow)
