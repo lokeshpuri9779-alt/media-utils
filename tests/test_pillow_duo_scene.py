@@ -55,6 +55,35 @@ class PillowDuoTests(unittest.TestCase):
             frames.append(frame.tobytes())
         self.assertEqual(len(set(frames)), 3)
 
+
+    def test_explicit_per_character_actions_reach_each_actor(self):
+        import astra_v2.pillow_duo_scene as duo
+        shot = {
+            "speech": "The fox runs while the owl repairs the lantern.",
+            "story_cast": ["fox", "owl"],
+            "story_action": "idle",
+            "story_actor_actions": {"fox": "run", "owl": "repair"},
+        }
+        observed = []
+        original = duo._actor
+        def capture(*args, **kwargs):
+            observed.append(args[5])
+            return original(*args, **kwargs)
+        duo._actor = capture
+        try:
+            frame = Image.new("RGB", (1080, 1920), (24, 35, 60))
+            self.assertTrue(duo.draw_duo(frame, shot, 0.35))
+        finally:
+            duo._actor = original
+        self.assertEqual(observed, ["run", "repair"])
+
+    def test_invalid_per_character_action_falls_back_safely(self):
+        from astra_v2.story_action_motion import actor_action_tracks
+        self.assertEqual(actor_action_tracks({
+            "story_action": "walk",
+            "story_actor_actions": {"fox": "teleport", "owl": "wave"},
+        }, ("fox", "owl")), {"fox": "walk", "owl": "wave"})
+
     def test_no_wrong_species_icon(self):
         from astra_v2.icon_visuals import pick_icon
         self.assertIsNone(pick_icon({"speech": "The fox met the rabbit."}))
