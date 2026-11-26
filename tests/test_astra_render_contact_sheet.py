@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from PIL import Image
+from imageio_ffmpeg import get_ffmpeg_exe
 
 from astra_v2.render_contact_sheet import create_contact_sheet
 
@@ -20,13 +21,13 @@ class ContactSheetTests(unittest.TestCase):
                 create_contact_sheet(video, output, duration_seconds=2)
             self.assertFalse(output.exists())
 
-    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
+    @unittest.skipUnless(get_ffmpeg_exe(),
                          "ffmpeg and ffprobe are needed for a real MP4 smoke test")
     def test_real_video_generates_four_unapproved_samples(self):
         with tempfile.TemporaryDirectory() as root:
             video = Path(root) / "source.mp4"
             output = Path(root) / "visual-review" / "sheet.jpg"
-            subprocess.run(["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error",
+            subprocess.run([get_ffmpeg_exe(), "-nostdin", "-hide_banner", "-loglevel", "error",
                             "-f", "lavfi", "-i", "testsrc2=size=360x640:rate=10",
                             "-t", "2", "-c:v", "mpeg4", "-y", str(video)],
                            check=True, timeout=20)
@@ -45,7 +46,7 @@ class ContactSheetTests(unittest.TestCase):
             self.assertEqual(result["contact_sheet_sha256"], manifest["contact_sheet_sha256"])
 
 
-    @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"),
+    @unittest.skipUnless(get_ffmpeg_exe(),
                          "ffmpeg and ffprobe needed for beat-aligned sampling")
     def test_real_video_samples_requested_storybeat_midpoints(self):
         with tempfile.TemporaryDirectory() as root:
@@ -123,7 +124,7 @@ class ContactSheetTests(unittest.TestCase):
         from astra_v2.asset_usage_audit import begin, observe, finish
 
         for error, expected in (
-            (RuntimeError("ffprobe_unavailable"), "ffprobe_unavailable"),
+            (RuntimeError("video_decode_unavailable"), "video_decode_unavailable"),
             (RuntimeError("private-token=should-not-appear"), "unspecified"),
         ):
             with self.subTest(error=expected), tempfile.TemporaryDirectory() as root:
