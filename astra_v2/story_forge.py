@@ -6,6 +6,7 @@ All outputs remain subject to the existing full render and publication gates.
 """
 import hashlib
 import re
+from astra_v2.story_action_motion import infer_actor_actions
 from astra_v2.pillow_duo_stories import PLOTS as PILLOW_DUO_PLOTS
 from astra_v2.editorial_batch_oct2026 import PLOTS as EDITORIAL_OCT2026_PLOTS
 from astra_v2.crossgenre_directed_24 import PLOTS as CROSSGENRE_DIRECTED_24
@@ -941,6 +942,7 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
             "story_beats": [
                 {"headline": h, "speech": speech, "visual": visual,
                  "label": label, "story_beat": role,
+                 "story_actor_actions": infer_actor_actions(speech),
                  "sub": "AN ORIGINAL RAYVAN STORY", "duration": 2.1}
                 for role, (h, speech, visual, label) in
                 zip(("reveal", "build", "twist", "payoff"), beats)
