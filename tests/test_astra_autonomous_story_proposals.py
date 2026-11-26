@@ -73,7 +73,7 @@ class AutonomousStoryProposalTests(unittest.TestCase):
                 tag = beat["visual"]
                 if tag == "story":
                     continue
-                pattern = subject_patterns.get(tag, r"(?<!\\w)" + re.escape(tag) + r"(?!\\w)")
+                pattern = subject_patterns.get(tag, r"(?<!\w)" + re.escape(tag) + r"(?!\w)")
                 self.assertRegex(beat["speech"], re.compile(pattern, re.I),
                                  msg=f"unsupported visual tag {tag!r}: {beat['speech']}")
 
