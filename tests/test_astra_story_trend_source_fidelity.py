@@ -11,7 +11,8 @@ def _item(news):
 
 ESPN = {'title': 'Northern Illinois beats Grambling basketball',
         'url': 'https://www.espn.com/mens-college-basketball/game/_/id/1',
-        'source': 'ESPN'}
+        'source': 'ESPN',
+        'summary': 'Grambling basketball faces Northern Illinois in a college basketball matchup.'}
 ESPN_PH = {'title': 'Grambling basketball season preview',
            'url': 'https://www.espn.ph/basketball/story/123',
            'source': 'ESPN Philippines'}
@@ -20,7 +21,8 @@ FOOTBALL = {'title': 'Bruno Fernandes returns to Manchester United against Chels
             'source': 'ESPN Philippines'}
 AP = {'title': 'Grambling basketball faces Northern Illinois',
       'url': 'https://apnews.com/article/grambling-basketball',
-      'source': 'Associated Press'}
+      'source': 'Associated Press',
+      'summary': 'Grambling basketball prepares for its matchup with Northern Illinois.'}
 
 
 class TrendSourceFidelityTests(unittest.TestCase):
