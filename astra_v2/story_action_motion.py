@@ -45,6 +45,27 @@ def choose_action(shot):
     return "idle"
 
 
+def actor_action_tracks(shot, cast):
+    """Resolve explicitly authored per-character action cues without guessing.
+
+    story_actor_actions maps actor names to supported actions. Missing,
+    malformed, or unsupported entries fall back to the shot-level cue.
+    This is an animation instruction resolver, not semantic visual approval.
+    """
+    fallback = str(shot.get("story_action") or "idle").strip().lower()
+    allowed = {name for name, _ in ACTION_PATTERNS} | {"idle", "warn"}
+    raw = shot.get("story_actor_actions")
+    if not isinstance(raw, dict):
+        return {str(name): fallback for name in cast}
+    result = {}
+    for name in cast:
+        actor = str(name)
+        value = raw.get(actor)
+        action = str(value).strip().lower() if isinstance(value, str) else ""
+        result[actor] = action if action in allowed else fallback
+    return result
+
+
 # The animal puppet has ONE action track. It can walk while carrying a
 # staged prop, but jump/swim poses do not keep prop-to-hand contact. Detect
 # only explicitly co-temporal claims involving a tangible supported prop.
