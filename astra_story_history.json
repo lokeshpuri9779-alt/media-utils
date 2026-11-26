@@ -13118,6 +13118,62 @@
       "central_conflict": "Ollie the otter wants to keep the shared brass lantern inside his muddy riverbank burrow while Felix the cat insists on placing it permanently near his dry stone ledge.",
       "decisive_choice": "Ollie suggests and carries out placing the lantern precisely on a neutral flat milestone halfway between their respective homes.",
       "resolution": "The central placement provides balanced light for both animals to safely navigate the riverbank at night, ending their dispute permanently."
+    },
+    {
+      "content_id": "rayvan-gemini-32aa2189a83b9407e41a",
+      "video_id": "UecagK74dIM",
+      "confirmed_at": "2026-11-26T07:12:34.261444+00:00",
+      "title": "Orion's Clockwork Lantern Dial Mistake",
+      "plot_fingerprint": "4b5c7f02914fbf94eaf92f26bd4d99ec2068e5963d12c7219ce08b66e9c9b251",
+      "story_beats": [
+        {
+          "headline": "The Midnight Tick",
+          "speech": "An unfamiliar rhythmic ticking echoes across the silent observatory floor while midnight shadows stretch long and cold.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Observation",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl stands inside the observatory, blinking in surprise at a brass clock placed near the telescope stand.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Glowing Misjudgment",
+          "speech": "The bright polished brass surface glints under the moonlight, tricking the watchful bird into expecting a guiding flame.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Second Guess",
+          "story_beat": "build",
+          "visual_prompt": "An owl tilts its head in the observatory, staring intently at a brass clock while feathers ripple in the cool draft.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Closer Inspection",
+          "speech": "Stepping closer to the mysterious sound reveals the swinging brass pendulum and the absence of any warm fire.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Decisive Step",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl perches near a brass clock on a wooden desk inside the observatory, peering directly at the glass face.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Discovery",
+          "speech": "Understanding the gentle mechanical movement at last, the wise bird rests quietly as the steady ticking continues.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Final Clarity",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl rests peacefully inside the observatory with a brass clock resting steadily beside its talons under the starlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl mistakes the steady metallic ticking of a brass clock for a signaling lantern during a quiet night watch in the observatory.",
+      "decisive_choice": "Orion decides to flutter closer to examine the ticking clock face directly instead of flying away from the rhythmic sound.",
+      "resolution": "Orion clearly observes the swinging pendulum mechanism inside the clock, realizes it is not a lantern, and calmly adjusts his night watch duties."
     }
   ]
 }

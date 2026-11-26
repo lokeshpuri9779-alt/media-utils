@@ -3,7 +3,7 @@
   "day": "2026-11-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 4,
-  "confirmed_today": 3,
+  "confirmed_today": 4,
   "last_attempt_at": "2026-11-26T07:10:22.894732+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -14621,16 +14621,14 @@
       "decisive_choice": "Ollie suggests and carries out placing the lantern precisely on a neutral flat milestone halfway between their respective homes.",
       "resolution": "The central placement provides balanced light for both animals to safely navigate the riverbank at night, ending their dispute permanently.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "UecagK74dIM": {
-      "content_id": "rayvan-gemini-32aa2189a83b9407e41a",
+    },
+    "rayvan-gemini-32aa2189a83b9407e41a": {
+      "video_id": "UecagK74dIM",
+      "confirmed_at": "2026-11-26T07:12:34.261444+00:00",
       "title": "Orion's Clockwork Lantern Dial Mistake",
-      "day": "2026-11-26",
-      "uploaded_at": "2026-11-26T07:10:24.493800+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-26T07:10:24.493800+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "4b5c7f02914fbf94eaf92f26bd4d99ec2068e5963d12c7219ce08b66e9c9b251",
       "story_beats": [
@@ -14682,31 +14680,31 @@
       "central_conflict": "Orion the owl mistakes the steady metallic ticking of a brass clock for a signaling lantern during a quiet night watch in the observatory.",
       "decisive_choice": "Orion decides to flutter closer to examine the ticking clock face directly instead of flying away from the rhythmic sound.",
       "resolution": "Orion clearly observes the swinging pendulum mechanism inside the clock, realizes it is not a lantern, and calmly adjusts his night watch duties.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-26T07:09:41.226560+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-26T07:12:33.902366+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T07:10:24.800404+00:00",
+    "at": "2026-11-26T07:12:34.352293+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-26T04:54:45.356984+00:00",
   "reserved": {
@@ -29822,10 +29820,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T07:10:24.800300+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-26T07:12:34.352249+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -29833,9 +29831,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T07:10:24.800385+00:00",
+    "at": "2026-11-26T07:12:34.352286+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -29847,22 +29845,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-26T07:10:24.799002+00:00",
-    "preflight_due": "true",
+    "at": "2026-11-26T07:12:34.351654+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T07:10:24.800169+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
-    "publish_step": "success",
-    "selection_source": "preload_artifact",
+    "at": "2026-11-26T07:12:34.352215+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
