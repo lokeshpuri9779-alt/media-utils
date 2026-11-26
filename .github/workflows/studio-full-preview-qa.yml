@@ -16,6 +16,7 @@ on:
       - 'tests/verify_studio_preview.py'
       - 'tests/review_studio_visual_reuse.py'
       - 'tests/test_studio_visual_reuse.py'
+      - 'tests/test_astra_studio_scene_location.py'
   workflow_dispatch:
   pull_request:
     paths:
@@ -54,6 +55,7 @@ jobs:
       - run: python -m unittest tests.test_studio_audio_gate tests.test_visual_artifact_backdrop -v
       - run: python -m unittest tests.test_astra_studio_preview_asset_gate -v
       - run: python -m unittest tests.test_studio_visual_reuse -v
+      - run: python -m unittest tests.test_astra_studio_scene_location -v
   longform-trend-preview:
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-24.04
