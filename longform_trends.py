@@ -146,7 +146,7 @@ def _claim_conflict(topic, sources):
         if not re.search(r"\b" + re.escape(claim) + r"\b", evidence):
             return f"topic asserts '{claim}', but source headlines and summaries do not mention it"
         negation = re.search(
-            r"\\b(?:no|not|never|without|isn't|wasn't|aren't|weren't|doesn't|didn't)\\b"
+            r"\b(?:no|not|never|without|isn't|wasn't|aren't|weren't|doesn't|didn't)\b"
             r"(?:\W+\w+){0,5}\W+" + re.escape(claim) + r"\b",
             evidence,
         )
