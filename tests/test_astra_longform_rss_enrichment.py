@@ -219,6 +219,51 @@ A second paragraph adds source context and explains what the mission team plans 
         self.assertIn('Europa mission', plan[0]['speech'])
         self.assertEqual(topics[0]['topic'], 'Europa mission')
 
+
+    def test_story_candidate_rejects_topic_claim_explicitly_negated_by_sources(self):
+        item = {
+            'title': 'Butterball turkey recall', 'traffic': '90K+',
+            'news': [
+                {'title': 'Butterball plant salmonella findings', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.com',
+                 'summary': 'Inspectors reported elevated salmonella findings; the plant is not required to recall products.'},
+                {'title': 'Butterball facility inspection update', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.com',
+                 'summary': 'The report describes inspection findings and says no recall was ordered.'},
+            ],
+        }
+        self.assertIsNone(story_candidate([item]))
+        with self.assertRaisesRegex(RuntimeError, 'source depth'):
+            build_plan([item])
+
+    def test_story_candidate_rejects_unsupported_high_impact_topic_claim(self):
+        item = {
+            'title': 'Company bankruptcy', 'traffic': '50K+',
+            'news': [
+                {'title': 'Company reports quarterly losses', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.com',
+                 'summary': 'The company reported quarterly losses and revised its annual outlook.'},
+                {'title': 'Company shares fall after earnings', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.com',
+                 'summary': 'Shares declined after the company released its earnings report.'},
+            ],
+        }
+        self.assertIsNone(story_candidate([item]))
+
+    def test_story_candidate_allows_supported_non_negated_claim(self):
+        item = {
+            'title': 'Product recall', 'traffic': '50K+',
+            'news': [
+                {'title': 'Product recall announced', 'url': 'https://news.google.com/a',
+                 'source': 'Publisher A', 'publisher_domain': 'a.com',
+                 'summary': 'The manufacturer announced a product recall after safety testing.'},
+                {'title': 'Product recall details published', 'url': 'https://news.google.com/b',
+                 'source': 'Publisher B', 'publisher_domain': 'b.com',
+                 'summary': 'The recall covers specific batches of the product.'},
+            ],
+        }
+        self.assertIsNotNone(story_candidate([item]))
+
     def test_story_plan_rejects_headlines_without_summaries(self):
         item = {
             'title': 'Mars mission', 'traffic': '20K+',
