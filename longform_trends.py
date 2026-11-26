@@ -219,6 +219,16 @@ def _compact_source_card_summary(summary, max_chars=72):
 def build_plan(items, offset=0):
     t=story_candidate(items, offset=offset)
     if not t:
+        headline_deep = [
+            topic for topic in sourced_topics(items, limit=8)
+            if len(topic.get('sources') or []) >= 2
+        ]
+        if headline_deep and not any(
+            _clean_summary(source.get('summary'))
+            for topic in headline_deep
+            for source in (topic.get('sources') or [])
+        ):
+            raise RuntimeError('Long-form story rejected: independent headlines exist, but no source summaries are available for substantive narration.')
         raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
     topic=t['topic']; headline=t['headline']; sources=t['source_names']
     source_rows=[]
