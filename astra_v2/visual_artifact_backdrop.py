@@ -87,6 +87,13 @@ def infer_consistent_story_scene(story):
     beats = story.get("story_beats")
     if not isinstance(beats, (list, tuple)):
         return None
+    # Preserve the established opening-location continuity rule. A later
+    # explicit shot may override it locally, while unresolved shots can still
+    # inherit the known opening scene.
+    if beats and isinstance(beats[0], dict):
+        opening = analyze_story_scene(beats[0])["scene"]
+        if opening:
+            return opening
     scenes = {
         result["scene"]
         for beat in beats if isinstance(beat, dict)
