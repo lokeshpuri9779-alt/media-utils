@@ -14626,11 +14626,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-26T06:45:57.334504+00:00",
+  "last_preflight_at": "2026-11-26T06:49:57.749556+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T06:48:26.732495+00:00",
+    "at": "2026-11-26T06:51:53.659479+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -29703,7 +29703,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T06:48:26.732449+00:00",
+    "at": "2026-11-26T06:51:53.659437+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -29714,13 +29714,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T06:48:26.732488+00:00",
+    "at": "2026-11-26T06:51:53.659472+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-26T06:47:43.435506+00:00",
+    "at": "2026-11-26T06:51:02.251519+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -29754,7 +29754,7 @@
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-26T06:48:26.731790+00:00",
+    "at": "2026-11-26T06:51:53.658736+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -29766,7 +29766,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T06:48:26.732290+00:00",
+    "at": "2026-11-26T06:51:53.659290+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
