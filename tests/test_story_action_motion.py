@@ -1,7 +1,25 @@
 import unittest
-from astra_v2.story_action_motion import choose_action,offset
+from astra_v2.story_action_motion import choose_action,offset, infer_actor_actions
 
 class StoryActionMotionTests(unittest.TestCase):
+
+    def test_infer_independent_actor_actions_from_clear_clauses(self):
+        self.assertEqual(infer_actor_actions(
+            "The fox ran toward the bridge, but the rabbit waved a warning."
+        ), {"fox": "run", "rabbit": "wave"})
+        self.assertEqual(infer_actor_actions(
+            "The rabbit repaired the lantern while the fox held it steady."
+        ), {"rabbit": "repair", "fox": "carry"})
+        self.assertEqual(infer_actor_actions(
+            "Together the fox and rabbit carried the glowing lantern."
+        ), {"fox": "carry", "rabbit": "carry"})
+
+    def test_actor_action_inference_ignores_ambiguous_or_unknown_subjects(self):
+        self.assertEqual(infer_actor_actions("The lantern was repaired carefully."), {})
+        self.assertEqual(infer_actor_actions("The fox and rabbit saw the storm."), {})
+        self.assertEqual(infer_actor_actions("The dragon ran toward the cave."), {})
+        self.assertEqual(infer_actor_actions(None), {})
+
     def test_action_from_scene(self):
         self.assertEqual(choose_action({"action":"Fox jumps over the fence"}),"jump")
         self.assertEqual(choose_action({"visual_prompt":"The owl runs home"}),"run")
