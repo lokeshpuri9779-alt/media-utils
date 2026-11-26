@@ -3,7 +3,7 @@
   "day": "2026-11-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-11-26T06:14:56.501979+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -14565,16 +14565,14 @@
       "decisive_choice": "Jasper proposes placing the lantern upon a flat stepping stone exactly halfway between their dens so its glow reaches both paths equally.",
       "resolution": "Both friends comfortably read their books side by side under the steady glow of the shared lantern.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "Bboix_UsLSA": {
-      "content_id": "rayvan-gemini-0a8de8e2490871619f21",
+    },
+    "rayvan-gemini-0a8de8e2490871619f21": {
+      "video_id": "Bboix_UsLSA",
+      "confirmed_at": "2026-11-26T06:45:57.627011+00:00",
       "title": "Ollie the Otter and Felix the Cat's Riverbank Lantern Sharing",
-      "day": "2026-11-26",
-      "uploaded_at": "2026-11-26T06:14:58.494648+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-26T06:14:58.494648+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "791902ca2a3c1aa52d41639d48f4a3627626b345519ac224f7eaad435fd35266",
       "story_beats": [
@@ -14622,16 +14620,17 @@
       "central_conflict": "Ollie the otter wants to keep the shared brass lantern inside his muddy riverbank burrow while Felix the cat insists on placing it permanently near his dry stone ledge.",
       "decisive_choice": "Ollie suggests and carries out placing the lantern precisely on a neutral flat milestone halfway between their respective homes.",
       "resolution": "The central placement provides balanced light for both animals to safely navigate the riverbank at night, ending their dispute permanently.",
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
+  "pending": {},
+  "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-26T06:13:39.108988+00:00",
+  "last_preflight_at": "2026-11-26T06:45:57.334504+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T06:14:58.766525+00:00",
+    "at": "2026-11-26T06:48:26.732495+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -29704,10 +29703,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T06:14:58.766483+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-26T06:48:26.732449+00:00",
+    "publication_outcome": "quality_skip",
+    "publication_reason": "no_approved_original_story_available",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -29715,37 +29714,111 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T06:14:58.766518+00:00",
+    "at": "2026-11-26T06:48:26.732488+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-26T06:14:45.367588+00:00",
-    "outcome": "processing",
-    "reason": "",
-    "content_id": "rayvan-gemini-0a8de8e2490871619f21",
-    "video_url": "https://www.youtube.com/watch?v=Bboix_UsLSA",
-    "story_selection": {}
+    "at": "2026-11-26T06:47:43.435506+00:00",
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "content_id": "",
+    "video_url": "",
+    "story_selection": {
+      "considered": 125,
+      "not_ready": 64,
+      "policy_rejected": {
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+        "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+        "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+        "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2,
+        "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+        "not_production_ready": 3
+      },
+      "already_seen": 0,
+      "duration_rejected": 0,
+      "render_qa_rejected": 0,
+      "render_exception": {
+        "CreativeReject": 3
+      },
+      "background_preflight_rejected": 0,
+      "background_review_gaps": [],
+      "approved": 0,
+      "exhausted": true,
+      "rejection_total": 125,
+      "next_action": "replenish_approved_story_supply"
+    }
   },
   "last_workflow_result": {
-    "at": "2026-11-26T06:14:58.765867+00:00",
+    "at": "2026-11-26T06:48:26.731790+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "quality_skip",
+    "reason": "no_approved_original_story_available",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T06:14:58.766421+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
+    "at": "2026-11-26T06:48:26.732290+00:00",
+    "collection_status": "collected",
     "publish_step": "success",
-    "selection_source": "preload_artifact",
-    "counters": {},
+    "selection_source": "fresh_candidate_evaluation",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 4,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 160
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 160,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 125,
+        "title": 1,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 125,
+        "remaining": 3
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 0,
+        "background_preflight_rejected": 0,
+        "background_review_gaps": [],
+        "considered": 125,
+        "duration_rejected": 0,
+        "not_ready": 64,
+        "policy_rejected": {
+          "not_production_ready": 3,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 15,
+          "renderer_incompatible: shot 1: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 4,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 5,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 15,
+          "renderer_incompatible: shot 2: Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons": 1,
+          "renderer_incompatible: shot 3: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 12,
+          "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
+        },
+        "render_exception": {
+          "CreativeReject": 3
+        },
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
