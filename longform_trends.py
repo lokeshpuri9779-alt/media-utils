@@ -126,19 +126,24 @@ def sourced_topics(items, limit=5):
     return ranked[:limit]
 
 def story_candidate(items, offset=0):
-    """Pick one source-deep topic for a coherent long-form story."""
+    """Pick a source-deep topic that also has source-authored narration context."""
     topics=sourced_topics(items,limit=8)
     deep=[]
     for t in topics:
-        # Long-form needs independent reporting even when the topic is not
-        # sensitive; one headline is not enough substance for a deep story.
-        if len(t.get('sources') or []) >= 2:
+        sources=t.get('sources') or []
+        # Two independent headlines are necessary, but headlines alone are
+        # not enough for substantive narration. Skip an un-summarized topic
+        # and continue to the next ranked topic instead of aborting the lane.
+        has_context=any(_clean_summary(source.get('summary')) for source in sources)
+        if len(sources) >= 2 and has_context:
             deep.append(t)
     return deep[offset] if len(deep) > offset else None
 
 def available(items, minimum=1):
     return len([t for t in sourced_topics(items, limit=8)
-                if len(t.get('sources') or []) >= 2]) >= minimum
+                if len(t.get('sources') or []) >= 2
+                and any(_clean_summary(source.get('summary'))
+                        for source in (t.get('sources') or []))]) >= minimum
 
 def _clean_summary(value, limit=420):
     """Normalize source-provided RSS context without treating it as verified fact."""
