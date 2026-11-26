@@ -13461,6 +13461,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-7b3ee7176192ae32",
+      "video_id": "bgoIWzpqll8",
+      "confirmed_at": "2026-11-26T13:00:37.324049+00:00",
+      "title": "The Fox and the Sundial Garden",
+      "plot_fingerprint": "3521870853b2d8fa02aecb525b697208807619c9c434649bcba2ee7193555c7a",
+      "story_beats": [
+        {
+          "headline": "THE FLOWERS CLOSED EARLY",
+          "speech": "A fox noticed the garden flowers closing before sunset on the day of the village picnic.",
+          "visual": "forest",
+          "label": "TOO EARLY",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE SUNDIAL LIED",
+          "speech": "He checked the stone sundial and found its shadow pointing toward evening despite the bright morning sun.",
+          "visual": "clock",
+          "label": "WRONG SHADOW",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE STATUE HAD MOVED",
+          "speech": "He discovered a tall statue had been shifted beside the sundial and was shading the flowers.",
+          "visual": "forest",
+          "label": "HIDDEN CAUSE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "SUNSHINE RETURNED",
+          "speech": "He moved the statue back with the gardeners and the flowers opened for the afternoon picnic.",
+          "visual": "forest",
+          "label": "GARDEN OPEN",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
