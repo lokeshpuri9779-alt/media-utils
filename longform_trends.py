@@ -261,6 +261,16 @@ def build_plan(items, offset=0):
             for source in (topic.get('sources') or [])
         ):
             raise RuntimeError('Long-form story rejected: independent headlines exist, but no source summaries are available for substantive narration.')
+        claim_rejections = [
+            (topic.get('topic'), _claim_conflict(topic.get('topic'), topic.get('sources') or []))
+            for topic in headline_deep
+            if _claim_conflict(topic.get('topic'), topic.get('sources') or [])
+        ]
+        if claim_rejections:
+            topic_name, reason = claim_rejections[0]
+            raise RuntimeError(
+                f"Long-form story rejected: source-claim conflict for '{topic_name}': {reason}."
+            )
         raise RuntimeError('No trend has enough independent source depth for a quality long-form story.')
     topic=t['topic']; headline=t['headline']; sources=t['source_names']
     source_rows=[]
