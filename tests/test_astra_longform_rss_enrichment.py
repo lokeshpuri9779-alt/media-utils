@@ -3,7 +3,8 @@ import unittest
 from unittest.mock import patch
 
 from astra_v2.trend_source_collector import _ArticleText, _parse_feed, _reader_summary_from_text, enrich_trends
-from longform_trends import build_plan, long_quality_gate, retention_contract, sourced_topics
+from longform_trends import (build_plan, long_quality_gate, retention_contract,
+                             sourced_topics, _compact_source_card_summary)
 
 
 class LongformRssEnrichmentTests(unittest.TestCase):
@@ -110,6 +111,14 @@ A second paragraph adds source context and explains what the mission team plans 
         parse_feed.return_value = []
         enrich_trends([{"title": f"Topic {i}", "news": []} for i in range(8)])
         self.assertEqual(parse_feed.call_count, 8)  # Google News plus Bing RSS fallback per topic
+
+    def test_source_card_summary_is_bounded_for_fixed_visual_box(self):
+        summary = ("All 32 teams are still alive in the playoff race, but only "
+                   "one team can win the championship after a long season.")
+        compact = _compact_source_card_summary(summary)
+        self.assertLessEqual(len(compact), 72)
+        self.assertTrue(compact.endswith("…"))
+        self.assertTrue(compact.startswith("All 32 teams are still alive"))
 
     def test_renderer_retains_summary_and_publisher_domain(self):
         item = {
