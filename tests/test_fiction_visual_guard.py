@@ -28,6 +28,15 @@ class FictionVisualGuardTests(unittest.TestCase):
         d.arc((115,593,964,1050),188,355,fill=(226,197,125),width=6)
         self.assertTrue(long_amber_guide_arc(artifact))
 
+    def test_character_portal_rim_is_not_mistaken_for_stage_guide(self):
+        # The Midnight Tick / Midnight Observation renders use a shorter
+        # circular gold rim around the character. It is intentional scene art,
+        # not the old extra-wide stage guide spanning most of the frame.
+        portal=self.canvas()
+        ImageDraw.Draw(portal).arc((210,593,910,1050),188,355,
+                                   fill=(226,197,125),width=6)
+        self.assertFalse(long_amber_guide_arc(portal))
+
     def test_edge_flash_rejected_but_character_activity_inside_stage_allowed(self):
         a=self.canvas()
         b=a.copy()
