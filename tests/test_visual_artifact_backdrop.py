@@ -82,9 +82,26 @@ class ArtifactBackdropTests(unittest.TestCase):
         self.assertEqual(choose_scene({
             "visual_prompt": "forest", "visual": "space", "speech": "city"
         }), "forest")
+        # A legacy visual token is an asset category, not necessarily the
+        # story's setting. Narrated settings must win when they are explicit.
         self.assertEqual(choose_scene({
             "visual": "underwater", "speech": "city"
-        }), "underwater")
+        }), "city")
+
+    def test_generic_visual_asset_tags_do_not_override_story_setting(self):
+        examples = [
+            ({"visual": "planet", "speech": "They met at the old observatory."},
+             "observatory"),
+            ({"visual": "ship", "speech": "The village stage flooded before the festival."},
+             "village"),
+            ({"visual": "planet", "speech": "The witch promised rain for the harvest festival."},
+             "village"),
+            ({"visual": "ship", "headline": "THE TRAIN WENT THE WRONG WAY",
+              "speech": "Each friend boarded a different train."}, "railway"),
+        ]
+        for shot, expected in examples:
+            with self.subTest(shot=shot):
+                self.assertEqual(choose_scene(shot), expected)
 
     def test_expanded_environment_synonyms(self):
         examples = {
