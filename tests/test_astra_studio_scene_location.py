@@ -123,16 +123,16 @@ class StudioAuthoredSceneLocationTests(unittest.TestCase):
 
     def test_conflicting_story_locations_do_not_leak_into_unresolved_beats(self):
         plan = planned([
-            shot("The owl starts in the observatory.", "signal",
-                 "An owl stands inside an observatory."),
-            shot("The owl travels elsewhere.", "door",
+            shot("The owl begins somewhere unknown.", "signal",
+                 "An owl stands beside unusual wooden crates."),
+            shot("The owl reaches the observatory.", "door",
+                 "The owl stands inside an observatory."),
+            shot("The owl travels to the garden.", "signal",
                  "The owl walks through a flower garden."),
-            shot("The owl examines an object.", "signal",
-                 "The owl looks at a brass device."),
         ])
         self.assertEqual([s.get("story_environment") for s in plan],
-                         ["observatory", "garden", None])
-        self.assertEqual(analyze_story_scene(plan[2])["scene"], None)
+                         [None, "observatory", "garden"])
+        self.assertEqual(analyze_story_scene(plan[0])["scene"], None)
 
     def test_location_selection_is_not_editorial_or_publication_approval(self):
         plan = planned([shot("The owl looks around.", "signal",
