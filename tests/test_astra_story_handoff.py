@@ -87,6 +87,14 @@ class StoryHandoffTests(unittest.TestCase):
             "content_id": source["content_id"], "title": source["title"],
             "genre": source["genre"], "description": "Original reviewed fictional story",
             "synthetic": True, "format": "short", "renderer": "studio-7.3.1",
+            # Mirror the renderer's complete burned-in caption receipt. This
+            # is test evidence only; production still derives it from render QA.
+            "caption_qa": {
+                "status": "pass", "burned_in": True,
+                "scene_count": len(source["story_beats"]),
+                "covered_scenes": len(source["story_beats"]),
+                "covered_words": 40,
+            },
             **approved_story_context(source),
         }
         self.assertIsNone(publication_rejection(candidate))
@@ -101,6 +109,8 @@ class StoryHandoffTests(unittest.TestCase):
             self.assertEqual(restored["production_ready"], True)
             self.assertEqual(restored["question"], source["question"])
             self.assertEqual(restored["answer"], source["answer"])
+            self.assertEqual(restored["caption_qa"]["status"], "pass")
+            self.assertTrue(restored["caption_qa"]["burned_in"])
             self.assertIsNone(publication_rejection(restored),
                               "Publisher should revalidate the exact original scenes")
 
