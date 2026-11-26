@@ -42,8 +42,10 @@ SCENE_TERMS = {
 def analyze_story_scene(shot):
     """One deterministic, side-effect-free scene decision for the full pipeline.
 
-    Explicit storyboard locations outrank narration. Unknown environments stay
-    unresolved rather than silently selecting unrelated artwork.
+    Explicit storyboard locations outrank narration. Narrated beat headings and
+    speech outrank legacy visual asset tags (e.g. planet or ship), which are not
+    reliable evidence of the story's setting. Unknown environments stay unresolved
+    rather than silently selecting unrelated artwork.
     """
     for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "headline", "speech", "story_title", "visual"):
         value = shot.get(key)
