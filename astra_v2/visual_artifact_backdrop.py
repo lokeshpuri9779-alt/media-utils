@@ -68,6 +68,34 @@ def analyze_story_scene(shot):
             "matched_term": None, "needs_background": True}
 
 
+
+def infer_consistent_story_scene(story):
+    """Return a taxonomy-backed shared setting, never a renderer-only guess.
+
+    An explicit story-level setting wins. Otherwise, inherit a scene only when
+    every beat that supplies a recognizable setting agrees on the same scene.
+    Unknown-only and conflicting stories remain unresolved; no generic
+    'meadow' or unrelated background is silently assigned.
+    """
+    if not isinstance(story, dict):
+        return None
+    top = story.get("story_environment")
+    if isinstance(top, str) and top.strip():
+        resolved = analyze_story_scene({"story_environment": top})["scene"]
+        if resolved:
+            return resolved
+    beats = story.get("story_beats")
+    if not isinstance(beats, (list, tuple)):
+        return None
+    scenes = {
+        result["scene"]
+        for beat in beats if isinstance(beat, dict)
+        for result in (analyze_story_scene(beat),)
+        if result["scene"]
+    }
+    return next(iter(scenes)) if len(scenes) == 1 else None
+
+
 def choose_scene(shot):
     return analyze_story_scene(shot)["scene"]
 
