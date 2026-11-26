@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
+  "attempts": 2,
   "confirmed_today": 1,
-  "last_attempt_at": "2026-11-26T04:56:13.253235+00:00",
+  "last_attempt_at": "2026-11-26T06:08:33.116702+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -14511,29 +14511,86 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "8aHo_pfplRM": {
+      "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+      "title": "Jasper the Otter and Barnaby the Cat and the Riverbank Lantern",
+      "day": "2026-11-26",
+      "uploaded_at": "2026-11-26T06:08:34.953337+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7f7182b420c3a7903d26e16d83085d155d174fc317cc52159a77064d54065a38",
+      "story_beats": [
+        {
+          "headline": "The Evening Shadow Falls",
+          "speech": "Jasper holds the glowing lantern tightly, claiming the dimming riverbank path requires absolute illumination for his evening reading.",
+          "visual": "signal",
+          "label": "The Competing Claim",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the brown otter stands on a grassy riverbank holding a lit brass lantern with a warm yellow glow, while Barnaby the ginger cat sits nearby with crossed arms looking at the light in a dimly lit dusk forest setting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Divided Path",
+          "speech": "Barnaby insists the brass lantern belongs near the northern rocks, leaving Jasper in total darkness without any light source.",
+          "visual": "forest",
+          "label": "The Argument",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds the brass lantern close to his chest near a pile of river rocks, while Jasper the brown otter points toward the southern path with a frustrated expression in a dusky woodland environment.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Midpoint Solution",
+          "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow.",
+          "visual": "door",
+          "label": "The Compromise",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, illuminating both of their open books.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Both companions read happily as the steady lantern beam bridges the distance between their separate nighttime reading spots.",
+          "visual": "planet",
+          "label": "The Peaceful Outcome",
+          "story_beat": "payoff",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat sit on opposite sides of a glowing brass lantern resting on a central flat stone, each peacefully reading an open book under the clear starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Jasper the otter and Barnaby the cat both urgently need the single shared lantern to illuminate their separate evening reading paths along opposite bends of the dark riverbank.",
+      "decisive_choice": "Jasper proposes placing the lantern upon a flat stepping stone exactly halfway between their dens so its glow reaches both paths equally.",
+      "resolution": "Both friends comfortably read their books side by side under the steady glow of the shared lantern.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-26T05:00:05.546259+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-11-26T06:07:24.648675+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T05:00:05.632943+00:00",
+    "at": "2026-11-26T06:08:35.220152+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-26T04:54:45.356984+00:00",
   "reserved": {
@@ -29480,13 +29537,67 @@
       "resolution": "Pip proudly returned the shiny heirloom, earning a permanent post as honorary station dog.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-9351d68f3fbc7b7e9559": {
+      "at": "2026-11-26T06:08:33.116681+00:00",
+      "title": "Jasper the Otter and Barnaby the Cat and the Riverbank Lantern",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "7f7182b420c3a7903d26e16d83085d155d174fc317cc52159a77064d54065a38",
+      "story_beats": [
+        {
+          "headline": "The Evening Shadow Falls",
+          "speech": "Jasper holds the glowing lantern tightly, claiming the dimming riverbank path requires absolute illumination for his evening reading.",
+          "visual": "signal",
+          "label": "The Competing Claim",
+          "story_beat": "reveal",
+          "visual_prompt": "Jasper the brown otter stands on a grassy riverbank holding a lit brass lantern with a warm yellow glow, while Barnaby the ginger cat sits nearby with crossed arms looking at the light in a dimly lit dusk forest setting.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Divided Path",
+          "speech": "Barnaby insists the brass lantern belongs near the northern rocks, leaving Jasper in total darkness without any light source.",
+          "visual": "forest",
+          "label": "The Argument",
+          "story_beat": "build",
+          "visual_prompt": "Barnaby the ginger cat holds the brass lantern close to his chest near a pile of river rocks, while Jasper the brown otter points toward the southern path with a frustrated expression in a dusky woodland environment.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Midpoint Solution",
+          "speech": "Jasper places the lantern firmly upon the flat central boundary stone so neither animal holds exclusive control over the glow.",
+          "visual": "door",
+          "label": "The Compromise",
+          "story_beat": "mechanism",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat both stand together next to a flat mossy boundary stone where the brass lantern rests safely in the center, illuminating both of their open books.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "Shared Illumination",
+          "speech": "Both companions read happily as the steady lantern beam bridges the distance between their separate nighttime reading spots.",
+          "visual": "planet",
+          "label": "The Peaceful Outcome",
+          "story_beat": "payoff",
+          "visual_prompt": "Jasper the brown otter and Barnaby the ginger cat sit on opposite sides of a glowing brass lantern resting on a central flat stone, each peacefully reading an open book under the clear starry night sky.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Jasper the otter and Barnaby the cat both urgently need the single shared lantern to illuminate their separate evening reading paths along opposite bends of the dark riverbank.",
+      "decisive_choice": "Jasper proposes placing the lantern upon a flat stepping stone exactly halfway between their dens so its glow reaches both paths equally.",
+      "resolution": "Both friends comfortably read their books side by side under the steady glow of the shared lantern.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T05:00:05.632900+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-26T06:08:35.220111+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -29494,36 +29605,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T05:00:05.632936+00:00",
+    "at": "2026-11-26T06:08:35.220145+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-26T04:54:44.899534+00:00",
+    "at": "2026-11-26T06:08:21.693035+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-9ad6e2060236f5797e21",
-    "video_url": "https://www.youtube.com/watch?v=-aoY3d-j9hw",
+    "content_id": "rayvan-gemini-9351d68f3fbc7b7e9559",
+    "video_url": "https://www.youtube.com/watch?v=8aHo_pfplRM",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-26T05:00:05.632322+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-26T06:08:35.219495+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T05:00:05.632867+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
+    "at": "2026-11-26T06:08:35.220050+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
+    "publish_step": "success",
+    "selection_source": "preload_artifact",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
