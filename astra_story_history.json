@@ -13371,6 +13371,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-c6cc1bc8f724a7a4",
+      "video_id": "iQ73_GespvI",
+      "confirmed_at": "2026-11-26T11:39:07.153316+00:00",
+      "title": "The Dolphin and the Harbor Gate",
+      "plot_fingerprint": "1fade7aa6416e3c1b39978de3175ea36f664cc3e08969a47d670fabd198f5ca2",
+      "story_beats": [
+        {
+          "headline": "THE HARBOR GATE JAMMED",
+          "speech": "A dolphin noticed the harbor gate stuck halfway open while fishing boats waited outside.",
+          "visual": "ship",
+          "label": "GATE STUCK",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "SAND HID THE HINGE",
+          "speech": "She followed a stream of bubbles and found sand piled around the lower hinge.",
+          "visual": "ship",
+          "label": "SAND FOUND",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A CURRENT CLEARED IT",
+          "speech": "She guided the boats to create a gentle current that washed loose sand away from the hinge.",
+          "visual": "ship",
+          "label": "HINGE FREED",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BOATS CAME HOME",
+          "speech": "The gate swung open and the harbor crew scheduled a cleaning before the next tide.",
+          "visual": "ship",
+          "label": "HARBOR OPEN",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
