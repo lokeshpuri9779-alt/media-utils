@@ -262,9 +262,9 @@ def finish(video_path, *, renderer, expected_shots=None):
             # Log only fixed diagnostic codes: never echo exception text, paths,
             # subprocess stderr, credentials, or other potentially private data.
             known_reasons = {
-                "ffprobe_unavailable", "ffmpeg_unavailable",
-                "missing_decoded_frame", "unexpected_sample_size",
-                "review_frame_source_hash_mismatch",
+                "video_decode_unavailable", "missing_video_stream",
+                "video_duration_unavailable", "frame_decode_failed",
+                "missing_decoded_frame", "review_frame_source_hash_mismatch",
             }
             reason = str(exc) if type(exc) is RuntimeError and str(exc) in known_reasons else "unspecified"
             print("ASTRA_VISUAL_REVIEW_SHEET=" + json.dumps({
