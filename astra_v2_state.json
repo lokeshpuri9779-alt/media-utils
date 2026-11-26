@@ -14512,12 +14512,13 @@
     }
   },
   "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-26T04:58:17.100859+00:00",
+  "last_outcome": "skipped",
+  "last_error": "",
+  "last_preflight_at": "2026-11-26T05:00:05.546259+00:00",
   "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "last_preflight_outcome": "skipped",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T04:58:17.523130+00:00",
+    "at": "2026-11-26T05:00:05.632943+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "false",
@@ -29482,8 +29483,8 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T04:58:17.523085+00:00",
-    "publication_outcome": "published",
+    "at": "2026-11-26T05:00:05.632900+00:00",
+    "publication_outcome": "skipped",
     "publication_reason": "min_interval",
     "character_memory": "not_reported",
     "character_memory_error": null,
@@ -29493,9 +29494,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T04:58:17.523122+00:00",
+    "at": "2026-11-26T05:00:05.632936+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "skipped",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -29507,19 +29508,19 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-26T04:58:17.522492+00:00",
+    "at": "2026-11-26T05:00:05.632322+00:00",
     "preflight_due": "false",
     "preflight_step": "success",
     "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "published",
+    "outcome": "skipped",
     "reason": "min_interval",
     "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T04:58:17.523017+00:00",
+    "at": "2026-11-26T05:00:05.632867+00:00",
     "collection_status": "not_applicable_publisher_skipped",
     "publish_step": "skipped",
     "selection_source": "no_render",
