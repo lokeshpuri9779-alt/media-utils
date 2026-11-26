@@ -3,60 +3,39 @@ on:
   workflow_run:
     workflows: ['ASTRA V2 - Publisher Health Watch']
     types: [completed]
-  workflow_dispatch:
 permissions:
-  actions: write
+  actions: read
   contents: read
 concurrency:
   group: astra-v2-controlled-recovery
   cancel-in-progress: false
 jobs:
   recover:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'failure' }}
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 3
     steps:
-      - uses: actions/checkout@v4
-      - name: Guarded recovery dispatch
+      - name: Check for an already-running automatic preload
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
+        shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
-          import base64, json, os, subprocess
-          from astra_v2.github_contents import decode_json_contents_file
-          from datetime import datetime, timezone
-          now = datetime.now(timezone.utc)
+          import json, os, subprocess
           repo = os.environ["REPO"]
-          def api(path):
-              p = subprocess.run(["gh", "api", f"repos/{repo}/{path}"],
-                                 capture_output=True, text=True, check=True, timeout=35)
-              return json.loads(p.stdout)
-          def minutes(raw):
-              if not raw: return float("inf")
-              return (now-datetime.fromisoformat(raw.replace("Z","+00:00"))).total_seconds()/60
-          def skip(reason):
-              print("ASTRA_RECOVERY=SKIP:"+reason)
-              raise SystemExit(0)
-          runs = api("actions/workflows/astra-v2-publish.yml/runs?per_page=30")["workflow_runs"]
-          if any(r["status"] != "completed" for r in runs):
-              skip("publisher_active")
-          if any(minutes(r["created_at"]) < 60 for r in runs):
-              skip("recent_publisher_run")
-          state_file = api("contents/astra_v2_state.json?ref=astra-state")
-          try:
-              state = decode_json_contents_file(state_file, api)
-          except (KeyError, ValueError, UnicodeDecodeError, subprocess.CalledProcessError) as exc:
-              skip("journal_unavailable:"+type(exc).__name__)
-          if state.get("version") != 2: skip("invalid_journal")
-          if state.get("pending"): skip("pending_upload_requires_reconciliation")
-          if state.get("blocked_until") and minutes(state["blocked_until"]) < 0:
-              skip("publisher_cooldown")
-          own = api("actions/workflows/astra-v2-controlled-recovery.yml/runs?per_page=30")["workflow_runs"]
-          if any(str(r["id"]) != os.environ["GITHUB_RUN_ID"] and
-                 minutes(r["created_at"]) < 90 for r in own):
-              skip("recovery_cooldown")
-          subprocess.run(["gh","workflow","run","astra-v2-preload.yml",
-                          "--repo",repo,"--ref","main"],check=True,timeout=35)
-          print("ASTRA_RECOVERY=PRELOAD_DISPATCHED")
+          result = subprocess.run(
+              ["gh", "api", f"repos/{repo}/actions/workflows/astra-v2-preload.yml/runs?per_page=10"],
+              capture_output=True, text=True, check=True, timeout=30)
+          runs = json.loads(result.stdout).get("workflow_runs", [])
+          active = [r for r in runs if r.get("status") in {"queued", "in_progress"}]
+          if active:
+              print("ASTRA_RECOVERY=OBSERVE:automatic_preload_already_active")
+              for run in active:
+                  print(f"ASTRA_PRELOAD_ACTIVE={run.get('html_url')}")
+          else:
+              print("ASTRA_RECOVERY=NOOP:no_supported_dispatch_trigger")
+              print("ASTRA_RECOVERY_POLICY=preload_runs_only_from_configured_push_or_schedule_events")
+              print("ASTRA_RECOVERY_ACTION=none; preserving_no_manual_dispatch_policy")
           PY
