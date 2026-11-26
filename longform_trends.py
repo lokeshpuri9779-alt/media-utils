@@ -165,6 +165,9 @@ def story_candidate(items, offset=0):
         # and continue to the next ranked topic instead of aborting the lane.
         has_context=any(_clean_summary(source.get('summary')) for source in sources)
         if len(sources) >= 2 and has_context:
+            conflict = _claim_conflict(t.get('topic'), sources)
+            if conflict:
+                continue
             deep.append(t)
     return deep[offset] if len(deep) > offset else None
 
