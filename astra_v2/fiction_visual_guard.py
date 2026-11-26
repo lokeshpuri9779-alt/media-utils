@@ -10,8 +10,37 @@ not rely on source-code strings, and it never requires an external model/API.
 """
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import numpy as np
 from astra_errors import CreativeReject
+
+
+def _save_rejection_diagnostics(frames, directory, beat, rule, *, max_frames=4):
+    """Best-effort, bounded private frame capture; never changes the QA verdict."""
+    if not directory:
+        return
+    try:
+        root = Path(directory)
+        root.mkdir(parents=True, exist_ok=True)
+        existing = list(root.glob("reject-*.png"))
+        remaining = max(0, max_frames - len(existing))
+        saved = []
+        for index, frame in enumerate(list(frames)[:remaining], 1):
+            name = f"reject-beat-{int(beat):02d}-frame-{index}.png"
+            frame.convert("RGB").save(root / name, format="PNG", optimize=True)
+            saved.append(name)
+        manifest = {
+            "rule": str(rule)[:80], "beat": int(beat),
+            "saved_frames": saved, "frame_count": len(saved),
+            "max_frames": max_frames, "diagnostic_only": True,
+        }
+        (root / "rejection.json").write_text(
+            json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8"
+        )
+    except (OSError, ValueError, TypeError):
+        return
 
 
 def _rgb(im):
@@ -81,7 +110,7 @@ def sudden_edge_panel(a,b):
     return False
 
 
-def validate_fiction_frames(plan, renderer, total, *, max_beats=48):
+def validate_fiction_frames(plan, renderer, total, *, max_beats=48, diagnostic_dir=None):
     """Sample final composited frames before voice+video publication.
 
     A Studio render should never reach the public queue if a sampled frame
@@ -118,12 +147,16 @@ def validate_fiction_frames(plan, renderer, total, *, max_beats=48):
         frames=[renderer(plan,at,"fiction",total) for at in times]
         checks+=len(frames)
         if any(long_amber_guide_arc(frame) for frame in frames):
+            _save_rejection_diagnostics(frames, diagnostic_dir, i + 1, "amber-guide-arc")
             raise CreativeReject(f"Fiction amber-guide-arc artifact in beat {i+1}")
         # Flash checks are within the first continuous take and across the
         # deliberately cut second take; no hard camera change is by itself
         # a failure, only a full-height edge-panel color jump.
         pairs=((0,1),(2,3),(3,4)) if len(frames)==5 else ((0,1),)
-        if any(sudden_edge_panel(frames[a],frames[b]) for a,b in pairs):
+        failed_pairs = [(a, b) for a, b in pairs if sudden_edge_panel(frames[a], frames[b])]
+        if failed_pairs:
+            failed_frames = [frames[index] for pair in failed_pairs for index in pair]
+            _save_rejection_diagnostics(failed_frames, diagnostic_dir, i + 1, "edge-transition-flash")
             raise CreativeReject(f"Fiction edge-transition flash in beat {i+1}")
     return {"pass": True, "sampled_frames": checks,
             "sampled_beats":len(scene_indices), "total_beats":count,

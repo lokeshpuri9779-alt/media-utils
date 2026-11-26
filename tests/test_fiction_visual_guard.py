@@ -1,5 +1,10 @@
 """Pixel QA for the yellow stage guide and flashing purple edge panels."""
+import json
+import tempfile
 import unittest
+from pathlib import Path
+from unittest.mock import patch
+
 from PIL import Image, ImageDraw
 
 from astra_errors import CreativeReject
@@ -47,6 +52,22 @@ class FictionVisualGuardTests(unittest.TestCase):
             validate_fiction_frames(plan,renderer,2)
         self.assertEqual(len(calls),2)
 
+    def test_rejected_frames_are_saved_as_bounded_private_diagnostics(self):
+        plan=[{"start":0,"end":2,"duration":2}]
+        def renderer(shots,t,genre,total):
+            return self.canvas()
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch("astra_v2.fiction_visual_guard.long_amber_guide_arc", return_value=True):
+                with self.assertRaisesRegex(CreativeReject,"amber-guide-arc"):
+                    validate_fiction_frames(plan, renderer, 2, diagnostic_dir=tmp)
+            root=Path(tmp)
+            images=list(root.glob("reject-*.png"))
+            self.assertEqual(len(images),2)
+            manifest=json.loads((root/"rejection.json").read_text())
+            self.assertEqual(manifest["rule"],"amber-guide-arc")
+            self.assertEqual(manifest["beat"],1)
+            self.assertEqual(manifest["frame_count"],2)
+            self.assertTrue(manifest["diagnostic_only"])
     def test_normal_lighting_and_motion_passes(self):
         plan=[{"start":0,"end":1.9,"duration":1.9},
               {"start":1.9,"end":4.2,"duration":2.3}]
