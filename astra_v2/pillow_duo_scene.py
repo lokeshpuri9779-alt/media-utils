@@ -602,6 +602,8 @@ def draw_duo(image, shot, t):
     d=ImageDraw.Draw(image)
     _stage(d,shot,t)
     action=str(shot.get("story_action") or "idle").lower()
+    from astra_v2.story_action_motion import actor_action_tracks
+    per_actor_actions = actor_action_tracks(shot, pair)
     mood=scene_mood(shot)
     prop=scene_prop(shot)
     from astra_v2.pillow_scene_direction import prop_trajectory, actor_translation
@@ -712,7 +714,7 @@ def draw_duo(image, shot, t):
         elif idx==1 and action!="carry":
             hand_target=None
         recipe=character_recipe(visual_identity(stable_key,name,idx))
-        _actor(d,name,x,y,t,action,actor_mood,idx,
+        _actor(d,name,x,y,t,per_actor_actions.get(name, action),actor_mood,idx,
                hand_target=hand_target,hand_strength=hand_strength,
                interact_side=1 if idx==0 else -1,
                visual_recipe=recipe)
