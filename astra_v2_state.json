@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-26",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 4,
+  "attempts": 5,
   "confirmed_today": 4,
-  "last_attempt_at": "2026-11-26T07:10:22.894732+00:00",
+  "last_attempt_at": "2026-11-26T07:48:08.202160+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -14683,28 +14683,90 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-26T07:12:33.902366+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "lpgzK42F99c": {
+      "content_id": "rayvan-gemini-75d406dc0bb8d30319ec",
+      "title": "Orion the Owl and the Observatory Clock Mistake",
+      "day": "2026-11-26",
+      "uploaded_at": "2026-11-26T07:48:10.308964+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1470635974d40e0ae29c2d649a47d098ad4a7eabe8336e6f4f71abb704d7fb7a",
+      "story_beats": [
+        {
+          "headline": "The Midnight Observation",
+          "speech": "Orion the owl stares intently through the tall observatory window at the midnight sky, listening to a loud ticking sound echoing nearby.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Observation",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl sits inside an observatory at night, staring intently at a brass clock placed on a wooden desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shortcut Stargazer",
+          "speech": "Instead of checking the star charts, Orion decides the rhythmic ticking noise must be a fast-moving comet passing close to the dome.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "The Shortcut Choice",
+          "story_beat": "build",
+          "visual_prompt": "An owl leans forward inside an observatory, tilting its head toward a ticking clock on the desk while ignoring a brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Close Inspection",
+          "speech": "Orion swoops down from the rafter to the wooden desk, pressing his beak close to the glass face of the ticking clock to verify his theory.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Checking Details",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl perches on a wooden desk inside an observatory, looking closely at the glass face of a ticking clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Timekeeper",
+          "speech": "Seeing the turning hands and tiny gears, Orion finally realizes the ticking noise is just a mechanical clock, not a distant star.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl blinks calmly inside an observatory, standing beside a ticking clock and a glowing brass lantern on the desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl mistakes the loud ticking of a brass clock left on the desk for a rare celestial alignment, ignoring the actual brass lantern on the shelf.",
+      "decisive_choice": "Orion decides to halt his hurried stargazing notes, fly down to the desk, and place his wing directly beside the ticking clock to inspect its face.",
+      "resolution": "Orion discovers the internal mechanical gears turning inside the clock, resolving his astronomical miscalculation with calm observation.",
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-11-26T07:46:58.994235+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-26T07:12:34.352293+00:00",
+    "at": "2026-11-26T07:48:10.563184+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-26T04:54:45.356984+00:00",
   "reserved": {
@@ -29817,13 +29879,71 @@
       "resolution": "Orion clearly observes the swinging pendulum mechanism inside the clock, realizes it is not a lantern, and calmly adjusts his night watch duties.",
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-75d406dc0bb8d30319ec": {
+      "at": "2026-11-26T07:48:08.202141+00:00",
+      "title": "Orion the Owl and the Observatory Clock Mistake",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "1470635974d40e0ae29c2d649a47d098ad4a7eabe8336e6f4f71abb704d7fb7a",
+      "story_beats": [
+        {
+          "headline": "The Midnight Observation",
+          "speech": "Orion the owl stares intently through the tall observatory window at the midnight sky, listening to a loud ticking sound echoing nearby.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "First Observation",
+          "story_beat": "reveal",
+          "visual_prompt": "An owl sits inside an observatory at night, staring intently at a brass clock placed on a wooden desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Shortcut Stargazer",
+          "speech": "Instead of checking the star charts, Orion decides the rhythmic ticking noise must be a fast-moving comet passing close to the dome.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "The Shortcut Choice",
+          "story_beat": "build",
+          "visual_prompt": "An owl leans forward inside an observatory, tilting its head toward a ticking clock on the desk while ignoring a brass lantern.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Close Inspection",
+          "speech": "Orion swoops down from the rafter to the wooden desk, pressing his beak close to the glass face of the ticking clock to verify his theory.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "Checking Details",
+          "story_beat": "mechanism",
+          "visual_prompt": "An owl perches on a wooden desk inside an observatory, looking closely at the glass face of a ticking clock.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The True Timekeeper",
+          "speech": "Seeing the turning hands and tiny gears, Orion finally realizes the ticking noise is just a mechanical clock, not a distant star.",
+          "visual": "owl",
+          "story_environment": "observatory",
+          "label": "The Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "An owl blinks calmly inside an observatory, standing beside a ticking clock and a glowing brass lantern on the desk.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl mistakes the loud ticking of a brass clock left on the desk for a rare celestial alignment, ignoring the actual brass lantern on the shelf.",
+      "decisive_choice": "Orion decides to halt his hurried stargazing notes, fly down to the desk, and place his wing directly beside the ticking clock to inspect its face.",
+      "resolution": "Orion discovers the internal mechanical gears turning inside the clock, resolving his astronomical miscalculation with calm observation.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-26T07:12:34.352249+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-26T07:48:10.563142+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -29831,36 +29951,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-26T07:12:34.352286+00:00",
+    "at": "2026-11-26T07:48:10.563177+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-26T07:10:13.397098+00:00",
+    "at": "2026-11-26T07:47:55.431926+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-gemini-32aa2189a83b9407e41a",
-    "video_url": "https://www.youtube.com/watch?v=UecagK74dIM",
+    "content_id": "rayvan-gemini-75d406dc0bb8d30319ec",
+    "video_url": "https://www.youtube.com/watch?v=lpgzK42F99c",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-26T07:12:34.351654+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-26T07:48:10.562521+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-26T07:12:34.352215+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
+    "at": "2026-11-26T07:48:10.563078+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
+    "publish_step": "success",
+    "selection_source": "preload_artifact",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
