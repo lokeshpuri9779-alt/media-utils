@@ -125,6 +125,35 @@ def sourced_topics(items, limit=5):
     ranked.sort(key=lambda x:(x['score'],x['topic']),reverse=True)
     return ranked[:limit]
 
+
+# High-impact event words must be present in source reporting, and explicit
+# negation in a source summary must block a stronger trend-provider headline.
+_HIGH_IMPACT_CLAIMS = (
+    "recall", "ban", "lawsuit", "arrest", "death", "dead", "killed",
+    "explosion", "bankruptcy", "shutdown", "resignation", "cancellation",
+)
+
+
+def _claim_conflict(topic, sources):
+    topic_text = str(topic or "").lower()
+    evidence = " ".join(
+        " ".join((str(source.get("title") or ""), str(source.get("summary") or "")))
+        for source in (sources or [])
+    ).lower()
+    for claim in _HIGH_IMPACT_CLAIMS:
+        if not re.search(r"\\b" + re.escape(claim) + r"\\b", topic_text):
+            continue
+        if not re.search(r"\\b" + re.escape(claim) + r"\\b", evidence):
+            return f"topic asserts '{claim}', but source headlines and summaries do not mention it"
+        negation = re.search(
+            r"\\b(?:no|not|never|without|isn't|wasn't|aren't|weren't|doesn't|didn't)\\b"
+            r"(?:\\W+\\w+){0,5}\\W+" + re.escape(claim) + r"\\b",
+            evidence,
+        )
+        if negation:
+            return f"source reporting explicitly negates '{claim}'"
+    return ""
+
 def story_candidate(items, offset=0):
     """Pick a source-deep topic that also has source-authored narration context."""
     topics=sourced_topics(items,limit=8)
