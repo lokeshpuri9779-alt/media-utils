@@ -55,6 +55,8 @@ def long_amber_guide_arc(image):
 
     Gold objects are valid; the signature is *many* isolated thin gold
     columns spread across the sky at meaningfully different y coordinates.
+    # Require a genuinely long (>750 px) stroke; shorter circular portal rims
+    # around a character can otherwise resemble the old stage guide.
     """
     arr=_rgb(image)
     # Exclude headlines (above 560), grounding/prop areas (below 950),
@@ -70,7 +72,7 @@ def long_amber_guide_arc(image):
     if slender.sum()<65:
         return False
     span=np.flatnonzero(slender)
-    if span[-1]-span[0]<100:
+    if span[-1]-span[0]<150:
         return False
     xs=np.flatnonzero(slender).astype(np.float64)*5 + 100.0
     ys=np.argmax(mask,axis=0)[slender].astype(np.float64)*3 + 560.0
