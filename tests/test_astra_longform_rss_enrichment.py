@@ -233,7 +233,7 @@ A second paragraph adds source context and explains what the mission team plans 
             ],
         }
         self.assertIsNone(story_candidate([item]))
-        with self.assertRaisesRegex(RuntimeError, 'source depth'):
+        with self.assertRaisesRegex(RuntimeError, 'source-claim conflict'):
             build_plan([item])
 
     def test_story_candidate_rejects_unsupported_high_impact_topic_claim(self):
