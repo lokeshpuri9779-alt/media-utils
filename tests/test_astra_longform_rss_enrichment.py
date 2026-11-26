@@ -4,7 +4,8 @@ from unittest.mock import patch
 
 from astra_v2.trend_source_collector import _ArticleText, _parse_feed, _reader_summary_from_text, enrich_trends
 from longform_trends import (build_plan, long_quality_gate, retention_contract,
-                             sourced_topics, _compact_source_card_summary)
+                             sourced_topics, story_candidate, available,
+                             _compact_source_card_summary)
 
 
 class LongformRssEnrichmentTests(unittest.TestCase):
@@ -185,6 +186,38 @@ A second paragraph adds source context and explains what the mission team plans 
         ]
         with self.assertRaisesRegex(RuntimeError, 'opening must establish'):
             retention_contract(plan)
+
+    def test_story_candidate_skips_higher_ranked_topic_without_source_summaries(self):
+        items = [
+            {
+                'title': 'Mars mission', 'traffic': '90K+',
+                'news': [
+                    {'title': 'Mars mission reaches orbit', 'url': 'https://news.google.com/a',
+                     'source': 'Mars Publisher A', 'publisher_domain': 'mars-a.com'},
+                    {'title': 'Mars mission science update', 'url': 'https://news.google.com/b',
+                     'source': 'Mars Publisher B', 'publisher_domain': 'mars-b.com'},
+                ],
+            },
+            {
+                'title': 'Europa mission', 'traffic': '20K+',
+                'news': [
+                    {'title': 'Europa mission probe begins survey', 'url': 'https://news.google.com/c',
+                     'source': 'Europa Publisher A', 'publisher_domain': 'europa-a.com',
+                     'summary': 'The mission team says the probe has begun its planned survey of the moon. '
+                                'The published update describes the first observation sequence.'},
+                    {'title': 'Europa mission scientists outline next phase', 'url': 'https://news.google.com/d',
+                     'source': 'Europa Publisher B', 'publisher_domain': 'europa-b.com',
+                     'summary': 'Scientists outline the next phase of the Europa mission and the measurements '
+                                'planned during the coming observation window.'},
+                ],
+            },
+        ]
+        candidate = story_candidate(items)
+        self.assertEqual(candidate['topic'], 'Europa mission')
+        self.assertTrue(available(items))
+        plan, topics = build_plan(items)
+        self.assertIn('Europa mission', plan[0]['speech'])
+        self.assertEqual(topics[0]['topic'], 'Europa mission')
 
     def test_story_plan_rejects_headlines_without_summaries(self):
         item = {
