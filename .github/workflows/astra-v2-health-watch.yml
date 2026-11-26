@@ -36,7 +36,10 @@ jobs:
 
           # Check real workflow executions, not only the saved upload journal.
           runs = api("actions/workflows/astra-v2-publish.yml/runs?per_page=10")
-          completed = [r for r in runs.get("workflow_runs", [])
+          publisher_runs = runs.get("workflow_runs", [])
+          active_publishers = [r for r in publisher_runs
+                               if r.get("status") in {"queued", "in_progress"}]
+          completed = [r for r in publisher_runs
                        if r.get("status") == "completed"]
           now = datetime.now(timezone.utc)
           if not completed:
@@ -54,7 +57,10 @@ jobs:
           # The production publisher is event-driven by successful Shorts or long-form
           # preload completion; it intentionally has no cron/manual trigger.
           preload_runs = api("actions/workflows/astra-v2-preload.yml/runs?per_page=10")
-          preload_completed = [r for r in preload_runs.get("workflow_runs", [])
+          preload_all = preload_runs.get("workflow_runs", [])
+          active_preloads = [r for r in preload_all
+                             if r.get("status") in {"queued", "in_progress"}]
+          preload_completed = [r for r in preload_all
                                if r.get("status") == "completed"]
           if not preload_completed:
               print("ASTRA_HEALTH=FAIL:no_completed_preload_runs")
@@ -69,9 +75,13 @@ jobs:
               print("ASTRA_HEALTH=FAIL:last_preload_run_failed")
               sys.exit(1)
           # Allow idle periods; this checks stale infrastructure, not upload quotas.
-          if age_minutes > 90:
+          if age_minutes > 90 and not active_publishers and not active_preloads:
               print("ASTRA_HEALTH=FAIL:publisher_event_chain_stale")
               sys.exit(1)
+          if active_publishers or active_preloads:
+              print("ASTRA_HEALTH=OK:event_chain_active")
+              for run in active_publishers + active_preloads:
+                  print(f"ASTRA_ACTIVE_RUN={run.get('html_url')}")
           # A green publisher can still skip every upload. Check publication
           # independently so recurring no-video failures are visible.
           import base64
