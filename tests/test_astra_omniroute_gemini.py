@@ -172,7 +172,7 @@ class GeminiRouteTests(unittest.TestCase):
         self.assertIn("cold-opens on a specific disruption", requests[0]["contents"][0]["parts"][0]["text"])
         self.assertIn("28-32 whitespace-separated words", requests[0]["contents"][0]["parts"][0]["text"])
         prompt = requests[0]["contents"][0]["parts"][0]["text"]
-        self.assertIn("brief, natural spoken line", prompt)
+        self.assertIn("actual spoken words inside double quotation marks", prompt)
         self.assertIn("stable personality trait", prompt)
         self.assertIn("one immediate want", prompt)
         self.assertIn("one pressure-triggered flaw", prompt)
