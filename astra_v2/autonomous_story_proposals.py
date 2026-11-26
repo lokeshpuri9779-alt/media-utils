@@ -473,7 +473,7 @@ def _visual_for_beat(speech, setting_visual, legacy_visual):
     """
     text = str(speech or "").casefold()
     legacy = str(legacy_visual or "").strip().casefold()
-    if legacy and re.search(r"(?<!\\w)" + re.escape(legacy) + r"(?!\\w)", text):
+    if legacy and re.search(r"(?<!\w)" + re.escape(legacy) + r"(?!\w)", text):
         return legacy
     matches = [(match.start(), name)
                for name, pattern in SUBJECTS
@@ -481,7 +481,7 @@ def _visual_for_beat(speech, setting_visual, legacy_visual):
     if matches:
         return min(matches, key=lambda item: item[0])[1]
     setting = str(setting_visual or "").strip().casefold()
-    if setting and re.search(r"(?<!\\w)" + re.escape(setting) + r"(?!\\w)", text):
+    if setting and re.search(r"(?<!\w)" + re.escape(setting) + r"(?!\w)", text):
         return setting
     return "story"
 
