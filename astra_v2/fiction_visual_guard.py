@@ -39,7 +39,8 @@ def _save_rejection_diagnostics(frames, directory, beat, rule, *, max_frames=4):
         (root / "rejection.json").write_text(
             json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8"
         )
-    except (OSError, ValueError, TypeError):
+    except Exception:
+        # Any diagnostic failure must leave the original CreativeReject intact.
         return
 
 
