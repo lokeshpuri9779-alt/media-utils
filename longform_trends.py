@@ -200,6 +200,17 @@ def retention_contract(plan):
     return {'opening_words':len(opening.split()),'closing_words':len(ending.split()),'distinct_beats':len({x.get('story_beat') for x in plan})}
 
 
+def _compact_source_card_summary(summary, max_chars=72):
+    """Keep publisher evidence readable inside the fixed-size visual card."""
+    clean = " ".join(str(summary or "").split())
+    if len(clean) <= max_chars:
+        return clean
+    clipped = clean[:max_chars - 1].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    if not clipped:
+        clipped = clean[:max_chars - 1]
+    return clipped + "…"
+
+
 def build_plan(items, offset=0):
     t=story_candidate(items, offset=offset)
     if not t:
@@ -268,7 +279,7 @@ def build_plan(items, offset=0):
     # show the actual reporting inputs rather than generic animated bars.
     visual_sources=[
         {'name':row['name'],'published':row['published'],
-         'summary':' '.join(row['summary'].split()[:22])}
+         'summary':_compact_source_card_summary(row['summary'])}
         for row in source_rows
     ]
     for scene_item in plan:
