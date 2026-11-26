@@ -124,7 +124,13 @@ def editorial_issues(story, history=(), novelty_index=None, semantic_previous=No
     narration = " ".join(str(b.get("speech") or "") for b in beats if isinstance(b, dict))
     if len(narration.split()) < 45:
         issues.append("insufficient_narrative_detail")
-    if visual_prompt_variety_count(beats) < 3:
+    # Taxonomy tags identify subjects, not shot composition. Until renderer
+    # prompts exist, a proposal cannot be judged for visual-shot variety.
+    has_rendered_visual_prompts = bool(beats) and all(
+        isinstance(beat, dict) and isinstance(beat.get("visual_prompt"), str)
+        and beat["visual_prompt"].strip() for beat in beats
+    )
+    if has_rendered_visual_prompts and visual_prompt_variety_count(beats) < 3:
         issues.append("insufficient_visual_variety")
     duplicate = (novelty_index.is_near_duplicate(story) if novelty_index is not None
                  else is_near_duplicate(story, history))

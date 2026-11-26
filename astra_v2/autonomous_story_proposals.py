@@ -2,7 +2,10 @@
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
+
+from astra_v2.story_subject_taxonomy import SUBJECTS
 
 ACTORS = (
     ("a lighthouse keeper", "keeper"), ("a curious fox", "fox"),
@@ -461,6 +464,28 @@ PRESSURE_ARCS = (
 )
 
 
+def _visual_for_beat(speech, setting_visual, legacy_visual):
+    """Choose only a visual key evidenced by this beat's own narration.
+
+    Character/subject mentions take precedence over unrelated rotating tags.
+    When no supported subject or setting is named, use the neutral story key;
+    never invent a book, robot, door, or other object absent from the beat.
+    """
+    text = str(speech or "").casefold()
+    legacy = str(legacy_visual or "").strip().casefold()
+    if legacy and re.search(r"(?<!\w)" + re.escape(legacy) + r"(?!\w)", text):
+        return legacy
+    matches = [(match.start(), name)
+               for name, pattern in SUBJECTS
+               if (match := re.search(pattern, text, re.I))]
+    if matches:
+        return min(matches, key=lambda item: item[0])[1]
+    setting = str(setting_visual or "").strip().casefold()
+    if setting and re.search(r"(?<!\w)" + re.escape(setting) + r"(?!\w)", text):
+        return setting
+    return "story"
+
+
 def _pick(index, values, stride):
     return values[(index // stride) % len(values)]
 
@@ -514,27 +539,20 @@ def proposal(index):
     investigation = _pick(index, INVESTIGATION_FRAMES, 31).format(**story_vars)
     twist = _pick(index, TWIST_FRAMES, 41).format(**story_vars)
     payoff = _pick(index, PAYOFF_FRAMES, 43).format(**story_vars)
-    beats = (
+    beat_speeches = (
         ("reveal", f"{opening} {architecture_opening}.", visual),
         ("build", f"{investigation} {architecture_build}. {method}, but {obstacle}. The attempt failed; {emotional}.", "book"),
         ("twist", f"{twist} {mystery_cause}. {architecture_turn}.", setting_visual),
         ("payoff", f"{payoff} {architecture_payoff}. {consequence.rstrip('.!?')}.", _pick(index, VISUALS, 3)),
     )
+    beats = tuple(
+        (role_name, speech, _visual_for_beat(speech, setting_visual, visual_name))
+        for role_name, speech, visual_name in beat_speeches
+    )
     # Normalize punctuation at beat boundaries so concatenated authored clauses
     # never produce doubled full stops in narration.
     beats = tuple((name, speech.replace("..", "."), visual_name)
                   for name, speech, visual_name in beats)
-    # Reserve distinct, story-relevant visual keys across the four beats.
-    # This fixes avoidable visual repetition without changing narration or
-    # treating these unreviewed proposals as publishable.
-    visual_keys = [beat[2] for beat in beats]
-    if len(set(visual_keys)) < 3:
-        replacement = next(
-            (key for key in (setting_visual, "lantern", "clock", "garden")
-             if key not in visual_keys), None
-        )
-        if replacement is not None:
-            beats = beats[:3] + ((beats[3][0], beats[3][1], replacement),)
     fingerprint_text = " ".join(beat[1] for beat in beats).casefold()
     return {
         "content_id": "astra-proposal-" + hashlib.sha256(f"proposal-{index}".encode()).hexdigest()[:20],

@@ -63,6 +63,20 @@ class AutonomousStoryProposalTests(unittest.TestCase):
         self.assertGreaterEqual(len(payoff), 30)
         self.assertEqual(len({item["plot_fingerprint"] for item in candidates}), 1200)
 
+    def test_each_visual_tag_is_supported_by_its_own_beat(self):
+        import re
+        from astra_v2.story_subject_taxonomy import SUBJECTS
+        candidates = [proposal(index) for index in range(240)]
+        subject_patterns = dict(SUBJECTS)
+        for story in candidates:
+            for beat in story["story_beats"]:
+                tag = beat["visual"]
+                if tag == "story":
+                    continue
+                pattern = subject_patterns.get(tag, r"(?<!\w)" + re.escape(tag) + r"(?!\w)")
+                self.assertRegex(beat["speech"], re.compile(pattern, re.I),
+                                 msg=f"unsupported visual tag {tag!r}: {beat['speech']}")
+
     def test_pressure_arcs_stay_inside_the_opening_mystery(self):
         candidates = [proposal(index) for index in range(240)]
         speeches = [" ".join(beat["speech"] for beat in item["story_beats"]).casefold()
