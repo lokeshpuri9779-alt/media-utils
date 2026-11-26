@@ -45,6 +45,53 @@ def choose_action(shot):
     return "idle"
 
 
+
+_STORY_ACTORS = (
+    "fox", "rabbit", "owl", "bear", "deer", "mouse", "otter", "wolf",
+    "squirrel", "raccoon", "hedgehog", "badger", "lynx", "frog", "duck",
+    "cat", "dog", "elephant", "lion", "turtle", "beaver", "crow", "eagle",
+    "panda", "horse", "raven", "goat", "penguin", "chipmunk", "mole",
+)
+_ACTOR_CLAUSE_SPLIT = re.compile(r"\\b(?:while|but|whereas|as)\\b|[;.!?]", re.I)
+
+
+def infer_actor_actions(speech, actors=None):
+    """Infer only clear actor-to-verb links from short authored narration.
+
+    Clauses are split at contrast/temporal boundaries. Coordinated actors
+    before one verb share that action; unrelated or ambiguous clauses produce
+    no entry. This supplies animation cues, never visual-quality approval.
+    """
+    if not isinstance(speech, str):
+        return {}
+    known = tuple(str(a).strip().lower() for a in (actors or _STORY_ACTORS)
+                  if str(a).strip())
+    result = {}
+    for clause in _ACTOR_CLAUSE_SPLIT.split(speech.lower()):
+        if not clause.strip():
+            continue
+        verb_match = None
+        action_name = None
+        for name, pattern in ACTION_PATTERNS:
+            match = re.search(pattern, clause, re.I)
+            if match and (verb_match is None or match.start() < verb_match.start()):
+                verb_match, action_name = match, name
+        if verb_match is None:
+            continue
+        before_verb = clause[:verb_match.start()]
+        mentioned = [
+            actor for actor in known
+            if re.search(r"\\b" + re.escape(actor) + r"\\b", before_verb)
+        ]
+        if len(mentioned) == 1:
+            result[mentioned[0]] = action_name
+        elif len(mentioned) > 1:
+            # Shared subject/action: e.g. "the fox and rabbit carried..."
+            for actor in mentioned:
+                result[actor] = action_name
+    return result
+
+
 def actor_action_tracks(shot, cast):
     """Resolve explicitly authored per-character action cues without guessing.
 
