@@ -97,6 +97,43 @@ class StudioAuthoredSceneLocationTests(unittest.TestCase):
         self.assertEqual([s["story_environment"] for s in plan],
                          ["forest", "forest"])
 
+    def test_later_unique_scene_can_supply_consistent_story_setting(self):
+        plan = planned([
+            shot("The owl discovers a strange object.", "signal",
+                 "An owl stands beside stacked wooden crates."),
+            shot("The owl checks the evidence.", "door",
+                 "The owl examines a brass clock inside a railway station."),
+            shot("The owl makes its choice.", "signal",
+                 "The owl holds the clock beside a wooden table."),
+        ])
+        self.assertEqual([s.get("story_environment") for s in plan],
+                         ["railway", "railway", "railway"])
+        self.assertTrue(all(analyze_story_scene(s)["scene"] == "railway"
+                            for s in plan))
+
+    def test_unrecognized_setting_is_not_replaced_with_generic_meadow(self):
+        plan = planned([
+            shot("The owl finds a mysterious object.", "signal",
+                 "An owl stands beside unusual wooden crates."),
+            shot("It studies the object.", "door",
+                 "The owl examines a brass device."),
+        ])
+        self.assertTrue(all("story_environment" not in s for s in plan))
+        self.assertTrue(all(analyze_story_scene(s)["scene"] is None for s in plan))
+
+    def test_conflicting_story_locations_do_not_leak_into_unresolved_beats(self):
+        plan = planned([
+            shot("The owl starts in the observatory.", "signal",
+                 "An owl stands inside an observatory."),
+            shot("The owl travels elsewhere.", "door",
+                 "The owl walks through a flower garden."),
+            shot("The owl examines an object.", "signal",
+                 "The owl looks at a brass device."),
+        ])
+        self.assertEqual([s.get("story_environment") for s in plan],
+                         ["observatory", "garden", None])
+        self.assertEqual(analyze_story_scene(plan[2])["scene"], None)
+
     def test_location_selection_is_not_editorial_or_publication_approval(self):
         plan = planned([shot("The owl looks around.", "signal",
                             "An owl inside the library.")])
