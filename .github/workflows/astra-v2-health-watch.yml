@@ -51,9 +51,11 @@ jobs:
           print(f"ASTRA_PUBLISHER_LAST_RUN={latest.get('html_url')}")
           print(f"ASTRA_PUBLISHER_LAST_CONCLUSION={latest.get('conclusion')}")
           print(f"ASTRA_PUBLISHER_LAST_AGE_MINUTES={age_minutes:.1f}")
-          if latest.get("conclusion") != "success":
+          if latest.get("conclusion") not in {"success", "skipped"}:
               print("ASTRA_HEALTH=FAIL:last_publisher_run_failed")
               sys.exit(1)
+          if latest.get("conclusion") == "skipped":
+              print("ASTRA_PUBLISHER_LAST_RUN_NOTE=skipped_by_event_or_gate")
           # The production publisher is event-driven by successful Shorts or long-form
           # preload completion; it intentionally has no cron/manual trigger.
           preload_runs = api("actions/workflows/astra-v2-preload.yml/runs?per_page=10")
