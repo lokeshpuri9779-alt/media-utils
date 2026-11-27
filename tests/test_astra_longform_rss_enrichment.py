@@ -113,6 +113,28 @@ A second paragraph adds source context and explains what the mission team plans 
         enrich_trends([{"title": f"Topic {i}", "news": []} for i in range(8)])
         self.assertEqual(parse_feed.call_count, 8)  # Google News plus Bing RSS fallback per topic
 
+
+    def test_sentence_excerpt_never_cuts_a_source_sentence(self):
+        from longform_trends import _sentence_excerpt
+        source = ("The mission team confirmed that the spacecraft reached orbit. "
+                  "The next observation phase begins after instrument checks. "
+                  "A third sentence describes the longer programme.")
+        excerpt = _sentence_excerpt(source, max_words=10)
+        self.assertEqual(
+            excerpt,
+            "The mission team confirmed that the spacecraft reached orbit."
+        )
+        self.assertTrue(excerpt.endswith("."))
+        self.assertNotIn("observation phase", excerpt)
+
+    def test_sentence_excerpt_keeps_one_long_sentence_intact(self):
+        from longform_trends import _sentence_excerpt
+        source = ("The mission team confirmed that the spacecraft reached orbit after "
+                  "a successful launch and completed its initial communications checks.")
+        excerpt = _sentence_excerpt(source, max_words=5)
+        self.assertEqual(excerpt, source)
+        self.assertTrue(excerpt.endswith("."))
+
     def test_source_card_summary_is_bounded_for_fixed_visual_box(self):
         summary = ("All 32 teams are still alive in the playoff race, but only "
                    "one team can win the championship after a long season.")
