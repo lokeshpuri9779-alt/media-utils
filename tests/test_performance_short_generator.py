@@ -6,8 +6,8 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from astra_v2.performance_short_generator import _prompt, _schema, generate
-from astra_v2.performance_short_contract import SCENE_ROLES
+from astra_v2.performance_short_generator import _history_fingerprints, _prompt, _schema, generate
+from astra_v2.performance_short_contract import SCENE_ROLES, premise_fingerprint
 from astra_v2.performance_short_review_packet import build_packet
 
 
@@ -59,6 +59,20 @@ def valid_payload():
 
 
 class PerformanceShortGeneratorTests(unittest.TestCase):
+    def test_history_fingerprints_include_archived_hashes_and_structured_premises(self):
+        premise = valid_payload()["premise"]
+        archived_hash = "A" * 64
+        history = [
+            {"plot_fingerprint": archived_hash},
+            {"plot_fingerprint": "not-a-sha256-hash"},
+            {"premise": premise},
+            {"plot_fingerprint": archived_hash.lower()},
+        ]
+        self.assertEqual(
+            _history_fingerprints(history),
+            sorted({archived_hash.lower(), premise_fingerprint(premise)}),
+        )
+
     def test_schema_requires_exactly_seven_scenes(self):
         schema = _schema()
         self.assertEqual(schema["properties"]["scenes"]["minItems"], 7)
