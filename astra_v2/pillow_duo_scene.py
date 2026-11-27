@@ -477,6 +477,20 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, re
                             fill=(245,205,116),outline=INK,width=6)
         d.arc((x-32,y-91,x+32,y-33),180,355,fill=CREAM,width=9)
         d.ellipse((x-21,y-25,x+21,y+42),fill=(255,237,174))
+    elif name=="feather":
+        # A clearly legible, authored story prop—not a generic icon.
+        # Gray state is used only when the storyboard explicitly declares it.
+        feather_fill = ((137, 148, 161) if condition in ("gray", "grey", "sideways")
+                        else (45, 126, 225))
+        d.polygon(((x-8,y+75),(x-29,y+34),(x-32,y-16),
+                   (x-12,y-66),(x+18,y-88),(x+37,y-43),
+                   (x+27,y+12),(x+8,y+55)),
+                  fill=feather_fill,outline=INK)
+        d.line(((x-8,y+72),(x+18,y-82)),fill=(235,242,250),width=5)
+        for k in range(5):
+            yy=y-48+k*22
+            d.line(((x+12-k*2,yy),(x+30,yy-15)),fill=(220,234,249),width=3)
+            d.line(((x+7-k*2,yy+8),(x-20,yy+19)),fill=(220,234,249),width=3)
     else:
         from astra_v2.pillow_story_artifacts import draw_story_prop
         if name in {"key","bell","compass","shield","rocket","heart","wrench","clock"}:
