@@ -626,7 +626,32 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
         "status": history_status, "video_records": len(performance["videos"]),
         "history_file_exists": history_file_exists,
     }, sort_keys=True))
-    episode = choose_episode(performance, datetime.now(ZoneInfo("Asia/Kolkata")), excluded_ids=excluded_ids)
+    selector_now = datetime.now(ZoneInfo("Asia/Kolkata"))
+    selector_snapshot = performance.get("trend_snapshot") or {}
+    selector_today = selector_now.date().isoformat()
+    selector_today_longs = []
+    selector_seen_episode = False
+    for history_entry in performance.get("videos", {}).values():
+        if str(history_entry.get("content_id") or "") == f"trend-brief-{selector_today}-{'am' if selector_now.hour < 19 else 'pm'}":
+            selector_seen_episode = True
+        if history_entry.get("format") == "long":
+            try:
+                if datetime.fromisoformat(history_entry["published_at"]).date().isoformat() == selector_today:
+                    selector_today_longs.append(history_entry)
+            except (KeyError, TypeError, ValueError):
+                pass
+    print("ASTRA_LONG_SELECTOR_CONTEXT=" + json.dumps({
+        "now": selector_now.isoformat(), "slot": "am" if 7 <= selector_now.hour < 19 else ("pm" if selector_now.hour >= 19 else "before_first"),
+        "snapshot_checked_at": selector_snapshot.get("checked_at"),
+        "snapshot_item_count": len(selector_snapshot.get("items") or []),
+        "today_long_count": len(selector_today_longs),
+        "target_episode_seen_in_history": selector_seen_episode,
+        "excluded_id_count": len(excluded_ids),
+    }, sort_keys=True))
+    episode = choose_episode(performance, selector_now, excluded_ids=excluded_ids)
+    print("ASTRA_LONG_SELECTOR_RESULT=" + json.dumps({
+        "episode": episode, "selected": bool(episode),
+    }, sort_keys=True))
     if not episode or episode in excluded_ids:
         print("ASTRA_LONG_SELECTION_DIAGNOSTIC=" + json.dumps({
             "selected": False, "history_status": history_status,
