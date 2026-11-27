@@ -13782,6 +13782,58 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-gemini-61faf35cd3d171f0e936",
+      "video_id": "O8tdcscm-Bw",
+      "confirmed_at": "2026-11-27T03:10:51.181397+00:00",
+      "title": "Orion the Owl and the Midnight Observatory Clock",
+      "plot_fingerprint": "18dc92918794cfe1d7915c4574b7c6ef75cfbd52a8741c91e9403e0fa14a6013",
+      "story_beats": [
+        {
+          "headline": "The Missing Light",
+          "speech": "My trusty lantern has vanished into the shadows, leaving my star charts completely obscured by the midnight gloom.",
+          "visual": "signal",
+          "label": "Missing Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands on a wooden desk inside the stone observatory, holding nothing in his talons, looking down at dark unlit star charts with a puzzled expression under starlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Spark of Confusion",
+          "speech": "Look at that golden glow on the wall! Surely this gleaming brass circle is the lantern I left behind.",
+          "visual": "door",
+          "label": "The Mistaken Object",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl points his wing toward a large round wall clock on the stone observatory wall, staring intently at its metallic rim while holding a small compass in his left talon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workspace Dispute",
+          "speech": "You cannot claim the observatory clock as your personal reading lamp while I am timing the planetary rotations!",
+          "visual": "robot",
+          "label": "The Disagreement",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand on opposite sides of a wooden observatory desk, both holding onto a small brass clock while glaring at each other under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Sharing Agreement",
+          "speech": "We will place the lantern right here in the center so its warm glow serves both our charts and your gears equally.",
+          "visual": "planet",
+          "label": "Harmonious Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand side by side on the wooden observatory desk, looking peacefully at a lit lantern placed squarely between them as starlight streams through the open window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl needs a lantern to illuminate his star charts during the midnight watch, but he mistakes the brass observatory clock for his light source, causing a dispute with Barnaby the mouse over shared workspace illumination.",
+      "decisive_choice": "Orion chooses to establish a cooperative shared-time rule, placing the lantern in the center of the desk so both can work without fighting over the light.",
+      "resolution": "The observatory is evenly illuminated, allowing Orion to read his charts and Barnaby to inspect his mechanical instruments in harmony."
     }
   ]
 }
