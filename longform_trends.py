@@ -182,6 +182,30 @@ def _clean_summary(value, limit=420):
     return ' '.join(re.sub(r'<[^>]+>', ' ', str(value or '')).split())[:limit]
 
 
+
+def _sentence_excerpt(value, max_words=32):
+    """Keep complete source sentences; the word budget is soft, never a mid-sentence cut."""
+    clean = _clean_summary(value, limit=2000)
+    if not clean:
+        return ""
+    sentences = re.split(r"(?<=[.!?])\\s+(?=[A-Z0-9\\\"'])", clean)
+    chosen = []
+    count = 0
+    for sentence in sentences:
+        sentence = sentence.strip()
+        if not sentence:
+            continue
+        words = len(sentence.split())
+        if chosen and count + words > max_words:
+            break
+        chosen.append(sentence)
+        count += words
+        if count >= max_words:
+            break
+    return " ".join(chosen) or clean
+
+
+
 def _distinctive_thumbnail_copy(headline, topic):
     """Create a compact, readable hook while preserving the source headline's wording."""
     words=re.findall(r"[A-Za-z0-9']+", str(headline or ''))
@@ -288,7 +312,7 @@ def build_plan(items, offset=0):
     # with a strict per-source word budget instead of dumping the full RSS descriptions.
     source_rows=usable[:2]
     for row in source_rows:
-        row['summary']=' '.join(row['summary'].split()[:32])
+        row['summary']=_sentence_excerpt(row['summary'], max_words=32)
     evidence_line=' '.join(
         f"{x['name']} ({x['published']}): {x['summary']}" for x in source_rows
     )
