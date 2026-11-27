@@ -14005,6 +14005,65 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-f386ca9c4ff60405",
+      "video_id": "0tsa9rtZh7M",
+      "confirmed_at": "2026-11-27T04:20:03.799296+00:00",
+      "title": "The Turtle and the Silent Railway Bell",
+      "plot_fingerprint": "e731eab8a7faa1439267d57a125df5b6c902c65e2d95fe9c6d73834c1a01911b",
+      "story_beats": [
+        {
+          "headline": "NO BELL AT THE CROSSING",
+          "speech": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual": "robot",
+          "visual_prompt": "robot: A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual_intent": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "label": "SILENT BELL",
+          "story_beat": "reveal",
+          "story_actor_actions": {
+            "turtle": "walk"
+          },
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WIRE WAS LOOSE",
+          "speech": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual": "signal",
+          "visual_prompt": "signal: He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual_intent": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "label": "BROKEN CONTACT",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FLAG CAME FIRST",
+          "speech": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual": "signal",
+          "visual_prompt": "signal: He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual_intent": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "label": "CROSSING CLOSED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WARNING RETURNED",
+          "speech": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual": "robot",
+          "visual_prompt": "robot: The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual_intent": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "label": "BELL WORKS",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
