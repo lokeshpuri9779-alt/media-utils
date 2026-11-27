@@ -13551,6 +13551,51 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-1ab066c5130f679d",
+      "video_id": "9fYTGFqrB0Y",
+      "confirmed_at": "2026-11-27T02:28:16.314292+00:00",
+      "title": "The Squirrel and the Late Clock",
+      "plot_fingerprint": "56b45e493aec97b3d928e9bc51b06582b7390ddf5b590dbb6543962e0bb05fd5",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK FROZE",
+          "speech": "A squirrel realized the clocktower hands had stopped just before the village's morning train was due.",
+          "visual": "clock",
+          "label": "ALARM",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A FALSE RESET",
+          "speech": "He moved the hands forward, but the clock stopped again before its first bell could ring.",
+          "visual": "signal",
+          "label": "FAILED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE MISSING TENSION",
+          "speech": "Inside the tower, he discovered that the hanging drive weight rested on a shelf after its rope slipped sideways.",
+          "visual": "clock",
+          "label": "CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE TIME RETURNED",
+          "speech": "The clockmaker rehung the weight and aligned the rope, then checked the bell against the station clock.",
+          "visual": "signal",
+          "label": "RESTORED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
