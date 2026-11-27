@@ -18,7 +18,7 @@ SCENE_TERMS = {
     "observatory": ("observatory", "telescope", "planetarium", "stargazing"),
     "forest": ("log cabin", "mossy tree", "tree root", "forest", "woods", "woodland", "jungle", "rainforest"),
     "harbor": ("harbor", "dock", "port", "marina", "seaport", "pier"),
-    "library": ("library", "bookshelf", "bookstore", "reading room"),
+    "library": ("sealed archive", "archive room", "archive", "archives", "archive stacks", "record room", "records room", "bookshelf", "bookshelves", "book stacks", "stacks", "shelves", "shelf", "reading room", "library", "bookstore"),
     # Bare "station" also means the International Space Station; require rail context.
     "railway": ("railway", "train", "train station", "railway station",
                 "rail station", "metro station", "subway station", "railroad", "locomotive"),

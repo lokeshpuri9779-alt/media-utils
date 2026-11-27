@@ -173,5 +173,28 @@ class ArtifactBackdropTests(unittest.TestCase):
             apply_backdrop(Image.new("RGB", (540, 720)), {"speech": "forest"}, "id")
 
 
+    def test_archive_story_resolves_to_verified_library_background(self):
+        from astra_v2.visual_artifact_backdrop import (
+            analyze_story_scene, infer_consistent_story_scene,
+        )
+        beats = [
+            {"visual_prompt": "book: A mouse librarian found fresh pages turning inside a sealed archive every night after closing time."},
+            {"visual_prompt": "door: She checked the window and door, yet a soft flutter returned whenever the room became quiet."},
+            {"visual_prompt": "book: She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft."},
+            {"visual_prompt": "book: The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry."},
+        ]
+        self.assertEqual(analyze_story_scene(beats[0])["scene"], "library")
+        self.assertEqual(analyze_story_scene(beats[2])["scene"], "library")
+        self.assertEqual(analyze_story_scene(beats[3])["scene"], "library")
+        shared_scene = infer_consistent_story_scene({"story_beats": beats})
+        self.assertEqual(shared_scene, "library")
+        # The door-only beat inherits the confirmed story setting; it does
+        # not invent a scene from its generic visual tag.
+        self.assertIsNone(analyze_story_scene(beats[1])["scene"])
+        for beat in beats:
+            self.assertEqual(analyze_story_scene(beat)["scene"] or shared_scene, "library")
+        self.assertIsNone(choose_scene({"visual": "book"}))
+
+
 if __name__ == "__main__":
     unittest.main()
