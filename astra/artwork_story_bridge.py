@@ -43,14 +43,20 @@ def build_story(path, artwork_manifest=None):
                       "label": caption.strip(), "story_beat": (
                           "reveal" if index == 0 else "payoff" if index == len(scenes)-1 else "build"),
                       "duration": 2.1,
-                      **({"artwork_manifest_path": str(Path(artwork_manifest).resolve())}
+                      **({"artwork_manifest_path": str(Path(artwork_manifest).resolve()),
+                          "artwork_asset_id": background,
+                          "scene_id": f"scene-{index + 1:02d}"}
                          if artwork_manifest is not None else {})})
     title = data["title"].strip()
     if not 8 <= len(title) <= 75:
         raise ValueError("invalid_story_title")
     digest = hashlib.sha256(json.dumps(beats, sort_keys=True).encode()).hexdigest()[:20]
+    content_id = "astra-artwork-review-" + digest
+    if artwork_manifest is not None:
+        for beat in beats:
+            beat["story_content_id"] = content_id
     return {"genre": "fiction", "kind": "microfiction", "title": title,
-            "content_id": "astra-artwork-review-" + digest,
+            "content_id": content_id,
             "hook": beats[0]["headline"], "question": beats[0]["speech"],
             "answer": beats[-1]["speech"], "story_beats": beats,
             "production_ready": False, "review_status": "pending_review",
