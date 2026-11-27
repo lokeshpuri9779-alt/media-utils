@@ -25,6 +25,12 @@ class AuthoredAdditionsTests(unittest.TestCase):
                              ["reveal", "build", "twist", "payoff"])
             self.assertIsNone(publication_rejection(story))
             self.assertTrue(all(len(b["speech"].split()) >= 9 for b in story["story_beats"]))
+            # The renderer and review packet must receive the scene action,
+            # not only a one-word prop label such as "clock" or "door".
+            for beat in story["story_beats"]:
+                self.assertIn(beat["speech"], beat["visual_prompt"])
+                self.assertEqual(beat["visual_intent"], beat["speech"])
+                self.assertTrue(beat["visual"].strip())
 
     def test_used_story_is_not_selected_again(self):
         stories = [s for s in catalog() if s["title"] in EXPECTED]
