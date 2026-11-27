@@ -148,8 +148,13 @@ class StoryArtTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             output = Path(root) / "studio-preview.mp4"
             env = {**os.environ, "ASTRA_VISUAL_ARTIFACT_BACKDROPS": "0"}
-            subprocess.run([sys.executable, "studio_renderer.py", "--preview", str(output)],
-                           check=True, timeout=180, env=env, capture_output=True, text=True)
+            result = subprocess.run(
+                [sys.executable, "studio_renderer.py", "--preview", str(output)],
+                check=False, timeout=180, env=env, capture_output=True, text=True)
+            self.assertEqual(
+                result.returncode, 0,
+                "Studio preview failed. stdout:\n" + result.stdout
+                + "\nstderr:\n" + result.stderr)
             self.assertTrue(output.is_file())
             self.assertGreater(output.stat().st_size, 1024)
             probe = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0",

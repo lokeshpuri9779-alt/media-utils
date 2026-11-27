@@ -478,6 +478,11 @@ def _prop(d, name, x, y, t, *, symbol_id=None, action="idle", condition=None, re
         d.arc((x-32,y-91,x+32,y-33),180,355,fill=CREAM,width=9)
         d.ellipse((x-21,y-25,x+21,y+42),fill=(255,237,174))
     else:
+        from astra_v2.pillow_story_artifacts import draw_story_prop
+        if name in {"key","bell","compass","shield","rocket","heart","wrench","clock"}:
+            draw_story_prop(d,name,x,y,t,action=action,condition=condition,
+                            repair_transition=repair_transition)
+            return
         from astra_v2.procedural_visual_library import draw_icon, icon_for_story
         draw_icon(d,icon_for_story(name,name),x,y,size=120)
         return
