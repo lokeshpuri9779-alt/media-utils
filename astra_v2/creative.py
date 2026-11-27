@@ -603,9 +603,39 @@ def make_long_candidate(path, excluded_ids, excluded_titles):
     import cloud_once as legacy
     from longform import choose_episode
     from ypp_safety import enforce
-    episode = choose_episode(legacy.load_performance(), datetime.now(ZoneInfo("Asia/Kolkata")), excluded_ids=excluded_ids)
+    performance = legacy.load_performance()
+    performance_path = getattr(legacy, "PERFORMANCE_PATH", None)
+    history_file_exists = bool(performance_path and performance_path.exists())
+    videos = performance.get("videos") if isinstance(performance, dict) else None
+    if not isinstance(videos, dict):
+        history_status = "invalid_shape"
+        performance = {"videos": {}}
+    elif not history_file_exists:
+        history_status = "missing_file"
+    elif not videos:
+        # cloud_once.load_performance currently normalizes malformed JSON to an
+        # empty history. Inspect the source file to distinguish that from valid {}.
+        try:
+            raw_history = json.loads(performance_path.read_text(encoding="utf-8"))
+            history_status = "valid_empty" if isinstance(raw_history, dict) and isinstance(raw_history.get("videos"), dict) else "invalid_shape"
+        except (OSError, ValueError, TypeError):
+            history_status = "unreadable_or_invalid_json"
+    else:
+        history_status = "loaded"
+    print("ASTRA_LONG_HISTORY_DIAGNOSTIC=" + json.dumps({
+        "status": history_status, "video_records": len(performance["videos"]),
+        "history_file_exists": history_file_exists,
+    }, sort_keys=True))
+    episode = choose_episode(performance, datetime.now(ZoneInfo("Asia/Kolkata")), excluded_ids=excluded_ids)
     if not episode or episode in excluded_ids:
+        print("ASTRA_LONG_SELECTION_DIAGNOSTIC=" + json.dumps({
+            "selected": False, "history_status": history_status,
+            "excluded_id_count": len(excluded_ids),
+        }, sort_keys=True))
         return None
+    print("ASTRA_LONG_SELECTION_DIAGNOSTIC=" + json.dumps({
+        "selected": True, "episode_id": str(episode), "history_status": history_status,
+    }, sort_keys=True))
     try:
         title, desc = legacy.make_long(path, episode)
     except RuntimeError as exc:
