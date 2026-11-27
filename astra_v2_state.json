@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 9,
+  "attempts": 10,
   "confirmed_today": 9,
-  "last_attempt_at": "2026-11-27T03:47:38.495495+00:00",
+  "last_attempt_at": "2026-11-27T03:55:39.309965+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -15594,29 +15594,93 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "0tsa9rtZh7M": {
+      "content_id": "rayvan-forge-f386ca9c4ff60405",
+      "title": "The Turtle and the Silent Railway Bell",
+      "day": "2026-11-27",
+      "uploaded_at": "2026-11-27T03:55:41.063173+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e731eab8a7faa1439267d57a125df5b6c902c65e2d95fe9c6d73834c1a01911b",
+      "story_beats": [
+        {
+          "headline": "NO BELL AT THE CROSSING",
+          "speech": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual": "robot",
+          "visual_prompt": "robot: A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual_intent": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "label": "SILENT BELL",
+          "story_beat": "reveal",
+          "story_actor_actions": {
+            "turtle": "walk"
+          },
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WIRE WAS LOOSE",
+          "speech": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual": "signal",
+          "visual_prompt": "signal: He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual_intent": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "label": "BROKEN CONTACT",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FLAG CAME FIRST",
+          "speech": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual": "signal",
+          "visual_prompt": "signal: He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual_intent": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "label": "CROSSING CLOSED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WARNING RETURNED",
+          "speech": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual": "robot",
+          "visual_prompt": "robot: The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual_intent": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "label": "BELL WORKS",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-27T03:51:29.127649+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-11-27T03:53:36.083334+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T03:51:29.244164+00:00",
+    "at": "2026-11-27T03:55:41.417267+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -31602,13 +31666,74 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-f386ca9c4ff60405": {
+      "at": "2026-11-27T03:55:39.309948+00:00",
+      "title": "The Turtle and the Silent Railway Bell",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "e731eab8a7faa1439267d57a125df5b6c902c65e2d95fe9c6d73834c1a01911b",
+      "story_beats": [
+        {
+          "headline": "NO BELL AT THE CROSSING",
+          "speech": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual": "robot",
+          "visual_prompt": "robot: A turtle heard a train approaching while the village crossing bell remained silent.",
+          "visual_intent": "A turtle heard a train approaching while the village crossing bell remained silent.",
+          "label": "SILENT BELL",
+          "story_beat": "reveal",
+          "story_actor_actions": {
+            "turtle": "walk"
+          },
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WIRE WAS LOOSE",
+          "speech": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual": "signal",
+          "visual_prompt": "signal: He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "visual_intent": "He inspected the warning box and discovered a loose wire shaking with each passing train.",
+          "label": "BROKEN CONTACT",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FLAG CAME FIRST",
+          "speech": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual": "signal",
+          "visual_prompt": "signal: He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "visual_intent": "He waved a bright flag to stop travelers while the station engineer secured the connection.",
+          "label": "CROSSING CLOSED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WARNING RETURNED",
+          "speech": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual": "robot",
+          "visual_prompt": "robot: The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "visual_intent": "The bell rang again and the engineer tested the crossing before allowing anyone through.",
+          "label": "BELL WORKS",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T03:51:29.244110+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-27T03:55:41.417223+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -31616,37 +31741,143 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T03:51:29.244156+00:00",
+    "at": "2026-11-27T03:55:41.417260+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-27T03:47:29.870351+00:00",
+    "at": "2026-11-27T03:54:39.491915+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-4715ef6a43dd00e7",
-    "video_url": "https://www.youtube.com/watch?v=51imfJu7z_Q",
+    "content_id": "rayvan-forge-f386ca9c4ff60405",
+    "video_url": "https://www.youtube.com/watch?v=0tsa9rtZh7M",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T03:51:29.243393+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-27T03:55:41.416529+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T03:51:29.244072+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
-    "counters": {},
+    "at": "2026-11-27T03:55:41.417089+00:00",
+    "collection_status": "collected",
+    "publish_step": "success",
+    "selection_source": "fresh_candidate_evaluation",
+    "counters": {
+      "ASTRA_STORY_SUPPLY": {
+        "eligible": 3,
+        "not_ready": 64,
+        "publication_rejected": {
+          "not_production_ready": 3
+        },
+        "seen": 89,
+        "total": 159
+      },
+      "ASTRA_STORY_HISTORY_FILTER": {
+        "before": 159,
+        "fingerprint": 0,
+        "id": 34,
+        "near_duplicate": 0,
+        "plot_key": 0,
+        "remaining": 124,
+        "title": 1,
+        "unplanned_original": 0
+      },
+      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
+        "pool": 124,
+        "remaining": 2
+      },
+      "ASTRA_STORY_SELECTION": {
+        "already_seen": 0,
+        "approved": 1,
+        "background_preflight_rejected": 1,
+        "background_review_gaps": [
+          {
+            "content_id": "rayvan-forge-df01d75de6c4ba09",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
+                    "visual": "book",
+                    "visual_intent": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
+                    "visual_prompt": "book: A mouse librarian found fresh pages turning inside a sealed archive every night after closing time."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 1
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
+                    "visual": "door",
+                    "visual_intent": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
+                    "visual_prompt": "door: She checked the window and door, yet a soft flutter returned whenever the room became quiet."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 2
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
+                    "visual": "book",
+                    "visual_intent": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
+                    "visual_prompt": "book: She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 3
+              },
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
+                    "visual": "book",
+                    "visual_intent": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
+                    "visual_prompt": "book: The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "missing_backgrounds",
+            "semantic_quality": "not_verified",
+            "shot_count": 4
+          }
+        ],
+        "considered": 2,
+        "duration_rejected": 0,
+        "not_ready": 0,
+        "policy_rejected": {},
+        "render_exception": {},
+        "render_qa_rejected": 0
+      }
+    },
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }
