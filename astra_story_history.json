@@ -13891,6 +13891,63 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-00232cfe175be596",
+      "video_id": "y_dlq3akvuk",
+      "confirmed_at": "2026-11-27T03:40:03.182566+00:00",
+      "title": "The Deer and the Weather Kites",
+      "plot_fingerprint": "cde88e9306df70794aaad1497b52c027caee83082526789858ff2428f3ee02d5",
+      "story_beats": [
+        {
+          "headline": "THE WIND CHANGED",
+          "speech": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual": "forest",
+          "visual_prompt": "forest: A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual_intent": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "label": "FALLING KITES",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RIBBONS POINTED EAST",
+          "speech": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual": "signal",
+          "visual_prompt": "signal: She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual_intent": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "label": "WIND CLUE",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A SAFER ROUTE",
+          "speech": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual": "forest",
+          "visual_prompt": "forest: She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual_intent": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "label": "TRAIL MARKED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RACE CONTINUED",
+          "speech": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual": "forest",
+          "visual_prompt": "forest: The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual_intent": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "label": "SAFE FINISH",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
