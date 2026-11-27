@@ -15,6 +15,15 @@ GROUND_TOP = 1180
 SCENE_CUES = (
     # Handheld books, pages and curtains are objects, not locations. Never
     # change the whole set to a library just because a character holds a book.
+    ("lighthouse", r"\b(?:lighthouse|light tower|beacon tower)\b"),
+    ("castle", r"\b(?:castle|fortress|keep|ramparts)\b"),
+    ("snowfield", r"\b(?:snowfield|glacier|frozen plain|ice field)\b"),
+    ("island", r"\b(?:island|atoll|tropical isle)\b"),
+    ("space", r"\b(?:outer space|in space|spaceship|space station|orbit)\b"),
+    ("laboratory", r"\b(?:laboratory|lab|science lab)\b"),
+    ("underwater", r"\b(?:underwater|ocean floor|sea floor|coral reef)\b"),
+    ("mountain", r"\b(?:mountain peak|high mountains|mountain pass|summit)\b"),
+    ("cave", r"\b(?:cave entrance|cave interior|inside the cave)\b"),
     ("observatory", r"\b(?:observatory|telescope|planetarium|astronomer)\b"),
     ("city", r"\b(?:city|downtown|skyscrapers?|city streets?)\b"),
     ("railway", r"\b(?:railway|railroad|train station|locomotive|rail tracks?)\b"),
@@ -115,6 +124,73 @@ def draw_story_stage(d, shot, t):
                 d.rectangle((x,1140,x+18,1270),fill=(108,86,71))
             d.polygon([(750,990),(816,927),(882,990)],fill=(222,219,171))
             d.polygon([(733,1070),(899,1070),(861,1112),(770,1112)],fill=(112,89,76))
+    elif setting == "lighthouse":
+        d.polygon(((420,1160),(470,700),(610,700),(660,1160)),fill=(226,218,193),outline=(74,76,83),width=8)
+        d.rectangle((470,670,610,760),fill=(86,115,139),outline=(245,225,177),width=9)
+        d.polygon(((450,670),(540,590),(630,670)),fill=(155,83,75),outline=(64,60,68))
+        d.polygon(((470,790),(130,640),(470,690)),fill=(250,224,151))
+        d.polygon(((610,790),(950,640),(610,690)),fill=(250,224,151))
+        d.ellipse((485,1110,595,1190),fill=(69,103,116))
+    elif setting == "castle":
+        d.rectangle((190,790,890,1170),fill=(126,132,145),outline=(66,74,91),width=9)
+        for x in (170,390,610,830):
+            d.rectangle((x,650,x+115,930),fill=(143,147,157),outline=(66,74,91),width=8)
+            d.rectangle((x,620,x+115,680),fill=(143,147,157))
+            for xx in (x+10,x+70): d.rectangle((xx,640,xx+28,682),fill=(143,147,157))
+        d.polygon(((155,650),(227,560),(300,650)),fill=(139,76,75))
+        d.polygon(((375,650),(447,560),(520,650)),fill=(139,76,75))
+        d.polygon(((595,650),(667,560),(740,650)),fill=(139,76,75))
+        d.arc((450,950,630,1210),180,360,fill=(54,57,72),width=20)
+    elif setting == "snowfield":
+        d.polygon(((55,1120),(250,760),(420,1080),(640,690),(1025,1130)),fill=(139,177,198))
+        d.polygon(((175,900),(250,760),(320,900),(265,876)),fill=(238,246,247))
+        d.polygon(((535,870),(640,690),(750,875),(650,835)),fill=(245,249,250))
+        for i in range(9):
+            x=100+i*110; yy=1040+(i%3)*35
+            d.ellipse((x,yy,x+90,yy+25),fill=(226,240,245))
+    elif setting == "island":
+        d.polygon(((100,1110),(250,970),(430,930),(650,970),(900,1110),(900,1180),(100,1180)),fill=(190,155,104))
+        d.polygon(((100,1110),(250,970),(430,930),(650,970),(900,1110)),fill=(76,151,146))
+        d.line((540,980,540,690),fill=(105,77,56),width=28)
+        d.polygon(((540,720),(350,660),(385,555),(540,630)),fill=(56,132,91))
+        d.polygon(((540,720),(735,660),(700,555),(540,630)),fill=(56,132,91))
+        d.polygon(((540,650),(470,470),(540,510),(610,470)),fill=(65,145,95))
+        d.arc((65,1080,1015,1320),180,355,fill=(191,231,229),width=18)
+    elif setting == "space":
+        d.ellipse((720,600,960,840),fill=(102,91,157))
+        d.ellipse((770,625,930,785),fill=(139,133,194))
+        d.ellipse((155,670,440,955),fill=(53,82,140),outline=(181,197,225),width=10)
+        d.arc((100,700,500,910),190,345,fill=(222,201,150),width=12)
+        d.polygon(((530,980),(600,760),(670,980)),fill=(174,180,190),outline=(55,66,87))
+        d.rectangle((570,900,630,1100),fill=(143,155,173))
+        for x,y in ((150,610),(870,920),(350,560),(950,700)):
+            d.ellipse((x,y,x+13,y+13),fill=(255,239,195))
+    elif setting == "laboratory":
+        d.rectangle((105,650,975,1125),fill=(95,124,139),outline=(210,220,211),width=12)
+        for x in (170,410,650):
+            d.rectangle((x,720,x+170,890),fill=(56,83,104),outline=(206,222,218),width=8)
+            d.line((x+20,850,x+150,850),fill=(123,206,190),width=12)
+        d.polygon(((445,900),(635,900),(685,1100),(395,1100)),fill=(160,197,184),outline=(57,80,88))
+        d.ellipse((475,960,605,1080),fill=(118,205,181))
+        d.line((540,650,540,770),fill=(226,226,207),width=10)
+    elif setting == "underwater":
+        d.polygon(((55,1080),(180,970),(320,1090),(470,970),(650,1090),(820,960),(1025,1080),(1025,1190),(55,1190)),fill=(38,107,128))
+        for x in (170,390,760,900):
+            d.line((x,1100,x-20,850),fill=(68,161,145),width=17)
+            d.ellipse((x-55,835,x+20,910),fill=(81,180,158))
+        for x,y in ((200,720),(340,850),(720,700),(870,880)):
+            d.ellipse((x,y,x+34,y+34),outline=(183,224,225),width=6)
+        d.polygon(((500,950),(570,900),(640,950),(570,1000)),fill=(231,185,118))
+    elif setting == "mountain":
+        d.polygon(((55,1160),(250,760),(400,1020),(620,600),(850,1010),(1025,780),(1025,1190)),fill=(90,119,143))
+        d.polygon(((170,925),(250,760),(325,925),(255,885)),fill=(232,237,234))
+        d.polygon(((520,790),(620,600),(720,790),(625,748)),fill=(239,244,239))
+        d.polygon(((770,940),(850,780),(930,940)),fill=(215,225,224))
+    elif setting == "cave":
+        d.polygon(((55,560),(210,760),(265,1080),(420,1180),(660,1180),(825,1080),(870,760),(1025,560),(1025,1190),(55,1190)),fill=(51,62,86))
+        d.ellipse((350,780,730,1160),fill=(106,133,150),outline=(170,184,189),width=10)
+        d.polygon(((470,1120),(540,880),(610,1120)),fill=(120,166,178))
+        d.ellipse((500,1080,580,1160),fill=(226,192,126))
     elif setting == "observatory":
         d.ellipse((260,560,820,1120),fill=(81,104,147),outline=(204,191,163),width=12)
         for radius in (120,190,258):
