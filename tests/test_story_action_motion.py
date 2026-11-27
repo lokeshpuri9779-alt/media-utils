@@ -20,6 +20,26 @@ class StoryActionMotionTests(unittest.TestCase):
         self.assertEqual(infer_actor_actions("The dragon ran toward the cave."), {})
         self.assertEqual(infer_actor_actions(None), {})
 
+    def test_story_forge_catalog_emits_character_action_tracks(self):
+        from astra_v2.story_forge import catalog
+        stories = catalog(limit=10000)
+        phrase = "rabbit repaired the lantern with a spare wick while the fox held the lantern steady"
+        target = next(
+            (story for story in stories
+             if any(phrase in beat.get("speech", "").lower()
+                    for beat in story.get("story_beats", []))),
+            None,
+        )
+        self.assertIsNotNone(target, "authored fox/rabbit lantern story must be in catalog")
+        beat = next(
+            beat for beat in target["story_beats"]
+            if phrase in beat.get("speech", "").lower()
+        )
+        self.assertEqual(
+            beat.get("story_actor_actions"),
+            {"rabbit": "repair", "fox": "carry"},
+        )
+
     def test_action_from_scene(self):
         self.assertEqual(choose_action({"action":"Fox jumps over the fence"}),"jump")
         self.assertEqual(choose_action({"visual_prompt":"The owl runs home"}),"run")
