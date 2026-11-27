@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 5,
-  "confirmed_today": 4,
-  "last_attempt_at": "2026-11-27T03:02:00.849213+00:00",
+  "attempts": 6,
+  "confirmed_today": 5,
+  "last_attempt_at": "2026-11-27T03:08:53.320184+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -15304,16 +15304,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "62TW1cpD82M": {
-      "content_id": "rayvan-forge-76330fd4c9518c32",
+    },
+    "rayvan-forge-76330fd4c9518c32": {
+      "video_id": "62TW1cpD82M",
+      "confirmed_at": "2026-11-27T03:07:42.222887+00:00",
       "title": "The Lynx and the Mountain Mirror",
-      "day": "2026-11-27",
-      "uploaded_at": "2026-11-27T03:02:02.504398+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-27T03:02:02.504398+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "7a97b4f16d2868c79e2bbaf71a05d0395d3c6409e0b36f4de261a2f57ec254e7",
       "story_beats": [
@@ -15354,16 +15352,74 @@
           "duration": 2.1
         }
       ],
+      "genre": "fiction"
+    }
+  },
+  "pending": {
+    "O8tdcscm-Bw": {
+      "content_id": "rayvan-gemini-61faf35cd3d171f0e936",
+      "title": "Orion the Owl and the Midnight Observatory Clock",
+      "day": "2026-11-27",
+      "uploaded_at": "2026-11-27T03:08:55.137182+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "18dc92918794cfe1d7915c4574b7c6ef75cfbd52a8741c91e9403e0fa14a6013",
+      "story_beats": [
+        {
+          "headline": "The Missing Light",
+          "speech": "My trusty lantern has vanished into the shadows, leaving my star charts completely obscured by the midnight gloom.",
+          "visual": "signal",
+          "label": "Missing Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands on a wooden desk inside the stone observatory, holding nothing in his talons, looking down at dark unlit star charts with a puzzled expression under starlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Spark of Confusion",
+          "speech": "Look at that golden glow on the wall! Surely this gleaming brass circle is the lantern I left behind.",
+          "visual": "door",
+          "label": "The Mistaken Object",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl points his wing toward a large round wall clock on the stone observatory wall, staring intently at its metallic rim while holding a small compass in his left talon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workspace Dispute",
+          "speech": "You cannot claim the observatory clock as your personal reading lamp while I am timing the planetary rotations!",
+          "visual": "robot",
+          "label": "The Disagreement",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand on opposite sides of a wooden observatory desk, both holding onto a small brass clock while glaring at each other under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Sharing Agreement",
+          "speech": "We will place the lantern right here in the center so its warm glow serves both our charts and your gears equally.",
+          "visual": "planet",
+          "label": "Harmonious Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand side by side on the wooden observatory desk, looking peacefully at a lit lantern placed squarely between them as starlight streams through the open window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl needs a lantern to illuminate his star charts during the midnight watch, but he mistakes the brass observatory clock for his light source, causing a dispute with Barnaby the mouse over shared workspace illumination.",
+      "decisive_choice": "Orion chooses to establish a cooperative shared-time rule, placing the lantern in the center of the desk so both can work without fighting over the light.",
+      "resolution": "The observatory is evenly illuminated, allowing Orion to read his charts and Barnaby to inspect his mechanical instruments in harmony.",
       "renderer": "studio-7.3.1"
     }
   },
   "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-27T03:01:15.662807+00:00",
+  "last_preflight_at": "2026-11-27T03:07:41.934224+00:00",
   "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T03:02:02.831537+00:00",
+    "at": "2026-11-27T03:08:55.417590+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -31133,10 +31189,64 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-gemini-61faf35cd3d171f0e936": {
+      "at": "2026-11-27T03:08:53.320163+00:00",
+      "title": "Orion the Owl and the Midnight Observatory Clock",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "18dc92918794cfe1d7915c4574b7c6ef75cfbd52a8741c91e9403e0fa14a6013",
+      "story_beats": [
+        {
+          "headline": "The Missing Light",
+          "speech": "My trusty lantern has vanished into the shadows, leaving my star charts completely obscured by the midnight gloom.",
+          "visual": "signal",
+          "label": "Missing Lantern",
+          "story_beat": "reveal",
+          "visual_prompt": "Orion the owl stands on a wooden desk inside the stone observatory, holding nothing in his talons, looking down at dark unlit star charts with a puzzled expression under starlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Spark of Confusion",
+          "speech": "Look at that golden glow on the wall! Surely this gleaming brass circle is the lantern I left behind.",
+          "visual": "door",
+          "label": "The Mistaken Object",
+          "story_beat": "build",
+          "visual_prompt": "Orion the owl points his wing toward a large round wall clock on the stone observatory wall, staring intently at its metallic rim while holding a small compass in his left talon.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Workspace Dispute",
+          "speech": "You cannot claim the observatory clock as your personal reading lamp while I am timing the planetary rotations!",
+          "visual": "robot",
+          "label": "The Disagreement",
+          "story_beat": "mechanism",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand on opposite sides of a wooden observatory desk, both holding onto a small brass clock while glaring at each other under moonlight.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "The Fair Sharing Agreement",
+          "speech": "We will place the lantern right here in the center so its warm glow serves both our charts and your gears equally.",
+          "visual": "planet",
+          "label": "Harmonious Resolution",
+          "story_beat": "payoff",
+          "visual_prompt": "Orion the owl and Barnaby the mouse stand side by side on the wooden observatory desk, looking peacefully at a lit lantern placed squarely between them as starlight streams through the open window.",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "central_conflict": "Orion the owl needs a lantern to illuminate his star charts during the midnight watch, but he mistakes the brass observatory clock for his light source, causing a dispute with Barnaby the mouse over shared workspace illumination.",
+      "decisive_choice": "Orion chooses to establish a cooperative shared-time rule, placing the lantern in the center of the desk so both can work without fighting over the light.",
+      "resolution": "The observatory is evenly illuminated, allowing Orion to read his charts and Barnaby to inspect his mechanical instruments in harmony.",
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T03:02:02.831483+00:00",
+    "at": "2026-11-27T03:08:55.417548+00:00",
     "publication_outcome": "processing",
     "publication_reason": "",
     "character_memory": "not_approved_or_missing_identity",
@@ -31147,21 +31257,21 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T03:02:02.831527+00:00",
+    "at": "2026-11-27T03:08:55.417582+00:00",
     "history_file_present": true,
     "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-27T03:01:48.677857+00:00",
+    "at": "2026-11-27T03:08:42.071298+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-76330fd4c9518c32",
-    "video_url": "https://www.youtube.com/watch?v=62TW1cpD82M",
+    "content_id": "rayvan-gemini-61faf35cd3d171f0e936",
+    "video_url": "https://www.youtube.com/watch?v=O8tdcscm-Bw",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T03:02:02.830780+00:00",
+    "at": "2026-11-27T03:08:55.416944+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -31173,7 +31283,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T03:02:02.831417+00:00",
+    "at": "2026-11-27T03:08:55.417494+00:00",
     "collection_status": "not_applicable_preloaded_candidate",
     "publish_step": "success",
     "selection_source": "preload_artifact",
