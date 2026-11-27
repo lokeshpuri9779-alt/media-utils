@@ -77,6 +77,27 @@ class PillowDuoTests(unittest.TestCase):
             duo._actor = original
         self.assertEqual(observed, ["run", "repair"])
 
+    def test_narrated_actor_actions_drive_individual_movement(self):
+        import astra_v2.pillow_duo_scene as duo
+        import astra_v2.pillow_scene_direction as direction
+        shot = {
+            "speech": "The fox ran toward the bridge, but the rabbit waved a warning.",
+            "story_cast": ["fox", "rabbit"],
+            "story_action": "idle",
+        }
+        observed = []
+        original = direction.actor_translation
+        def capture(action, timestamp, index):
+            observed.append((action, index))
+            return original(action, timestamp, index)
+        direction.actor_translation = capture
+        try:
+            frame = Image.new("RGB", (1080, 1920), (24, 35, 60))
+            self.assertTrue(duo.draw_duo(frame, shot, 0.7))
+        finally:
+            direction.actor_translation = original
+        self.assertEqual(observed, [("run", 0), ("wave", 1)])
+
     def test_invalid_per_character_action_falls_back_safely(self):
         from astra_v2.story_action_motion import actor_action_tracks
         self.assertEqual(actor_action_tracks({
