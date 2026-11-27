@@ -2,7 +2,7 @@
 import unittest
 from PIL import Image, ImageChops
 
-from astra_v2.pillow_duo_scene import draw_duo
+from astra_v2.pillow_duo_scene import draw_duo, scene_prop, _prop
 from astra_v2.pillow_scene_direction import (
     actor_translation, draw_story_stage, prop_trajectory, story_setting
 )
@@ -168,6 +168,33 @@ class DirectedPillowScenesTests(unittest.TestCase):
             self.assertIsNone(ImageChops.difference(
                 im.crop((0,1400,1080,1920)),
                 Image.new("RGB",(1080,520),(24,35,60))).getbbox())
+
+
+    def test_blue_feather_is_a_real_story_prop_and_can_change_to_gray(self):
+        story = {
+            "story_beats": [
+                {"speech": "The rabbit caught a brilliant blue feather."},
+                {"speech": "The owl held the feather beneath a lantern."},
+                {"speech": "The rabbit showed the feather's tiny ridges."},
+            ]
+        }
+        self.assertEqual(scene_prop({
+            "speech": "The rabbit caught a brilliant blue feather."
+        }), "feather")
+        blue = Image.new("RGB", (1080, 1920), (24, 35, 60))
+        gray = blue.copy()
+        _prop(ImageDraw.Draw(blue), "feather", 540, 1000, 0.8)
+        _prop(ImageDraw.Draw(gray), "feather", 540, 1000, 0.8,
+              condition="gray")
+        blue_pixels = sum(1 for p in blue.crop((500, 900, 590, 1085)).getdata()
+                          if p == (45, 126, 225))
+        gray_pixels = sum(1 for p in gray.crop((500, 900, 590, 1085)).getdata()
+                          if p == (137, 148, 161))
+        self.assertGreater(blue_pixels, 100)
+        self.assertGreater(gray_pixels, 100)
+        self.assertIsNotNone(ImageChops.difference(
+            blue.crop((500, 900, 590, 1085)),
+            gray.crop((500, 900, 590, 1085))).getbbox())
 
 if __name__=="__main__":
     unittest.main()
