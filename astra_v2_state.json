@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 7,
+  "attempts": 8,
   "confirmed_today": 7,
-  "last_attempt_at": "2026-11-27T03:19:21.766730+00:00",
+  "last_attempt_at": "2026-11-27T03:38:18.461519+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -15472,28 +15472,91 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-27T03:21:17.549745+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "y_dlq3akvuk": {
+      "content_id": "rayvan-forge-00232cfe175be596",
+      "title": "The Deer and the Weather Kites",
+      "day": "2026-11-27",
+      "uploaded_at": "2026-11-27T03:38:19.886813+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cde88e9306df70794aaad1497b52c027caee83082526789858ff2428f3ee02d5",
+      "story_beats": [
+        {
+          "headline": "THE WIND CHANGED",
+          "speech": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual": "forest",
+          "visual_prompt": "forest: A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual_intent": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "label": "FALLING KITES",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RIBBONS POINTED EAST",
+          "speech": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual": "signal",
+          "visual_prompt": "signal: She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual_intent": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "label": "WIND CLUE",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A SAFER ROUTE",
+          "speech": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual": "forest",
+          "visual_prompt": "forest: She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual_intent": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "label": "TRAIL MARKED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RACE CONTINUED",
+          "speech": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual": "forest",
+          "visual_prompt": "forest: The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual_intent": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "label": "SAFE FINISH",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-11-27T03:37:19.020616+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T03:21:17.942646+00:00",
+    "at": "2026-11-27T03:38:20.152781+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -31361,13 +31424,72 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-00232cfe175be596": {
+      "at": "2026-11-27T03:38:18.461499+00:00",
+      "title": "The Deer and the Weather Kites",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "cde88e9306df70794aaad1497b52c027caee83082526789858ff2428f3ee02d5",
+      "story_beats": [
+        {
+          "headline": "THE WIND CHANGED",
+          "speech": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual": "forest",
+          "visual_prompt": "forest: A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "visual_intent": "A deer saw festival kites falling toward the valley just before the mountain race began.",
+          "label": "FALLING KITES",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RIBBONS POINTED EAST",
+          "speech": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual": "signal",
+          "visual_prompt": "signal: She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "visual_intent": "She noticed that every loose ribbon pointed toward a narrow gap between the hills.",
+          "label": "WIND CLUE",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A SAFER ROUTE",
+          "speech": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual": "forest",
+          "visual_prompt": "forest: She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "visual_intent": "She placed colored ribbons along the sheltered trail and guided runners away from the gusts.",
+          "label": "TRAIL MARKED",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RACE CONTINUED",
+          "speech": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual": "forest",
+          "visual_prompt": "forest: The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "visual_intent": "The runners reached the finish safely and used the ribbons to plan next year's course.",
+          "label": "SAFE FINISH",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T03:21:17.942603+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-27T03:38:20.152740+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -31375,36 +31497,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T03:21:17.942639+00:00",
+    "at": "2026-11-27T03:38:20.152774+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-27T03:18:22.239210+00:00",
+    "at": "2026-11-27T03:38:07.184666+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-d4a1122cf6f3b431",
-    "video_url": "https://www.youtube.com/watch?v=xVq7pqrH8g4",
+    "content_id": "rayvan-forge-00232cfe175be596",
+    "video_url": "https://www.youtube.com/watch?v=y_dlq3akvuk",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T03:21:17.942013+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-27T03:38:20.152168+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T03:21:17.942567+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
+    "at": "2026-11-27T03:38:20.152682+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
+    "publish_step": "success",
+    "selection_source": "preload_artifact",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
