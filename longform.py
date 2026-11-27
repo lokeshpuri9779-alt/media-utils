@@ -112,6 +112,9 @@ def choose_episode(data,now,excluded_ids=()):
     if episode_id in seen_ids:
         print("ASTRA_LONGFORM_SUPPLY=episode_already_used")
         return None
+    if episode_id in excluded_ids:
+        print("ASTRA_LONGFORM_SUPPLY=episode_already_excluded")
+        return None
     return episode_id
 
 
