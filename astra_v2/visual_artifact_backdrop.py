@@ -55,7 +55,7 @@ def analyze_story_scene(shot):
         matches = []
         for scene in SCENES:
             term = next((candidate for candidate in SCENE_TERMS[scene]
-                         if re.search(r"\\b" + re.escape(candidate) + r"\\b", text)), None)
+                         if re.search(r"\b" + re.escape(candidate) + r"\b", text)), None)
             if term:
                 matches.append((len(term), scene, term))
         if not matches:
