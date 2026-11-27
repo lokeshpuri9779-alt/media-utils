@@ -119,7 +119,7 @@ def actor_action_tracks(shot, cast):
 # This is an authoring/renderer capability check, NOT a pixel-level review.
 _PROP_NAME = (
     r"(?:box|book|ball|flower|lantern|key|bell|compass|shield|"
-    r"rocket|heart|wrench|clock)"
+    r"rocket|heart|wrench|clock|feather)"
 )
 _CARRYING_PROP = re.compile(
     r"\b(?:carry|carries|carried|carrying|hold|holds|held|holding|"
