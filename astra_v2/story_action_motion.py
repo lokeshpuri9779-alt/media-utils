@@ -81,7 +81,7 @@ def infer_actor_actions(speech, actors=None):
         before_verb = clause[:verb_match.start()]
         mentioned = [
             actor for actor in known
-            if re.search(r"\\b" + re.escape(actor) + r"\\b", before_verb)
+            if re.search(r"\b" + re.escape(actor) + r"\b", before_verb)
         ]
         if len(mentioned) == 1:
             result[mentioned[0]] = action_name
