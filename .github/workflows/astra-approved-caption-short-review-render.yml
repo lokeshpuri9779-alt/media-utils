@@ -58,7 +58,7 @@ jobs:
               "attestation": attestation,
               "rendered": False,
               "published": False
-          }, indent=2) + "\\n")
+          }, indent=2) + chr(10))
           PY
 
       - name: Upload rejection receipt
@@ -143,7 +143,7 @@ jobs:
               "attestation": attestation,
               "production_approved": False,
               "published": False
-          }, indent=2) + "\\n", encoding="utf-8")
+          }, indent=2) + chr(10), encoding="utf-8")
           print("Human review-render authorization verified; production approval remains false.")
           PY
 
@@ -163,11 +163,7 @@ jobs:
         env:
           ASTRA_VOICE_CACHE: /home/runner/.cache/astra-voice
         run: |
-          python -m astra_v2.caption_short_pipeline \\
-            --candidate review-input/candidate.json \\
-            --output output/rayvan-short.mp4 \\
-            --voice af_heart \\
-            --speed 1.04
+          python -m astra_v2.caption_short_pipeline --candidate review-input/candidate.json --output output/rayvan-short.mp4 --voice af_heart --speed 1.04
 
       - name: Upload review MP4, captions and decision receipt
         if: inputs.review_decision == 'approve_for_review_render' && always()
