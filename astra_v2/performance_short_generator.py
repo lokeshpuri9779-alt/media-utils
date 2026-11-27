@@ -235,6 +235,24 @@ def _read_history(path):
         return [json.loads(line) for line in raw.splitlines() if line.strip()]
 
 
+def _history_fingerprints(history):
+    """Collect valid archived plot hashes and hashes from structured premises."""
+    fingerprints = set()
+    for item in history:
+        if not isinstance(item, dict):
+            continue
+        archived = item.get("plot_fingerprint")
+        if isinstance(archived, str) and re.fullmatch(r"[0-9a-fA-F]{64}", archived):
+            fingerprints.add(archived.lower())
+        premise = item.get("premise")
+        if isinstance(premise, dict):
+            try:
+                fingerprints.add(premise_fingerprint(premise))
+            except ValueError:
+                pass
+    return sorted(fingerprints)
+
+
 def main(argv=None):
     """Generate exactly one review-only candidate and packet when explicitly enabled."""
     import argparse
@@ -251,14 +269,7 @@ def main(argv=None):
     if not enabled():
         raise SystemExit("ASTRA_GEMINI_ENABLED=1 and GEMINI_API_KEY are required; no files written")
     history = _read_history(args.history)
-    fingerprints = []
-    for item in history:
-        premise = item.get("premise") if isinstance(item, dict) else None
-        if isinstance(premise, dict):
-            try:
-                fingerprints.append(premise_fingerprint(premise))
-            except ValueError:
-                pass
+    fingerprints = _history_fingerprints(history)
     candidate = generate(history, fingerprints, args.brief)
     if candidate is None:
         raise SystemExit("Generation disabled; no files written")
