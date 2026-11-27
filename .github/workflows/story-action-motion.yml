@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/story-action-motion-v1
+      - main
 permissions:
   contents: read
 jobs:
