@@ -30,7 +30,7 @@ def valid_payload():
             "headline": f"RESCUE BEAT {i+1}", "visual": "fox",
             "label": "ORIGINAL STORY", "story_environment": "forest",
             "story_beat": "reveal" if i == 0 else "payoff" if i == 6 else "build",
-            "action": f"The fox performs a clear action during the {role} scene.",
+            "action": ["looks", "watches", "pushes", "catches", "looks", "opens", "runs"][i],
             "visual_prompt": prompts[i],
             "camera": "Medium shot, clear readable subject action",
             "environment": "moonlit forest clearing",

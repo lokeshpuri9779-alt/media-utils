@@ -31,7 +31,7 @@ def sample_outline():
             "label": "ORIGINAL STORY",
             "story_environment": "forest",
             "story_beat": "reveal" if i == 0 else "payoff" if i == 6 else "build",
-            "action": f"The fox performs a visible action for {role}.",
+            "action": ["looks", "watches", "pushes", "catches", "looks", "opens", "runs"][i],
             "visual_prompt": prompts[i],
             "camera": "clear medium shot with readable subject action",
             "environment": "moonlit forest clearing",
@@ -65,6 +65,12 @@ class PerformanceShortContractTests(unittest.TestCase):
         self.assertFalse(result["approved"])
         self.assertFalse(result["production_ready"])
         self.assertFalse(result["published"])
+
+    def test_rejects_scene_without_a_renderer_supported_action(self):
+        outline = sample_outline()
+        outline["scenes"][3]["action"] = "The fox performs a visible action."
+        with self.assertRaisesRegex(ValueError, "scene_4_action_not_animatable"):
+            validate_short_outline(outline)
 
     def test_render_fixture_is_a_valid_seven_scene_story_with_explicit_props(self):
         story = json.loads(Path("tests/fixtures/performance_short_preview.json").read_text())
