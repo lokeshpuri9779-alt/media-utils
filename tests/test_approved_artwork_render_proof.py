@@ -15,7 +15,7 @@ class ApprovedArtworkProofTests(unittest.TestCase):
             self.assertTrue(all(x["artwork_manifest_path"] == str(manifest) for x in story["story_beats"]))
             self.assertEqual(
                 [x["artwork_asset_id"] for x in story["story_beats"]],
-                ["emerald-forest", "misty-forest", "golden-forest", "ocean-night"])
+                ["dawn-valley", "misty-forest", "ocean-storm", "moonlit-valley"])
             self.assertEqual(
                 [x["scene_id"] for x in story["story_beats"]],
                 ["scene-01", "scene-02", "scene-03", "scene-04"])
