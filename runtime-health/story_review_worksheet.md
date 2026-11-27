@@ -4,473 +4,25 @@ This is a **read-only review aid**, not an approval record. Revise stories subst
 recompute their SHA-256 digests, and obtain explicit editorial decisions before promotion.
 No story in this worksheet is eligible for automatic publishing.
 
-## 1. The Bell Mystery of the Market
+## 1. The Snow Mystery of the Museum
 
-- Content ID: \`astra-proposal-2280ae9e44e4dedd5869\`
-- Original digest: \`7c18ec033829da6bcd8a8e2cd9ab37aff5ccaeb2261ed1bd91536fdcc7811c54\`
+- Content ID: \`astra-proposal-6dec85126f47e30bc2a5\`
+- Original digest: \`0a60833314b98d1f1ab2d53cf5b4acd4713e1728d72164a5778fafb475ca6fdd\`
 - Status: pending; substantive rewrite required
 
 ### Original narration
 
-**reveal:** A routine check in a floating market became urgent when the warning bell rang beneath the lake; before the mountain pass closed for winter. A strict deadline made careful investigation seem impossible.
-*Visual:* bell
-
-**build:** Two pieces mattered: a bell-shaped sonar echo and a child's drawing that matched the broken machine. The community's most trusted explanation depended on a measurement nobody had repeated. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The protagonist negotiated a temporary safe pause. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
-*Visual:* robot
-
-**twist:** One detail overturned the first theory: The traced chain of events identified the hidden trigger. A second instrument exposed a calibration error in the original reading. the bell hung from a submerged warning cable, and a passing current made its hollow housing ring. The pause allowed a small test that prevented a larger mistake.
-*Visual:* story
-
-**payoff:** The team left proof behind: a young astronomer shared the discovery so the whole community could solve the problem together. The team isolated the trigger and checked that the safe route stayed open. The team added independent calibration checks to the local procedure. The team created an emergency procedure that protects time for verification. and prevented the next scheduled outage.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 2. The Lighthouse Mystery of the Observatory
-
-- Content ID: \`astra-proposal-12a5987015d35ad7f046\`
-- Original digest: \`dcaf9f6cd61961592ab9aedd440660d94f36497217d7ea41b4fbd466538774f1\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A young astronomer found the same impossible sign again in a silent observatory: the lighthouse beam stopped before reaching the sea; before the last ferry left the harbor. The apparent solution worked briefly, then exposed a deeper consequence.
-*Visual:* lighthouse
-
-**build:** A young astronomer treated a set of tide marks on the oldest wall as a lead, not proof, and tested it against a jammed brass lens mechanism. The protagonist hesitated after an earlier mistake, while the deadline kept closing in. A failed test revealed that an important assumption was wrong; repeated the test under controlled conditions. The team stopped the fix and measured the new harm. compared witness accounts taken separately, but two witnesses remembered the event differently. The attempt failed; the hero learned that asking for help was the missing step.
-*Visual:* story
-
-**twist:** The failed test was the missing link. The repeated result exposed the missing cause. A reversible test made it possible to act without repeating the earlier mistake. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The second attempt addressed the underlying cause instead of the symptom.
-*Visual:* story
-
-**payoff:** Instead of hiding the mistake, a young astronomer restored the night lights and reopened the route before dawn. The team added a repeatable check to catch the same failure early. The protagonist showed the neighbors how to check uncertain explanations safely. The community adopted a safer long-term maintenance plan. and prevented the next scheduled outage.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 3. The Statue Mystery of the Library
-
-- Content ID: \`astra-proposal-5e02a3f23bd8d4354d53\`
-- Original digest: \`6a369cc72048675812b2331df3f0c39901e9ab8ed070dfee259fe88ea1013dfb\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** The astronomer could not ignore the museum's smallest statue changed position nightly in a coastal library; before sunrise erased the only clue. A trusted tool produced a confident but misleading result.
-*Visual:* statue
-
-**build:** A young astronomer treated a message carried by migrating birds as a lead, not proof, and tested it against tiny wet footprints beside its case. A ticking deadline made the obvious shortcut tempting, but the shortcut risked the only clue. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. The protagonist verified its output using a different method. compared witness accounts taken separately, but a sudden power cut interrupted the first test. The attempt failed; the hero learned that asking for help was the missing step.
-*Visual:* story
-
-**twist:** Then the evidence changed the case: Only the second explanation accounted for both observations. A small reversible test exposed why the shortcut would have made the damage worse. a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints. The independent measurement uncovered the tool's hidden limitation.
-*Visual:* story
-
-**payoff:** Instead of hiding the mistake, a young astronomer redirected the danger toward an empty field and kept the village safe. The team documented the rejected explanation so it would not mislead anyone again. The team kept the safe test procedure for the next emergency. The team required independent verification before future critical decisions. without blaming anyone before the evidence was clear.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 4. The Signal Mystery of the Museum
-
-- Content ID: \`astra-proposal-bf3457994e800d5e1f16\`
-- Original digest: \`66d30a709a2b36530d9a55f8248cc0a8f37af5925f74521627501370020f85f6\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Nobody in an underground museum could explain the signal tower sent messages to an empty sky, so a repair robot began with the physical evidence; before the annual night market began. An earlier mistake left the protagonist reluctant to intervene.
-*Visual:* signal
-
-**build:** A repair robot set a mirror reflecting a distant beacon beside a trail of warm stones beneath the snow. The anomaly stopped whenever investigators approached, suggesting someone was hiding it. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. A friend proposed a reversible action with a clear stopping rule. built a small safe model to test the theory, but the clue was damaged by rain before it could be copied. The attempt failed; pride gave way to doubt before trust returned.
-*Visual:* robot
-
-**twist:** The clue had not lied; the interpretation had. Only the second explanation accounted for both observations. A remote observation revealed that the investigators themselves triggered the shutdown. the tower's rotating mirror reflected a distant beacon beyond the visible horizon. The cautious trial succeeded because the protagonist acknowledged the old mistake.
-*Visual:* story
-
-**payoff:** A repair robot left a reliable warning system for the next generation. The team documented the rejected explanation so it would not mislead anyone again. The team changed its testing distance and repeated the observation without interference. The protagonist taught others how to test uncertain ideas safely. while keeping the evacuation route open.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 5. The Waterwheel Mystery of the Garden
-
-- Content ID: \`astra-proposal-8de2de728420c9d357be\`
-- Original digest: \`95e7ae4942c44bcfa2ae46e145ce9d6f025ebdf3d84549d8e972bdaf5bc17b38\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Nobody in a mountain garden could explain the waterwheel turned only at midnight, so a repair robot began with the physical evidence; before the annual night market began. A trusted tool produced a confident but misleading result.
-*Visual:* waterwheel
-
-**build:** A repair robot mapped warm water flowing uphill against a trail of warm stones beneath the snow before choosing a test. An unusual pattern appeared to move, making the team suspect a second hidden source. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. The protagonist verified its output using a different method. built a small safe model to test the theory, but the clue was damaged by rain before it could be copied. The attempt failed; pride gave way to doubt before trust returned.
-*Visual:* robot
-
-**twist:** One detail overturned the first theory: The warning predicted the failure more accurately than the first theory. Fixed reference points showed that the observer's viewpoint was changing instead. a pressure-fed pipe carried warmer reservoir water uphill through a timed release valve. The independent measurement uncovered the tool's hidden limitation.
-*Visual:* story
-
-**payoff:** A repair robot shared the discovery so the whole community could solve the problem together. The team included the helper in designing a better early-warning procedure. The team installed stable markers so future observations could be compared fairly. The team required independent verification before future critical decisions. while keeping the evacuation route open.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 6. The Lighthouse Mystery of the Railway
-
-- Content ID: \`astra-proposal-3b9d51062ad3380a1715\`
-- Original digest: \`32638e5a8f698602a077e1b10a7de3945298e15c8b4a2eb80337731686837e17\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A repair robot found the same impossible sign again in an abandoned railway: the lighthouse beam stopped before reaching the sea; before the last ferry left the harbor. The apparent solution worked briefly, then exposed a deeper consequence.
-*Visual:* lighthouse
-
-**build:** Two pieces mattered: a jammed brass lens mechanism and a set of tide marks on the oldest wall. A quiet observer noticed that the anomaly happened only when one person was absent. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The team stopped the fix and measured the new harm. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
-*Visual:* story
-
-**twist:** The failed test was the missing link. The timeline showed how both witnesses had seen different stages of the same event. The timing matched a routine maintenance cycle rather than anyone's movements. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The second attempt addressed the underlying cause instead of the symptom.
-*Visual:* story
-
-**payoff:** The team left proof behind: a repair robot restored the night lights and reopened the route before dawn. The team published a shared timeline so future warnings could be interpreted correctly. The team changed the maintenance schedule and checked the result in public. The community adopted a safer long-term maintenance plan. and prevented the next scheduled outage.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 7. The River Mystery of the Village
-
-- Content ID: \`astra-proposal-3529d579bf364f7aff3e\`
-- Original digest: \`0cfe6de32277f46153f25ac9767261fe21493636ef54ae8a5da3bc9a8cd667f0\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** The robot could not ignore a river flowed backward for exactly one minute in a flooded village; before sunrise erased the only clue. A trusted tool produced a confident but misleading result.
-*Visual:* river
-
-**build:** Rather than guess, a repair robot compared a gate buried under the riverbed with a message carried by migrating birds. A second witness challenged the first account, so the team had to test both versions. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. The protagonist verified its output using a different method. compared witness accounts taken separately, but a sudden power cut interrupted the first test. The attempt failed; the hero learned that asking for help was the missing step.
-*Visual:* robot
-
-**twist:** Then the evidence changed the case: Only the second explanation accounted for both observations. The conflicting accounts described different moments, not different events. a timed sluice gate briefly reversed the surface current in the narrow channel. The independent measurement uncovered the tool's hidden limitation.
-*Visual:* story
-
-**payoff:** Instead of hiding the mistake, a repair robot redirected the danger toward an empty field and kept the village safe. The team documented the rejected explanation so it would not mislead anyone again. The team recorded the corrected timeline so the disagreement would not recur. The team required independent verification before future critical decisions. without blaming anyone before the evidence was clear.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 8. The Bridge Mystery of the Village
-
-- Content ID: \`astra-proposal-e88b108fdd0f04363a00\`
-- Original digest: \`bf3b566ac0896484faacdb2339f9344869d333b0ed3299216509c3a4947a2d46\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Nobody in a flooded village could explain every bridge light blinked in a different rhythm, so a repair robot began with the physical evidence; before the evacuation bell sent everyone away. A trusted tool produced a confident but misleading result.
-*Visual:* bridge
-
-**build:** A repair robot mapped a pattern hidden in the wiring against a melody remembered by an elderly neighbor before choosing a test. A fragile clue could be examined only once before the weather destroyed it. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. The protagonist verified its output using a different method. tested the pattern against a hand-drawn timeline, but the team had to work without disturbing nesting animals. The attempt failed; a lonely task became a shared effort.
-*Visual:* robot
-
-**twist:** When the team replayed the evidence, Only the second explanation accounted for both observations. The team captured measurements from several angles before making a reversible test. a shared relay cycled through different delays, so each light followed its own wiring path. The independent measurement uncovered the tool's hidden limitation.
-*Visual:* story
-
-**payoff:** The final test gave a repair robot a choice; a repair robot opened the hidden channel and restored the town's water. The team documented the rejected explanation so it would not mislead anyone again. The preserved measurements let others independently verify the conclusion. The team required independent verification before future critical decisions. and left a practical check for future caretakers.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 9. The Lighthouse Mystery of the Library
-
-- Content ID: \`astra-proposal-0ee6b1422866a41b7c79\`
-- Original digest: \`a597af68f5f94a958cb5cbde1ad9e569923751df3fe3979fc6522f03012aa679\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A repair robot found the same impossible sign again in a coastal library: the lighthouse beam stopped before reaching the sea; before sunrise erased the only clue. A strict deadline made careful investigation seem impossible.
-*Visual:* lighthouse
-
-**build:** Two pieces mattered: a jammed brass lens mechanism and an overlooked maintenance log. The first attempted fix caused a second warning, raising the stakes instead of ending the problem. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist negotiated a temporary safe pause. mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The attempt failed; fear turned into curiosity when the clue finally made sense.
-*Visual:* story
-
-**twist:** The clue had not lied; the interpretation had. The reversible test revealed the cause without destroying the clue. The second warning was a side effect of the attempted fix, not a new mystery. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The pause allowed a small test that prevented a larger mistake.
-*Visual:* story
-
-**payoff:** With the danger understood, a repair robot sent a clear signal that guided the missing travelers home. The team preserved the original evidence for future investigators. The team added a check for that side effect before using the repair again. The team created an emergency procedure that protects time for verification. while protecting the fragile original clue.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 10. The Signal Mystery of the Garden
-
-- Content ID: \`astra-proposal-375d68c4e07e174b0a5c\`
-- Original digest: \`9efd24b049faa2f8a67efe4f308079b8425b9343ceba7aa1d19e3b9332cad5fe\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A repair robot found the same impossible sign again in a mountain garden: the orchard echoed words nobody had spoken; before the annual night market began. The apparent solution worked briefly, then exposed a deeper consequence.
-*Visual:* robot
-
-**build:** Two pieces mattered: a repeating distress call in the wind and a trail of warm stones beneath the snow. A harmless test result changed after the sample was moved, raising suspicion of tampering. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The team stopped the fix and measured the new harm. mapped which events happened before each failure, but the team had to work without disturbing nesting animals. The attempt failed; fear turned into curiosity when the clue finally made sense.
-*Visual:* story
-
-**twist:** The clue had not lied; the interpretation had. The reversible test revealed the cause without destroying the clue. Repeating the test with sealed controls showed the container, not the sample, caused the change. wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call. The second attempt addressed the underlying cause instead of the symptom.
-*Visual:* story
-
-**payoff:** With the danger understood, a repair robot repaired the mechanism and taught the neighbors how to maintain it. The team preserved the original evidence for future investigators. The team standardized sealed controls for later comparisons. The community adopted a safer long-term maintenance plan. while protecting the fragile original clue.
-*Visual:* robot
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 11. The Signal Mystery of the Library
-
-- Content ID: \`astra-proposal-ea75b2917de7f8c7e2e1\`
-- Original digest: \`8d8c3cb278e0bed57259dc6cb15ba6847ecf1e5763a024faae8c704e1be156c7\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Nobody in a coastal library could explain the signal tower sent messages to an empty sky, so a curious fox began with the physical evidence; before the annual night market began. A trusted tool produced a confident but misleading result.
-*Visual:* signal
-
-**build:** A curious fox mapped a mirror reflecting a distant beacon against a trail of warm stones beneath the snow before choosing a test. A scarce replacement part forced the team to choose which system to restore first. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. The protagonist verified its output using a different method. built a small safe model to test the theory, but the clue was damaged by rain before it could be copied. The attempt failed; pride gave way to doubt before trust returned.
-*Visual:* fox
-
-**twist:** One detail overturned the first theory: The warning predicted the failure more accurately than the first theory. A temporary bypass protected both systems long enough to test the shared cause. the tower's rotating mirror reflected a distant beacon beyond the visible horizon. The independent measurement uncovered the tool's hidden limitation.
-*Visual:* story
-
-**payoff:** A curious fox left a reliable warning system for the next generation. The team included the helper in designing a better early-warning procedure. The team documented the bypass limits and sourced the correct part. The team required independent verification before future critical decisions. while keeping the evacuation route open.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 12. The Bridge Mystery of the Market
-
-- Content ID: \`astra-proposal-0a9a6a2776af4ea84448\`
-- Original digest: \`9affc382f80dc186796feb8c11721f6a8740e8a2f2cc7ba638bdce0f1dfeab0e\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A routine check in a floating market became urgent when every bridge light blinked in a different rhythm; before the town's water supply ran dry. The first witness seemed unreliable but held the only missing detail.
-*Visual:* bridge
-
-**build:** A curious fox mapped a pattern hidden in the wiring against a child's drawing that matched the broken machine before choosing a test. A small object appeared in every account but never in the physical evidence. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist asked the witness to reconstruct the event without interruption. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
-*Visual:* fox
-
-**twist:** One detail overturned the first theory: The reversible test revealed the cause without destroying the clue. A search of the object's last known location showed it had been described from memory. a shared relay cycled through different delays, so each light followed its own wiring path. The missing detail reconciled the conflicting accounts.
-*Visual:* story
-
-**payoff:** The team left proof behind: a curious fox shared the discovery so the whole community could solve the problem together. The team preserved the original evidence for future investigators. The team separated eyewitness recollection from verified evidence in its report. The witness was invited to help document the corrected record. and prevented the next scheduled outage.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 13. The Bell Mystery of the Library
-
-- Content ID: \`astra-proposal-cebe967857abbcfa9b11\`
-- Original digest: \`36730cfe3dd413be9742e602e81628d95666f9b292e2c6c48374ed2296281404\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A routine check in a coastal library became urgent when the warning bell rang beneath the lake; before the mountain pass closed for winter. A strict deadline made careful investigation seem impossible.
-*Visual:* bell
-
-**build:** Two pieces mattered: a bell-shaped sonar echo and a constellation reflected in a puddle. A safe-looking route became hazardous whenever the original mechanism activated. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The protagonist negotiated a temporary safe pause. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
-*Visual:* story
-
-**twist:** One detail overturned the first theory: The traced chain of events identified the hidden trigger. A timed observation showed the hazard followed the mechanism's cycle. the bell hung from a submerged warning cable, and a passing current made its hollow housing ring. The pause allowed a small test that prevented a larger mistake.
-*Visual:* story
-
-**payoff:** The team left proof behind: a curious fox shared the discovery so the whole community could solve the problem together. The team isolated the trigger and checked that the safe route stayed open. The team marked a temporary exclusion zone and repaired the trigger. The team created an emergency procedure that protects time for verification. and prevented the next scheduled outage.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 14. The Signal Mystery of the Greenhouse
-
-- Content ID: \`astra-proposal-bed71c3cfd1107a0e629\`
-- Original digest: \`6402b420cbfa21205d225587199032bd77bea88bec316892d9d6cb3d56ed10f8\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** The fox could not ignore the orchard echoed words nobody had spoken in a desert greenhouse; before the evacuation bell sent everyone away. An earlier mistake left the protagonist reluctant to intervene.
-*Visual:* fox
-
-**build:** A curious fox treated a message carried by migrating birds as a lead, not proof, and tested it against a repeating distress call in the wind. The first attempted fix caused a second warning, raising the stakes instead of ending the problem. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. A friend proposed a reversible action with a clear stopping rule. compared witness accounts taken separately, but a sudden power cut interrupted the first test. The attempt failed; the hero learned that asking for help was the missing step.
-*Visual:* fox
-
-**twist:** Then the evidence changed the case: Only the second explanation accounted for both observations. The second warning was a side effect of the attempted fix, not a new mystery. wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call. The cautious trial succeeded because the protagonist acknowledged the old mistake.
-*Visual:* story
-
-**payoff:** Instead of hiding the mistake, a curious fox restored the night lights and reopened the route before dawn. The team documented the rejected explanation so it would not mislead anyone again. The team added a check for that side effect before using the repair again. The protagonist taught others how to test uncertain ideas safely. and prevented the next scheduled outage.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 15. The Door Mystery of the Railway
-
-- Content ID: \`astra-proposal-9a82d13354cf703b374e\`
-- Original digest: \`d755f05a877080e694fdd4e28b8ba4fcec273e543da98e6fcd98ca5ecdd23e7d\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** At an abandoned railway, a curious fox faced one urgent puzzle: all the shadows pointed toward one locked door; before the annual night market began. A strict deadline made careful investigation seem impossible.
-*Visual:* door
-
-**build:** The investigation began with a small mechanical part lodged beneath the floor, then checked it against a clockwork shadow moving against the sun. Two harmless changes happened together, making their combined effect look like sabotage. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist negotiated a temporary safe pause. reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The attempt failed; an old disagreement was resolved by a small act of kindness.
-*Visual:* story
-
-**twist:** The reversible test revealed the cause without destroying the clue. The team reversed each change separately and isolated which one affected the mechanism. a concealed clockwork shutter redirected a fixed beam, moving its shadow against the sun. The pause allowed a small test that prevented a larger mistake.
-*Visual:* story
-
-**payoff:** A curious fox turned the discovery into action and reunited the separated team and returned the lost object. The team preserved the original evidence for future investigators. The maintenance log now records changes individually so causes remain traceable. The team created an emergency procedure that protects time for verification. without blaming anyone before the evidence was clear.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 16. The Door Mystery of the Observatory
-
-- Content ID: \`astra-proposal-efe9b0e847e4947e4431\`
-- Original digest: \`5e431616215f6e59397ac9fec9b23487d244e9fdcb851d8f00024ff5fb908a75\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Before anyone blamed a neighbor, a curious fox had to explain all the shadows pointed toward one locked door in a silent observatory; before the town's water supply ran dry. A strict deadline made careful investigation seem impossible.
-*Visual:* door
-
-**build:** The investigation began with a sequence of lights from a passing train, then checked it against a clockwork shadow moving against the sun. The anomaly stopped whenever investigators approached, suggesting someone was hiding it. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist negotiated a temporary safe pause. reconstructed the mechanism from its worn parts, but a sudden power cut interrupted the first test. The attempt failed; an old disagreement was resolved by a small act of kindness.
-*Visual:* train
-
-**twist:** The reversible test revealed the cause without destroying the clue. A remote observation revealed that the investigators themselves triggered the shutdown. a concealed clockwork shutter redirected a fixed beam, moving its shadow against the sun. The pause allowed a small test that prevented a larger mistake.
-*Visual:* story
-
-**payoff:** A curious fox turned the discovery into action and reunited the separated team and returned the lost object. The team preserved the original evidence for future investigators. The team changed its testing distance and repeated the observation without interference. The team created an emergency procedure that protects time for verification. without blaming anyone before the evidence was clear.
-*Visual:* fox
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 17. The Snow Mystery of the Garden
-
-- Content ID: \`astra-proposal-fd92341204083bcae1ad\`
-- Original digest: \`43dac07b9f87d8e14be5727695ebe306245abfb173cca9ef5cd79c5f749451ed\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A routine check in a mountain garden became urgent when fresh snow appeared inside a sealed room; before sunrise erased the only clue. The first witness seemed unreliable but held the only missing detail.
+**reveal:** The otter could not ignore fresh snow appeared inside a sealed room in an underground museum; before the evacuation bell sent everyone away. A trusted tool produced a confident but misleading result.
 *Visual:* snow
 
-**build:** A curious fox mapped a cold draft from a forgotten tunnel against an overlooked maintenance log before choosing a test. The protagonist hesitated after an earlier mistake, while the deadline kept closing in. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. The protagonist asked the witness to reconstruct the event without interruption. tested the pattern against a hand-drawn timeline, but the team had to work without disturbing nesting animals. The attempt failed; fear turned into curiosity when the clue finally made sense.
-*Visual:* fox
+**build:** Rather than guess, a river otter compared a cold draft from a forgotten tunnel with an overlooked maintenance log. A witness refused to speak because the investigation might expose a private promise. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The protagonist verified its output using a different method. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; pride gave way to doubt before trust returned.
+*Visual:* otter
 
-**twist:** The clue had not lied; the interpretation had. The warning predicted the failure more accurately than the first theory. A reversible test made it possible to act without repeating the earlier mistake. a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent. The missing detail reconciled the conflicting accounts.
+**twist:** The clue had not lied; the interpretation had. The timeline showed how both witnesses had seen different stages of the same event. The team verified the relevant timing without demanding the private details. a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent. The independent measurement uncovered the tool's hidden limitation.
 *Visual:* story
 
-**payoff:** With the danger understood, a curious fox sent a clear signal that guided the missing travelers home. The team included the helper in designing a better early-warning procedure. The protagonist showed the neighbors how to check uncertain explanations safely. The witness was invited to help document the corrected record. while protecting the fragile original clue.
-*Visual:* fox
+**payoff:** A river otter shared the discovery so the whole community could solve the problem together. The team published a shared timeline so future warnings could be interpreted correctly. The final report protected the witness while preserving the facts needed to prevent recurrence. The team required independent verification before future critical decisions. while protecting the fragile original clue.
+*Visual:* otter
 
 ### Reviewer checklist
 
@@ -480,24 +32,52 @@ No story in this worksheet is eligible for automatic publishing.
 - [ ] Verify narration and visual continuity
 - [ ] Record reviewer, detailed notes and digest of final revised story
 
-## 18. The Map Mystery of the Observatory
+## 2. The Statue Mystery of the Railway
 
-- Content ID: \`astra-proposal-0ea344a69be943e34bd2\`
-- Original digest: \`820bac906729bf2763e142747d22cafba5ed24092ce36e2e6cb28619499cbce3\`
+- Content ID: \`astra-proposal-7b00ed78454c550cfabf\`
+- Original digest: \`af670ae40d99450fe57fabd59173d3f6050dc6cf0d0eef1b56a2875b9b33fc67\`
 - Status: pending; substantive rewrite required
 
 ### Original narration
 
-**reveal:** Nobody in a silent observatory could explain the town's oldest map changed each morning, so a lighthouse keeper began with the physical evidence; before sunrise erased the only clue. Before acting, the team had to choose between two costly alternatives.
-*Visual:* map
+**reveal:** At an abandoned railway, a river otter faced one urgent puzzle: the museum's smallest statue changed position nightly; before the mountain pass closed for winter. The team could rescue one group immediately or protect everyone later.
+*Visual:* statue
 
-**build:** A lighthouse keeper set new streets etched into a stone tile beside an overlooked maintenance log. Two harmless changes happened together, making their combined effect look like sabotage. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. A limited trial ruled out the tempting shortcut. built a small safe model to test the theory, but the clue was damaged by rain before it could be copied. The attempt failed; pride gave way to doubt before trust returned.
+**build:** Rather than guess, a river otter compared tiny wet footprints beside its case with a map drawn on the back of a family photograph. A power failure interrupted the only test that could separate the two explanations. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. They created a temporary safeguard while testing the permanent solution. checked the clue against weather and tide records, but the safest route was blocked by a fallen tree. The attempt failed; a lonely task became a shared effort.
+*Visual:* otter
+
+**twist:** When the team replayed the evidence, The reversible test revealed the cause without destroying the clue. A hand-powered repeat produced the same result and ruled out the suspected electrical fault. a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints. The safeguard bought time to resolve the cause without abandoning anyone.
 *Visual:* story
 
-**twist:** The clue had not lied; the interpretation had. Only the second explanation accounted for both observations. The team reversed each change separately and isolated which one affected the mechanism. morning condensation revealed a second layer of shallow survey engravings on the stone tile. The protagonist changed course after the evidence challenged the first plan.
+**payoff:** The final test gave a river otter a choice; a river otter sent a clear signal that guided the missing travelers home. The team preserved the original evidence for future investigators. The team kept a manual backup method for future emergencies. The final solution removed the tradeoff and kept the safeguard available. without wasting the town limited supplies.
+*Visual:* otter
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 3. The Signal Mystery of the Observatory
+
+- Content ID: \`astra-proposal-5993868deec54dcdf02f\`
+- Original digest: \`c2ff0288a4814cbfa9635df5272e1f9e10c3023d828eea84d7ee2a95de0926ab\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** A routine check in a silent observatory became urgent when the signal tower sent messages to an empty sky; before the evacuation bell sent everyone away. The first witness seemed unreliable but held the only missing detail.
+*Visual:* signal
+
+**build:** Two pieces mattered: a mirror reflecting a distant beacon and a set of tide marks on the oldest wall. Two harmless changes happened together, making their combined effect look like sabotage. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The protagonist asked the witness to reconstruct the event without interruption. mapped which events happened before each failure, but a ticking timer left only minutes to compare the evidence. The attempt failed; an old disagreement was resolved by a small act of kindness.
 *Visual:* story
 
-**payoff:** A lighthouse keeper left a reliable warning system for the next generation. The team documented the rejected explanation so it would not mislead anyone again. The maintenance log now records changes individually so causes remain traceable. The final choice preserved the evidence and earned back the community's trust. while keeping the evacuation route open.
+**twist:** Then the evidence changed the case: The timeline showed how both witnesses had seen different stages of the same event. The team reversed each change separately and isolated which one affected the mechanism. the tower's rotating mirror reflected a distant beacon beyond the visible horizon. The missing detail reconciled the conflicting accounts.
+*Visual:* story
+
+**payoff:** A young astronomer turned the discovery into action and reunited the separated team and returned the lost object. The team published a shared timeline so future warnings could be interpreted correctly. The maintenance log now records changes individually so causes remain traceable. The witness was invited to help document the corrected record. and made the result easy for children to verify.
 *Visual:* story
 
 ### Reviewer checklist
@@ -508,136 +88,444 @@ No story in this worksheet is eligible for automatic publishing.
 - [ ] Verify narration and visual continuity
 - [ ] Record reviewer, detailed notes and digest of final revised story
 
-## 19. The Bell Mystery of the Village
+## 4. The Snow Mystery of the Greenhouse
 
-- Content ID: \`astra-proposal-c82df6253e13505478eb\`
-- Original digest: \`4a639f0fca42d5789ba9d0433f9dd75def8de9cb4611c4f99c170bb657c9342a\`
+- Content ID: \`astra-proposal-2a12e91465709912a479\`
+- Original digest: \`12ca44a423f8850d93fd95225d5f567a617412b7f2abe6a24f4ed22d678a6b95\`
 - Status: pending; substantive rewrite required
 
 ### Original narration
 
-**reveal:** A lighthouse keeper found the same impossible sign again in a flooded village: the warning bell rang beneath the lake; before the mountain pass closed for winter. Two allies disagreed about which clue deserved attention.
+**reveal:** A young astronomer found the same impossible sign again in a desert greenhouse: fresh snow appeared inside a sealed room; before the annual night market began. The apparent solution worked briefly, then exposed a deeper consequence.
+*Visual:* snow
+
+**build:** A young astronomer treated a small mechanical part lodged beneath the floor as a lead, not proof, and tested it against a cold draft from a forgotten tunnel. A small object appeared in every account but never in the physical evidence. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. The team stopped the fix and measured the new harm. followed the sound to its physical source, but the first explanation failed a simple repeat test. The attempt failed; an old disagreement was resolved by a small act of kindness.
+*Visual:* story
+
+**twist:** Only the second explanation accounted for both observations. A search of the object's last known location showed it had been described from memory. a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent. The second attempt addressed the underlying cause instead of the symptom.
+*Visual:* story
+
+**payoff:** A young astronomer turned the discovery into action and opened the hidden channel and restored the town's water. The team documented the rejected explanation so it would not mislead anyone again. The team separated eyewitness recollection from verified evidence in its report. The community adopted a safer long-term maintenance plan. and made the result easy for children to verify.
+*Visual:* story
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 5. The Lighthouse Mystery of the Library
+
+- Content ID: \`astra-proposal-db76d3a79b3ee935a9ed\`
+- Original digest: \`d1172f568d17121ee4a56ffe0cdb80a5f0700596960c586a4600e770ad8d86b6\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** The astronomer could not ignore the lighthouse beam stopped before reaching the sea in a coastal library; before the town's water supply ran dry. A trusted tool produced a confident but misleading result.
+*Visual:* lighthouse
+
+**build:** Rather than guess, a young astronomer compared a jammed brass lens mechanism with a sequence of lights from a passing train. A rushed public announcement risked turning an uncertain theory into a dangerous rumor. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist verified its output using a different method. followed the sound to its physical source, but the first explanation failed a simple repeat test. The attempt failed; a lonely task became a shared effort.
+*Visual:* train
+
+**twist:** When the team replayed the evidence, The reversible test revealed the cause without destroying the clue. A quick controlled check separated what was observed from what was merely assumed. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The independent measurement uncovered the tool's hidden limitation.
+*Visual:* story
+
+**payoff:** The final test gave a young astronomer a choice; a young astronomer sent a clear signal that guided the missing travelers home. The team preserved the original evidence for future investigators. The team published the evidence and its remaining uncertainty together. The team required independent verification before future critical decisions. without wasting the town limited supplies.
+*Visual:* story
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 6. The Bell Mystery of the Library
+
+- Content ID: \`astra-proposal-0e184d3eb6e8e1e6e4db\`
+- Original digest: \`ef276131af9478ff7f3caaba26b907c83312b55dc763b43125f27397efa71e8c\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** The robot could not ignore the warning bell rang beneath the lake in a coastal library; before the evacuation bell sent everyone away. An earlier mistake left the protagonist reluctant to intervene.
 *Visual:* bell
 
-**build:** Two pieces mattered: a bell-shaped sonar echo and a constellation reflected in a puddle. A rushed public announcement risked turning an uncertain theory into a dangerous rumor. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. They split the investigation into independent tests. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
-*Visual:* story
-
-**twist:** The failed test was the missing link. The traced chain of events identified the hidden trigger. A quick controlled check separated what was observed from what was merely assumed. the bell hung from a submerged warning cable, and a passing current made its hollow housing ring. Their separate findings became consistent only when combined.
-*Visual:* story
-
-**payoff:** The team left proof behind: a lighthouse keeper shared the discovery so the whole community could solve the problem together. The team isolated the trigger and checked that the safe route stayed open. The team published the evidence and its remaining uncertainty together. Both allies received credit and agreed to share evidence earlier. and prevented the next scheduled outage.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 20. The River Mystery of the Market
-
-- Content ID: \`astra-proposal-748da529dc7394152d0d\`
-- Original digest: \`d6d59f3336f29ea490d107f4bee4f37f19fae2092a4ba34782a292e2b6bc1c31\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** At a floating market, a lighthouse keeper faced one urgent puzzle: a river flowed backward for exactly one minute; before the annual night market began. The team could rescue one group immediately or protect everyone later.
-*Visual:* river
-
-**build:** Rather than guess, a lighthouse keeper compared a gate buried under the riverbed with a small mechanical part lodged beneath the floor. The protagonist recognized a familiar pattern but feared that assumption would bias the test. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. They created a temporary safeguard while testing the permanent solution. compared witness accounts taken separately, but a sudden power cut interrupted the first test. The attempt failed; an old disagreement was resolved by a small act of kindness.
-*Visual:* story
-
-**twist:** Then the evidence changed the case: The warning predicted the failure more accurately than the first theory. A colleague designed a blind check that did not reveal the expected answer. a timed sluice gate briefly reversed the surface current in the narrow channel. The safeguard bought time to resolve the cause without abandoning anyone.
-*Visual:* story
-
-**payoff:** A lighthouse keeper turned the discovery into action and redirected the danger toward an empty field and kept the village safe. The team included the helper in designing a better early-warning procedure. The team adopted blind checks whenever prior experience could distort judgment. The final solution removed the tradeoff and kept the safeguard available. without blaming anyone before the evidence was clear.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 21. The Map Mystery of the Railway
-
-- Content ID: \`astra-proposal-c995e7e6755d4584fb24\`
-- Original digest: \`63aa78fa154422a09a7a393ab63f8f3588d6d13926496d5cd5e1c02a31ecd685\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Before anyone blamed a neighbor, a lighthouse keeper had to explain the town's oldest map changed each morning in an abandoned railway; before the mountain pass closed for winter. The apparent solution worked briefly, then exposed a deeper consequence.
-*Visual:* map
-
-**build:** The investigation began with a sequence of lights from a passing train, then checked it against new streets etched into a stone tile. An unusual pattern appeared to move, making the team suspect a second hidden source. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The team stopped the fix and measured the new harm. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; an old disagreement was resolved by a small act of kindness.
-*Visual:* train
-
-**twist:** The traced chain of events identified the hidden trigger. Fixed reference points showed that the observer's viewpoint was changing instead. morning condensation revealed a second layer of shallow survey engravings on the stone tile. The second attempt addressed the underlying cause instead of the symptom.
-*Visual:* story
-
-**payoff:** A lighthouse keeper turned the discovery into action and reunited the separated team and returned the lost object. The team isolated the trigger and checked that the safe route stayed open. The team installed stable markers so future observations could be compared fairly. The community adopted a safer long-term maintenance plan. and left a practical check for future caretakers.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 22. The Waterwheel Mystery of the Greenhouse
-
-- Content ID: \`astra-proposal-9039b46feaf290d7f9d8\`
-- Original digest: \`b2ef34195df99fe77defad2e7ec8a1884fe9ef57108986e5f07572e5d2c9910c\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** Nobody in a desert greenhouse could explain the waterwheel turned only at midnight, so a lighthouse keeper began with the physical evidence; before the last ferry left the harbor. Before acting, the team had to choose between two costly alternatives.
-*Visual:* waterwheel
-
-**build:** A lighthouse keeper set warm water flowing uphill beside a map drawn on the back of a family photograph. The community's most trusted explanation depended on a measurement nobody had repeated. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. A limited trial ruled out the tempting shortcut. tested the pattern against a hand-drawn timeline, but the useful part was hidden inside an ordinary object. The attempt failed; a lonely task became a shared effort.
-*Visual:* story
-
-**twist:** When the team replayed the evidence, The timeline showed how both witnesses had seen different stages of the same event. A second instrument exposed a calibration error in the original reading. a pressure-fed pipe carried warmer reservoir water uphill through a timed release valve. The protagonist changed course after the evidence challenged the first plan.
-*Visual:* story
-
-**payoff:** The final test gave a lighthouse keeper a choice; a lighthouse keeper opened the hidden channel and restored the town's water. The team published a shared timeline so future warnings could be interpreted correctly. The team added independent calibration checks to the local procedure. The final choice preserved the evidence and earned back the community's trust. and left a practical check for future caretakers.
-*Visual:* story
-
-### Reviewer checklist
-
-- [ ] Rewrite weak causal transitions, dialogue and resolution
-- [ ] Verify originality against published and reserved history
-- [ ] Verify distinct, legible 9:16 visual scenes
-- [ ] Verify narration and visual continuity
-- [ ] Record reviewer, detailed notes and digest of final revised story
-
-## 23. The Bridge Mystery of the Library
-
-- Content ID: \`astra-proposal-dd752675e75b4605010e\`
-- Original digest: \`80e5709f618257b8ddfe88ae9a96cd0a124a791f39c67fef74300de7ae79aa39\`
-- Status: pending; substantive rewrite required
-
-### Original narration
-
-**reveal:** A routine check in a coastal library became urgent when every bridge light blinked in a different rhythm; before the town's water supply ran dry. The first witness seemed unreliable but held the only missing detail.
-*Visual:* bridge
-
-**build:** Two pieces mattered: a pattern hidden in the wiring and a child's drawing that matched the broken machine. The community's most trusted explanation depended on a measurement nobody had repeated. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist asked the witness to reconstruct the event without interruption. tracked the signal across three locations, but two witnesses remembered the event differently. The attempt failed; a seemingly useless object proved essential.
+**build:** Rather than guess, a repair robot compared a bell-shaped sonar echo with a melody remembered by an elderly neighbor. A scarce replacement part forced the team to choose which system to restore first. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. A friend proposed a reversible action with a clear stopping rule. compared witness accounts taken separately, but the useful part was hidden inside an ordinary object. The attempt failed; pride gave way to doubt before trust returned.
 *Visual:* robot
 
-**twist:** One detail overturned the first theory: The reversible test revealed the cause without destroying the clue. A second instrument exposed a calibration error in the original reading. a shared relay cycled through different delays, so each light followed its own wiring path. The missing detail reconciled the conflicting accounts.
+**twist:** The clue had not lied; the interpretation had. The traced chain of events identified the hidden trigger. A temporary bypass protected both systems long enough to test the shared cause. the bell hung from a submerged warning cable, and a passing current made its hollow housing ring. The cautious trial succeeded because the protagonist acknowledged the old mistake.
 *Visual:* story
 
-**payoff:** The team left proof behind: a storm chaser shared the discovery so the whole community could solve the problem together. The team preserved the original evidence for future investigators. The team added independent calibration checks to the local procedure. The witness was invited to help document the corrected record. and prevented the next scheduled outage.
+**payoff:** A repair robot shared the discovery so the whole community could solve the problem together. The team isolated the trigger and checked that the safe route stayed open. The team documented the bypass limits and sourced the correct part. The protagonist taught others how to test uncertain ideas safely. and left a practical check for future caretakers.
+*Visual:* robot
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 7. The Telescope Mystery of the Greenhouse
+
+- Content ID: \`astra-proposal-d32ca9f0acaba7c7805f\`
+- Original digest: \`d9b168bfc241293848769ef13a2c2d34688c99acb5d942eba835f2febab90493\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Nobody in a desert greenhouse could explain the stars vanished above a single rooftop, so a repair robot began with the physical evidence; before the mountain pass closed for winter. Before acting, the team had to choose between two costly alternatives.
+*Visual:* robot
+
+**build:** A repair robot set a lens hidden in a broken telescope beside a constellation reflected in a puddle. The first attempted fix caused a second warning, raising the stakes instead of ending the problem. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. A limited trial ruled out the tempting shortcut. tested the pattern against a hand-drawn timeline, but the team had to work without disturbing nesting animals. The attempt failed; the hero learned that asking for help was the missing step.
+*Visual:* robot
+
+**twist:** The failed test was the missing link. The reversible test revealed the cause without destroying the clue. The second warning was a side effect of the attempted fix, not a new mystery. a misaligned rooftop lens scattered light across that patch of sky and washed out the faint stars. The protagonist changed course after the evidence challenged the first plan.
+*Visual:* story
+
+**payoff:** Instead of hiding the mistake, a repair robot redirected the danger toward an empty field and kept the village safe. The team preserved the original evidence for future investigators. The team added a check for that side effect before using the repair again. The final choice preserved the evidence and earned back the community's trust. before the weather changed again.
+*Visual:* robot
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 8. The Map Mystery of the Museum
+
+- Content ID: \`astra-proposal-7f3625e8b1ca4954a712\`
+- Original digest: \`662a8a4d57a0953757b1b80253716be3f994ee00d9d689695642e6be900fc6b1\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Nobody in an underground museum could explain the town's oldest map changed each morning, so a repair robot began with the physical evidence; before the last ferry left the harbor. A trusted tool produced a confident but misleading result.
+*Visual:* map
+
+**build:** A repair robot mapped new streets etched into a stone tile against a constellation reflected in a puddle before choosing a test. A second witness challenged the first account, so the team had to test both versions. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. The protagonist verified its output using a different method. tested the pattern against a hand-drawn timeline, but a ticking timer left only minutes to compare the evidence. The attempt failed; the hero learned that asking for help was the missing step.
+*Visual:* robot
+
+**twist:** The failed test was the missing link. The reversible test revealed the cause without destroying the clue. The conflicting accounts described different moments, not different events. morning condensation revealed a second layer of shallow survey engravings on the stone tile. The independent measurement uncovered the tool's hidden limitation.
+*Visual:* story
+
+**payoff:** Instead of hiding the mistake, a repair robot reunited the separated team and returned the lost object. The team preserved the original evidence for future investigators. The team recorded the corrected timeline so the disagreement would not recur. The team required independent verification before future critical decisions. before the weather changed again.
+*Visual:* robot
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 9. The Map Mystery of the Library
+
+- Content ID: \`astra-proposal-8c43622fb0b8c93f4ee9\`
+- Original digest: \`f15b776423703ea9c33824e81ad05cc24beba24533431951a2a226a054b15871\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Nobody in a coastal library could explain the town's oldest map changed each morning, so a repair robot began with the physical evidence; before the last ferry left the harbor. A trusted tool produced a confident but misleading result.
+*Visual:* map
+
+**build:** A repair robot mapped new streets etched into a stone tile against a set of tide marks on the oldest wall before choosing a test. The protagonist recognized a familiar pattern but feared that assumption would bias the test. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The protagonist verified its output using a different method. mapped which events happened before each failure, but a ticking timer left only minutes to compare the evidence. The attempt failed; the hero learned that asking for help was the missing step.
+*Visual:* robot
+
+**twist:** Then the evidence changed the case: The traced chain of events identified the hidden trigger. A colleague designed a blind check that did not reveal the expected answer. morning condensation revealed a second layer of shallow survey engravings on the stone tile. The independent measurement uncovered the tool's hidden limitation.
+*Visual:* story
+
+**payoff:** Instead of hiding the mistake, a repair robot reunited the separated team and returned the lost object. The team isolated the trigger and checked that the safe route stayed open. The team adopted blind checks whenever prior experience could distort judgment. The team required independent verification before future critical decisions. before the weather changed again.
+*Visual:* robot
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 10. The Signal Mystery of the Greenhouse
+
+- Content ID: \`astra-proposal-8f1b8cc6b05cf9bf0e0f\`
+- Original digest: \`27f1abd4141e8be4c7208c5168fd51a48aca6d6d61d513ef43a83ad20540ae2e\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** At a desert greenhouse, a curious fox faced one urgent puzzle: the orchard echoed words nobody had spoken; before the annual night market began. A strict deadline made careful investigation seem impossible.
+*Visual:* fox
+
+**build:** The investigation began with a trail of warm stones beneath the snow, then checked it against a repeating distress call in the wind. The protagonist's closest ally wanted to conceal a mistake that had altered the evidence. A failed test revealed that an important assumption was wrong; repeated the test under controlled conditions. The protagonist negotiated a temporary safe pause. reconstructed the mechanism from its worn parts, but the team had to work without disturbing nesting animals. The attempt failed; a seemingly useless object proved essential.
+*Visual:* story
+
+**twist:** One detail overturned the first theory: The repeated result exposed the missing cause. The ally's original notes revealed exactly when the clue had changed. wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** The team left proof behind: a curious fox restored the night lights and reopened the route before dawn. The team added a repeatable check to catch the same failure early. The team corrected the record and agreed to disclose mistakes immediately. The team created an emergency procedure that protects time for verification. while protecting the fragile original clue.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 11. The Statue Mystery of the Library
+
+- Content ID: \`astra-proposal-80269447d6f1a9b6635e\`
+- Original digest: \`07327e1946e36a1f30a03c06f578bd12d408063ac401d7211debc4ecd83a3bb5\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** At a coastal library, a curious fox faced one urgent puzzle: the museum's smallest statue changed position nightly; before the annual night market began. A strict deadline made careful investigation seem impossible.
+*Visual:* statue
+
+**build:** The investigation began with a trail of warm stones beneath the snow, then checked it against tiny wet footprints beside its case. A fragile clue could be examined only once before the weather destroyed it. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. The protagonist negotiated a temporary safe pause. reconstructed the mechanism from its worn parts, but the team had to work without disturbing nesting animals. The attempt failed; a seemingly useless object proved essential.
+*Visual:* story
+
+**twist:** One detail overturned the first theory: Only the second explanation accounted for both observations. The team captured measurements from several angles before making a reversible test. a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** The team left proof behind: a curious fox restored the night lights and reopened the route before dawn. The team documented the rejected explanation so it would not mislead anyone again. The preserved measurements let others independently verify the conclusion. The team created an emergency procedure that protects time for verification. while protecting the fragile original clue.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 12. The Telescope Mystery of the Museum
+
+- Content ID: \`astra-proposal-de45e9ff17ec24024de4\`
+- Original digest: \`ed1d76e72d964f819687343d0a9fbf2b7b69d57fd36810b85c5444e7809c8912\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Before anyone blamed a neighbor, a curious fox had to explain the stars vanished above a single rooftop in an underground museum; before the mountain pass closed for winter. Before acting, the team had to choose between two costly alternatives.
+*Visual:* fox
+
+**build:** A curious fox set a lens hidden in a broken telescope beside a child's drawing that matched the broken machine. The only useful tool gave a confident result that contradicted what everyone could see. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. A limited trial ruled out the tempting shortcut. tested the pattern against a hand-drawn timeline, but the team had to work without disturbing nesting animals. The attempt failed; a seemingly useless object proved essential.
+*Visual:* fox
+
+**twist:** The failed test was the missing link. The warning predicted the failure more accurately than the first theory. An independent measurement revealed the tool's hidden limitation. a misaligned rooftop lens scattered light across that patch of sky and washed out the faint stars. The protagonist changed course after the evidence challenged the first plan.
+*Visual:* story
+
+**payoff:** The team left proof behind: a curious fox redirected the danger toward an empty field and kept the village safe. The team included the helper in designing a better early-warning procedure. The team required a second method before trusting future critical readings. The final choice preserved the evidence and earned back the community's trust. before the weather changed again.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 13. The Waterwheel Mystery of the Greenhouse
+
+- Content ID: \`astra-proposal-5392227e93972d14b65f\`
+- Original digest: \`5d6f262c07993582e9df15259faea86eee2070ffd8b40cefffb69dad726b83d6\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** A routine check in a desert greenhouse became urgent when the waterwheel turned only at midnight; before sunrise erased the only clue. A strict deadline made careful investigation seem impossible.
+*Visual:* waterwheel
+
+**build:** Two pieces mattered: warm water flowing uphill and a message carried by migrating birds. The anomaly stopped whenever investigators approached, suggesting someone was hiding it. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The protagonist negotiated a temporary safe pause. mapped which events happened before each failure, but a ticking timer left only minutes to compare the evidence. The attempt failed; an old disagreement was resolved by a small act of kindness.
+*Visual:* story
+
+**twist:** Then the evidence changed the case: The timeline showed how both witnesses had seen different stages of the same event. A remote observation revealed that the investigators themselves triggered the shutdown. a pressure-fed pipe carried warmer reservoir water uphill through a timed release valve. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** A curious fox turned the discovery into action and reunited the separated team and returned the lost object. The team published a shared timeline so future warnings could be interpreted correctly. The team changed its testing distance and repeated the observation without interference. The team created an emergency procedure that protects time for verification. and made the result easy for children to verify.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 14. The Bridge Mystery of the Railway
+
+- Content ID: \`astra-proposal-05b69ad4de757997bc33\`
+- Original digest: \`5b1f15424e3aecc6ec7699a3ae34dcb480fe06df8547bb3127cc68bab1293926\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** A routine check in an abandoned railway became urgent when every bridge light blinked in a different rhythm; before sunrise erased the only clue. A strict deadline made careful investigation seem impossible.
+*Visual:* bridge
+
+**build:** Two pieces mattered: a pattern hidden in the wiring and a message carried by migrating birds. A scarce replacement part forced the team to choose which system to restore first. A failed test revealed that an important assumption was wrong; repeated the test under controlled conditions. The protagonist negotiated a temporary safe pause. mapped which events happened before each failure, but a ticking timer left only minutes to compare the evidence. The attempt failed; an old disagreement was resolved by a small act of kindness.
+*Visual:* story
+
+**twist:** Then the evidence changed the case: The repeated result exposed the missing cause. A temporary bypass protected both systems long enough to test the shared cause. a shared relay cycled through different delays, so each light followed its own wiring path. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** A curious fox turned the discovery into action and opened the hidden channel and restored the town's water. The team added a repeatable check to catch the same failure early. The team documented the bypass limits and sourced the correct part. The team created an emergency procedure that protects time for verification. and made the result easy for children to verify.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 15. The Bridge Mystery of the Village
+
+- Content ID: \`astra-proposal-e7de826a951fbbb09612\`
+- Original digest: \`1cfbe9f33727874061d16a72a28db05daf7e2d00840d6d3897c20d7c098538db\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** A curious fox found the same impossible sign again in a flooded village: every bridge light blinked in a different rhythm; before sunrise erased the only clue. Two allies disagreed about which clue deserved attention.
+*Visual:* bridge
+
+**build:** A curious fox treated a small mechanical part lodged beneath the floor as a lead, not proof, and tested it against a pattern hidden in the wiring. An unusual pattern appeared to move, making the team suspect a second hidden source. A failed test revealed that an important assumption was wrong; repeated the test under controlled conditions. They split the investigation into independent tests. mapped which events happened before each failure, but the first explanation failed a simple repeat test. The attempt failed; an old disagreement was resolved by a small act of kindness.
+*Visual:* fox
+
+**twist:** The repeated result exposed the missing cause. Fixed reference points showed that the observer's viewpoint was changing instead. a shared relay cycled through different delays, so each light followed its own wiring path. Their separate findings became consistent only when combined.
+*Visual:* story
+
+**payoff:** A curious fox turned the discovery into action and opened the hidden channel and restored the town's water. The team added a repeatable check to catch the same failure early. The team installed stable markers so future observations could be compared fairly. Both allies received credit and agreed to share evidence earlier. and made the result easy for children to verify.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 16. The Signal Mystery of the Garden
+
+- Content ID: \`astra-proposal-c20c8b4c362e16390fec\`
+- Original digest: \`711c8e6171228a75f9195ad4fe845e32a01241aec68bf8f6a52d5a2970355889\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** The fox could not ignore the orchard echoed words nobody had spoken in a mountain garden; before the mountain pass closed for winter. The team could rescue one group immediately or protect everyone later.
+*Visual:* fox
+
+**build:** Rather than guess, a curious fox compared a repeating distress call in the wind with a map drawn on the back of a family photograph. A quiet observer noticed that the anomaly happened only when one person was absent. The obvious solution would have damaged the only surviving clue; built a reversible test before touching the original evidence. They created a temporary safeguard while testing the permanent solution. checked the clue against weather and tide records, but the safest route was blocked by a fallen tree. The attempt failed; a lonely task became a shared effort.
+*Visual:* fox
+
+**twist:** When the team replayed the evidence, The reversible test revealed the cause without destroying the clue. The timing matched a routine maintenance cycle rather than anyone's movements. wind through a cracked reed and hollow irrigation pipe repeated a pattern like a distress call. The safeguard bought time to resolve the cause without abandoning anyone.
+*Visual:* story
+
+**payoff:** The final test gave a curious fox a choice; a curious fox sent a clear signal that guided the missing travelers home. The team preserved the original evidence for future investigators. The team changed the maintenance schedule and checked the result in public. The final solution removed the tradeoff and kept the safeguard available. without wasting the town limited supplies.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 17. The Telescope Mystery of the Garden
+
+- Content ID: \`astra-proposal-354fb67071e90375003d\`
+- Original digest: \`979819145bad29e634a64f2cee0905bc3d2b6040ee1fb808d51847fa12fac560\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Before anyone blamed a neighbor, a curious fox had to explain the stars vanished above a single rooftop in a mountain garden; before the evacuation bell sent everyone away. A strict deadline made careful investigation seem impossible.
+*Visual:* fox
+
+**build:** The investigation began with a melody remembered by an elderly neighbor, then checked it against a lens hidden in a broken telescope. A ticking deadline made the obvious shortcut tempting, but the shortcut risked the only clue. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The protagonist negotiated a temporary safe pause. checked the clue against weather and tide records, but the safest route was blocked by a fallen tree. The attempt failed; fear turned into curiosity when the clue finally made sense.
+*Visual:* tree
+
+**twist:** The clue had not lied; the interpretation had. The timeline showed how both witnesses had seen different stages of the same event. A small reversible test exposed why the shortcut would have made the damage worse. a misaligned rooftop lens scattered light across that patch of sky and washed out the faint stars. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** With the danger understood, a curious fox repaired the mechanism and taught the neighbors how to maintain it. The team published a shared timeline so future warnings could be interpreted correctly. The team kept the safe test procedure for the next emergency. The team created an emergency procedure that protects time for verification. without wasting the town limited supplies.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 18. The Door Mystery of the Railway
+
+- Content ID: \`astra-proposal-e65c9e35696b2b51877a\`
+- Original digest: \`6bb62feaf53632ddf34c5c9875f3ab1b3a5f6c3d1e1a6e6654b1bdf55d6928bd\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Before anyone blamed a neighbor, a curious fox had to explain all the shadows pointed toward one locked door in an abandoned railway; before sunrise erased the only clue. Before acting, the team had to choose between two costly alternatives.
+*Visual:* door
+
+**build:** A curious fox set a clockwork shadow moving against the sun beside an overlooked maintenance log. A sudden crowd made it impossible to repeat the test safely in its usual location. A failed test revealed that an important assumption was wrong; repeated the test under controlled conditions. A limited trial ruled out the tempting shortcut. built a small safe model to test the theory, but the clue was damaged by rain before it could be copied. The attempt failed; pride gave way to doubt before trust returned.
+*Visual:* fox
+
+**twist:** The clue had not lied; the interpretation had. The repeated result exposed the missing cause. The team built a small scale model that reproduced the same critical behavior. a concealed clockwork shutter redirected a fixed beam, moving its shadow against the sun. The protagonist changed course after the evidence challenged the first plan.
+*Visual:* story
+
+**payoff:** A curious fox left a reliable warning system for the next generation. The team added a repeatable check to catch the same failure early. The model became a safe training tool for future investigators. The final choice preserved the evidence and earned back the community's trust. while keeping the evacuation route open.
+*Visual:* fox
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 19. The Snow Mystery of the Observatory
+
+- Content ID: \`astra-proposal-f53ba22f6b4414690e7c\`
+- Original digest: \`f6bce6730f3b693dfd92dee5e8b1003b33824b136bc75b61e9fd0c16ca86389b\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** The keeper could not ignore fresh snow appeared inside a sealed room in a silent observatory; before the evacuation bell sent everyone away. A trusted tool produced a confident but misleading result.
+*Visual:* snow
+
+**build:** Rather than guess, a lighthouse keeper compared a cold draft from a forgotten tunnel with an overlooked maintenance log. An unusual pattern appeared to move, making the team suspect a second hidden source. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The protagonist verified its output using a different method. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; pride gave way to doubt before trust returned.
+*Visual:* story
+
+**twist:** The clue had not lied; the interpretation had. The traced chain of events identified the hidden trigger. Fixed reference points showed that the observer's viewpoint was changing instead. a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent. The independent measurement uncovered the tool's hidden limitation.
+*Visual:* story
+
+**payoff:** A lighthouse keeper shared the discovery so the whole community could solve the problem together. The team isolated the trigger and checked that the safe route stayed open. The team installed stable markers so future observations could be compared fairly. The team required independent verification before future critical decisions. while protecting the fragile original clue.
 *Visual:* story
 
 ### Reviewer checklist
@@ -648,24 +536,80 @@ No story in this worksheet is eligible for automatic publishing.
 - [ ] Verify narration and visual continuity
 - [ ] Record reviewer, detailed notes and digest of final revised story
 
-## 24. The Signal Mystery of the Railway
+## 20. The Lighthouse Mystery of the Railway
 
-- Content ID: \`astra-proposal-e946d8071f845aae8ccd\`
-- Original digest: \`38e26918d6b5c39e1cc669f50988f4aae46988c47078a0aeb23a27441ea41a3c\`
+- Content ID: \`astra-proposal-3ebc9f9935e4cdd21fbf\`
+- Original digest: \`74d2b6bb8701ce88b300be22f8175f6d5a369b1e792960cf1a6d8b6caf13c95f\`
 - Status: pending; substantive rewrite required
 
 ### Original narration
 
-**reveal:** Before anyone blamed a neighbor, a storm chaser had to explain the signal tower sent messages to an empty sky in an abandoned railway; before the mountain pass closed for winter. The apparent solution worked briefly, then exposed a deeper consequence.
-*Visual:* signal
+**reveal:** The keeper could not ignore the lighthouse beam stopped before reaching the sea in an abandoned railway; before sunrise erased the only clue. The team could rescue one group immediately or protect everyone later.
+*Visual:* lighthouse
 
-**build:** The investigation began with a sequence of lights from a passing train, then checked it against a mirror reflecting a distant beacon. A witness refused to speak because the investigation might expose a private promise. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The team stopped the fix and measured the new harm. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; an old disagreement was resolved by a small act of kindness.
+**build:** Rather than guess, a lighthouse keeper compared a jammed brass lens mechanism with an overlooked maintenance log. A witness refused to speak because the investigation might expose a private promise. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. They created a temporary safeguard while testing the permanent solution. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; pride gave way to doubt before trust returned.
+*Visual:* story
+
+**twist:** The clue had not lied; the interpretation had. The timeline showed how both witnesses had seen different stages of the same event. The team verified the relevant timing without demanding the private details. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The safeguard bought time to resolve the cause without abandoning anyone.
+*Visual:* story
+
+**payoff:** A lighthouse keeper shared the discovery so the whole community could solve the problem together. The team published a shared timeline so future warnings could be interpreted correctly. The final report protected the witness while preserving the facts needed to prevent recurrence. The final solution removed the tradeoff and kept the safeguard available. while protecting the fragile original clue.
+*Visual:* story
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 21. The River Mystery of the Railway
+
+- Content ID: \`astra-proposal-390d80c1d6a63bea95cc\`
+- Original digest: \`f86ef0bf773fc1e3d99977967e2a39e23dcba902368a70140a3204a33ca0cbcd\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** Before anyone blamed a neighbor, a lighthouse keeper had to explain a river flowed backward for exactly one minute in an abandoned railway; before the town's water supply ran dry. Two allies disagreed about which clue deserved attention.
+*Visual:* river
+
+**build:** A lighthouse keeper set a gate buried under the riverbed beside a child's drawing that matched the broken machine. A quiet observer noticed that the anomaly happened only when one person was absent. The first clue contradicted the town's explanation; tested a competing explanation against the original clue. They split the investigation into independent tests. tested the pattern against a hand-drawn timeline, but the team had to work without disturbing nesting animals. The attempt failed; a seemingly useless object proved essential.
+*Visual:* robot
+
+**twist:** One detail overturned the first theory: Only the second explanation accounted for both observations. The timing matched a routine maintenance cycle rather than anyone's movements. a timed sluice gate briefly reversed the surface current in the narrow channel. Their separate findings became consistent only when combined.
+*Visual:* story
+
+**payoff:** The team left proof behind: a lighthouse keeper redirected the danger toward an empty field and kept the village safe. The team documented the rejected explanation so it would not mislead anyone again. The team changed the maintenance schedule and checked the result in public. Both allies received credit and agreed to share evidence earlier. while protecting the fragile original clue.
+*Visual:* story
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 22. The Snow Mystery of the Garden
+
+- Content ID: \`astra-proposal-d34db605265e74165ec7\`
+- Original digest: \`e7c52e182374fdee9862304970e40d69742a32219b1da54a5693d3d88a792da0\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** The keeper could not ignore fresh snow appeared inside a sealed room in a mountain garden; before the town's water supply ran dry. Before acting, the team had to choose between two costly alternatives.
+*Visual:* snow
+
+**build:** A lighthouse keeper treated a sequence of lights from a passing train as a lead, not proof, and tested it against a cold draft from a forgotten tunnel. A safe-looking route became hazardous whenever the original mechanism activated. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. A limited trial ruled out the tempting shortcut. followed the sound to its physical source, but the first explanation failed a simple repeat test. The attempt failed; a lonely task became a shared effort.
 *Visual:* train
 
-**twist:** The traced chain of events identified the hidden trigger. The team verified the relevant timing without demanding the private details. the tower's rotating mirror reflected a distant beacon beyond the visible horizon. The second attempt addressed the underlying cause instead of the symptom.
+**twist:** The warning predicted the failure more accurately than the first theory. A timed observation showed the hazard followed the mechanism's cycle. a pressure difference pulled cold air from the snow-filled forgotten tunnel through a floor vent. The protagonist changed course after the evidence challenged the first plan.
 *Visual:* story
 
-**payoff:** A storm chaser turned the discovery into action and reunited the separated team and returned the lost object. The team isolated the trigger and checked that the safe route stayed open. The final report protected the witness while preserving the facts needed to prevent recurrence. The community adopted a safer long-term maintenance plan. and left a practical check for future caretakers.
+**payoff:** The final test gave a lighthouse keeper a choice; a lighthouse keeper sent a clear signal that guided the missing travelers home. The team included the helper in designing a better early-warning procedure. The team marked a temporary exclusion zone and repaired the trigger. The final choice preserved the evidence and earned back the community's trust. and made the result easy for children to verify.
 *Visual:* story
 
 ### Reviewer checklist
@@ -676,24 +620,80 @@ No story in this worksheet is eligible for automatic publishing.
 - [ ] Verify narration and visual continuity
 - [ ] Record reviewer, detailed notes and digest of final revised story
 
-## 25. The Signal Mystery of the Observatory
+## 23. The Lighthouse Mystery of the Village
 
-- Content ID: \`astra-proposal-ff5a97e5c120910296e7\`
-- Original digest: \`a0444724257b7032d7a42d25c07406a2034cef615fd14a1f79b69635374a21c4\`
+- Content ID: \`astra-proposal-f00ca71145ba6f38a980\`
+- Original digest: \`6f911a6c49097f22e69a4fcc1cdeecf6c93fcfc3f17095d5ebebf9fa11e4280d\`
 - Status: pending; substantive rewrite required
 
 ### Original narration
 
-**reveal:** Before anyone blamed a neighbor, a storm chaser had to explain the signal tower sent messages to an empty sky in a silent observatory; before the mountain pass closed for winter. Before acting, the team had to choose between two costly alternatives.
-*Visual:* signal
+**reveal:** The keeper could not ignore the lighthouse beam stopped before reaching the sea in a flooded village; before the town's water supply ran dry. An earlier mistake left the protagonist reluctant to intervene.
+*Visual:* lighthouse
 
-**build:** A storm chaser set a mirror reflecting a distant beacon beside a map drawn on the back of a family photograph. The first repair restored the signal but silently disabled an important warning. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. A limited trial ruled out the tempting shortcut. reconstructed the mechanism from its worn parts, but the useful part was hidden inside an ordinary object. The attempt failed; a lonely task became a shared effort.
+**build:** Rather than guess, a lighthouse keeper compared a jammed brass lens mechanism with a sequence of lights from a passing train. The protagonist's closest ally wanted to conceal a mistake that had altered the evidence. A helper's earlier warning had been dismissed as unrelated; compared the warning with the new physical evidence. A friend proposed a reversible action with a clear stopping rule. followed the sound to its physical source, but the first explanation failed a simple repeat test. The attempt failed; a lonely task became a shared effort.
+*Visual:* train
+
+**twist:** The warning predicted the failure more accurately than the first theory. The ally's original notes revealed exactly when the clue had changed. a jammed brass lens carriage cut off the beam before it could clear the lighthouse housing. The cautious trial succeeded because the protagonist acknowledged the old mistake.
 *Visual:* story
 
-**twist:** The timeline showed how both witnesses had seen different stages of the same event. A full-cycle test revealed the warning disappeared only during the repair's final stage. the tower's rotating mirror reflected a distant beacon beyond the visible horizon. The protagonist changed course after the evidence challenged the first plan.
+**payoff:** The final test gave a lighthouse keeper a choice; a lighthouse keeper sent a clear signal that guided the missing travelers home. The team included the helper in designing a better early-warning procedure. The team corrected the record and agreed to disclose mistakes immediately. The protagonist taught others how to test uncertain ideas safely. without wasting the town limited supplies.
 *Visual:* story
 
-**payoff:** The final test gave a storm chaser a choice; a storm chaser reunited the separated team and returned the lost object. The team published a shared timeline so future warnings could be interpreted correctly. The team added an end-to-end safety test before declaring repairs complete. The final choice preserved the evidence and earned back the community's trust. and left a practical check for future caretakers.
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 24. The Statue Mystery of the Museum
+
+- Content ID: \`astra-proposal-9d92507c4ed0664cfa6b\`
+- Original digest: \`6ce57ceb5efed9760249a620cff023bc0556143d40a486108d14d674e1b86756\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** At an underground museum, a lighthouse keeper faced one urgent puzzle: the museum's smallest statue changed position nightly; before the last ferry left the harbor. The first witness seemed unreliable but held the only missing detail.
+*Visual:* statue
+
+**build:** The investigation began with a map drawn on the back of a family photograph, then checked it against tiny wet footprints beside its case. The neighbors disagreed about whether the evidence was safe to test in public. A harmless-looking side effect threatened the safest route; traced the side effect backward to the mechanism that triggered it. The protagonist asked the witness to reconstruct the event without interruption. checked the clue against weather and tide records, but the safest route was blocked by a fallen tree. The attempt failed; fear turned into curiosity when the clue finally made sense.
+*Visual:* tree
+
+**twist:** When the team replayed the evidence, The traced chain of events identified the hidden trigger. A contained test answered the question without putting the original clue at risk. a maintenance hatch let a caretaker shift the statue's wheeled plinth, leaving damp footprints. The missing detail reconciled the conflicting accounts.
+*Visual:* story
+
+**payoff:** With the danger understood, a lighthouse keeper repaired the mechanism and taught the neighbors how to maintain it. The team isolated the trigger and checked that the safe route stayed open. The team shared the test results so the community could verify the decision. The witness was invited to help document the corrected record. without wasting the town limited supplies.
+*Visual:* story
+
+### Reviewer checklist
+
+- [ ] Rewrite weak causal transitions, dialogue and resolution
+- [ ] Verify originality against published and reserved history
+- [ ] Verify distinct, legible 9:16 visual scenes
+- [ ] Verify narration and visual continuity
+- [ ] Record reviewer, detailed notes and digest of final revised story
+
+## 25. The River Mystery of the Garden
+
+- Content ID: \`astra-proposal-0d18e8784b127bdf6fd6\`
+- Original digest: \`88f25990b0f4aba881b3feb00082c85600507f6ed075f60145c794797a62d463\`
+- Status: pending; substantive rewrite required
+
+### Original narration
+
+**reveal:** At a mountain garden, a lighthouse keeper faced one urgent puzzle: a river flowed backward for exactly one minute; before the last ferry left the harbor. A strict deadline made careful investigation seem impossible.
+*Visual:* river
+
+**build:** The investigation began with a melody remembered by an elderly neighbor, then checked it against a gate buried under the riverbed. The first attempted fix caused a second warning, raising the stakes instead of ending the problem. Two witnesses described incompatible versions of the event; reconstructed the timeline from independent records. The protagonist negotiated a temporary safe pause. checked the clue against weather and tide records, but the safest route was blocked by a fallen tree. The attempt failed; fear turned into curiosity when the clue finally made sense.
+*Visual:* tree
+
+**twist:** When the team replayed the evidence, The timeline showed how both witnesses had seen different stages of the same event. The second warning was a side effect of the attempted fix, not a new mystery. a timed sluice gate briefly reversed the surface current in the narrow channel. The pause allowed a small test that prevented a larger mistake.
+*Visual:* story
+
+**payoff:** With the danger understood, a lighthouse keeper repaired the mechanism and taught the neighbors how to maintain it. The team published a shared timeline so future warnings could be interpreted correctly. The team added a check for that side effect before using the repair again. The team created an emergency procedure that protects time for verification. without wasting the town limited supplies.
 *Visual:* story
 
 ### Reviewer checklist
