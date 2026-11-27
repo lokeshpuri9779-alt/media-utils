@@ -14070,6 +14070,65 @@
       "video_id": "vJj7i7N7nQw",
       "confirmed_at": "2026-11-27T18:22:05.024750+00:00",
       "title": "Why tina fey Is Getting Attention Now | RAYVAN"
+    },
+    {
+      "content_id": "rayvan-forge-df01d75de6c4ba09",
+      "video_id": "YK9aFt9eXvw",
+      "confirmed_at": "2026-11-27T19:36:53.550055+00:00",
+      "title": "The Mouse and the Whispering Archive",
+      "plot_fingerprint": "41cf5134c711d4c886c623153a1e28ebbe88a5f7b20d748d00ffb92bc7decaa6",
+      "story_beats": [
+        {
+          "headline": "PAGES TURNED ALONE",
+          "speech": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
+          "visual": "book",
+          "visual_prompt": "book: A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
+          "visual_intent": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
+          "label": "WHO IS READING",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WINDOW WAS LOCKED",
+          "speech": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
+          "visual": "door",
+          "visual_prompt": "door: She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
+          "visual_intent": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
+          "label": "NO ENTRY",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A HIDDEN AIR SHAFT",
+          "speech": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
+          "visual": "book",
+          "visual_prompt": "book: She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
+          "visual_intent": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
+          "label": "FOLLOW THE AIR",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BOOKS WERE SAFE",
+          "speech": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
+          "visual": "book",
+          "visual_prompt": "book: The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
+          "visual_intent": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
+          "label": "ARCHIVE OPEN",
+          "story_beat": "payoff",
+          "story_actor_actions": {
+            "mouse": "repair"
+          },
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
