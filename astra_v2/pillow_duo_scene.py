@@ -687,8 +687,9 @@ def draw_duo(image, shot, t):
         prop_pos=(round(prop_pos[0]*(1-grasp)+held[0]*grasp),
                   round(prop_pos[1]*(1-grasp)+held[1]*grasp))
     for idx,name in enumerate(pair):
-        x=(298 if idx==0 else 772)+actor_translation(action,t,idx)
-        if idx==1 and action=="carry":
+        actor_action = per_actor_actions.get(name, action)
+        x=(298 if idx==0 else 772)+actor_translation(actor_action,t,idx)
+        if idx==1 and actor_action=="carry":
             x-=105
         y=846
         # A story prop may be picked up, repaired, opened, pushed or pulled.
