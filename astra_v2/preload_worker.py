@@ -135,6 +135,23 @@ def main():
                         perf["trend_snapshot"] = {
                             "checked_at": now.isoformat(), "items": trends[:120]}
                         legacy.save_performance(perf)
+                        saved_snapshot = (perf.get("trend_snapshot") or {})
+                        print("ASTRA_LONG_SNAPSHOT_HANDOFF=" + json.dumps({
+                            "stage": "after_save", "path": str(getattr(legacy, "PERFORMANCE_PATH", "")),
+                            "checked_at": saved_snapshot.get("checked_at"),
+                            "item_count": len(saved_snapshot.get("items") or []),
+                        }, sort_keys=True))
+                        reloaded = legacy.load_performance()
+                        reloaded_snapshot = (reloaded.get("trend_snapshot") or {})
+                        print("ASTRA_LONG_SNAPSHOT_HANDOFF=" + json.dumps({
+                            "stage": "after_reload",
+                            "checked_at": reloaded_snapshot.get("checked_at"),
+                            "item_count": len(reloaded_snapshot.get("items") or []),
+                            "matches_saved": (
+                                reloaded_snapshot.get("checked_at") == saved_snapshot.get("checked_at")
+                                and len(reloaded_snapshot.get("items") or []) == len(saved_snapshot.get("items") or [])
+                            ),
+                        }, sort_keys=True))
                         print("ASTRA_LONG_RESEARCH=eligible_sourced_topics")
                     else:
                         print("ASTRA_LONG_RESEARCH=no_eligible_sourced_topics")
