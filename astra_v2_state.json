@@ -3,7 +3,7 @@
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 3,
-  "confirmed_today": 2,
+  "confirmed_today": 3,
   "last_attempt_at": "2026-11-27T02:47:35.029185+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -15206,16 +15206,14 @@
         }
       ],
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "L98JHSSPACU": {
-      "content_id": "rayvan-forge-b934b0399a530eb5",
+    },
+    "rayvan-forge-b934b0399a530eb5": {
+      "video_id": "L98JHSSPACU",
+      "confirmed_at": "2026-11-27T02:49:22.519255+00:00",
       "title": "The Frog and the Cloud Catcher",
-      "day": "2026-11-27",
-      "uploaded_at": "2026-11-27T02:47:36.779811+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-27T02:47:36.779811+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "b23d4561686aa79aec6d5175df3813c1f7e6664a506b6d6efcaf43a11470026c",
       "story_beats": [
@@ -15256,31 +15254,31 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-27T02:46:23.171267+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-27T02:49:22.210898+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T02:47:37.039748+00:00",
+    "at": "2026-11-27T02:49:22.624798+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -30944,10 +30942,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T02:47:37.039708+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-27T02:49:22.624735+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -30955,9 +30953,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T02:47:37.039742+00:00",
+    "at": "2026-11-27T02:49:22.624788+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -30969,22 +30967,22 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T02:47:37.039105+00:00",
-    "preflight_due": "true",
+    "at": "2026-11-27T02:49:22.623982+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T02:47:37.039654+00:00",
-    "collection_status": "not_applicable_preloaded_candidate",
-    "publish_step": "success",
-    "selection_source": "preload_artifact",
+    "at": "2026-11-27T02:49:22.624694+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
