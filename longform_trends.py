@@ -188,7 +188,7 @@ def _sentence_excerpt(value, max_words=32):
     clean = _clean_summary(value, limit=2000)
     if not clean:
         return ""
-    sentences = re.split(r"(?<=[.!?])\\s+(?=[A-Z0-9\\\"'])", clean)
+    sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9"])', clean)
     chosen = []
     count = 0
     for sentence in sentences:
