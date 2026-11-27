@@ -3,7 +3,7 @@
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
   "attempts": 7,
-  "confirmed_today": 6,
+  "confirmed_today": 7,
   "last_attempt_at": "2026-11-27T03:19:21.766730+00:00",
   "blocked_until": "",
   "quota_reason": "",
@@ -15409,16 +15409,14 @@
       "decisive_choice": "Orion chooses to establish a cooperative shared-time rule, placing the lantern in the center of the desk so both can work without fighting over the light.",
       "resolution": "The observatory is evenly illuminated, allowing Orion to read his charts and Barnaby to inspect his mechanical instruments in harmony.",
       "genre": "fiction"
-    }
-  },
-  "pending": {
-    "xVq7pqrH8g4": {
-      "content_id": "rayvan-forge-d4a1122cf6f3b431",
+    },
+    "rayvan-forge-d4a1122cf6f3b431": {
+      "video_id": "xVq7pqrH8g4",
+      "confirmed_at": "2026-11-27T03:21:17.849229+00:00",
       "title": "The Seal and the Singing Buoy",
-      "day": "2026-11-27",
-      "uploaded_at": "2026-11-27T03:19:23.447893+00:00",
-      "genre": "fiction",
       "format": "short",
+      "uploaded_at": "2026-11-27T03:19:23.447893+00:00",
+      "renderer": "studio-7.3.1",
       "plot_key": "",
       "plot_fingerprint": "08eca90f5a59f77c0e3aa18a71c0cd47238c173a239e340c50eb816c4f57b650",
       "story_beats": [
@@ -15471,31 +15469,31 @@
           "duration": 2.1
         }
       ],
-      "renderer": "studio-7.3.1"
+      "genre": "fiction"
     }
   },
-  "last_outcome": "processing",
-  "last_error": "",
-  "last_preflight_at": "2026-11-27T03:17:28.670898+00:00",
-  "last_preflight_reason": "ready",
-  "last_preflight_outcome": "ready",
+  "pending": {},
+  "last_outcome": "published",
+  "last_preflight_at": "2026-11-27T03:21:17.549745+00:00",
+  "last_preflight_reason": "min_interval",
+  "last_preflight_outcome": "published",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T03:19:23.809582+00:00",
+    "at": "2026-11-27T03:21:17.942646+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "true",
+    "render_due": "false",
     "job_status_before_persist": "success",
-    "dependencies_step": "success",
-    "publish_step": "success",
+    "dependencies_step": "skipped",
+    "publish_step": "skipped",
     "cover_tests": "",
-    "motion_tests": "success",
-    "animal_tests": "success",
-    "cover_package_tests": "success",
-    "quality_tests": "success",
-    "policy_tests": "success",
-    "queue_tests": "success",
-    "oauth_tests": "success",
-    "layer_tests": "success"
+    "motion_tests": "skipped",
+    "animal_tests": "skipped",
+    "cover_package_tests": "skipped",
+    "quality_tests": "skipped",
+    "policy_tests": "skipped",
+    "queue_tests": "skipped",
+    "oauth_tests": "skipped",
+    "layer_tests": "skipped"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -31366,10 +31364,10 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T03:19:23.809538+00:00",
-    "publication_outcome": "processing",
-    "publication_reason": "",
-    "character_memory": "not_approved_or_missing_identity",
+    "at": "2026-11-27T03:21:17.942603+00:00",
+    "publication_outcome": "published",
+    "publication_reason": "min_interval",
+    "character_memory": "not_reported",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -31377,9 +31375,9 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T03:19:23.809575+00:00",
+    "at": "2026-11-27T03:21:17.942639+00:00",
     "history_file_present": true,
-    "publication_outcome": "processing",
+    "publication_outcome": "published",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
@@ -31391,129 +31389,23 @@
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T03:19:23.808878+00:00",
-    "preflight_due": "true",
+    "at": "2026-11-27T03:21:17.942013+00:00",
+    "preflight_due": "false",
     "preflight_step": "success",
-    "publish_step": "success",
+    "publish_step": "skipped",
     "job_status_before_persist": "success",
-    "outcome": "processing",
-    "reason": "",
-    "fresh_upload_attempted": true,
+    "outcome": "published",
+    "reason": "min_interval",
+    "fresh_upload_attempted": false,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": false
+    "reconciled_previous_publication": true
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T03:19:23.809410+00:00",
-    "collection_status": "collected",
-    "publish_step": "success",
-    "selection_source": "fresh_candidate_evaluation",
-    "counters": {
-      "ASTRA_STORY_SUPPLY": {
-        "eligible": 6,
-        "not_ready": 64,
-        "publication_rejected": {
-          "not_production_ready": 3
-        },
-        "seen": 89,
-        "total": 162
-      },
-      "ASTRA_STORY_HISTORY_FILTER": {
-        "before": 162,
-        "fingerprint": 0,
-        "id": 34,
-        "near_duplicate": 0,
-        "plot_key": 0,
-        "remaining": 127,
-        "title": 1,
-        "unplanned_original": 0
-      },
-      "ASTRA_STORY_SUPPLY_AFTER_HISTORY": {
-        "pool": 127,
-        "remaining": 5
-      },
-      "ASTRA_STORY_SELECTION": {
-        "already_seen": 0,
-        "approved": 1,
-        "background_preflight_rejected": 1,
-        "background_review_gaps": [
-          {
-            "content_id": "rayvan-forge-df01d75de6c4ba09",
-            "missing_shots": [
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
-                    "visual": "book",
-                    "visual_intent": "A mouse librarian found fresh pages turning inside a sealed archive every night after closing time.",
-                    "visual_prompt": "book: A mouse librarian found fresh pages turning inside a sealed archive every night after closing time."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 1
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
-                    "visual": "door",
-                    "visual_intent": "She checked the window and door, yet a soft flutter returned whenever the room became quiet.",
-                    "visual_prompt": "door: She checked the window and door, yet a soft flutter returned whenever the room became quiet."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 2
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
-                    "visual": "book",
-                    "visual_intent": "She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft.",
-                    "visual_prompt": "book: She held a ribbon near the shelves and traced the breeze to a loose panel covering an old air shaft."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 3
-              },
-              {
-                "authored_context": {
-                  "authored_fields": {
-                    "speech": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
-                    "visual": "book",
-                    "visual_intent": "The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry.",
-                    "visual_prompt": "book: The mouse repaired the panel and reopened the archive, where the gentle airflow kept the fragile pages dry."
-                  },
-                  "review_only": true,
-                  "source": "unmodified_story_input",
-                  "source_beat_found": true
-                },
-                "reason": "scene_unresolved",
-                "shot": 4
-              }
-            ],
-            "publication_approval": false,
-            "reason": "missing_backgrounds",
-            "semantic_quality": "not_verified",
-            "shot_count": 4
-          }
-        ],
-        "considered": 2,
-        "duration_rejected": 0,
-        "not_ready": 0,
-        "policy_rejected": {},
-        "render_exception": {},
-        "render_qa_rejected": 0
-      }
-    },
+    "at": "2026-11-27T03:21:17.942567+00:00",
+    "collection_status": "not_applicable_publisher_skipped",
+    "publish_step": "skipped",
+    "selection_source": "no_render",
+    "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
 }

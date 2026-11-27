@@ -13834,6 +13834,63 @@
       "central_conflict": "Orion the owl needs a lantern to illuminate his star charts during the midnight watch, but he mistakes the brass observatory clock for his light source, causing a dispute with Barnaby the mouse over shared workspace illumination.",
       "decisive_choice": "Orion chooses to establish a cooperative shared-time rule, placing the lantern in the center of the desk so both can work without fighting over the light.",
       "resolution": "The observatory is evenly illuminated, allowing Orion to read his charts and Barnaby to inspect his mechanical instruments in harmony."
+    },
+    {
+      "content_id": "rayvan-forge-d4a1122cf6f3b431",
+      "video_id": "xVq7pqrH8g4",
+      "confirmed_at": "2026-11-27T03:21:17.849229+00:00",
+      "title": "The Seal and the Singing Buoy",
+      "plot_fingerprint": "08eca90f5a59f77c0e3aa18a71c0cd47238c173a239e340c50eb816c4f57b650",
+      "story_beats": [
+        {
+          "headline": "A BUOY SANG AT DAWN",
+          "speech": "A seal noticed the harbor buoy making three musical notes instead of its usual warning bell.",
+          "visual": "ship",
+          "visual_prompt": "ship: A seal noticed the harbor buoy making three musical notes instead of its usual warning bell.",
+          "visual_intent": "A seal noticed the harbor buoy making three musical notes instead of its usual warning bell.",
+          "label": "THREE NOTES",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE FISHERS MISREAD IT",
+          "speech": "The boats followed the familiar channel but found floating driftwood blocking the entrance.",
+          "visual": "ship",
+          "visual_prompt": "ship: The boats followed the familiar channel but found floating driftwood blocking the entrance.",
+          "visual_intent": "The boats followed the familiar channel but found floating driftwood blocking the entrance.",
+          "label": "BLOCKED",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE NOTES MARKED DEPTH",
+          "speech": "The seal matched each note to a water depth and guided the boats through a safer passage.",
+          "visual": "signal",
+          "visual_prompt": "signal: The seal matched each note to a water depth and guided the boats through a safer passage.",
+          "visual_intent": "The seal matched each note to a water depth and guided the boats through a safer passage.",
+          "label": "NEW ROUTE",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A SAFER HARBOR",
+          "speech": "The harbor keeper painted the new route on the pier and thanked the seal for listening closely.",
+          "visual": "ship",
+          "visual_prompt": "ship: The harbor keeper painted the new route on the pier and thanked the seal for listening closely.",
+          "visual_intent": "The harbor keeper painted the new route on the pier and thanked the seal for listening closely.",
+          "label": "SAFE RETURN",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
