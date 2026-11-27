@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 1,
+  "attempts": 2,
   "confirmed_today": 1,
-  "last_attempt_at": "2026-11-27T02:29:01.077966+00:00",
+  "last_attempt_at": "2026-11-27T02:34:54.442227+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -15159,28 +15159,79 @@
       "genre": "current"
     }
   },
-  "pending": {},
-  "last_outcome": "published",
-  "last_preflight_at": "2026-11-27T02:31:51.844992+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "published",
+  "pending": {
+    "1BCyYUQc7gE": {
+      "content_id": "rayvan-forge-5d252364b800ef65",
+      "title": "The Owl and the Radio Ribbon",
+      "day": "2026-11-27",
+      "uploaded_at": "2026-11-27T02:34:55.838647+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "10cbb1e478cc2cf063b69f148409adda6df3ad2a2a937a03316532fc198de652",
+      "story_beats": [
+        {
+          "headline": "THE RADIO LOST ITS VOICE",
+          "speech": "An owl heard the hilltop radio fall silent while a mountain rescue team waited for directions.",
+          "visual": "signal",
+          "label": "NO MESSAGE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE ANTENNA WAS INTACT",
+          "speech": "She inspected the antenna but found its cable twisted around a metal weather vane.",
+          "visual": "signal",
+          "label": "TANGLED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A RIBBON SHOWED THE WIND",
+          "speech": "She tied a ribbon to the vane and watched it reveal which gusts pulled the cable too tight.",
+          "visual": "forest",
+          "label": "WIND CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RESCUE TEAM HEARD",
+          "speech": "She secured the cable away from the vane and the rescue team received its route before nightfall.",
+          "visual": "signal",
+          "label": "CONNECTED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
+  "last_error": "",
+  "last_preflight_at": "2026-11-27T02:34:12.276282+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T02:31:52.295804+00:00",
+    "at": "2026-11-27T02:34:56.160748+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -30747,13 +30798,60 @@
       "story_beats": [],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-5d252364b800ef65": {
+      "at": "2026-11-27T02:34:54.442208+00:00",
+      "title": "The Owl and the Radio Ribbon",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "10cbb1e478cc2cf063b69f148409adda6df3ad2a2a937a03316532fc198de652",
+      "story_beats": [
+        {
+          "headline": "THE RADIO LOST ITS VOICE",
+          "speech": "An owl heard the hilltop radio fall silent while a mountain rescue team waited for directions.",
+          "visual": "signal",
+          "label": "NO MESSAGE",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE ANTENNA WAS INTACT",
+          "speech": "She inspected the antenna but found its cable twisted around a metal weather vane.",
+          "visual": "signal",
+          "label": "TANGLED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A RIBBON SHOWED THE WIND",
+          "speech": "She tied a ribbon to the vane and watched it reveal which gusts pulled the cable too tight.",
+          "visual": "forest",
+          "label": "WIND CLUE",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE RESCUE TEAM HEARD",
+          "speech": "She secured the cable away from the vane and the rescue team received its route before nightfall.",
+          "visual": "signal",
+          "label": "CONNECTED",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T02:31:52.295745+00:00",
-    "publication_outcome": "published",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-27T02:34:56.160704+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -30761,36 +30859,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T02:31:52.295794+00:00",
+    "at": "2026-11-27T02:34:56.160741+00:00",
     "history_file_present": true,
-    "publication_outcome": "published",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-27T02:28:49.009786+00:00",
+    "at": "2026-11-27T02:34:45.475725+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "trend-brief-2026-11-26-pm",
-    "video_url": "https://www.youtube.com/watch?v=k1opcDWQYN8",
+    "content_id": "rayvan-forge-5d252364b800ef65",
+    "video_url": "https://www.youtube.com/watch?v=1BCyYUQc7gE",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T02:31:52.294866+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-27T02:34:56.160099+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "published",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
-    "reconciled_previous_publication": true
+    "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T02:31:52.295699+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
+    "at": "2026-11-27T02:34:56.160647+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
+    "publish_step": "success",
+    "selection_source": "preload_artifact",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
