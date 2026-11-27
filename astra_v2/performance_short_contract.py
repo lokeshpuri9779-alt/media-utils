@@ -8,6 +8,8 @@ from __future__ import annotations
 import hashlib
 import re
 
+from astra_v2.story_action_motion import choose_action
+
 SCENE_ROLES = (
     "hook", "stakes", "attempt", "setback", "discovery", "climax", "payoff"
 )
@@ -91,6 +93,8 @@ def validate_short_outline(outline: dict, history=()) -> dict:
             minimum_length = 3 if field == "action" else 8
             if not isinstance(scene.get(field), str) or len(scene[field].strip()) < minimum_length:
                 raise ValueError(f"scene_{index}_{field}_missing")
+        if choose_action({"action": scene["action"]}) == "idle":
+            raise ValueError(f"scene_{index}_action_not_animatable")
         for field in ("visual", "story_environment", "story_beat"):
             if not isinstance(scene.get(field), str) or not scene[field].strip():
                 raise ValueError(f"scene_{index}_{field}_missing")
