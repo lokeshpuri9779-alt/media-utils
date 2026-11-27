@@ -47,7 +47,7 @@ def analyze_story_scene(shot):
     reliable evidence of the story's setting. Unknown environments stay unresolved
     rather than silently selecting unrelated artwork.
     """
-    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "visual", "headline", "speech", "story_title"):
+    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "headline", "speech", "story_title", "visual"):
         value = shot.get(key)
         if not isinstance(value, str) or not value.strip():
             continue
