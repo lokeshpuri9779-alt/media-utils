@@ -56,6 +56,10 @@ class RendererAwareWritingTests(unittest.TestCase):
         prompt = captured[0]["prompt"]
         self.assertIn("Choose exactly one or two recurring animal protagonist SPECIES", prompt)
         self.assertIn("Do not create human protagonists", prompt)
+        self.assertIn("No human may appear as a named or unnamed visible actor", prompt)
+        self.assertIn("animal interact physically with a human", prompt)
+        self.assertIn("Never use a symbolic signal graphic", prompt)
+        self.assertIn("real physical object in the animal scene", prompt)
         self.assertIn("supported animal", prompt.lower())
         self.assertIn("without adding an unrepresentable third protagonist", prompt)
         self.assertIn("unreviewed proposal", prompt)
