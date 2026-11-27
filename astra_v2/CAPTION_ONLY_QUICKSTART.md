@@ -8,6 +8,7 @@ ASTRA's caption-only path runs on GitHub-hosted Actions. It produces narration p
 - **ASTRA Single-Lane Diagnostic** — manually tests one lane end-to-end without writing story history or publishing.
 - **ASTRA Local Story to Caption Short** — manually generates one selected direction and renders a review artifact.
 - **ASTRA Caption-only Render** — renders an existing review candidate from `queue/pending/`.
+- **ASTRA Caption Short Review Generation** — manually generates exactly one seven-scene fiction candidate with the configured Gemini model and stores a candidate, review packet, and one-item review queue as a 14-day artifact. It requires the repository secret `GEMINI_API_KEY`; optionally set repository variable `ASTRA_GEMINI_MODEL`. It does not render or publish and does not write to the repository's persistent queue.
 
 The caption inference workflows share one concurrency group to prevent overlapping model runs and competing writes to the shared originality history. Generation and rendering commands have hard time limits. A timeout fails the run safely; it does not trigger publishing.
 
@@ -25,6 +26,10 @@ The generator adapts structure to the content direction:
 The complete spoken script is constrained to 65–85 words, including a specific audience question. Compact four-beat scenes allow 10–18 words each, with the prompt aiming for 14–16 words. Validation rejects incorrect role order, weak length, generic CTAs, repeated lines, selected cliché endings, and topics too similar to recent ASTRA content. Validation does not prove factual accuracy, originality in the legal sense, or audience performance.
 
 Candidates are explicitly marked `approved: false`, `production_ready: false`, and `published: false`. The renderer refuses candidates without those explicit review-only flags and validates the expected scene-role sequence.
+
+## Seven-scene fiction review generation
+
+The separate **ASTRA Caption Short Review Generation** workflow is an optional Gemini-backed fiction lane, not a replacement for the local Qwen multi-format pipeline above. It is manually triggered, generates exactly one candidate per run, and has a 12-minute job limit. A missing Gemini secret fails before generation. The workflow verifies all candidate, packet, and queue promotion flags remain false, then uploads the JSON review artifacts for 14 days. It does not commit candidates to `queue/pending/`, render an MP4, change approval state, or invoke the YouTube publisher. A human must inspect the candidate and decide whether to place a selected candidate into the existing caption-only render process.
 
 ## Factual and timely content
 
