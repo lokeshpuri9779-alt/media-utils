@@ -48,6 +48,10 @@ def packet_for(candidate, video_hash):
 
 
 class SemanticVideoGateTests(unittest.TestCase):
+    def test_production_publisher_requires_independent_video_review(self):
+        workflow = (Path(__file__).resolve().parents[1] / ".github/workflows/astra-v2-publish.yml").read_text()
+        self.assertIn("ASTRA_REQUIRE_INDEPENDENT_VIDEO_REVIEW: '1'", workflow)
+
     def setUp(self):
         self.private_key = Ed25519PrivateKey.generate()
         raw = self.private_key.public_key().public_bytes(
