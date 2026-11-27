@@ -97,7 +97,10 @@ jobs:
                           'status':'pending_review',
                           'sha256':hashlib.sha256(png).hexdigest()})
           manifest_path=art/'manifest.json'
-          manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\\n')
+          manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\n')
+          # Fail immediately if any generated JSON document is malformed.
+          for json_path in (manifest_path, art/'production-report.json', art/'source-manifest.json'):
+              json.loads(json_path.read_text(encoding='utf-8'))
           result=validate_library(root)
           expected=count*len(formats)
           assert result['verified_files']==expected, (result['verified_files'],expected)
@@ -141,8 +144,8 @@ jobs:
               'publishing_authorized':False,
               'notes':['Procedural illustrations are original candidates, not hand-drawn artwork.',
                        'Every PNG is integrity-checked; visual semantics still require human review.']}
-          (art/'production-report.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\\n')
-          (art/'source-manifest.json').write_text(json.dumps({'sources':source_records},indent=2,sort_keys=True)+'\\n')
+          (art/'production-report.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+          (art/'source-manifest.json').write_text(json.dumps({'sources':source_records},indent=2,sort_keys=True)+'\n')
           dest=Path('runtime-artifacts/astra-visual-pack.zip')
           with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
               for p in sorted(art.rglob('*')):
