@@ -49,6 +49,7 @@ PROPS = {
     "heart": r"\b(?:heart|valentine)\b",
     "wrench": r"\b(?:wrench|spanner)\b",
     "clock": r"\b(?:clock|timepiece)\b",
+    "feather": r"\bfeathers?\b",
 }
 
 
