@@ -26,6 +26,12 @@ The complete spoken script is constrained to 65–85 words, including a specific
 
 Candidates are explicitly marked `approved: false`, `production_ready: false`, and `published: false`. The renderer refuses candidates without those explicit review-only flags and validates the expected scene-role sequence.
 
+## Human-authorized render of a generated fiction candidate
+
+After the review-generation workflow has been merged to the default branch and run successfully, use **ASTRA Approved Caption Short Review Render** with the exact generation run ID and candidate ID from its artifact. Inspect the candidate and review packet first. Choose `approve_for_review_render` only after that inspection and provide a meaningful reviewer attestation; choose `reject` to record rejection without rendering.
+
+The workflow downloads the artifact from that exact run, verifies the candidate identity and SHA-256 against both the review packet and one-item review queue, and checks that all approval/publication flags remain false. Only then does it render the caption-only MP4 and upload a review artifact. The dispatch actor, decision, attestation, source run and candidate hash are recorded in a decision receipt. This is permission to create a review render only; it does not approve production, commit to `queue/pending/`, schedule, upload to YouTube or publish. Production editorial approval and all existing publisher gates remain separate.
+
 ## Factual and timely content
 
 Facts and GK remain AI-generated drafts. Human verification is required before approval. Current news and trending topics use RSS headlines as leads; they are not independent fact-checking. The source links must be opened and claims verified before publishing. If feeds fail or return too few usable sources, the run stops rather than inventing a news script.
