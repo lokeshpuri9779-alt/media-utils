@@ -34,6 +34,25 @@ jobs:
           python -m pip install --disable-pip-version-check \
             'httpx==0.28.1' 'Pillow==11.3.0' 'imageio-ffmpeg==0.6.0' 'numpy==2.2.6'
 
+      - name: Restore protected story history for originality context
+        run: |
+          git fetch --no-tags origin astra-state
+          git show origin/astra-state:astra_story_history.json > output-story-history-source.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = json.loads(Path("output-story-history-source.json").read_text(encoding="utf-8"))
+          stories = source.get("stories") if isinstance(source, dict) else source
+          if not isinstance(stories, list):
+              raise SystemExit("Protected story history has an invalid schema; refusing empty-history generation")
+          Path("output").mkdir(exist_ok=True)
+          Path("output/story-history.json").write_text(
+              json.dumps(stories, ensure_ascii=False) + "\\n", encoding="utf-8"
+          )
+          print(f"Restored {len(stories)} protected story-history entries for prompt exclusions.")
+          PY
+
       - name: Generate one unapproved candidate and review packet
         env:
           ASTRA_GEMINI_ENABLED: "1"
@@ -47,6 +66,7 @@ jobs:
           fi
           mkdir -p output
           python -m astra_v2.performance_short_generator \
+            --history output/story-history.json \
             --output output/candidate.json \
             --packet output/review-packet.json \
             --queue output/review-queue.json \
