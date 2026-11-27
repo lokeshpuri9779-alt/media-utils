@@ -941,6 +941,11 @@ def catalog(excluded_ids=None, excluded_titles=None, limit=256, excluded_plot_ha
             "source": "", "keywords": ["original fiction", genre],
             "story_beats": [
                 {"headline": h, "speech": speech, "visual": visual,
+                 # Keep the authored prop cue AND narrated action in the
+                 # explicit scene prompt consumed by art direction/review.
+                 # The short legacy "visual" field remains for old callers.
+                 "visual_prompt": f"{visual}: {speech}",
+                 "visual_intent": speech,
                  "label": label, "story_beat": role,
                  "story_actor_actions": infer_actor_actions(speech),
                  "sub": "AN ORIGINAL RAYVAN STORY", "duration": 2.1}
