@@ -15,9 +15,9 @@ on:
           - long
         default: both
       count:
-        description: 'Number of original portrait backgrounds'
+        description: 'Original backgrounds per format (up to 5,000)'
         required: false
-        default: '1600'
+        default: '3000'
 permissions:
   contents: read
 concurrency:
@@ -26,7 +26,7 @@ concurrency:
 jobs:
   build-pack:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,35 +34,44 @@ jobs:
           python-version: '3.11'
       - name: Install free local image conversion tools
         run: python -m pip install Pillow cairosvg
-      - name: Generate, validate and package original assets
+      - name: Generate expanded original assets, contact sheets and provenance
         env:
-          ASSET_COUNT: ${{ inputs.count || '1600' }}
+          ASSET_COUNT: ${{ inputs.count || '3000' }}
           ASSET_FORMAT: ${{ inputs.format || 'both' }}
         run: |
           python - <<'PY'
-          import io, os, json, hashlib, zipfile
+          import io, os, json, hashlib, zipfile, math
           from pathlib import Path
           import cairosvg
-          from PIL import Image
+          from PIL import Image, ImageDraw, ImageFont
           from astra_v2.visual_artifact_library import artifact
           from astra_v2.illustrated_asset_validation import validate_library
+
           count=int(os.environ['ASSET_COUNT'])
-          if not 1 <= count <= 4000: raise ValueError('count must be 1..4000')
+          if not 1 <= count <= 5000: raise ValueError('count must be 1..5000')
           fmt=os.environ['ASSET_FORMAT']
           if fmt not in ('shorts','long','both'): raise ValueError('invalid format')
+          formats=('shorts','long') if fmt=='both' else (fmt,)
           root=Path('runtime-artifacts/astra-pack')
-          (root/'art').mkdir(parents=True,exist_ok=True)
-          manifest={'assets':[]}
-          for format_name in (('shorts','long') if fmt=='both' else (fmt,)):
-              width,height=(540,960) if format_name=='shorts' else (1280,720)
-              art=root/'art'/format_name/'backgrounds'
-              art.mkdir(parents=True,exist_ok=True)
-              for i in range(count):
-                  scene,svg=artifact(i)
-                  raw=cairosvg.svg2png(bytestring=svg.encode(),output_width=540,output_height=720)
-                  with Image.open(io.BytesIO(raw)) as source:
-                      source=source.convert('RGB')
-                      # Fit the entire illustration without cropping or stretching.
+          art=root/'art'
+          art.mkdir(parents=True,exist_ok=True)
+          manifest={'schema':'astra.visual.assets.v2','assets':[]}
+          svg_dir=art/'source-svg'
+          svg_dir.mkdir(parents=True,exist_ok=True)
+          source_records=[]
+          for i in range(count):
+              scene,svg=artifact(i)
+              svg_path=svg_dir/f'{scene}-{i:04d}.svg'
+              svg_path.write_text(svg,encoding='utf-8')
+              source_records.append({'id':f'svg-{scene}-{i:04d}',
+                  'path':str(svg_path.relative_to(root)),'kind':'source-vector',
+                  'license':'original','source':'ASTRA visual_artifact_library procedural generator',
+                  'sha256':hashlib.sha256(svg.encode()).hexdigest()})
+              raw=cairosvg.svg2png(bytestring=svg.encode(),output_width=540,output_height=720)
+              with Image.open(io.BytesIO(raw)) as source:
+                  source=source.convert('RGB')
+                  for format_name in formats:
+                      width,height=(540,960) if format_name=='shorts' else (1280,720)
                       scale=min(width/source.width,height/source.height)
                       size=(round(source.width*scale),round(source.height*scale))
                       resized=source.resize(size,Image.Resampling.LANCZOS)
@@ -71,46 +80,103 @@ jobs:
                       output=io.BytesIO()
                       canvas.save(output,format='PNG',optimize=True)
                       png=output.getvalue()
-                  rel=f'art/{format_name}/backgrounds/{scene}-{i:04d}.png'
-                  (root/rel).write_bytes(png)
-                  manifest['assets'].append({'id':f'{format_name}-{scene}-{i:04d}',
-                      'path':rel,'kind':'background','license':'original',
-                      'source':'ASTRA visual_artifact_library procedural generator',
-                      'artist':'ASTRA original procedural generator',
-                      'style':'stylized-illustration',
-                      'tags':[scene,'background',format_name,'environment'],
-                      'sha256':hashlib.sha256(png).hexdigest()})
-          (root/'art'/'manifest.json').write_text(json.dumps(manifest,indent=2))
+                      rel=f'art/{format_name}/backgrounds/{scene}-{i:04d}.png'
+                      destination=root/rel
+                      destination.parent.mkdir(parents=True,exist_ok=True)
+                      destination.write_bytes(png)
+                      manifest['assets'].append({'id':f'{format_name}-{scene}-{i:04d}',
+                          'path':rel,'kind':'background','license':'original',
+                          'source':'ASTRA original procedural vector illustration',
+                          'artist':'ASTRA original procedural generator',
+                          'style':'stylized-illustration',
+                          'format':format_name,'scene':scene,
+                          'tags':[scene,'background',format_name,'environment'],
+                          'status':'pending_review',
+                          'sha256':hashlib.sha256(png).hexdigest()})
+          manifest_path=art/'manifest.json'
+          manifest_path.write_text(json.dumps(manifest,indent=2,sort_keys=True)+'\\n')
           result=validate_library(root)
-          assert result['verified_files']==count*(2 if fmt=='both' else 1)
+          expected=count*len(formats)
+          assert result['verified_files']==expected, (result['verified_files'],expected)
+
+          # Make zoomable, paginated review sheets: 200 labelled thumbnails per page.
+          sheet_dir=art/'contact-sheets'
+          sheet_dir.mkdir(parents=True,exist_ok=True)
+          page_size=200
+          columns=10
+          thumb=(72,96)
+          gap,label_h=8,20
+          rows=math.ceil(page_size/columns)
+          sheet_paths=[]
+          for page,start in enumerate(range(0,len(manifest['assets']),page_size),1):
+              batch=manifest['assets'][start:start+page_size]
+              page_rows=math.ceil(len(batch)/columns)
+              sheet=Image.new('RGB',(gap+columns*(thumb[0]+gap),
+                  gap+page_rows*(thumb[1]+label_h+gap)),(20,26,39))
+              draw=ImageDraw.Draw(sheet)
+              for j,entry in enumerate(batch):
+                  with Image.open(root/entry['path']) as opened:
+                      preview=opened.convert('RGB')
+                      preview.thumbnail(thumb,Image.Resampling.LANCZOS)
+                      tile=Image.new('RGB',thumb,(35,43,58))
+                      tile.paste(preview,((thumb[0]-preview.width)//2,(thumb[1]-preview.height)//2))
+                  x=gap+(j%columns)*(thumb[0]+gap)
+                  y=gap+(j//columns)*(thumb[1]+label_h+gap)
+                  sheet.paste(tile,(x,y))
+                  draw.text((x,y+thumb[1]+3),entry['id'][-18:],fill=(235,239,245),font=ImageFont.load_default())
+              destination=sheet_dir/f'contact-{page:03d}.jpg'
+              sheet.save(destination,quality=88,optimize=True)
+              sheet_paths.append(destination)
+          report={'schema':'astra.visual.asset-pack-report.v2',
+              'requested_per_format':count,'formats':list(formats),
+              'verified_png_assets':result['verified_files'],
+              'unique_png_hashes':result['distinct_png_hashes'],
+              'original_svg_sources':len(source_records),
+              'contact_sheets':len(sheet_paths),
+              'review_status':'pending_review',
+              'production_approved':False,
+              'publishing_authorized':False,
+              'notes':['Procedural illustrations are original candidates, not hand-drawn artwork.',
+                       'Every PNG is integrity-checked; visual semantics still require human review.']}
+          (art/'production-report.json').write_text(json.dumps(report,indent=2,sort_keys=True)+'\\n')
+          (art/'source-manifest.json').write_text(json.dumps({'sources':source_records},indent=2,sort_keys=True)+'\\n')
           dest=Path('runtime-artifacts/astra-visual-pack.zip')
           with zipfile.ZipFile(dest,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
-              for p in sorted((root/'art').rglob('*')):
+              for p in sorted(art.rglob('*')):
                   if p.is_file(): z.write(p,p.relative_to(root))
-          print('ASTRA_ASSET_PACK='+json.dumps({'verified':result['verified_files'],
-              'zip_bytes':dest.stat().st_size,'formats':fmt,'shorts_dimensions':'540x960','long_dimensions':'1280x720','production_approved':False}))
+          print('ASTRA_ASSET_PACK='+json.dumps({**report,
+              'zip_bytes':dest.stat().st_size,
+              'shorts_dimensions':'540x960','long_dimensions':'1280x720'}))
           PY
       - name: Verify compositor tests for Shorts and long videos
         run: |
           python -m unittest discover -s tests -p 'test_astra_asset_video_formats.py' -v
           python -m unittest discover -s tests -p 'test_astra_asset_pack_compositor.py' -v
-      - name: Check ZIP archive contents
+      - name: Check ZIP archive contents and review safeguards
         run: |
           python - <<'PY'
-          import zipfile
+          import json, zipfile
           from pathlib import Path
           path=Path('runtime-artifacts/astra-visual-pack.zip')
           with zipfile.ZipFile(path) as archive:
               bad=archive.testzip()
               assert bad is None, f'corrupt ZIP member: {bad}'
               files=archive.namelist()
-              assert 'art/manifest.json' in files
+              for required in ('art/manifest.json','art/source-manifest.json',
+                               'art/production-report.json'):
+                  assert required in files, required
+              report=json.loads(archive.read('art/production-report.json'))
+              assert report['production_approved'] is False
+              assert report['publishing_authorized'] is False
+              assert report['verified_png_assets'] >= 1
+              sheets=[p for p in files if p.startswith('art/contact-sheets/')]
+              assert len(sheets)==report['contact_sheets']
               print('ASTRA_ASSET_ARCHIVE_VERIFIED='+str(len(files)-1))
           PY
-      - name: Upload reusable asset ZIP
+      - name: Upload expanded reusable asset library
         uses: actions/upload-artifact@v4
         with:
-          name: astra-original-visual-pack
+          name: astra-expanded-original-visual-library
           path: runtime-artifacts/astra-visual-pack.zip
           retention-days: 30
           if-no-files-found: error
