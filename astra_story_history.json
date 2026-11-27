@@ -13948,6 +13948,63 @@
           "duration": 2.1
         }
       ]
+    },
+    {
+      "content_id": "rayvan-forge-4715ef6a43dd00e7",
+      "video_id": "51imfJu7z_Q",
+      "confirmed_at": "2026-11-27T03:49:35.944259+00:00",
+      "title": "The Hedgehog and the Clock of Frost",
+      "plot_fingerprint": "e2de36e2ff6d47fca1c5b9e38df21ab538f3a65b44f00ad6d1494f86f4c94a71",
+      "story_beats": [
+        {
+          "headline": "THE CLOCK STOPPED",
+          "speech": "A hedgehog found the town clock frozen at noon just as the winter market opened.",
+          "visual": "clock",
+          "visual_prompt": "clock: A hedgehog found the town clock frozen at noon just as the winter market opened.",
+          "visual_intent": "A hedgehog found the town clock frozen at noon just as the winter market opened.",
+          "label": "FROZEN TIME",
+          "story_beat": "reveal",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A WARM GEAR",
+          "speech": "He noticed that the brass hands moved whenever sunlight reached the clock tower window.",
+          "visual": "clock",
+          "visual_prompt": "clock: He noticed that the brass hands moved whenever sunlight reached the clock tower window.",
+          "visual_intent": "He noticed that the brass hands moved whenever sunlight reached the clock tower window.",
+          "label": "SUNLIT GEAR",
+          "story_beat": "build",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE MIRROR PATH",
+          "speech": "He arranged old mirrors along the stairwell to direct morning light onto the iced mechanism.",
+          "visual": "signal",
+          "visual_prompt": "signal: He arranged old mirrors along the stairwell to direct morning light onto the iced mechanism.",
+          "visual_intent": "He arranged old mirrors along the stairwell to direct morning light onto the iced mechanism.",
+          "label": "LIGHT RETURNS",
+          "story_beat": "twist",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE BELLS RANG",
+          "speech": "The ice melted without breaking the gears and the market bells rang for everyone waiting below.",
+          "visual": "clock",
+          "visual_prompt": "clock: The ice melted without breaking the gears and the market bells rang for everyone waiting below.",
+          "visual_intent": "The ice melted without breaking the gears and the market bells rang for everyone waiting below.",
+          "label": "MARKET OPENS",
+          "story_beat": "payoff",
+          "story_actor_actions": {},
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ]
     }
   ]
 }
