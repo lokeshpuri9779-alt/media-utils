@@ -13,6 +13,14 @@ class ApprovedArtworkProofTests(unittest.TestCase):
             self.assertEqual(len(approved), 4)
             self.assertEqual(len(story["story_beats"]), 4)
             self.assertTrue(all(x["artwork_manifest_path"] == str(manifest) for x in story["story_beats"]))
+            self.assertEqual(
+                [x["artwork_asset_id"] for x in story["story_beats"]],
+                ["dawn-valley", "misty-forest", "ocean-storm", "moonlit-valley"])
+            self.assertEqual(
+                [x["scene_id"] for x in story["story_beats"]],
+                ["scene-01", "scene-02", "scene-03", "scene-04"])
+            self.assertTrue(all(x["story_content_id"] == story["content_id"]
+                                for x in story["story_beats"]))
             self.assertTrue(all(x["review_scope"] == "isolated_ci_fixture_only" for x in approved))
             self.assertFalse(story["production_ready"])
             self.assertFalse(Path("art/manifest.json").read_text().find('"status": "approved"') >= 0)

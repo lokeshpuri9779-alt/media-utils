@@ -178,11 +178,20 @@ def select_asset(scene: dict, manifest_path: str | Path = DEFAULT_MANIFEST) -> d
     assets = load_assets(manifest_path)
     explicit_id = scene.get("artwork_asset_id")
     if explicit_id:
-        matches = [asset for asset in assets
-                   if asset.get("id") == explicit_id
-                   and asset.get("story_content_id") == scene.get("story_content_id")
-                   and asset.get("scene_id") == scene.get("scene_id")
-                   and asset.get("story_content_id") and asset.get("scene_id")]
+        matches = []
+        for asset in assets:
+            if asset.get("id") != explicit_id:
+                continue
+            # Generic reviewed assets may be explicitly assigned by ID. When
+            # an asset carries story/scene scope, require both bindings to
+            # match exactly; never let a scoped asset leak into another scene.
+            scoped = bool(asset.get("story_content_id") or asset.get("scene_id"))
+            if scoped and not (
+                    asset.get("story_content_id") == scene.get("story_content_id")
+                    and asset.get("scene_id") == scene.get("scene_id")
+                    and asset.get("story_content_id") and asset.get("scene_id")):
+                continue
+            matches.append(asset)
         return matches[0] if len(matches) == 1 else None
     query = _tokens(" ".join(str(scene.get(k) or "") for k in (
         "story_subject", "visual", "visual_intent", "visual_prompt",
