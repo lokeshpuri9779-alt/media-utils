@@ -47,25 +47,47 @@ def analyze_story_scene(shot):
     reliable evidence of the story's setting. Unknown environments stay unresolved
     rather than silently selecting unrelated artwork.
     """
-    for key in ("story_environment", "scene_environment", "scene_location", "setting", "visual_prompt", "visual_intent", "headline", "speech", "story_title", "visual"):
+    def match_field(key):
         value = shot.get(key)
         if not isinstance(value, str) or not value.strip():
-            continue
+            return None
         text = value.lower()
-        # Prefer the most specific explicit phrase in this field. This lets
-        # "winter cabin" resolve to snowfield instead of the generic village
-        # cue "cabin", while preserving the documented field precedence.
         matches = []
         for scene in SCENES:
-            # Preserve the first declared synonym within a scene family.
             term = next((candidate for candidate in SCENE_TERMS[scene]
-                         if re.search(r"\b" + re.escape(candidate) + r"\b", text)), None)
+                         if re.search(r"\\b" + re.escape(candidate) + r"\\b", text)), None)
             if term:
                 matches.append((len(term), scene, term))
-        if matches:
-            _, scene, term = max(matches, key=lambda item: item[0])
-            return {"scene": scene, "source_field": key,
-                    "matched_term": term, "needs_background": False}
+        if not matches:
+            return None
+        _, scene, term = max(matches, key=lambda item: item[0])
+        return {"scene": scene, "source_field": key,
+                "matched_term": term, "needs_background": False}
+
+    # Reliable authored setting and narration first.
+    for key in ("story_environment", "scene_environment", "scene_location", "setting",
+                "visual_prompt", "visual_intent", "headline", "speech"):
+        result = match_field(key)
+        if result:
+            return result
+
+    # A descriptive visual phrase (e.g. "A forest clearing") is a real
+    # location cue and may refine a title-derived location. A bare token
+    # (e.g. "planet", "ship", "orbit") is only an asset hint, so defer it.
+    visual = shot.get("visual")
+    if isinstance(visual, str) and len(visual.split()) > 1:
+        result = match_field("visual")
+        if result:
+            return result
+
+    result = match_field("story_title")
+    if result:
+        return result
+
+    # Keep single-token storyboard tags usable when no stronger context exists.
+    result = match_field("visual")
+    if result:
+        return result
     return {"scene": None, "source_field": None,
             "matched_term": None, "needs_background": True}
 
