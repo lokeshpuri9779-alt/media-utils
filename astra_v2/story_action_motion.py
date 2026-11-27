@@ -52,7 +52,7 @@ _STORY_ACTORS = (
     "cat", "dog", "elephant", "lion", "turtle", "beaver", "crow", "eagle",
     "panda", "horse", "raven", "goat", "penguin", "chipmunk", "mole",
 )
-_ACTOR_CLAUSE_SPLIT = re.compile(r"\\b(?:while|but|whereas|as)\\b|[;.!?]", re.I)
+_ACTOR_CLAUSE_SPLIT = re.compile(r"\b(?:while|but|whereas|as)\b|[;.!?]", re.I)
 
 
 def infer_actor_actions(speech, actors=None):
