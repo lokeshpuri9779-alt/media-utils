@@ -2,9 +2,9 @@
   "version": 2,
   "day": "2026-11-27",
   "created_at": "2026-10-12T18:44:27.511371+00:00",
-  "attempts": 2,
+  "attempts": 3,
   "confirmed_today": 2,
-  "last_attempt_at": "2026-11-27T02:34:54.442227+00:00",
+  "last_attempt_at": "2026-11-27T02:47:35.029185+00:00",
   "blocked_until": "",
   "quota_reason": "",
   "published": {
@@ -15208,29 +15208,79 @@
       "genre": "fiction"
     }
   },
-  "pending": {},
-  "last_outcome": "skipped",
+  "pending": {
+    "L98JHSSPACU": {
+      "content_id": "rayvan-forge-b934b0399a530eb5",
+      "title": "The Frog and the Cloud Catcher",
+      "day": "2026-11-27",
+      "uploaded_at": "2026-11-27T02:47:36.779811+00:00",
+      "genre": "fiction",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "b23d4561686aa79aec6d5175df3813c1f7e6664a506b6d6efcaf43a11470026c",
+      "story_beats": [
+        {
+          "headline": "A CLOUD RESTED ON THE HILL",
+          "speech": "A frog found a low cloud caught between the hilltop windmill and a tall pine after a cool morning.",
+          "visual": "planet",
+          "label": "CLOUD CAUGHT",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WINDMILL STOPPED",
+          "speech": "He tried turning the windmill blades, but the cloud thickened and hid the path leading back to the pond.",
+          "visual": "forest",
+          "label": "PATH DISAPPEARED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A WARM AIR TUNNEL",
+          "speech": "The frog opened the greenhouse vents and guided warm air uphill, lifting the cloud above the pine branches.",
+          "visual": "forest",
+          "label": "CLEAR THE HILL",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE POND SHONE",
+          "speech": "Sunlight returned to the pond and the frog marked the safe trail for anyone traveling through morning mist.",
+          "visual": "forest",
+          "label": "MORNING CLEAR",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1"
+    }
+  },
+  "last_outcome": "processing",
   "last_error": "",
-  "last_preflight_at": "2026-11-27T02:38:26.269924+00:00",
-  "last_preflight_reason": "min_interval",
-  "last_preflight_outcome": "skipped",
+  "last_preflight_at": "2026-11-27T02:46:23.171267+00:00",
+  "last_preflight_reason": "ready",
+  "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-27T02:38:26.352999+00:00",
+    "at": "2026-11-27T02:47:37.039748+00:00",
     "early_tests": "success",
     "preflight_step": "success",
-    "render_due": "false",
+    "render_due": "true",
     "job_status_before_persist": "success",
-    "dependencies_step": "skipped",
-    "publish_step": "skipped",
+    "dependencies_step": "success",
+    "publish_step": "success",
     "cover_tests": "",
-    "motion_tests": "skipped",
-    "animal_tests": "skipped",
-    "cover_package_tests": "skipped",
-    "quality_tests": "skipped",
-    "policy_tests": "skipped",
-    "queue_tests": "skipped",
-    "oauth_tests": "skipped",
-    "layer_tests": "skipped"
+    "motion_tests": "success",
+    "animal_tests": "success",
+    "cover_package_tests": "success",
+    "quality_tests": "success",
+    "policy_tests": "success",
+    "queue_tests": "success",
+    "oauth_tests": "success",
+    "layer_tests": "success"
   },
   "last_feedback_attempt_at": "2026-11-27T02:28:49.459191+00:00",
   "reserved": {
@@ -30844,13 +30894,60 @@
       ],
       "renderer": "studio-7.3.1",
       "result": "accepted"
+    },
+    "rayvan-forge-b934b0399a530eb5": {
+      "at": "2026-11-27T02:47:35.029167+00:00",
+      "title": "The Frog and the Cloud Catcher",
+      "format": "short",
+      "plot_key": "",
+      "plot_fingerprint": "b23d4561686aa79aec6d5175df3813c1f7e6664a506b6d6efcaf43a11470026c",
+      "story_beats": [
+        {
+          "headline": "A CLOUD RESTED ON THE HILL",
+          "speech": "A frog found a low cloud caught between the hilltop windmill and a tall pine after a cool morning.",
+          "visual": "planet",
+          "label": "CLOUD CAUGHT",
+          "story_beat": "reveal",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE WINDMILL STOPPED",
+          "speech": "He tried turning the windmill blades, but the cloud thickened and hid the path leading back to the pond.",
+          "visual": "forest",
+          "label": "PATH DISAPPEARED",
+          "story_beat": "build",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "A WARM AIR TUNNEL",
+          "speech": "The frog opened the greenhouse vents and guided warm air uphill, lifting the cloud above the pine branches.",
+          "visual": "forest",
+          "label": "CLEAR THE HILL",
+          "story_beat": "twist",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        },
+        {
+          "headline": "THE POND SHONE",
+          "speech": "Sunlight returned to the pond and the frog marked the safe trail for anyone traveling through morning mist.",
+          "visual": "forest",
+          "label": "MORNING CLEAR",
+          "story_beat": "payoff",
+          "sub": "AN ORIGINAL RAYVAN STORY",
+          "duration": 2.1
+        }
+      ],
+      "renderer": "studio-7.3.1",
+      "result": "accepted"
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-27T02:38:26.352957+00:00",
-    "publication_outcome": "skipped",
-    "publication_reason": "min_interval",
-    "character_memory": "not_reported",
+    "at": "2026-11-27T02:47:37.039708+00:00",
+    "publication_outcome": "processing",
+    "publication_reason": "",
+    "character_memory": "not_approved_or_missing_identity",
     "character_memory_error": null,
     "first_candidate_manifest": false,
     "existing_character_proposal": false,
@@ -30858,36 +30955,36 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-27T02:38:26.352992+00:00",
+    "at": "2026-11-27T02:47:37.039742+00:00",
     "history_file_present": true,
-    "publication_outcome": "skipped",
+    "publication_outcome": "processing",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-27T02:34:45.475725+00:00",
+    "at": "2026-11-27T02:47:22.964172+00:00",
     "outcome": "processing",
     "reason": "",
-    "content_id": "rayvan-forge-5d252364b800ef65",
-    "video_url": "https://www.youtube.com/watch?v=1BCyYUQc7gE",
+    "content_id": "rayvan-forge-b934b0399a530eb5",
+    "video_url": "https://www.youtube.com/watch?v=L98JHSSPACU",
     "story_selection": {}
   },
   "last_workflow_result": {
-    "at": "2026-11-27T02:38:26.352419+00:00",
-    "preflight_due": "false",
+    "at": "2026-11-27T02:47:37.039105+00:00",
+    "preflight_due": "true",
     "preflight_step": "success",
-    "publish_step": "skipped",
+    "publish_step": "success",
     "job_status_before_persist": "success",
-    "outcome": "skipped",
-    "reason": "min_interval",
-    "fresh_upload_attempted": false,
+    "outcome": "processing",
+    "reason": "",
+    "fresh_upload_attempted": true,
     "fresh_publication_confirmed": false,
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-27T02:38:26.352926+00:00",
-    "collection_status": "not_applicable_publisher_skipped",
-    "publish_step": "skipped",
-    "selection_source": "no_render",
+    "at": "2026-11-27T02:47:37.039654+00:00",
+    "collection_status": "not_applicable_preloaded_candidate",
+    "publish_step": "success",
+    "selection_source": "preload_artifact",
     "counters": {},
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
   }
