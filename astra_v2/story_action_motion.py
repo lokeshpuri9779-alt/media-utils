@@ -102,7 +102,10 @@ def actor_action_tracks(shot, cast):
     fallback = str(shot.get("story_action") or "idle").strip().lower()
     allowed = {name for name, _ in ACTION_PATTERNS} | {"idle", "warn"}
     raw = shot.get("story_actor_actions")
-    has_explicit_shot_action = isinstance(shot.get("story_action"), str) and bool(shot.get("story_action").strip())
+    authored_shot_action = shot.get("story_action")
+    has_explicit_shot_action = (isinstance(authored_shot_action, str) and
+                                bool(authored_shot_action.strip()) and
+                                authored_shot_action.strip().lower() != "idle")
     inferred = infer_actor_actions(shot.get("speech"), cast) if raw is None and not has_explicit_shot_action else {}
     if not isinstance(raw, dict):
         return {str(name): inferred.get(str(name), fallback) for name in cast}
