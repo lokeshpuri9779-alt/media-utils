@@ -1,6 +1,6 @@
 """Regression gates against repeating identical backdrops or static story props."""
 import unittest
-from PIL import Image, ImageChops
+from PIL import Image, ImageChops, ImageDraw
 
 from astra_v2.pillow_duo_scene import draw_duo, scene_prop, _prop
 from astra_v2.pillow_scene_direction import (
@@ -181,6 +181,7 @@ class DirectedPillowScenesTests(unittest.TestCase):
         self.assertEqual(scene_prop({
             "speech": "The rabbit caught a brilliant blue feather."
         }), "feather")
+        self.assertEqual(scene_prop({"story_prop": "feather"}), "feather")
         blue = Image.new("RGB", (1080, 1920), (24, 35, 60))
         gray = blue.copy()
         _prop(ImageDraw.Draw(blue), "feather", 540, 1000, 0.8)
