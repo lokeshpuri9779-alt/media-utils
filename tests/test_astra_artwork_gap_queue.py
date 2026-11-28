@@ -85,6 +85,32 @@ class ArtworkGapQueueTests(unittest.TestCase):
         self.assertIsNone(build_repair_queue(invalid, lane=0))
         self.assertIsNone(build_repair_queue({}, lane=0))
 
+
+    def test_preserves_renderer_issue_scene_identity_and_issue_count(self):
+        selection = {"background_review_gaps": [{
+            "content_id": "renderer-rejected-story",
+            "shot_count": 3,
+            "story_context": {"title": "The Signal Bell"},
+            "missing_shots": [{
+                "shot": 2,
+                "scene_id": "signal-bell-scene-2",
+                "reason": "scene_unresolved",
+                "renderer_issue": "signal_graphic_does_not_depict_narrated_event",
+                "authored_context": {
+                    "source_beat_found": True,
+                    "authored_fields": {"speech": "The bell rings twice."},
+                },
+            }],
+        }]}
+        result = build_repair_queue(selection, lane=1)
+        self.assertEqual(result["renderer_issue_count"], 1)
+        row = result["items"][0]["missing_shots"][0]
+        self.assertEqual(row["scene_id"], "signal-bell-scene-2")
+        self.assertEqual(row["renderer_issue"],
+                         "signal_graphic_does_not_depict_narrated_event")
+        self.assertFalse(result["publication_approval"])
+        self.assertEqual(result["semantic_quality"], "not_verified")
+
     def test_archive_hook_and_upload_stay_optional_and_separate(self):
         root = Path(__file__).resolve().parents[1]
         creative = (root / "astra_v2/creative.py").read_text(encoding="utf-8")
