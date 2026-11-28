@@ -53,13 +53,25 @@ def build_repair_queue(selection, *, lane):
                 evidence["scene"] = _text(row["scene"], 48)
             rows.append(evidence)
         if cid and rows:
-            gaps.append({
+            item = {
                 "content_id": cid,
                 "shot_count": source.get("shot_count") if type(source.get("shot_count")) is int else None,
                 "missing_shot_count": len(rows), "missing_shots": rows,
                 "publication_approval": False, "semantic_quality": "not_verified",
                 "repair_status": "manual_scene_and_art_review_required",
-            })
+            }
+            # Keep a bounded full-story art-direction packet so a later review
+            # workflow can preserve cast, visual bible and every scene beat.
+            # This is source context only; it never grants semantic approval.
+            context = source.get("story_context")
+            if isinstance(context, dict):
+                try:
+                    encoded = json.dumps(context, ensure_ascii=False, sort_keys=True)
+                    if len(encoded) <= 16000:
+                        item["story_context"] = json.loads(encoded)
+                except (TypeError, ValueError):
+                    pass
+            gaps.append(item)
     if not gaps:
         return None
     gaps.sort(key=lambda gap: (-gap["missing_shot_count"], gap["content_id"]))
