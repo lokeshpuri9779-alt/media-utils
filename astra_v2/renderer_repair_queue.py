@@ -62,7 +62,16 @@ def build_renderer_repair_gap(story, rejection):
     """Return one exact-shot review packet, or None for non-renderer rejections."""
     if not isinstance(story, dict):
         return None
-    match = _REJECTION.fullmatch(_text(rejection, 260))
+    # Reject multi-line input before whitespace normalization. Otherwise a
+    # malformed rejection can be collapsed into a valid single-line packet.
+    if (
+        not isinstance(rejection, str)
+        or len(rejection) > 260
+        or "\n" in rejection
+        or "\r" in rejection
+    ):
+        return None
+    match = _REJECTION.fullmatch(" ".join(rejection.split()))
     if not match:
         return None
     shot_number, issue = int(match.group(1)), match.group(2)
