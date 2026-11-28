@@ -86,7 +86,7 @@ jobs:
         if: inputs.review_decision == 'approve_for_review_render'
         uses: actions/download-artifact@v4
         with:
-          name: rayvan-caption-short-review-${{ inputs.generation_run_id }}
+          name: rayvan-caption-short-generate-render-review-${{ inputs.generation_run_id }}
           run-id: ${{ inputs.generation_run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path: review-input
