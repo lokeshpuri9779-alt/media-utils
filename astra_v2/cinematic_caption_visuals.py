@@ -161,8 +161,7 @@ def create_floating_caption(phrase: str, output: str | Path, index: int = 0) -> 
 def camera_motion_filter(duration: float, fps: int = 30, reverse: bool = False) -> str:
     """FFmpeg zoompan filter: slow continuous camera drift on the background only."""
     frames = max(1, int(round(float(duration) * int(fps))))
-    direction = "-" if reverse else "+"
-    zoom = f"min(zoom{direction}0.00045,1.045)" if reverse else "min(zoom+0.00045,1.045)"
+    zoom = "max(1.0,1.045-on*0.00045)" if reverse else "min(1.045,1+on*0.00045)"
     return (
         f"zoompan=z='{zoom}':x='iw/2-(iw/zoom/2)+sin(on/47)*9':"
         f"y='ih/2-(ih/zoom/2)+cos(on/61)*12':d={frames}:"
