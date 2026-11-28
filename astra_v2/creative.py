@@ -98,6 +98,62 @@ def publisher_history_ids(state):
 
 
 
+def _bounded_story_art_context(story):
+    """Preserve authored continuity data for later review; never invent it."""
+    if not isinstance(story, dict):
+        return {}
+    context = {}
+    for key in ("content_id", "title", "genre", "story_environment", "visual_style"):
+        value = story.get(key)
+        if isinstance(value, str) and value.strip():
+            context[key] = " ".join(value.split())[:400]
+    bible = story.get("visual_bible")
+    if isinstance(bible, dict):
+        safe_bible = {}
+        for key, value in list(bible.items())[:24]:
+            if not isinstance(key, str):
+                continue
+            if isinstance(value, str) and value.strip():
+                safe_bible[key[:64]] = " ".join(value.split())[:400]
+            elif isinstance(value, list):
+                entries = [" ".join(x.split())[:240] for x in value[:12]
+                           if isinstance(x, str) and x.strip()]
+                if entries:
+                    safe_bible[key[:64]] = entries
+        if safe_bible:
+            context["visual_bible"] = safe_bible
+    cast = story.get("story_cast")
+    if isinstance(cast, list):
+        safe_cast = []
+        allowed = ("character_id", "name", "species", "appearance", "clothing",
+                   "personality", "role", "visual_description")
+        for member in cast[:12]:
+            if not isinstance(member, dict):
+                continue
+            row = {key: " ".join(member[key].split())[:300]
+                   for key in allowed
+                   if isinstance(member.get(key), str) and member[key].strip()}
+            if row:
+                safe_cast.append(row)
+        if safe_cast:
+            context["story_cast"] = safe_cast
+    beats = story.get("story_beats")
+    fields = ("story_environment", "scene_environment", "scene_location",
+              "setting", "visual_prompt", "visual_intent", "visual", "speech")
+    if isinstance(beats, (list, tuple)):
+        safe_beats = []
+        for beat in beats[:24]:
+            if not isinstance(beat, dict):
+                continue
+            row = {key: " ".join(beat[key].split())[:500]
+                   for key in fields
+                   if isinstance(beat.get(key), str) and beat[key].strip()}
+            safe_beats.append(row)
+        if safe_beats:
+            context["story_beats"] = safe_beats
+    return context
+
+
 def authored_scene_repair_context(story, shot_number):
     """Bounded original storyboard fields; no inferred scene or rewrite."""
     beats = story.get("story_beats") if isinstance(story, dict) else None
@@ -135,6 +191,7 @@ def record_background_preflight_gap(selection, story, report):
         "content_id": story.get("content_id"),
         "shot_count": report.get("shot_count"),
         "reason": report.get("reason"),
+        "story_context": _bounded_story_art_context(story),
         "missing_shots": missing,
         "publication_approval": False,
         "semantic_quality": "not_verified",
