@@ -15747,11 +15747,11 @@
   "pending": {},
   "last_outcome": "quality_skip",
   "last_error": "",
-  "last_preflight_at": "2026-11-28T07:44:35.967153+00:00",
+  "last_preflight_at": "2026-11-28T07:55:16.023946+00:00",
   "last_preflight_reason": "ready",
   "last_preflight_outcome": "ready",
   "last_publisher_job_diagnostic": {
-    "at": "2026-11-28T07:45:32.991095+00:00",
+    "at": "2026-11-28T07:56:27.476770+00:00",
     "early_tests": "success",
     "preflight_step": "success",
     "render_due": "true",
@@ -31897,7 +31897,7 @@
     }
   },
   "last_character_memory_diagnostic": {
-    "at": "2026-11-28T07:45:32.991012+00:00",
+    "at": "2026-11-28T07:56:27.476709+00:00",
     "publication_outcome": "quality_skip",
     "publication_reason": "no_approved_original_story_available",
     "character_memory": "not_reported",
@@ -31908,13 +31908,13 @@
     "continuity_snapshot_present": false
   },
   "last_story_history_diagnostic": {
-    "at": "2026-11-28T07:45:32.991080+00:00",
+    "at": "2026-11-28T07:56:27.476759+00:00",
     "history_file_present": true,
     "publication_outcome": "quality_skip",
     "note": "Missing history is not evidence of an upload or a complete fingerprint archive"
   },
   "last_production_result": {
-    "at": "2026-11-28T07:45:06.159693+00:00",
+    "at": "2026-11-28T07:55:55.235795+00:00",
     "outcome": "quality_skip",
     "reason": "no_approved_original_story_available",
     "content_id": "",
@@ -31938,15 +31938,1342 @@
       "render_qa_rejected": 0,
       "render_exception": {},
       "background_preflight_rejected": 0,
-      "background_review_gaps": [],
+      "background_review_gaps": [
+        {
+          "content_id": "rayvan-anthology-542cd01a50f64edb",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-542cd01a50f64edb",
+            "title": "The Library of Unwritten Books",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "door",
+                "speech": "Every night, a blank book appeared on the library desk."
+              },
+              {
+                "visual": "signal",
+                "speech": "The pages described a stranger who would arrive before dawn."
+              },
+              {
+                "visual": "robot",
+                "speech": "The stranger carried a book with the librarian's name on its cover."
+              },
+              {
+                "visual": "door",
+                "speech": "Instead of following the prediction, she wrote her own final page."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-anthology-542cd01a50f64edb:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "library",
+                  "visual": "signal",
+                  "speech": "The pages described a stranger who would arrive before dawn.",
+                  "story_action": "idle",
+                  "story_prop": "book",
+                  "story_subject": "book"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
+            "title": "The Ocean Above the City",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "planet",
+                "speech": "One morning, fish were swimming across the sky like clouds."
+              },
+              {
+                "visual": "signal",
+                "speech": "A child watched a glowing jellyfish drift toward an old lighthouse."
+              },
+              {
+                "visual": "door",
+                "speech": "Its lamp had been projecting memories of a vanished ocean."
+              },
+              {
+                "visual": "forest",
+                "speech": "The child restored the lamp and the town remembered how to protect its shore."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-anthology-a9a002d2ef7f9c8f:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "lighthouse",
+                  "visual": "signal",
+                  "speech": "A child watched a glowing jellyfish drift toward an old lighthouse.",
+                  "story_action": "look",
+                  "story_prop": "lantern",
+                  "story_subject": "ocean"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-2906bc6378365d3e",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-2906bc6378365d3e",
+            "title": "The Museum of Tomorrows",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "door",
+                "speech": "A museum guard found a newspaper dated one day ahead."
+              },
+              {
+                "visual": "signal",
+                "speech": "The front page showed a bridge collapsing at noon."
+              },
+              {
+                "visual": "robot",
+                "speech": "Behind the wall, a machine was collecting warnings from possible futures."
+              },
+              {
+                "visual": "door",
+                "speech": "The guard warned the city, and the next newspaper showed an empty bridge."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-anthology-2906bc6378365d3e:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "museum",
+                  "visual": "door",
+                  "speech": "A museum guard found a newspaper dated one day ahead.",
+                  "story_action": "idle",
+                  "story_subject": "museum"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-0566139be012f920",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-0566139be012f920",
+            "title": "The Shadow That Was Late",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "door",
+                "speech": "His shadow kept moving five seconds after he stopped."
+              },
+              {
+                "visual": "signal",
+                "speech": "It pointed toward a locked door beneath the stairs."
+              },
+              {
+                "visual": "robot",
+                "speech": "Behind the door, a forgotten projector was replaying his grandfather's films."
+              },
+              {
+                "visual": "door",
+                "speech": "He played the final reel and danced with the shadow on the wall."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-anthology-0566139be012f920:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual": "signal",
+                  "speech": "It pointed toward a locked door beneath the stairs.",
+                  "story_action": "point"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-535144f2435abf94",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-535144f2435abf94",
+            "title": "The Little Robot and the Kite",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "robot",
+                "speech": "A little robot watched its handmade kite escape over the workshop roof."
+              },
+              {
+                "visual": "door",
+                "speech": "It followed the kite across rooftops and under the town's old clocktower."
+              },
+              {
+                "visual": "signal",
+                "speech": "At the tower, the robot discovered the kite was guiding it toward a broken weather vane."
+              },
+              {
+                "visual": "planet",
+                "speech": "The robot repaired the vane and the townspeople filled the bright sky with colorful kites."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 3,
+              "scene_id": "rayvan-anthology-535144f2435abf94:shot:3",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "workshop",
+                  "visual": "signal",
+                  "speech": "At the tower, the robot discovered the kite was guiding it toward a broken weather vane.",
+                  "story_action": "idle",
+                  "story_subject": "robot"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-e0cf80928a197bb4",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-e0cf80928a197bb4",
+            "title": "The Turtle and the Speedy Clock",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "signal",
+                "speech": "A turtle noticed that the town clock was spinning faster than everyone could walk."
+              },
+              {
+                "visual": "door",
+                "speech": "The rabbit tried to stop the gears but kept slipping on the tower stairs."
+              },
+              {
+                "visual": "robot",
+                "speech": "The turtle found a loose stone beneath the clock and carefully fixed the wobbly gear."
+              },
+              {
+                "visual": "forest",
+                "speech": "The bells rang at the correct hour and the town finally enjoyed a peaceful afternoon."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-anthology-e0cf80928a197bb4:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "forest",
+                  "visual": "signal",
+                  "speech": "A turtle noticed that the town clock was spinning faster than everyone could walk.",
+                  "story_action": "walk",
+                  "story_prop": "clock",
+                  "story_subject": "clock"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-d7fa314f9218ce30",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-d7fa314f9218ce30",
+            "title": "The Cloud That Wanted a Hat",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "planet",
+                "speech": "A little cloud floated into town wearing a paper hat that immediately blew away."
+              },
+              {
+                "visual": "door",
+                "speech": "It tried a giant helmet, a flowerpot and even a bright umbrella."
+              },
+              {
+                "visual": "ship",
+                "speech": "A child tied a colorful ribbon to a kite and offered it to the cloud."
+              },
+              {
+                "visual": "forest",
+                "speech": "The cloud wore its rainbow kite proudly and shaded everyone at the parade."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 3,
+              "scene_id": "rayvan-anthology-d7fa314f9218ce30:shot:3",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "space",
+                  "visual": "ship",
+                  "speech": "A child tied a colorful ribbon to a kite and offered it to the cloud.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-anthology-950dcb55e1ae06b0",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-anthology-950dcb55e1ae06b0",
+            "title": "The Raccoon and the Midnight Bakery",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "door",
+                "speech": "A raccoon smelled fresh bread coming from a bakery that had been closed for years."
+              },
+              {
+                "visual": "signal",
+                "speech": "Tiny flour footprints led through the dark kitchen to a locked cupboard."
+              },
+              {
+                "visual": "robot",
+                "speech": "Inside, a little robot had been baking bread for the neighborhood's stray animals."
+              },
+              {
+                "visual": "forest",
+                "speech": "The raccoon opened the doors and every hungry animal joined the midnight feast."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-anthology-950dcb55e1ae06b0:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "forest",
+                  "visual": "signal",
+                  "speech": "Tiny flour footprints led through the dark kitchen to a locked cupboard.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-free-original-1ecf425b029c3427",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-free-original-1ecf425b029c3427",
+            "title": "The Signal Hidden Inside a Seed",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "signal",
+                "speech": "When the last seed began transmitting a signal, Mira thought the radio was broken."
+              },
+              {
+                "visual": "forest",
+                "speech": "She buried the seed beneath the abandoned station, where nobody had seen green in years."
+              },
+              {
+                "visual": "forest",
+                "speech": "At dawn, the new leaves arranged themselves into a map of tomorrow's storm."
+              },
+              {
+                "visual": "signal",
+                "speech": "Mira shared the map. For the first time in decades, the whole city prepared together."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 4,
+              "scene_id": "rayvan-free-original-1ecf425b029c3427:shot:4",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "city",
+                  "visual": "signal",
+                  "speech": "Mira shared the map. For the first time in decades, the whole city prepared together.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-free-original-1e5869965be72db7",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-free-original-1e5869965be72db7",
+            "title": "The Ship That Delivered Yesterday",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual": "ship",
+                "speech": "The rescue ship returned after forty years, but its clock still showed the day it left."
+              },
+              {
+                "visual": "ship",
+                "speech": "Inside, Ava found only a recording device and a small parcel addressed to her grandmother."
+              },
+              {
+                "visual": "signal",
+                "speech": "The recording held her grandfather's last bedtime story, saved before the ship vanished."
+              },
+              {
+                "visual": "signal",
+                "speech": "Ava played it for her grandmother, and the quiet house filled with laughter again."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 3,
+              "scene_id": "rayvan-free-original-1e5869965be72db7:shot:3",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual": "signal",
+                  "speech": "The recording held her grandfather's last bedtime story, saved before the ship vanished.",
+                  "story_action": "carry"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-silentcomet-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-silentcomet-v1",
+            "title": "The Comet That Stopped",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "The comet stopped moving above the city.",
+                "visual": "planet",
+                "speech": "The comet stopped moving above the city."
+              },
+              {
+                "visual_intent": "An astronomer noticed a repeating pulse inside its ice.",
+                "visual": "signal",
+                "speech": "An astronomer noticed a repeating pulse inside its ice."
+              },
+              {
+                "visual_intent": "The pulse was a map of a distant home.",
+                "visual": "ship",
+                "speech": "The pulse was a map of a distant home."
+              },
+              {
+                "visual_intent": "She transmitted a reply and watched the comet turn toward the stars.",
+                "visual": "planet",
+                "speech": "She transmitted a reply and watched the comet turn toward the stars."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-silentcomet-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "snowfield",
+                  "visual_intent": "An astronomer noticed a repeating pulse inside its ice.",
+                  "visual": "signal",
+                  "speech": "An astronomer noticed a repeating pulse inside its ice.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-doorclock-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-doorclock-v1",
+            "title": "The Door That Opened Tomorrow | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "At midnight, a new door appeared in the old station.",
+                "visual": "door",
+                "speech": "At midnight, a new door appeared in the old station."
+              },
+              {
+                "visual_intent": "Through it, Lena saw the same room twenty-four hours later.",
+                "visual": "door",
+                "speech": "Through it, Lena saw the same room twenty-four hours later."
+              },
+              {
+                "visual_intent": "On the seventh night, the room beyond was completely dark.",
+                "visual": "signal",
+                "speech": "On the seventh night, the room beyond was completely dark."
+              },
+              {
+                "visual_intent": "So she held the door open. And the next morning finally arrived.",
+                "visual": "door",
+                "speech": "So she held the door open. And the next morning finally arrived."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 3,
+              "scene_id": "rayvan-original-doorclock-v1:shot:3",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_intent": "On the seventh night, the room beyond was completely dark.",
+                  "visual": "signal",
+                  "speech": "On the seventh night, the room beyond was completely dark.",
+                  "story_action": "idle",
+                  "story_subject": "clock"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-robotgarden-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-robotgarden-v1",
+            "title": "The Robot Who Grew a Forest | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A forgotten robot found the last seed in a silent city.",
+                "visual": "robot",
+                "speech": "A forgotten robot found the last seed in a silent city."
+              },
+              {
+                "visual_intent": "Every day, it carried one drop of water across the ruins.",
+                "visual": "robot",
+                "speech": "Every day, it carried one drop of water across the ruins."
+              },
+              {
+                "visual_intent": "The seed became a tree. Then the tree made another seed.",
+                "visual": "forest",
+                "speech": "The seed became a tree. Then the tree made another seed."
+              },
+              {
+                "visual_intent": "When the robot fell silent, its forest had just begun to sing.",
+                "visual": "forest",
+                "speech": "When the robot fell silent, its forest had just begun to sing."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-robotgarden-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "city",
+                  "visual_intent": "Every day, it carried one drop of water across the ruins.",
+                  "visual": "robot",
+                  "speech": "Every day, it carried one drop of water across the ruins.",
+                  "story_action": "carry",
+                  "story_subject": "robot"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-spacesong-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-spacesong-v1",
+            "title": "The Song From the Empty Ship | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "An empty spaceship broadcast the same lullaby every night.",
+                "visual": "ship",
+                "speech": "An empty spaceship broadcast the same lullaby every night."
+              },
+              {
+                "visual_intent": "The rescuers searched every room. Not one person was there.",
+                "visual": "ship",
+                "speech": "The rescuers searched every room. Not one person was there."
+              },
+              {
+                "visual_intent": "Behind the engine, they found a sleeping child in a rescue pod.",
+                "visual": "signal",
+                "speech": "Behind the engine, they found a sleeping child in a rescue pod."
+              },
+              {
+                "visual_intent": "The lullaby had been a promise to keep the child safe.",
+                "visual": "ship",
+                "speech": "The lullaby had been a promise to keep the child safe."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-spacesong-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_intent": "The rescuers searched every room. Not one person was there.",
+                  "visual": "ship",
+                  "speech": "The rescuers searched every room. Not one person was there.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-lasttree-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-lasttree-v1",
+            "title": "The Library Beneath the Last Tree | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "In a city of steel, one tree was older than every building.",
+                "visual": "forest",
+                "speech": "In a city of steel, one tree was older than every building."
+              },
+              {
+                "visual_intent": "A child found a small door hidden under the roots.",
+                "visual": "door",
+                "speech": "A child found a small door hidden under the roots."
+              },
+              {
+                "visual_intent": "Inside, every book was made of living leaves.",
+                "visual": "forest",
+                "speech": "Inside, every book was made of living leaves."
+              },
+              {
+                "visual_intent": "When she read the first page aloud, seeds began to fall.",
+                "visual": "forest",
+                "speech": "When she read the first page aloud, seeds began to fall."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-lasttree-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "city",
+                  "visual_intent": "A child found a small door hidden under the roots.",
+                  "visual": "door",
+                  "speech": "A child found a small door hidden under the roots.",
+                  "story_action": "hide"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-moonpost-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-moonpost-v1",
+            "title": "The Post Office on the Moon | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "Every morning, Mara carried letters to an abandoned lunar outpost.",
+                "visual": "planet",
+                "speech": "Every morning, Mara carried letters to an abandoned lunar outpost."
+              },
+              {
+                "visual_intent": "One envelope held a drawing of a garden that did not exist.",
+                "visual": "door",
+                "speech": "One envelope held a drawing of a garden that did not exist."
+              },
+              {
+                "visual_intent": "Behind the outpost, she found a greenhouse with one tiny green shoot.",
+                "visual": "forest",
+                "speech": "Behind the outpost, she found a greenhouse with one tiny green shoot."
+              },
+              {
+                "visual_intent": "Years later, the first settlers wrote back from a garden beneath the stars.",
+                "visual": "signal",
+                "speech": "Years later, the first settlers wrote back from a garden beneath the stars."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 4,
+              "scene_id": "rayvan-original-moonpost-v1:shot:4",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "garden",
+                  "visual_intent": "Years later, the first settlers wrote back from a garden beneath the stars.",
+                  "visual": "signal",
+                  "speech": "Years later, the first settlers wrote back from a garden beneath the stars.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-rainmuseum-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-rainmuseum-v1",
+            "title": "The Museum of Lost Rain | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "The museum kept the world's last raindrop inside a glass jar.",
+                "visual": "planet",
+                "speech": "The museum kept the world's last raindrop inside a glass jar."
+              },
+              {
+                "visual_intent": "Niko found a recording of thunder hidden beneath the display.",
+                "visual": "signal",
+                "speech": "Niko found a recording of thunder hidden beneath the display."
+              },
+              {
+                "visual_intent": "When he played it, the silent weather machine began to hum.",
+                "visual": "robot",
+                "speech": "When he played it, the silent weather machine began to hum."
+              },
+              {
+                "visual_intent": "Outside, the city heard real thunder for the first time in a century.",
+                "visual": "forest",
+                "speech": "Outside, the city heard real thunder for the first time in a century."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-rainmuseum-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "museum",
+                  "visual_intent": "Niko found a recording of thunder hidden beneath the display.",
+                  "visual": "signal",
+                  "speech": "Niko found a recording of thunder hidden beneath the display.",
+                  "story_action": "hide"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-clockworkbridge-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-clockworkbridge-v1",
+            "title": "The Bridge That Remembered | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "Every night, lights crossed the broken bridge though nobody was there.",
+                "visual": "signal",
+                "speech": "Every night, lights crossed the broken bridge though nobody was there."
+              },
+              {
+                "visual_intent": "A small repair robot traced the lights to a missing metal joint.",
+                "visual": "robot",
+                "speech": "A small repair robot traced the lights to a missing metal joint."
+              },
+              {
+                "visual_intent": "Its memory revealed two villages had once built the bridge together.",
+                "visual": "door",
+                "speech": "Its memory revealed two villages had once built the bridge together."
+              },
+              {
+                "visual_intent": "At sunrise, the repaired bridge carried neighbors toward each other again.",
+                "visual": "ship",
+                "speech": "At sunrise, the repaired bridge carried neighbors toward each other again."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-original-clockworkbridge-v1:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "visual_intent": "Every night, lights crossed the broken bridge though nobody was there.",
+                  "visual": "signal",
+                  "speech": "Every night, lights crossed the broken bridge though nobody was there.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-starseed-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-starseed-v1",
+            "title": "The Seed That Fell From Saturn | Original Microfiction",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A silver seed drifted past the station near Saturn.",
+                "visual": "planet",
+                "speech": "A silver seed drifted past the station near Saturn."
+              },
+              {
+                "visual_intent": "Iris planted it in the station's smallest pot.",
+                "visual": "forest",
+                "speech": "Iris planted it in the station's smallest pot."
+              },
+              {
+                "visual_intent": "Each new leaf pointed toward a ship lost beyond the rings.",
+                "visual": "signal",
+                "speech": "Each new leaf pointed toward a ship lost beyond the rings."
+              },
+              {
+                "visual_intent": "Following the glowing leaves, the lost crew finally found their way home.",
+                "visual": "ship",
+                "speech": "Following the glowing leaves, the lost crew finally found their way home."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 3,
+              "scene_id": "rayvan-original-starseed-v1:shot:3",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "space",
+                  "visual_intent": "Each new leaf pointed toward a ship lost beyond the rings.",
+                  "visual": "signal",
+                  "speech": "Each new leaf pointed toward a ship lost beyond the rings.",
+                  "story_action": "point"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-paperplanet-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-paperplanet-v1",
+            "title": "The Planet Made of Paper",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A cartographer watched a distant planet fold like a sheet of paper.",
+                "visual": "planet",
+                "speech": "A cartographer watched a distant planet fold like a sheet of paper."
+              },
+              {
+                "visual_intent": "Each new crease formed a symbol on her star map.",
+                "visual": "signal",
+                "speech": "Each new crease formed a symbol on her star map."
+              },
+              {
+                "visual_intent": "Together the symbols revealed an asteroid heading toward her home.",
+                "visual": "planet",
+                "speech": "Together the symbols revealed an asteroid heading toward her home."
+              },
+              {
+                "visual_intent": "She sent the warning, and the paper planet unfolded into a brilliant sail.",
+                "visual": "ship",
+                "speech": "She sent the warning, and the paper planet unfolded into a brilliant sail."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-paperplanet-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "space",
+                  "visual_intent": "Each new crease formed a symbol on her star map.",
+                  "visual": "signal",
+                  "speech": "Each new crease formed a symbol on her star map.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-lanterntrain-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-lanterntrain-v1",
+            "title": "The Train of Lost Lanterns",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "An empty train arrived carrying hundreds of unlit lanterns.",
+                "visual": "ship",
+                "speech": "An empty train arrived carrying hundreds of unlit lanterns."
+              },
+              {
+                "visual_intent": "The station keeper discovered a forgotten village name on every lantern.",
+                "visual": "signal",
+                "speech": "The station keeper discovered a forgotten village name on every lantern."
+              },
+              {
+                "visual_intent": "A tunnel opened onto a valley whose lights had gone out years ago.",
+                "visual": "door",
+                "speech": "A tunnel opened onto a valley whose lights had gone out years ago."
+              },
+              {
+                "visual_intent": "She lit the first lantern, and the villagers carried the others into the night.",
+                "visual": "forest",
+                "speech": "She lit the first lantern, and the villagers carried the others into the night."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 2,
+              "scene_id": "rayvan-original-lanterntrain-v1:shot:2",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "village",
+                  "visual_intent": "The station keeper discovered a forgotten village name on every lantern.",
+                  "visual": "signal",
+                  "speech": "The station keeper discovered a forgotten village name on every lantern.",
+                  "story_action": "idle",
+                  "story_prop": "lantern"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-cloudtailor-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-cloudtailor-v1",
+            "title": "The Tailor of Thunder",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A young sky tailor saw a thundercloud split above the orchard.",
+                "visual": "planet",
+                "speech": "A young sky tailor saw a thundercloud split above the orchard."
+              },
+              {
+                "visual_intent": "The torn cloud spilled its rain far beyond the thirsty trees.",
+                "visual": "forest",
+                "speech": "The torn cloud spilled its rain far beyond the thirsty trees."
+              },
+              {
+                "visual_intent": "She used a bright rainbow as thread and stitched the cloud together.",
+                "visual": "signal",
+                "speech": "She used a bright rainbow as thread and stitched the cloud together."
+              },
+              {
+                "visual_intent": "The repaired cloud rained gently, and the orchard filled with blossoms.",
+                "visual": "forest",
+                "speech": "The repaired cloud rained gently, and the orchard filled with blossoms."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-original-cloudtailor-v1:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "space",
+                  "visual_intent": "A young sky tailor saw a thundercloud split above the orchard.",
+                  "visual": "planet",
+                  "speech": "A young sky tailor saw a thundercloud split above the orchard.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-mirrorbird-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-mirrorbird-v1",
+            "title": "The Bird in the Mirror",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A child saw a bright blue bird inside a mirror on a rainy day.",
+                "visual": "door",
+                "speech": "A child saw a bright blue bird inside a mirror on a rainy day."
+              },
+              {
+                "visual_intent": "The reflection showed a nest beside a river that was beginning to flood.",
+                "visual": "forest",
+                "speech": "The reflection showed a nest beside a river that was beginning to flood."
+              },
+              {
+                "visual_intent": "She recognized the old bridge and ran to the river behind her house.",
+                "visual": "ship",
+                "speech": "She recognized the old bridge and ran to the river behind her house."
+              },
+              {
+                "visual_intent": "She moved the nest to higher branches, and the bird sang outside her window.",
+                "visual": "forest",
+                "speech": "She moved the nest to higher branches, and the bird sang outside her window."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-original-mirrorbird-v1:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "forest",
+                  "visual_intent": "A child saw a bright blue bird inside a mirror on a rainy day.",
+                  "visual": "door",
+                  "speech": "A child saw a bright blue bird inside a mirror on a rainy day.",
+                  "story_action": "idle",
+                  "story_subject": "bird"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        },
+        {
+          "content_id": "rayvan-original-moonbakery-v1",
+          "shot_count": 4,
+          "reason": "renderer_incompatible",
+          "story_context": {
+            "content_id": "rayvan-original-moonbakery-v1",
+            "title": "The Bakery at Moonrise",
+            "genre": "fiction",
+            "story_environment": "",
+            "visual_style": "",
+            "story_beats": [
+              {
+                "visual_intent": "A baker discovered his flour glowing whenever moonlight touched it.",
+                "visual": "planet",
+                "speech": "A baker discovered his flour glowing whenever moonlight touched it."
+              },
+              {
+                "visual_intent": "Tiny silver crumbs led from the bakery to an abandoned observatory.",
+                "visual": "door",
+                "speech": "Tiny silver crumbs led from the bakery to an abandoned observatory."
+              },
+              {
+                "visual_intent": "Inside he found a lost traveler whose small ship had run out of power.",
+                "visual": "ship",
+                "speech": "Inside he found a lost traveler whose small ship had run out of power."
+              },
+              {
+                "visual_intent": "The warm silver bread powered the ship, and the traveler left a new recipe.",
+                "visual": "signal",
+                "speech": "The warm silver bread powered the ship, and the traveler left a new recipe."
+              }
+            ]
+          },
+          "missing_shots": [
+            {
+              "shot": 1,
+              "scene_id": "rayvan-original-moonbakery-v1:shot:1",
+              "reason": "scene_unresolved",
+              "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+              "authored_context": {
+                "source": "unmodified_story_input",
+                "source_beat_found": true,
+                "authored_fields": {
+                  "story_environment": "space",
+                  "visual_intent": "A baker discovered his flour glowing whenever moonlight touched it.",
+                  "visual": "planet",
+                  "speech": "A baker discovered his flour glowing whenever moonlight touched it.",
+                  "story_action": "idle"
+                },
+                "review_only": true
+              }
+            }
+          ],
+          "publication_approval": false,
+          "semantic_quality": "not_verified",
+          "repair_status": "manual_scene_and_art_review_required"
+        }
+      ],
+      "renderer_repair_rejected": 55,
       "approved": 0,
       "exhausted": true,
       "rejection_total": 122,
-      "next_action": "replenish_approved_story_supply"
+      "next_action": "review_renderer_incompatible_story_scenes"
     }
   },
   "last_workflow_result": {
-    "at": "2026-11-28T07:45:32.989842+00:00",
+    "at": "2026-11-28T07:56:27.475485+00:00",
     "preflight_due": "true",
     "preflight_step": "success",
     "publish_step": "success",
@@ -31958,7 +33285,7 @@
     "reconciled_previous_publication": false
   },
   "last_story_selection_diagnostics": {
-    "at": "2026-11-28T07:45:32.990793+00:00",
+    "at": "2026-11-28T07:56:27.476121+00:00",
     "collection_status": "collected",
     "publish_step": "success",
     "selection_source": "fresh_candidate_evaluation",
@@ -31990,7 +33317,1333 @@
         "already_seen": 0,
         "approved": 0,
         "background_preflight_rejected": 0,
-        "background_review_gaps": [],
+        "background_review_gaps": [
+          {
+            "content_id": "rayvan-anthology-542cd01a50f64edb",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The pages described a stranger who would arrive before dawn.",
+                    "story_action": "idle",
+                    "story_environment": "library",
+                    "story_prop": "book",
+                    "story_subject": "book",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-anthology-542cd01a50f64edb:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-542cd01a50f64edb",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "Every night, a blank book appeared on the library desk.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "The pages described a stranger who would arrive before dawn.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "The stranger carried a book with the librarian's name on its cover.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "Instead of following the prediction, she wrote her own final page.",
+                  "visual": "door"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Library of Unwritten Books",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A child watched a glowing jellyfish drift toward an old lighthouse.",
+                    "story_action": "look",
+                    "story_environment": "lighthouse",
+                    "story_prop": "lantern",
+                    "story_subject": "ocean",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-anthology-a9a002d2ef7f9c8f:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-a9a002d2ef7f9c8f",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "One morning, fish were swimming across the sky like clouds.",
+                  "visual": "planet"
+                },
+                {
+                  "speech": "A child watched a glowing jellyfish drift toward an old lighthouse.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "Its lamp had been projecting memories of a vanished ocean.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "The child restored the lamp and the town remembered how to protect its shore.",
+                  "visual": "forest"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Ocean Above the City",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-2906bc6378365d3e",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A museum guard found a newspaper dated one day ahead.",
+                    "story_action": "idle",
+                    "story_environment": "museum",
+                    "story_subject": "museum",
+                    "visual": "door"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-anthology-2906bc6378365d3e:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-2906bc6378365d3e",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A museum guard found a newspaper dated one day ahead.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "The front page showed a bridge collapsing at noon.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "Behind the wall, a machine was collecting warnings from possible futures.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "The guard warned the city, and the next newspaper showed an empty bridge.",
+                  "visual": "door"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Museum of Tomorrows",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-0566139be012f920",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "It pointed toward a locked door beneath the stairs.",
+                    "story_action": "point",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-anthology-0566139be012f920:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-0566139be012f920",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "His shadow kept moving five seconds after he stopped.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "It pointed toward a locked door beneath the stairs.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "Behind the door, a forgotten projector was replaying his grandfather's films.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "He played the final reel and danced with the shadow on the wall.",
+                  "visual": "door"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Shadow That Was Late",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-535144f2435abf94",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "At the tower, the robot discovered the kite was guiding it toward a broken weather vane.",
+                    "story_action": "idle",
+                    "story_environment": "workshop",
+                    "story_subject": "robot",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-anthology-535144f2435abf94:shot:3",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-535144f2435abf94",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A little robot watched its handmade kite escape over the workshop roof.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "It followed the kite across rooftops and under the town's old clocktower.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "At the tower, the robot discovered the kite was guiding it toward a broken weather vane.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "The robot repaired the vane and the townspeople filled the bright sky with colorful kites.",
+                  "visual": "planet"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Little Robot and the Kite",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-e0cf80928a197bb4",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A turtle noticed that the town clock was spinning faster than everyone could walk.",
+                    "story_action": "walk",
+                    "story_environment": "forest",
+                    "story_prop": "clock",
+                    "story_subject": "clock",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-anthology-e0cf80928a197bb4:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-e0cf80928a197bb4",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A turtle noticed that the town clock was spinning faster than everyone could walk.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "The rabbit tried to stop the gears but kept slipping on the tower stairs.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "The turtle found a loose stone beneath the clock and carefully fixed the wobbly gear.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "The bells rang at the correct hour and the town finally enjoyed a peaceful afternoon.",
+                  "visual": "forest"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Turtle and the Speedy Clock",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-d7fa314f9218ce30",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A child tied a colorful ribbon to a kite and offered it to the cloud.",
+                    "story_action": "idle",
+                    "story_environment": "space",
+                    "visual": "ship"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-anthology-d7fa314f9218ce30:shot:3",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-d7fa314f9218ce30",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A little cloud floated into town wearing a paper hat that immediately blew away.",
+                  "visual": "planet"
+                },
+                {
+                  "speech": "It tried a giant helmet, a flowerpot and even a bright umbrella.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "A child tied a colorful ribbon to a kite and offered it to the cloud.",
+                  "visual": "ship"
+                },
+                {
+                  "speech": "The cloud wore its rainbow kite proudly and shaded everyone at the parade.",
+                  "visual": "forest"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Cloud That Wanted a Hat",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-anthology-950dcb55e1ae06b0",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Tiny flour footprints led through the dark kitchen to a locked cupboard.",
+                    "story_action": "idle",
+                    "story_environment": "forest",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-anthology-950dcb55e1ae06b0:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-anthology-950dcb55e1ae06b0",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A raccoon smelled fresh bread coming from a bakery that had been closed for years.",
+                  "visual": "door"
+                },
+                {
+                  "speech": "Tiny flour footprints led through the dark kitchen to a locked cupboard.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "Inside, a little robot had been baking bread for the neighborhood's stray animals.",
+                  "visual": "robot"
+                },
+                {
+                  "speech": "The raccoon opened the doors and every hungry animal joined the midnight feast.",
+                  "visual": "forest"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Raccoon and the Midnight Bakery",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-free-original-1ecf425b029c3427",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Mira shared the map. For the first time in decades, the whole city prepared together.",
+                    "story_action": "idle",
+                    "story_environment": "city",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-free-original-1ecf425b029c3427:shot:4",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-free-original-1ecf425b029c3427",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "When the last seed began transmitting a signal, Mira thought the radio was broken.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "She buried the seed beneath the abandoned station, where nobody had seen green in years.",
+                  "visual": "forest"
+                },
+                {
+                  "speech": "At dawn, the new leaves arranged themselves into a map of tomorrow's storm.",
+                  "visual": "forest"
+                },
+                {
+                  "speech": "Mira shared the map. For the first time in decades, the whole city prepared together.",
+                  "visual": "signal"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Signal Hidden Inside a Seed",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-free-original-1e5869965be72db7",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The recording held her grandfather's last bedtime story, saved before the ship vanished.",
+                    "story_action": "carry",
+                    "visual": "signal"
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-free-original-1e5869965be72db7:shot:3",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-free-original-1e5869965be72db7",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "The rescue ship returned after forty years, but its clock still showed the day it left.",
+                  "visual": "ship"
+                },
+                {
+                  "speech": "Inside, Ava found only a recording device and a small parcel addressed to her grandmother.",
+                  "visual": "ship"
+                },
+                {
+                  "speech": "The recording held her grandfather's last bedtime story, saved before the ship vanished.",
+                  "visual": "signal"
+                },
+                {
+                  "speech": "Ava played it for her grandmother, and the quiet house filled with laughter again.",
+                  "visual": "signal"
+                }
+              ],
+              "story_environment": "",
+              "title": "The Ship That Delivered Yesterday",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-silentcomet-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "An astronomer noticed a repeating pulse inside its ice.",
+                    "story_action": "idle",
+                    "story_environment": "snowfield",
+                    "visual": "signal",
+                    "visual_intent": "An astronomer noticed a repeating pulse inside its ice."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-silentcomet-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-silentcomet-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "The comet stopped moving above the city.",
+                  "visual": "planet",
+                  "visual_intent": "The comet stopped moving above the city."
+                },
+                {
+                  "speech": "An astronomer noticed a repeating pulse inside its ice.",
+                  "visual": "signal",
+                  "visual_intent": "An astronomer noticed a repeating pulse inside its ice."
+                },
+                {
+                  "speech": "The pulse was a map of a distant home.",
+                  "visual": "ship",
+                  "visual_intent": "The pulse was a map of a distant home."
+                },
+                {
+                  "speech": "She transmitted a reply and watched the comet turn toward the stars.",
+                  "visual": "planet",
+                  "visual_intent": "She transmitted a reply and watched the comet turn toward the stars."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Comet That Stopped",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-doorclock-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "On the seventh night, the room beyond was completely dark.",
+                    "story_action": "idle",
+                    "story_subject": "clock",
+                    "visual": "signal",
+                    "visual_intent": "On the seventh night, the room beyond was completely dark."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-doorclock-v1:shot:3",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-doorclock-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "At midnight, a new door appeared in the old station.",
+                  "visual": "door",
+                  "visual_intent": "At midnight, a new door appeared in the old station."
+                },
+                {
+                  "speech": "Through it, Lena saw the same room twenty-four hours later.",
+                  "visual": "door",
+                  "visual_intent": "Through it, Lena saw the same room twenty-four hours later."
+                },
+                {
+                  "speech": "On the seventh night, the room beyond was completely dark.",
+                  "visual": "signal",
+                  "visual_intent": "On the seventh night, the room beyond was completely dark."
+                },
+                {
+                  "speech": "So she held the door open. And the next morning finally arrived.",
+                  "visual": "door",
+                  "visual_intent": "So she held the door open. And the next morning finally arrived."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Door That Opened Tomorrow | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-robotgarden-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Every day, it carried one drop of water across the ruins.",
+                    "story_action": "carry",
+                    "story_environment": "city",
+                    "story_subject": "robot",
+                    "visual": "robot",
+                    "visual_intent": "Every day, it carried one drop of water across the ruins."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: subject_icon_cannot_depict_narrated_interaction",
+                "scene_id": "rayvan-original-robotgarden-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-robotgarden-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A forgotten robot found the last seed in a silent city.",
+                  "visual": "robot",
+                  "visual_intent": "A forgotten robot found the last seed in a silent city."
+                },
+                {
+                  "speech": "Every day, it carried one drop of water across the ruins.",
+                  "visual": "robot",
+                  "visual_intent": "Every day, it carried one drop of water across the ruins."
+                },
+                {
+                  "speech": "The seed became a tree. Then the tree made another seed.",
+                  "visual": "forest",
+                  "visual_intent": "The seed became a tree. Then the tree made another seed."
+                },
+                {
+                  "speech": "When the robot fell silent, its forest had just begun to sing.",
+                  "visual": "forest",
+                  "visual_intent": "When the robot fell silent, its forest had just begun to sing."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Robot Who Grew a Forest | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-spacesong-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The rescuers searched every room. Not one person was there.",
+                    "story_action": "idle",
+                    "visual": "ship",
+                    "visual_intent": "The rescuers searched every room. Not one person was there."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-original-spacesong-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-spacesong-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "An empty spaceship broadcast the same lullaby every night.",
+                  "visual": "ship",
+                  "visual_intent": "An empty spaceship broadcast the same lullaby every night."
+                },
+                {
+                  "speech": "The rescuers searched every room. Not one person was there.",
+                  "visual": "ship",
+                  "visual_intent": "The rescuers searched every room. Not one person was there."
+                },
+                {
+                  "speech": "Behind the engine, they found a sleeping child in a rescue pod.",
+                  "visual": "signal",
+                  "visual_intent": "Behind the engine, they found a sleeping child in a rescue pod."
+                },
+                {
+                  "speech": "The lullaby had been a promise to keep the child safe.",
+                  "visual": "ship",
+                  "visual_intent": "The lullaby had been a promise to keep the child safe."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Song From the Empty Ship | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-lasttree-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A child found a small door hidden under the roots.",
+                    "story_action": "hide",
+                    "story_environment": "city",
+                    "visual": "door",
+                    "visual_intent": "A child found a small door hidden under the roots."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-original-lasttree-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-lasttree-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "In a city of steel, one tree was older than every building.",
+                  "visual": "forest",
+                  "visual_intent": "In a city of steel, one tree was older than every building."
+                },
+                {
+                  "speech": "A child found a small door hidden under the roots.",
+                  "visual": "door",
+                  "visual_intent": "A child found a small door hidden under the roots."
+                },
+                {
+                  "speech": "Inside, every book was made of living leaves.",
+                  "visual": "forest",
+                  "visual_intent": "Inside, every book was made of living leaves."
+                },
+                {
+                  "speech": "When she read the first page aloud, seeds began to fall.",
+                  "visual": "forest",
+                  "visual_intent": "When she read the first page aloud, seeds began to fall."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Library Beneath the Last Tree | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-moonpost-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Years later, the first settlers wrote back from a garden beneath the stars.",
+                    "story_action": "idle",
+                    "story_environment": "garden",
+                    "visual": "signal",
+                    "visual_intent": "Years later, the first settlers wrote back from a garden beneath the stars."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-moonpost-v1:shot:4",
+                "shot": 4
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-moonpost-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "Every morning, Mara carried letters to an abandoned lunar outpost.",
+                  "visual": "planet",
+                  "visual_intent": "Every morning, Mara carried letters to an abandoned lunar outpost."
+                },
+                {
+                  "speech": "One envelope held a drawing of a garden that did not exist.",
+                  "visual": "door",
+                  "visual_intent": "One envelope held a drawing of a garden that did not exist."
+                },
+                {
+                  "speech": "Behind the outpost, she found a greenhouse with one tiny green shoot.",
+                  "visual": "forest",
+                  "visual_intent": "Behind the outpost, she found a greenhouse with one tiny green shoot."
+                },
+                {
+                  "speech": "Years later, the first settlers wrote back from a garden beneath the stars.",
+                  "visual": "signal",
+                  "visual_intent": "Years later, the first settlers wrote back from a garden beneath the stars."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Post Office on the Moon | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-rainmuseum-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Niko found a recording of thunder hidden beneath the display.",
+                    "story_action": "hide",
+                    "story_environment": "museum",
+                    "visual": "signal",
+                    "visual_intent": "Niko found a recording of thunder hidden beneath the display."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-rainmuseum-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-rainmuseum-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "The museum kept the world's last raindrop inside a glass jar.",
+                  "visual": "planet",
+                  "visual_intent": "The museum kept the world's last raindrop inside a glass jar."
+                },
+                {
+                  "speech": "Niko found a recording of thunder hidden beneath the display.",
+                  "visual": "signal",
+                  "visual_intent": "Niko found a recording of thunder hidden beneath the display."
+                },
+                {
+                  "speech": "When he played it, the silent weather machine began to hum.",
+                  "visual": "robot",
+                  "visual_intent": "When he played it, the silent weather machine began to hum."
+                },
+                {
+                  "speech": "Outside, the city heard real thunder for the first time in a century.",
+                  "visual": "forest",
+                  "visual_intent": "Outside, the city heard real thunder for the first time in a century."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Museum of Lost Rain | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-clockworkbridge-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Every night, lights crossed the broken bridge though nobody was there.",
+                    "story_action": "idle",
+                    "visual": "signal",
+                    "visual_intent": "Every night, lights crossed the broken bridge though nobody was there."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-clockworkbridge-v1:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-clockworkbridge-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "Every night, lights crossed the broken bridge though nobody was there.",
+                  "visual": "signal",
+                  "visual_intent": "Every night, lights crossed the broken bridge though nobody was there."
+                },
+                {
+                  "speech": "A small repair robot traced the lights to a missing metal joint.",
+                  "visual": "robot",
+                  "visual_intent": "A small repair robot traced the lights to a missing metal joint."
+                },
+                {
+                  "speech": "Its memory revealed two villages had once built the bridge together.",
+                  "visual": "door",
+                  "visual_intent": "Its memory revealed two villages had once built the bridge together."
+                },
+                {
+                  "speech": "At sunrise, the repaired bridge carried neighbors toward each other again.",
+                  "visual": "ship",
+                  "visual_intent": "At sunrise, the repaired bridge carried neighbors toward each other again."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Bridge That Remembered | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-starseed-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Each new leaf pointed toward a ship lost beyond the rings.",
+                    "story_action": "point",
+                    "story_environment": "space",
+                    "visual": "signal",
+                    "visual_intent": "Each new leaf pointed toward a ship lost beyond the rings."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-starseed-v1:shot:3",
+                "shot": 3
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-starseed-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A silver seed drifted past the station near Saturn.",
+                  "visual": "planet",
+                  "visual_intent": "A silver seed drifted past the station near Saturn."
+                },
+                {
+                  "speech": "Iris planted it in the station's smallest pot.",
+                  "visual": "forest",
+                  "visual_intent": "Iris planted it in the station's smallest pot."
+                },
+                {
+                  "speech": "Each new leaf pointed toward a ship lost beyond the rings.",
+                  "visual": "signal",
+                  "visual_intent": "Each new leaf pointed toward a ship lost beyond the rings."
+                },
+                {
+                  "speech": "Following the glowing leaves, the lost crew finally found their way home.",
+                  "visual": "ship",
+                  "visual_intent": "Following the glowing leaves, the lost crew finally found their way home."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Seed That Fell From Saturn | Original Microfiction",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-paperplanet-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "Each new crease formed a symbol on her star map.",
+                    "story_action": "idle",
+                    "story_environment": "space",
+                    "visual": "signal",
+                    "visual_intent": "Each new crease formed a symbol on her star map."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-paperplanet-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-paperplanet-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A cartographer watched a distant planet fold like a sheet of paper.",
+                  "visual": "planet",
+                  "visual_intent": "A cartographer watched a distant planet fold like a sheet of paper."
+                },
+                {
+                  "speech": "Each new crease formed a symbol on her star map.",
+                  "visual": "signal",
+                  "visual_intent": "Each new crease formed a symbol on her star map."
+                },
+                {
+                  "speech": "Together the symbols revealed an asteroid heading toward her home.",
+                  "visual": "planet",
+                  "visual_intent": "Together the symbols revealed an asteroid heading toward her home."
+                },
+                {
+                  "speech": "She sent the warning, and the paper planet unfolded into a brilliant sail.",
+                  "visual": "ship",
+                  "visual_intent": "She sent the warning, and the paper planet unfolded into a brilliant sail."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Planet Made of Paper",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-lanterntrain-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "The station keeper discovered a forgotten village name on every lantern.",
+                    "story_action": "idle",
+                    "story_environment": "village",
+                    "story_prop": "lantern",
+                    "visual": "signal",
+                    "visual_intent": "The station keeper discovered a forgotten village name on every lantern."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event",
+                "scene_id": "rayvan-original-lanterntrain-v1:shot:2",
+                "shot": 2
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-lanterntrain-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "An empty train arrived carrying hundreds of unlit lanterns.",
+                  "visual": "ship",
+                  "visual_intent": "An empty train arrived carrying hundreds of unlit lanterns."
+                },
+                {
+                  "speech": "The station keeper discovered a forgotten village name on every lantern.",
+                  "visual": "signal",
+                  "visual_intent": "The station keeper discovered a forgotten village name on every lantern."
+                },
+                {
+                  "speech": "A tunnel opened onto a valley whose lights had gone out years ago.",
+                  "visual": "door",
+                  "visual_intent": "A tunnel opened onto a valley whose lights had gone out years ago."
+                },
+                {
+                  "speech": "She lit the first lantern, and the villagers carried the others into the night.",
+                  "visual": "forest",
+                  "visual_intent": "She lit the first lantern, and the villagers carried the others into the night."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Train of Lost Lanterns",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-cloudtailor-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A young sky tailor saw a thundercloud split above the orchard.",
+                    "story_action": "idle",
+                    "story_environment": "space",
+                    "visual": "planet",
+                    "visual_intent": "A young sky tailor saw a thundercloud split above the orchard."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-original-cloudtailor-v1:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-cloudtailor-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A young sky tailor saw a thundercloud split above the orchard.",
+                  "visual": "planet",
+                  "visual_intent": "A young sky tailor saw a thundercloud split above the orchard."
+                },
+                {
+                  "speech": "The torn cloud spilled its rain far beyond the thirsty trees.",
+                  "visual": "forest",
+                  "visual_intent": "The torn cloud spilled its rain far beyond the thirsty trees."
+                },
+                {
+                  "speech": "She used a bright rainbow as thread and stitched the cloud together.",
+                  "visual": "signal",
+                  "visual_intent": "She used a bright rainbow as thread and stitched the cloud together."
+                },
+                {
+                  "speech": "The repaired cloud rained gently, and the orchard filled with blossoms.",
+                  "visual": "forest",
+                  "visual_intent": "The repaired cloud rained gently, and the orchard filled with blossoms."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Tailor of Thunder",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-mirrorbird-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A child saw a bright blue bird inside a mirror on a rainy day.",
+                    "story_action": "idle",
+                    "story_environment": "forest",
+                    "story_subject": "bird",
+                    "visual": "door",
+                    "visual_intent": "A child saw a bright blue bird inside a mirror on a rainy day."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-original-mirrorbird-v1:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-mirrorbird-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A child saw a bright blue bird inside a mirror on a rainy day.",
+                  "visual": "door",
+                  "visual_intent": "A child saw a bright blue bird inside a mirror on a rainy day."
+                },
+                {
+                  "speech": "The reflection showed a nest beside a river that was beginning to flood.",
+                  "visual": "forest",
+                  "visual_intent": "The reflection showed a nest beside a river that was beginning to flood."
+                },
+                {
+                  "speech": "She recognized the old bridge and ran to the river behind her house.",
+                  "visual": "ship",
+                  "visual_intent": "She recognized the old bridge and ran to the river behind her house."
+                },
+                {
+                  "speech": "She moved the nest to higher branches, and the bird sang outside her window.",
+                  "visual": "forest",
+                  "visual_intent": "She moved the nest to higher branches, and the bird sang outside her window."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Bird in the Mirror",
+              "visual_style": ""
+            }
+          },
+          {
+            "content_id": "rayvan-original-moonbakery-v1",
+            "missing_shots": [
+              {
+                "authored_context": {
+                  "authored_fields": {
+                    "speech": "A baker discovered his flour glowing whenever moonlight touched it.",
+                    "story_action": "idle",
+                    "story_environment": "space",
+                    "visual": "planet",
+                    "visual_intent": "A baker discovered his flour glowing whenever moonlight touched it."
+                  },
+                  "review_only": true,
+                  "source": "unmodified_story_input",
+                  "source_beat_found": true
+                },
+                "reason": "scene_unresolved",
+                "renderer_issue": "Directed scene requires verified scene artwork: human_actor_not_supported_by_directed_icons",
+                "scene_id": "rayvan-original-moonbakery-v1:shot:1",
+                "shot": 1
+              }
+            ],
+            "publication_approval": false,
+            "reason": "renderer_incompatible",
+            "repair_status": "manual_scene_and_art_review_required",
+            "semantic_quality": "not_verified",
+            "shot_count": 4,
+            "story_context": {
+              "content_id": "rayvan-original-moonbakery-v1",
+              "genre": "fiction",
+              "story_beats": [
+                {
+                  "speech": "A baker discovered his flour glowing whenever moonlight touched it.",
+                  "visual": "planet",
+                  "visual_intent": "A baker discovered his flour glowing whenever moonlight touched it."
+                },
+                {
+                  "speech": "Tiny silver crumbs led from the bakery to an abandoned observatory.",
+                  "visual": "door",
+                  "visual_intent": "Tiny silver crumbs led from the bakery to an abandoned observatory."
+                },
+                {
+                  "speech": "Inside he found a lost traveler whose small ship had run out of power.",
+                  "visual": "ship",
+                  "visual_intent": "Inside he found a lost traveler whose small ship had run out of power."
+                },
+                {
+                  "speech": "The warm silver bread powered the ship, and the traveler left a new recipe.",
+                  "visual": "signal",
+                  "visual_intent": "The warm silver bread powered the ship, and the traveler left a new recipe."
+                }
+              ],
+              "story_environment": "",
+              "title": "The Bakery at Moonrise",
+              "visual_style": ""
+            }
+          }
+        ],
         "considered": 122,
         "duration_rejected": 0,
         "not_ready": 64,
@@ -32006,7 +34659,8 @@
           "renderer_incompatible: shot 4: Directed scene requires verified scene artwork: signal_graphic_does_not_depict_narrated_event": 2
         },
         "render_exception": {},
-        "render_qa_rejected": 0
+        "render_qa_rejected": 0,
+        "renderer_repair_rejected": 55
       }
     },
     "note": "Diagnostic only; no approval, scheduling or publishing effect"
