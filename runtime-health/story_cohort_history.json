@@ -2,15 +2,6 @@
   "runs": [
     {
       "attempt": "1",
-      "commit": "9dd2afdb7a04e2c2003954a780027fcd46282ac8",
-      "duplicate_rate": 0.0,
-      "narrative_duplicates": 0,
-      "new_proposals": 100,
-      "publication_enabled": false,
-      "run_id": "39482934827"
-    },
-    {
-      "attempt": "1",
       "commit": "9611e981a963d37e8a5bbf6bf1d2f5d5fd33633e",
       "duplicate_rate": 0.0,
       "narrative_duplicates": 0,
@@ -269,6 +260,15 @@
       "new_proposals": 76,
       "publication_enabled": false,
       "run_id": "46072776987"
+    },
+    {
+      "attempt": "1",
+      "commit": "73caefdd65b516ecaff21df526dfb957eb57c1ec",
+      "duplicate_rate": 0.0,
+      "narrative_duplicates": 0,
+      "new_proposals": 79,
+      "publication_enabled": false,
+      "run_id": "46123330222"
     }
   ],
   "schema_version": 1
