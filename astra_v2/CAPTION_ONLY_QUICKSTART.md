@@ -1,6 +1,6 @@
 # ASTRA GitHub-native multi-format Shorts pipeline
 
-ASTRA's caption-only path runs on GitHub-hosted Actions. It produces narration plus phrase-synchronized captions on a solid background: no animation, illustrations, stock footage, B-roll, music, branding overlays, or CTA overlays.
+ASTRA's caption-only path runs on GitHub-hosted Actions. The cinematic renderer produces full-screen 9:16 moving visuals with subtle, phrase-synchronized floating captions and narration. It is not a static caption card or permanent lower-third. Gemini-backed fiction generation is an optional lane; the local Qwen path remains available and is not replaced.
 
 ## Workflows
 
@@ -8,12 +8,13 @@ ASTRA's caption-only path runs on GitHub-hosted Actions. It produces narration p
 - **ASTRA Single-Lane Diagnostic** — manually tests one lane end-to-end without writing story history or publishing.
 - **ASTRA Local Story to Caption Short** — manually generates one selected direction and renders a review artifact.
 - **ASTRA Caption-only Render** — renders an existing review candidate from `queue/pending/`.
+- **ASTRA Caption Short Generate + Review Render** — manually generates one Gemini-backed seven-scene fiction candidate, renders the cinematic caption-only MP4, and uploads a review-only artifact. It requires `GEMINI_API_KEY` and does not publish.
 
 The caption inference workflows share one concurrency group to prevent overlapping model runs and competing writes to the shared originality history. Generation and rendering commands have hard time limits. A timeout fails the run safely; it does not trigger publishing.
 
 ## Generation and validation
 
-The pinned Qwen3-4B Q4_K_M model runs locally on the GitHub Actions CPU runner. No paid inference API, Gemini, vidIQ credits, local computer, WSL2, or external paid AI service is required.
+The pinned Qwen3-4B Q4_K_M model remains available locally on the GitHub Actions CPU runner for its multi-format generation path. The separate fiction workflow uses the configured Gemini model when `GEMINI_API_KEY` is present; Gemini is retained rather than replaced. Neither route grants production approval or publishing permission.
 
 The generator adapts structure to the content direction:
 - Puzzles use challenge, thinking pause, answer, and explanation.
