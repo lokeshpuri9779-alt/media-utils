@@ -473,7 +473,7 @@ def make_candidate(path, excluded_ids, excluded_titles):
                  "already_seen": 0, "duration_rejected": 0,
                  "render_qa_rejected": 0, "render_exception": {},
                  "background_preflight_rejected": 0, "background_review_gaps": [],
-                 "approved": 0}
+                 "renderer_repair_rejected": 0, "approved": 0}
     for story in premium_stories:
         selection["considered"] += 1
         if not (story.get("production_ready") or story.get("validation_candidate")):
@@ -483,6 +483,15 @@ def make_candidate(path, excluded_ids, excluded_titles):
         rejection = publication_rejection(story)
         if rejection:
             selection["policy_rejected"][rejection] = selection["policy_rejected"].get(rejection, 0) + 1
+            if rejection.startswith("renderer_incompatible:"):
+                from astra_v2.renderer_repair_queue import build_renderer_repair_gap
+                repair_gap = build_renderer_repair_gap(story, rejection)
+                if repair_gap:
+                    selection["renderer_repair_rejected"] += 1
+                    if len(selection["background_review_gaps"]) < 24:
+                        selection["background_review_gaps"].append(repair_gap)
+                    print("ASTRA_RENDERER_REPAIR_REVIEW_GAP=" +
+                          json.dumps(repair_gap, sort_keys=True), flush=True)
             print("Story publication preflight rejected:", story.get("content_id"), rejection)
             continue
         if story["content_id"] in excluded_ids or story["title"].casefold().strip() in excluded_titles:
@@ -590,10 +599,12 @@ def make_candidate(path, excluded_ids, excluded_titles):
             + sum(selection["render_exception"].values())
             + selection["background_preflight_rejected"])
         selection["next_action"] = (
-            "review_missing_story_scene_backgrounds"
-            if selection["background_preflight_rejected"]
-            else ("replenish_approved_story_supply" if not selection["approved"]
-                  else "investigate_render_or_policy_gates"))
+            "review_renderer_incompatible_story_scenes"
+            if selection["renderer_repair_rejected"]
+            else ("review_missing_story_scene_backgrounds"
+                  if selection["background_preflight_rejected"]
+                  else ("replenish_approved_story_supply" if not selection["approved"]
+                        else "investigate_render_or_policy_gates")))
         archive_background_review_gaps(selection)
         if lane_count > 1:
             raise CreativeSkip('no_approved_candidate_in_preload_lane', selection=selection)
