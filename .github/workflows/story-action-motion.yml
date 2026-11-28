@@ -16,3 +16,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m unittest discover -s tests -p 'test_story_action_motion.py' -v
+      - run: python -m unittest discover -s tests -p 'test_pillow_scene_direction.py' -v
