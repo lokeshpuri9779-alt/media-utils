@@ -37,6 +37,21 @@ class ArtworkGapQueueTests(unittest.TestCase):
         self.assertFalse(result["automatic_scene_substitution"])
         self.assertFalse(result["automatic_image_generation"])
 
+    def test_preserves_bounded_story_art_direction_for_later_review(self):
+        story_context = {
+            "content_id": "story-a", "title": "The Bell Tower",
+            "visual_bible": {"fox": "russet fur, white chest", "owl": ["amber eyes"]},
+            "story_cast": [{"name": "Fox", "appearance": "russet fur"}],
+            "story_beats": [{"speech": "The fox enters the tower."}],
+        }
+        result = build_repair_queue({"background_review_gaps": [{
+            "content_id": "story-a", "shot_count": 1, "story_context": story_context,
+            "missing_shots": [{"shot": 1, "reason": "scene_unresolved"}],
+        }]}, lane=0)
+        self.assertEqual(result["items"][0]["story_context"], story_context)
+        self.assertFalse(result["publication_approval"])
+        self.assertEqual(result["semantic_quality"], "not_verified")
+
     def test_no_gaps_create_no_artifact(self):
         with tempfile.TemporaryDirectory() as root:
             self.assertIsNone(save_repair_queue({"background_review_gaps": []},
