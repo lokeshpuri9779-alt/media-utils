@@ -1,0 +1,40 @@
+{
+  "schema": "astra.art.review-only-candidate.v1",
+  "status": "pending_review",
+  "story_sha256": "423b3e3865770bacfed51077434efe471941b0e3bb86edf8ca536f85e7ef175a",
+  "publication_triggered": false,
+  "story": {
+    "content_id": "astra-review-library-unwritten-books-20261128",
+    "title": "The Library of Unwritten Books",
+    "kind": "authored_causal_story",
+    "production_ready": false,
+    "plot_fingerprint": "midnight_blank_book_stranger_prediction_librarian_authored_ending",
+    "visual_bible": "A quiet, old-world public library at midnight; warm amber desk lamp, deep blue moonlight through tall windows, consistent middle-aged librarian with dark hair in a low bun, round spectacles, forest-green cardigan; recurring cream linen-bound blank book with a small brass clasp; cinematic storybook illustration, vertical 9:16, no text or lettering.",
+    "story_beats": [
+      {
+        "story_beat": "reveal",
+        "scene_id": "scene-1",
+        "speech": "Every night, just before midnight, a blank book appeared on the library desk. By morning, it was gone.",
+        "visual_prompt": "A quiet old library after midnight, a single cream linen-bound blank book with a brass clasp appearing on a polished wooden desk beneath a warm amber lamp, tall shadowed bookshelves and blue moonlight, no people, cinematic storybook illustration."
+      },
+      {
+        "story_beat": "build",
+        "scene_id": "scene-2",
+        "speech": "One evening, the librarian opened it. The pages described a stranger who would arrive before dawn, carrying a book of his own.",
+        "visual_prompt": "The same middle-aged librarian with dark hair in a low bun, round spectacles and forest-green cardigan reading the open blank-looking cream book at the desk, faint delicate ink-like lines suggested but no readable text, clock nearing midnight, cinematic storybook illustration."
+      },
+      {
+        "story_beat": "twist",
+        "scene_id": "scene-3",
+        "speech": "At the door, a stranger appeared exactly as the pages had promised. In his hands was a book bearing the librarian's name.",
+        "visual_prompt": "At the library entrance before dawn, a mysterious but non-threatening traveler in a charcoal coat stands holding a closed dark leather book with a small brass nameplate turned away and unreadable, the same librarian watching from behind the desk, rain-speckled glass doors, cinematic storybook illustration."
+      },
+      {
+        "story_beat": "payoff",
+        "scene_id": "scene-4",
+        "speech": "She refused to let the book decide what happened next. She took her pen and wrote the ending herself.",
+        "visual_prompt": "Close view of the same librarian calmly writing in the cream linen-bound book at the desk, the stranger waiting respectfully in the softly lit background, first golden dawn light entering the tall windows, hopeful cinematic storybook illustration, no legible writing."
+      }
+    ]
+  }
+}
