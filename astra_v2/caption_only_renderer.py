@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from imageio_ffmpeg import get_ffmpeg_exe
-
+from astra_v2.cinematic_caption_visuals import (\n    camera_motion_filter, create_floating_caption, create_scene_plate,\n)\n
 WIDTH, HEIGHT, FPS, RATE = 1080, 1920, 30, 24000
 
 
@@ -184,26 +184,48 @@ def render_caption_video(narration: str, output: str, voice: str = "af_heart",
 
         manifest = []
         cursor = 0.0
+        segment_list = work / "video-segments.txt"
+        segment_paths = []
         for index, (phrase, duration) in enumerate(zip(chunks, durations)):
-            frame = work / f"caption-{index:04d}.png"
-            _caption_frame(phrase, frame, index)
+            segment_duration = duration + (0.12 if index != len(chunks) - 1 else 0)
+            background = work / f"scene-{index:04d}.png"
+            caption = work / f"floating-caption-{index:04d}.png"
+            segment = work / f"segment-{index:04d}.mp4"
+            create_scene_plate(phrase, background, index)
+            create_floating_caption(phrase, caption, index)
             manifest.append({"caption": phrase, "start": round(cursor, 3),
-                             "end": round(cursor + duration, 3)})
-            cursor += duration + (0.12 if index != len(chunks) - 1 else 0)
+                             "end": round(cursor + duration, 3),
+                             "visual": "procedural_cinematic_motion",
+                             "caption_style": "floating_transparent"})
+            cursor += segment_duration
+            filter_graph = (
+                f"[0:v]{camera_motion_filter(segment_duration, FPS, index % 2 == 1)},"
+                f"format=rgba[bg];[bg][1:v]overlay=0:0:shortest=1,"
+                f"format=yuv420p[v]"
+            )
+            segment_command = [
+                get_ffmpeg_exe(), "-y",
+                "-loop", "1", "-framerate", str(FPS), "-i", str(background),
+                "-loop", "1", "-framerate", str(FPS), "-i", str(caption),
+                "-filter_complex", filter_graph, "-map", "[v]",
+                "-t", f"{segment_duration:.6f}", "-an",
+                "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
+                "-r", str(FPS), "-pix_fmt", "yuv420p", str(segment),
+            ]
+            subprocess.run(segment_command, check=True, capture_output=True, text=True)
+            if not segment.is_file() or segment.stat().st_size < 1024:
+                raise RuntimeError(f"FFmpeg did not produce cinematic segment {index}")
+            segment_paths.append(segment)
 
-        # One still caption card per phrase, with exact phrase-level audio timing.
-        concat_file = work / "frames.txt"
-        with concat_file.open("w", encoding="utf-8") as handle:
-            for index, item in enumerate(manifest):
-                handle.write(f"file '{(work / f'caption-{index:04d}.png').as_posix()}'\n")
-                handle.write(f"duration {durations[index] + (0.12 if index != len(chunks)-1 else 0):.6f}\n")
-            handle.write(f"file '{(work / f'caption-{len(chunks)-1:04d}.png').as_posix()}'\n")
+        with segment_list.open("w", encoding="utf-8") as handle:
+            for segment in segment_paths:
+                handle.write(f"file '{segment.as_posix()}'\\n")
         command = [
-            get_ffmpeg_exe(), "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
-            "-i", str(concat_path), "-vf", f"fps={FPS},format=yuv420p",
-            "-c:v", "libx264", "-preset", "veryfast", "-crf", "23",
-            "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart",
-            str(target),
+            get_ffmpeg_exe(), "-y", "-f", "concat", "-safe", "0",
+            "-i", str(segment_list), "-i", str(concat_path),
+            "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy",
+            "-c:a", "aac", "-b:a", "160k", "-shortest",
+            "-movflags", "+faststart", str(target),
         ]
         ffmpeg = get_ffmpeg_exe()
         subprocess.run(command, check=True, capture_output=True, text=True)
