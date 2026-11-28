@@ -17,7 +17,10 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from imageio_ffmpeg import get_ffmpeg_exe
-from astra_v2.cinematic_caption_visuals import (\n    camera_motion_filter, create_floating_caption, create_scene_plate,\n)\n
+from astra_v2.cinematic_caption_visuals import (
+    camera_motion_filter, create_floating_caption, create_scene_plate,
+)
+
 WIDTH, HEIGHT, FPS, RATE = 1080, 1920, 30, 24000
 
 
