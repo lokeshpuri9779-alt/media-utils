@@ -110,7 +110,7 @@ def _prompt(history=(), creative_brief="") -> str:
         "recent stories: " + json.dumps(exclusions, ensure_ascii=False) + ". "
         "Use supported animal subjects only from: " + ", ".join(sorted(VISUALS)) + ". "
         "Choose a renderer-supported environment from: " + ", ".join(SCENES) + ". "
-        "Use exactly one supported animal protagonist species throughout all seven scenes; no humans, clothing, humanoids or "
+        "Choose exactly ONE canonical animal species token from the supported list and use that exact same literal `visual` field value in all seven scenes (for example, `fox` in every scene, never `fox` in one scene and `red fox` or another species label elsewhere). Do not vary, decorate, pluralize or synonymize the `visual` field. The protagonist species must remain identical throughout; no humans, clothing, humanoids or "
         "other animal species. Supply one precise character_bible (fur/feathers, colors, markings, eyes and body proportions) and repeat that exact description verbatim in every visual_prompt. Keep it identical in all seven scenes. "
         "Every visual_prompt must explicitly show the protagonist and the exact "
         "story_environment token, and describe one clear, filmable action. List every "
