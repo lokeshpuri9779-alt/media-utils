@@ -9,7 +9,8 @@ import os
 from pathlib import Path
 
 FIELDS = ("story_environment", "scene_environment", "scene_location", "setting",
-          "visual_prompt", "visual_intent", "visual", "speech", "story_level_environment")
+          "visual_prompt", "visual_intent", "visual", "speech", "action",
+          "story_action", "story_prop", "story_subject", "story_level_environment")
 
 
 def _text(value, limit=160):
@@ -49,6 +50,10 @@ def build_repair_queue(selection, *, lane):
                     "authored_fields": excerpts, "review_only": True,
                 },
             }
+            if _text(row.get("scene_id"), 96):
+                evidence["scene_id"] = _text(row["scene_id"], 96)
+            if _text(row.get("renderer_issue"), 220):
+                evidence["renderer_issue"] = _text(row["renderer_issue"], 220)
             if reason == "no_matching_background" and _text(row.get("scene"), 48):
                 evidence["scene"] = _text(row["scene"], 48)
             rows.append(evidence)
@@ -84,6 +89,8 @@ def build_repair_queue(selection, *, lane):
                                       for g in gaps for s in g["missing_shots"]),
         "no_matching_background_count": sum(s["reason"] == "no_matching_background"
                                               for g in gaps for s in g["missing_shots"]),
+        "renderer_issue_count": sum(bool(s.get("renderer_issue"))
+                                    for g in gaps for s in g["missing_shots"]),
         "publication_approval": False, "semantic_quality": "not_verified",
         "automatic_scene_substitution": False, "automatic_image_generation": False,
         "items": gaps,
